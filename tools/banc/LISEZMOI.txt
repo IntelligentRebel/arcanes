@@ -1,0 +1,17 @@
+﻿Banc de test Arcanes : rien à installer, tout tourne dans Edge.
+
+1. Portable branché sur secteur, couvercle ouvert (ou Options d'alimentation > fermeture du capot : Ne rien faire).
+   Paramètres > Système > Alimentation > Mode d'alimentation : Meilleures performances (sinon le processeur tourne au ralenti).
+2. Double-clic sur LANCER.bat (jamais directement sur banc.html : ouverte ainsi, Edge peut brider la page dès qu'elle passe en arrière-plan). Deux fenêtres s'ouvrent :
+   - Edge, sur la page du banc : clique sur Lancer ;
+   - une petite fenêtre noire qui empêche la mise en veille tant que la fenêtre Edge du banc reste ouverte ; elle se ferme toute seule après elle.
+   Ne réduis pas la fenêtre Edge du banc (Edge peut geler une page réduite) : laisse-la ouverte, derrière les autres si tu veux.
+3. Le matin : bouton « Télécharger les résultats » sur la page, et envoie-moi le fichier nuit.jsonl (le rapport.txt aussi si tu veux y jeter un œil).
+
+Fermer puis relancer (toujours par LANCER.bat) reprend où on en était : seules les parties en cours sont perdues.
+Un nouveau banc : télécharge d'abord les résultats (nuit.jsonl) de l'ancien, puis supprime l'ancien dossier et décompresse le nouveau où tu veux.
+  Si c'est une nouvelle version d'un plan en cours, je joins à la page les parties déjà jouées (elle le dit sous les boutons) : elles ne seront pas rejouées.
+  Sinon, bouton « Reprendre des résultats… » et choisis le dernier nuit.jsonl téléchargé.
+Le rapport note les arrêts (« PC en veille ou page gelée ») et les parties bloquées.
+Le nombre de cœurs se règle sur la page (par défaut : 13). Le bouton « Test de vitesse » (une demi-heure environ) mesure le bon réglage pour ce PC et le garde (pour ce dossier seulement : chaque nouveau banc repart de 13).
+Si une page d'accueil d'Edge s'ouvre en plus, ferme-la et garde l'onglet du banc au premier plan.

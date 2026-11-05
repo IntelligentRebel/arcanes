@@ -1,0 +1,49 @@
+{
+ "nom": "Entraînement 9 : les sorts oubliés découpés (carte, combat) ; la purification des terres ; le boss final du plan d'en face",
+ "experiences": [
+  {
+   "id": "sorts_decoupes",
+   "note": "le paquet « sorts oubliés » du banc 8 change 83 parties sur 100 pour un total nul : on sépare les sorts de carte (tempêtes, Stase, Disjonctions, Captation, Brise-sort, Drain, Nœud perverti, Corruption, Résurrection, appels de héros, Vœu de mort…) des sorts de combat (chances de réussite, morts relevés, dissipations, Bois tordu, Appel du chaos, murs). Une moitié aide-t-elle ?",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 270000,
+   "graines": 500,
+   "points": [75, 150],
+   "expAdversaires": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true, "no_purify": true},
+   "variantes": [
+    {"nom": "sans", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true, "no_purify": true}},
+    {"nom": "carte", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_cspells2": true, "no_purify": true}},
+    {"nom": "combat", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_purify": true}}
+   ]
+  },
+  {
+   "id": "sorts_decoupes_hardcore",
+   "note": "la même chose au niveau Hardcore, contre des Hardcore réglés comme le jeu livré",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 280000,
+   "graines": 90,
+   "points": [150],
+   "expAdversaires": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true, "no_purify": true},
+   "variantes": [
+    {"nom": "sans", "niveau": "hardcore", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true, "no_purify": true}},
+    {"nom": "carte", "niveau": "hardcore", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_cspells2": true, "no_purify": true}},
+    {"nom": "combat", "niveau": "hardcore", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_purify": true}}
+   ]
+  },
+  {
+   "id": "purification",
+   "note": "l'IA purifie ses terres corrompues (unités qui purifient, sort de Purification) : jamais mesuré, actif pour tous au banc 8",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 290000,
+   "graines": 200,
+   "points": [75, 150],
+   "expAdversaires": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true, "no_purify": true},
+   "variantes": [
+    {"nom": "sans", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true, "no_purify": true}},
+    {"nom": "avec", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true, "no_cspells2": true}}
+   ]
+  }
+ ]
+}

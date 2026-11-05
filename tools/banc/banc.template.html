@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arcanes : banc de test</title>
+<style>
+  :root { --bg: #f6f4ef; --card: #ffffff; --ink: #1d1b16; --muted: #6b665c; --line: #e2ddd2; --accent: #7a4fd1; --ok: #2f7d4f; --bad: #b3412e; --bar: #ece6f8; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #16151a; --card: #201f26; --ink: #ece9f1; --muted: #a29db0; --line: #34323d; --accent: #a989ee; --ok: #6fc193; --bad: #ef8a76; --bar: #2d2840; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, "Segoe UI", sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 60px; }
+  h1 { font-size: 22px; margin: 0 0 2px; }
+  .sub { color: var(--muted); margin: 0 0 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  button { font: inherit; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+  button.main { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  button:disabled { opacity: .45; cursor: default; }
+  input[type=number] { width: 64px; font: inherit; padding: 6px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+  .big { font-size: 20px; font-weight: 650; }
+  .muted { color: var(--muted); }
+  .warn { color: var(--bad); }
+  .slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; }
+  .slot { border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px; font-size: 13px; }
+  .slot .bar { height: 5px; background: var(--bar); border-radius: 3px; margin-top: 5px; overflow: hidden; }
+  .slot .bar i { display: block; height: 100%; background: var(--accent); }
+  .slot.idle { opacity: .5; }
+  pre { margin: 0; font: 12.5px/1.45 ui-monospace, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+  #log div { font-size: 13px; padding: 1px 0; border-bottom: 1px dashed var(--line); }
+  details summary { cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Arcanes : banc de test</h1>
+  <p class="sub" id="planName"></p>
+
+  <div class="card">
+    <div class="row">
+      <button class="main" id="start">Lancer</button>
+      <button id="stop" disabled>Arrêter</button>
+      <label class="muted">Cœurs utilisés <input type="number" id="cores" min="1" max="64"></label>
+      <span class="muted" id="coresInfo"></span>
+    </div>
+    <p class="big" id="status" style="margin:12px 0 4px"></p>
+    <p class="muted" id="status2" style="margin:0"></p>
+    <p class="muted" id="timing" style="margin:6px 0 0"></p>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <button id="speed">Test de vitesse</button>
+      <label class="muted"><input type="checkbox" id="thenRun"> puis lancer le plan</label>
+      <span class="muted" id="speedInfo"></span>
+    </div>
+    <pre id="speedOut" style="margin-top:10px"></pre>
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <button id="dlRes">Télécharger les résultats (nuit.jsonl)</button>
+      <button id="dlRep">Télécharger le rapport</button>
+      <button id="imp" title="Un nuit.jsonl déjà téléchargé : ses parties ne seront pas rejouées">Reprendre des résultats…</button>
+      <input type="file" id="impFile" accept=".jsonl,.txt,application/json" hidden>
+      <span style="flex:1"></span>
+      <button id="clear">Effacer les résultats</button>
+    </div>
+    <p class="muted" style="margin:10px 0 0">Les résultats sont gardés dans le navigateur au fil de l'eau : fermer puis rouvrir cette page reprend où on en était. Le matin, télécharge les résultats et envoie le fichier.<span id="shippedInfo"></span></p>
+  </div>
+
+  <div class="card"><b>Parties en cours</b><div class="slots" id="slots" style="margin-top:8px"></div></div>
+  <div class="card"><b>Dernières parties</b><div id="log" style="margin-top:6px"></div></div>
+  <div class="card"><details open><summary>Rapport</summary><pre id="report" style="margin-top:10px"></pre></details></div>
+  <div class="card"><details><summary>Erreurs</summary><pre id="errors" style="margin-top:10px"></pre></details></div>
+</main>
+
+<script type="text/plain" id="worker-src">@@WORKER@@</script>
+<script type="text/plain" id="done-src">@@DONE@@</script>
+<script>const PLAN = @@PLAN@@; const ENGINE_VERSION = '@@VERSION@@';</script>
+<script>@@CORE@@</script>
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const K = 'arcanes-banc|' + PLAN.nom, KE = K + '|erreurs', KRUN = K + '|en-marche', KCORES = 'arcanes-banc|coeurs13', KS = K + '|seances', KV = 'arcanes-banc|vitesse';
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+  del(k) { try { localStorage.removeItem(k); } catch (e) { } },
+};
+const jobs = bancJobs(PLAN);
+const parse = t => (t || '').split('\n').filter(Boolean).map(l => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean);
+let rows = parse(store.get(K));
+let errs = (store.get(KE) || '').split('\n=====\n').filter(x => x.trim());
+const workerURL = URL.createObjectURL(new Blob([$('#worker-src').textContent], { type: 'text/javascript' }));
+let running = false, testing = false, slots = [], todo = [], next = 0, t0 = 0, doneNow = 0, saveWarn = false;
+let sessions = []; try { sessions = JSON.parse(store.get(KS) || '[]'); } catch (e) { sessions = []; }
+const saveSessions = () => store.set(KS, JSON.stringify(sessions));
+const recent = [];
+const secsBy = {};
+const acc = r => { const s = secsBy[r.exp_id] || (secsBy[r.exp_id] = { sum: 0, n: 0 }); s.sum += r.secs || 0; s.n++; };
+rows.forEach(acc);
+// résultats déjà acquis : joints au banc (dans la page) ou repris d'un nuit.jsonl. Seulement ceux de ce plan et de ce moteur ;
+// une partie déjà jouée ne se rejoue pas (un dossier de banc perdu ne coûte plus la nuit)
+const jobKeys = new Set(jobs.map(j => j.key));
+function mergeRows(list) {
+  const have = new Set(rows.map(r => r.key)); let n = 0;
+  for (const r of list) if (r && r.key && jobKeys.has(r.key) && (!r.version || r.version === ENGINE_VERSION) && !have.has(r.key)) { rows.push(r); have.add(r.key); acc(r); n++; }
+  if (n) store.set(K, rows.map(r => JSON.stringify(r)).join('\n') + '\n');
+  return n;
+}
+const shippedN = mergeRows(parse($('#done-src').textContent));
+{ const n0 = parse($('#done-src').textContent).length; if (n0) $('#shippedInfo').textContent = ' ' + n0 + ' parties des nuits précédentes sont jointes à ce banc : elles ne seront pas rejouées.'; }
+const hhmm = d => String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+const hc = navigator.hardwareConcurrency || 4;
+// ce qui peut brider le calcul la nuit : fenêtre cachée (si le banc n'a pas été ouvert par LANCER.bat), PC sur batterie
+let lastTick = Date.now(), battery = null;
+try { if (navigator.getBattery) navigator.getBattery().then(b => { battery = b; }).catch(() => {}); } catch (e) { }
+function track() {
+  const now = Date.now(), dt = now - lastTick; lastTick = now;
+  const se = running && sessions[sessions.length - 1]; if (!se) return;
+  // plus de deux minutes sans que la page ait tourné : PC en veille, ou page gelée par le navigateur (fenêtre réduite) ; noté dans le rapport
+  if (dt > 120000) { (se.pauses = se.pauses || []).push([now - dt, now]); for (const sl of slots) sl.seen = now; saveSessions(); return; }
+  if (document.hidden) se.cache = (se.cache || 0) + dt;
+  if (battery && !battery.charging) se.batt = (se.batt || 0) + dt;
+  // une partie qui n'avance plus d'un tour en 20 minutes est bloquée : notée en erreur, et le cœur passe à la suivante
+  for (const sl of slots) if (sl.job && now - (sl.seen || now) > 1200000) { addError(sl.job.key, 'partie bloquée au tour ' + sl.turn + ' (aucun tour joué en 20 minutes)'); give(sl); }
+}
+document.addEventListener('visibilitychange', track);
+const median = a => { if (!a.length) return null; const b = a.slice().sort((x, y) => x - y); return b[b.length >> 1]; };
+const KREF = 'arcanes-banc|sonde2';
+// la sonde des 20 dernières parties de la séance, comparée à la meilleure séance déjà vue sur ce PC. Les premières parties d'une séance
+// ne comptent pas : leur sonde tombe pendant la pointe de puissance que le PC s'accorde quelques secondes au démarrage (jusqu'en 0.30.4,
+// elles servaient de référence et le banc criait au bridage, « 3.8 fois moins vite », sur une machine simplement revenue à son régime normal)
+function probeRatio() {
+  const se = sessions[sessions.length - 1], so = se && se.sonde; if (!so || so.length < 10) return null;
+  // sans séance de référence sur ce dossier : la nuit du 30/10 (13 cœurs, mode Turbo supposé : 104 ms)
+  const m = median(so.slice(-20)), ref = +(store.get(KREF) || 0) || (se.coeurs === 13 ? 104 : 0);
+  if (so.length >= 30) { const ms = median(so); if (!ref || ms < ref) store.set(KREF, String(ms)); }
+  return ref ? m / ref : null;
+}
+
+$('#planName').textContent = PLAN.nom + ' · moteur ' + ENGINE_VERSION + ' · ' + jobs.length + ' parties au plan';
+// 13 cœurs : sur la machine du banc, autant de parties à l'heure qu'à 18 (nuits du 29/10 à 18 cœurs et du 30/10 à 13 : 429 et 437 parties de 150 tours en Difficile par heure)
+// pour un PC plus frais et plus libre. Le réglage (et le test de vitesse) restent propres au dossier du banc : LANCER.bat y range le profil du navigateur
+const DEFAULT_CORES = 13;
+$('#cores').value = +(store.get(KCORES) || Math.max(1, Math.min(DEFAULT_CORES, hc - 2)));
+$('#coresInfo').textContent = '(cette machine : ' + hc + ' processeurs logiques)';
+
+function saveRow(r) {
+  if (!store.set(K, (store.get(K) || '') + JSON.stringify(r) + '\n') && !saveWarn) { saveWarn = true; alertLine('Le navigateur refuse de garder plus de résultats : télécharge-les maintenant.'); }
+}
+function alertLine(t) { $('#status2').innerHTML = '<span class="warn">' + t + '</span>'; }
+
+function start() {
+  const done = new Set(rows.map(r => r.key));
+  todo = jobs.filter(j => !done.has(j.key)); next = 0;
+  if (!todo.length) { render(); return; }
+  const n = Math.max(1, Math.min(64, Math.round(+$('#cores').value) || 1));
+  store.set(KCORES, String(n)); store.set(KRUN, '1');
+  running = true; t0 = Date.now(); doneNow = 0;
+  sessions.push({ debut: t0, fin: t0, coeurs: n, parties: 0, secs: 0 }); saveSessions();
+  slots = Array.from({ length: n }, (_, i) => ({ i, w: null, job: null, turn: 0 }));
+  slots.forEach(give);
+  render();
+}
+function stop(finished) {
+  running = false;
+  for (const s of slots) { if (s.w) s.w.terminate(); s.w = null; s.job = null; }
+  store.del(KRUN);
+  render(finished);
+}
+function give(slot) {
+  if (slot.w) { slot.w.terminate(); slot.w = null; }
+  if (!running || next >= todo.length) { slot.job = null; if (running && slots.every(s => !s.job)) stop(true); return; }
+  const job = todo[next++]; slot.job = job; slot.turn = 0; slot.seen = Date.now();
+  const w = new Worker(workerURL); slot.w = w;
+  w.onmessage = e => {
+    const m = e.data;
+    if (m.progress != null) { slot.turn = m.progress; slot.seen = Date.now(); return; }
+    if (m.ok) {
+      const r = Object.assign({ key: job.key, exp_id: job.exp_id }, m.ok, { fin: Date.now() });
+      rows.push(r); acc(r); doneNow++; saveRow(r);
+      const se = sessions[sessions.length - 1]; if (se) { track(); se.fin = r.fin; se.parties++; se.secs += r.secs || 0; if (r.cpu && se.parties > 2 * (se.coeurs || 1)) (se.sonde = se.sonde || []).push(r.cpu); if (se.sonde && se.sonde.length > 400) se.sonde.shift(); saveSessions(); }
+      recent.unshift('[' + hhmm(new Date()) + '] ' + r.exp_id + ' · ' + r.label + ' · carte ' + r.seed + ' : score ' + r.score + ', rang ' + r.rank + (r.alive ? '' : ' (éliminé au tour ' + r.deathTurn + ')'));
+      recent.length = Math.min(recent.length, 14);
+      if (doneNow % 3 === 1) drawReport();
+    } else if (m.error) addError(job.key, m.error);
+    give(slot);
+  };
+  w.onerror = ev => { ev.preventDefault(); addError(job.key, ev.message || 'erreur inconnue'); give(slot); };
+  w.postMessage(job);
+}
+function addError(key, text) { errs.push(key + '\n' + text); store.set(KE, errs.join('\n=====\n')); }
+
+function eta() {
+  if (!running) return '';
+  let tot = 0;
+  for (const j of todo.slice(next)) { const s = secsBy[j.exp_id]; if (!s) return ''; tot += s.sum / s.n; }
+  for (const s of slots) if (s.job) { const a = secsBy[s.job.exp_id]; if (!a) return ''; tot += Math.max(0, a.sum / a.n * (1 - s.turn / s.job.turns)); }
+  return ' · fin estimée vers ' + hhmm(new Date(Date.now() + tot * 1000 / slots.length)) + (tot / slots.length > 20 * 3600 ? ' (dans ' + Math.round(tot / slots.length / 3600) + ' h)' : '');
+}
+function render(finished) {
+  const n = rows.length;
+  $('#status').textContent = n + ' / ' + jobs.length + ' parties jouées' + (running && doneNow ? ' · ' + (doneNow / ((Date.now() - t0) / 60000)).toFixed(1) + ' parties/min' : '') + eta();
+  const pr = running ? probeRatio() : null;
+  if (!saveWarn && pr && pr > 1.5) alertLine('Chaque cœur calcule ' + pr.toFixed(1) + ' fois moins vite que lors de la meilleure séance de ce PC : branche-le sur secteur, mode Turbo (ou Performances) dans G-Helper, et ouvre le banc par LANCER.bat (pas en double-cliquant sur la page).');
+  else if (!saveWarn) $('#status2').textContent = running ? 'En marche sur ' + slots.length + ' cœurs. Laisse cette fenêtre ouverte (elle peut être en arrière-plan).' : testing ? 'Test de vitesse en cours…' : finished ? 'Plan terminé.' : n >= jobs.length ? 'Plan terminé.' : 'À l\'arrêt.';
+  $('#start').disabled = running || testing || n >= jobs.length; $('#stop').disabled = !running && !testing; $('#cores').disabled = running || testing; $('#speed').disabled = running || testing;
+  const tt = timingText(); $('#timing').textContent = tt ? 'Temps de calcul : ' + tt.split('\n').join(' · ') : '';
+  $('#start').textContent = n && n < jobs.length ? 'Reprendre' : 'Lancer';
+  $('#slots').innerHTML = slots.length ? slots.map(s => s.job
+    ? '<div class="slot"><b>' + s.job.label.replace(/</g, '&lt;') + '</b><br><span class="muted">' + s.job.exp_id + ' · carte ' + s.job.seed + ' · tour ' + s.turn + '/' + s.job.turns + '</span><div class="bar"><i style="width:' + Math.round(100 * s.turn / s.job.turns) + '%"></i></div></div>'
+    : '<div class="slot idle">libre</div>').join('') : '<span class="muted">aucune</span>';
+  $('#log').innerHTML = recent.map(t => '<div>' + t.replace(/</g, '&lt;') + '</div>').join('') || '<span class="muted">pas encore de partie finie dans cette séance</span>';
+  $('#errors').textContent = errs.length ? errs.join('\n\n') : 'aucune';
+  if (finished) drawReport();
+}
+// le temps passé : chaque séance (de Lancer à la dernière partie finie), et la part du temps où les cœurs ont vraiment calculé
+const dur = ms => { const m = Math.round(ms / 60000); return Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); };
+const dayhm = t => { const d = new Date(t); return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' }) + ' ' + hhmm(d); };
+function timingText() {
+  const ss = sessions.filter(x => x.parties > 0); if (!ss.length) return '';
+  // le temps actif d'une séance : de Lancer à la dernière partie finie, moins les pauses (veille, page gelée)
+  const act = x => Math.max(1, x.fin - x.debut - (x.pauses || []).reduce((a, [f, t]) => a + Math.max(0, Math.min(t, x.fin) - Math.max(f, x.debut)), 0));
+  const L = ss.map(x => 'séance du ' + dayhm(x.debut) + ' au ' + dayhm(x.fin) + ' : ' + dur(act(x)) + ', ' + x.parties + ' parties sur ' + x.coeurs + ' cœurs'
+    + ', ' + (x.parties / Math.max(1e-9, act(x) / 3600000)).toFixed(0) + ' parties/h, cœurs occupés ' + Math.min(100, Math.round(100 * x.secs * 1000 / Math.max(1, act(x) * x.coeurs))) + ' % du temps'
+    + (x.sonde && x.sonde.length ? ', sonde processeur ' + median(x.sonde) + ' ms' : '') + (x.cache ? ', fenêtre cachée ' + Math.round(100 * x.cache / act(x)) + ' %' : '') + (x.batt ? ', sur batterie ' + Math.round(100 * x.batt / act(x)) + ' %' : '')
+    + (x.pauses && x.pauses.length ? ' ; arrêts (PC en veille ou page gelée) : ' + x.pauses.map(([f, t]) => hhmm(new Date(f)) + ' → ' + dayhm(t) + ' (' + dur(t - f) + ')').join(', ') : ''));
+  if (ss.length > 1) L.push('total : ' + dur(ss.reduce((a, x) => a + act(x), 0)) + ' de calcul');
+  return L.join('\n');
+}
+function speedText() { const v = store.get(KV); return v ? 'Dernier test de vitesse :\n' + v : ''; }
+function fullReport() { return [bancReport(PLAN, rows, jobs.length, errs.length).trimEnd(), errs.length && 'Erreurs (les 5 premières) :\n' + errs.slice(0, 5).map(e => e.slice(0, 1500)).join('\n\n'), timingText() && 'Temps de calcul :\n' + timingText(), speedText()].filter(Boolean).join('\n\n') + '\n'; }
+function drawReport() { $('#report').textContent = rows.length ? fullReport() : 'Pas encore de résultats.'; }
+
+// test de vitesse, mesuré comme la nuit : chaque cœur enchaîne les parties sans attendre les autres.
+// L'étalon : la première partie du plan jouée seule, tour par tour. Le travail fait ensuite par tous les cœurs se compte en secondes
+// de cette partie seule (« équivaut à N cœurs à pleine vitesse »), quel que soit le moment de la partie où chacun se trouve.
+// Chaque réglage est mesuré deux fois, en montant puis en redescendant, pour que l'échauffement du PC pèse autant sur tous.
+let SPEED_SETTLE = 15000, SPEED_WIN = 60000, abortTest = false;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function speedCounts() {
+  let ns = []; for (let n = Math.max(1, Math.round(hc * 0.4)); n <= hc; n++) ns.push(n);
+  if (ns.length > 14) { const st = Math.ceil(ns.length / 14); ns = ns.filter((n, i) => i % st === 0 || n === hc); }
+  return ns;
+}
+function speedMinutes() { return Math.round((2 * speedCounts().length * (SPEED_SETTLE + SPEED_WIN) + 90000) / 60000); }
+async function speedTest() {
+  if (running || testing) return;
+  testing = true; abortTest = false; render();
+  const job = Object.assign({}, jobs[0], { key: 'vitesse' });
+  const out = t => { $('#speedOut').textContent = t; };
+  const finish = (txt, keep) => { if (keep) store.set(KV, '(' + dayhm(Date.now()) + ')\n' + txt); out(txt); testing = false; render(); drawReport(); };
+  out('… la partie étalon (carte ' + job.seed + ', ' + job.turns + ' tours), seule sur la machine');
+  const cost = await new Promise(res => {
+    let last = performance.now(); const c = []; const w = new Worker(workerURL);
+    w.onmessage = e => { const now = performance.now(); c.push((now - last) / 1000); last = now; if (e.data.progress != null) { if (abortTest) { w.terminate(); res(null); } return; } w.terminate(); res(e.data.ok ? c : null); };
+    w.onerror = ev => { ev.preventDefault(); w.terminate(); res(null); };
+    w.postMessage(job);
+  });
+  if (!cost) return finish(abortTest ? 'Test arrêté.' : 'Le test a échoué (voir les erreurs du navigateur).', false);
+  const solo = cost.reduce((a, b) => a + b, 0), avg = solo / cost.length;
+  let work = 0, failed = false;
+  const pool = [];
+  const run = slot => {
+    const w = new Worker(workerURL); slot.w = w; let k = 0;
+    w.onmessage = e => { if (!slot.alive) return; work += k < cost.length ? cost[k] : avg; k++; if (e.data.progress != null) return; w.terminate(); if (e.data.ok) run(slot); else failed = true; };
+    w.onerror = ev => { ev.preventDefault(); w.terminate(); failed = true; };
+    w.postMessage(job);
+  };
+  const resize = async n => {
+    while (pool.length > n) { const s = pool.pop(); s.alive = false; s.w.terminate(); }
+    while (pool.length < n && !abortTest) { const s = { alive: true }; pool.push(s); run(s); if (pool.length < n) await sleep(1500); }   // départs décalés : les parties ne vont pas du même pas
+  };
+  const ns = speedCounts(), seq = ns.concat(ns.slice().reverse()), meas = {};
+  const mean = n => meas[n].reduce((a, b) => a + b, 0) / meas[n].length;
+  const f1 = x => x.toFixed(1), pct = x => (x >= 0 ? '+' : '') + Math.round(100 * x) + ' %';
+  const head = 'Partie étalon (carte ' + job.seed + ', ' + job.turns + ' tours) jouée seule : ' + Math.round(solo) + ' s.\n'
+    + 'Puis chaque cœur enchaîne les parties ; mesure sur ' + Math.round(SPEED_WIN / 1000) + ' s à chaque réglage, en montant puis en redescendant.\n'
+    + 'Unité : cœurs à pleine vitesse (1 = le travail d\'une partie seule sur la machine).\n\n';
+  const table = () => 'cœurs   montée   descente   moyenne   parties/h\n' + ns.filter(n => meas[n]).map(n => String(n).padStart(5)
+    + f1(meas[n][0]).padStart(9) + (meas[n][1] != null ? f1(meas[n][1]) : '').padStart(11) + f1(mean(n)).padStart(10) + String(Math.round(mean(n) * 3600 / solo)).padStart(12)).join('\n');
+  const t00 = Date.now();
+  for (let i = 0; i < seq.length && !abortTest && !failed; i++) {
+    const n = seq[i];
+    out(head + table() + '\n\n… ' + n + ' cœurs en cours (' + (i + 1) + '/' + seq.length + '), fin du test vers ' + hhmm(new Date(t00 + (seq.length - i) * (SPEED_SETTLE + SPEED_WIN) + (i === 0 ? 30000 : 0))));
+    await resize(n);
+    await sleep(i === 0 ? 2 * SPEED_SETTLE : SPEED_SETTLE);
+    if (abortTest || failed) break;
+    const w0 = work, t0 = performance.now();
+    await sleep(SPEED_WIN);
+    if (abortTest || failed) break;
+    (meas[n] = meas[n] || []).push((work - w0) / ((performance.now() - t0) / 1000));
+  }
+  await resize(0);
+  if (failed) return finish('Le test a échoué (voir les erreurs du navigateur).', false);
+  const done = ns.filter(n => meas[n]);
+  if (abortTest) return finish(head + table() + '\n\nTest arrêté avant la fin : réglage des cœurs inchangé.', false);
+  // le meilleur réglage se lit sur la courbe lissée (chaque point avec ses deux voisins) : un accident isolé ne décide pas
+  const sm = done.map((n, i) => { const v = done.slice(Math.max(0, i - 1), i + 2).map(mean); return v.reduce((a, b) => a + b, 0) / v.length; });
+  const best = done[sm.indexOf(Math.max(...sm))], mb = mean(best);
+  const gaps = done.filter(n => meas[n].length > 1).map(n => Math.abs(meas[n][0] - meas[n][1]) / mean(n)).sort((a, b) => a - b);
+  const noise = gaps.length ? gaps[gaps.length >> 1] : 0;
+  const band = done.filter(n => mean(n) >= mb * (1 - noise));
+  const cur = +$('#cores').value;
+  let msg = 'Le plus de parties à l\'heure : ' + best + ' cœurs (' + Math.round(mb * 3600 / solo) + ' parties de ce type à l\'heure).'
+    + '\nDeux mesures du même réglage diffèrent en général de ' + Math.round(100 * noise) + ' % : un écart plus petit ne prouve rien.'
+    + (band.length > 1 ? '\nÀ moins de ' + Math.round(100 * noise) + ' % du meilleur : ' + band.join(', ') + ' cœurs.' : '')
+    + (meas[cur] && cur !== best ? '\nLe réglage d\'avant (' + cur + ' cœurs) : ' + pct(mean(cur) / mb - 1) + ' par rapport à ' + best + ' cœurs.' : '');
+  if (best !== cur) { $('#cores').value = best; store.set(KCORES, String(best)); msg += '\nRéglage des cœurs passé de ' + cur + ' à ' + best + '.'; }
+  finish(head + table() + '\n\n' + msg, true);
+  if ($('#thenRun').checked && rows.length < jobs.length) start();
+}
+function download(name, text) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' })); a.download = name;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+}
+
+$('#start').onclick = start;
+$('#stop').onclick = () => { if (testing) { abortTest = true; $('#speedOut').textContent += '\n… arrêt demandé'; } else stop(false); };
+$('#imp').onclick = () => { if (running || testing) { alertLine('Arrête le banc avant de reprendre des résultats.'); return; } $('#impFile').click(); };
+$('#impFile').onchange = async ev => { const f = ev.target.files[0]; if (!f) return; const n = mergeRows(parse(await f.text())); ev.target.value = '';
+  drawReport(); render(); alertLine(n ? n + ' résultats repris : ces parties ne seront pas rejouées.' : 'Rien à reprendre dans ce fichier (autre plan, autre moteur, ou déjà là).'); };
+$('#dlRes').onclick = () => download('nuit.jsonl', rows.map(r => JSON.stringify(r)).join('\n') + '\n');
+$('#dlRep').onclick = () => download('rapport.txt', fullReport());
+$('#speed').onclick = speedTest;
+$('#clear').onclick = () => { if (running) return; if (!confirm('Effacer les ' + rows.length + ' résultats gardés dans le navigateur ?')) return; rows = []; errs = []; sessions = []; for (const k in secsBy) delete secsBy[k]; store.del(K); store.del(KE); store.del(KS); recent.length = 0; drawReport(); render(); };
+window.addEventListener('beforeunload', e => { if (running) { e.preventDefault(); e.returnValue = ''; } });
+setInterval(() => { track(); if (running) render(); }, 1000);
+setInterval(() => { if (running) drawReport(); }, 60000);
+$('#speedInfo').textContent = 'Environ ' + speedMinutes() + ' min. Pour chaque nombre de cœurs de ' + speedCounts()[0] + ' à ' + hc + ', compte le travail fait quand chaque cœur enchaîne les parties comme la nuit, deux fois par réglage, puis règle les cœurs sur le meilleur.';
+drawReport(); render();
+// le navigateur a été fermé en pleine marche (redémarrage, mise à jour) : on reprend tout seul
+if (store.get(KRUN) === '1' && rows.length < jobs.length) { $('#status2').textContent = 'Reprise automatique dans 3 secondes…'; setTimeout(() => { if (!running) start(); }, 3000); }
+</script>
+</body>
+</html>

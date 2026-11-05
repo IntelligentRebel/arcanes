@@ -1,0 +1,929 @@
+{
+ "cfg": {
+  "seed": 332,
+  "race": "lizardman",
+  "books": {
+   "sorcery": 9,
+   "nature": 2
+  },
+  "difficulty": "normal",
+  "opponents": 4,
+  "warmup": 200,
+  "assist": true
+ },
+ "errors": [
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Azhemir TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Tsevan TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n ",
+   "turn": -1,
+   "log": [
+    "t201 combat : OrcSwordsmen va en 7,6"
+   ]
+  }
+ ],
+ "integrity": [],
+ "roundtrip": [],
+ "stuck": [
+  {
+   "turn": 201,
+   "state": "{\"busy\":false,\"moving\":false,\"combat\":false,\"cbusy\":true,\"side\":0,\"mode\":false,\"auto\":false,\"robot\":false,\"modals\":[],\"log\":[\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\",\"t201 fin du tour\"]}",
+   "last": "fin du tour"
+  }
+ ],
+ "turns": 201,
+ "steps": 1409,
+ "over": "en cours",
+ "log": [
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour",
+  "t201 fin du tour"
+ ],
+ "counts": {
+  "combat OrcSwordsmen": 18,
+  "combat «": 2,
+  "combat garder": 1,
+  "combat attendre": 1,
+  "marche": 4,
+  "ouvre": 5,
+  "fermer": 6,
+  "clic": 19,
+  "lance": 2,
+  "visée": 6,
+  "action": 2,
+  "fin": 1265
+ },
+ "minutes": 4.1
+}

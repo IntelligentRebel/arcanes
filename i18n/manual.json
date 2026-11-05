@@ -1,0 +1,6 @@
+{
+ "@unit_race": {
+  "fr": "{0} {1}",
+  "hint": "nom d'une troupe : {0} = l'unité (Lanciers), {1} = le peuple au pluriel (hauts-elfes) ; en anglais « High Elf Spearmen » : ordre et accord à adapter"
+ }
+}

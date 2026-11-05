@@ -1,0 +1,212 @@
+{
+ "nom": "Entraînement 11 : un seul sorcier sur le plan d'en face fait-il un vrai boss ? ; la bourse de combat gardée contre le joueur seulement : rend-elle les IA plus coriaces ?",
+ "experiences": [
+  {
+   "id": "boss_seul",
+   "note": "en essai, pas dans le jeu : un seul sorcier sur le plan d'en face au lieu de deux. Conquiert-il son plan, avec quelle armée, étudie-t-il le Sort de Maîtrise avant qu'on puisse l'atteindre, gagne-t-il la partie seul ?",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 350000,
+   "graines": 150,
+   "points": [
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "deux",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "autrePlan": 2
+    },
+    {
+     "nom": "seul",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "autrePlan": 1
+    }
+   ]
+  },
+  {
+   "id": "boss_seul_hardcore",
+   "note": "la même chose au niveau Hardcore",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 360000,
+   "graines": 12,
+   "points": [
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "deux",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "autrePlan": 2
+    },
+    {
+     "nom": "seul",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "autrePlan": 1
+    }
+   ]
+  },
+  {
+   "id": "bourse_humain",
+   "note": "0.30.4 : la bourse de combat (mana gardé pour les batailles, or changé en mana pour la capitale) ne joue plus que contre le joueur ; ici le sorcier observé tient lieu de joueur. Ses adversaires avec ou sans bourse : un score plus bas du sorcier observé avec la bourse = des IA plus coriaces contre le joueur",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 370000,
+   "graines": 400,
+   "points": [
+    75,
+    150
+   ],
+   "variantes": [
+    {
+     "nom": "sans",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_cpurse": true
+     }
+    },
+    {
+     "nom": "avec",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "bourse_humain_hardcore",
+   "note": "la même chose au niveau Hardcore",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 380000,
+   "graines": 120,
+   "points": [
+    150
+   ],
+   "variantes": [
+    {
+     "nom": "sans",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_cpurse": true
+     }
+    },
+    {
+     "nom": "avec",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  }
+ ]
+}

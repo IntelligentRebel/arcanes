@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="darkreader-lock">
+<title>Arcanes</title>
+<style>/*__CSS__*/</style>
+<script>
+// langue : celle choisie, sinon celle du navigateur, sinon l'anglais ; ses textes (lang/<langue>.js) se chargent avant le jeu
+(function () {
+  var L = /*__LANGS__*/[], s = null, id = null;
+  try { s = localStorage.getItem('arcanes:lang'); } catch (e) {}
+  var ok = function (c) { return c === 'fr' || L.indexOf(c) >= 0; };
+  if (s && ok(s)) id = s;
+  var nav = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+  for (var i = 0; i < nav.length && !id; i++) { var c = String(nav[i] || '').toLowerCase().split(/[-_]/)[0]; if (ok(c)) id = c; }
+  if (!id) id = L.indexOf('en') >= 0 ? 'en' : 'fr';
+  window.I18N_DICT = {}; window.I18N_SHIPPED = L;
+  if (id !== 'fr') {
+    if (id !== 'en' && L.indexOf('en') >= 0) document.write('<script src="lang/en.js"><\/script>');
+    document.write('<script src="lang/' + id + '.js"><\/script>');
+  }
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="map"></canvas>
+  <header id="topbar"></header>
+  <aside id="side">
+    <!-- en tête du panneau : les boutons restent à la même place quoi qu'affiche la sélection -->
+    <div id="endturn"><button class="next" id="btn-next" onclick="this.blur(); App.selectNext(false, null, true)">Suivante</button><button id="btn-end" onclick="this.blur(); App.endTurn()">Fin du tour</button></div>
+    <div id="sel" class="card"></div>
+    <div id="tileinfo" class="card"></div>
+  </aside>
+  <div id="minimap-wrap" class="card"><div class="mm-top"><span class="plane" id="mm-plane">Arcane</span><button class="abtn" onclick="App.togglePlane(); this.blur()">Changer de plan</button></div><div class="mm-tools"><button class="abtn" id="mm-lairs" onclick="App.toggleLairs(); this.blur()">Repaires <span class="k">V</span></button><button class="abtn" id="mm-nodes" onclick="App.toggleNodes(); this.blur()" title="Les nœuds à prendre : libres en vert, gardés ou pas encore visités en jaune, tenus par des rivaux en rouge">Nœuds à prendre <span class="k">O</span></button></div><canvas id="minimap" width="240" height="160" style="width:240px;height:160px"></canvas></div>
+  <div id="logbox" class="card"></div>
+  <div id="toasts"></div>
+  <div id="modal-root"></div>
+  <div id="combat-root" hidden></div>
+  <div id="busy" hidden></div>
+  <div id="tooltip"></div>
+</div>
+<script>
+window.ATLAS_JSON = /*__ATLAS_JSON__*/;
+window.ATLAS_PNG = "/*__ATLAS_PNG__*/";
+window.HD_JSON = /*__HD_JSON__*/;
+window.HD_PNG = "/*__HD_PNG__*/";
+window.HD2_JSON = /*__HD2_JSON__*/;
+window.HD2_PNG = "/*__HD2_PNG__*/";
+window.TITLE_IMG = "/*__TITLE_IMG__*/";
+window.ANIM_JSON = /*__ANIM_JSON__*/;
+window.ANIM_PNG = "/*__ANIM_PNG__*/";
+window.WEAPONS_JSON = /*__WEAPONS_JSON__*/;
+window.WEAPONS_PNG = "/*__WEAPONS_PNG__*/";
+window.FX_JSON = /*__FX_JSON__*/;
+window.FX_PNG = "/*__FX_PNG__*/";
+window.MUSIC_JSON = /*__MUSIC_JSON__*/;
+</script>
+<script>
+/*__JS__*/
+</script>
+</body>
+</html>

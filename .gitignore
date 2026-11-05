@@ -1,0 +1,18 @@
+# produits de l'assemblage
+dist/
+build/
+# sources des images (planches brutes, essais) : seuls les atlas finis d'assets/ sont versionnés
+art/
+# captures et résultats des tests et du banc
+tests/shots/
+tests/resultats/
+tests/robot/*.png
+# fichiers de travail
+*.orig
+/*.png
+assets/contact-sheet.png
+i18n/work/chunk*.json
+i18n/work/todo_*.json
+i18n/work/few_*.json
+i18n/work/out/*/*.json
+__pycache__/

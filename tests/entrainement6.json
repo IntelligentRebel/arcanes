@@ -1,0 +1,139 @@
+{
+ "nom": "Entraînement 6 : la paix dosée pour Difficile ; la quête du Livre par l'IA ; le pacte encore renforcé",
+ "experiences": [
+  {
+   "id": "dose_difficile",
+   "note": "Difficile sans paix, avec la paix de Hardcore, et quatre doses entre les deux : laquelle place Difficile à mi-chemin de Hardcore ?",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 170000,
+   "graines": 200,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "difficile",
+     "niveau": "hard"
+    },
+    {
+     "nom": "paix_hardcore",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.15
+      }
+     }
+    },
+    {
+     "nom": "r-10_6%",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.06
+      }
+     }
+    },
+    {
+     "nom": "r-10_10%",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.1
+      }
+     }
+    },
+    {
+     "nom": "r-5_15%",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": -5,
+       "peaceChance": 0.15
+      }
+     }
+    },
+    {
+     "nom": "r0_15%",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": 0,
+       "peaceChance": 0.15
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "livre_quete",
+   "note": "au tour 40, le sorcier observé (Hardcore) reçoit trois fragments : trouve-t-il la case, brise-t-il le sceau, prend-il le Livre ? fouille élargie (40 / 80 cases) contre l'ancienne (12 / 24)",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 180000,
+   "graines": 30,
+   "points": [
+    100,
+    200
+   ],
+   "livre": true,
+   "cadeauLivre": 40,
+   "variantes": [
+    {
+     "nom": "nouvelle",
+     "niveau": "hardcore"
+    },
+    {
+     "nom": "ancienne",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "bookCands": 24,
+       "bookThreatAll": 1
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "rituel",
+   "note": "nouvelles cartes : sans pacte, le pacte renforcé de la nuit 5 (1,25 / 1,6, 600) et un pacte plus prompt encore (1,15 / 1,4, 500)",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 141000,
+   "graines": 120,
+   "points": [
+    100
+   ],
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "sans_rituel",
+     "niveau": "hardcore",
+     "sansRituel": true
+    },
+    {
+     "nom": "rituel_fort",
+     "niveau": "hardcore",
+     "rituel": {
+      "lead": 1.25,
+      "avg": 1.6,
+      "cost": 600
+     }
+    },
+    {
+     "nom": "rituel_tres_fort",
+     "niveau": "hardcore",
+     "rituel": {
+      "lead": 1.15,
+      "avg": 1.4,
+      "cost": 500
+     }
+    }
+   ]
+  }
+ ]
+}

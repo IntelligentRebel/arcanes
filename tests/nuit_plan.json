@@ -1,0 +1,55 @@
+{
+  "nom": "Nuit 2 : nœuds, sorts globaux, Hardcore et Difficile",
+  "experiences": [
+    {
+      "id": "noeuds_globaux200",
+      "note": "l'IA qui court après les nœuds libres, celle qui lance des globaux sur son surplus, les deux, aucune",
+      "tours": 200,
+      "adversaires": "normal",
+      "graine": 30000,
+      "graines": 150,
+      "points": [100, 150],
+      "variantes": [
+        "normal{\"no_nodes\":1,\"no_globals\":1}",
+        "normal{\"no_globals\":1}",
+        "normal{\"no_nodes\":1}",
+        "normal"
+      ]
+    },
+    {
+      "id": "hardcore250",
+      "note": "chaque brique du Hardcore retirée une à une, et Hardcore face à Difficile et Normale",
+      "tours": 250,
+      "adversaires": "normal",
+      "graine": 40000,
+      "graines": 100,
+      "points": [100, 150, 200],
+      "variantes": [
+        "hardcore",
+        "hardcore{\"no_tailor\":1}",
+        "hardcore{\"no_raid\":1}",
+        "hardcore{\"no_predator\":1,\"no_timing\":1,\"no_fronts\":1}",
+        "hard",
+        "normal"
+      ]
+    },
+    {
+      "id": "difficile150",
+      "note": "chaque brique de Difficile retirée une à une, et Difficile face à Normale",
+      "tours": 150,
+      "adversaires": "normal",
+      "graine": 50000,
+      "graines": 120,
+      "points": [100],
+      "variantes": [
+        "hard",
+        "hard{\"no_econ\":1}",
+        "hard{\"no_foresight\":1}",
+        "hard{\"no_budget\":1}",
+        "hard{\"no_respath\":1}",
+        "hard{\"no_planes\":1}",
+        "normal"
+      ]
+    }
+  ]
+}

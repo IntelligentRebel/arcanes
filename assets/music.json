@@ -1,0 +1,112 @@
+{
+ "titre": {
+  "ctx": "title",
+  "title": "Arcanes",
+  "dur": 133.7
+ },
+ "terres": {
+  "ctx": "arcanus",
+  "title": "Les Terres d'Arcanus",
+  "dur": 108.7
+ },
+ "routes": {
+  "ctx": "arcanus",
+  "title": "Routes et royaumes",
+  "dur": 120.5
+ },
+ "myrror": {
+  "ctx": "myrror",
+  "title": "Le Plan de Myrror",
+  "dur": 161.3
+ },
+ "combat1": {
+  "ctx": "combat",
+  "title": "Le Choc des armes",
+  "dur": 83.1
+ },
+ "combat2": {
+  "ctx": "combat",
+  "title": "Sortilèges et acier",
+  "dur": 76.1
+ },
+ "victoire": {
+  "ctx": "victory",
+  "title": "Victoire",
+  "dur": 14.0
+ },
+ "defaite": {
+  "ctx": "defeat",
+  "title": "Défaite",
+  "dur": 25.1
+ },
+ "peuple-hautshommes": {
+  "ctx": "race:highmen",
+  "title": "La Couronne d'Albâtre",
+  "dur": 96.4
+ },
+ "peuple-orques": {
+  "ctx": "race:orc",
+  "title": "Le Pas de la Horde",
+  "dur": 105.2
+ },
+ "peuple-barbares": {
+  "ctx": "race:barbarian",
+  "title": "Le Serment des Clans",
+  "dur": 84.7
+ },
+ "peuple-gnolls": {
+  "ctx": "race:gnoll",
+  "title": "Les Rires de la Meute",
+  "dur": 85.9
+ },
+ "peuple-halfelins": {
+  "ctx": "race:halfling",
+  "title": "La Fête des Collines",
+  "dur": 70.8
+ },
+ "peuple-hautselfes": {
+  "ctx": "race:highelf",
+  "title": "Sous les Ramures d'Argent",
+  "dur": 115.0
+ },
+ "peuple-klackons": {
+  "ctx": "race:klackon",
+  "title": "La Ruche infinie",
+  "dur": 82.7
+ },
+ "peuple-hommeslezards": {
+  "ctx": "race:lizardman",
+  "title": "Le Marais des Anciens",
+  "dur": 109.2
+ },
+ "peuple-nomades": {
+  "ctx": "race:nomad",
+  "title": "Les Caravanes du Vent",
+  "dur": 96.3
+ },
+ "peuple-hommesbetes": {
+  "ctx": "race:beastmen",
+  "title": "Le Rite des Cornes",
+  "dur": 96.2
+ },
+ "peuple-elfesnoirs": {
+  "ctx": "race:darkelf",
+  "title": "La Valse des Ombres",
+  "dur": 88.0
+ },
+ "peuple-draconiens": {
+  "ctx": "race:draconian",
+  "title": "Les Ailes de Braise",
+  "dur": 86.9
+ },
+ "peuple-nains": {
+  "ctx": "race:dwarf",
+  "title": "Le Chant de l'Enclume",
+  "dur": 108.2
+ },
+ "peuple-trolls": {
+  "ctx": "race:troll",
+  "title": "Le Pas des Géants",
+  "dur": 104.0
+ }
+}

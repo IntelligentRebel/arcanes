@@ -1,0 +1,163 @@
+{
+ "start": "2026-10-21T23:19:46.416Z",
+ "seeds": 10,
+ "turns": 150,
+ "seed": 5000,
+ "steps": [
+  {
+   "knob": "offense",
+   "round": 0,
+   "results": [
+    {
+     "value": 1,
+     "mean": 483.6,
+     "diff": 0,
+     "se": 0,
+     "n": 10
+    },
+    {
+     "value": 0.8,
+     "mean": 452.6,
+     "diff": -31,
+     "se": 54.075461676767546,
+     "n": 10
+    },
+    {
+     "value": 1.25,
+     "mean": 406.8,
+     "diff": -76.8,
+     "se": 64.37939629001399,
+     "n": 10
+    }
+   ],
+   "adopted": null,
+   "seconds": 2608
+  },
+  {
+   "knob": "milChance",
+   "round": 0,
+   "results": [
+    {
+     "value": 1,
+     "mean": 483.6,
+     "diff": 0,
+     "se": 0,
+     "n": 10
+    },
+    {
+     "value": 0.8,
+     "mean": 499.8,
+     "diff": 16.2,
+     "se": 161.78083940936887,
+     "n": 10
+    },
+    {
+     "value": 1.25,
+     "mean": 456,
+     "diff": -27.6,
+     "se": 152.2550637727509,
+     "n": 10
+    }
+   ],
+   "adopted": null,
+   "seconds": 1904
+  },
+  {
+   "knob": "settler",
+   "round": 0,
+   "results": [
+    {
+     "value": 1,
+     "mean": 483.6,
+     "diff": 0,
+     "se": 0,
+     "n": 10
+    },
+    {
+     "value": 0.8,
+     "mean": 310.4,
+     "diff": -173.2,
+     "se": 156.20889148117587,
+     "n": 10
+    },
+    {
+     "value": 1.25,
+     "mean": 410.4,
+     "diff": -73.2,
+     "se": 161.84202173724844,
+     "n": 10
+    }
+   ],
+   "adopted": null,
+   "seconds": 1676
+  },
+  {
+   "knob": "campValue",
+   "round": 0,
+   "results": [
+    {
+     "value": 1.5,
+     "mean": 483.6,
+     "diff": 0,
+     "se": 0,
+     "n": 10
+    },
+    {
+     "value": 1.2,
+     "mean": 449.6,
+     "diff": -34,
+     "se": 70.62498770894682,
+     "n": 10
+    },
+    {
+     "value": 1.875,
+     "mean": 440.3,
+     "diff": -43.3,
+     "se": 132.36842943508512,
+     "n": 10
+    }
+   ],
+   "adopted": null,
+   "seconds": 1641
+  },
+  {
+   "knob": "planWarMil",
+   "round": 0,
+   "results": [
+    {
+     "value": 1.3,
+     "mean": 483.6,
+     "diff": 0,
+     "se": 0,
+     "n": 10
+    },
+    {
+     "value": 1.04,
+     "mean": 410.4,
+     "diff": -73.2,
+     "se": 110.50176469179122,
+     "n": 10
+    },
+    {
+     "value": 1.625,
+     "mean": 441.5,
+     "diff": -42.1,
+     "se": 50.166046507794704,
+     "n": 10
+    }
+   ],
+   "adopted": null,
+   "seconds": 1384
+  }
+ ],
+ "tune": {
+  "offense": 1,
+  "milChance": 1,
+  "settler": 1,
+  "planWarMil": 1.3,
+  "planDefMil": 1.4,
+  "campValue": 1.5,
+  "rallyWait": 8
+ },
+ "note": "5 r\u00e9glages essay\u00e9s (\u00d70,8 et \u00d71,25, 10 cartes, Normale contre Normale) : aucun ne bat la valeur actuelle de fa\u00e7on significative."
+}

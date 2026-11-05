@@ -1,0 +1,576 @@
+{
+ "nom": "Entraînement 2 : confirmation et pas suivant",
+ "experiences": [
+  {
+   "id": "confirmation",
+   "note": "les réglages retenus de la nuit 1, sur des cartes neuves",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 70000,
+   "graines": 210,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "hardcore",
+     "niveau": "hardcore"
+    },
+    {
+     "nom": "difficile",
+     "niveau": "hard"
+    },
+    {
+     "nom": "e06",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "settler": 1.6,
+       "settlerPop": 2,
+       "settlerMax": 1,
+       "offense": 0.7,
+       "milCap": 6,
+       "milChance": 1.8,
+       "milSurplus": 2.2,
+       "garrison": 1.5,
+       "planWarMil": 1.7,
+       "planDefMil": 1.8,
+       "attackWin": 0.45,
+       "lairWin": 0.8,
+       "rallyWait": 4,
+       "campValue": 2.2,
+       "reach": 22,
+       "lairValue": 0.6,
+       "nodeValue": 0.6,
+       "summonVal": 1.4,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5,
+       "resSummon": 0.5,
+       "resCombat": 30,
+       "warEdge": 1.0
+      }
+     }
+    },
+    {
+     "nom": "g2a",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "milChance": 1.8,
+       "lairWin": 0.8,
+       "garrison": 1.5,
+       "planDefMil": 1.8,
+       "planWarMil": 1.7,
+       "milSurplus": 2.2,
+       "attackWin": 0.68,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5
+      }
+     }
+    },
+    {
+     "nom": "g2b",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "milChance": 1.8,
+       "lairWin": 0.8,
+       "garrison": 1.5,
+       "planDefMil": 1.8,
+       "planWarMil": 1.7,
+       "milSurplus": 2.2,
+       "attackWin": 0.68,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5,
+       "settlerPop": 4,
+       "reach": 22,
+       "lairValue": 0.6,
+       "milCap": 6,
+       "summonVal": 0.7,
+       "offense": 1.4,
+       "settler": 1.6
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "pas2",
+   "note": "autour de g2a : chaque réglage poussé un cran plus loin dans le bon sens (Plackett-Burman à 12 essais)",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 80000,
+   "graines": 85,
+   "points": [
+    100
+   ],
+   "facteurs": [
+    {
+     "nom": "milChance",
+     "bas": 1.8,
+     "haut": 2.4
+    },
+    {
+     "nom": "garrison",
+     "bas": 1.5,
+     "haut": 2.0
+    },
+    {
+     "nom": "planDefMil",
+     "bas": 1.8,
+     "haut": 2.3
+    },
+    {
+     "nom": "planWarMil",
+     "bas": 1.7,
+     "haut": 2.2
+    },
+    {
+     "nom": "milSurplus",
+     "bas": 2.2,
+     "haut": 3.0
+    },
+    {
+     "nom": "summonUpkeep",
+     "bas": 0.9,
+     "haut": 1.3
+    },
+    {
+     "nom": "unitEnchVal",
+     "bas": 0.5,
+     "haut": 0.2
+    },
+    {
+     "nom": "settler",
+     "bas": 1,
+     "haut": 1.6
+    },
+    {
+     "nom": "reach",
+     "bas": 16,
+     "haut": 22
+    },
+    {
+     "nom": "offense",
+     "bas": 1,
+     "haut": 1.4
+    },
+    {
+     "nom": "settlerPop",
+     "bas": 3,
+     "haut": 4
+    }
+   ],
+   "variantes": [
+    {
+     "nom": "g2a",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 1.8,
+       "garrison": 1.5,
+       "planDefMil": 1.8,
+       "planWarMil": 1.7,
+       "milSurplus": 2.2,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5,
+       "settler": 1,
+       "reach": 16,
+       "offense": 1,
+       "settlerPop": 3
+      }
+     },
+     "signes": [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+     ]
+    },
+    {
+     "nom": "f01",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 2.4,
+       "garrison": 2.0,
+       "planDefMil": 1.8,
+       "planWarMil": 2.2,
+       "milSurplus": 3.0,
+       "summonUpkeep": 1.3,
+       "unitEnchVal": 0.5,
+       "settler": 1,
+       "reach": 16,
+       "offense": 1.4,
+       "settlerPop": 3
+      }
+     },
+     "signes": [
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1
+     ]
+    },
+    {
+     "nom": "f02",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 1.8,
+       "garrison": 2.0,
+       "planDefMil": 2.3,
+       "planWarMil": 1.7,
+       "milSurplus": 3.0,
+       "summonUpkeep": 1.3,
+       "unitEnchVal": 0.2,
+       "settler": 1,
+       "reach": 16,
+       "offense": 1,
+       "settlerPop": 4
+      }
+     },
+     "signes": [
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1
+     ]
+    },
+    {
+     "nom": "f03",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 2.4,
+       "garrison": 1.5,
+       "planDefMil": 2.3,
+       "planWarMil": 2.2,
+       "milSurplus": 2.2,
+       "summonUpkeep": 1.3,
+       "unitEnchVal": 0.2,
+       "settler": 1.6,
+       "reach": 16,
+       "offense": 1,
+       "settlerPop": 3
+      }
+     },
+     "signes": [
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1
+     ]
+    },
+    {
+     "nom": "f04",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 1.8,
+       "garrison": 2.0,
+       "planDefMil": 1.8,
+       "planWarMil": 2.2,
+       "milSurplus": 3.0,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.2,
+       "settler": 1.6,
+       "reach": 22,
+       "offense": 1,
+       "settlerPop": 3
+      }
+     },
+     "signes": [
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1
+     ]
+    },
+    {
+     "nom": "f05",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 1.8,
+       "garrison": 1.5,
+       "planDefMil": 2.3,
+       "planWarMil": 1.7,
+       "milSurplus": 3.0,
+       "summonUpkeep": 1.3,
+       "unitEnchVal": 0.5,
+       "settler": 1.6,
+       "reach": 22,
+       "offense": 1.4,
+       "settlerPop": 3
+      }
+     },
+     "signes": [
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1,
+      -1
+     ]
+    },
+    {
+     "nom": "f06",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 1.8,
+       "garrison": 1.5,
+       "planDefMil": 1.8,
+       "planWarMil": 2.2,
+       "milSurplus": 2.2,
+       "summonUpkeep": 1.3,
+       "unitEnchVal": 0.2,
+       "settler": 1,
+       "reach": 22,
+       "offense": 1.4,
+       "settlerPop": 4
+      }
+     },
+     "signes": [
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "nom": "f07",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 2.4,
+       "garrison": 1.5,
+       "planDefMil": 1.8,
+       "planWarMil": 1.7,
+       "milSurplus": 3.0,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.2,
+       "settler": 1.6,
+       "reach": 16,
+       "offense": 1.4,
+       "settlerPop": 4
+      }
+     },
+     "signes": [
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1,
+      1
+     ]
+    },
+    {
+     "nom": "f08",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 2.4,
+       "garrison": 2.0,
+       "planDefMil": 1.8,
+       "planWarMil": 1.7,
+       "milSurplus": 2.2,
+       "summonUpkeep": 1.3,
+       "unitEnchVal": 0.5,
+       "settler": 1.6,
+       "reach": 22,
+       "offense": 1,
+       "settlerPop": 4
+      }
+     },
+     "signes": [
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1,
+      1
+     ]
+    },
+    {
+     "nom": "f09",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 2.4,
+       "garrison": 2.0,
+       "planDefMil": 2.3,
+       "planWarMil": 1.7,
+       "milSurplus": 2.2,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.2,
+       "settler": 1,
+       "reach": 22,
+       "offense": 1.4,
+       "settlerPop": 3
+      }
+     },
+     "signes": [
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1,
+      -1
+     ]
+    },
+    {
+     "nom": "f10",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 1.8,
+       "garrison": 2.0,
+       "planDefMil": 2.3,
+       "planWarMil": 2.2,
+       "milSurplus": 2.2,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5,
+       "settler": 1.6,
+       "reach": 16,
+       "offense": 1.4,
+       "settlerPop": 4
+      }
+     },
+     "signes": [
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1,
+      1
+     ]
+    },
+    {
+     "nom": "f11",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "lairWin": 0.8,
+       "attackWin": 0.68,
+       "milChance": 2.4,
+       "garrison": 1.5,
+       "planDefMil": 2.3,
+       "planWarMil": 2.2,
+       "milSurplus": 3.0,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5,
+       "settler": 1,
+       "reach": 22,
+       "offense": 1,
+       "settlerPop": 4
+      }
+     },
+     "signes": [
+      1,
+      -1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      -1,
+      1,
+      -1,
+      1
+     ]
+    }
+   ]
+  }
+ ]
+}

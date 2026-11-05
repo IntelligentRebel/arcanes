@@ -1,0 +1,282 @@
+{
+ "nom": "Entraînement 14 : malus d'empire proportionnels (v0.31.7) contre l'ancien +1 fixe ; l'IA qui bâtit enfin son ouvrage",
+ "experiences": [
+  {
+   "id": "malus_difficile",
+   "note": "Difficile. « Loin de la capitale » et « Étendue de l'empire » : +1 fixe (avant) ou +10 % par habitant (v0.31.7), toutes IA, même carte. Agitation à la fin, meneur du t100",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 460000,
+   "graines": 100,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "agitation": true,
+   "variantes": [
+    {
+     "nom": "malus fixes (+1)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "malusFixes": true
+    },
+    {
+     "nom": "malus proportionnels (+10 %/hab.)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "malus_avance",
+   "note": "Difficile. Le sorcier observé part très en avance (un joueur qui s'envole) : les malus proportionnels le freinent-ils davantage ? (score du sujet plus bas = frein plus fort)",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 470000,
+   "graines": 60,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "agitation": true,
+   "variantes": [
+    {
+     "nom": "malus fixes (+1)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "malusFixes": true
+    },
+    {
+     "nom": "malus proportionnels (+10 %/hab.)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     }
+    }
+   ],
+   "avance": true
+  },
+  {
+   "id": "malus_hardcore",
+   "note": "Hardcore, même essai (coalition et Démon actifs)",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 480000,
+   "graines": 24,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "agitation": true,
+   "variantes": [
+    {
+     "nom": "malus fixes (+1)",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "malusFixes": true
+    },
+    {
+     "nom": "malus proportionnels (+10 %/hab.)",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "ouvrage_ia",
+   "note": "Difficile, le sorcier observé change de peuple à chaque carte. En essai pour lui seul (wonder2) : l'ouvrage du peuple de sa meilleure cité (plus celui d'une petite cité conquise), bâti même sous une menace que sa garnison tient. Au banc 13, la recherche faite, l'ouvrage n'était bâti que dans un tiers des parties",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 490000,
+   "graines": 98,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "races": [
+    "barbarian",
+    "gnoll",
+    "halfling",
+    "highelf",
+    "highmen",
+    "klackon",
+    "lizardman",
+    "nomad",
+    "orc",
+    "beastmen",
+    "darkelf",
+    "draconian",
+    "dwarf",
+    "troll"
+   ],
+   "variantes": [
+    {
+     "nom": "ouvrages, IA actuelle",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     }
+    },
+    {
+     "nom": "ouvrages, IA corrigée",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true
+     }
+    }
+   ]
+  }
+ ]
+}

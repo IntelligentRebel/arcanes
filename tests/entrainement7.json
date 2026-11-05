@@ -1,0 +1,52 @@
+{
+ "nom": "Entraînement 7 : des gardiens du Livre à portée de l'IA ? ; Difficile entre Difficile sans paix et Hardcore ; ce qui gâche le pacte très prompt",
+ "experiences": [
+  {
+   "id": "livre_gardiens",
+   "note": "au tour 40, le sorcier observé (Hardcore) reçoit trois fragments ; gardiens du Livre à 12 500 (actuels), 7 000 ou 4 000 de force : l'IA prend-elle le Livre, et à quel prix ?",
+   "tours": 200,
+   "adversaires": "hardcore",
+   "graine": 210000,
+   "graines": 30,
+   "points": [100],
+   "livre": true,
+   "cadeauLivre": 40,
+   "variantes": [
+    {"nom": "gardiens_12500", "niveau": "hardcore"},
+    {"nom": "gardiens_7000", "niveau": "hardcore", "gardiens": 7000},
+    {"nom": "gardiens_4000", "niveau": "hardcore", "gardiens": 4000}
+   ]
+  },
+  {
+   "id": "difficile_place",
+   "note": "Difficile avec sa paix de la v0.29.12, sans paix, et Hardcore, sur les mêmes cartes : Difficile tombe-t-il à mi-chemin ?",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 220000,
+   "graines": 100,
+   "points": [100],
+   "variantes": [
+    {"nom": "difficile_sans_paix", "niveau": "hard", "exp": {"tune": {"peaceRel": 15, "peaceChance": 0.05}}},
+    {"nom": "difficile", "niveau": "hard"},
+    {"nom": "hardcore", "niveau": "hardcore"}
+   ]
+  },
+  {
+   "id": "pacte_axes",
+   "note": "le pacte fort (1,25 / 1,6, 600) freine le meneur ; le très prompt (1,15 / 1,4, 500) non : lequel des trois réglages le gâche ?",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 230000,
+   "graines": 100,
+   "points": [100],
+   "meneur": true,
+   "variantes": [
+    {"nom": "sans_rituel", "niveau": "hardcore", "sansRituel": true},
+    {"nom": "fort", "niveau": "hardcore", "rituel": {"lead": 1.25, "avg": 1.6, "cost": 600}},
+    {"nom": "fort_avance_1.15", "niveau": "hardcore", "rituel": {"lead": 1.15, "avg": 1.6, "cost": 600}},
+    {"nom": "fort_moyenne_1.4", "niveau": "hardcore", "rituel": {"lead": 1.25, "avg": 1.4, "cost": 600}},
+    {"nom": "fort_cout_500", "niveau": "hardcore", "rituel": {"lead": 1.25, "avg": 1.6, "cost": 500}}
+   ]
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "cfg": {
+  "seed": 101,
+  "race": "highelf",
+  "books": {
+   "sorcery": 5,
+   "chaos": 6
+  },
+  "difficulty": "hard",
+  "opponents": 2
+ },
+ "errors": [],
+ "integrity": [],
+ "roundtrip": [],
+ "stuck": [],
+ "turns": 12,
+ "steps": 108,
+ "minutes": 0.3
+}

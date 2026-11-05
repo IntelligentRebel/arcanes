@@ -1,0 +1,31 @@
+// v0.31.21 : une garnison sans tireurs, derrière ses murs, face à un assaillant qui tire, sort l'attaquer au lieu d'attendre la mort ;
+// contre des volants qu'elle ne peut atteindre, elle reste à l'abri. Les défenseurs traversent leur propre Mur de feu.
+const { loadEngine } = require('./load');
+const E = loadEngine(); E.AI.LAB = false; const { Game, Units, World, Cities, Battle, RNG, CombatAI } = E;
+const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) process.exitCode = 1; };
+const g = Game.newGame({ seed: 5, mapW: 60, mapH: 40, opponents: 2, difficulty: 'normal', crisis: 'off', human: { name: 'X', portrait: 0, books: { nature: 6 }, retorts: [], race: 'highelf' } });
+const city = Object.values(g.cities).find(c => c.owner === 1) || g.cities[g.players[1].fortress];
+city.buildings.cityWalls = 1;
+function run(att, fire) {
+  let outside = 0, n = 0, wins = 0;
+  for (let i = 0; i < 12; i++) {
+    const A = att.map(t => Units.create(g, t, 0, city.plane, city.x, city.y));
+    const D = ['OrcSwordsmen', 'OrcSwordsmen', 'OrcSpearmen', 'OrcSpearmen'].map(t => Units.create(g, t, 1, city.plane, city.x, city.y));
+    const bt = new Battle(g, { attackers: A, defenders: D, attackerPid: 0, defenderPid: 1, plane: city.plane, x: city.x, y: city.y, city, rng: new RNG(900 + i) });
+    if (fire) bt.wallOfFire = true;
+    const mv = bt.moveUnit.bind(bt), burnt = { n: 0 };
+    bt.moveUnit = (b, c, r, rch) => { const hp = b.u.dmg; const res = mv(b, c, r, rch); if (b.side === 1 && b.u.dmg > hp) burnt.n++; if (b.side === 1 && !bt.inCity(b.c, b.r)) outside++; n++; return res; };
+    CombatAI.autoResolve(bt);
+    if (bt.winner === 1) wins++;
+    if (fire) ok(burnt.n === 0, 'aucun défenseur brûlé par son propre mur de feu (' + burnt.n + ')');
+    for (const u of A.concat(D)) if (g.units[u.id]) Units.remove(g, u);
+  }
+  return { outside, wins };
+}
+const archers = run(['Longbowmen', 'Longbowmen', 'Longbowmen', 'Longbowmen']);
+console.log('      contre des archers :', JSON.stringify(archers));
+ok(archers.outside > 0, 'la garnison sort attaquer les archers');
+const flyers = run(['Pegasai', 'Pegasai', 'Pegasai']);
+console.log('      contre des volants :', JSON.stringify(flyers));
+ok(flyers.outside === 0, 'contre des volants hors d\'atteinte, elle reste à l\'abri');
+run(['Longbowmen', 'Longbowmen', 'Longbowmen'], true);

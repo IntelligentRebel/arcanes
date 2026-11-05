@@ -1,0 +1,237 @@
+{
+ "nom": "Entraînement 4 : la paix, confirmée et dosée ; le pacte contre le meneur ; ce que coûte le Livre de légende",
+ "experiences": [
+  {
+   "id": "dose",
+   "note": "Hardcore (paix entre sorciers) contre l'ancien, trois doses, deux pistes de la nuit 3, la valeur des cités neutres en deux doses, et l'IA sans le Livre de légende",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 100000,
+   "graines": 160,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "hardcore",
+     "niveau": "hardcore",
+     "exp": {}
+    },
+    {
+     "nom": "sans_paix",
+     "niveau": "hardcore",
+     "exp": {
+      "no_peace": 1
+     }
+    },
+    {
+     "nom": "paix_douce",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "peaceRel": 5,
+       "peaceChance": 0.1
+      }
+     }
+    },
+    {
+     "nom": "paix_forte",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "peaceRel": -30,
+       "peaceChance": 0.25
+      }
+     }
+    },
+    {
+     "nom": "paix_max",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "peaceRel": -60,
+       "peaceChance": 0.4
+      }
+     }
+    },
+    {
+     "nom": "neutres_0.6",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "neutralValue": 0.6
+      }
+     }
+    },
+    {
+     "nom": "neutres_0.8",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "neutralValue": 0.8
+      }
+     }
+    },
+    {
+     "nom": "g2a",
+     "niveau": "hardcore",
+     "exp": {
+      "tune": {
+       "milChance": 1.8,
+       "lairWin": 0.8,
+       "garrison": 1.5,
+       "planDefMil": 1.8,
+       "planWarMil": 1.7,
+       "milSurplus": 2.2,
+       "attackWin": 0.68,
+       "summonUpkeep": 0.9,
+       "unitEnchVal": 0.5
+      }
+     }
+    },
+    {
+     "nom": "sans_livre",
+     "niveau": "hardcore",
+     "exp": {
+      "no_book": 1,
+      "no_bookquest": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "tous_en_paix",
+   "note": "les trois adversaires cherchent aussi la paix : le gain tient-il quand tout le monde s'y met ?",
+   "tours": 150,
+   "adversaires": "hard",
+   "expAdversaires": {
+    "tune": {
+     "peaceRel": -10,
+     "peaceChance": 0.15
+    }
+   },
+   "graine": 110000,
+   "graines": 160,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "hardcore",
+     "niveau": "hardcore",
+     "exp": {}
+    },
+    {
+     "nom": "sans_paix",
+     "niveau": "hardcore",
+     "exp": {
+      "no_peace": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "difficile",
+   "note": "la même paix au niveau Difficile",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 120000,
+   "graines": 160,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "difficile",
+     "niveau": "hard"
+    },
+    {
+     "nom": "difficile_paix",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.15
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "normale",
+   "note": "la même paix au niveau Normal ; et sans l'attrait des cités qui gardent un fragment du Livre",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 130000,
+   "graines": 160,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "normale",
+     "niveau": "normal"
+    },
+    {
+     "nom": "normale_paix",
+     "niveau": "normal",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.15
+      }
+     }
+    },
+    {
+     "nom": "normale_sans_livre",
+     "niveau": "normal",
+     "exp": {
+      "no_book": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "rituel",
+   "note": "partie Hardcore entre IA : le pacte et le Démon légendaire freinent-ils le meneur ?",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 140000,
+   "graines": 120,
+   "points": [
+    100
+   ],
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "avec_rituel",
+     "niveau": "hardcore"
+    },
+    {
+     "nom": "sans_rituel",
+     "niveau": "hardcore",
+     "sansRituel": true
+    }
+   ]
+  },
+  {
+   "id": "livre_long",
+   "note": "300 tours entre IA Hardcore : qui trouve les fragments, le sceau est-il brisé, le Livre pris ?",
+   "tours": 300,
+   "adversaires": "hardcore",
+   "graine": 150000,
+   "graines": 40,
+   "points": [
+    100,
+    200
+   ],
+   "livre": true,
+   "variantes": [
+    {
+     "nom": "hardcore",
+     "niveau": "hardcore"
+    }
+   ]
+  }
+ ]
+}

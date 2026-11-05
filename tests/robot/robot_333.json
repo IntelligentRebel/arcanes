@@ -1,0 +1,1853 @@
+{
+ "cfg": {
+  "seed": 333,
+  "race": "halfling",
+  "books": {
+   "chaos": 4,
+   "death": 7
+  },
+  "difficulty": "normal",
+  "opponents": 2,
+  "warmup": 200,
+  "assist": true
+ },
+ "errors": [
+  {
+   "kind": "console",
+   "msg": "IA Solenkh TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Solenkh TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Solenkh TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Solenkh TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "IA Isvaran TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  },
+  {
+   "kind": "console",
+   "msg": "Neutres TypeError: Cannot read properties of null (reading 'world')\n    at Object.prerenderGround (file:///home/claude/arcanes/dist/arcanes/index.html:19887:31)\n    at file:///home/claude/arcanes/dist/arcanes/index.html:19614:18\n    at new Promise (<anonymous>)\n    at Object.run (file:///home/claude/arcanes/dist/arcanes/index.html:19602:12)\n    at Game.hooks.battle (file:///home/claude/arcanes/dist/arcanes/index.html:22608:60)\n    at Object.attack (file:///home/claude/arcanes/dist/arcanes/index.html:7892:39)\n    at Game.attack (file:///home/claude/arcanes/dist/arcanes/index.html:14956:190)\n   ",
+   "turn": -1,
+   "log": [
+    "t201 combat : NomadSwordsmen va en 6,4"
+   ]
+  }
+ ],
+ "integrity": [
+  {
+   "turn": 205,
+   "msg": "unité morte sur la carte : Skeleton 18,15"
+  },
+  {
+   "turn": 210,
+   "msg": "unité morte sur la carte : Skeleton 18,15"
+  },
+  {
+   "turn": 215,
+   "msg": "unité morte sur la carte : Skeleton 18,15"
+  },
+  {
+   "turn": 220,
+   "msg": "unité morte sur la carte : Skeleton 18,15"
+  },
+  {
+   "turn": 225,
+   "msg": "unité morte sur la carte : Skeleton 18,15"
+  },
+  {
+   "turn": 230,
+   "msg": "unité morte sur la carte : Skeleton 17,17"
+  }
+ ],
+ "roundtrip": [],
+ "stuck": [],
+ "turns": 233,
+ "steps": 3491,
+ "over": "defeat",
+ "log": [
+  "t226 combat : HellHounds vers Ghoul",
+  "t226 combat : HellHounds va en 9,5",
+  "t226 combat : HellHounds va en 8,6",
+  "t226 combat : HellHounds va en 8,7",
+  "t226 combat : fin du tour",
+  "t226 combat : HellHounds va en 5,8",
+  "t226 combat : grimoire",
+  "t226 combat fermer",
+  "t226 combat : fin du tour",
+  "t226 combat : BatteringRam va en 7,8",
+  "t226 combat : HellHounds attaque HellHounds",
+  "t226 combat : LizardSpearmen va en 7,6",
+  "t226 combat : LizardSpearmen va en 5,6",
+  "t226 combat : grimoire",
+  "t226 combat fermer",
+  "t226 combat : HellHounds attaque HellHounds",
+  "t226 combat : garder",
+  "t226 combat : grimoire",
+  "t226 combat fermer",
+  "t226 combat : grimoire",
+  "t226 combat fermer",
+  "t226 combat : fin du tour",
+  "t226 combat : HellHounds va en 7,5",
+  "t226 combat : garder",
+  "t226 combat : garder",
+  "t226 combat : BatteringRam va en 8,7",
+  "t226 combat : HellHounds vers Ghoul",
+  "t226 combat : garder",
+  "t226 combat : fin du tour",
+  "t226 combat : HellHounds va en 6,5",
+  "t226 combat : LizardSpearmen va en 4,5",
+  "t226 combat : fin du tour",
+  "t226 combat : LizardSpearmen va en 5,5",
+  "t226 combat : HellHounds va en 6,3",
+  "t226 combat : HellHounds vers Ghoul",
+  "t226 combat : HellHounds va en 8,8",
+  "t226 combat : grimoire",
+  "t226 combat fermer",
+  "t226 combat : attendre",
+  "t226 combat : HellHounds attaque Ghoul",
+  "t226 combat : grimoire",
+  "t226 combat fermer",
+  "t226 combat : BatteringRam vers Ghoul",
+  "t226 combat : HellHounds attaque Ghoul",
+  "t226 combat : garder",
+  "t226 combat : HellHounds vers Ghoul",
+  "t226 combat : HellHounds va en 9,6",
+  "t226 combat : HellHounds va en 4,5",
+  "t226 combat : HellHounds va en 10,6",
+  "t226 combat : HellHounds vers Ghoul",
+  "t226 combat : LizardSpearmen va en 6,4",
+  "t226 combat : HellHounds attaque Ghoul",
+  "t226 combat : fuir",
+  "t226 combat clic « Fuir »",
+  "t226 combat clic « Continuer »",
+  "t227 combat clic « Résolution automatique »",
+  "t227 combat clic « Rejouer manuellement »",
+  "t227 combat : HalflingSwordsmen va en 9,9",
+  "t227 combat : HalflingSwordsmen va en 9,11",
+  "t227 combat : HalflingSwordsmen va en 10,12",
+  "t227 combat : HalflingSwordsmen va en 10,11",
+  "t227 combat clic « Continuer »",
+  "t227 marche Épéistes halfelins 31,31 → 30,30",
+  "t227 marche Squelettes 14,28 → 13,28",
+  "t227 marche Chiens infernaux 18,24 → 21,24",
+  "t227 marche Chiens infernaux 15,29 → 15,29",
+  "t227 ouvre un panneau",
+  "t227 clic « En campagne Miroir (19,14) · 1 unité »",
+  "t227 ouvre un panneau",
+  "t227 clic « Graphique »",
+  "t227 fermer",
+  "t227 clic « Graphique »",
+  "t227 fermer",
+  "t227 fermer",
+  "t227 marche Chiens infernaux 15,28 → 15,26",
+  "t227 marche Épéistes halfelins 16,28 → 15,26",
+  "t227 fin du tour",
+  "t227 combat clic « Résolution automatique »",
+  "t227 combat clic « Accepter le résultat »",
+  "t228 clic « Refuser »",
+  "t228 marche Épéistes halfelins 21,21 → 20,22",
+  "t228 marche Squelettes 23,15 → 22,14",
+  "t228 combat clic « Résolution automatique »",
+  "t228 combat clic « Accepter le résultat »",
+  "t228 marche Épéistes halfelins 24,25 → 25,26",
+  "t228 combat clic « Résolution automatique »",
+  "t228 combat clic « Accepter le résultat »",
+  "t228 clic « L'annexer »",
+  "t228 action « SentinelleS » Épéistes halfelins",
+  "t228 marche Chiens infernaux 17,20 → 15,19",
+  "t228 ouvre un panneau",
+  "t228 clic « Offrir 50 or »",
+  "t228 clic « Offrir 50 or »",
+  "t228 clic « Offrir 50 or »",
+  "t228 clic « Offrir 50 or »",
+  "t228 clic « Proposer la paix »",
+  "t228 clic « Graphique »",
+  "t228 fermer",
+  "t228 clic « Proposer la paix »",
+  "t228 clic « Proposer la paix »",
+  "t228 clic « Proposer la paix »",
+  "t228 clic « Proposer la paix »",
+  "t228 clic « Proposer la paix »",
+  "t228 fenêtres fermées de force",
+  "t228 action « AttendreW » Lanciers halfelins",
+  "t228 marche Épéistes halfelins 31,31 → 30,32",
+  "t228 combat clic « Résolution automatique »",
+  "t228 combat clic « Accepter le résultat »",
+  "t228 clic « La raser »",
+  "t228 marche Chiens infernaux 17,20 → 21,18",
+  "t228 fin du tour",
+  "t228 combat clic « Commander la bataille »",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HellHounds vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 5,6",
+  "t228 combat : HellHounds va en 4,5",
+  "t228 combat : garder",
+  "t228 combat : HellHounds vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 7,4",
+  "t228 combat : HalflingSwordsmen va en 5,7",
+  "t228 combat : HellHounds va en 2,4",
+  "t228 combat : HellHounds va en 4,6",
+  "t228 combat : HellHounds vers HeroShuri",
+  "t228 combat : HellHounds va en 4,5",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HellHounds va en 3,7",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 5,8",
+  "t228 combat : HalflingSwordsmen va en 6,4",
+  "t228 combat : HalflingSwordsmen va en 7,3",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 6,7",
+  "t228 combat : fin du tour",
+  "t228 combat : HalflingSwordsmen va en 8,3",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 7,7",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen va en 8,8",
+  "t228 combat : HalflingSwordsmen va en 8,4",
+  "t228 combat : HalflingSwordsmen va en 7,7",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen va en 7,3",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen va en 8,3",
+  "t228 combat : HalflingSwordsmen va en 7,8",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen va en 7,2",
+  "t228 combat : HalflingSwordsmen va en 7,3",
+  "t228 combat : HalflingSwordsmen va en 8,3",
+  "t228 combat : HalflingSwordsmen va en 8,8",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : fin du tour",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 7,2",
+  "t228 combat : HalflingSwordsmen va en 7,2",
+  "t228 combat : HalflingSwordsmen va en 8,7",
+  "t228 combat : garder",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen va en 7,4",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : HalflingSwordsmen vers HeroShuri",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen va en 7,6",
+  "t228 combat : attendre",
+  "t228 combat : HalflingSwordsmen va en 7,7",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen va en 8,3",
+  "t228 combat : HalflingSwordsmen va en 7,3",
+  "t228 combat : grimoire",
+  "t228 combat fermer",
+  "t228 combat : HalflingSwordsmen attaque HeroShuri",
+  "t228 combat clic « Continuer »",
+  "t229 marche Chiens infernaux 15,26 → 18,24",
+  "t229 marche Squelettes 13,27 → 10,26",
+  "t229 marche Squelettes 23,14 → 24,14",
+  "t229 marche Épéistes halfelins 22,12 → 25,10",
+  "t229 ouvre une cité",
+  "t229 clic « Renommer »",
+  "t229 clic « Renommer »",
+  "t229 clic « Modèles de file (3) »",
+  "t229 clic « Supprimer »",
+  "t229 clic « Supprimer »",
+  "t229 clic « Charger dans cette cité »",
+  "t229 clic « ↓ »",
+  "t229 clic « Croissance »",
+  "t229 clic « ↓ »",
+  "t229 clic « ↑ »",
+  "t229 clic « ⤓ »",
+  "t229 clic « ⤒ »",
+  "t229 fenêtres fermées de force",
+  "t229 marche Épéistes halfelins 25,27 → 25,29",
+  "t229 marche Lanciers halfelins 31,32 → 35,34",
+  "t229 marche Squelettes 15,28 → 17,29",
+  "t229 marche Épéistes halfelins 32,22 → 31,23",
+  "t229 combat clic « Résolution automatique »",
+  "t229 combat clic « Accepter le résultat »",
+  "t229 marche Chiens infernaux 18,23 → 22,26",
+  "t229 marche Chiens infernaux 18,23 → 18,24",
+  "t229 fin du tour",
+  "t229 clic « Passer quand même »",
+  "t230 ouvre une cité",
+  "t230 fin du tour",
+  "t230 clic « Annuler »",
+  "t230 action « SentinelleS » Squelettes",
+  "t230 ouvre un panneau",
+  "t230 clic « Voir »",
+  "t230 ouvre un panneau",
+  "t230 clic « En campagne Arcane (23,19) · 3 unités »",
+  "t230 marche Épéistes halfelins 24,14 → 25,14",
+  "t230 fin du tour",
+  "t230 clic « Annuler »",
+  "t230 marche Chiens infernaux 23,23 → 23,22",
+  "t230 combat clic « Commander la bataille »",
+  "t230 combat : HellHounds va en 10,9",
+  "t230 combat : HellHounds va en 11,10",
+  "t230 combat : HellHounds va en 12,10",
+  "t230 combat : HellHounds va en 12,11",
+  "t230 combat : fin du tour",
+  "t230 combat : HellHounds va en 12,12",
+  "t230 combat : HellHounds vers Catapult",
+  "t230 combat : HellHounds va en 11,12",
+  "t230 combat : HellHounds vers HighMenSpearmen",
+  "t230 combat : HellHounds attaque HighMenSpearmen",
+  "t230 combat : HellHounds attaque HighMenSpearmen",
+  "t230 combat clic « Continuer »",
+  "t230 ouvre un panneau",
+  "t230 fermer",
+  "t230 marche Épéistes halfelins 18,22 → 18,21",
+  "t230 combat clic « Résolution automatique »",
+  "t230 combat clic « Accepter le résultat »",
+  "t230 marche Épéistes halfelins 19,17 → 19,17",
+  "t230 fin du tour",
+  "t231 marche Nagas 19,23 → 19,23",
+  "t231 marche Chiens infernaux 23,17 → 24,16",
+  "t231 fin du tour",
+  "t231 combat clic « Résolution automatique »",
+  "t231 combat clic « Accepter le résultat »",
+  "t232 clic « Compris »",
+  "t232 marche Chiens infernaux 24,16 → 23,17",
+  "t232 combat clic « Commander la bataille »",
+  "t232 combat : HellHounds va en 8,10",
+  "t232 combat : HellHounds vers NomadSwordsmen",
+  "t232 combat : HellHounds va en 7,12",
+  "t232 combat : fin du tour",
+  "t232 combat : HellHounds va en 6,10",
+  "t232 combat : HellHounds attaque NomadSwordsmen",
+  "t232 combat : HellHounds vers NomadSwordsmen",
+  "t232 combat clic « Continuer »",
+  "t232 marche Squelettes 17,29 → 17,30",
+  "t232 marche Nagas 19,22 → 19,22",
+  "t232 ouvre un panneau",
+  "t232 clic « Abandonner »",
+  "t232 clic « Annuler »",
+  "t232 clic « Abandonner »",
+  "t232 fermer",
+  "t232 clic « Abandonner »",
+  "t232 clic « Abandonner »",
+  "t232 fermer",
+  "t232 marche Chiens infernaux 18,21 → 17,20",
+  "t232 marche Squelettes 16,29 → 13,27",
+  "t232 marche Squelettes 24,15 → 24,15",
+  "t232 fin du tour",
+  "t233 combat clic « Résolution automatique »",
+  "t233 combat clic « Accepter le résultat »",
+  "t233 marche Squelettes 24,15 → 24,14",
+  "t233 combat clic « Commander la bataille »",
+  "t233 combat : Skeleton vers Berserkers",
+  "t233 combat : Skeleton vers Berserkers",
+  "t233 combat : fuir",
+  "t233 combat clic « Fuir »",
+  "t233 combat clic « Continuer »",
+  "t233 action « AttendreW » Nagas",
+  "t233 ouvre une cité",
+  "t233 clic « Changer »",
+  "t233 clic « Biens de commerce +1 or/tour »",
+  "t233 clic « Aucun »",
+  "t233 clic « Modèles de file (1) »",
+  "t233 clic « Charger dans cette cité »",
+  "t233 clic « ↑ »",
+  "t233 clic « Renommer »",
+  "t233 clic « Renommer »",
+  "t233 fermer",
+  "t233 marche Squelettes 19,20 → 20,22",
+  "t233 marche Squelettes 16,29 → 15,28",
+  "t233 combat clic « Résolution automatique »",
+  "t233 combat clic « Accepter le résultat »",
+  "t233 fin du tour",
+  "t233 clic « Passer quand même »"
+ ],
+ "counts": {
+  "combat NomadSwordsmen": 89,
+  "combat ": 60,
+  "combat «": 234,
+  "combat fenêtres": 3,
+  "combat grimoire": 67,
+  "combat cible": 7,
+  "combat fin": 32,
+  "combat HalflingSwordsmen": 195,
+  "combat HalflingSpearmen": 18,
+  "combat Skeleton": 35,
+  "combat garder": 34,
+  "combat attendre": 22,
+  "combat sélection": 17,
+  "combat fuir": 21,
+  "marche": 141,
+  "ouvre": 72,
+  "clic": 247,
+  "fenêtres": 4,
+  "fermer": 58,
+  "fin": 38,
+  "combat HalflingScouts": 6,
+  "action": 19,
+  "combat HellHounds": 163,
+  "combat LizardHalberdiers": 14,
+  "combat MagicSpirit": 4,
+  "combat HighElfSwordsmen": 31,
+  "combat HighMenSwordsmen": 2,
+  "combat LizardSpearmen": 7,
+  "combat BatteringRam": 3
+ },
+ "minutes": 33.9
+}

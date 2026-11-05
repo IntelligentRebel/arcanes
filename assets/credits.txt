@@ -1,0 +1,1271 @@
+Arcanes - credits graphiques (atlas.png)
+============================================================
+
+Source : tuiles de Dungeon Crawl Stone Soup, export "crawl/tiles"
+         (https://github.com/crawl/tiles), lot releases/Nov-2015.
+Licence : CC0 1.0 Universal (domaine public)
+          https://creativecommons.org/publicdomain/zero/1.0/
+          Les artistes ayant place leur travail sous CC0 sont listes dans ARTISTS.md du depot ;
+          les tuiles a licence incertaine (TILES_UNDER_UNKNOWN_LICENSE.md) sont exclues du lot.
+          Aucune tuile hors de releases/Nov-2015 n'a ete utilisee.
+Merci aux artistes de Dungeon Crawl Stone Soup et de RLTiles.
+
+Traitements : composition en "paperdolls" (corps + equipement), recolorations,
+symetries, cadres d'icones, avec Pillow (tools/build_atlas.py). Les sprites
+marques "dessine" ci-dessous sont du pixel-art original, egalement verses en CC0.
+
+Sprites dessines (pixel-art original) :
+  unit:LizardSettlers  (paperdoll draconien vert + sac dessine)
+  unit:NomadSettlers  (paperdoll humain hale + sac dessine)
+  unit:OrcSettlers  (paperdoll humain a peau verte + sac dessine)
+  unit:TrollSettlers  (mon/deep_troll + sac dessine)
+  unit:Unicorn  (cheval blanc compose + corne dessinee)
+  unit:FloatingIsland  (dessine (pixel-art))
+  unit:Trireme  (dessine (pixel-art))
+  unit:Galley  (dessine (pixel-art))
+  unit:Catapult  (dessine (pixel-art))
+  unit:Warship  (dessine (pixel-art))
+  unit:BarbarianSettlers  (paperdoll humain clair + sac dessine)
+  unit:BeastmenSettlers  (paperdoll minotaure + sac dessine)
+  unit:DarkElfSettlers  (paperdoll elfe noir + sac dessine)
+  unit:DraconianSettlers  (paperdoll draconien aile + sac dessine)
+  unit:AirShip  (dessine (pixel-art))
+  unit:SteamCannon  (dessine (pixel-art))
+  unit:DwarfSettlers  (paperdoll nain + sac dessine)
+  unit:GnollSettlers  (paperdoll kobold recolore + sac dessine)
+  unit:HalflingSettlers  (paperdoll halfelin + sac dessine)
+  unit:HighElfSettlers  (paperdoll elfe + sac dessine)
+  unit:HighMenSettlers  (paperdoll humain + sac dessine)
+  unit:KlackonSettlers  (paperdoll formicide + sac dessine)
+  spell:flying_fortress  (ile flottante + forteresse dessinees)
+  spell:move_fortress  (forteresse dessinee)
+  spell:spell_of_return  (dngn/gateways/portal + forteresse dessinee)
+  feat:temple  (dessine (pixel-art))
+  feat:keep  (dessine (pixel-art))
+  feat:tower  (dessine (pixel-art))
+  feat:fallen_temple  (dessine (pixel-art))
+
+Fichiers d'origine utilises (634), relatifs a releases/Nov-2015/ :
+  UNUSED/features/lava.png
+  UNUSED/gui/divinations.png
+  UNUSED/monsters/asmodeus.small.png
+  UNUSED/monsters/gnome.png
+  UNUSED/monsters/michael.png
+  UNUSED/monsters/raven.png
+  UNUSED/monsters/shedu.png
+  UNUSED/monsters/silver_star.png
+  UNUSED/monsters/thorn_lotus.png
+  UNUSED/other/eye_filled_portal.png
+  UNUSED/spells/abjuration.png
+  UNUSED/spells/banishment.png
+  UNUSED/spells/components/bird.png
+  UNUSED/spells/components/hand3.png
+  UNUSED/spells/forceful_dismissal.png
+  UNUSED/spells/orb_of_destruction_big.png
+  UNUSED/weapons/broad_axe4.png
+  UNUSED/weapons/war_axe4.png
+  UNUSED/worn/hammer2.png
+  dngn/altars/elyvilon.png
+  dngn/altars/generic.png
+  dngn/altars/kikubaaqudgha.png
+  dngn/altars/okawaru.png
+  dngn/altars/shining_one.png
+  dngn/altars/zin.png
+  dngn/floor/dirt0.png
+  dngn/floor/dirt1.png
+  dngn/floor/dirt2.png
+  dngn/floor/grass/grass0.png
+  dngn/floor/grass/grass1.png
+  dngn/floor/grass/grass2.png
+  dngn/floor/grass/grass_flowers_blue1.png
+  dngn/floor/grass/grass_flowers_blue2.png
+  dngn/floor/grass/grass_flowers_red1.png
+  dngn/floor/grass/grass_flowers_red2.png
+  dngn/floor/grass/grass_flowers_yellow1.png
+  dngn/floor/grass/grass_flowers_yellow2.png
+  dngn/floor/green_bones05.png
+  dngn/floor/ice0.png
+  dngn/floor/ice1.png
+  dngn/floor/ice2.png
+  dngn/floor/ice3.png
+  dngn/floor/sand1.png
+  dngn/floor/sand2.png
+  dngn/floor/sand3.png
+  dngn/floor/sand4.png
+  dngn/floor/sand5.png
+  dngn/floor/sand6.png
+  dngn/floor/sand7.png
+  dngn/floor/sand8.png
+  dngn/floor/swamp0.png
+  dngn/floor/swamp1.png
+  dngn/floor/swamp2.png
+  dngn/floor/swamp3.png
+  dngn/gateways/enter_abyss1.png
+  dngn/gateways/enter_crypt.png
+  dngn/gateways/enter_depths.png
+  dngn/gateways/enter_lair.png
+  dngn/gateways/enter_spider.png
+  dngn/gateways/enter_zot_closed.png
+  dngn/gateways/exit_pandemonium.png
+  dngn/gateways/portal.png
+  dngn/gateways/starry_portal.png
+  dngn/gateways/stone_arch.png
+  dngn/gateways/volcano_exit.png
+  dngn/sparkling_fountain.png
+  dngn/statues/crumbled_column_1.png
+  dngn/statues/crumbled_column_3.png
+  dngn/statues/crumbled_column_4.png
+  dngn/statues/statue_ancient_evil.png
+  dngn/statues/statue_angel.png
+  dngn/statues/statue_archer.png
+  dngn/statues/statue_sword.png
+  dngn/trees/mangrove1.png
+  dngn/trees/mangrove2.png
+  dngn/trees/mangrove3.png
+  dngn/trees/tree1_lightred.png
+  dngn/trees/tree1_red.png
+  dngn/trees/tree1_yellow.png
+  dngn/trees/tree2_lightred.png
+  dngn/trees/tree2_red.png
+  dngn/trees/tree2_yellow.png
+  dngn/wall/brick_gray0.png
+  dngn/wall/lair0.png
+  dngn/wall/lair1.png
+  dngn/wall/lair2.png
+  dngn/wall/lair3.png
+  dngn/wall/orc0.png
+  dngn/wall/orc1.png
+  dngn/wall/orc2.png
+  dngn/wall/orc3.png
+  dngn/wall/stone2_gray0.png
+  dngn/water/shallow_water.png
+  dngn/water/shallow_water2.png
+  dngn/water/shoals_deep_water0.png
+  dngn/water/shoals_deep_water1.png
+  dngn/water/shoals_deep_water10.png
+  dngn/water/shoals_deep_water11.png
+  dngn/water/shoals_deep_water2.png
+  dngn/water/shoals_deep_water3.png
+  dngn/water/shoals_deep_water4.png
+  dngn/water/shoals_deep_water5.png
+  dngn/water/shoals_deep_water6.png
+  dngn/water/shoals_deep_water7.png
+  dngn/water/shoals_deep_water8.png
+  dngn/water/shoals_deep_water9.png
+  dngn/water/shoals_shallow_water0.png
+  dngn/water/shoals_shallow_water1.png
+  dngn/water/shoals_shallow_water10.png
+  dngn/water/shoals_shallow_water11.png
+  dngn/water/shoals_shallow_water2.png
+  dngn/water/shoals_shallow_water3.png
+  dngn/water/shoals_shallow_water4.png
+  dngn/water/shoals_shallow_water5.png
+  dngn/water/shoals_shallow_water6.png
+  dngn/water/shoals_shallow_water7.png
+  dngn/water/shoals_shallow_water8.png
+  dngn/water/shoals_shallow_water9.png
+  effect/cloud_black_smoke.png
+  effect/cloud_blue_smoke.png
+  effect/cloud_mutagenic_large1.png
+  gui/commands/find_waypoint.png
+  gui/commands/goto_target.png
+  gui/invocations/elyvilon_heal_other.png
+  gui/invocations/kiku_necronomicon.png
+  gui/invocations/qazlal_disaster_area.png
+  gui/invocations/qazlal_elemental_force.png
+  gui/invocations/qazlal_upheaval.png
+  gui/invocations/tso_bless_weapon.png
+  gui/spells/air/airstrike.png
+  gui/spells/air/chain_lightning.png
+  gui/spells/air/deflect_missiles.png
+  gui/spells/air/lightning_bolt.png
+  gui/spells/air/repel_missiles.png
+  gui/spells/air/silence.png
+  gui/spells/air/swiftness.png
+  gui/spells/air/tornado.png
+  gui/spells/conjuration/dazzling_spray.png
+  gui/spells/conjuration/fulminant_prism.png
+  gui/spells/conjuration/iskenderuns_mystic_blast.png
+  gui/spells/conjuration/orb_of_destruction.png
+  gui/spells/earth/dig.png
+  gui/spells/earth/ledas_liquefaction.png
+  gui/spells/earth/lees_rapid_deconstruction.png
+  gui/spells/earth/petrify.png
+  gui/spells/earth/sandblast.png
+  gui/spells/earth/shatter.png
+  gui/spells/earth/statue_form.png
+  gui/spells/earth/stoneskin.png
+  gui/spells/enchantment/berserker_rage.png
+  gui/spells/enchantment/cause_fear.png
+  gui/spells/enchantment/confuse.png
+  gui/spells/enchantment/confusing_touch.png
+  gui/spells/enchantment/darkness.png
+  gui/spells/enchantment/discord.png
+  gui/spells/enchantment/enslavement.png
+  gui/spells/enchantment/haste.png
+  gui/spells/enchantment/infusion.png
+  gui/spells/enchantment/invisibility.png
+  gui/spells/enchantment/mass_confusion.png
+  gui/spells/enchantment/slow.png
+  gui/spells/fire/bolt_of_fire.png
+  gui/spells/fire/bolt_of_magma.png
+  gui/spells/fire/conjure_flame.png
+  gui/spells/fire/fire_storm.png
+  gui/spells/fire/fireball.png
+  gui/spells/fire/inner_flame.png
+  gui/spells/fire/ring_of_flames.png
+  gui/spells/ice/condensation_shield.png
+  gui/spells/ice/ensorcelled_hibernation.png
+  gui/spells/ice/ice_storm.png
+  gui/spells/ice/metabolic_englaciation.png
+  gui/spells/ice/throw_icicle.png
+  gui/spells/monster/brain_feed.png
+  gui/spells/monster/polymorph.png
+  gui/spells/monster/summon_minor_demon.png
+  gui/spells/necromancy/agony.png
+  gui/spells/necromancy/animate_dead.png
+  gui/spells/necromancy/bolt_of_draining.png
+  gui/spells/necromancy/borgnjors_revivification.png
+  gui/spells/necromancy/control_undead.png
+  gui/spells/necromancy/corpse_rot.png
+  gui/spells/necromancy/death_channel.png
+  gui/spells/necromancy/deaths_door.png
+  gui/spells/necromancy/dispel_undead.png
+  gui/spells/necromancy/pain.png
+  gui/spells/necromancy/regeneration.png
+  gui/spells/necromancy/sublimation_of_blood.png
+  gui/spells/necromancy/symbol_of_torment.png
+  gui/spells/necromancy/twisted_resurrection.png
+  gui/spells/necromancy/vampiric_draining.png
+  gui/spells/poison/cure_poison.png
+  gui/spells/poison/olgrebs_toxic_radiance.png
+  gui/spells/summoning/mass_abjuration.png
+  gui/spells/summoning/recall.png
+  gui/spells/summoning/sticks_to_snakes.png
+  gui/spells/summoning/summon_forest.png
+  gui/spells/translocation/controlled_blink.png
+  gui/spells/translocation/disjunction.png
+  gui/spells/translocation/dispersal.png
+  gui/spells/translocation/gravitas.png
+  gui/spells/translocation/passage_of_golubria.png
+  gui/spells/translocation/phase_shift.png
+  gui/spells/translocation/shroud_of_golubria.png
+  gui/spells/translocation/warp_weapon.png
+  gui/spells/transmutation/beastly_appendage.png
+  gui/spells/transmutation/irradiate.png
+  item/amulet/artefact/urand_brooch_of_shielding.png
+  item/amulet/artefact/urand_vitality.png
+  item/amulet/celtic_blue.png
+  item/amulet/crystal_red.png
+  item/amulet/face1_gold.png
+  item/amulet/stone2_green.png
+  item/armour/artefact/urand_dragon_king.png
+  item/armour/artefact/urand_dyrovepreva.png
+  item/armour/artefact/urand_lear.png
+  item/armour/artefact/urand_night.png
+  item/armour/artefact/urand_salamander.png
+  item/armour/boots1_brown.png
+  item/armour/boots2_jackboots.png
+  item/armour/boots4_green.png
+  item/armour/cloak1_leather.png
+  item/armour/cloak2.png
+  item/armour/cloak4.png
+  item/armour/glove3.png
+  item/armour/glove4.png
+  item/armour/glove5.png
+  item/armour/gold_dragon_armour.png
+  item/armour/headgear/helmet1.png
+  item/armour/headgear/helmet2.png
+  item/armour/headgear/helmet_art1.png
+  item/armour/headgear/helmet_art3.png
+  item/armour/headgear/helmet_ego1.png
+  item/armour/plate1.png
+  item/armour/ring_mail1.png
+  item/armour/ring_mail2.png
+  item/armour/scale_mail1.png
+  item/armour/shields/buckler1.png
+  item/armour/shields/large_shield1.png
+  item/armour/shields/large_shield3.png
+  item/armour/shields/lshield_louise.png
+  item/armour/shields/shield1.png
+  item/book/artefact/buckle.png
+  item/book/metal_blue.png
+  item/food/chunk_rotten.png
+  item/gold/10.png
+  item/misc/misc_box.png
+  item/misc/misc_crystal.png
+  item/misc/misc_fan.png
+  item/misc/misc_horn.png
+  item/misc/misc_lamp.png
+  item/misc/misc_lantern.png
+  item/misc/misc_orb.png
+  item/misc/misc_phial.png
+  item/misc/runes/rune_gehenna.png
+  item/misc/runes/rune_lom_lobon.png
+  item/ring/artefact/urand_octoring.png
+  item/ring/artefact/urand_shadows.png
+  item/ring/i-see-invis.png
+  item/ring/ruby.png
+  item/ring/tourmaline.png
+  item/rod/i-rod_warding.png
+  item/scroll/i-holy_word.png
+  item/scroll/i-magic_mapping.png
+  item/staff/staff01.png
+  item/staff/staff05.png
+  item/staff/staff07.png
+  item/wand/gem_bone.png
+  item/wand/gem_gold.png
+  item/wand/gem_iron.png
+  item/wand/gem_silver.png
+  item/weapon/artefact/spwpn_staff_of_olgreb.png
+  item/weapon/artefact/spwpn_sword_of_power.png
+  item/weapon/artefact/urand_axe_of_woe.png
+  item/weapon/artefact/urand_firestarter.png
+  item/weapon/artefact/urand_flaming_death.png
+  item/weapon/artefact/urand_order.png
+  item/weapon/artefact/urand_skullcrusher.png
+  item/weapon/artefact/urand_storm_bow.png
+  item/weapon/flail1.png
+  item/weapon/greatsword1.png
+  item/weapon/hand_axe1.png
+  item/weapon/long_sword1.png
+  item/weapon/mace1.png
+  item/weapon/morningstar1.png
+  item/weapon/ranged/arbalest1.png
+  item/weapon/ranged/longbow1.png
+  item/weapon/ranged/shortbow1.png
+  item/weapon/ranged/throwing_net.png
+  item/weapon/scimitar1.png
+  misc/icons/heart.png
+  mon/animals/alligator_snapping_turtle.png
+  mon/animals/basilisk.png
+  mon/animals/black_bear.png
+  mon/animals/boulder_beetle.png
+  mon/animals/caustic_shrike.png
+  mon/animals/elephant.png
+  mon/animals/elephant_dire.png
+  mon/animals/hell_hound.png
+  mon/animals/redback.png
+  mon/animals/wolf.png
+  mon/death_knight.png
+  mon/deep_troll.png
+  mon/deep_troll_shaman.png
+  mon/demons/balrug.png
+  mon/demons/chaos_spawn1.png
+  mon/demons/efreet.png
+  mon/demons/red_devil.png
+  mon/demons/shadow_fiend.png
+  mon/draco/draco-base-black.png
+  mon/draco/draco-job-knight.png
+  mon/dragons/hydra5.png
+  mon/dragons/storm_dragon.png
+  mon/dragons/wyvern.png
+  mon/dwarf.png
+  mon/eyes/eye_of_devastation.png
+  mon/fire_giant.png
+  mon/fungi_plants/briar_patch.png
+  mon/gnoll.png
+  mon/griffon.png
+  mon/hell_knight.png
+  mon/holy/angel.png
+  mon/holy/daeva.png
+  mon/iron_troll.png
+  mon/manticore.png
+  mon/mutant_beast.png
+  mon/naga_warrior.png
+  mon/necromancer.png
+  mon/nonliving/air_elemental.png
+  mon/nonliving/earth_elemental.png
+  mon/nonliving/fire_elemental.png
+  mon/nonliving/guardian_golem.png
+  mon/nonliving/maelstrom1.png
+  mon/nonliving/spatial_vortex1.png
+  mon/orc_warrior.png
+  mon/panlord/demon_body_succubus.png
+  mon/panlord/demon_head_horse.png
+  mon/panlord/demon_head_medusa.png
+  mon/panlord/demon_wings_butterfly_small.png
+  mon/panlord/demon_wings_large.png
+  mon/panlord/demon_wings_sparrow.png
+  mon/stone_giant.png
+  mon/tengu_conjurer.png
+  mon/titan.png
+  mon/undead/flying_skull.png
+  mon/undead/ghoul.png
+  mon/undead/phantom.png
+  mon/undead/shadow.png
+  mon/undead/shadow_wraith.png
+  mon/undead/skeletal_warrior.png
+  mon/undead/spectrals/spectral_quadruped_large.png
+  mon/unique/eustachio.png
+  mon/unique/frederick.png
+  mon/unique/iron_giant.png
+  mon/unique/jormungandr.png
+  mon/unique/kirke.png
+  mon/unique/margery.png
+  mon/unique/maurice.png
+  mon/unique/mennas.png
+  mon/unique/psyche.png
+  mon/unique/rupert.png
+  mon/unique/sigmund.png
+  mon/vault/gigabat.png
+  mon/vault/hell_wizard_100.png
+  mon/vault/hellbinder.png
+  mon/vault_guard.png
+  mon/vault_sentinel.png
+  player/base/centaur_brown_m.png
+  player/base/centaur_darkbrown_m.png
+  player/base/centaur_darkgrey_m.png
+  player/base/centaur_lightbrown_m.png
+  player/base/centaur_lightgrey_m.png
+  player/base/deep_elf_m.png
+  player/base/draconian_gold_m.png
+  player/base/draconian_green_m.png
+  player/base/draconian_red_m.png
+  player/base/dwarf_m.png
+  player/base/elf_f.png
+  player/base/elf_m.png
+  player/base/formicid.png
+  player/base/gargoyle_m.png
+  player/base/halfling_m.png
+  player/base/human_f.png
+  player/base/human_m.png
+  player/base/kobold_m.png
+  player/base/minotaur_brown1_m.png
+  player/base/minotaur_brown2_m.png
+  player/base/spriggan_m.png
+  player/body/animal_skin.png
+  player/body/aragorn2.png
+  player/body/armour_blue_gold.png
+  player/body/bloody.png
+  player/body/bplate_green.png
+  player/body/bplate_metal1.png
+  player/body/china_red.png
+  player/body/china_red2.png
+  player/body/dress_green.png
+  player/body/frodo.png
+  player/body/gil-galad.png
+  player/body/gimli.png
+  player/body/green_chain.png
+  player/body/half_plate.png
+  player/body/half_plate2.png
+  player/body/half_plate3.png
+  player/body/jacket_stud.png
+  player/body/kryias.png
+  player/body/leather2.png
+  player/body/leather_green.png
+  player/body/leather_heavy.png
+  player/body/leather_jacket.png
+  player/body/leather_metal.png
+  player/body/leather_red.png
+  player/body/leather_short.png
+  player/body/leather_stud.png
+  player/body/legolas.png
+  player/body/mesh_black.png
+  player/body/monk_blue.png
+  player/body/pipin.png
+  player/body/plate_and_cloth.png
+  player/body/plate_black.png
+  player/body/robe_black_gold.png
+  player/body/robe_black_red.png
+  player/body/robe_blue.png
+  player/body/robe_blue_white.png
+  player/body/robe_brown.png
+  player/body/robe_brown2.png
+  player/body/robe_green_gold.png
+  player/body/robe_of_night.png
+  player/body/robe_purple.png
+  player/body/robe_red.png
+  player/body/robe_red3.png
+  player/body/robe_red_gold.png
+  player/body/robe_white.png
+  player/body/robe_white2.png
+  player/body/robe_white_blue.png
+  player/body/robe_white_green.png
+  player/body/robe_white_red.png
+  player/body/shirt_black.png
+  player/body/shirt_black3.png
+  player/body/shirt_black_and_cloth.png
+  player/body/shirt_check.png
+  player/body/shirt_vest.png
+  player/body/shirt_white1.png
+  player/body/shirt_white2.png
+  player/body/shirt_white3.png
+  player/body/slit_black.png
+  player/body/vest_red2.png
+  player/boots/mesh_black.png
+  player/boots/mesh_white.png
+  player/boots/middle_brown.png
+  player/boots/middle_gold.png
+  player/boots/middle_green.png
+  player/boots/middle_ybrown.png
+  player/boots/short_brown2.png
+  player/boots/short_purple.png
+  player/cloak/black.png
+  player/cloak/brown.png
+  player/drcwing/drcwing_red.png
+  player/drcwing/drcwing_yellow.png
+  player/gloves/glove_short_gray.png
+  player/gloves/glove_short_red.png
+  player/hair/aragorn.png
+  player/hair/arwen.png
+  player/hair/brown1.png
+  player/hair/brown2.png
+  player/hair/djinn1.png
+  player/hair/elf_black.png
+  player/hair/fem_black.png
+  player/hair/fem_red.png
+  player/hair/fem_white.png
+  player/hair/fem_yellow.png
+  player/hair/frodo.png
+  player/hair/knot_red.png
+  player/hair/legolas.png
+  player/hair/merry.png
+  player/hair/pigtail_red.png
+  player/hair/pj.png
+  player/hair/sam.png
+  player/halo/halo_player.png
+  player/hand1/axe_executioner.png
+  player/hand1/battleaxe2.png
+  player/hand1/black_sword.png
+  player/hand1/bow.png
+  player/hand1/bow_three.png
+  player/hand1/bow_two.png
+  player/hand1/broadsword.png
+  player/hand1/dagger_slant.png
+  player/hand1/falchion.png
+  player/hand1/falchion2.png
+  player/hand1/glaive.png
+  player/hand1/glaive_two.png
+  player/hand1/great_bow.png
+  player/hand1/great_mace.png
+  player/hand1/greatsling.png
+  player/hand1/halberd.png
+  player/hand1/katana_slant.png
+  player/hand1/lance.png
+  player/hand1/long_sword_slant.png
+  player/hand1/long_sword_slant2.png
+  player/hand1/mace_two.png
+  player/hand1/misc/fan.png
+  player/hand1/misc/light_blue.png
+  player/hand1/misc/light_yellow.png
+  player/hand1/pick_axe.png
+  player/hand1/pike.png
+  player/hand1/quarterstaff.png
+  player/hand1/rapier.png
+  player/hand1/sceptre.png
+  player/hand1/scimitar.png
+  player/hand1/short_sword_slant.png
+  player/hand1/short_sword_slant2.png
+  player/hand1/spear.png
+  player/hand1/spear2.png
+  player/hand1/spear_five.png
+  player/hand1/spear_four.png
+  player/hand1/spear_three.png
+  player/hand1/spear_two.png
+  player/hand1/staff_evil.png
+  player/hand1/staff_fancy.png
+  player/hand1/staff_large.png
+  player/hand1/staff_mage.png
+  player/hand1/staff_mage_two.png
+  player/hand1/staff_organic.png
+  player/hand1/staff_plain.png
+  player/hand1/staff_ring_blue.png
+  player/hand1/staff_ruby.png
+  player/hand1/staff_sceptre.png
+  player/hand1/staff_skull.png
+  player/hand1/sword_thief.png
+  player/hand1/whip.png
+  player/hand2/buckler_round.png
+  player/hand2/buckler_round2.png
+  player/hand2/doll_only/shield_middle_black.png
+  player/hand2/doll_only/shield_middle_brown.png
+  player/hand2/doll_only/shield_middle_cyan.png
+  player/hand2/doll_only/shield_middle_round.png
+  player/hand2/doll_only/shield_round2.png
+  player/hand2/doll_only/shield_round3.png
+  player/hand2/doll_only/shield_round4.png
+  player/hand2/doll_only/shield_shaman.png
+  player/hand2/doll_only/shield_skull.png
+  player/hand2/lshield_gold.png
+  player/hand2/lshield_green.png
+  player/hand2/misc/book_magenta.png
+  player/hand2/misc/book_red.png
+  player/hand2/misc/book_white.png
+  player/hand2/misc/book_yellow.png
+  player/hand2/misc/dagger.png
+  player/hand2/misc/fire_dark.png
+  player/hand2/misc/fire_green.png
+  player/hand2/misc/fire_white.png
+  player/hand2/misc/lantern.png
+  player/hand2/misc/light_blue.png
+  player/hand2/misc/light_red.png
+  player/hand2/misc/light_yellow.png
+  player/hand2/misc/short_sword_slant.png
+  player/hand2/misc/short_sword_slant2.png
+  player/hand2/misc/spark.png
+  player/hand2/misc/torch.png
+  player/hand2/shield_kite1.png
+  player/hand2/shield_kite2.png
+  player/hand2/shield_kite3.png
+  player/hand2/shield_kite4.png
+  player/hand2/shield_knight_blue.png
+  player/hand2/shield_knight_rw.png
+  player/head/band_magenta.png
+  player/head/band_red.png
+  player/head/bandana_ybrown.png
+  player/head/bear.png
+  player/head/black_horn2.png
+  player/head/cap_black1.png
+  player/head/cap_blue.png
+  player/head/chain.png
+  player/head/crown_gold1.png
+  player/head/crown_gold2.png
+  player/head/crown_gold3.png
+  player/head/feather_blue.png
+  player/head/feather_green.png
+  player/head/feather_red.png
+  player/head/feather_white.png
+  player/head/feather_yellow.png
+  player/head/fhelm_horn_yellow.png
+  player/head/healer.png
+  player/head/helm_gimli.png
+  player/head/helm_green.png
+  player/head/helm_plume.png
+  player/head/hood_black2.png
+  player/head/hood_green.png
+  player/head/hood_green2.png
+  player/head/hood_white.png
+  player/head/hood_ybrown.png
+  player/head/horn_evil.png
+  player/head/horned.png
+  player/head/horns1.png
+  player/head/horns2.png
+  player/head/iron_red.png
+  player/head/isildur.png
+  player/head/ninja_black.png
+  player/head/straw.png
+  player/head/taiso_red.png
+  player/head/turban_brown.png
+  player/head/turban_purple.png
+  player/head/turban_white.png
+  player/head/viking_brown1.png
+  player/head/viking_gold.png
+  player/head/wizard_blackred.png
+  player/head/wizard_blue.png
+  player/head/wizard_lightgreen.png
+  player/head/wizard_purple.png
+  player/head/wizard_red.png
+  player/head/wizard_white.png
+  player/head/yellow_wing.png
+  player/legs/leg_armour00.png
+  player/legs/leg_armour01.png
+  player/legs/leg_armour02.png
+  player/legs/leg_armour03.png
+  player/legs/leg_armour04.png
+  player/legs/leg_armour05.png
+  player/legs/loincloth_red.png
+  player/legs/pants_black.png
+  player/legs/pants_blue.png
+  player/legs/pants_brown.png
+  player/legs/pants_darkgreen.png
+  player/legs/pants_l_white.png
+  player/legs/pants_orange.png
+  player/legs/pants_short_brown.png
+  player/legs/pants_short_brown3.png
+  player/legs/pants_short_darkbrown.png
+  player/legs/pants_short_gray.png
+  player/legs/skirt_green.png
+  player/legs/skirt_red.png
+  player/transform/dragon_form_mottled.png
+  player/transform/dragon_form_red.png
+  player/transform/shadow_form.png
+
+Correspondance cle -> source :
+  unit:LizardSpearmen              paperdoll draconien vert
+  unit:LizardSwordsmen             paperdoll draconien vert
+  unit:LizardHalberdiers           paperdoll draconien vert
+  unit:LizardJavelineers           paperdoll draconien vert
+  unit:LizardShamans               paperdoll draconien vert
+  unit:LizardSettlers              paperdoll draconien vert + sac dessine
+  unit:DragonTurtle                mon/animals/alligator_snapping_turtle
+  unit:NomadSpearmen               paperdoll humain hale
+  unit:NomadSwordsmen              paperdoll humain hale
+  unit:NomadBowmen                 paperdoll humain hale
+  unit:NomadPriest                 paperdoll humain hale
+  unit:NomadSettlers               paperdoll humain hale + sac dessine
+  unit:NomadHorsebowemen           humain hale + cheval compose
+  unit:NomadPikemen                paperdoll humain hale
+  unit:NomadRangers                paperdoll humain hale
+  unit:Griffin                     mon/griffon
+  unit:OrcSpearmen                 paperdoll humain a peau verte
+  unit:OrcSwordsmen                paperdoll humain a peau verte
+  unit:OrcHalberdiers              paperdoll humain a peau verte
+  unit:OrcBowmen                   paperdoll humain a peau verte
+  unit:OrcCavalry                  orque + cheval compose
+  unit:OrcShamans                  paperdoll humain a peau verte
+  unit:OrcMagicians                paperdoll humain a peau verte
+  unit:OrcEngineers                paperdoll humain a peau verte
+  unit:OrcSettlers                 paperdoll humain a peau verte + sac dessine
+  unit:WyvernRiders                mon/dragons/wyvern + cavalier orque
+  unit:TrollSpearmen               mon/deep_troll + lance
+  unit:TrollSwordsmen              mon/deep_troll + epee + bouclier
+  unit:TrollHalberdiers            mon/deep_troll + hallebarde
+  unit:TrollShamans                mon/deep_troll_shaman
+  unit:TrollSettlers               mon/deep_troll + sac dessine
+  unit:WarTrolls                   mon/iron_troll + masse
+  unit:WarMammoths                 mon/animals/elephant recolore
+  unit:MagicSpirit                 mon/undead/phantom
+  unit:HellHounds                  mon/animals/hell_hound
+  unit:Gargoyle                    player/base/gargoyle_m
+  unit:FireGiant                   mon/fire_giant
+  unit:FireElemental               mon/nonliving/fire_elemental
+  unit:ChaosSpawn                  mon/demons/chaos_spawn1
+  unit:Chimeras                    mon/mutant_beast
+  unit:DoomBat                     mon/vault/gigabat recolore feu
+  unit:Efreet                      mon/demons/efreet
+  unit:Hydra                       mon/dragons/hydra5
+  unit:GreatDrake                  player/transform/dragon_form_red
+  unit:Skeleton                    mon/undead/skeletal_warrior
+  unit:Ghoul                       mon/undead/ghoul
+  unit:NightStalker                mon/undead/shadow
+  unit:WereWolf                    mon/gnoll recolore gris
+  unit:Demon                       mon/demons/red_devil
+  unit:Wraith                      mon/undead/shadow_wraith
+  unit:ShadowDemons                mon/demons/shadow_fiend
+  unit:DeathKnights                mon/death_knight
+  unit:DemonLord                   mon/demons/balrug
+  unit:Zombie                      humain recolore (zombie)
+  unit:Unicorn                     cheval blanc compose + corne dessinee
+  unit:GuardianSpirit              phantom dore + halo
+  unit:Angel                       mon/holy/angel
+  unit:ArchAngel                   mon/holy/daeva
+  unit:WarBear                     mon/animals/black_bear recolore
+  unit:Sprites                     spriggan + ailes de papillon
+  unit:Cockatrices                 mon/animals/caustic_shrike recolore
+  unit:Basilisk                    mon/animals/basilisk
+  unit:GiantSpiders                mon/animals/redback
+  unit:StoneGiant                  mon/stone_giant
+  unit:Colossus                    mon/unique/iron_giant recolore bronze
+  unit:Gorgon                      seigneur de Pandemonium compose (ailes + corps + tete de meduse)
+  unit:EarthElemental              mon/nonliving/earth_elemental
+  unit:Behemoth                    mon/animals/elephant_dire
+  unit:GreatWyrm                   mon/unique/jormungandr
+  unit:FloatingIsland              dessine (pixel-art)
+  unit:PhantomBeast                spectral_quadruped_large recolore
+  unit:PhantomWarrior              paperdoll guerrier recolore spectral
+  unit:StormGiant                  mon/titan
+  unit:AirElemental                mon/nonliving/air_elemental
+  unit:Djinn                       humain bleu + fumee
+  unit:SkyDrake                    mon/dragons/storm_dragon
+  unit:Nagas                       mon/naga_warrior
+  unit:HeroBrax                    mon/dwarf
+  unit:HeroGunther                 mon/unique/rupert
+  unit:HeroZaldron                 UNUSED/monsters/gnome (vieux sage)
+  unit:HeroBShan                   paperdoll derviche
+  unit:HeroRakir                   paperdoll homme-bete dresseur
+  unit:HeroValana                  paperdoll barde
+  unit:HeroBahgtru                 mon/orc_warrior
+  unit:HeroSerena                  paperdoll guerisseuse
+  unit:HeroShuri                   paperdoll chasseresse
+  unit:HeroTheria                  paperdoll voleuse
+  unit:HeroGreyfairer              paperdoll druide
+  unit:HeroTaki                    paperdoll moine
+  unit:HeroReywind                 mon/unique/sigmund
+  unit:HeroMalleus                 mon/unique/eustachio
+  unit:HeroTumu                    paperdoll assassin
+  unit:HeroJaer                    paperdoll mage du vent
+  unit:HeroMarcus                  paperdoll rodeur
+  unit:HeroFang                    mon/draco base noire + chevalier
+  unit:HeroMorgana                 paperdoll sorciere
+  unit:HeroAureus                  mon/unique/frederick
+  unit:HeroShinBo                  paperdoll ninja
+  unit:HeroSpyder                  mon/unique/maurice
+  unit:HeroShalla                  mon/unique/margery
+  unit:HeroYramrag                 mon/vault/hellbinder
+  unit:HeroMysticX                 UNUSED/monsters/michael (silhouette encapuchonnee)
+  unit:HeroAerie                   mon/unique/psyche
+  unit:HeroDethStryke              paperdoll bretteur (deux lames)
+  unit:HeroElana                   mon/unique/kirke
+  unit:HeroRoland                  paperdoll paladin + halo
+  unit:HeroMortu                   mon/vault_sentinel
+  unit:HeroAlorra                  paperdoll archere elfe
+  unit:HeroSirHarold               mon/vault_guard
+  unit:HeroRavashack               mon/necromancer
+  unit:HeroWarrax                  mon/hell_knight
+  unit:HeroTorin                   mon/unique/mennas
+  unit:Trireme                     dessine (pixel-art)
+  unit:Galley                      dessine (pixel-art)
+  unit:Catapult                    dessine (pixel-art)
+  unit:Warship                     dessine (pixel-art)
+  unit:BarbarianSpearmen           paperdoll humain clair
+  unit:BarbarianSwordsmen          paperdoll humain clair
+  unit:BarbarianBowmen             paperdoll humain clair
+  unit:BarbarianCavalry            humain clair + cheval compose
+  unit:BarbarianShaman             paperdoll humain clair
+  unit:BarbarianSettlers           paperdoll humain clair + sac dessine
+  unit:Berserkers                  paperdoll humain clair
+  unit:BeastmenSpearmen            paperdoll minotaure
+  unit:BeastmenSwordsmen           paperdoll minotaure
+  unit:BeastmenHalberdiers         paperdoll minotaure
+  unit:BeastmenBowmen              paperdoll minotaure
+  unit:BeastmenPriest              paperdoll minotaure
+  unit:BeastmenMagician            paperdoll minotaure
+  unit:BeastmenEngineer            paperdoll minotaure
+  unit:BeastmenSettlers            paperdoll minotaure + sac dessine
+  unit:Centaur                     paperdoll centaure
+  unit:Manticore                   mon/manticore
+  unit:Minotaur                    paperdoll minotaure sombre
+  unit:DarkElfSpearmen             paperdoll elfe noir
+  unit:DarkElfSwordsmen            paperdoll elfe noir
+  unit:DarkElfHalberdiers          paperdoll elfe noir
+  unit:DarkElfCavalry              elfe noir + cheval noir compose
+  unit:DarkElfPriests              paperdoll elfe noir
+  unit:DarkElfSettlers             paperdoll elfe noir + sac dessine
+  unit:Nightblades                 paperdoll elfe noir
+  unit:Warlocks                    paperdoll elfe noir
+  unit:Nightmares                  cheval noir aux yeux rouges compose
+  unit:DraconianSpearmen           paperdoll draconien aile
+  unit:DraconianSwordsmen          paperdoll draconien aile
+  unit:DraconianHalberdiers        paperdoll draconien aile
+  unit:DraconianBowmen             paperdoll draconien aile
+  unit:DraconianShaman             paperdoll draconien aile
+  unit:DraconianMagician           paperdoll draconien aile
+  unit:DraconianEngineer           paperdoll draconien aile
+  unit:DraconianSettlers           paperdoll draconien aile + sac dessine
+  unit:DoomDrake                   player/transform/dragon_form_mottled
+  unit:AirShip                     dessine (pixel-art)
+  unit:DwarfSwordsmen              paperdoll nain (reduit)
+  unit:DwarfHalberdiers            paperdoll nain (reduit)
+  unit:DwarfEngineer               paperdoll nain (reduit)
+  unit:Hammerhands                 paperdoll nain (reduit)
+  unit:SteamCannon                 dessine (pixel-art)
+  unit:Golem                       mon/nonliving/guardian_golem
+  unit:DwarfSettlers               paperdoll nain + sac dessine
+  unit:GnollSpearmen               paperdoll kobold recolore
+  unit:GnollSwordsmen              paperdoll kobold recolore
+  unit:GnollHalberdiers            paperdoll kobold recolore
+  unit:GnollBowmen                 paperdoll kobold recolore
+  unit:GnollSettlers               paperdoll kobold recolore + sac dessine
+  unit:WolfRiders                  mon/animals/wolf + cavalier gnoll
+  unit:HalflingSpearmen            paperdoll halfelin (reduit)
+  unit:HalflingSwordsmen           paperdoll halfelin (reduit)
+  unit:HalflingBowmen              paperdoll halfelin (reduit)
+  unit:HalflingShamans             paperdoll halfelin (reduit)
+  unit:HalflingSettlers            paperdoll halfelin + sac dessine
+  unit:Slingers                    paperdoll halfelin (reduit)
+  unit:HighElfSpearmen             paperdoll elfe
+  unit:HighElfSwordsmen            paperdoll elfe
+  unit:HighElfHalberdiers          paperdoll elfe
+  unit:HighElfCavalry              elfe + cheval gris compose
+  unit:HighElfMagician             paperdoll elfe
+  unit:HighElfSettlers             paperdoll elfe + sac dessine
+  unit:Longbowmen                  paperdoll elfe
+  unit:ElvenLord                   elfe dore + cheval blanc compose
+  unit:Pegasai                     elfe + cheval blanc aile compose
+  unit:HighMenSpearmen             paperdoll humain
+  unit:HighMenSwordsmen            paperdoll humain
+  unit:HighMenBowmen               paperdoll humain
+  unit:HighMenCavalry              humain + cheval compose (centaure + tete de cheval)
+  unit:HighMenPriest               paperdoll humain
+  unit:HighMenMagician             paperdoll humain
+  unit:HighMenEngineer             paperdoll humain
+  unit:HighMenSettlers             paperdoll humain + sac dessine
+  unit:HighMenPikemen              paperdoll humain
+  unit:Paladin                     humain + cheval blanc compose
+  unit:KlackonSpearmen             paperdoll formicide
+  unit:KlackonSwordsmen            paperdoll formicide
+  unit:KlackonHalberdiers          paperdoll formicide
+  unit:KlackonEngineer             paperdoll formicide
+  unit:KlackonSettlers             paperdoll formicide + sac dessine
+  unit:StagBeetle                  mon/animals/boulder_beetle recolore
+  wizard:0                         paperdoll vieux mage
+  wizard:1                         paperdoll chamane
+  wizard:2                         paperdoll pretresse vaudou
+  wizard:3                         paperdoll mystique
+  wizard:4                         paperdoll illusionniste
+  wizard:5                         paperdoll elementaliste
+  wizard:6                         mon/vault/hell_wizard_100
+  wizard:7                         paperdoll draconien
+  wizard:8                         UNUSED/monsters/asmodeus.small
+  wizard:9                         paperdoll nymphe elfe
+  wizard:10                        mon/tengu_conjurer
+  wizard:11                        paperdoll grande pretresse
+  wizard:12                        paperdoll pretre a plumes
+  wizard:13                        paperdoll sorciere
+  spell:air_elemental              icone d'invocation + unit:AirElemental
+  spell:altar_of_battle            dngn/altars/okawaru
+  spell:angel                      icone d'invocation + unit:Angel
+  spell:animate_dead               gui/spells/necromancy/animate_dead
+  spell:archangel                  icone d'invocation + unit:ArchAngel
+  spell:armageddon                 gui/invocations/qazlal_disaster_area
+  spell:astral_gate                dngn/gateways/starry_portal
+  spell:aura_of_majesty            item/armour/artefact/urand_dyrovepreva
+  spell:awareness                  UNUSED/gui/divinations
+  spell:banish                     UNUSED/spells/banishment
+  spell:basilisk                   icone d'invocation + unit:Basilisk
+  spell:behemoth                   icone d'invocation + unit:Behemoth
+  spell:berserk                    gui/spells/enchantment/berserker_rage
+  spell:black_channels             gui/spells/necromancy/death_channel
+  spell:black_prayer               gui/invocations/kiku_necronomicon
+  spell:black_sleep                gui/spells/ice/ensorcelled_hibernation recolore
+  spell:black_wind                 gui/spells/air/airstrike recolore
+  spell:bless                      player/halo/halo_player
+  spell:call_chaos                 effect/cloud_mutagenic_large1
+  spell:call_lightning             gui/spells/air/chain_lightning
+  spell:call_the_void              dngn/gateways/enter_abyss1
+  spell:change_terrain             gui/spells/earth/dig
+  spell:chaos_channels             gui/spells/transmutation/beastly_appendage
+  spell:chaos_rift                 mon/nonliving/maelstrom1
+  spell:chaos_spawn                icone d'invocation + unit:ChaosSpawn
+  spell:chaos_surge                gui/spells/conjuration/fulminant_prism
+  spell:charm_of_life              item/amulet/artefact/urand_vitality
+  spell:chimera                    icone d'invocation + unit:Chimeras
+  spell:cloak_of_fear              item/armour/artefact/urand_night
+  spell:cloud_of_shadow            effect/cloud_black_smoke
+  spell:cockatrice                 icone d'invocation + unit:Cockatrices
+  spell:colossus                   icone d'invocation + unit:Colossus
+  spell:confusion                  gui/spells/enchantment/confuse
+  spell:consecration               dngn/altars/shining_one
+  spell:corruption                 gui/spells/necromancy/corpse_rot
+  spell:counter_magic              item/rod/i-rod_warding (x2)
+  spell:cracks_call                gui/spells/earth/shatter
+  spell:create_artifact            item/weapon/artefact/spwpn_sword_of_power
+  spell:creature_binding           gui/spells/necromancy/control_undead
+  spell:cruel_unminding            gui/spells/monster/brain_feed
+  spell:crusade                    item/armour/shields/large_shield1
+  spell:cursed_lands               dngn/floor/green_bones05 + mon/undead/flying_skull
+  spell:darkness                   gui/spells/enchantment/darkness
+  spell:dark_rituals               dngn/altars/kikubaaqudgha
+  spell:death_knights              icone d'invocation + unit:DeathKnights
+  spell:death_spell                gui/spells/necromancy/symbol_of_torment
+  spell:death_wish                 mon/undead/flying_skull
+  spell:demon_lord                 icone d'invocation + unit:DemonLord
+  spell:detect_magic               gui/spells/conjuration/dazzling_spray
+  spell:disenchant_area            gui/spells/summoning/mass_abjuration
+  spell:disenchant_true            gui/spells/summoning/mass_abjuration teinte
+  spell:disintegrate               gui/spells/transmutation/irradiate
+  spell:disjunction                gui/spells/translocation/disjunction
+  spell:disjunction_true           gui/spells/translocation/disjunction teinte
+  spell:dispel_evil                gui/spells/necromancy/dispel_undead
+  spell:dispel_magic               UNUSED/spells/abjuration
+  spell:dispel_magic_true          UNUSED/spells/abjuration teinte
+  spell:disrupt                    gui/spells/earth/lees_rapid_deconstruction
+  spell:djinni                     icone d'invocation + unit:Djinn
+  spell:doom_bat                   icone d'invocation + unit:DoomBat
+  spell:doom_bolt                  gui/spells/conjuration/orb_of_destruction
+  spell:doom_mastery               item/misc/runes/rune_gehenna
+  spell:drain_power                gui/spells/necromancy/sublimation_of_blood
+  spell:earth_elemental            icone d'invocation + unit:EarthElemental
+  spell:earth_gate                 dngn/gateways/stone_arch
+  spell:earthquake                 gui/invocations/qazlal_upheaval
+  spell:earth_to_mud               gui/spells/earth/ledas_liquefaction
+  spell:efreet                     icone d'invocation + unit:Efreet
+  spell:eldritch_weapon            gui/spells/translocation/warp_weapon
+  spell:elemental_armor            gui/invocations/qazlal_elemental_force
+  spell:enchant_item               gui/spells/enchantment/infusion
+  spell:enchant_road               gui/commands/goto_target
+  spell:endurance                  item/armour/boots2_jackboots
+  spell:entangle                   mon/fungi_plants/briar_patch
+  spell:eternal_night              UNUSED/other/eye_filled_portal
+  spell:evil_omens                 item/misc/misc_lantern
+  spell:evil_presence              dngn/statues/statue_ancient_evil
+  spell:famine                     item/food/chunk_rotten
+  spell:fireball                   gui/spells/fire/fireball
+  spell:fire_bolt                  gui/spells/fire/bolt_of_fire
+  spell:fire_elemental             icone d'invocation + unit:FireElemental
+  spell:fire_giant                 icone d'invocation + unit:FireGiant
+  spell:fire_storm                 gui/spells/fire/fire_storm
+  spell:flame_blade                item/weapon/artefact/urand_flaming_death
+  spell:flame_strike               gui/spells/fire/ring_of_flames
+  spell:flight                     mon/panlord/demon_wings_sparrow recolore
+  spell:floating_island            icone d'invocation + unit:FloatingIsland
+  spell:flying_fortress            ile flottante + forteresse dessinees
+  spell:gaias_blessing             gui/spells/summoning/summon_forest
+  spell:ghouls                     icone d'invocation + unit:Ghoul
+  spell:giant_spiders              icone d'invocation + unit:GiantSpiders
+  spell:giant_strength             UNUSED/spells/components/hand3
+  spell:gorgons                    icone d'invocation + unit:Gorgon
+  spell:great_drake                icone d'invocation + unit:GreatDrake
+  spell:great_unsummoning          UNUSED/spells/forceful_dismissal
+  spell:great_wasting              gui/spells/earth/sandblast
+  spell:great_wyrm                 icone d'invocation + unit:GreatWyrm
+  spell:guardian_spirit            icone d'invocation + unit:GuardianSpirit
+  spell:guardian_wind              gui/spells/air/deflect_missiles
+  spell:guises                     gui/spells/translocation/shroud_of_golubria
+  spell:haste                      gui/spells/enchantment/haste
+  spell:healing                    gui/spells/poison/cure_poison
+  spell:heavenly_light             dngn/gateways/exit_pandemonium
+  spell:hell_hounds                icone d'invocation + unit:HellHounds
+  spell:herb_mastery               UNUSED/monsters/thorn_lotus
+  spell:heroism                    item/armour/headgear/helmet_art3
+  spell:high_prayer                dngn/altars/zin
+  spell:holy_armor                 item/armour/artefact/urand_dragon_king
+  spell:holy_arms                  item/weapon/artefact/urand_order
+  spell:holy_weapon                gui/invocations/tso_bless_weapon
+  spell:holy_word                  item/scroll/i-holy_word
+  spell:hydra                      icone d'invocation + unit:Hydra
+  spell:ice_bolt                   gui/spells/ice/throw_icicle
+  spell:ice_storm                  gui/spells/ice/ice_storm
+  spell:immolation                 gui/spells/fire/inner_flame
+  spell:incarnation                icone d'invocation + unit:HeroTorin
+  spell:inspirations               item/misc/misc_lamp
+  spell:invisibility               gui/spells/enchantment/invisibility
+  spell:invulnerability            item/armour/shields/large_shield3
+  spell:iron_skin                  gui/spells/earth/statue_form
+  spell:just_cause                 dngn/statues/statue_sword
+  spell:life_drain                 gui/spells/necromancy/vampiric_draining
+  spell:life_force                 misc/icons/heart (x3)
+  spell:lightning_bolt             gui/spells/air/lightning_bolt
+  spell:lion_heart                 UNUSED/monsters/shedu
+  spell:lycanthropy                unit:WereWolf
+  spell:magic_immunity             item/armour/shields/lshield_louise
+  spell:magic_spirit               icone d'invocation + unit:MagicSpirit
+  spell:magic_vortex               mon/nonliving/spatial_vortex1
+  spell:mana_leak                  gui/spells/necromancy/bolt_of_draining
+  spell:mass_healing               gui/invocations/elyvilon_heal_other
+  spell:mass_invisibility          gui/spells/translocation/phase_shift
+  spell:metal_fires                item/weapon/artefact/urand_firestarter
+  spell:meteor_storms              gui/spells/fire/bolt_of_magma
+  spell:mind_storm                 gui/spells/enchantment/mass_confusion
+  spell:move_fortress              forteresse dessinee
+  spell:nagas                      icone d'invocation + unit:Nagas
+  spell:natures_awareness          UNUSED/monsters/raven
+  spell:natures_cures              gui/spells/poison/cure_poison teinte vert
+  spell:natures_eye                mon/eyes/eye_of_devastation
+  spell:natures_wrath              gui/spells/air/tornado
+  spell:night_stalker              icone d'invocation + unit:NightStalker
+  spell:pathfinding                gui/commands/find_waypoint
+  spell:pestilence                 gui/spells/poison/olgrebs_toxic_radiance
+  spell:petrify                    gui/spells/earth/petrify
+  spell:phantom_beast              icone d'invocation + unit:PhantomBeast
+  spell:phantom_warriors           icone d'invocation + unit:PhantomWarrior
+  spell:planar_seal                dngn/gateways/enter_zot_closed
+  spell:planar_travel              gui/spells/translocation/passage_of_golubria
+  spell:plane_shift                dngn/gateways/portal
+  spell:possession                 gui/spells/enchantment/enslavement
+  spell:prayer                     dngn/altars/elyvilon
+  spell:prosperity                 item/gold/10
+  spell:psionic_blast              gui/spells/conjuration/iskenderuns_mystic_blast
+  spell:raise_dead                 gui/spells/necromancy/borgnjors_revivification
+  spell:raise_volcano              dngn/gateways/volcano_exit
+  spell:recall_hero                gui/spells/summoning/recall
+  spell:regeneration               gui/spells/necromancy/regeneration
+  spell:resist_elements            item/armour/artefact/urand_salamander
+  spell:resist_magic               item/amulet/artefact/urand_brooch_of_shielding
+  spell:resurrection               gui/spells/necromancy/twisted_resurrection recolore or
+  spell:righteousness              dngn/statues/statue_angel
+  spell:shadow_demons              icone d'invocation + unit:ShadowDemons
+  spell:shatter                    item/weapon/long_sword1 brisee (composition)
+  spell:skeletons                  icone d'invocation + unit:Skeleton
+  spell:sky_drake                  icone d'invocation + unit:SkyDrake
+  spell:spell_binding              item/book/metal_blue
+  spell:spell_blast                UNUSED/spells/orb_of_destruction_big
+  spell:spell_lock                 item/book/artefact/buckle
+  spell:spell_of_mastery           item/misc/misc_orb
+  spell:spell_ward                 gui/spells/ice/condensation_shield
+  spell:sprites                    icone d'invocation + unit:Sprites
+  spell:star_fires                 UNUSED/monsters/silver_star
+  spell:stasis                     gui/spells/enchantment/slow
+  spell:stone_giant                icone d'invocation + unit:StoneGiant
+  spell:stone_skin                 gui/spells/earth/stoneskin
+  spell:storm_giant                icone d'invocation + unit:StormGiant
+  spell:stream_of_life             dngn/sparkling_fountain
+  spell:subversion                 gui/spells/enchantment/discord
+  spell:summon_champion            icone d'invocation + unit:HeroRoland
+  spell:summon_hero                icone d'invocation + unit:HeroSirHarold
+  spell:summoning_circle           gui/spells/monster/summon_minor_demon (pentagramme agrandi)
+  spell:suppress_magic             gui/spells/air/silence
+  spell:terror                     gui/spells/enchantment/cause_fear
+  spell:time_stop                  gui/spells/ice/metabolic_englaciation
+  spell:tranquility                UNUSED/spells/components/bird
+  spell:transmute                  item/misc/misc_phial
+  spell:true_light                 player/hand1/misc/light_yellow (x2)
+  spell:true_sight                 item/ring/i-see-invis (x2)
+  spell:unicorns                   icone d'invocation + unit:Unicorn
+  spell:vertigo                    gui/spells/enchantment/confusing_touch
+  spell:wall_of_darkness           dngn/wall/brick_gray0 recolore pourpre
+  spell:wall_of_fire               gui/spells/fire/conjure_flame
+  spell:wall_of_stone              dngn/wall/stone2_gray0
+  spell:war_bears                  icone d'invocation + unit:WarBear
+  spell:warp_creature              gui/spells/monster/polymorph (recadre)
+  spell:warp_lightning             gui/spells/air/lightning_bolt teinte
+  spell:warp_node                  gui/spells/translocation/gravitas
+  spell:warp_reality               gui/spells/translocation/dispersal
+  spell:warp_wood                  gui/spells/summoning/sticks_to_snakes
+  spell:water_walking              dngn/water/shallow_water + item/armour/boots1_brown
+  spell:weakness                   gui/spells/necromancy/pain
+  spell:web                        item/weapon/ranged/throwing_net
+  spell:wind_mastery               gui/spells/air/airstrike
+  spell:wind_walking               gui/spells/air/swiftness
+  spell:word_of_death              gui/spells/necromancy/deaths_door
+  spell:word_of_recall             gui/spells/translocation/controlled_blink
+  spell:wrack                      gui/spells/necromancy/agony
+  spell:wraith                     icone d'invocation + unit:Wraith
+  spell:wraithform                 player/transform/shadow_form
+  spell:zombie_mastery             icone d'invocation + unit:Zombie
+  spell:blur                       gui/spells/air/repel_missiles
+  spell:earth_lore                 item/scroll/i-magic_mapping
+  spell:gargoyles                  icone d'invocation + unit:Gargoyle
+  spell:spell_of_return            dngn/gateways/portal + forteresse dessinee
+  ter:grass:0                      dngn/floor/grass/*
+  ter:grass:1                      dngn/floor/grass/*
+  ter:grass:2                      dngn/floor/grass/*
+  ter:grass:3                      dngn/floor/grass/*
+  ter:grass:4                      dngn/floor/grass/*
+  ter:grass:5                      dngn/floor/grass/*
+  ter:grass:6                      dngn/floor/grass/*
+  ter:grass:7                      dngn/floor/grass/*
+  ter:grass:8                      dngn/floor/grass/*
+  ter:dirt:0                       dngn/floor/dirt0-2
+  ter:dirt:1                       dngn/floor/dirt0-2
+  ter:dirt:2                       dngn/floor/dirt0-2
+  ter:sand:0                       dngn/floor/sand1-8
+  ter:sand:1                       dngn/floor/sand1-8
+  ter:sand:2                       dngn/floor/sand1-8
+  ter:sand:3                       dngn/floor/sand1-8
+  ter:sand:4                       dngn/floor/sand1-8
+  ter:sand:5                       dngn/floor/sand1-8
+  ter:sand:6                       dngn/floor/sand1-8
+  ter:sand:7                       dngn/floor/sand1-8
+  ter:snow:0                       dngn/floor/sand1-8 recolore neige
+  ter:snow:1                       dngn/floor/sand1-8 recolore neige
+  ter:snow:2                       dngn/floor/sand1-8 recolore neige
+  ter:snow:3                       dngn/floor/sand1-8 recolore neige
+  ter:snow:4                       dngn/floor/sand1-8 recolore neige
+  ter:snow:5                       dngn/floor/sand1-8 recolore neige
+  ter:snow:6                       dngn/floor/sand1-8 recolore neige
+  ter:snow:7                       dngn/floor/sand1-8 recolore neige
+  ter:swamp:0                      dngn/floor/swamp0-3 recolore olive + flaques (dngn/water/shallow_water)
+  ter:swamp:1                      dngn/floor/swamp0-3 recolore olive + flaques (dngn/water/shallow_water)
+  ter:swamp:2                      dngn/floor/swamp0-3 recolore olive + flaques (dngn/water/shallow_water)
+  ter:swamp:3                      dngn/floor/swamp0-3 recolore olive + flaques (dngn/water/shallow_water)
+  ter:water:0                      dngn/water/shoals_deep_water0-11
+  ter:water:1                      dngn/water/shoals_deep_water0-11
+  ter:water:2                      dngn/water/shoals_deep_water0-11
+  ter:water:3                      dngn/water/shoals_deep_water0-11
+  ter:water:4                      dngn/water/shoals_deep_water0-11
+  ter:water:5                      dngn/water/shoals_deep_water0-11
+  ter:water:6                      dngn/water/shoals_deep_water0-11
+  ter:water:7                      dngn/water/shoals_deep_water0-11
+  ter:water:8                      dngn/water/shoals_deep_water0-11
+  ter:water:9                      dngn/water/shoals_deep_water0-11
+  ter:water:10                     dngn/water/shoals_deep_water0-11
+  ter:water:11                     dngn/water/shoals_deep_water0-11
+  ter:shallow:0                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:1                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:2                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:3                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:4                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:5                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:6                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:7                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:8                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:9                    dngn/water/shoals_shallow_water0-11
+  ter:shallow:10                   dngn/water/shoals_shallow_water0-11
+  ter:shallow:11                   dngn/water/shoals_shallow_water0-11
+  ter:lava:0                       UNUSED/features/lava (+ symetries)
+  ter:lava:1                       UNUSED/features/lava (+ symetries)
+  ter:lava:2                       UNUSED/features/lava (+ symetries)
+  ter:lava:3                       UNUSED/features/lava (+ symetries)
+  ter:rock:0                       dngn/wall/lair0-3 recolore gris
+  ter:rock:1                       dngn/wall/lair0-3 recolore gris
+  ter:rock:2                       dngn/wall/lair0-3 recolore gris
+  ter:rock:3                       dngn/wall/lair0-3 recolore gris
+  ter:hills:0                      dngn/wall/orc0-3
+  ter:hills:1                      dngn/wall/orc0-3
+  ter:hills:2                      dngn/wall/orc0-3
+  ter:hills:3                      dngn/wall/orc0-3
+  ter:ice:0                        dngn/floor/ice0-3 recolore
+  ter:ice:1                        dngn/floor/ice0-3 recolore
+  ter:ice:2                        dngn/floor/ice0-3 recolore
+  ter:ice:3                        dngn/floor/ice0-3 recolore
+  tree:0                           dngn/trees/mangrove1
+  tree:1                           dngn/trees/mangrove2
+  tree:2                           dngn/trees/mangrove3
+  tree:3                           dngn/trees/tree1_yellow recolore vert
+  tree:4                           dngn/trees/tree2_yellow recolore vert
+  tree:5                           dngn/trees/tree1_red recolore vert
+  tree:6                           dngn/trees/tree2_red recolore vert
+  tree:7                           dngn/trees/tree1_lightred recolore vert
+  tree:8                           dngn/trees/tree2_lightred recolore vert
+  tree:9                           dngn/trees/tree1_yellow
+  tree:10                          dngn/trees/tree2_yellow
+  tree:11                          dngn/trees/tree1_red
+  tree:12                          dngn/trees/tree2_red
+  tree:13                          dngn/trees/tree1_lightred
+  tree:14                          dngn/trees/tree2_lightred
+  feat:cave                        dngn/gateways/enter_lair
+  feat:ruins                       dngn/statues/crumbled_column_1,3,4 composees
+  feat:temple                      dessine (pixel-art)
+  feat:keep                        dessine (pixel-art)
+  feat:tower                       dessine (pixel-art)
+  feat:dungeon                     dngn/gateways/enter_depths
+  feat:fallen_temple               dessine (pixel-art)
+  feat:portal                      dngn/gateways/portal
+  feat:altar                       dngn/altars/generic
+  feat:statue                      dngn/statues/statue_archer
+  feat:lair                        dngn/gateways/enter_spider
+  feat:crypt                       dngn/gateways/enter_crypt
+  item:sword                       item/weapon/long_sword1
+  item:sword:1                     item/weapon/greatsword1
+  item:sword:2                     item/weapon/scimitar1
+  item:sword:3                     item/weapon/artefact/spwpn_sword_of_power
+  item:mace                        item/weapon/mace1
+  item:mace:1                      item/weapon/morningstar1
+  item:mace:2                      item/weapon/flail1
+  item:mace:3                      item/weapon/artefact/urand_skullcrusher
+  item:axe                         item/weapon/hand_axe1
+  item:axe:1                       UNUSED/weapons/war_axe4
+  item:axe:2                       UNUSED/weapons/broad_axe4
+  item:axe:3                       item/weapon/artefact/urand_axe_of_woe
+  item:bow                         item/weapon/ranged/longbow1
+  item:bow:1                       item/weapon/ranged/shortbow1
+  item:bow:2                       item/weapon/ranged/arbalest1
+  item:bow:3                       item/weapon/artefact/urand_storm_bow
+  item:staff                       item/staff/staff01
+  item:staff:1                     item/staff/staff05
+  item:staff:2                     item/staff/staff07
+  item:staff:3                     item/weapon/artefact/spwpn_staff_of_olgreb
+  item:wand                        item/wand/gem_gold
+  item:wand:1                      item/wand/gem_iron
+  item:wand:2                      item/wand/gem_bone
+  item:wand:3                      item/wand/gem_silver
+  item:misc                        item/misc/misc_lamp
+  item:misc:1                      item/misc/misc_horn
+  item:misc:2                      item/misc/misc_fan
+  item:misc:3                      item/misc/misc_box
+  item:shield                      item/armour/shields/large_shield1
+  item:shield:1                    item/armour/shields/shield1
+  item:shield:2                    item/armour/shields/buckler1
+  item:shield:3                    item/armour/shields/large_shield3
+  item:chain                       item/armour/ring_mail1
+  item:chain:1                     item/armour/scale_mail1
+  item:chain:2                     item/armour/ring_mail2
+  item:plate                       item/armour/plate1
+  item:plate:1                     item/armour/artefact/urand_lear
+  item:plate:2                     item/armour/gold_dragon_armour
+  item:helm                        item/armour/headgear/helmet1
+  item:helm:1                      item/armour/headgear/helmet2
+  item:helm:2                      item/armour/headgear/helmet_art1
+  item:helm:3                      item/armour/headgear/helmet_ego1
+  item:amulet                      item/amulet/celtic_blue
+  item:amulet:1                    item/amulet/crystal_red
+  item:amulet:2                    item/amulet/face1_gold
+  item:amulet:3                    item/amulet/stone2_green
+  item:ring                        item/ring/ruby
+  item:ring:1                      item/ring/tourmaline
+  item:ring:2                      item/ring/artefact/urand_octoring
+  item:ring:3                      item/ring/artefact/urand_shadows
+  item:cloak                       item/armour/cloak1_leather
+  item:cloak:1                     item/armour/cloak2
+  item:cloak:2                     item/armour/cloak4
+  item:gauntlets                   item/armour/glove3
+  item:gauntlets:1                 item/armour/glove4
+  item:gauntlets:2                 item/armour/glove5
+  item:orb                         item/misc/misc_crystal
+  item:orb:1                       item/misc/misc_orb
+  item:orb:2                       item/misc/runes/rune_lom_lobon
+  item:boots                       item/armour/boots1_brown
+  item:boots:1                     item/armour/boots2_jackboots
+  item:boots:2                     item/armour/boots4_green

@@ -1,0 +1,101 @@
+{
+ "nom": "Entraînement 5 : l'échelle des niveaux avec la paix ; le pacte, tel quel et renforcé ; le Livre en partie longue",
+ "experiences": [
+  {
+   "id": "echelle",
+   "note": "les cinq marches sur les mêmes cartes : Normale et Difficile avec et sans la paix entre sorciers, et Hardcore",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 160000,
+   "graines": 240,
+   "points": [
+    100
+   ],
+   "variantes": [
+    {
+     "nom": "hardcore",
+     "niveau": "hardcore"
+    },
+    {
+     "nom": "difficile",
+     "niveau": "hard"
+    },
+    {
+     "nom": "difficile_paix",
+     "niveau": "hard",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.15
+      }
+     }
+    },
+    {
+     "nom": "normale",
+     "niveau": "normal"
+    },
+    {
+     "nom": "normale_paix",
+     "niveau": "normal",
+     "exp": {
+      "tune": {
+       "peaceRel": -10,
+       "peaceChance": 0.15
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "rituel",
+   "note": "suite de la nuit 4 (cartes 140025 et suivantes) : le pacte freine-t-il le meneur ? et un pacte plus prompt (meneur 1,25 fois le deuxième, 1,6 fois la moyenne) et moins cher (600) ?",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 140025,
+   "graines": 150,
+   "points": [
+    100
+   ],
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "avec_rituel",
+     "niveau": "hardcore"
+    },
+    {
+     "nom": "sans_rituel",
+     "niveau": "hardcore",
+     "sansRituel": true
+    },
+    {
+     "nom": "rituel_fort",
+     "niveau": "hardcore",
+     "rituel": {
+      "lead": 1.25,
+      "avg": 1.6,
+      "cost": 600
+     }
+    }
+   ]
+  },
+  {
+   "id": "livre_long",
+   "note": "suite de la nuit 4 (cartes 150006 et suivantes) : 300 tours entre IA Hardcore, que devient le Livre ?",
+   "tours": 300,
+   "adversaires": "hardcore",
+   "graine": 150006,
+   "graines": 34,
+   "points": [
+    100,
+    200
+   ],
+   "livre": true,
+   "variantes": [
+    {
+     "nom": "hardcore",
+     "niveau": "hardcore"
+    }
+   ]
+  }
+ ]
+}

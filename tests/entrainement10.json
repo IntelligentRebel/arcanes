@@ -1,0 +1,217 @@
+{
+ "nom": "Entraînement 10 : les sorts de combat de la 0.30.3 (traits utiles, bourse de mana, va-tout) ; la purification face à des terres corrompues ; le boss du plan d'en face jusqu'au tour 250",
+ "experiences": [
+  {
+   "id": "sorts_combat",
+   "note": "livré en 0.30.3 sans mesure : « traits » = l'IA ne lance plus de traits qui ne feraient sans doute rien (héros et mages visent où ça fait mal) ; « tout » = en plus, elle garde du mana quand l'ennemi approche ou qu'elle prépare une attaque, et joue son va-tout pour sa capitale. Contre des IA réglées comme le jeu livré 0.30.3",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 300000,
+   "graines": 400,
+   "points": [
+    75,
+    150
+   ],
+   "expAdversaires": {
+    "no_vainstrike": true,
+    "no_firststrike": true,
+    "no_spells2": true,
+    "no_cspells2": true,
+    "no_purify": true
+   },
+   "variantes": [
+    {
+     "nom": "sans",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_cpurse": true,
+      "no_allin": true,
+      "no_nowaste": true
+     }
+    },
+    {
+     "nom": "traits",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_cpurse": true,
+      "no_allin": true
+     }
+    },
+    {
+     "nom": "tout",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "sorts_combat_hardcore",
+   "note": "la même chose au niveau Hardcore (le niveau où les sorts oubliés du banc 9 coûtaient le plus)",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 310000,
+   "graines": 120,
+   "points": [
+    150
+   ],
+   "expAdversaires": {
+    "no_vainstrike": true,
+    "no_firststrike": true,
+    "no_spells2": true,
+    "no_cspells2": true,
+    "no_purify": true
+   },
+   "variantes": [
+    {
+     "nom": "sans",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_cpurse": true,
+      "no_allin": true,
+      "no_nowaste": true
+     }
+    },
+    {
+     "nom": "tout",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "purification_corrompue",
+   "note": "au banc 9 personne ne corrompait de terres (la Corruption n'est lancée que par les sorts oubliés de l'IA) : 200 parties identiques. Ici les adversaires corrompent (comme un joueur qui s'en sert) ; le sorcier observé purifie-t-il, et y gagne-t-il ?",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 320000,
+   "graines": 200,
+   "points": [
+    75,
+    150
+   ],
+   "corruption": true,
+   "expAdversaires": {
+    "no_vainstrike": true,
+    "no_firststrike": true,
+    "no_cspells2": true,
+    "no_purify": true
+   },
+   "variantes": [
+    {
+     "nom": "sans",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    },
+    {
+     "nom": "avec",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "boss_long",
+   "note": "le sorcier le plus fort du plan d'en face a-t-il conquis l'essentiel de son plan, et quand ? (au tour 150 il n'en tient que la moitié) ; jeu livré, 250 tours",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 330000,
+   "graines": 150,
+   "points": [
+    150,
+    200
+   ],
+   "boss": true,
+   "expAdversaires": {
+    "no_vainstrike": true,
+    "no_firststrike": true,
+    "no_spells2": true,
+    "no_cspells2": true,
+    "no_purify": true
+   },
+   "variantes": [
+    {
+     "nom": "livre",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "boss_long_hardcore",
+   "note": "la même chose au niveau Hardcore",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 340000,
+   "graines": 60,
+   "points": [
+    150,
+    200
+   ],
+   "boss": true,
+   "expAdversaires": {
+    "no_vainstrike": true,
+    "no_firststrike": true,
+    "no_spells2": true,
+    "no_cspells2": true,
+    "no_purify": true
+   },
+   "variantes": [
+    {
+     "nom": "livre",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  }
+ ]
+}

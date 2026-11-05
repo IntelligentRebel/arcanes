@@ -1,0 +1,141 @@
+{
+ "nom": "Entraînement 12 : les ouvrages de race (v0.31). Quand les IA les obtiennent, et ce que chacun rapporte à son peuple",
+ "experiences": [
+  {
+   "id": "ouvrages",
+   "note": "le sorcier observé change de peuple à chaque carte (14 peuples, 30 cartes chacun). Même carte avec et sans ouvrages : l'écart dit ce que vaut l'ouvrage de son peuple face à ceux des autres",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 400000,
+   "graines": 420,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "races": [
+    "barbarian",
+    "gnoll",
+    "halfling",
+    "highelf",
+    "highmen",
+    "klackon",
+    "lizardman",
+    "nomad",
+    "orc",
+    "beastmen",
+    "darkelf",
+    "draconian",
+    "dwarf",
+    "troll"
+   ],
+   "variantes": [
+    {
+     "nom": "sans ouvrages",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "sansOuvrages": true
+    },
+    {
+     "nom": "avec ouvrages",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "ouvrages_hardcore",
+   "note": "la même chose au niveau Hardcore (12 cartes par peuple)",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 410000,
+   "graines": 168,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "races": [
+    "barbarian",
+    "gnoll",
+    "halfling",
+    "highelf",
+    "highmen",
+    "klackon",
+    "lizardman",
+    "nomad",
+    "orc",
+    "beastmen",
+    "darkelf",
+    "draconian",
+    "dwarf",
+    "troll"
+   ],
+   "variantes": [
+    {
+     "nom": "sans ouvrages",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "sansOuvrages": true
+    },
+    {
+     "nom": "avec ouvrages",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  }
+ ]
+}

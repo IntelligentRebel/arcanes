@@ -1,0 +1,49 @@
+{
+ "nom": "Entraînement 8 : l'IA de combat qui ne tire plus pour rien et compte la première frappe ; l'IA qui lance enfin ses sorts oubliés",
+ "experiences": [
+  {
+   "id": "combat_tactique",
+   "note": "le sorcier observé (Difficile) contre des adversaires réglés comme le jeu livré : sans les deux corrections de l'IA de combat, avec l'une, avec l'autre, avec les deux. Plus de cités et de score au tour 150 ?",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 240000,
+   "graines": 100,
+   "points": [75, 150],
+   "expAdversaires": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true},
+   "variantes": [
+    {"nom": "sans", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true}},
+    {"nom": "tir_utile", "niveau": "hard", "exp": {"no_firststrike": true, "no_spells2": true}},
+    {"nom": "premiere_frappe", "niveau": "hard", "exp": {"no_vainstrike": true, "no_spells2": true}},
+    {"nom": "les_deux", "niveau": "hard", "exp": {"no_spells2": true}}
+   ]
+  },
+  {
+   "id": "sorts_oublies",
+   "note": "le sorcier observé lance (ou non) les sorts que l'IA ignorait : tempêtes, Stase, Disjonctions, Captation, Brise-sort, Drain, Nœud perverti, Corruption, Résurrection, appels de héros, Vœu de mort ; en combat, chances de réussite, morts relevés, dissipations, Bois tordu, Appel du chaos, murs",
+   "tours": 150,
+   "adversaires": "hard",
+   "graine": 250000,
+   "graines": 100,
+   "points": [75, 150],
+   "expAdversaires": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true},
+   "variantes": [
+    {"nom": "sans", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true}},
+    {"nom": "avec", "niveau": "hard", "exp": {"no_vainstrike": true, "no_firststrike": true}}
+   ]
+  },
+  {
+   "id": "tout_hardcore",
+   "note": "les trois corrections ensemble, au niveau Hardcore, contre des Hardcore réglés comme le jeu livré",
+   "tours": 150,
+   "adversaires": "hardcore",
+   "graine": 260000,
+   "graines": 60,
+   "points": [150],
+   "expAdversaires": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true},
+   "variantes": [
+    {"nom": "sans", "niveau": "hardcore", "exp": {"no_vainstrike": true, "no_firststrike": true, "no_spells2": true}},
+    {"nom": "avec", "niveau": "hardcore", "exp": {}}
+   ]
+  }
+ ]
+}

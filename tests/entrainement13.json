@@ -1,0 +1,372 @@
+{
+ "nom": "Entraînement 13 : les ouvrages de race (v0.31) ; le Démon invoqué par la seule coalition ; des IA qui connaissent la force globale de chacun",
+ "experiences": [
+  {
+   "id": "ouvrages",
+   "note": "le sorcier observé change de peuple à chaque carte (14 peuples, 14 cartes chacun). Même carte avec et sans ouvrages : l'écart dit ce que vaut l'ouvrage de son peuple face à ceux des autres",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 400000,
+   "graines": 196,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "races": [
+    "barbarian",
+    "gnoll",
+    "halfling",
+    "highelf",
+    "highmen",
+    "klackon",
+    "lizardman",
+    "nomad",
+    "orc",
+    "beastmen",
+    "darkelf",
+    "draconian",
+    "dwarf",
+    "troll"
+   ],
+   "variantes": [
+    {
+     "nom": "sans ouvrages",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "sansOuvrages": true
+    },
+    {
+     "nom": "avec ouvrages",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "ouvrages_hardcore",
+   "note": "la même chose au niveau Hardcore (10 cartes par peuple)",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 410000,
+   "graines": 42,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "races": [
+    "barbarian",
+    "gnoll",
+    "halfling",
+    "highelf",
+    "highmen",
+    "klackon",
+    "lizardman",
+    "nomad",
+    "orc",
+    "beastmen",
+    "darkelf",
+    "draconian",
+    "dwarf",
+    "troll"
+   ],
+   "variantes": [
+    {
+     "nom": "sans ouvrages",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "sansOuvrages": true
+    },
+    {
+     "nom": "avec ouvrages",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "demon_coalition",
+   "note": "Hardcore. L'ancien pacte (tous ceux qui connaissent le meneur, désigné par les vrais chiffres) contre celui de la coalition (seules les IA qui voient en lui le meneur). Le meneur du tour 100 est-il autant freiné ?",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 420000,
+   "graines": 48,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "ancien pacte",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "rituel": {
+      "coalition": false
+     }
+    },
+    {
+     "nom": "pacte de la coalition",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "force_connue",
+   "note": "Hardcore, pacte de la coalition. En essai : toutes les IA connaissent la force globale de chacun (le total, pas le détail) pour juger du meneur et de la guerre contre lui",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 430000,
+   "graines": 40,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "vue partielle",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     }
+    },
+    {
+     "nom": "force connue",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "force_connue_avance",
+   "note": "Hardcore. Le sorcier observé part très en avance, comme un joueur qui s'envole : les IA qui connaissent la force globale le freinent-elles mieux ? (score du sujet plus bas = coalition plus efficace)",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 440000,
+   "graines": 36,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "avance": true,
+   "variantes": [
+    {
+     "nom": "vue partielle",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     }
+    },
+    {
+     "nom": "force connue",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "force_connue_difficile",
+   "note": "Difficile (la coalition sans le Démon), même essai",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 450000,
+   "graines": 90,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "vue partielle",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true
+     }
+    },
+    {
+     "nom": "force connue",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true
+     }
+    }
+   ]
+  }
+ ]
+}

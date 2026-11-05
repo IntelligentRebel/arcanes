@@ -1,0 +1,454 @@
+{
+ "nom": "Entraînement 15 : moteur 0.31.21 ; les malus proportionnels de l'empire, l'IA et l'ouvrage de son peuple, les cols, les civils",
+ "experiences": [
+  {
+   "id": "malus_difficile",
+   "note": "Difficile. « Loin de la capitale » et « Étendue de l'empire » : +1 fixe (avant) ou +10 % par habitant (v0.31.7), toutes IA, même carte. Agitation à la fin, meneur du t100",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 460000,
+   "graines": 150,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "agitation": true,
+   "variantes": [
+    {
+     "nom": "malus fixes (+1)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "malusFixes": true
+    },
+    {
+     "nom": "malus proportionnels (+10 %/hab.)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "malus_avance",
+   "note": "Difficile. Le sorcier observé part très en avance (un joueur qui s'envole) : les malus proportionnels le freinent-ils davantage ? (score du sujet plus bas = frein plus fort)",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 470000,
+   "graines": 60,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "agitation": true,
+   "variantes": [
+    {
+     "nom": "malus fixes (+1)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "malusFixes": true
+    },
+    {
+     "nom": "malus proportionnels (+10 %/hab.)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ],
+   "avance": true
+  },
+  {
+   "id": "malus_hardcore",
+   "note": "Hardcore, même essai (coalition et Démon actifs)",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 480000,
+   "graines": 40,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "agitation": true,
+   "variantes": [
+    {
+     "nom": "malus fixes (+1)",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "malusFixes": true
+    },
+    {
+     "nom": "malus proportionnels (+10 %/hab.)",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "ouvrage_ia",
+   "note": "Difficile, le sorcier observé change de peuple à chaque carte. En essai pour lui seul (wonder2) : l'ouvrage du peuple de sa meilleure cité (plus celui d'une petite cité conquise), bâti même sous une menace que sa garnison tient. Au banc 13, la recherche faite, l'ouvrage n'était bâti que dans un tiers des parties",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 490000,
+   "graines": 98,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "races": [
+    "barbarian",
+    "gnoll",
+    "halfling",
+    "highelf",
+    "highmen",
+    "klackon",
+    "lizardman",
+    "nomad",
+    "orc",
+    "beastmen",
+    "darkelf",
+    "draconian",
+    "dwarf",
+    "troll"
+   ],
+   "variantes": [
+    {
+     "nom": "ouvrages, IA actuelle",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "ouvrages, IA corrigée",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  },
+  {
+   "tours": 250,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "id": "cols",
+   "note": "Difficile. L'IA forme un ingénieur et trace la route d'un col quand une montagne lui barre une cité voisine (v0.31.15). Cas rares : on compte aussi les cols trouvés et les chantiers (pass, passRoad).",
+   "adversaires": "hard",
+   "graine": 510000,
+   "graines": 40,
+   "variantes": [
+    {
+     "nom": "sans ingénieurs",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "ingénieurs aux cols",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  },
+  {
+   "tours": 250,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "id": "civils",
+   "note": "Difficile. En combat automatique, les civils de l'IA (ingénieurs, colons, éclaireurs) fuient au lieu de charger (v0.31.7).",
+   "adversaires": "hard",
+   "graine": 520000,
+   "graines": 100,
+   "variantes": [
+    {
+     "nom": "civils au contact",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "civils à l'abri",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}
