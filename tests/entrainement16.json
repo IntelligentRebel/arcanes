@@ -7,7 +7,7 @@
    "tours": 250,
    "adversaires": "hardcore",
    "graine": 500000,
-   "graines": 80,
+   "graines": 100,
    "points": [
     100,
     150,
@@ -116,7 +116,7 @@
    "tours": 250,
    "adversaires": "hard",
    "graine": 510000,
-   "graines": 150,
+   "graines": 190,
    "points": [
     100,
     150,
