@@ -178,7 +178,7 @@ Object.assign(AI, {
     if (L.phase === 'build') {
       // une cité menacée passe avant la légende ; on ne refait le calcul que tous les 3 tours
       if (game.turn - (L.check || -99) < 3 || Cities.ofPlayer(game, pl.id).some(c => AI.threatNear(game, pl, c) > 0)) return new Set();
-      const free = Object.values(game.units).filter(u => u.owner === pl.id && u !== h && u.plane === s.plane && u.aiRole !== 'garrison' && u.aiEscort == null && u.status !== 'governor'
+      const free = Object.values(game.units).filter(u => u.owner === pl.id && u !== h && u.plane === s.plane && u.aiRole !== 'garrison' && u.aiEscort == null && u.riteEscort == null && u.status !== 'governor'
         && AI.isSoldier(game, u) && World.dist(world, u.x, u.y, s.x, s.y) <= 30);
       const force = [h].concat(free.sort((a, b) => Units.strength(game, b) - Units.strength(game, a)).slice(0, MAX_STACK - 1));
       L.win = AI.simulate(game, force, guards, info, 6); L.check = game.turn;
@@ -235,7 +235,7 @@ Object.assign(AI, {
     const need = AI.feat(pl, 'bold', 3) ? 0.55 : 0.6, info = { plane: s.plane, x: s.x, y: s.y, site: s };
     if (P.phase === 'build') {
       if (game.turn - (P.check || -99) < 3 || Cities.ofPlayer(game, pl.id).some(c => AI.threatNear(game, pl, c) > 0)) return new Set();
-      const free = Object.values(game.units).filter(u => u.owner === pl.id && u.plane === s.plane && u.aiRole !== 'garrison' && u.aiEscort == null && u.status !== 'governor'
+      const free = Object.values(game.units).filter(u => u.owner === pl.id && u.plane === s.plane && u.aiRole !== 'garrison' && u.aiEscort == null && u.riteEscort == null && u.status !== 'governor'
         && !(busy && busy.has(u.id)) && AI.isSoldier(game, u) && World.dist(world, u.x, u.y, s.x, s.y) <= 30);
       const force = free.sort((a, b) => Units.strength(game, b) - Units.strength(game, a)).slice(0, MAX_STACK);
       P.check = game.turn;
@@ -294,7 +294,7 @@ Object.assign(AI, {
     const near = s => Math.min(...cities.map(c => World.dist(world, c.x, c.y, s.x, s.y)));
     const tower = U.min(game.sites.filter(s => s.type === 'tower' && s.plane === home && s.cleared && Intel.knows(game, pl, home, s.x, s.y) && near(s) <= 25), near);
     if (!tower || Move.hostileAt(game, pl.id, home, tower.x, tower.y)) return new Set();
-    const free = Object.values(game.units).filter(u => u.owner === pl.id && u.plane === home && u.aiRole !== 'garrison' && u.aiEscort == null && u.status !== 'governor'
+    const free = Object.values(game.units).filter(u => u.owner === pl.id && u.plane === home && u.aiRole !== 'garrison' && u.aiEscort == null && u.riteEscort == null && u.status !== 'governor'
       && !busy.has(u.id) && AI.isSoldier(game, u) && World.dist(world, u.x, u.y, tower.x, tower.y) <= 30);
     const force = free.sort((a, b) => Units.strength(game, b) - Units.strength(game, a)).slice(0, MAX_STACK - 1);
     if (force.length < 4 || U.sum(force, u => Units.strength(game, u)) < AI.TRIP_POWER) return new Set();

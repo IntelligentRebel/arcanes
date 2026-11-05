@@ -16,3 +16,4 @@ i18n/work/todo_*.json
 i18n/work/few_*.json
 i18n/work/out/*/*.json
 __pycache__/
+resultats/

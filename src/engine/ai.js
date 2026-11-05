@@ -40,6 +40,7 @@ const AI = {
     AI.planReview(game, pl);
     AI.manageEconomy(game, pl);
     if (AI.feat(pl, 'heroes')) AI.equipHeroes(game, pl);
+    AI.riteEscortClaim(game, pl);
     AI.manageCities(game, pl);
     AI.manageMagic(game, pl);
     await AI.manageUnits(game, pl);
@@ -124,6 +125,8 @@ const AI = {
         }
         if (buy) Game.buy(game, c.id);
       }
+      // (pacte, réglage escort) l'escorte du démon s'achète dès qu'on en a les moyens, même pas commencée
+      else if (price && c.aiRiteEsc != null && c.prod.type === 'unit' && game.rite && game.rite.phase === 'demon' && game.rite.demon === c.aiRiteEsc && pl.gold >= price + 150) Game.buy(game, c.id);
     }
   },
   chooseProduction(game, c) {
@@ -158,6 +161,8 @@ const AI = {
     if (garrison.filter(u => AI.isSoldier(game, u)).length < want && bestMil && (foodRoom > 0 || threat > 0)) return { type: 'unit', id: bestMil };
     // 1 bis. un colon attend une escorte ici : un soldat d'abord
     if (bestMil && garrison.some(u => Units.isSettler(u) && (u.aiWaitEscort || 0) > 0) && garrison.filter(u => AI.isSoldier(game, u)).length < 2) return { type: 'unit', id: bestMil };
+    // 1 bis bis. (pacte, réglage escort) le maître du Démon légendaire lui forme une escorte dans ses cités les plus proches de lui
+    { const esc = AI.riteEscortBuild(game, pl, c, units, e, threat); if (esc) return { type: 'unit', id: esc }; }
     // 1 ter. éclaireurs : un (deux au-delà de 4 cités) pendant la phase d'exploration
     const scout = units.find(t => DATA.units[t].abilities.scout);
     if (scout && (game.turn <= 60 || (pl.aiBook && pl.aiBook.phase === 'search' && pl.aiBook.searcher == null && AI.feat(pl, 'bookquest', 2)))) {
@@ -508,7 +513,7 @@ const AI = {
       .concat(pl.aiTrip && pl.aiTrip.members ? pl.aiTrip.members : [])
       .concat(pl.aiBook && pl.aiBook.members ? pl.aiBook.members : []));
     // les engins de siège ne gardent pas les cités : ils suivent l'armée
-    const pool = Object.values(game.units).filter(u => u.owner === pl.id && !u.hero && u.aiEscort == null && !engaged.has(u.id) && AI.isSoldier(game, u) && !DATA.units[u.type].abilities.siegeOnly);
+    const pool = Object.values(game.units).filter(u => u.owner === pl.id && !u.hero && u.aiEscort == null && u.riteEscort == null && !engaged.has(u.id) && AI.isSoldier(game, u) && !DATA.units[u.type].abilities.siegeOnly);
     const citiesByNeed = Cities.ofPlayer(game, pl.id).map(c => ({ c, threat: AI.threatNear(game, pl, c) })).sort((a, b) => (b.c.fortress - a.c.fortress) || (b.threat - a.threat));
     const posted = c => pool.filter(u => u.aiPost === c.id).length;
     const claimHere = (c, upTo) => {
@@ -563,7 +568,7 @@ const AI = {
     const bookx = AI.feat(pl, 'bookquest', 2) ? await AI.bookUnits(game, pl, new Set([...legend, ...portal])) : new Set();
     if (game.over) return;
     for (const id of bookx) portal.add(id);
-    const attackers = mine().filter(u => !legend.has(u.id) && !portal.has(u.id) && u.aiRole !== 'garrison' && u.aiEscort == null && !Units.isSettler(u) && !Units.isEngineer(u) && !Units.isScout(u) && !Units.has(game, u, 'meld') && u.nodeBound == null && !DATA.units[u.type].sailing && !u.stasis && !u.riteDemon);
+    const attackers = mine().filter(u => !legend.has(u.id) && !portal.has(u.id) && u.aiRole !== 'garrison' && u.aiEscort == null && u.riteEscort == null && !Units.isSettler(u) && !Units.isEngineer(u) && !Units.isScout(u) && !Units.has(game, u, 'meld') && u.nodeBound == null && !DATA.units[u.type].sailing && !u.stasis && !u.riteDemon);
     // Hardcore : le Démon légendaire du pacte marche seul sur la cible
     await AI.riteDemonTurn(game, pl); if (game.over) return;
     const groups = U.groupBy(attackers, u => u.plane + ',' + u.x + ',' + u.y);
@@ -714,12 +719,12 @@ const AI = {
     const world = game.world;
     let esc = Object.values(game.units).find(u => u.owner === pl.id && u.aiEscort === st.id);
     if (esc) return esc;
-    const cands = Object.values(game.units).filter(u => u.owner === pl.id && u.aiEscort == null && !u.hero && u.plane === st.plane && AI.isSoldier(game, u)
+    const cands = Object.values(game.units).filter(u => u.owner === pl.id && u.aiEscort == null && u.riteEscort == null && !u.hero && u.plane === st.plane && AI.isSoldier(game, u)
       && World.dist(world, u.x, u.y, st.x, st.y) <= 6 && (Units.stats(game, u).melee > 0 || Units.stats(game, u).ranged > 0));
     const ok = u => {
       const c = Cities.at(game, u.plane, u.x, u.y);
       if (!c || c.owner !== pl.id) return true;
-      return Units.at(game, u.plane, u.x, u.y).filter(o => o !== u && o.owner === pl.id && o.aiEscort == null && AI.isSoldier(game, o)).length >= 1;
+      return Units.at(game, u.plane, u.x, u.y).filter(o => o !== u && o.owner === pl.id && o.aiEscort == null && o.riteEscort == null && AI.isSoldier(game, o)).length >= 1;
     };
     const reach = u => (u.x === st.x && u.y === st.y) || !!Move.findPath(game, [u], u.plane, st.x, st.y, {});
     esc = U.min(cands.filter(u => ok(u) && reach(u)), u => World.dist(world, u.x, u.y, st.x, st.y) * 10 - Units.strength(game, u) / 50);
@@ -865,7 +870,7 @@ const AI = {
     const out = new Set(), st = AI.bookPlan(game, pl);
     if (!st || st.phase === 'idle' || (st.pause && game.turn < st.pause)) { if (st) st.members = []; return out; }
     const b = game.book, world = game.world, key = t => t.p + ',' + t.x + ',' + t.y;
-    const free = u => u.owner === pl.id && !busy.has(u.id) && u.aiRole !== 'garrison' && u.aiEscort == null && u.status !== 'governor' && !u.riteDemon && u.nodeBound == null && !u.stasis && !DATA.units[u.type].sailing && !Units.isSettler(u) && !Units.isEngineer(u) && !Units.has(game, u, 'meld');
+    const free = u => u.owner === pl.id && !busy.has(u.id) && u.aiRole !== 'garrison' && u.aiEscort == null && u.riteEscort == null && u.status !== 'governor' && !u.riteDemon && u.nodeBound == null && !u.stasis && !DATA.units[u.type].sailing && !Units.isSettler(u) && !Units.isEngineer(u) && !Units.has(game, u, 'meld');
     if (st.phase === 'search') {
       // l'éclaireur du Livre : un éclaireur s'il y en a un, sinon la plus rapide des unités libres les moins précieuses
       const near = v => Math.min(...st.cands.map(t => AI.bookDist(game, pl, v, t.p, t.x, t.y)));
@@ -926,20 +931,88 @@ const AI = {
   },
   // Hardcore : le Démon légendaire de son pacte. Blessé, il se refait dans la cité la plus proche ; sinon il frappe la plus proche
   // des cités ou armées de la cible que la simulation lui donne gagnante, ou s'approche de la plus proche
+  // ---------- le Démon légendaire et son escorte ----------
+  // (0.31.23, réglage escort du pacte, à l'essai au banc) une pile de 9 au plus : le démon et 8 escortes
+  RITE_ESC: 8,
+  // une troupe qui peut l'escorter sans le ralentir : volante et d'au moins 3 cases (réglage 3), sinon d'au moins 2 cases (réglage 2, faute de mieux)
+  escortFits(game, u, need) { const s = Units.stats(game, u); return need >= 3 ? s.flying && s.move >= 3 : s.move >= 2; },
+  escortTypeFits(t, need) { const d = DATA.units[t]; return !!d && !d.sailing && !d.abilities.createOutpost && !d.abilities.construction && !d.abilities.siegeOnly && !d.abilities.scout && (d.melee >= 2 || d.ranged >= 2) && (need >= 3 ? !!d.flying && d.move >= 3 : d.move >= 2); },
+  // le palier, fixé à la première décision : 3 si le maître a des volants rapides ou peut en bâtir, sinon 2 si le réglage l'admet, sinon rien
+  escortNeed(game, pl, r) {
+    const mode = Rite.cfg(game, 'escort'); if (!mode) return 0;
+    if (r.escNeed != null) return r.escNeed;
+    const d = game.units[r.demon]; if (!d) return 0;
+    const fast = Object.values(game.units).some(u => u.owner === pl.id && !u.riteDemon && !u.hero && AI.isSoldier(game, u) && AI.escortFits(game, u, 3))
+      || Cities.ofPlayer(game, pl.id).some(c => Cities.buildableUnits(game, c).some(t => AI.escortTypeFits(t, 3)));
+    return (r.escNeed = fast ? 3 : mode >= 3 ? 0 : 2);
+  },
+  // les trois cités du maître les plus proches du démon, sur son plan
+  escortCities(game, pl, d) { return Cities.ofPlayer(game, pl.id).filter(c => c.plane === d.plane && World.dist(game.world, c.x, c.y, d.x, d.y) <= 20).sort((a, b) => World.dist(game.world, a.x, a.y, d.x, d.y) - World.dist(game.world, b.x, b.y, d.x, d.y)).slice(0, 3); },
+  riteEscortBuild(game, pl, c, units, e, threat) {
+    const r = game.rite; if (!r || r.phase !== 'demon' || r.owner !== pl.id || !Rite.cfg(game, 'escort')) return null;
+    const d = game.units[r.demon]; if (!d || d.plane !== c.plane || threat > 0) return null;
+    const need = AI.escortNeed(game, pl, r); if (!need) return null;
+    if (!AI.escortCities(game, pl, d).includes(c)) return null;
+    const fits = x => x.aiRiteEsc === d.id && x.prod && x.prod.type === 'unit' && AI.escortTypeFits(x.prod.id, need);
+    const have = Object.values(game.units).filter(u => u.riteEscort === d.id).length + Cities.ofPlayer(game, pl.id).filter(x => x !== c && fits(x)).length;
+    if (have >= AI.RITE_ESC) return null;
+    const best = U.max(units.filter(t => AI.escortTypeFits(t, need)), t => AI.unitValue(game, c, t, e, 'attack'));
+    if (best) c.aiRiteEsc = d.id;
+    return best || null;
+  },
+  // les troupes libres du maître qui peuvent rejoindre l'escorte (pas les héros, ni ce qui garde, escorte un colon ou part en expédition)
+  escortFree(game, pl, d, need) {
+    const busy = new Set([].concat(...['aiLegend', 'aiPortal', 'aiTrip', 'aiBook'].map(k => pl[k] && pl[k].members ? pl[k].members : [])));
+    return Object.values(game.units).filter(u => u.owner === pl.id && !u.riteDemon && u.riteEscort == null && !u.hero && !u.avatar && u.plane === d.plane && !busy.has(u.id)
+      && u.aiRole !== 'garrison' && u.aiEscort == null && u.status !== 'governor' && u.nodeBound == null && !u.stasis && AI.isSoldier(game, u)
+      && !DATA.units[u.type].abilities.siegeOnly && AI.escortFits(game, u, need) && World.dist(game.world, u.x, u.y, d.x, d.y) <= 15);
+  },
+  // au début du tour (avant les garnisons) : l'escorte se complète avec les troupes libres, et les cités proches en bâtissent
+  riteEscortClaim(game, pl) {
+    const r = Rite.active(game);
+    if (!r || r.phase !== 'demon' || r.owner !== pl.id || !Rite.cfg(game, 'escort')) return;
+    const d = game.units[r.demon]; if (!d) return;
+    const need = AI.escortNeed(game, pl, r); if (!need) return;
+    const mine = () => Object.values(game.units).filter(u => u.riteEscort === d.id && u.owner === pl.id);
+    for (const u of mine()) if (u.plane !== d.plane || !AI.escortFits(game, u, need)) delete u.riteEscort;
+    const esc = mine();
+    if (esc.length < AI.RITE_ESC) for (const u of AI.escortFree(game, pl, d, need).sort((a, b) => Units.strength(game, b) - Units.strength(game, a))) { if (esc.length >= AI.RITE_ESC) break; u.riteEscort = d.id; delete u.aiRole; delete u.aiPost; u.path = null; esc.push(u); }
+    if (esc.length < AI.RITE_ESC) for (const c of AI.escortCities(game, pl, d)) if (c.aiRiteEsc !== d.id) c.aiReconsider = true;
+  },
   async riteDemonTurn(game, pl) {
     const r = Rite.active(game);
     if (!r || r.phase !== 'demon' || r.owner !== pl.id || pl.diplo[r.target] !== 'war') return;
-    const d = game.units[r.demon]; if (!d || d.moves <= 0) return;
+    const d = game.units[r.demon]; if (!d) return;
     const world = game.world;
+    const need = AI.escortNeed(game, pl, r);
+    const mine = () => Object.values(game.units).filter(u => u.riteEscort === d.id && u.owner === pl.id);
+    AI.riteEscortClaim(game, pl);
+    const onTile = () => Units.at(game, d.plane, d.x, d.y).filter(u => u.riteEscort === d.id);
+    // (à 3 cases, une escorte qui a déjà marché ce tour reste en arrière plutôt que de le freiner ; à 2, il règle son pas sur elle)
+    const group = () => [d].concat(onTile().filter(u => need >= 3 ? u.moves >= d.moves : u.moves > 0));
+    // l'escorte qui n'est pas encore sur sa case le rejoint (par petits groupes, ceux qui sont ensemble marchent ensemble)
+    const chase = async () => {
+      if (!need || !game.units[d.id]) return;
+      const away = mine().filter(u => u.moves > 0 && (u.plane !== d.plane || u.x !== d.x || u.y !== d.y));
+      for (const g of Object.values(U.groupBy(away, u => u.plane + ',' + u.x + ',' + u.y))) await Game.moveGroup(game, g.map(u => u.id), d.x, d.y, { noAttack: true });
+      r.maxEsc = Math.max(r.maxEsc || 0, onTile().length);
+    };
+    const go = async (x, y, opts) => { const ids = group().map(u => u.id); return Game.moveGroup(game, ids, x, y, opts); };
+    if (d.moves <= 0) return chase();
+    // le rassemblement : après l'invocation, il attend quelques tours que son escorte le rejoigne (tant qu'il en vient)
+    if (need && game.turn - r.summoned <= Rite.cfg(game, 'muster') && onTile().length < AI.RITE_ESC) {
+      const coming = mine().length > onTile().length || Cities.ofPlayer(game, pl.id).some(c => c.aiRiteEsc === d.id && c.prod && c.prod.type === 'unit');
+      if (coming) return chase();
+    }
     if (d.dmg > Units.stats(game, d).maxHp * 0.55) {
       const home = U.min(Cities.ofPlayer(game, pl.id).filter(c => c.plane === d.plane), c => World.dist(world, c.x, c.y, d.x, d.y));
-      if (home && (home.x !== d.x || home.y !== d.y)) await Game.moveGroup(game, [d.id], home.x, home.y, { noAttack: true });
-      return;
+      if (home && (home.x !== d.x || home.y !== d.y)) await go(home.x, home.y, { noAttack: true });
+      return chase();
     }
     const cands = [];
     for (const c of Intel.knownCities(game, pl)) if (c.owner === r.target && c.plane === d.plane) cands.push({ x: c.x, y: c.y, city: c });
     for (const u of Object.values(game.units)) if (u.owner === r.target && u.plane === d.plane && !Cities.at(game, u.plane, u.x, u.y) && Intel.sees(game, pl, u.plane, u.x, u.y) && !Intel.hiddenFrom(game, pl.id, u) && !cands.some(c => c.x === u.x && c.y === u.y)) cands.push({ x: u.x, y: u.y });
-    if (!cands.length) return;
+    if (!cands.length) return chase();
     for (const c of cands) c.d = World.dist(world, c.x, c.y, d.x, d.y);
     cands.sort((a, b) => a.d - b.d);
     for (const c of cands.slice(0, 4)) {
@@ -947,15 +1020,18 @@ const AI = {
       const info = Intel.defenders(game, pl, d.plane, c.x, c.y);
       const defs = info ? info.units : [];
       const si = World.get(world, d.plane, 'site', c.x, c.y);
-      const win = !defs.length && !(c.city && Battle.spire(game, c.city)) ? 1 : AI.simulate(game, [d], defs, { plane: d.plane, x: c.x, y: c.y, city: c.city || null, site: si >= 0 ? game.sites[si] : null }, 2);
+      const win = !defs.length && !(c.city && Battle.spire(game, c.city)) ? 1 : AI.simulate(game, group(), defs, { plane: d.plane, x: c.x, y: c.y, city: c.city || null, site: si >= 0 ? game.sites[si] : null }, 2);
       if (win >= 0.5) {
-        const mv = await Game.moveGroup(game, [d.id], c.x, c.y, {});
+        const mv = await go(c.x, c.y, {});
         if (mv && !mv.ok && game.units[d.id] && d.moves > 0) { AI.markBadTarget(game, pl, d.plane, c.x, c.y); continue; }
-        return;
+        const took = c.city && Cities.at(game, d.plane, c.x, c.y);
+        if (took && took.owner === pl.id) r.caps = (r.caps || 0) + 1;
+        return chase();
       }
     }
     const c = cands[0], st = AI.stagingTile(game, pl, d, c.x, c.y);
-    if (st && (st[0] !== d.x || st[1] !== d.y)) await Game.moveGroup(game, [d.id], st[0], st[1], { noAttack: true });
+    if (st && (st[0] !== d.x || st[1] !== d.y)) await go(st[0], st[1], { noAttack: true });
+    return chase();
   },
   // group : les unités qui partiraient vraiment (on simule le combat avec elles seules)
   pickTarget(game, pl, u0, power, minWin = 0, group) {

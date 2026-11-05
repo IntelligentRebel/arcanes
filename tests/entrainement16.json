@@ -1,0 +1,186 @@
+{
+ "nom": "Entraînement 16 : moteur 0.31.23 ; l'escorte du Démon légendaire, la sortie de la garnison",
+ "experiences": [
+  {
+   "id": "demon_escorte",
+   "note": "Hardcore, le sorcier observé part très en avance (le pacte le vise). Le Démon légendaire seul (jeu actuel), escorté de volants aussi rapides que lui (3 cases) que son maître rallie et bâtit, ou à défaut des meilleures troupes à 2 cases ; il attend son escorte 3 tours après l'invocation. Le meneur est-il davantage freiné ?",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 500000,
+   "graines": 80,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "avance": true,
+   "variantes": [
+    {
+     "nom": "démon seul",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "escorte à 3 cases",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "rituel": {
+      "escort": 3,
+      "muster": 3
+     }
+    },
+    {
+     "nom": "escorte à 3, sinon à 2 cases",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "rituel": {
+      "escort": 2,
+      "muster": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "sortie_garnison",
+   "note": "Difficile, pour le sorcier observé seul. En combat automatique, une garnison sans tireurs derrière ses murs sort attaquer un assaillant qui tire (v0.31.21) au lieu d'attendre à l'abri.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 510000,
+   "graines": 150,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "variantes": [
+    {
+     "nom": "garnison à l'abri",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "no_sally": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "sortie contre les tireurs",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_wonder2": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}

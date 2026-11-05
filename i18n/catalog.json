@@ -10411,7 +10411,7 @@
  "à {0}": {
   "at": [
    "src/engine/game.js:1164",
-   "src/engine/events.js:1138",
+   "src/engine/events.js:1145",
    "src/ui/magicui.js:353",
    "src/ui/magicui.js:379"
   ],
@@ -11664,7 +11664,7 @@
    "src/engine/turn.js:88",
    "src/engine/turn.js:638",
    "src/engine/spells.js:31",
-   "src/engine/ai.js:1140"
+   "src/engine/ai.js:1216"
   ]
  },
  "unités": {
@@ -12448,7 +12448,7 @@
  "Il faut une unité amie.": {
   "at": [
    "src/engine/spells.js:192",
-   "src/engine/events.js:1110"
+   "src/engine/events.js:1117"
   ]
  },
  "Il faut une unité ennemie.": {
@@ -12523,7 +12523,7 @@
  "Il faut une cité amie.": {
   "at": [
    "src/engine/spells.js:220",
-   "src/engine/events.js:1093"
+   "src/engine/events.js:1100"
   ]
  },
  "Il faut une cité ennemie.": {
@@ -12613,7 +12613,7 @@
  "Choisissez un sorcier rival.": {
   "at": [
    "src/engine/spells.js:248",
-   "src/engine/events.js:1077"
+   "src/engine/events.js:1084"
   ]
  },
  "N'entretient aucun enchantement global.": {
@@ -13840,7 +13840,7 @@
  "Mana insuffisant.": {
   "at": [
    "src/engine/spells.js:739",
-   "src/engine/events.js:680"
+   "src/engine/events.js:687"
   ]
  },
  "{0} a pulvérisé votre incantation de {1}.": {
@@ -14593,29 +14593,29 @@
  },
  "Aucun traité": {
   "at": [
-   "src/engine/ai.js:1057"
+   "src/engine/ai.js:1133"
   ]
  },
  "Pacte de paix": {
   "at": [
-   "src/engine/ai.js:1057"
+   "src/engine/ai.js:1133"
   ]
  },
  "Alliance": {
   "at": [
-   "src/engine/ai.js:1057",
+   "src/engine/ai.js:1133",
    "src/ui/panels.js:405"
   ]
  },
  "Guerre": {
   "at": [
-   "src/engine/ai.js:1057",
+   "src/engine/ai.js:1133",
    "src/ui/panels.js:419"
   ]
  },
  "{0} a rompu son traité et vous attaque !": {
   "at": [
-   "src/engine/ai.js:1075"
+   "src/engine/ai.js:1151"
   ],
   "args": [
    "pa.name"
@@ -14623,7 +14623,7 @@
  },
  "Vous êtes en guerre contre {0}.": {
   "at": [
-   "src/engine/ai.js:1079"
+   "src/engine/ai.js:1155"
   ],
   "args": [
    "pb.name"
@@ -14631,7 +14631,7 @@
  },
  "{0} vous déclare la guerre.": {
   "at": [
-   "src/engine/ai.js:1079"
+   "src/engine/ai.js:1155"
   ],
   "args": [
    "pa.name"
@@ -14639,12 +14639,12 @@
  },
  "Seulement avec un sorcier en paix ou allié.": {
   "at": [
-   "src/engine/ai.js:1094"
+   "src/engine/ai.js:1170"
   ]
  },
  "{0} rouvre son territoire à vos troupes.": {
   "at": [
-   "src/engine/ai.js:1096"
+   "src/engine/ai.js:1172"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))"
@@ -14652,7 +14652,7 @@
  },
  "{0} vous interdit son territoire{1}": {
   "at": [
-   "src/engine/ai.js:1100"
+   "src/engine/ai.js:1176"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))",
@@ -14661,7 +14661,7 @@
  },
  " : {0} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1100",
+   "src/engine/ai.js:1176",
    "src/ui/panels.js:407"
   ],
   "args": [
@@ -14670,22 +14670,22 @@
  },
  "unité est reconduite": {
   "at": [
-   "src/engine/ai.js:1100",
-   "src/engine/ai.js:1139"
+   "src/engine/ai.js:1176",
+   "src/engine/ai.js:1215"
   ]
  },
  "unités sont reconduites": {
   "at": [
-   "src/engine/ai.js:1100",
-   "src/engine/ai.js:1100",
-   "src/engine/ai.js:1139",
-   "src/engine/ai.js:1139"
+   "src/engine/ai.js:1176",
+   "src/engine/ai.js:1176",
+   "src/engine/ai.js:1215",
+   "src/engine/ai.js:1215"
   ],
   "hint": "pluriel de « unité est reconduite »"
  },
  "{0} étend son territoire, qu'il vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1139"
+   "src/engine/ai.js:1215"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -14694,7 +14694,7 @@
  },
  "{0} {1}{2} sur votre territoire, qui lui est interdit : {3} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1140"
+   "src/engine/ai.js:1216"
   ],
   "args": [
    "U.n(n, 'unité', 'unités')",
@@ -14705,27 +14705,27 @@
  },
  " se trouvaient": {
   "at": [
-   "src/engine/ai.js:1140"
+   "src/engine/ai.js:1216"
   ]
  },
  " se trouvait": {
   "at": [
-   "src/engine/ai.js:1140"
+   "src/engine/ai.js:1216"
   ]
  },
  "elles sont reconduites": {
   "at": [
-   "src/engine/ai.js:1140"
+   "src/engine/ai.js:1216"
   ]
  },
  "elle est reconduite": {
   "at": [
-   "src/engine/ai.js:1140"
+   "src/engine/ai.js:1216"
   ]
  },
  "{0} accepte : faisons front ensemble contre {1}.": {
   "at": [
-   "src/engine/ai.js:1165"
+   "src/engine/ai.js:1241"
   ],
   "args": [
    "pb.name",
@@ -14734,7 +14734,7 @@
  },
  "{0} accepte votre présent.": {
   "at": [
-   "src/engine/ai.js:1167"
+   "src/engine/ai.js:1243"
   ],
   "args": [
    "pb.name"
@@ -14742,7 +14742,7 @@
  },
  "La guerre est déclarée.{0}": {
   "at": [
-   "src/engine/ai.js:1168"
+   "src/engine/ai.js:1244"
   ],
   "args": [
    "broke ? ' Rompre un traité vous coûte l\\'estime de tous les sorciers.' : ''"
@@ -14750,12 +14750,12 @@
  },
  " Rompre un traité vous coûte l'estime de tous les sorciers.": {
   "at": [
-   "src/engine/ai.js:1168"
+   "src/engine/ai.js:1244"
   ]
  },
  "{0} vous a déjà répondu ce tour-ci.": {
   "at": [
-   "src/engine/ai.js:1172"
+   "src/engine/ai.js:1248"
   ],
   "args": [
    "pb.name"
@@ -14763,7 +14763,7 @@
  },
  "{0} accepte : {1}.": {
   "at": [
-   "src/engine/ai.js:1175"
+   "src/engine/ai.js:1251"
   ],
   "args": [
    "pb.name",
@@ -14772,7 +14772,7 @@
  },
  "{0} refuse.": {
   "at": [
-   "src/engine/ai.js:1177"
+   "src/engine/ai.js:1253"
   ],
   "args": [
    "pb.name"
@@ -14780,7 +14780,7 @@
  },
  "{0} vous propose la paix{1}.": {
   "at": [
-   "src/engine/ai.js:1256"
+   "src/engine/ai.js:1332"
   ],
   "args": [
    "a.name",
@@ -14789,12 +14789,12 @@
  },
  ", avec des concessions": {
   "at": [
-   "src/engine/ai.js:1256"
+   "src/engine/ai.js:1332"
   ]
  },
  "{0} et {1} signent la paix.": {
   "at": [
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1334"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, a.id))",
@@ -14803,8 +14803,8 @@
  },
  "{0} vous déclare la guerre !": {
   "at": [
-   "src/engine/ai.js:1275",
-   "src/engine/ai.js:1282"
+   "src/engine/ai.js:1351",
+   "src/engine/ai.js:1358"
   ],
   "args": [
    "a.name"
@@ -14812,8 +14812,8 @@
  },
  "Guerre déclarée à {0}.": {
   "at": [
-   "src/engine/ai.js:1276",
-   "src/engine/ai.js:1283",
+   "src/engine/ai.js:1352",
+   "src/engine/ai.js:1359",
    "src/engine/diplo.js:123"
   ],
   "args": [
@@ -14822,7 +14822,7 @@
  },
  "{0} vous propose un pacte de paix.": {
   "at": [
-   "src/engine/ai.js:1295"
+   "src/engine/ai.js:1371"
   ],
   "args": [
    "a.name"
@@ -14904,8 +14904,8 @@
  "vous": {
   "at": [
    "src/engine/aistrat.js:45",
-   "src/engine/events.js:666",
-   "src/engine/events.js:667",
+   "src/engine/events.js:673",
+   "src/engine/events.js:674",
    "src/engine/chronicle.js:96"
   ]
  },
@@ -15957,22 +15957,22 @@
  },
  "un autre sorcier": {
   "at": [
-   "src/engine/events.js:548"
+   "src/engine/events.js:551"
   ]
  },
  "un sorcier": {
   "at": [
-   "src/engine/events.js:548"
+   "src/engine/events.js:551"
   ]
  },
  " autres sorciers": {
   "at": [
-   "src/engine/events.js:548"
+   "src/engine/events.js:551"
   ]
  },
  "{0} et {1}": {
   "at": [
-   "src/engine/events.js:549",
+   "src/engine/events.js:552",
    "src/ui/mapview.js:1135"
   ],
   "args": [
@@ -15982,32 +15982,32 @@
  },
  "Invocation du Démon légendaire": {
   "at": [
-   "src/engine/events.js:588"
+   "src/engine/events.js:591"
   ]
  },
  "scellent": {
   "at": [
-   "src/engine/events.js:589"
+   "src/engine/events.js:592"
   ]
  },
  "scelle": {
   "at": [
-   "src/engine/events.js:589"
+   "src/engine/events.js:592"
   ]
  },
  "invoquent": {
   "at": [
-   "src/engine/events.js:589"
+   "src/engine/events.js:592"
   ]
  },
  "invoque": {
   "at": [
-   "src/engine/events.js:589"
+   "src/engine/events.js:592"
   ]
  },
  "{0} {1} un pacte contre vous : le rituel d'Invocation du Démon légendaire commence.": {
   "at": [
-   "src/engine/events.js:590"
+   "src/engine/events.js:593"
   ],
   "args": [
    "w.n",
@@ -16016,7 +16016,7 @@
  },
  "{0} {1} un pacte contre {2}, qui domine la partie, et {3} le Démon légendaire.{4}": {
   "at": [
-   "src/engine/events.js:592"
+   "src/engine/events.js:595"
   ],
   "args": [
    "w.n",
@@ -16028,19 +16028,19 @@
  },
  " Vous n'y êtes pas engagé : vous pouvez y contribuer depuis l'écran Magie (M).": {
   "at": [
-   "src/engine/events.js:592"
+   "src/engine/events.js:595"
   ]
  },
  "Le Démon légendaire": {
   "at": [
-   "src/engine/events.js:641",
-   "src/engine/events.js:673",
+   "src/engine/events.js:644",
+   "src/engine/events.js:680",
    "src/ui/magicui.js:434"
   ]
  },
  "Le Démon légendaire se dresse aux côtés {0} et marche contre vous.": {
   "at": [
-   "src/engine/events.js:641"
+   "src/engine/events.js:644"
   ],
   "args": [
    "deWho(Players.nameFor(game, v, owner.id))"
@@ -16048,7 +16048,7 @@
  },
  "Le rituel s'achève : le Démon légendaire se dresse à vos côtés. Il ne combat que {0}.": {
   "at": [
-   "src/engine/events.js:642"
+   "src/engine/events.js:645"
   ],
   "args": [
    "Players.nameFor(game, v, r.target)"
@@ -16056,7 +16056,7 @@
  },
  "Le Démon légendaire se dresse aux côtés {0} contre {1}.": {
   "at": [
-   "src/engine/events.js:643"
+   "src/engine/events.js:646"
   ],
   "args": [
    "deWho(Players.nameFor(game, v, owner.id))",
@@ -16065,7 +16065,7 @@
  },
  "Vous avez abattu le Démon légendaire ! Renom +{0}, et son essence vous rend {1} mana.": {
   "at": [
-   "src/engine/events.js:653"
+   "src/engine/events.js:656"
   ],
   "args": [
    "Rite.SLAIN_FAME",
@@ -16074,7 +16074,7 @@
  },
  "Le pacte contre {0} n'a plus d'objet{1}": {
   "at": [
-   "src/engine/events.js:664"
+   "src/engine/events.js:671"
   ],
   "args": [
    "Players.nameFor(game, v, T)",
@@ -16083,12 +16083,12 @@
  },
  " : le Démon légendaire retourne aux abîmes.": {
   "at": [
-   "src/engine/events.js:664"
+   "src/engine/events.js:671"
   ]
  },
  "Vous ne dominez plus la partie : le pacte se dissout{0}": {
   "at": [
-   "src/engine/events.js:665"
+   "src/engine/events.js:672"
   ],
   "args": [
    "d ? ' et le Démon légendaire retourne aux abîmes.' : '.'"
@@ -16096,13 +16096,13 @@
  },
  " et le Démon légendaire retourne aux abîmes.": {
   "at": [
-   "src/engine/events.js:665",
-   "src/engine/events.js:665"
+   "src/engine/events.js:672",
+   "src/engine/events.js:672"
   ]
  },
  "{0} ne domine plus la partie : le pacte se dissout{1}": {
   "at": [
-   "src/engine/events.js:665"
+   "src/engine/events.js:672"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, T))",
@@ -16111,7 +16111,7 @@
  },
  "Le pacte contre {0} se défait : le rituel est abandonné.": {
   "at": [
-   "src/engine/events.js:666"
+   "src/engine/events.js:673"
   ],
   "args": [
    "v === T ? 'vous' : Players.nameFor(game, v, T)"
@@ -16119,7 +16119,7 @@
  },
  "Le Démon légendaire est tombé. Le pacte contre {0} devra attendre avant de tenter un nouveau rituel.": {
   "at": [
-   "src/engine/events.js:667"
+   "src/engine/events.js:674"
   ],
   "args": [
    "v === T ? 'vous' : Players.nameFor(game, v, T)"
@@ -16127,17 +16127,17 @@
  },
  "Le maître du Démon légendaire a fait la paix : le démon retourne aux abîmes.": {
   "at": [
-   "src/engine/events.js:668"
+   "src/engine/events.js:675"
   ]
  },
  "Le pacte": {
   "at": [
-   "src/engine/events.js:673"
+   "src/engine/events.js:680"
   ]
  },
  "{0} a pulvérisé votre part du rituel du Démon légendaire.": {
   "at": [
-   "src/engine/events.js:682"
+   "src/engine/events.js:689"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -16145,7 +16145,7 @@
  },
  "Part de {0} dans le rituel pulvérisée ({1} mana).": {
   "at": [
-   "src/engine/events.js:683"
+   "src/engine/events.js:690"
   ],
   "args": [
    "o.name",
@@ -16154,7 +16154,7 @@
  },
  "Le Démon légendaire ne combat que {0}.": {
   "at": [
-   "src/engine/events.js:690"
+   "src/engine/events.js:697"
   ],
   "args": [
    "r ? Players.nameFor(game, attackers[0].owner, r.target) : 'la cible du pacte'"
@@ -16162,229 +16162,229 @@
  },
  "la cible du pacte": {
   "at": [
-   "src/engine/events.js:690"
+   "src/engine/events.js:697"
   ]
  },
  "Palimpseste": {
   "at": [
-   "src/engine/events.js:725"
+   "src/engine/events.js:732"
   ]
  },
  "Recopie dans votre grimoire le plus précieux des sorts que connaît un sorcier rival et que vous ignorez.": {
   "at": [
-   "src/engine/events.js:726"
+   "src/engine/events.js:733"
   ]
  },
  "Rature": {
   "at": [
-   "src/engine/events.js:727"
+   "src/engine/events.js:734"
   ]
  },
  "Efface de la mémoire d'un sorcier rival le plus rare de ses sorts. Il devra le rechercher à nouveau.": {
   "at": [
-   "src/engine/events.js:728"
+   "src/engine/events.js:735"
   ]
  },
  "Oubli": {
   "at": [
-   "src/engine/events.js:729"
+   "src/engine/events.js:736"
   ]
  },
  "Vos rivaux oublient vos terres : ce qu'ils en savaient, cartes et rapports sur vos armées, s'efface. Ils devront vous redécouvrir.": {
   "at": [
-   "src/engine/events.js:730"
+   "src/engine/events.js:737"
   ]
  },
  "Annales": {
   "at": [
-   "src/engine/events.js:731"
+   "src/engine/events.js:738"
   ]
  },
  "Vous lisez tout ce que sait un sorcier rival : ses cartes et ses rapports sur les armées deviennent les vôtres.": {
   "at": [
-   "src/engine/events.js:732"
+   "src/engine/events.js:739"
   ]
  },
  "Deus ex machina": {
   "at": [
-   "src/engine/events.js:733"
+   "src/engine/events.js:740"
   ]
  },
  "Une seule fois par partie. La prochaine armée d'un sorcier qui attaque la cité est renvoyée dans la plus proche de ses cités, sans combat.": {
   "at": [
-   "src/engine/events.js:734"
+   "src/engine/events.js:741"
   ]
  },
  "Mise en abyme": {
   "at": [
-   "src/engine/events.js:735"
+   "src/engine/events.js:742"
   ]
  },
  "Crée à ses côtés une copie exacte de l'unité visée, expérience et enchantements compris. Pas sur un héros.": {
   "at": [
-   "src/engine/events.js:736"
+   "src/engine/events.js:743"
   ]
  },
  "Artefact légendaire": {
   "at": [
-   "src/engine/events.js:737"
+   "src/engine/events.js:744"
   ]
  },
  "Fait paraître dans votre coffre l'un des cinq artefacts légendaires, au hasard. Il n'en paraîtra que trois dans toute la partie.": {
   "at": [
-   "src/engine/events.js:738"
+   "src/engine/events.js:745"
   ]
  },
  "zéro": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "une": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "deux": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "trois": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "quatre": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "cinq": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "six": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "sept": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "huit": {
   "at": [
-   "src/engine/events.js:828"
+   "src/engine/events.js:835"
   ]
  },
  "Ses pages reposent sous l'herbe d'une prairie.": {
   "at": [
-   "src/engine/events.js:829"
+   "src/engine/events.js:836"
   ]
  },
  "Les arbres d'une forêt gardent son sommeil.": {
   "at": [
-   "src/engine/events.js:829"
+   "src/engine/events.js:836"
   ]
  },
  "Il dort au creux d'une colline.": {
   "at": [
-   "src/engine/events.js:829"
+   "src/engine/events.js:836"
   ]
  },
  "Le sable d'un désert le recouvre.": {
   "at": [
-   "src/engine/events.js:830"
+   "src/engine/events.js:837"
   ]
  },
  "La vase d'un marais le cache.": {
   "at": [
-   "src/engine/events.js:830"
+   "src/engine/events.js:837"
   ]
  },
  "Le gel de la toundra l'emprisonne.": {
   "at": [
-   "src/engine/events.js:830"
+   "src/engine/events.js:837"
   ]
  },
  "Il se trouve dans le quart nord-ouest du monde.": {
   "at": [
-   "src/engine/events.js:831"
+   "src/engine/events.js:838"
   ]
  },
  "Il se trouve dans le quart nord-est du monde.": {
   "at": [
-   "src/engine/events.js:831"
+   "src/engine/events.js:838"
   ]
  },
  "Il se trouve dans le quart sud-ouest du monde.": {
   "at": [
-   "src/engine/events.js:832"
+   "src/engine/events.js:839"
   ]
  },
  "Il se trouve dans le quart sud-est du monde.": {
   "at": [
-   "src/engine/events.js:832"
+   "src/engine/events.js:839"
   ]
  },
  "Un nœud de nature verdoie": {
   "at": [
-   "src/engine/events.js:833"
+   "src/engine/events.js:840"
   ]
  },
  "Un nœud de chaos brûle": {
   "at": [
-   "src/engine/events.js:833"
+   "src/engine/events.js:840"
   ]
  },
  "Un nœud de sorcellerie scintille": {
   "at": [
-   "src/engine/events.js:833"
+   "src/engine/events.js:840"
   ]
  },
  "Le Livre dort sur le Miroir, le monde d'en dessous.": {
   "at": [
-   "src/engine/events.js:838",
-   "src/engine/events.js:884"
+   "src/engine/events.js:845",
+   "src/engine/events.js:891"
   ]
  },
  "Le Livre dort sur Arcane, sous le soleil.": {
   "at": [
-   "src/engine/events.js:838",
-   "src/engine/events.js:884"
+   "src/engine/events.js:845",
+   "src/engine/events.js:891"
   ]
  },
  "Une rivière coule à côté de lui.": {
   "at": [
-   "src/engine/events.js:840",
-   "src/engine/events.js:886"
+   "src/engine/events.js:847",
+   "src/engine/events.js:893"
   ]
  },
  "On y entend le ressac de la mer.": {
   "at": [
-   "src/engine/events.js:841",
-   "src/engine/events.js:887"
+   "src/engine/events.js:848",
+   "src/engine/events.js:894"
   ]
  },
  "La mer est à plus de quatre cases.": {
   "at": [
-   "src/engine/events.js:842",
-   "src/engine/events.js:888"
+   "src/engine/events.js:849",
+   "src/engine/events.js:895"
   ]
  },
  "Une montagne veille à côté de lui.": {
   "at": [
-   "src/engine/events.js:843",
-   "src/engine/events.js:889"
+   "src/engine/events.js:850",
+   "src/engine/events.js:896"
   ]
  },
  "{0} à moins de {1} cases.": {
   "at": [
-   "src/engine/events.js:844",
-   "src/engine/events.js:890"
+   "src/engine/events.js:851",
+   "src/engine/events.js:897"
   ],
   "args": [
    "Book.NODE_TXT[r]",
@@ -16393,8 +16393,8 @@
  },
  "Une tour de sorcellerie se dresse à moins de {0} cases.": {
   "at": [
-   "src/engine/events.js:845",
-   "src/engine/events.js:891"
+   "src/engine/events.js:852",
+   "src/engine/events.js:898"
   ],
   "args": [
    "N[n]"
@@ -16402,8 +16402,8 @@
  },
  "Un repaire s'ouvre à moins de {0} cases.": {
   "at": [
-   "src/engine/events.js:846",
-   "src/engine/events.js:892"
+   "src/engine/events.js:853",
+   "src/engine/events.js:899"
   ],
   "args": [
    "N[n]"
@@ -16411,7 +16411,7 @@
  },
  "la bibliothèque de {0}": {
   "at": [
-   "src/engine/events.js:906"
+   "src/engine/events.js:913"
   ],
   "args": [
    "c.name"
@@ -16419,7 +16419,7 @@
  },
  "{0} On y lit : « {1} »{2} Vous en détenez {3} sur {4}.": {
   "at": [
-   "src/engine/events.js:922"
+   "src/engine/events.js:929"
   ],
   "args": [
    "how",
@@ -16431,7 +16431,7 @@
  },
  " Il rejoint {0}.": {
   "at": [
-   "src/engine/events.js:922"
+   "src/engine/events.js:929"
   ],
   "args": [
    "Book.where(game, f.city)"
@@ -16439,23 +16439,23 @@
  },
  "a mis la main sur un fragment du Livre de légende.": {
   "at": [
-   "src/engine/events.js:925",
-   "src/engine/events.js:942"
+   "src/engine/events.js:932",
+   "src/engine/events.js:949"
   ]
  },
  "un fragment du Livre de légende": {
   "at": [
-   "src/engine/events.js:932"
+   "src/engine/events.js:939"
   ]
  },
  "Parmi le butin, un fragment du Livre de légende.": {
   "at": [
-   "src/engine/events.js:933"
+   "src/engine/events.js:940"
   ]
  },
  "Dans {0} de {1}, un fragment du Livre de légende.{2} Vous en détenez {3} sur {4}.": {
   "at": [
-   "src/engine/events.js:940"
+   "src/engine/events.js:947"
   ],
   "args": [
    "f.archive && old < 0 ? 'les archives' : 'la bibliothèque'",
@@ -16467,19 +16467,19 @@
  },
  "les archives": {
   "at": [
-   "src/engine/events.js:940",
-   "src/engine/events.js:944"
+   "src/engine/events.js:947",
+   "src/engine/events.js:951"
   ]
  },
  "la bibliothèque": {
   "at": [
-   "src/engine/events.js:940",
-   "src/engine/events.js:944"
+   "src/engine/events.js:947",
+   "src/engine/events.js:951"
   ]
  },
  " On y lit : « {0} »": {
   "at": [
-   "src/engine/events.js:940"
+   "src/engine/events.js:947"
   ],
   "args": [
    "Book.clueOf(game, f)"
@@ -16487,12 +16487,12 @@
  },
  " Vous en connaissiez déjà le texte.": {
   "at": [
-   "src/engine/events.js:940"
+   "src/engine/events.js:947"
   ]
  },
  "Le fragment du Livre de légende gardé à {0} vous est enlevé avec la cité.": {
   "at": [
-   "src/engine/events.js:941"
+   "src/engine/events.js:948"
   ],
   "args": [
    "city.name"
@@ -16500,7 +16500,7 @@
  },
  "Dans {0} de {1}, un fragment du Livre de légende.": {
   "at": [
-   "src/engine/events.js:944"
+   "src/engine/events.js:951"
   ],
   "args": [
    "f.archive && old < 0 ? 'les archives' : 'la bibliothèque'",
@@ -16509,7 +16509,7 @@
  },
  "Le Livre de légende est à vous : il était gardé à {0}. Ses sorts s'ouvrent dans votre grimoire.": {
   "at": [
-   "src/engine/events.js:947"
+   "src/engine/events.js:954"
   ],
   "args": [
    "city.name"
@@ -16517,7 +16517,7 @@
  },
  "Le Livre de légende vous est enlevé avec {0}.": {
   "at": [
-   "src/engine/events.js:948"
+   "src/engine/events.js:955"
   ],
   "args": [
    "city.name"
@@ -16525,7 +16525,7 @@
  },
  "{0} s'empare du Livre de légende.": {
   "at": [
-   "src/engine/events.js:948"
+   "src/engine/events.js:955"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pid))"
@@ -16533,22 +16533,22 @@
  },
  "Dans les décombres, un fragment du Livre de légende.": {
   "at": [
-   "src/engine/events.js:967"
+   "src/engine/events.js:974"
   ]
  },
  "Une présence ancienne dort ici, scellée. Le sceau ne cédera qu'à qui détient trois fragments du Livre de légende.": {
   "at": [
-   "src/engine/events.js:973"
+   "src/engine/events.js:980"
   ]
  },
  "Le sceau se brise : les gardiens du Livre de légende se dressent et repoussent vos troupes.": {
   "at": [
-   "src/engine/events.js:981"
+   "src/engine/events.js:988"
   ]
  },
  "Le Livre de légende est à vous ! Il rejoint {0}. Ses sorts s'ouvrent dans votre grimoire.": {
   "at": [
-   "src/engine/events.js:1006"
+   "src/engine/events.js:1013"
   ],
   "args": [
    "Book.where(game, b.city)"
@@ -16556,7 +16556,7 @@
  },
  "{0} s'est emparé du Livre de légende.": {
   "at": [
-   "src/engine/events.js:1007"
+   "src/engine/events.js:1014"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pid))"
@@ -16564,14 +16564,14 @@
  },
  "Le Livre de légende": {
   "at": [
-   "src/engine/events.js:1008",
+   "src/engine/events.js:1015",
    "src/ui/magicui.js:446",
    "src/ui/main.js:1817"
   ]
  },
  "Il rejoint {0}. Ses sept sorts s'ouvrent dans votre grimoire.": {
   "at": [
-   "src/engine/events.js:1008"
+   "src/engine/events.js:1015"
   ],
   "args": [
    "Book.where(game, b.city)"
@@ -16579,17 +16579,17 @@
  },
  "Les gardiens sont tombés, mais le sceau tient encore : il faut détenir trois fragments du Livre de légende.": {
   "at": [
-   "src/engine/events.js:1017"
+   "src/engine/events.js:1024"
   ]
  },
  "Le Livre de légende est gardé ici.": {
   "at": [
-   "src/engine/events.js:1028"
+   "src/engine/events.js:1035"
   ]
  },
  "{0} garde {1} du Livre de légende.": {
   "at": [
-   "src/engine/events.js:1029"
+   "src/engine/events.js:1036"
   ],
   "args": [
    "c.buildings.library ? 'Sa bibliothèque' : c.owner < 0 ? 'Ses archives' : 'Elle'",
@@ -16598,22 +16598,22 @@
  },
  "Sa bibliothèque": {
   "at": [
-   "src/engine/events.js:1029"
+   "src/engine/events.js:1036"
   ]
  },
  "Ses archives": {
   "at": [
-   "src/engine/events.js:1029"
+   "src/engine/events.js:1036"
   ]
  },
  "Elle": {
   "at": [
-   "src/engine/events.js:1029"
+   "src/engine/events.js:1036"
   ]
  },
  "{0} fragments": {
   "at": [
-   "src/engine/events.js:1029"
+   "src/engine/events.js:1036"
   ],
   "args": [
    "n"
@@ -16621,12 +16621,12 @@
  },
  "un fragment": {
   "at": [
-   "src/engine/events.js:1029"
+   "src/engine/events.js:1036"
   ]
  },
  "{0} ne connaît aucun sort que vous puissiez recopier.": {
   "at": [
-   "src/engine/events.js:1036"
+   "src/engine/events.js:1043"
   ],
   "args": [
    "o.name"
@@ -16634,7 +16634,7 @@
  },
  "{0} a recopié dans son grimoire votre sort {1}.": {
   "at": [
-   "src/engine/events.js:1039"
+   "src/engine/events.js:1046"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -16643,7 +16643,7 @@
  },
  "Palimpseste : {0} rejoint votre grimoire.": {
   "at": [
-   "src/engine/events.js:1040"
+   "src/engine/events.js:1047"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -16651,7 +16651,7 @@
  },
  "{0} n'a aucun sort qu'on puisse raturer.": {
   "at": [
-   "src/engine/events.js:1044"
+   "src/engine/events.js:1051"
   ],
   "args": [
    "o.name"
@@ -16659,7 +16659,7 @@
  },
  "{0} a raturé {1} de votre grimoire : il faudra le rechercher à nouveau.": {
   "at": [
-   "src/engine/events.js:1048"
+   "src/engine/events.js:1055"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -16668,7 +16668,7 @@
  },
  "Rature : {0} s'efface du grimoire de {1}.": {
   "at": [
-   "src/engine/events.js:1049"
+   "src/engine/events.js:1056"
   ],
   "args": [
    "DATA.spells[id].name",
@@ -16677,7 +16677,7 @@
  },
  "Une brume étrange a effacé de vos cartes ce que vous saviez des terres {0}.": {
   "at": [
-   "src/engine/events.js:1070"
+   "src/engine/events.js:1077"
   ],
   "args": [
    "deWho(Players.nameFor(game, o.id, pl.id))"
@@ -16685,7 +16685,7 @@
  },
  "Oubli : vos rivaux ont perdu la trace de vos terres ({0} cases effacées de leurs cartes).": {
   "at": [
-   "src/engine/events.js:1073"
+   "src/engine/events.js:1080"
   ],
   "args": [
    "n"
@@ -16693,7 +16693,7 @@
  },
  "Annales : les cartes {0} sont à vous ({1}, {2} sur les armées).": {
   "at": [
-   "src/engine/events.js:1089"
+   "src/engine/events.js:1096"
   ],
   "args": [
    "deWho(Players.nameFor(game, pl.id, o.id))",
@@ -16703,30 +16703,30 @@
  },
  "case découverte": {
   "at": [
-   "src/engine/events.js:1089"
+   "src/engine/events.js:1096"
   ]
  },
  "cases découvertes": {
   "at": [
-   "src/engine/events.js:1089",
-   "src/engine/events.js:1089"
+   "src/engine/events.js:1096",
+   "src/engine/events.js:1096"
   ],
   "hint": "pluriel de « case découverte »"
  },
  "rapport": {
   "at": [
-   "src/engine/events.js:1089"
+   "src/engine/events.js:1096"
   ]
  },
  "rapports": {
   "at": [
-   "src/engine/events.js:1089"
+   "src/engine/events.js:1096"
   ],
   "hint": "pluriel de « rapport »"
  },
  "Deus ex machina veille sur {0}.": {
   "at": [
-   "src/engine/events.js:1096"
+   "src/engine/events.js:1103"
   ],
   "args": [
    "c.name"
@@ -16734,13 +16734,13 @@
  },
  "Les trois artefacts légendaires de cette partie ont déjà paru.": {
   "at": [
-   "src/engine/events.js:1100",
-   "src/engine/events.js:1185"
+   "src/engine/events.js:1107",
+   "src/engine/events.js:1192"
   ]
  },
  "{0} a fait paraître {1}, un artefact légendaire.": {
   "at": [
-   "src/engine/events.js:1105"
+   "src/engine/events.js:1112"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -16749,7 +16749,7 @@
  },
  "{0} paraît dans votre coffre ({1}). {2}": {
   "at": [
-   "src/engine/events.js:1106"
+   "src/engine/events.js:1113"
   ],
   "args": [
    "U.cap(a.name)",
@@ -16759,7 +16759,7 @@
  },
  "{0} peu{1} encore paraître.": {
   "at": [
-   "src/engine/events.js:1106"
+   "src/engine/events.js:1113"
   ],
   "args": [
    "n > 1 ? 'Deux autres artefacts légendaires' : 'Un dernier artefact légendaire'",
@@ -16768,22 +16768,22 @@
  },
  "Deux autres artefacts légendaires": {
   "at": [
-   "src/engine/events.js:1106"
+   "src/engine/events.js:1113"
   ]
  },
  "Un dernier artefact légendaire": {
   "at": [
-   "src/engine/events.js:1106"
+   "src/engine/events.js:1113"
   ]
  },
  "C'était le dernier.": {
   "at": [
-   "src/engine/events.js:1106"
+   "src/engine/events.js:1113"
   ]
  },
  "Mise en abyme : {0}{1}": {
   "at": [
-   "src/engine/events.js:1114"
+   "src/engine/events.js:1121"
   ],
   "args": [
    "Units.label(u)",
@@ -16792,22 +16792,22 @@
  },
  " ont désormais leur double.": {
   "at": [
-   "src/engine/events.js:1114"
+   "src/engine/events.js:1121"
   ]
  },
  " a désormais son double.": {
   "at": [
-   "src/engine/events.js:1114"
+   "src/engine/events.js:1121"
   ]
  },
  "en arrière": {
   "at": [
-   "src/engine/events.js:1138"
+   "src/engine/events.js:1145"
   ]
  },
  "Deus ex machina : l'armée {0} qui attaquait {1} a été renvoyée {2}.": {
   "at": [
-   "src/engine/events.js:1139"
+   "src/engine/events.js:1146"
   ],
   "args": [
    "deWho(Players.nameFor(game, city.owner, pid))",
@@ -16817,12 +16817,12 @@
  },
  "chez elle": {
   "at": [
-   "src/engine/events.js:1139"
+   "src/engine/events.js:1146"
   ]
  },
  "Une force venue de nulle part protégeait {0} : votre armée a été renvoyée {1}.": {
   "at": [
-   "src/engine/events.js:1140"
+   "src/engine/events.js:1147"
   ],
   "args": [
    "city.name",
@@ -16831,7 +16831,7 @@
  },
  "Votre armée est renvoyée {0}.": {
   "at": [
-   "src/engine/events.js:1142"
+   "src/engine/events.js:1149"
   ],
   "args": [
    "to"
@@ -16839,7 +16839,7 @@
  },
  "L'armée qui attaquait {0} est renvoyée chez elle.": {
   "at": [
-   "src/engine/events.js:1142"
+   "src/engine/events.js:1149"
   ],
   "args": [
    "city.name"
@@ -16847,67 +16847,67 @@
  },
  "Excalibur": {
   "at": [
-   "src/engine/events.js:1169"
+   "src/engine/events.js:1176"
   ]
  },
  "l'Égide": {
   "at": [
-   "src/engine/events.js:1170"
+   "src/engine/events.js:1177"
   ]
  },
  "l'Anneau de Gygès": {
   "at": [
-   "src/engine/events.js:1171"
+   "src/engine/events.js:1178"
   ]
  },
  "l'Arc d'Apollon": {
   "at": [
-   "src/engine/events.js:1172"
+   "src/engine/events.js:1179"
   ]
  },
  "le Caducée d'Hermès": {
   "at": [
-   "src/engine/events.js:1173"
+   "src/engine/events.js:1180"
   ]
  },
  "Il faut détenir le Livre de légende.": {
   "at": [
-   "src/engine/events.js:1186"
+   "src/engine/events.js:1193"
   ]
  },
  "Ce sorcier ne connaît aucun sort que vous puissiez recopier.": {
   "at": [
-   "src/engine/events.js:1187"
+   "src/engine/events.js:1194"
   ]
  },
  "Ce sorcier n'a aucun sort qu'on puisse raturer.": {
   "at": [
-   "src/engine/events.js:1188"
+   "src/engine/events.js:1195"
   ]
  },
  "Vous ne connaissez pas ce sorcier.": {
   "at": [
-   "src/engine/events.js:1189"
+   "src/engine/events.js:1196"
   ]
  },
  "Deus ex machina ne s'invoque qu'une fois par partie.": {
   "at": [
-   "src/engine/events.js:1190"
+   "src/engine/events.js:1197"
   ]
  },
  "Pas sur un héros.": {
   "at": [
-   "src/engine/events.js:1193"
+   "src/engine/events.js:1200"
   ]
  },
  "Impossible sur cette unité.": {
   "at": [
-   "src/engine/events.js:1194"
+   "src/engine/events.js:1201"
   ]
  },
  "La pile est pleine.": {
   "at": [
-   "src/engine/events.js:1195"
+   "src/engine/events.js:1202"
   ]
  },
  "Score": {

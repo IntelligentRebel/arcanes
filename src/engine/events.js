@@ -508,7 +508,10 @@ const Rite = {
   on(game) { return game.difficulty === 'hardcore' && !(game.opts && game.opts.noRite) && !(typeof AI !== 'undefined' && AI.EXP && AI.EXP.no_rite); },
   active(game) { const r = game.rite; return r && (r.phase === 'ritual' || r.phase === 'demon') ? r : null; },
   // réglages : ceux du jeu, sauf essai du banc (game.opts.rite)
-  cfg(game, k) { const o = game.opts && game.opts.rite; return o && o[k] != null ? o[k] : { lead: 1.25, avg: 1.6, cost: Rite.COST, minTurn: Rite.MIN_TURN, coalition: true }[k]; },
+  cfg(game, k) { const o = game.opts && game.opts.rite; return o && o[k] != null ? o[k] : { lead: 1.25, avg: 1.6, cost: Rite.COST, minTurn: Rite.MIN_TURN, coalition: true, escort: 0, muster: 3 }[k]; },
+  // (0.31.23, à l'essai au banc) escort : le maître du démon lui forme une escorte ; 3 = des volants aussi rapides que lui (3 cases),
+  // 2 = faute de ceux-là, les meilleures troupes à 2 cases ; 0 = le démon marche seul. muster : les tours où il attend son escorte
+  // après l'invocation (0 : il part aussitôt, l'escorte le rattrape)
   // le poids d'un sorcier pour le pacte : cités, puissance, sorts, renommée, armée (le démon n'y compte pas)
   standing(game, p) {
     if (!p || !p.alive) return 0;
@@ -660,6 +663,10 @@ const Rite = {
     if (d) Units.remove(game, d);
     const T = r.target;
     const rs = Rite.stats(game); if (rs[why] != null) rs[why]++;
+    // l'escorte rentre dans le rang ; ce que le démon a fait (pour le banc)
+    for (const u of Object.values(game.units)) if (u.riteEscort != null) delete u.riteEscort;
+    for (const c of Object.values(game.cities)) if (c.aiRiteEsc != null) delete c.aiRiteEsc;
+    if (r.phase === 'demon' && r.summoned != null) { rs.escorts = (rs.escorts || 0) + (r.maxEsc || 0); rs.demonCaps = (rs.demonCaps || 0) + (r.caps || 0); rs.life = (rs.life || 0) + game.turn - r.summoned; }
     const msg = {
       fallen: v => 'Le pacte contre ' + Players.nameFor(game, v, T) + ' n\'a plus d\'objet' + (d ? ' : le Démon légendaire retourne aux abîmes.' : '.'),
       caught: v => v === T ? 'Vous ne dominez plus la partie : le pacte se dissout' + (d ? ' et le Démon légendaire retourne aux abîmes.' : '.') : U.cap(Players.nameFor(game, v, T)) + ' ne domine plus la partie : le pacte se dissout' + (d ? ' et le Démon légendaire retourne aux abîmes.' : '.'),

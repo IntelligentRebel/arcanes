@@ -2380,7 +2380,8 @@ const CombatAI = {
     // sauf quand attendre revient à se faire tirer dessus : l'assaillant tire (au moins la moitié de ses troupes), la garnison ne tire pas ;
     // ceux qui peuvent atteindre un tireur sortent l'attaquer (contre des volants, impossible : ils restent à l'abri)
     const shoots = o => { const os = bt.stats(o); return os.ranged > 0 && os.rangedType && (o.ammo > 0 || (os.rangedType === 'magic' && o.casterMana >= 3)); };
-    const sally = walledDef && foes.filter(shoots).length * 2 >= foes.length && !bt.alive(b.side).some(shoots) && foes.some(f => shoots(f) && !bt.outOfReach(b, f));
+    const noSally = typeof AI !== 'undefined' && ((AI.EXP && AI.EXP.no_sally) || ((bt.game && bt.game.players[b.u.owner] && bt.game.players[b.u.owner].aiExp) || {}).no_sally);
+    const sally = walledDef && !noSally && foes.filter(shoots).length * 2 >= foes.length && !bt.alive(b.side).some(shoots) && foes.some(f => shoots(f) && !bt.outOfReach(b, f));
     const keepIn = walledDef && bt.inCity(b.c, b.r) && !sally;
     if (keepIn && !foes.some(f => bt.inCity(f.c, f.r))) {
       const engines = foes.filter(f => DATA.units[f.u.type].abilities.siegeOnly || f.u.type === 'Catapult');
