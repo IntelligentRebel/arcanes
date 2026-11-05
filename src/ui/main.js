@@ -24,6 +24,8 @@ const App = {
     // liens des messages recopiés en HTML (toasts) : délégation
     document.addEventListener('click', ev => { const a = ev.target.closest && ev.target.closest('a[data-goto]'); if (a && !a.onclick && App.game) { ev.preventDefault(); if (a.closest('#toasts') && (UI.modals.length || App.peeking || CombatView.active)) return; App.goto(JSON.parse(a.dataset.goto)); } });
     Setup.titleScreen();
+    // la copie locale demande à GitHub s'il existe une version plus récente (src/ui/update.js)
+    setTimeout(() => { Update.check(); }, 1500);
   },
 
   start(game, opts = {}) {
@@ -1077,6 +1079,12 @@ const App = {
     Sfx.afterTurn();
     App.save('auto');
     if (App.prefs.autoExport > 0 && game.turn % App.prefs.autoExport === 0 && !game.over) { App.exportSave(); UI.toast('Sauvegarde du tour ' + game.turn + ' téléchargée.'); }
+    // 0.31.22 : au tour 10, une seule fois, la copie téléchargée tous les 10 tours est proposée (coupée tant qu'on n'a pas dit oui)
+    else if (!(App.prefs.autoExport > 0) && !App.prefs.autoExportAsked && game.turn >= 10 && !game.over) {
+      App.setPref('autoExportAsked', true);
+      const n = App.prefs.autoExportN || 10;
+      if (await UI.confirm('Copies de sauvegarde', 'Vos parties sont gardées dans ce navigateur : effacer ses données les efface aussi. Télécharger une copie de la partie tous les ' + n + ' tours ?', 'Oui', 'Non merci')) { App.setPref('autoExport', n); App.exportSave(); UI.toast('Sauvegarde du tour ' + game.turn + ' téléchargée.'); }
+    }
     App.refresh();
     if (game.over) return App.gameOver();
     // les écrans du début de tour (cités à relancer, offres, talents) d'abord ; les nouvelles de l'intertour ensuite

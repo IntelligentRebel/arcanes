@@ -12,7 +12,7 @@ const Setup = {
       h('div', { style: 'text-align:center' },
         h('div', { class: 'logo' }, 'ARCANES'),
         h('div', { class: 'sub' }, 'Deux plans, quatorze sorciers, une seule maîtrise'),
-        h('div', { style: 'display:flex;flex-direction:column;gap:10px;width:320px;margin:0 auto' },
+        h('div', { class: 'title-actions', style: 'display:flex;flex-direction:column;gap:10px;width:320px;margin:0 auto' },
           h('button', { class: 'btn primary', style: 'height:46px;font-size:16px', onclick: () => Setup.newGame() }, 'Nouvelle partie'),
           hasAuto ? h('button', { class: 'btn', style: 'height:40px', onclick: () => { scr.remove(); App.load('auto'); } }, 'Continuer (' + meta('auto') + ')') : null,
           hasManual ? h('button', { class: 'btn', style: 'height:40px', onclick: () => { scr.remove(); App.load('manual'); } }, 'Charger la sauvegarde (' + meta('manual') + ')') : null,
@@ -29,6 +29,7 @@ const Setup = {
     }
     // même contexte d'empilement que les fenêtres, pour que la création de partie s'affiche par-dessus
     ($('#modal-root').parentNode || document.body).append(scr);
+    Update.titleButton(scr);
     setTimeout(() => Setup.titleBackground(scr, bg), 30);
   },
 

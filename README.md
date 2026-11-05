@@ -32,7 +32,7 @@ Arcanes keeps what made *Master of Magic* unforgettable and drops the irritants 
 ## Play
 
 - **Online**: [intelligentrebel.github.io/arcanes](https://intelligentrebel.github.io/arcanes/), nothing to install. Your games are saved in your browser, and you can export them to a file.
-- **Offline**: download the latest build from the [Releases](https://github.com/IntelligentRebel/arcanes/releases) page (or build it, below), unzip it, and open `arcanes/index.html`.
+- **Offline**: download the latest build from the [Releases](https://github.com/IntelligentRebel/arcanes/releases) page (or build it, below), unzip it, and open `arcanes/index.html`. The offline copy checks GitHub for newer versions at launch (you can turn that off in the menu).
 
 Controls follow the classic 4X conventions: click a stack to select it, click a destination to move, right-click to deselect, **Enter** to end the turn. The menu has a *Help and shortcuts* page listing every key.
 

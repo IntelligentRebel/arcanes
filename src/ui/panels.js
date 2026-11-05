@@ -725,6 +725,15 @@ const Panels = {
       body.append(h('div', { class: 'row', onclick: () => { App.setPref('autoExport', App.prefs.autoExport > 0 ? 0 : (App.prefs.autoExportN || 10)); m.close(); Panels.menu(); } },
         h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Sauvegarde téléchargée automatiquement : ', lab),
           h('div', { class: 't2' }, 'Un fichier de sauvegarde arrive dans vos téléchargements à la fin du tour, tous les ', num, ' tours.')))); }
+    // la copie locale : les nouvelles versions publiées sur GitHub (src/ui/update.js)
+    if (Update.isLocalCopy()) {
+      if (Update.newer.length) row('Nouvelle version disponible : ' + Update.newer[0].version, 'Notes de version et téléchargement', () => { m.close(); Update.dialog(); });
+      const on = Update.enabled();
+      row('Recherche des nouvelles versions : ' + (on ? 'activée' : 'coupée'), 'Au lancement, le jeu demande à GitHub si une version plus récente est parue', async () => {
+        App.setPref('checkUpdates', !on); m.close();
+        if (!on) { const r = await Update.check(true); if (r && r.length) { Update.dialog(); return; } if (r) UI.toast('Vous avez la dernière version (' + GAME_VERSION + ').', '', 'update'); }
+        Panels.menu(); });
+    }
     row('Encyclopédie', 'Unités, sorts, bâtiments et races', () => { m.close(); Panels.encyclopedia(); });
     if (I18N.available().length > 1) row('Langue : ' + (I18N.LANGS.find(l => l.id === I18N.lang) || {}).name, 'Le jeu se recharge dans la langue choisie ; la partie en cours est sauvegardée', async () => {
       const v = await UI.choice('Langue', '', I18N.available().map(l => ({ label: l.name, value: l.id, primary: l.id === I18N.lang })));

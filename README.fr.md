@@ -32,7 +32,7 @@ Arcanes garde ce qui rendait *Master of Magic* inoubliable et laisse tomber les 
 ## Jouer
 
 - **En ligne** : [intelligentrebel.github.io/arcanes](https://intelligentrebel.github.io/arcanes/), rien à installer. Les parties sont gardées dans le navigateur, et s'exportent dans un fichier.
-- **Hors ligne** : téléchargez la dernière version sur la page [Releases](https://github.com/IntelligentRebel/arcanes/releases) (ou assemblez-la, ci-dessous), décompressez-la et ouvrez `arcanes/index.html`.
+- **Hors ligne** : téléchargez la dernière version sur la page [Releases](https://github.com/IntelligentRebel/arcanes/releases) (ou assemblez-la, ci-dessous), décompressez-la et ouvrez `arcanes/index.html`. La copie hors ligne demande à GitHub, au lancement, s'il existe une version plus récente (ça se coupe dans le menu).
 
 Le menu contient une page *Aide et raccourcis* qui liste toutes les touches.
 
