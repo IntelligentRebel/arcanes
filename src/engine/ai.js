@@ -31,7 +31,7 @@ const AI = {
     bookCands: null, bookThreatAll: 1 },
   tune(pl, k) { const t = pl && pl.aiExp && pl.aiExp.tune; return t && t[k] != null ? t[k] : AI.TUNE[k]; },
   // en essai : actives seulement dans les bancs de test (AI.LAB), absentes du jeu livré tant que leur effet n'est pas mesuré
-  PENDING: { purify: 1, vainstrike: 1, firststrike: 1, spells2: 1, cspells2: 1, truestanding: 1, civilians: 1, wonder2: 1, stackspells: 1, engineers: 1 },   // spells2 : sorts oubliés sur la carte ; cspells2 : en combat
+  PENDING: { purify: 1, vainstrike: 1, firststrike: 1, spells2: 1, cspells2: 1, truestanding: 1, civilians: 1, stackspells: 1, engineers: 1 },   // spells2 : sorts oubliés sur la carte ; cspells2 : en combat
   LAB: false,
   feat(pl, name, min = 1) { return AI.lvl(pl) >= min && !(AI.PENDING[name] && !AI.LAB) && !(AI.EXP && AI.EXP['no_' + name]) && !(pl && pl.aiExp && pl.aiExp['no_' + name]); },
   async takeTurn(game, pl) {

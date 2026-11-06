@@ -1,5 +1,5 @@
 {
- "nom": "Entraînement 16 : moteur 0.31.23 ; l'escorte du Démon légendaire, la sortie de la garnison",
+ "nom": "Entraînement 16 : moteur 0.31.24 ; l'escorte du Démon légendaire, la sortie de la garnison",
  "experiences": [
   {
    "id": "demon_escorte",
@@ -7,7 +7,7 @@
    "tours": 250,
    "adversaires": "hardcore",
    "graine": 500000,
-   "graines": 100,
+   "graines": 180,
    "points": [
     100,
     150,
@@ -27,7 +27,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      },
@@ -39,7 +38,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      }
@@ -55,7 +53,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      },
@@ -67,7 +64,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      },
@@ -87,7 +83,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      },
@@ -99,7 +94,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      },
@@ -116,7 +110,7 @@
    "tours": 250,
    "adversaires": "hard",
    "graine": 510000,
-   "graines": 190,
+   "graines": 260,
    "points": [
     100,
     150,
@@ -134,7 +128,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true,
       "no_sally": true
@@ -147,7 +140,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      }
@@ -163,7 +155,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      },
@@ -175,7 +166,6 @@
       "no_purify": true,
       "no_truestanding": true,
       "no_civilians": true,
-      "no_wonder2": true,
       "no_stackspells": true,
       "no_engineers": true
      }
