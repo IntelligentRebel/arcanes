@@ -53,11 +53,11 @@ ok(withRetorts(['runemaster'], () => Magic.dispelResist(g, 0, 'fireball')) === 2
   ok(!/habitants/.test(owed) && /au moins 4/.test(owed), 'Prince des Cendres : « ' + owed + ' »');
 }
 
-// 7. aide : l'empire étendu pèse 10 % par habitant (comme le détail de la cité), pas +1
+// 7. aide : l'empire étendu pèse un rebelle par malus (v0.31.25, comme le détail de la cité), plus 10 % par habitant
 {
   const src = fs.readFileSync(path.join(ROOT, 'src/ui/panels.js'), 'utf8'), i = src.indexOf('<b>Empire étendu</b>'), help = src.slice(i, src.indexOf('</p>', i));
   const far = Object.values(g.cities).find(c => c.owner < 0) || cap;
-  ok(Cities.OVER_PCT === 0.1 && /10 %/.test(help) && !/\+1 agitation/.test(help), 'aide : « ' + help.replace(/<[^>]+>/g, '') + ' »');
+  ok(/un rebelle de plus/.test(help) && !/10 %/.test(help), 'aide : « ' + help.replace(/<[^>]+>/g, '') + ' »');
 }
 
 // 8. renommée : l'infobulle compte la solde comme le moteur (Trône de Crânes compris)

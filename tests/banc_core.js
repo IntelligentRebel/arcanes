@@ -3,7 +3,7 @@
 
 // une variante : « niveau{"exp"}@adversaires », ou un objet { nom, niveau, exp, signes } (plans d'entraînement)
 function bancVariant(l) {
-  if (typeof l === 'object') return { level: l.niveau, exp: l.exp || {}, opp: l.adversaires || null, oppexp: l.expAdversaires || null, noRite: !!l.sansRituel, rite: l.rituel || null, bookGuard: l.gardiens || null, label: l.nom, signs: l.signes || null, otherPlane: l.autrePlan != null ? l.autrePlan : null, noWonders: !!l.sansOuvrages, flatOverstretch: !!l.malusFixes };
+  if (typeof l === 'object') return { level: l.niveau, exp: l.exp || {}, opp: l.adversaires || null, oppexp: l.expAdversaires || null, noRite: !!l.sansRituel, rite: l.rituel || null, bookGuard: l.gardiens || null, label: l.nom, signs: l.signes || null, otherPlane: l.autrePlan != null ? l.autrePlan : null, noWonders: !!l.sansOuvrages, flatOverstretch: !!l.malusFixes, propOverstretch: !!l.malusProportionnels };
   const m = l.match(/^(\w+)(\{.*\})?(@(\w+))?$/);
   if (!m) throw new Error('variante illisible : ' + l);
   return { level: m[1], exp: m[2] ? JSON.parse(m[2]) : {}, opp: m[4] || null, label: l };
@@ -17,7 +17,7 @@ function bancJobs(plan) {
     for (let s = 0; s < ex.graines; s++) for (const v of vs) {
       const seed = ex.graine + s;
       jobs.push({ key: ex.id + '|' + v.label + '|' + seed, exp_id: ex.id, seed, level: v.level, exp: v.exp, label: v.label, opp: v.opp || ex.adversaires, subjexp: true,
-        turns: ex.tours, checkpoints: bancPoints(ex), bossPoints: !!ex.boss, benchHuman: ex.joueurHumain !== false, otherPlane: v.otherPlane, order: (s + 0.5) / ex.graines, oppmix: ex.melange || null, oppexp: v.oppexp || ex.expAdversaires || null, noRite: v.noRite || null, rite: v.rite || null, noWonders: v.noWonders || null, flatOverstretch: v.flatOverstretch || null, race: ex.races ? ex.races[s % ex.races.length] : null, boost: !!ex.avance, bookGuard: v.bookGuard || null, bookGift: ex.cadeauLivre || null });
+        turns: ex.tours, checkpoints: bancPoints(ex), bossPoints: !!ex.boss, benchHuman: ex.joueurHumain !== false, otherPlane: v.otherPlane, order: (s + 0.5) / ex.graines, oppmix: ex.melange || null, oppexp: v.oppexp || ex.expAdversaires || null, noRite: v.noRite || null, rite: v.rite || null, noWonders: v.noWonders || null, flatOverstretch: v.flatOverstretch || null, propOverstretch: v.propOverstretch || null, race: ex.races ? ex.races[s % ex.races.length] : null, boost: !!ex.avance, bookGuard: v.bookGuard || null, bookGift: ex.cadeauLivre || null });
     }
   }
   return jobs.sort((a, b) => a.order - b.order);

@@ -3035,7 +3035,7 @@
  "Scierie": {
   "at": [
    "data/buildings.js:25",
-   "src/engine/cities.js:352",
+   "src/engine/cities.js:353",
    "src/ui/city.js:705"
   ]
  },
@@ -3160,7 +3160,7 @@
  "Marché": {
   "at": [
    "data/buildings.js:37",
-   "src/engine/cities.js:382"
+   "src/engine/cities.js:383"
   ]
  },
  "Place de commerce qui augmente les revenus en or.": {
@@ -3171,7 +3171,7 @@
  "Banque": {
   "at": [
    "data/buildings.js:38",
-   "src/engine/cities.js:382",
+   "src/engine/cities.js:383",
    "src/ui/city.js:705"
   ]
  },
@@ -3183,7 +3183,7 @@
  "Guilde des marchands": {
   "at": [
    "data/buildings.js:39",
-   "src/engine/cities.js:382"
+   "src/engine/cities.js:383"
   ]
  },
  "Compagnie de négoce maritime, cumulée avec le marché et la banque.": {
@@ -3194,8 +3194,8 @@
  "Grenier": {
   "at": [
    "data/buildings.js:40",
-   "src/engine/cities.js:336",
-   "src/engine/cities.js:425"
+   "src/engine/cities.js:337",
+   "src/engine/cities.js:426"
   ]
  },
  "Réserves de grain : plus de nourriture et une croissance plus rapide.": {
@@ -3206,8 +3206,8 @@
  "Halle aux grains": {
   "at": [
    "data/buildings.js:41",
-   "src/engine/cities.js:336",
-   "src/engine/cities.js:426"
+   "src/engine/cities.js:337",
+   "src/engine/cities.js:427"
   ]
  },
  "Marché des producteurs : encore plus de nourriture et de croissance.": {
@@ -3218,7 +3218,7 @@
  "Guilde des forestiers": {
   "at": [
    "data/buildings.js:42",
-   "src/engine/cities.js:352"
+   "src/engine/cities.js:353"
   ]
  },
  "Gardes forestiers qui tirent nourriture et matériaux des bois.": {
@@ -3239,7 +3239,7 @@
  "Guilde des mécaniciens": {
   "at": [
    "data/buildings.js:44",
-   "src/engine/cities.js:353"
+   "src/engine/cities.js:354"
   ]
  },
  "Ateliers mécaniques : forte hausse de production et engins de siège.": {
@@ -3250,7 +3250,7 @@
  "Guilde des mineurs": {
   "at": [
    "data/buildings.js:45",
-   "src/engine/cities.js:353"
+   "src/engine/cities.js:354"
   ]
  },
  "Exploitation minière : production accrue et gisements plus rentables.": {
@@ -3281,8 +3281,8 @@
  "Logements": {
   "at": [
    "data/buildings.js:48",
-   "src/engine/cities.js:437",
-   "src/engine/cities.js:693",
+   "src/engine/cities.js:438",
+   "src/engine/cities.js:694",
    "src/ui/city.js:692"
   ]
  },
@@ -3304,7 +3304,7 @@
  "Forteresse": {
   "at": [
    "data/buildings.js:50",
-   "src/engine/cities.js:336",
+   "src/engine/cities.js:337",
    "src/ui/city.js:66"
   ]
  },
@@ -3510,7 +3510,7 @@
  "Or": {
   "at": [
    "data/terrain.js:33",
-   "src/engine/cities.js:953",
+   "src/engine/cities.js:954",
    "src/ui/city.js:70",
    "src/ui/panels.js:79"
   ]
@@ -3573,7 +3573,7 @@
  "Gibier": {
   "at": [
    "data/terrain.js:39",
-   "src/engine/cities.js:336"
+   "src/engine/cities.js:337"
   ]
  },
  "Animaux sauvages qui nourrissent la cité.": {
@@ -3664,7 +3664,7 @@
  "Puissance divine": {
   "at": [
    "data/terrain.js:58",
-   "src/engine/cities.js:407"
+   "src/engine/cities.js:408"
   ]
  },
  "Les édifices religieux produisent 50 % de mana en plus et apaisent mieux la population.": {
@@ -3685,7 +3685,7 @@
  "Puissance infernale": {
   "at": [
    "data/terrain.js:60",
-   "src/engine/cities.js:407"
+   "src/engine/cities.js:408"
   ]
  },
  "Pendant de la puissance divine pour la magie de mort : les édifices religieux produisent 50 % de mana en plus et apaisent mieux la population.": {
@@ -4255,7 +4255,7 @@
  "Prospérité": {
   "at": [
    "data/spells.js:51",
-   "src/engine/cities.js:383"
+   "src/engine/cities.js:384"
   ]
  },
  "Double le revenu en or que la ville tire des impôts et des minerais (+100 % de cette base).": {
@@ -5398,7 +5398,7 @@
  "Bénédiction de Gaïa": {
   "at": [
    "data/spells.js:177",
-   "src/engine/cities.js:427"
+   "src/engine/cities.js:428"
   ]
  },
  "Nourriture du terrain +50 % (plafond de population), récoltes des fermiers +20 % et agitation −2, production des forêts doublée et croissance accrue. Chaque tour, 10 % de chances par case que ses déserts deviennent prairies et ses volcans collines, 20 % qu'une terre corrompue soit purifiée.": {
@@ -5919,7 +5919,7 @@
  "Halle des Moissons": {
   "at": [
    "data/wonders.js:13",
-   "src/engine/cities.js:383"
+   "src/engine/cities.js:384"
   ]
  },
  "Le surplus de nourriture de chacune de vos cités rapporte 1 or de plus pour 2 de nourriture en trop.": {
@@ -5951,7 +5951,7 @@
  "Ruche-Mère": {
   "at": [
    "data/wonders.js:19",
-   "src/engine/cities.js:306"
+   "src/engine/cities.js:307"
   ]
  },
  "Plus aucune agitation dans vos cités klackonnes.": {
@@ -7698,7 +7698,7 @@
  "Impôts": {
   "at": [
    "src/engine/cities.js:262",
-   "src/engine/cities.js:381",
+   "src/engine/cities.js:382",
    "src/ui/magicui.js:319"
   ]
  },
@@ -7745,7 +7745,7 @@
  },
  " (+{0} % par habitant)": {
   "at": [
-   "src/engine/cities.js:279"
+   "src/engine/cities.js:280"
   ],
   "args": [
    "Math.round(Cities.OVER_PCT * 100)"
@@ -7753,17 +7753,17 @@
  },
  "Loin de la capitale (autre plan)": {
   "at": [
-   "src/engine/cities.js:280"
+   "src/engine/cities.js:281"
   ]
  },
  "Loin de la capitale": {
   "at": [
-   "src/engine/cities.js:280"
+   "src/engine/cities.js:281"
   ]
  },
  "Étendue de l'empire{0}": {
   "at": [
-   "src/engine/cities.js:281"
+   "src/engine/cities.js:282"
   ],
   "args": [
    "perTxt"
@@ -7771,25 +7771,25 @@
  },
  "Lieux de culte": {
   "at": [
-   "src/engine/cities.js:300",
+   "src/engine/cities.js:301",
    "src/ui/city.js:66"
   ]
  },
  "Guildes, oracle, sorts, gouverneur": {
   "at": [
-   "src/engine/cities.js:301"
+   "src/engine/cities.js:302"
   ]
  },
  "Garnison": {
   "at": [
-   "src/engine/cities.js:302",
+   "src/engine/cities.js:303",
    "src/ui/city.js:137",
    "src/ui/city.js:682"
   ]
  },
  "Fermiers ({0} × {1}{2})": {
   "at": [
-   "src/engine/cities.js:335"
+   "src/engine/cities.js:336"
   ],
   "args": [
    "F",
@@ -7799,32 +7799,32 @@
  },
  ", Gaïa +20 %": {
   "at": [
-   "src/engine/cities.js:335"
+   "src/engine/cities.js:336"
   ]
  },
  "Terrain": {
   "at": [
-   "src/engine/cities.js:352"
+   "src/engine/cities.js:353"
   ]
  },
  "Gouverneur": {
   "at": [
-   "src/engine/cities.js:353",
-   "src/engine/cities.js:383",
-   "src/engine/cities.js:417",
-   "src/engine/cities.js:424"
+   "src/engine/cities.js:354",
+   "src/engine/cities.js:384",
+   "src/engine/cities.js:418",
+   "src/engine/cities.js:425"
   ]
  },
  "Gisements": {
   "at": [
-   "src/engine/cities.js:381",
+   "src/engine/cities.js:382",
    "src/ui/city.js:66",
    "src/ui/main.js:318"
   ]
  },
  "Commerce (+{0} %)": {
   "at": [
-   "src/engine/cities.js:381"
+   "src/engine/cities.js:382"
   ],
   "args": [
    "tradePct"
@@ -7832,30 +7832,30 @@
  },
  "Biens de commerce": {
   "at": [
-   "src/engine/cities.js:383",
-   "src/engine/cities.js:695",
+   "src/engine/cities.js:384",
+   "src/engine/cities.js:696",
    "src/ui/city.js:693",
    "src/ui/panels.js:107"
   ]
  },
  "lune maléfique": {
   "at": [
-   "src/engine/cities.js:406"
+   "src/engine/cities.js:407"
   ]
  },
  "Rites ténébreux ×2": {
   "at": [
-   "src/engine/cities.js:408"
+   "src/engine/cities.js:409"
   ]
  },
  "Présence maléfique : aucune": {
   "at": [
-   "src/engine/cities.js:409"
+   "src/engine/cities.js:410"
   ]
  },
  "Place libre ({0} citoyens sur {1})": {
   "at": [
-   "src/engine/cities.js:422"
+   "src/engine/cities.js:423"
   ],
   "args": [
    "N",
@@ -7864,7 +7864,7 @@
  },
  "Peuple ({0})": {
   "at": [
-   "src/engine/cities.js:423"
+   "src/engine/cities.js:424"
   ],
   "args": [
    "race.name"
@@ -7872,13 +7872,13 @@
  },
  "Explosion démographique": {
   "at": [
-   "src/engine/cities.js:429",
+   "src/engine/cities.js:430",
    "src/ui/main.js:1401"
   ]
  },
  "Disette : il manque {0} nourriture": {
   "at": [
-   "src/engine/cities.js:441"
+   "src/engine/cities.js:442"
   ],
   "args": [
    "-out.foodSurplus"
@@ -7886,27 +7886,27 @@
  },
  "Population maximale atteinte": {
   "at": [
-   "src/engine/cities.js:442"
+   "src/engine/cities.js:443"
   ]
  },
  "une forêt dans la zone de la cité": {
   "at": [
-   "src/engine/cities.js:616"
+   "src/engine/cities.js:617"
   ]
  },
  "des collines ou des montagnes dans la zone de la cité": {
   "at": [
-   "src/engine/cities.js:616"
+   "src/engine/cities.js:617"
   ]
  },
  "un accès à la mer": {
   "at": [
-   "src/engine/cities.js:616"
+   "src/engine/cities.js:617"
   ]
  },
  "{0} ne se construit pas": {
   "at": [
-   "src/engine/cities.js:622"
+   "src/engine/cities.js:623"
   ],
   "args": [
    "bd ? bd.name : b"
@@ -7914,7 +7914,7 @@
  },
  "les {0} ne savent pas bâtir : {1}": {
   "at": [
-   "src/engine/cities.js:623"
+   "src/engine/cities.js:624"
   ],
   "args": [
    "race.name",
@@ -7923,7 +7923,7 @@
  },
  "{0} : seulement dans la cité de la forteresse": {
   "at": [
-   "src/engine/cities.js:624"
+   "src/engine/cities.js:625"
   ],
   "args": [
    "bd.name"
@@ -7931,7 +7931,7 @@
  },
  "{0} : seulement dans une cité où vivent des {1}": {
   "at": [
-   "src/engine/cities.js:627"
+   "src/engine/cities.js:628"
   ],
   "args": [
    "bd.name",
@@ -7940,17 +7940,17 @@
  },
  " : déjà bâti à ": {
   "at": [
-   "src/engine/cities.js:628"
+   "src/engine/cities.js:629"
   ]
  },
  " : déjà en chantier à ": {
   "at": [
-   "src/engine/cities.js:628"
+   "src/engine/cities.js:629"
   ]
  },
  "{0} : vous avez déjà {1} vos {2} ouvrages de la partie": {
   "at": [
-   "src/engine/cities.js:629"
+   "src/engine/cities.js:630"
   ],
   "args": [
    "bd.name",
@@ -7960,17 +7960,17 @@
  },
  "bâti": {
   "at": [
-   "src/engine/cities.js:629"
+   "src/engine/cities.js:630"
   ]
  },
  "bâti ou mis en chantier": {
   "at": [
-   "src/engine/cities.js:629"
+   "src/engine/cities.js:630"
   ]
  },
  "{0} : il faut d'abord en achever la recherche": {
   "at": [
-   "src/engine/cities.js:630"
+   "src/engine/cities.js:631"
   ],
   "args": [
    "bd.name"
@@ -7978,7 +7978,7 @@
  },
  "{0} : il faut {1}": {
   "at": [
-   "src/engine/cities.js:639"
+   "src/engine/cities.js:640"
   ],
   "args": [
    "bd.name",
@@ -7987,28 +7987,28 @@
  },
  "il faut un accès à la mer": {
   "at": [
-   "src/engine/cities.js:654"
+   "src/engine/cities.js:655"
   ]
  },
  "Armes magiques pour la garnison": {
   "at": [
-   "src/engine/cities.js:699"
+   "src/engine/cities.js:700"
   ]
  },
  "Croissance": {
   "at": [
-   "src/engine/cities.js:952"
+   "src/engine/cities.js:953"
   ]
  },
  "Magie": {
   "at": [
-   "src/engine/cities.js:954",
+   "src/engine/cities.js:955",
    "src/ui/main.js:216"
   ]
  },
  "Armée": {
   "at": [
-   "src/engine/cities.js:955",
+   "src/engine/cities.js:956",
    "src/engine/chronicle.js:9",
    "src/ui/panels.js:665",
    "src/ui/main.js:1639"
@@ -8016,32 +8016,32 @@
  },
  "Le sol refuse ici toute fondation.": {
   "at": [
-   "src/engine/cities.js:1045"
+   "src/engine/cities.js:1046"
   ]
  },
  "Impossible de fonder une cité sur l'eau.": {
   "at": [
-   "src/engine/cities.js:1046"
+   "src/engine/cities.js:1047"
   ]
  },
  "Un nœud magique ne peut pas accueillir de cité.": {
   "at": [
-   "src/engine/cities.js:1048"
+   "src/engine/cities.js:1049"
   ]
  },
  "On ne fonde pas de cité sur une montagne.": {
   "at": [
-   "src/engine/cities.js:1049"
+   "src/engine/cities.js:1050"
   ]
  },
  "Un lieu de pouvoir occupe déjà cette case.": {
   "at": [
-   "src/engine/cities.js:1050"
+   "src/engine/cities.js:1051"
   ]
  },
  "Trop proche de {0} (4 cases minimum).": {
   "at": [
-   "src/engine/cities.js:1053"
+   "src/engine/cities.js:1054"
   ],
   "args": [
    "c.name"
@@ -8049,7 +8049,7 @@
  },
  "Territoire d'un autre sorcier : fondation interdite.": {
   "at": [
-   "src/engine/cities.js:1056"
+   "src/engine/cities.js:1057"
   ]
  },
  "des pillards": {
@@ -24176,7 +24176,7 @@
    "src/ui/panels.js:750"
   ]
  },
- "<div class=\"grid2\"><div>\n      <h4 class=\"gold\" style=\"margin-bottom:6px\">Carte</h4>\n      <div class=\"kv\"><span>Sélectionner une pile</span><span>clic gauche</span></div>\n      <div class=\"kv\"><span>Déplacer / attaquer</span><span>double-clic sur la destination</span></div>\n      <div class=\"kv\"><span>Ordre à plusieurs tours</span><span>double-clic, même sans mouvement restant</span></div>\n      <div class=\"kv\"><span>Désélectionner</span><span>clic droit ou <span class=\"kbd\">Échap</span></span></div>\n      <div class=\"kv\"><span>Faire défiler</span><span>glisser, flèches, mini-carte</span></div>\n      <div class=\"kv\"><span>Zoom</span><span>molette, + / -</span></div>\n      <div class=\"kv\"><span>Unité suivante</span><span class=\"kbd\">Espace</span></div>\n      <div class=\"kv\"><span>Centrer sur la sélection</span><span class=\"kbd\">C</span></div>\n      <div class=\"kv\"><span>Attendre / Sentinelle</span><span><span class=\"kbd\">W</span> <span class=\"kbd\">S</span></span></div>\n      <div class=\"kv\"><span>Exploration automatique</span><span class=\"kbd\">X</span></div>\n      <div class=\"kv\"><span>Fonder une cité</span><span class=\"kbd\">B</span></div>\n      <div class=\"kv\"><span>Route (ingénieurs)</span><span class=\"kbd\">R</span></div>\n      <div class=\"kv\"><span>Changer de plan</span><span class=\"kbd\">P</span></div>\n      <div class=\"kv\"><span>Fin du tour</span><span class=\"kbd\">Entrée</span></div>\n      </div><div>\n      <h4 class=\"gold\" style=\"margin-bottom:6px\">Écrans</h4>\n      <div class=\"kv\"><span>Grimoire</span><span class=\"kbd\">G</span></div><div class=\"kv\"><span>Magie</span><span class=\"kbd\">M</span></div><div class=\"kv\"><span>Recherche</span><span class=\"kbd\">R</span></div>\n      <div class=\"kv\"><span>Cités / Armées / Sorciers</span><span><span class=\"kbd\">Maj+C</span> <span class=\"kbd\">A</span> <span class=\"kbd\">D</span></span></div><div class=\"kv\"><span>Journal</span><span class=\"kbd\">L</span></div>\n      <div class=\"kv\"><span>Menaces sur vos cités</span><span class=\"kbd\">T</span></div><div class=\"kv\"><span>Lieux inexplorés</span><span class=\"kbd\">V</span></div><div class=\"kv\"><span>Nœuds à prendre</span><span class=\"kbd\">O</span></div><div class=\"kv\"><span>Annuler le dernier déplacement</span><span class=\"kbd\">U</span></div>\n      <h4 class=\"gold\" style=\"margin:10px 0 6px\">Combat</h4>\n      <div class=\"kv\"><span>Attaquer</span><span>clic sur un ennemi encerclé</span></div><div class=\"kv\"><span>Sorts</span><span class=\"kbd\">S</span></div><div class=\"kv\"><span>Automatique</span><span class=\"kbd\">A</span></div><div class=\"kv\"><span>Fin du tour</span><span class=\"kbd\">Entrée</span></div>\n      </div></div>\n      <p class=\"muted\" style=\"margin-top:10px\">Nouveautés par rapport à l'original : frontières culturelles (impossible de fonder une cité en territoire étranger, 4 cases minimum entre cités ; l'espace entre des cités voisines d'un même sorcier, jusqu'à 10 cases, est à lui), répartition automatique des fermiers pour nourrir les armées, liste des cités qui revient après consultation, combats automatiques à tout moment.</p>\n      <p class=\"muted\"><b>Le voile</b> (indicateur en haut) s'use avec le temps, les passages entre les plans et les grands sorts ; à chaque seuil, des failles s'ouvrent : elles servent de passage entre Arcane et le Miroir, mais des créatures en sortent. <b>Les sanctuaires</b> (deux sur Arcane, quatre sur le Miroir) offrent un pacte : un don tout de suite, une dette plus tard. <b>La Crise</b> (réglable à la création de la partie) ouvre la Brèche, qui envoie des vagues sur le plus puissant des sorciers jusqu'à ce qu'on la referme.</p>\n      <p class=\"muted\"><b>Terrain de combat</b> (survolez une case pour ses effets) : les arbres couvrent des tirs (+2 défense) mais brûlent et le feu se propage ; une colline donne +10 % pour toucher à distance et +1 défense en mêlée ; les rochers bloquent le passage ; l'eau profonde d'une rivière ne se franchit qu'à la nage, en volant ou par l'un des deux gués, qui coûtent tout le mouvement et exposent (-1 défense) ; les fondrières des marais engluent.</p>\n      <p class=\"muted\"><b>Précision</b> : à 100 %, chaque coup porte ; au-delà, chaque tranche de 10 % ignore 1 point de défense de la cible (pas celle de la muraille).</p>\n      <p class=\"muted\"><b>Dilemmes</b> : tous les 8 à 12 tours, une situation à trancher, deux issues dont les conséquences sont écrites. <b>Némésis</b> : qui abat un de vos héros reçoit un nom, se renforce (+1 par rang en attaque, défense et résistance) et peut revenir vous chercher ; l'abattre à votre tour rapporte or, renommée et expérience.</p>\n      <p class=\"muted\"><b>Diplomatie</b> : l'écran des sorciers détaille ce qui fait l'attitude de chacun envers vous (traités, attaques, frontières, voies de magie, ennemi commun…). Un sorcier bien plus fort peut exiger de l'or ou un sort ; s'il pose un ultimatum, refuser, c'est la guerre. Les sorts s'échangent entre sorciers qui peuvent les apprendre. Un sorcier d'honneur dénonce un traité six tours avant de pouvoir attaquer ; seul un fourbe le rompt sans prévenir. Une guerre qui coûte trop rend la paix plus facile à obtenir.</p>\n      <p class=\"muted\"><b>Course à la Maîtrise</b> : qui étudie ou lance le Sort de Maîtrise, et dans combien de tours, est connu de tous (indicateur en haut). Celui qui le lance s'attire la guerre de tous les sorciers ; prendre sa forteresse l'arrête. <b>Empire étendu</b> : une cité à plus de 20 cases de la forteresse, ou sur l'autre plan, a +10 % d'agitation par habitant ; à partir de 20 cités, toutes (sauf la forteresse) en ont autant.</p>\n      <p class=\"muted\"><b>Flanc et dos</b> : le chevron au sol montre où regarde l'unité (son dernier pas, sa dernière cible ; frappée, elle se retourne). Frapper de flanc donne +1 en attaque ; dans le dos, +1 et la défense de la cible divisée par deux. Une unité en garde n'a ni flanc ni dos. En cliquant sur un ennemi hors de portée, votre unité choisit d'elle-même la meilleure case.</p>\n      <p class=\"muted\"><b>Les nœuds</b> (comme dans l'original) : chaque nœud rayonne sur une aura d'autant de cases que sa puissance. Un Esprit magique ou gardien qui fusionne avec lui le lie à votre magie : son aura scintille alors à vos couleurs et vous rapporte sa puissance chaque tour (doublée par la Maîtrise des nœuds, et encore par la maîtrise de son royaume). Un combat livré sur le nœud donne +2 en attaque, défense et résistance aux créatures de son royaume, et dissipe souvent les sorts des autres royaumes (force 50 : un sort de 10 mana n'a que 17 % de chances de passer) ; la Maîtrise des nœuds en protège.</p>": {
+ "<div class=\"grid2\"><div>\n      <h4 class=\"gold\" style=\"margin-bottom:6px\">Carte</h4>\n      <div class=\"kv\"><span>Sélectionner une pile</span><span>clic gauche</span></div>\n      <div class=\"kv\"><span>Déplacer / attaquer</span><span>double-clic sur la destination</span></div>\n      <div class=\"kv\"><span>Ordre à plusieurs tours</span><span>double-clic, même sans mouvement restant</span></div>\n      <div class=\"kv\"><span>Désélectionner</span><span>clic droit ou <span class=\"kbd\">Échap</span></span></div>\n      <div class=\"kv\"><span>Faire défiler</span><span>glisser, flèches, mini-carte</span></div>\n      <div class=\"kv\"><span>Zoom</span><span>molette, + / -</span></div>\n      <div class=\"kv\"><span>Unité suivante</span><span class=\"kbd\">Espace</span></div>\n      <div class=\"kv\"><span>Centrer sur la sélection</span><span class=\"kbd\">C</span></div>\n      <div class=\"kv\"><span>Attendre / Sentinelle</span><span><span class=\"kbd\">W</span> <span class=\"kbd\">S</span></span></div>\n      <div class=\"kv\"><span>Exploration automatique</span><span class=\"kbd\">X</span></div>\n      <div class=\"kv\"><span>Fonder une cité</span><span class=\"kbd\">B</span></div>\n      <div class=\"kv\"><span>Route (ingénieurs)</span><span class=\"kbd\">R</span></div>\n      <div class=\"kv\"><span>Changer de plan</span><span class=\"kbd\">P</span></div>\n      <div class=\"kv\"><span>Fin du tour</span><span class=\"kbd\">Entrée</span></div>\n      </div><div>\n      <h4 class=\"gold\" style=\"margin-bottom:6px\">Écrans</h4>\n      <div class=\"kv\"><span>Grimoire</span><span class=\"kbd\">G</span></div><div class=\"kv\"><span>Magie</span><span class=\"kbd\">M</span></div><div class=\"kv\"><span>Recherche</span><span class=\"kbd\">R</span></div>\n      <div class=\"kv\"><span>Cités / Armées / Sorciers</span><span><span class=\"kbd\">Maj+C</span> <span class=\"kbd\">A</span> <span class=\"kbd\">D</span></span></div><div class=\"kv\"><span>Journal</span><span class=\"kbd\">L</span></div>\n      <div class=\"kv\"><span>Menaces sur vos cités</span><span class=\"kbd\">T</span></div><div class=\"kv\"><span>Lieux inexplorés</span><span class=\"kbd\">V</span></div><div class=\"kv\"><span>Nœuds à prendre</span><span class=\"kbd\">O</span></div><div class=\"kv\"><span>Annuler le dernier déplacement</span><span class=\"kbd\">U</span></div>\n      <h4 class=\"gold\" style=\"margin:10px 0 6px\">Combat</h4>\n      <div class=\"kv\"><span>Attaquer</span><span>clic sur un ennemi encerclé</span></div><div class=\"kv\"><span>Sorts</span><span class=\"kbd\">S</span></div><div class=\"kv\"><span>Automatique</span><span class=\"kbd\">A</span></div><div class=\"kv\"><span>Fin du tour</span><span class=\"kbd\">Entrée</span></div>\n      </div></div>\n      <p class=\"muted\" style=\"margin-top:10px\">Nouveautés par rapport à l'original : frontières culturelles (impossible de fonder une cité en territoire étranger, 4 cases minimum entre cités ; l'espace entre des cités voisines d'un même sorcier, jusqu'à 10 cases, est à lui), répartition automatique des fermiers pour nourrir les armées, liste des cités qui revient après consultation, combats automatiques à tout moment.</p>\n      <p class=\"muted\"><b>Le voile</b> (indicateur en haut) s'use avec le temps, les passages entre les plans et les grands sorts ; à chaque seuil, des failles s'ouvrent : elles servent de passage entre Arcane et le Miroir, mais des créatures en sortent. <b>Les sanctuaires</b> (deux sur Arcane, quatre sur le Miroir) offrent un pacte : un don tout de suite, une dette plus tard. <b>La Crise</b> (réglable à la création de la partie) ouvre la Brèche, qui envoie des vagues sur le plus puissant des sorciers jusqu'à ce qu'on la referme.</p>\n      <p class=\"muted\"><b>Terrain de combat</b> (survolez une case pour ses effets) : les arbres couvrent des tirs (+2 défense) mais brûlent et le feu se propage ; une colline donne +10 % pour toucher à distance et +1 défense en mêlée ; les rochers bloquent le passage ; l'eau profonde d'une rivière ne se franchit qu'à la nage, en volant ou par l'un des deux gués, qui coûtent tout le mouvement et exposent (-1 défense) ; les fondrières des marais engluent.</p>\n      <p class=\"muted\"><b>Précision</b> : à 100 %, chaque coup porte ; au-delà, chaque tranche de 10 % ignore 1 point de défense de la cible (pas celle de la muraille).</p>\n      <p class=\"muted\"><b>Dilemmes</b> : tous les 8 à 12 tours, une situation à trancher, deux issues dont les conséquences sont écrites. <b>Némésis</b> : qui abat un de vos héros reçoit un nom, se renforce (+1 par rang en attaque, défense et résistance) et peut revenir vous chercher ; l'abattre à votre tour rapporte or, renommée et expérience.</p>\n      <p class=\"muted\"><b>Diplomatie</b> : l'écran des sorciers détaille ce qui fait l'attitude de chacun envers vous (traités, attaques, frontières, voies de magie, ennemi commun…). Un sorcier bien plus fort peut exiger de l'or ou un sort ; s'il pose un ultimatum, refuser, c'est la guerre. Les sorts s'échangent entre sorciers qui peuvent les apprendre. Un sorcier d'honneur dénonce un traité six tours avant de pouvoir attaquer ; seul un fourbe le rompt sans prévenir. Une guerre qui coûte trop rend la paix plus facile à obtenir.</p>\n      <p class=\"muted\"><b>Course à la Maîtrise</b> : qui étudie ou lance le Sort de Maîtrise, et dans combien de tours, est connu de tous (indicateur en haut). Celui qui le lance s'attire la guerre de tous les sorciers ; prendre sa forteresse l'arrête. <b>Empire étendu</b> : une cité à plus de 20 cases de la forteresse, ou sur l'autre plan, compte un rebelle de plus ; à partir de 20 cités, toutes (sauf la forteresse) en comptent un de plus.</p>\n      <p class=\"muted\"><b>Flanc et dos</b> : le chevron au sol montre où regarde l'unité (son dernier pas, sa dernière cible ; frappée, elle se retourne). Frapper de flanc donne +1 en attaque ; dans le dos, +1 et la défense de la cible divisée par deux. Une unité en garde n'a ni flanc ni dos. En cliquant sur un ennemi hors de portée, votre unité choisit d'elle-même la meilleure case.</p>\n      <p class=\"muted\"><b>Les nœuds</b> (comme dans l'original) : chaque nœud rayonne sur une aura d'autant de cases que sa puissance. Un Esprit magique ou gardien qui fusionne avec lui le lie à votre magie : son aura scintille alors à vos couleurs et vous rapporte sa puissance chaque tour (doublée par la Maîtrise des nœuds, et encore par la maîtrise de son royaume). Un combat livré sur le nœud donne +2 en attaque, défense et résistance aux créatures de son royaume, et dissipe souvent les sorts des autres royaumes (force 50 : un sort de 10 mana n'a que 17 % de chances de passer) ; la Maîtrise des nœuds en protège.</p>": {
   "at": [
    "src/ui/panels.js:754"
   ]

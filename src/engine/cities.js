@@ -274,8 +274,9 @@ const Cities = {
       if (owner && owner.terror > game.turn) { abs += 2; why.push(['Terreur du Roi sans Visage', 2]); } // riposte du Roi sans Visage
       if (c.moods) { const m = Dilemmas.moodOf(game, c); if (m) { abs += m; why.push(['Humeur passagère', m]); } }   // humeurs passagères (dilemmes)
       // empire étendu : l'éloignement de la capitale et le nombre de cités pèsent (modérément) sur l'ordre
-      // v0.31.7 : +10 % par habitant chacun (un point fixe écrasait les petites cités et ne pesait rien sur les grandes) ; l'ancien +1 fixe en variante de banc
-      const ov = Cities.overstretch(game, c, owner), flat = !!(game.opts && game.opts.flatOverstretch), per = flat ? 1 : Cities.OVER_PCT * N;
+      // un rebelle de plus pour chacun. (v0.31.7 à 0.31.24 : +10 % par habitant, gardé en variante de banc, propOverstretch : au banc 15,
+      // il freinait moins le sorcier qui s'envole, dont l'avance se fait en petites cités jeunes loin de sa capitale)
+      const ov = Cities.overstretch(game, c, owner), flat = !(game.opts && game.opts.propOverstretch), per = flat ? 1 : Cities.OVER_PCT * N;
       const perTxt = flat ? '' : ' (+' + Math.round(Cities.OVER_PCT * 100) + ' % par habitant)';
       if (ov.dist) { abs += per; why.push([(ov.plane ? 'Loin de la capitale (autre plan)' : 'Loin de la capitale') + perTxt, per]); }
       if (ov.size) { abs += per; why.push(['Étendue de l\'empire' + perTxt, per]); }
@@ -929,8 +930,8 @@ const Cities = {
   },
 
   // ---------- empire étendu ----------
-  // une cité loin de la forteresse (au-delà de 20 cases, ou sur l'autre plan) : +10 % d'agitation par habitant ; un empire de 20 cités ou plus :
-  // +10 % par habitant partout (la forteresse elle-même n'est pas touchée, ni les cités neutres)
+  // une cité loin de la forteresse (au-delà de 20 cases, ou sur l'autre plan) : un rebelle de plus ; un empire de 20 cités ou plus :
+  // un rebelle de plus partout (la forteresse elle-même n'est pas touchée, ni les cités neutres)
   OVER_DIST: 20, OVER_SIZE: 20, OVER_PCT: 0.1, noOverstretch: false,
   overstretch(game, c, owner) {
     const out = { dist: 0, size: 0, plane: false };

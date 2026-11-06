@@ -93,7 +93,7 @@ async function playOne(E, job) {
   // oppmix : des adversaires de niveaux mêlés, qui tournent d'une carte à l'autre
   const mix = job.oppmix ? job.oppmix.split(',') : null;
   const levels = mix ? [0, 1, 2].map(i => mix[(i + job.seed) % mix.length]) : [job.opp, job.opp, job.opp];
-  const game = E.Game.newGame({ seed: job.seed, mapW: 60, mapH: 40, landSize: 'medium', opponents: 3, otherPlane: job.otherPlane != null ? job.otherPlane : undefined, difficulty: levels[0], crisis: 'normal', aiLevels: levels, noRite: !!job.noRite, rite: job.rite || null, bookGuard: job.bookGuard || null, noWonders: !!job.noWonders, flatOverstretch: !!job.flatOverstretch,
+  const game = E.Game.newGame({ seed: job.seed, mapW: 60, mapH: 40, landSize: 'medium', opponents: 3, otherPlane: job.otherPlane != null ? job.otherPlane : undefined, difficulty: levels[0], crisis: 'normal', aiLevels: levels, noRite: !!job.noRite, rite: job.rite || null, bookGuard: job.bookGuard || null, noWonders: !!job.noWonders, flatOverstretch: !!job.flatOverstretch, propOverstretch: !!job.propOverstretch,
     human: { name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: job.race || 'highmen' } });
   const p0 = game.players[0]; p0.human = false; p0.aiLevel = job.level; p0.aiPersonality = 'balanced';
   const plane0 = (game.cities[p0.fortress] || { plane: 0 }).plane;   // le plan de départ du sorcier observé ; l'autre est celui du « boss final »
