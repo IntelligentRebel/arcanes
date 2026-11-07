@@ -508,7 +508,8 @@ const Rite = {
   on(game) { return game.difficulty === 'hardcore' && !(game.opts && game.opts.noRite) && !(typeof AI !== 'undefined' && AI.EXP && AI.EXP.no_rite); },
   active(game) { const r = game.rite; return r && (r.phase === 'ritual' || r.phase === 'demon') ? r : null; },
   // réglages : ceux du jeu, sauf essai du banc (game.opts.rite)
-  cfg(game, k) { const o = game.opts && game.opts.rite; return o && o[k] != null ? o[k] : { lead: 1.25, avg: 1.6, cost: Rite.COST, minTurn: Rite.MIN_TURN, coalition: true, escort: 0, muster: 3, retinue: 0, retinueUnit: 'DeathKnights' }[k]; },
+  cfg(game, k) { const o = game.opts && game.opts.rite; return o && o[k] != null ? o[k] : { lead: 1.25, avg: 1.6, cost: Rite.COST, minTurn: Rite.MIN_TURN, coalition: true, escort: 0, muster: 3, retinue: 4, retinueUnit: 'DeathKnights', summons: 2 }[k]; },
+  // (0.31.27) le démon arrive avec son cortège de 4 Chevaliers de la mort, et invoque ses démons mineurs deux fois par combat (summons)
   // (0.31.26, à l'essai au banc) retinue : le rituel invoque aussi un cortège de N volants rapides (des Chevaliers de la mort), sans entretien,
   // qui marchent avec le démon et disparaissent avec lui à la fin du pacte
   // (0.31.23, à l'essai au banc) escort : le maître du démon lui forme une escorte ; 3 = des volants aussi rapides que lui (3 cases),
@@ -639,6 +640,7 @@ const Rite = {
     // le cortège (réglage retinue) : sur sa case, dans la limite de la pile
     const nr = Math.min(Rite.cfg(game, 'retinue') || 0, 9 - Units.at(game, at[0], at[1], at[2]).length);
     for (let i = 0; i < nr; i++) { const e = Units.create(game, Rite.cfg(game, 'retinueUnit'), owner.id, at[0], at[1], at[2]); e.riteEscort = u.id; e.riteRetinue = true; e.pactFree = true; e.moves = 0; }
+    r.maxEsc = Math.max(r.maxEsc || 0, nr);
     r.phase = 'demon'; r.owner = owner.id; r.demon = u.id; r.summoned = game.turn; Rite.stats(game).demons++;
     game.riteCount = game.riteCount || {}; game.riteCount[r.target] = (game.riteCount[r.target] || 0) + 1;
     // une IA qui n'était pas en guerre avec la cible y entre : sans traité, aussitôt ; sous un traité, elle le dénonce d'abord

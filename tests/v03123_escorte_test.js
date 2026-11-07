@@ -6,7 +6,7 @@ const E = loadEngine(); E.AI.LAB = false; const { Game, Units, World, Cities, Tu
 const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) process.exitCode = 1; };
 
 async function setup(escort, ownerRace) {
-  const g = Game.newGame({ seed: 12, mapW: 60, mapH: 40, opponents: 2, difficulty: 'hardcore', crisis: 'off', rite: { escort, muster: 3, minTurn: 9999 },
+  const g = Game.newGame({ seed: 12, mapW: 60, mapH: 40, opponents: 2, difficulty: 'hardcore', crisis: 'off', rite: { escort, muster: 3, minTurn: 9999, retinue: 0 },
     human: { name: 'X', portrait: 0, books: { nature: 6 }, retorts: [], race: 'highmen' } });
   g.players[0].human = false; g.players[0].aiLevel = 'hardcore';
   const owner = g.players[1], fc = g.cities[owner.fortress];

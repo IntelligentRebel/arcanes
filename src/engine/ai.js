@@ -949,7 +949,7 @@ const AI = {
   // les trois cités du maître les plus proches du démon, sur son plan
   escortCities(game, pl, d) { return Cities.ofPlayer(game, pl.id).filter(c => c.plane === d.plane && World.dist(game.world, c.x, c.y, d.x, d.y) <= 20).sort((a, b) => World.dist(game.world, a.x, a.y, d.x, d.y) - World.dist(game.world, b.x, b.y, d.x, d.y)).slice(0, 3); },
   riteEscortBuild(game, pl, c, units, e, threat) {
-    const r = game.rite; if (!r || r.phase !== 'demon' || r.owner !== pl.id || !AI.escortNeed(game, pl, r)) return null;
+    const r = game.rite; if (!r || r.phase !== 'demon' || r.owner !== pl.id || !Rite.cfg(game, 'escort')) return null;
     const d = game.units[r.demon]; if (!d || d.plane !== c.plane || threat > 0) return null;
     const need = AI.escortNeed(game, pl, r); if (!need) return null;
     if (!AI.escortCities(game, pl, d).includes(c)) return null;
@@ -970,7 +970,7 @@ const AI = {
   // au début du tour (avant les garnisons) : l'escorte se complète avec les troupes libres, et les cités proches en bâtissent
   riteEscortClaim(game, pl) {
     const r = Rite.active(game);
-    if (!r || r.phase !== 'demon' || r.owner !== pl.id || !AI.escortNeed(game, pl, r)) return;
+    if (!r || r.phase !== 'demon' || r.owner !== pl.id || !Rite.cfg(game, 'escort')) return;
     const d = game.units[r.demon]; if (!d) return;
     const need = AI.escortNeed(game, pl, r); if (!need) return;
     const mine = () => Object.values(game.units).filter(u => u.riteEscort === d.id && u.owner === pl.id);

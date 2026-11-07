@@ -1293,8 +1293,11 @@ class Battle {
   // all : aussi les capacités déjà utilisées (used) et les sorts trop chers pour la réserve de l'unité (short), pour l'affichage
   unitSpells(b, all) {
     const s = this.stats(b), out = [];
-    const free = (flag, id) => { if (s.ab[flag] && (all || !b.usedAbility[id])) out.push({ id, free: true, key: id, used: !!b.usedAbility[id] }); };
-    free('fireballSpell', 'fireball'); free('doomBoltSpell', 'doom_bolt'); free('healingSpell', 'healing'); free('webSpell', 'web'); if (all || this.alive(b.side).length < 9) free('summonDemons', 'summon_demons');   // (pas de place : 9 unités au plus par camp)
+    // une fois par combat ; le Démon légendaire invoque ses démons jusqu'à deux fois (réglage summons du pacte)
+    const uses = id => b.usedAbility[id] === true ? 1 : b.usedAbility[id] || 0;
+    const max = id => id === 'summon_demons' && b.u.riteDemon && typeof Rite !== 'undefined' ? Rite.cfg(this.game, 'summons') : 1;
+    const free = (flag, id) => { if (s.ab[flag] && (all || uses(id) < max(id))) out.push({ id, free: true, key: id, used: uses(id) >= max(id) }); };
+    free('fireballSpell', 'fireball'); free('doomBoltSpell', 'doom_bolt'); free('healingSpell', 'healing'); free('webSpell', 'web'); { const room = 9 - this.alive(b.side).length; if (all || room >= (b.u.riteDemon && uses('summon_demons') >= 1 ? 3 : 1)) free('summonDemons', 'summon_demons'); }   // (la seconde invocation du Démon légendaire attend la place pour ses trois démons)   // (pas de place : 9 unités au plus par camp)
     // lanceurs : sorts du héros et sorts de combat du sorcier, payés sur la réserve de l'unité
     if (b.casterMana > 0 || (all && s.caster > 0)) {
       const pl = this.player(b.side);
@@ -1686,7 +1689,7 @@ const CombatSpells = {
     } else {
       const opt = bt.unitSpells(caster).find(o => o.id === id);
       if (!opt) return false;
-      if (opt.free) { caster.usedAbility[opt.key] = true; extra = 0; }   // un pouvoir inné ne se renforce pas
+      if (opt.free) { const n = caster.usedAbility[opt.key]; caster.usedAbility[opt.key] = (n === true ? 1 : n || 0) + 1; extra = 0; }   // un pouvoir inné ne se renforce pas
       else { if (opt.cost + extra > caster.casterMana) return false; caster.casterMana -= opt.cost + extra; }
       caster.moves = 0;
     }

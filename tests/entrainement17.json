@@ -1,9 +1,9 @@
 {
- "nom": "Entraînement 17 : moteur 0.31.26 ; le cortège du Démon légendaire, la sortie de la garnison resserrée",
+ "nom": "Entraînement 17 : moteur 0.31.27 ; le cortège du Démon légendaire et sa double invocation, la sortie de la garnison resserrée",
  "experiences": [
   {
    "id": "demon_cortege",
-   "note": "Hardcore, le sorcier observé part très en avance (le pacte le vise). Au banc 16, l'escorte que le maître du démon rallie et bâtit ne s'est presque jamais formée (1,3 unité au mieux). Ici, le rituel invoque le démon avec un cortège de Chevaliers de la mort (volants, 3 cases, sans entretien), qui disparaît avec lui. Le meneur est-il davantage freiné ?",
+   "note": "Hardcore, le sorcier observé part très en avance (le pacte le vise). Au banc 16, l'escorte que le maître du démon rallie et bâtit ne s'est presque jamais formée. Depuis la 0.31.27, le rituel invoque le démon avec un cortège de 4 Chevaliers de la mort (volants, 3 cases, sans entretien, partis avec lui), et il invoque ses démons mineurs deux fois par combat (la seconde quand il y a la place pour trois). Comparé au démon d'avant : le meneur est-il davantage freiné, ou écrasé ?",
    "tours": 250,
    "adversaires": "hardcore",
    "graine": 520000,
@@ -17,7 +17,7 @@
    "avance": true,
    "variantes": [
     {
-     "nom": "démon seul",
+     "nom": "démon d'avant (seul, une invocation)",
      "niveau": "hardcore",
      "exp": {
       "no_vainstrike": true,
@@ -40,10 +40,14 @@
       "no_civilians": true,
       "no_stackspells": true,
       "no_engineers": true
+     },
+     "rituel": {
+      "retinue": 0,
+      "summons": 1
      }
     },
     {
-     "nom": "cortège de 4",
+     "nom": "cortège de 4, une invocation",
      "niveau": "hardcore",
      "exp": {
       "no_vainstrike": true,
@@ -69,11 +73,12 @@
      },
      "rituel": {
       "retinue": 4,
+      "summons": 1,
       "muster": 0
      }
     },
     {
-     "nom": "cortège de 8",
+     "nom": "cortège de 4, deux invocations (jeu)",
      "niveau": "hardcore",
      "exp": {
       "no_vainstrike": true,
@@ -96,10 +101,6 @@
       "no_civilians": true,
       "no_stackspells": true,
       "no_engineers": true
-     },
-     "rituel": {
-      "retinue": 8,
-      "muster": 0
      }
     }
    ]
