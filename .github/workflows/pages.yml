@@ -36,3 +36,5 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 1800000   # 30 min : GitHub met parfois plus de 10 min à traiter le jeu (200 Mo)
