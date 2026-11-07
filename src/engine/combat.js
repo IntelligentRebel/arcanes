@@ -2381,7 +2381,9 @@ const CombatAI = {
     // ceux qui peuvent atteindre un tireur sortent l'attaquer (contre des volants, impossible : ils restent à l'abri)
     const shoots = o => { const os = bt.stats(o); return os.ranged > 0 && os.rangedType && (o.ammo > 0 || (os.rangedType === 'magic' && o.casterMana >= 3)); };
     const noSally = typeof AI !== 'undefined' && ((AI.EXP && AI.EXP.no_sally) || ((bt.game && bt.game.players[b.u.owner] && bt.game.players[b.u.owner].aiExp) || {}).no_sally);
-    const sally = walledDef && !noSally && foes.filter(shoots).length * 2 >= foes.length && !bt.alive(b.side).some(shoots) && foes.some(f => shoots(f) && !bt.outOfReach(b, f));
+    // (0.31.26, à l'essai au banc : sally_all) ne sortir que si tous les assaillants tirent, comme demandé au départ
+    const ownExp = (bt.game && bt.game.players[b.u.owner] && bt.game.players[b.u.owner].aiExp) || {}, sallyAll = typeof AI !== 'undefined' && ((AI.EXP && AI.EXP.sally_all) || ownExp.sally_all);
+    const sally = walledDef && !noSally && (sallyAll ? foes.every(shoots) : foes.filter(shoots).length * 2 >= foes.length) && !bt.alive(b.side).some(shoots) && foes.some(f => shoots(f) && !bt.outOfReach(b, f));
     const keepIn = walledDef && bt.inCity(b.c, b.r) && !sally;
     if (keepIn && !foes.some(f => bt.inCity(f.c, f.r))) {
       const engines = foes.filter(f => DATA.units[f.u.type].abilities.siegeOnly || f.u.type === 'Catapult');

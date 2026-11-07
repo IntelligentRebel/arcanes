@@ -29,3 +29,15 @@ const flyers = run(['Pegasai', 'Pegasai', 'Pegasai']);
 console.log('      contre des volants :', JSON.stringify(flyers));
 ok(flyers.outside === 0, 'contre des volants hors d\'atteinte, elle reste à l\'abri');
 run(['Longbowmen', 'Longbowmen', 'Longbowmen'], true);
+// v0.31.26 (sally_all, à l'essai au banc) : contre deux archers et deux épéistes, la garnison sort (moitié de tireurs) ;
+// avec sally_all, elle ne sort que si tous les assaillants tirent
+{
+  const mixed = run(['Longbowmen', 'Longbowmen', 'HighMenSwordsmen', 'HighMenSwordsmen']);
+  E.AI.EXP = { sally_all: true };
+  const mixedAll = run(['Longbowmen', 'Longbowmen', 'HighMenSwordsmen', 'HighMenSwordsmen']);
+  const archAll = run(['Longbowmen', 'Longbowmen', 'Longbowmen', 'Longbowmen']);
+  E.AI.EXP = {};
+  console.log('      archers et épéistes :', JSON.stringify(mixed), 'sally_all :', JSON.stringify(mixedAll), 'archers seuls, sally_all :', JSON.stringify(archAll));
+  ok(mixed.outside > 0 && mixedAll.outside < mixed.outside / 4, 'sally_all : pas de sortie contre une moitié d\'épéistes');
+  ok(archAll.outside > 0, 'sally_all : sortie contre des archers seuls');
+}

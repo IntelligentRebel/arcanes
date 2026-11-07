@@ -508,7 +508,9 @@ const Rite = {
   on(game) { return game.difficulty === 'hardcore' && !(game.opts && game.opts.noRite) && !(typeof AI !== 'undefined' && AI.EXP && AI.EXP.no_rite); },
   active(game) { const r = game.rite; return r && (r.phase === 'ritual' || r.phase === 'demon') ? r : null; },
   // réglages : ceux du jeu, sauf essai du banc (game.opts.rite)
-  cfg(game, k) { const o = game.opts && game.opts.rite; return o && o[k] != null ? o[k] : { lead: 1.25, avg: 1.6, cost: Rite.COST, minTurn: Rite.MIN_TURN, coalition: true, escort: 0, muster: 3 }[k]; },
+  cfg(game, k) { const o = game.opts && game.opts.rite; return o && o[k] != null ? o[k] : { lead: 1.25, avg: 1.6, cost: Rite.COST, minTurn: Rite.MIN_TURN, coalition: true, escort: 0, muster: 3, retinue: 0, retinueUnit: 'DeathKnights' }[k]; },
+  // (0.31.26, à l'essai au banc) retinue : le rituel invoque aussi un cortège de N volants rapides (des Chevaliers de la mort), sans entretien,
+  // qui marchent avec le démon et disparaissent avec lui à la fin du pacte
   // (0.31.23, à l'essai au banc) escort : le maître du démon lui forme une escorte ; 3 = des volants aussi rapides que lui (3 cases),
   // 2 = faute de ceux-là, les meilleures troupes à 2 cases ; 0 = le démon marche seul. muster : les tours où il attend son escorte
   // après l'invocation (0 : il part aussitôt, l'escorte le rattrape)
@@ -634,6 +636,9 @@ const Rite = {
     if (!at) return;   // pas de place : il apparaîtra au prochain tour
     const u = Units.create(game, 'RiteDemon', owner.id, at[0], at[1], at[2]);
     u.riteDemon = true; u.moves = 0;
+    // le cortège (réglage retinue) : sur sa case, dans la limite de la pile
+    const nr = Math.min(Rite.cfg(game, 'retinue') || 0, 9 - Units.at(game, at[0], at[1], at[2]).length);
+    for (let i = 0; i < nr; i++) { const e = Units.create(game, Rite.cfg(game, 'retinueUnit'), owner.id, at[0], at[1], at[2]); e.riteEscort = u.id; e.riteRetinue = true; e.pactFree = true; e.moves = 0; }
     r.phase = 'demon'; r.owner = owner.id; r.demon = u.id; r.summoned = game.turn; Rite.stats(game).demons++;
     game.riteCount = game.riteCount || {}; game.riteCount[r.target] = (game.riteCount[r.target] || 0) + 1;
     // une IA qui n'était pas en guerre avec la cible y entre : sans traité, aussitôt ; sous un traité, elle le dénonce d'abord
@@ -664,6 +669,7 @@ const Rite = {
     const T = r.target;
     const rs = Rite.stats(game); if (rs[why] != null) rs[why]++;
     // l'escorte rentre dans le rang ; ce que le démon a fait (pour le banc)
+    for (const u of Object.values(game.units)) if (u.riteRetinue) Units.remove(game, u);
     for (const u of Object.values(game.units)) if (u.riteEscort != null) delete u.riteEscort;
     for (const c of Object.values(game.cities)) if (c.aiRiteEsc != null) delete c.aiRiteEsc;
     if (r.phase === 'demon' && r.summoned != null) { rs.escorts = (rs.escorts || 0) + (r.maxEsc || 0); rs.demonCaps = (rs.demonCaps || 0) + (r.caps || 0); rs.life = (rs.life || 0) + game.turn - r.summoned; }

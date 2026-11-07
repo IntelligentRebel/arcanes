@@ -1,0 +1,203 @@
+{
+ "nom": "Entraînement 17 : moteur 0.31.26 ; le cortège du Démon légendaire, la sortie de la garnison resserrée",
+ "experiences": [
+  {
+   "id": "demon_cortege",
+   "note": "Hardcore, le sorcier observé part très en avance (le pacte le vise). Au banc 16, l'escorte que le maître du démon rallie et bâtit ne s'est presque jamais formée (1,3 unité au mieux). Ici, le rituel invoque le démon avec un cortège de Chevaliers de la mort (volants, 3 cases, sans entretien), qui disparaît avec lui. Le meneur est-il davantage freiné ?",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 520000,
+   "graines": 200,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "meneur": true,
+   "avance": true,
+   "variantes": [
+    {
+     "nom": "démon seul",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "cortège de 4",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "rituel": {
+      "retinue": 4,
+      "muster": 0
+     }
+    },
+    {
+     "nom": "cortège de 8",
+     "niveau": "hardcore",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "rituel": {
+      "retinue": 8,
+      "muster": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "sortie_stricte",
+   "note": "Difficile, pour le sorcier observé seul. Au banc 16, sortir dès que la moitié des assaillants tire coûtait un peu (rang +0,09 ± 0,06). Ici, sortir seulement quand tous les assaillants tirent (la demande de départ).",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 530000,
+   "graines": 280,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "variantes": [
+    {
+     "nom": "garnison à l'abri",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "no_sally": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "sortie dès la moitié de tireurs",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "sortie si tous tirent",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "sally_all": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}

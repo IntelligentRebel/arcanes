@@ -939,7 +939,7 @@ const AI = {
   escortTypeFits(t, need) { const d = DATA.units[t]; return !!d && !d.sailing && !d.abilities.createOutpost && !d.abilities.construction && !d.abilities.siegeOnly && !d.abilities.scout && (d.melee >= 2 || d.ranged >= 2) && (need >= 3 ? !!d.flying && d.move >= 3 : d.move >= 2); },
   // le palier, fixé à la première décision : 3 si le maître a des volants rapides ou peut en bâtir, sinon 2 si le réglage l'admet, sinon rien
   escortNeed(game, pl, r) {
-    const mode = Rite.cfg(game, 'escort'); if (!mode) return 0;
+    const mode = Rite.cfg(game, 'escort') || (Rite.cfg(game, 'retinue') ? 3 : 0); if (!mode) return 0;
     if (r.escNeed != null) return r.escNeed;
     const d = game.units[r.demon]; if (!d) return 0;
     const fast = Object.values(game.units).some(u => u.owner === pl.id && !u.riteDemon && !u.hero && AI.isSoldier(game, u) && AI.escortFits(game, u, 3))
@@ -949,7 +949,7 @@ const AI = {
   // les trois cités du maître les plus proches du démon, sur son plan
   escortCities(game, pl, d) { return Cities.ofPlayer(game, pl.id).filter(c => c.plane === d.plane && World.dist(game.world, c.x, c.y, d.x, d.y) <= 20).sort((a, b) => World.dist(game.world, a.x, a.y, d.x, d.y) - World.dist(game.world, b.x, b.y, d.x, d.y)).slice(0, 3); },
   riteEscortBuild(game, pl, c, units, e, threat) {
-    const r = game.rite; if (!r || r.phase !== 'demon' || r.owner !== pl.id || !Rite.cfg(game, 'escort')) return null;
+    const r = game.rite; if (!r || r.phase !== 'demon' || r.owner !== pl.id || !AI.escortNeed(game, pl, r)) return null;
     const d = game.units[r.demon]; if (!d || d.plane !== c.plane || threat > 0) return null;
     const need = AI.escortNeed(game, pl, r); if (!need) return null;
     if (!AI.escortCities(game, pl, d).includes(c)) return null;
@@ -970,7 +970,7 @@ const AI = {
   // au début du tour (avant les garnisons) : l'escorte se complète avec les troupes libres, et les cités proches en bâtissent
   riteEscortClaim(game, pl) {
     const r = Rite.active(game);
-    if (!r || r.phase !== 'demon' || r.owner !== pl.id || !Rite.cfg(game, 'escort')) return;
+    if (!r || r.phase !== 'demon' || r.owner !== pl.id || !AI.escortNeed(game, pl, r)) return;
     const d = game.units[r.demon]; if (!d) return;
     const need = AI.escortNeed(game, pl, r); if (!need) return;
     const mine = () => Object.values(game.units).filter(u => u.riteEscort === d.id && u.owner === pl.id);

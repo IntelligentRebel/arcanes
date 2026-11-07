@@ -157,7 +157,9 @@ async function playOne(E, job) {
   for (const c in marks) if (marks[c].boss) (res.bossAt = res.bossAt || {})[c] = marks[c].boss;
   // les terres corrompues autour des cités du sorcier observé (la purification ne sert que s'il y en a)
   res.corrupt = E.U.sum(E.Cities.ofPlayer(game, 0), c => E.World.catchment(game.world, c.x, c.y).filter(([x, y]) => E.World.get(game.world, c.plane, 'corrupt', x, y)).length);
-  if (game.riteStats) res.rite = game.riteStats;
+  if (game.riteStats) res.rite = Object.assign({}, game.riteStats);
+  // un démon encore debout à la fin : ce qu'il a fait compte aussi (v0.31.26)
+  { const r = game.rite; if (res.rite && r && r.phase === 'demon' && r.summoned != null) { const rs = res.rite; rs.escorts = (rs.escorts || 0) + (r.maxEsc || 0); rs.demonCaps = (rs.demonCaps || 0) + (r.caps || 0); rs.life = (rs.life || 0) + game.turn - r.summoned; } }
   // le Livre de légende : fragments trouvés (lus par quelqu'un), ce qu'en tient le sujet, sceau, prise, artefacts
   const B = E.Book || (typeof Book !== 'undefined' ? Book : null), b = game.book;
   if (B && b) res.book = { found: b.frags.filter(f => f.read.length).length, held0: B.held(game, 0), read0: B.readBy(game, 0).length,
