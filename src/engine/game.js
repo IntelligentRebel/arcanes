@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.28';
+const GAME_VERSION = '0.31.29';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -1508,6 +1508,8 @@ const Game = {
     Units.remove(game, u);
     Game.log(game, s.owner, 'Le ' + Game.siteName(s) + ' est désormais lié à votre puissance : son aura de ' + Game.aura(game, s).length + ' cases s\'illumine à vos couleurs (+' + Magic.nodePower(game, game.players[s.owner], s) + ' de magie par tour).', { x: s.x, y: s.y, plane: s.plane });
     if (prev >= 0) Game.log(game, prev, 'Un rival s\'est emparé de l\'un de vos nœuds magiques.', { x: s.x, y: s.y, plane: s.plane });
+    // 0.31.29 : le joueur volé l'apprend au centre de l'écran, au début de son tour
+    if (prev >= 0 && game.players[prev] && game.players[prev].human) (game.players[prev].nodesLost = game.players[prev].nodesLost || []).push({ site: si, by: u.owner, turn: game.turn, guardian });
     return { ok: true };
   },
   buildRoad(game, ids) {

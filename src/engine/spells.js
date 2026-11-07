@@ -360,7 +360,8 @@ const Spells = {
     if (id === 'stasis' && !foes().some(u => !Units.stats(game, u).ab.magicImmunity)) return pact() || 'Aucune unité ennemie à figer ici.';
     if (id === 'disenchant_area' || id === 'disenchant_true') {
       const si = World.get(w, p, 'site', x, y), st = si >= 0 ? game.sites[si] : null, c = Cities.at(game, p, x, y);
-      if (!foes().some(u => u.ench.length) && !(st && st.warped != null && st.warped !== pl.id && !Spells.treaty(game, pl, st.warped)) && !(c && !Spells.treaty(game, pl, c.owner) && c.ench.some(e => e.owner !== pl.id))) return pact() || 'Rien à dissiper ici.';
+      const guarded = st && st.type === 'node' && st.meldBy === 'GuardianSpirit' && st.owner >= 0 && st.owner !== pl.id && !Spells.treaty(game, pl, st.owner);
+      if (!guarded && !foes().some(u => u.ench.length) && !(st && st.warped != null && st.warped !== pl.id && !Spells.treaty(game, pl, st.warped)) && !(c && !Spells.treaty(game, pl, c.owner) && c.ench.some(e => e.owner !== pl.id))) return pact() || 'Rien à dissiper ici.';
     }
     if (id === 'plane_shift') { const why = Spells.planeShiftWhy(game, pl, { plane: p, x, y }); if (why) return why; }
     if (id === 'floating_island') { if (!World.isWater(ter)) return 'Il faut une case d\'océan.'; if (foes().length) return 'Des unités étrangères occupent cette case.'; }
@@ -755,6 +756,12 @@ const OVERLAND_HANDLERS = {
     Game.drownStranded(game, t.plane, t.x, t.y);   // sans Vol ni Marche sur l'eau, plus rien ne les porte
     const si = World.get(game.world, t.plane, 'site', t.x, t.y), st = si >= 0 ? game.sites[si] : null;
     if (st && st.warped != null && st.warped !== pl.id && game.rng.chance(Spells.dispelChance(game, str, 'warp_node', st.warped))) { st.warped = null; n++; }
+    // 0.31.29 (comme Master of Magic) : sur un nœud rival, la garde de l'esprit gardien tombe ; le nœud reste à son sorcier,
+    // mais un esprit adverse le lui reprend de nouveau à 75 %
+    if (st && st.type === 'node' && st.meldBy === 'GuardianSpirit' && st.owner >= 0 && st.owner !== pl.id && !Spells.treaty(game, pl, st.owner)) {
+      st.meldBy = 'MagicSpirit'; n++; names.push(U.txt('la garde de l\'esprit gardien du nœud')); hit.add(st.owner);
+      Diplomacy.adjust(game, st.owner, pl.id, -5, 'hostile_spell');
+    }
     const c = Cities.at(game, t.plane, t.x, t.y);
     if (c) { const b = c.ench.slice(); c.ench = c.ench.filter(e => e.owner === pl.id || !game.rng.chance(Spells.dispelChance(game, str, e.spell, e.owner))); for (const e of b) if (!c.ench.includes(e) && DATA.spells[e.spell]) { names.push(DATA.spells[e.spell].name + ' (' + c.name + ')'); if (e.owner >= 0) hit.add(e.owner); } n += b.length - c.ench.length; }
     for (const o of hit) if (o !== pl.id && game.players[o]) Game.log(game, o, U.cap(Players.nameFor(game, o, pl.id)) + ' a dissipé ' + names.join(', ') + '.', { x: t.x, y: t.y, plane: t.plane, player: pl.id });

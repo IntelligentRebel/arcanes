@@ -67,6 +67,7 @@ const App = {
       await App.heroArrivalPrompt(); if (App.game !== game) return;
       await App.fallPrompt(); if (App.game !== game) return;
       await App.demonPrompt(); if (App.game !== game) return;
+      await App.nodeLostPrompts(); if (App.game !== game) return;
       await App.landmarkPrompts(); if (App.game !== game) return;
       await App.eventPrompts(); if (App.game !== game) return;
       if (Pacts.due(game, human).length) await App.pactPrompts(); if (App.game !== game) return;
@@ -1431,6 +1432,33 @@ const App = {
     }
   },
   // capitale perdue : le grand message, une fois
+  // 0.31.29 : un nœud volé par un rival, au centre de l'écran (illustration selon le royaume du nœud)
+  async nodeLostPrompts() {
+    const game = App.game, pl = App.me(); if (!game || !pl || !pl.nodesLost || !pl.nodesLost.length || App.nodeLostOpen) return;
+    App.nodeLostOpen = true;
+    try {
+      while (pl.nodesLost.length) {
+        const e = pl.nodesLost.shift(), s = game.sites[e.site]; if (!s) continue;
+        const img = window.AUTO_CHOICE ? null : await App.eventArt('node_lost_' + (s.realm || 'sorcery')); if (App.game !== game) return;
+        const art = h('div', { class: 'lm-art' + (img ? '' : ' none') });
+        if (img) { img.alt = ''; art.append(img); } else art.append(h('div', { class: 'lm-halo' }));
+        const color = { nature: '#5fbf5a', chaos: '#e2603a', sorcery: '#5a8ee8' }[s.realm] || '#c9a24a';
+        const thief = U.cap(Players.nameFor(game, pl.id, e.by));
+        const body = h('div', { class: 'lm', style: '--lc:' + color }, art,
+          h('div', { class: 'lm-kicker' }, 'Nœud perdu'),
+          h('div', { class: 'lm-name' }, Game.siteName(s)),
+          h('div', { class: 'lm-text' }, thief + ' vous a pris ce nœud : son mana nourrit désormais sa magie.'),
+          e.guardian ? h('div', { class: 'lm-text dim' }, 'Un esprit gardien le tient : un Désenchantement de zone ferait tomber sa garde.') : null);
+        Sfx.play('defeat');
+        const go = await new Promise(res => {
+          const m = UI.modal({ title: '', body, width: 760, cls: 'landmark-modal', onClose: () => res(false),
+            footer: [h('button', { class: 'btn', onclick: () => { res(false); m.close(); } }, 'Continuer'), h('button', { class: 'btn primary', onclick: () => { res(true); m.close(); } }, 'Voir le nœud')] });
+        });
+        if (App.game !== game) return;
+        if (go) { MapView.centerOn(s.x, s.y, s.plane); App.refresh(); }
+      }
+    } finally { App.nodeLostOpen = false; }
+  },
   // le Démon légendaire abattu : le grand moment, au centre de l'écran
   async demonPrompt() {
     const game = App.game, pl = App.me(), s = pl && pl.demonSlain;
@@ -1478,6 +1506,7 @@ const App = {
     await App.heroArrivalPrompt();
     await App.fallPrompt();
     await App.demonPrompt();
+    await App.nodeLostPrompts();
     await App.landmarkPrompts();
     await App.showContacts();
     await App.pactPrompts();
