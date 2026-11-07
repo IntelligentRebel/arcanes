@@ -415,7 +415,10 @@ const Finale = {
     const prev = s.owner, name = Game.siteName(s);
     Object.assign(s, { devoured: true, owner: -1, basePower: 0, power: 0, meldBy: null, warped: null, cleared: true, guardians: [] });
     u.grow = Math.min(8, (u.grow || 0) + 1); u.dmg = 0; f.eaten = (f.eaten || 0) + 1;   // (au plus 8 crans : qu'on puisse encore l'abattre)
-    Game.logEach(game, v => v === prev ? 'Le Dévoreur de nœuds a englouti votre ' + name + ', et il grandit encore.' : 'Le Dévoreur de nœuds a englouti le ' + name + ' (' + s.x + ', ' + s.y + '), et il grandit encore.', { x: s.x, y: s.y, plane: s.plane, crisis: true, minor: true });
+    // le contrecoup : le maître du nœud perd le quart de son mana
+    const op = game.players[prev], lost = op ? Math.floor((op.mana || 0) / 4) : 0;
+    if (lost > 0) op.mana -= lost;
+    Game.logEach(game, v => v === prev ? (lost > 0 ? 'Le Dévoreur de nœuds a englouti votre ' + name + ' : le contrecoup vous coûte ' + lost + ' mana, et il grandit encore.' : 'Le Dévoreur de nœuds a englouti votre ' + name + ', et il grandit encore.') : 'Le Dévoreur de nœuds a englouti le ' + name + ' (' + s.x + ', ' + s.y + '), et il grandit encore.', { x: s.x, y: s.y, plane: s.plane, crisis: true, minor: true });
   },
   // la croissance du Dévoreur (et du liche relevé) : chaque cran ajoute de quoi rester un défi
   grow(u, s) {

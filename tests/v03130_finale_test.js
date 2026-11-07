@@ -114,9 +114,10 @@ async function start(seed, kind) {
     const u = g.units[f.boss];
     ok(u && u.type === 'NodeEater' && u.plane === mine.plane, 'le Dévoreur surgit sur le plan des nœuds de la cible');
     ok(Finale.eaterTarget(g, f, u.plane, u) === mine, 'il vise d\'abord le nœud de la cible');
-    const g0 = u.grow;
+    const g0 = u.grow; g.players[0].mana = 400;
     for (let t = 0; t < 40 && !mine.devoured && g.units[u.id]; t++) { u.moves = Units.maxMoves(g, u); await Finale.moveBoss(g, [u]); }
     ok(mine.devoured && mine.owner === -1 && mine.power === 0 && u.grow === g0 + 1, 'nœud englouti, le Dévoreur grandit');
+    ok(g.players[0].mana <= 300, 'le contrecoup coûte le quart de son mana au maître du nœud (' + g.players[0].mana + ')');
     ok(!Game.canMeld(g, { type: 'MagicSpirit', owner: 0, plane: mine.plane, x: mine.x, y: mine.y, ench: [] }).ok, 'un nœud dévoré ne se lie plus');
     await kill(g, u, 2);
     ok(f.state === 'over' && f.by === 2, 'abattu : fin de la crise');

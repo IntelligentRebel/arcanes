@@ -10678,7 +10678,7 @@
    "src/engine/game.js:1433",
    "src/engine/game.js:1448",
    "src/engine/veil.js:598",
-   "src/engine/finale.js:501"
+   "src/engine/finale.js:504"
   ],
   "args": [
    "it.name"
@@ -10714,7 +10714,7 @@
   "at": [
    "src/engine/game.js:1448",
    "src/engine/veil.js:598",
-   "src/engine/finale.js:501"
+   "src/engine/finale.js:504"
   ],
   "args": [
    "it.name",
@@ -17672,9 +17672,18 @@
    "Cities.lostText(lost)"
   ]
  },
+ "Le Dévoreur de nœuds a englouti votre {0} : le contrecoup vous coûte {1} mana, et il grandit encore.": {
+  "at": [
+   "src/engine/finale.js:421"
+  ],
+  "args": [
+   "name",
+   "lost"
+  ]
+ },
  "Le Dévoreur de nœuds a englouti votre {0}, et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:418"
+   "src/engine/finale.js:421"
   ],
   "args": [
    "name"
@@ -17682,7 +17691,7 @@
  },
  "Le Dévoreur de nœuds a englouti le {0} ({1}, {2}), et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:418"
+   "src/engine/finale.js:421"
   ],
   "args": [
    "name",
@@ -17692,32 +17701,32 @@
  },
  "Le Seigneur liche tombe sous vos coups. Il se relèvera, tant que son phylactère tient.": {
   "at": [
-   "src/engine/finale.js:476"
+   "src/engine/finale.js:479"
   ]
  },
  "Le Seigneur liche est tombé. Il se relèvera, tant que son phylactère tient.": {
   "at": [
-   "src/engine/finale.js:476"
+   "src/engine/finale.js:479"
   ]
  },
  "600 pièces d'or": {
   "at": [
-   "src/engine/finale.js:497"
+   "src/engine/finale.js:500"
   ]
  },
  "600 cristaux de mana": {
   "at": [
-   "src/engine/finale.js:498"
+   "src/engine/finale.js:501"
   ]
  },
  "+15 de renommée": {
   "at": [
-   "src/engine/finale.js:502"
+   "src/engine/finale.js:505"
   ]
  },
  "Vous avez mis fin à la crise ({0}).": {
   "at": [
-   "src/engine/finale.js:507"
+   "src/engine/finale.js:510"
   ],
   "args": [
    "T"
@@ -17725,7 +17734,7 @@
  },
  "{0} a mis fin à la crise ({1}).": {
   "at": [
-   "src/engine/finale.js:507"
+   "src/engine/finale.js:510"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pid))",
@@ -17734,7 +17743,7 @@
  },
  "La crise est finie ({0}).": {
   "at": [
-   "src/engine/finale.js:507"
+   "src/engine/finale.js:510"
   ],
   "args": [
    "T"
@@ -17742,7 +17751,7 @@
  },
  "Récompense : {0}.": {
   "at": [
-   "src/engine/finale.js:508",
+   "src/engine/finale.js:511",
    "src/ui/main.js:1486"
   ],
   "args": [
