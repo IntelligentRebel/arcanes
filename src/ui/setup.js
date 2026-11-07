@@ -30,7 +30,30 @@ const Setup = {
     // même contexte d'empilement que les fenêtres, pour que la création de partie s'affiche par-dessus
     ($('#modal-root').parentNode || document.body).append(scr);
     Update.titleButton(scr);
+    Setup.titleGate(scr);
     setTimeout(() => Setup.titleBackground(scr, bg), 30);
+  },
+
+  // 0.31.28 : la musique du titre. Le navigateur ne laisse partir le son qu'après un geste du joueur ; on essaie d'abord sans
+  // (un site déjà fréquenté y a souvent droit), et s'il refuse, l'écran s'ouvre d'un clic, ce qui lance la musique
+  titleGate(scr) {
+    if (!Sfx.music || !Music.hasTracks() || Music.playing) return;
+    const start = () => { Sfx.ensure(); Music.start(); };
+    if (typeof navigator !== 'undefined' && navigator.webdriver) return;   // (tests automatisés : pas de voile)
+    let probe; try { probe = new Audio(Music.base + 'titre.ogg'); probe.volume = 0.001; } catch (e) { return; }
+    const gate = () => {
+      if (!scr.isConnected || scr.querySelector('.title-gate') || Music.playing) return;
+      scr.classList.add('gated');
+      const g = h('div', { class: 'title-gate' }, h('div', { class: 'gate-text' }, 'Cliquez pour entrer'));
+      const open = e => { if (!g.isConnected) return; if (e) { e.preventDefault(); e.stopPropagation(); } start(); scr.classList.remove('gated'); g.classList.add('out'); setTimeout(() => g.remove(), 800); window.removeEventListener('keydown', open, true); };
+      g.addEventListener('click', open);
+      window.addEventListener('keydown', open, true);
+      scr.append(g);
+    };
+    const p = probe.play();
+    const stopProbe = () => { try { probe.pause(); probe.removeAttribute('src'); probe.load(); } catch (e) { /* rien */ } };
+    if (p && p.then) p.then(() => { stopProbe(); start(); }).catch(() => { stopProbe(); gate(); });
+    else { stopProbe(); gate(); }
   },
 
   // fond animé : un monde généré pour l'occasion, survolé lentement, et des étincelles de magie

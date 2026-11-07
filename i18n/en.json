@@ -3989,6 +3989,7 @@
 "Partie précédente ({0})": "Previous game ({0})",
 "Importer un fichier…": "Import a file…",
 "v{0} · Règles inspirées de Master of Magic (1994). Données de règles : projet open source kazzmir/master-of-magic (BSD-3). Graphismes générés pour Arcanes ; icônes de sorts : tuiles CC0 de Dungeon Crawl Stone Soup. Musique composée pour Arcanes, jouée avec la SoundFont GeneralUser GS de S. Christian Collins.": "v{0} · Rules inspired by Master of Magic (1994). Rules data: open source project kazzmir/master-of-magic (BSD-3). Graphics generated for Arcanes; spell icons: CC0 tiles from Dungeon Crawl Stone Soup. Music composed for Arcanes, played with the GeneralUser GS SoundFont by S. Christian Collins.",
+"Cliquez pour entrer": "Click to enter",
 "opacity 1.6s": "opacity 1.6s",
 "Fichier invalide.": "Invalid file.",
 " ({0}, tour {1})": " ({0}, turn {1})",

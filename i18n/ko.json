@@ -3989,6 +3989,7 @@
 "Partie précédente ({0})": "이전 게임 ({0})",
 "Importer un fichier…": "파일 가져오기…",
 "v{0} · Règles inspirées de Master of Magic (1994). Données de règles : projet open source kazzmir/master-of-magic (BSD-3). Graphismes générés pour Arcanes ; icônes de sorts : tuiles CC0 de Dungeon Crawl Stone Soup. Musique composée pour Arcanes, jouée avec la SoundFont GeneralUser GS de S. Christian Collins.": "v{0} · 규칙은 Master of Magic(1994)에서 영감을 받았다. 규칙 데이터: 오픈소스 프로젝트 kazzmir/master-of-magic (BSD-3). 그래픽은 Arcanes를 위해 생성했다. 주문 아이콘: Dungeon Crawl Stone Soup의 CC0 타일. 음악은 Arcanes를 위해 작곡되었으며 S. Christian Collins의 GeneralUser GS SoundFont로 연주된다.",
+"Cliquez pour entrer": "클릭하여 입장",
 "opacity 1.6s": "opacity 1.6s",
 "Fichier invalide.": "잘못된 파일.",
 " ({0}, tour {1})": " ({0}, {1}턴)",

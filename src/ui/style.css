@@ -590,3 +590,11 @@ table.t th .sortmark { font-size: 10px; }
 .update-modal .release-notes ul { margin: 4px 0 6px 18px; padding: 0; }
 .update-modal .release-notes p { margin: 4px 0; }
 .update-modal .body { max-height: 70vh; overflow-y: auto; }
+
+/* 0.31.28 : l'écran titre s'ouvre d'un clic, qui lance la musique */
+.title-screen .title-actions, .title-screen .credits, .title-screen .lang-pick { transition: opacity .9s ease; }
+.title-screen.gated .title-actions, .title-screen.gated .credits, .title-screen.gated .lang-pick { opacity: 0; pointer-events: none; }
+.title-screen > .title-gate { position: absolute; inset: 0; z-index: 5; cursor: pointer; display: flex; align-items: flex-end; justify-content: center; padding: 0 0 14vh; border-radius: 0; background: none; transition: opacity .8s ease; }
+.title-screen > .title-gate.out { opacity: 0; pointer-events: none; }
+.title-gate .gate-text { font-family: var(--serif); font-size: 18px; letter-spacing: .32em; text-transform: uppercase; color: #f0c860; padding: 10px 26px 10px 32px; border-radius: 999px; background: radial-gradient(ellipse at center, rgba(5,7,12,.82) 0%, rgba(5,7,12,.6) 70%, rgba(5,7,12,0) 100%); text-shadow: 0 0 10px rgba(240,190,80,.45), 0 1px 2px #000; animation: gatepulse 2.6s ease-in-out infinite; }
+@keyframes gatepulse { 0%, 100% { opacity: .62; } 50% { opacity: 1; } }

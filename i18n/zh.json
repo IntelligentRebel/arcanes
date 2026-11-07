@@ -3989,6 +3989,7 @@
 "Partie précédente ({0})": "上一局（{0}）",
 "Importer un fichier…": "导入文件…",
 "v{0} · Règles inspirées de Master of Magic (1994). Données de règles : projet open source kazzmir/master-of-magic (BSD-3). Graphismes générés pour Arcanes ; icônes de sorts : tuiles CC0 de Dungeon Crawl Stone Soup. Musique composée pour Arcanes, jouée avec la SoundFont GeneralUser GS de S. Christian Collins.": "v{0} · 规则灵感源自《Master of Magic》（1994）。规则数据：开源项目 kazzmir/master-of-magic（BSD-3）。Arcanes 的图形为生成所得；法术图标：Dungeon Crawl Stone Soup 的 CC0 图块。音乐专为 Arcanes 创作，使用 S. Christian Collins 的 GeneralUser GS 音色库演奏。",
+"Cliquez pour entrer": "点击进入",
 "opacity 1.6s": "opacity 1.6s",
 "Fichier invalide.": "文件无效。",
 " ({0}, tour {1})": "（{0}，第 {1} 回合）",
