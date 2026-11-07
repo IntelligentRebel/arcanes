@@ -22,6 +22,7 @@ Arcanes garde ce qui rendait *Master of Magic* inoubliable et laisse tomber les 
 - **Héros et légendes** : des héros qui montent en niveau et portent des artefacts, des quêtes épiques dans des repaires mortels révélés indice après indice, un Livre de légende dont les fragments sont dispersés dans le monde.
 - **Batailles tactiques** : attaques de flanc, tirs depuis les remparts, murailles assez épaisses pour s'y tenir, portes à enfoncer, tours qui ripostent, Mur de feu et sorts de combat, avec une résolution automatique qu'on peut rejouer à la main.
 - **Une IA qui ne triche pas** : les niveaux changent la façon dont les rivaux jouent, jamais ce qu'ils reçoivent. En Difficile, ils s'allient contre celui qui s'envole ; en Hardcore, une coalition peut invoquer le **Démon légendaire** contre le meneur.
+- **Les crises de fin** : passé le tour 200, le sorcier qui écrase la partie s'attire l'une de cinq crises, d'un Seigneur liche qui se relève sans cesse à un hiver qui gèle les récoltes.
 - **Un monde vivant** : frontières, diplomatie et traités, événements et dilemmes, grands moments illustrés, chronique de la partie.
 - **11 langues** : le jeu suit la langue du navigateur (l'anglais sinon), et se change depuis l'écran titre ou le menu.
 - **Une bande originale**, avec un thème pour chaque peuple.

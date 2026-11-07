@@ -133,7 +133,7 @@ const Setup = {
   newGame() {
     const st = {
       mode: 'preset', preset: 0, name: 'Morwen', portrait: 0, books: { life: 0, death: 0, chaos: 0, nature: 0, sorcery: 0 }, retorts: [], race: 'highmen',
-      difficulty: 'normal', landSize: 'medium', mapSize: 'normal', opponents: 3, seed: '', color: 0, mountainsBlock: true, crisis: 'normal',
+      difficulty: 'normal', landSize: 'medium', mapSize: 'normal', opponents: 3, seed: '', color: 0, mountainsBlock: true, crisis: 'normal', finale: 'random',
     };
     Setup.applyPreset(st, 0);
     const body = h('div');
@@ -189,6 +189,7 @@ const Setup = {
               sel('Terres émergées', 'landSize', [['small', 'Peu'], ['medium', 'Moyennes'], ['large', 'Beaucoup']]),
               sel('Adversaires sur votre plan', 'opponents', [[1, '1'], [2, '2'], [3, '3'], [4, '4']]),
               sel('La Crise', 'crisis', [['normal', 'Vers le tour 150'], ['early', 'Précoce : tour 100'], ['late', 'Tardive : tour 200'], ['off', 'Désactivée']]),
+              (() => { const l = sel('Crise de fin', 'finale', [['random', 'Contre le meneur'], ['off', 'Désactivée']]); UI.tipOn(l, () => 'Après le tour 200, si un sorcier écrase la partie, une crise tirée au sort se lève contre lui.'); return l; })(),
               h('label', { style: 'display:flex;flex-direction:column;gap:3px' }, h('span', { class: 'muted', style: 'font-size:12px' }, 'Graine'), seedIn)),
               (() => { const cb = h('input', { type: 'checkbox', id: 'ng-mtn' }); cb.checked = st.mountainsBlock; cb.onchange = () => { st.mountainsBlock = cb.checked; };
                 const lab = h('label', { style: 'display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:13px;cursor:pointer' }, cb, h('span', null, 'Montagnes infranchissables sans route', h('div', { class: 'dim', style: 'font-size:11.5px' }, 'Seuls les volants, les montagnards (nains…) et les ingénieurs y passent ; une route ouvre le col à tous.')));
@@ -279,7 +280,7 @@ const Setup = {
     setTimeout(() => {
       try {
         const ms = MAP_SIZES[st.mapSize] || MAP_SIZES.normal;
-        const game = Game.newGame({ seed, mapW: ms.w, mapH: ms.h, landSize: st.landSize, opponents: st.opponents, difficulty: st.difficulty, mountainsBlock: st.mountainsBlock, crisis: st.crisis,
+        const game = Game.newGame({ seed, mapW: ms.w, mapH: ms.h, landSize: st.landSize, opponents: st.opponents, difficulty: st.difficulty, mountainsBlock: st.mountainsBlock, crisis: st.crisis, finale: st.finale,
           human: { name: st.name.trim(), portrait: st.portrait, books: st.books, retorts: st.retorts, race: st.race } });
         // couleur choisie
         const human = game.players[0];

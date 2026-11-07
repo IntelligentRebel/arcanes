@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.29';
+const GAME_VERSION = '0.31.30';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -68,6 +68,7 @@ const Game = {
     for (const s of game.sites) Game.ensureGuardians(game, s);
     Veil.init(game);
     Crisis.init(game, opts.crisis || 'normal');
+    Finale.init(game, opts.finale || 'random');
     Book.place(game);
     for (const pl of game.players) { Move.revealAllFor(game, pl); const fc = game.cities[pl.fortress]; if (fc) Move.reveal(game, pl, fc.plane, fc.x, fc.y, 4); Game.startTurnFor(game, pl); }
     Cities.updateTerritory(game);
@@ -160,6 +161,7 @@ const Game = {
     if (!game.startsSoftened && game.turn <= 80) Game.softenStarts(game);
     if (!game.pactsPlaced) Pacts.place(game);
     if (!game.crisis) { Crisis.init(game, 'normal'); game.crisis.at = Math.max(game.crisis.at, game.turn + 50); }
+    if (!game.finale) Finale.init(game, 'random');   // v0.31.30 : les crises de fin
     for (const u of Object.values(game.units)) if (u.hero && !u.avatar) {
       if (u.hero.lvlSeen == null) u.hero.lvlSeen = Heroes.rawLevel(u);
       // v0.19.3 : les anciennes quêtes en cours deviennent des légendes
@@ -522,11 +524,11 @@ const Game = {
     if (s.type === 'node' && rng.chance(0.25) && s.power < 8) { s.guardians = []; }
   },
   siteName(s) {
-    return { cave: 'Grotte', ruins: 'Ruines', temple: 'Temple ancien', keep: 'Donjon abandonné', dungeon: 'Souterrain', fallenTemple: 'Temple déchu', lair: 'Antre de monstres', tower: 'Tour de sorcellerie', tomb: s.relic && s.relic.wizard ? 'Tombeau de ' + s.relic.wizard : 'Tombeau de sorcier', rift: 'Faille entre les plans', breach: 'la Brèche', shrine: s.entity ? 'Sanctuaire de ' + Pacts.ENT[s.entity].name : 'Sanctuaire d\'une puissance', node: (s.realm === 'sorcery' ? 'Nœud de sorcellerie' : s.realm === 'nature' ? 'Nœud de nature' : 'Nœud de chaos') }[s.type] || 'Lieu mystérieux';
+    return { cave: 'Grotte', ruins: 'Ruines', temple: 'Temple ancien', keep: 'Donjon abandonné', dungeon: 'Souterrain', fallenTemple: 'Temple déchu', lair: 'Antre de monstres', tower: 'Tour de sorcellerie', tomb: s.relic && s.relic.wizard ? 'Tombeau de ' + s.relic.wizard : 'Tombeau de sorcier', rift: 'Faille entre les plans', breach: 'la Brèche', phylactery: 'Phylactère du Seigneur liche', citadel: 'Citadelle de l\'Archimage', winterheart: 'Cœur de l\'Hiver', shrine: s.entity ? 'Sanctuaire de ' + Pacts.ENT[s.entity].name : 'Sanctuaire d\'une puissance', node: (s.realm === 'sorcery' ? 'Nœud de sorcellerie' : s.realm === 'nature' ? 'Nœud de nature' : 'Nœud de chaos') }[s.type] || 'Lieu mystérieux';
   },
   siteHasGuardians(s) { return !s.cleared && s.guardians && s.guardians.length > 0; },
   // ---------- ce qu'un sorcier sait des lieux : rien tant que ses troupes n'y sont pas entrées (comme dans l'original) ----------
-  LAIR_TYPES: new Set(['cave', 'ruins', 'temple', 'keep', 'dungeon', 'fallenTemple', 'lair', 'tower', 'tomb', 'breach', 'node']),
+  LAIR_TYPES: new Set(['cave', 'ruins', 'temple', 'keep', 'dungeon', 'fallenTemple', 'lair', 'tower', 'tomb', 'breach', 'node', 'phylactery', 'citadel', 'winterheart']),
   // un lieu dont le contenu se découvre en y entrant (un nœud déjà lié se voit à son aura : il n'a plus rien à cacher)
   isLair(s) { return !!s && Game.LAIR_TYPES.has(s.type) && !s.closed && !(s.type === 'node' && s.owner >= 0); },
   siteKnown(pl, s) { return pl && pl.siteKnow && s ? pl.siteKnow[s.id] || null : null; },
@@ -864,6 +866,7 @@ const Game = {
       }
     }
     if (demonDown && typeof Rite !== 'undefined') Rite.slain(game);   // le Démon légendaire abattu : la cible est récompensée tout de suite
+    if (typeof Finale !== 'undefined' && game.finale && game.finale.state === 'active') try { await Finale.afterBattle(game, battle, res, info); } catch (e) { console.error('crise de fin', e); }
     // créatures asservies : elles disparaissent ; unités rappelées : elles rentrent à la forteresse de leur maître (ou juste à côté)
     for (const u of res.vanished || []) if (game.units[u.id]) Units.remove(game, u);
     for (const u of res.recalled || []) if (game.units[u.id]) {
@@ -1420,6 +1423,7 @@ const Game = {
       for (const s2 of game.sites) if (s2.type === 'tower' && s2.x === site.x && s2.y === site.y) s2.cleared = true;
     }
     if (site.type === 'breach') return Crisis.closed(game, site, pid, survivors);
+    if (site.finale) return Finale.siteCleared(game, site, pid, survivors);
     if (!pl) return found;
     Book.onLoot(game, site, pid, found);
     if (site.type === 'tomb' && site.relic) {
@@ -1478,6 +1482,7 @@ const Game = {
     if (!u || !Units.has(game, u, 'meld')) return { ok: false, why: 'Cette unité ne peut pas fusionner.' };
     const si = World.get(game.world, u.plane, 'site', u.x, u.y), s = si >= 0 ? game.sites[si] : null;
     if (!s || s.type !== 'node') return { ok: false, why: 'Il faut se trouver sur un nœud.', off: true };
+    if (s.devoured) return { ok: false, why: 'Ce nœud a été dévoré : il n\'y reste rien à lier.' };
     if (Game.siteHasGuardians(s)) return { ok: false, why: 'Le nœud est encore gardé.' };
     // le nœud d'un sorcier en paix ou allié : comme l'IA, on ne le lui prend pas sans rompre le traité d'abord
     const op = s.owner >= 0 && s.owner !== u.owner ? game.players[s.owner] : null, st = op ? (game.players[u.owner].diplo || {})[op.id] : null;

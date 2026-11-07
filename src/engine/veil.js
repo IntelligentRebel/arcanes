@@ -553,7 +553,7 @@ const Crisis = {
     const k = game.crisis, s = Crisis.site(game); if (!s) return;
     const t = game.turn - k.start;
     // trop de créatures déjà dehors : la Brèche garde ses forces
-    if (Object.values(game.units).filter(u => u.crisis).length >= 15) {
+    if (Object.values(game.units).filter(u => u.crisis && !u.finale).length >= 15) {
       k.next = game.turn + 3;
       if (s.guardians.length < MAX_STACK) { const c = Veil.pool(['chaos', 'death'], 400 + 10 * t, 50); if (c.length) s.guardians.push(game.rng.pick(c).id); }
       return;
@@ -588,7 +588,7 @@ const Crisis = {
   async closed(game, site, pid, survivors) {
     const k = game.crisis, pl = game.players[pid];
     if (k) k.state = 'over';
-    for (const u of Object.values(game.units)) if (u.crisis) { delete u.crisis; delete u.crisisTarget; }
+    for (const u of Object.values(game.units)) if (u.crisis && !u.finale) { delete u.crisis; delete u.crisisTarget; }
     const found = [];
     if (pl) {
       pl.gold += 500; found.push('500 pièces d\'or');

@@ -234,6 +234,8 @@ const Magic = {
     mod += Math.max(0, (pl.books[sp.realm] || 0) - 7) * 0.1;
     let omens = 1;
     if ((sp.realm === 'life' || sp.realm === 'nature') && game.players.some(o => o && o.alive && o.id !== pl.id && o.globals.includes('evil_omens'))) omens = 1.5;
+    // l'Archimage oublié contre le meneur : ses sorts coûtent moitié plus (pas ceux du combat)
+    if (!combat && typeof Finale !== 'undefined' && game.finale && game.finale.kind === 'archmage') omens *= Finale.costMult(game, pl);
     return Math.max(1, Math.floor(base * (1 - mod) * omens));
   },
   canCastOverland(pl, id) { const s = DATA.spells[id]; return s && s.overland && pl.known.includes(id); },

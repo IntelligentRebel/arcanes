@@ -93,7 +93,7 @@ async function playOne(E, job) {
   // oppmix : des adversaires de niveaux mêlés, qui tournent d'une carte à l'autre
   const mix = job.oppmix ? job.oppmix.split(',') : null;
   const levels = mix ? [0, 1, 2].map(i => mix[(i + job.seed) % mix.length]) : [job.opp, job.opp, job.opp];
-  const game = E.Game.newGame({ seed: job.seed, mapW: 60, mapH: 40, landSize: 'medium', opponents: 3, otherPlane: job.otherPlane != null ? job.otherPlane : undefined, difficulty: levels[0], crisis: 'normal', aiLevels: levels, noRite: !!job.noRite, rite: job.rite || null, bookGuard: job.bookGuard || null, noWonders: !!job.noWonders, flatOverstretch: !!job.flatOverstretch, propOverstretch: !!job.propOverstretch,
+  const game = E.Game.newGame({ seed: job.seed, mapW: 60, mapH: 40, landSize: 'medium', opponents: 3, otherPlane: job.otherPlane != null ? job.otherPlane : undefined, difficulty: levels[0], crisis: 'normal', finale: job.finale || 'random', aiLevels: levels, noRite: !!job.noRite, rite: job.rite || null, bookGuard: job.bookGuard || null, noWonders: !!job.noWonders, flatOverstretch: !!job.flatOverstretch, propOverstretch: !!job.propOverstretch,
     human: { name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: job.race || 'highmen' } });
   const p0 = game.players[0]; p0.human = false; p0.aiLevel = job.level; p0.aiPersonality = 'balanced';
   const plane0 = (game.cities[p0.fortress] || { plane: 0 }).plane;   // le plan de départ du sorcier observé ; l'autre est celui du « boss final »
@@ -158,6 +158,8 @@ async function playOne(E, job) {
   // les terres corrompues autour des cités du sorcier observé (la purification ne sert que s'il y en a)
   res.corrupt = E.U.sum(E.Cities.ofPlayer(game, 0), c => E.World.catchment(game.world, c.x, c.y).filter(([x, y]) => E.World.get(game.world, c.plane, 'corrupt', x, y)).length);
   if (game.riteStats) res.rite = Object.assign({}, game.riteStats);
+  // la crise de fin (v0.31.30) : laquelle, contre qui, quand, comment elle a fini
+  { const f = game.finale; if (f && f.kind) res.finale = { kind: f.kind, state: f.state, omen: f.omen || null, start: f.start || null, end: f.end || null, by: f.by != null ? f.by : null, target: f.target, subj: f.target === 0, force: f.force || null, waves: f.waves || 0, eaten: f.eaten || 0, seceded: f.seceded || 0, clues: f.clues || 0, rises: f.rises || 0 }; }
   // un démon encore debout à la fin : ce qu'il a fait compte aussi (v0.31.26)
   { const r = game.rite; if (res.rite && r && r.phase === 'demon' && r.summoned != null) { const rs = res.rite; rs.escorts = (rs.escorts || 0) + (r.maxEsc || 0); rs.demonCaps = (rs.demonCaps || 0) + (r.caps || 0); rs.life = (rs.life || 0) + game.turn - r.summoned; } }
   // le Livre de légende : fragments trouvés (lus par quelqu'un), ce qu'en tient le sujet, sceau, prise, artefacts

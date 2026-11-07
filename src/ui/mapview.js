@@ -558,6 +558,16 @@ const MapView = {
       const x = World.wx(world, xx), i = y * world.w + x;
       if (!ex[i]) continue;
       const P = pos(xx, y);
+      // le givre du Grand Hiver : un voile blanc bleuté, quelques cristaux
+      if (world.planes[p].frost && world.planes[p].frost[i]) {
+        const cx = P.x + ts / 2, cy = P.y + ts / 2, fg = ctx.createRadialGradient(cx, cy, ts * .1, cx, cy, ts * .8);
+        fg.addColorStop(0, 'rgba(225,240,255,.62)'); fg.addColorStop(.65, 'rgba(205,228,255,.38)'); fg.addColorStop(1, 'rgba(205,228,255,0)');
+        ctx.fillStyle = fg; ctx.fillRect(P.x - ts * .3, P.y - ts * .3, ts * 1.6, ts * 1.6);
+        const hsh = (x * 37 + y * 101) % 5;
+        ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = Math.max(1, ts / 60); ctx.beginPath();
+        for (let k = 0; k < 3; k++) { const a = k * Math.PI / 3, r = ts * .08, sx = P.x + ts * (.25 + hsh * .1), sy = P.y + ts * (.3 + (hsh % 3) * .15); ctx.moveTo(sx - Math.cos(a) * r, sy - Math.sin(a) * r); ctx.lineTo(sx + Math.cos(a) * r, sy + Math.sin(a) * r); }
+        ctx.stroke();
+      }
       if (world.planes[p].corrupt[i] && Fx.has('corrupt:0')) {
         // une des neuf taches dessinées, tournée d'un quart de tour selon la case : le sol empoisonné, sans motif répété
         const hsh = (x * 73 + y * 151 + p * 37) >>> 0;
@@ -596,6 +606,13 @@ const MapView = {
       if (s.plane !== p || s.type !== 'node' || s.owner < 0 || !game.players[s.owner]) continue;
       MapView.drawAura(ctx, s, s.warped != null ? '#3c2c40' : game.players[s.owner].color, pos, ts, now, ex, W, H);   // perverti : l'aura s'éteint presque
     }
+    // les nœuds dévorés : une tache de cendre éteinte
+    for (const s of game.sites) {
+      if (!s.devoured || s.plane !== p || !ex[s.y * world.w + s.x]) continue;
+      const P = pos(s.x + MapView.wrapNear(s.x), s.y), cx = P.x + ts / 2, cy = P.y + ts / 2, dg = ctx.createRadialGradient(cx, cy, 0, cx, cy, ts * .75);
+      dg.addColorStop(0, 'rgba(12,8,14,.8)'); dg.addColorStop(.6, 'rgba(30,22,34,.45)'); dg.addColorStop(1, 'rgba(30,22,34,0)');
+      ctx.fillStyle = dg; ctx.fillRect(P.x - ts * .25, P.y - ts * .25, ts * 1.5, ts * 1.5);
+    }
     // lieux
     for (const s of game.sites) {
       if (s.plane !== p || s.type === 'node' || !ex[s.y * world.w + s.x]) continue;
@@ -603,6 +620,7 @@ const MapView = {
       if (s.type === 'rift') { if (!s.closed) MapView.drawRift(ctx, s, P.x, P.y, ts, now); continue; }
       if (s.type === 'shrine') { MapView.drawShrine(ctx, s, P.x, P.y, ts, now, !!Pacts.pactWith(pl, s.entity)); continue; }
       if (s.type === 'breach') { if (!s.cleared) MapView.drawBreach(ctx, s, P.x, P.y, ts, now); continue; }
+      if (s.finale) { if (!s.cleared) MapView.drawFinaleSite(ctx, s, P.x, P.y, ts, now); continue; }
       const key = { cave: 'feat:cave', ruins: 'feat:ruins', temple: 'feat:temple', keep: 'feat:keep', dungeon: 'feat:dungeon', fallenTemple: 'feat:fallen_temple', lair: 'feat:lair', tower: 'feat:tower', tomb: 'feat:fallen_temple' }[s.type];
       const kc = Game.knownCleared(pl, s);   // ce que le joueur sait du lieu, pas son état réel
       if (s.type === 'tomb' && !kc) { const g = ctx.createRadialGradient(P.x + ts / 2, P.y + ts * .6, 0, P.x + ts / 2, P.y + ts * .6, ts * .8); g.addColorStop(0, 'rgba(150,90,220,.55)'); g.addColorStop(1, 'rgba(150,90,220,0)'); ctx.fillStyle = g; ctx.fillRect(P.x - ts * .3, P.y - ts * .2, ts * 1.6, ts * 1.6); }
@@ -1722,6 +1740,29 @@ const MapView = {
     ctx.fillStyle = fg; ctx.beginPath(); ctx.ellipse(cx, fy, ts * .09, ts * (.14 + .03 * pulse), 0, 0, 7); ctx.fill();
     ctx.restore();
   },
+  // les lieux des crises de fin : un halo à la couleur de la crise, et la figure du lieu
+  drawFinaleSite(ctx, s, x, y, ts, now) {
+    const t = now / 1000, pulse = .5 + .5 * Math.sin(t * 1.4), cx = x + ts * .5, cy = y + ts * .55;
+    const col = { phylactery: '90,230,140', citadel: '170,110,255', winterheart: '170,220,255' }[s.type] || '255,255,255';
+    ctx.save();
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, ts * 1.2);
+    g.addColorStop(0, 'rgba(' + col + ',' + (.55 + .2 * pulse) + ')'); g.addColorStop(.5, 'rgba(' + col + ',.2)'); g.addColorStop(1, 'rgba(' + col + ',0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(cx, cy, ts * 1.2, ts * .9, 0, 0, 7); ctx.fill();
+    ctx.restore();
+    if (s.type === 'winterheart') {
+      // un cristal de glace qui bat
+      ctx.save(); ctx.translate(cx, cy - ts * .08); const k = ts * (.3 + .03 * pulse);
+      const cg = ctx.createLinearGradient(0, -k, 0, k); cg.addColorStop(0, '#ffffff'); cg.addColorStop(.5, '#a8d8ff'); cg.addColorStop(1, '#4f8fd0');
+      ctx.fillStyle = cg; ctx.strokeStyle = 'rgba(255,255,255,.9)'; ctx.lineWidth = Math.max(1, ts / 40);
+      for (const [sx, sy, sc] of [[0, 0, 1], [-k * .55, k * .3, .55], [k * .55, k * .3, .55]]) {
+        ctx.beginPath(); ctx.moveTo(sx, sy - k * sc); ctx.lineTo(sx + k * .32 * sc, sy); ctx.lineTo(sx, sy + k * .7 * sc); ctx.lineTo(sx - k * .32 * sc, sy); ctx.closePath(); ctx.fill(); ctx.stroke();
+      }
+      ctx.restore(); return;
+    }
+    const key = s.type === 'phylactery' ? 'feat:fallen_temple' : 'feat:keep';
+    if (Sprites.hasHD(key)) Sprites.drawFoot(ctx, Sprites.planeKey(key, s.plane), cx, y + ts * 1.02, ts * 1.12);
+    else Sprites.draw(ctx, key, x + ts * .08, y + ts * .02, ts * .84, ts * .84);
+  },
   drawBreach(ctx, s, x, y, ts, now) {
     const key = 'site:breach';
     const cx = x + ts * .5, cy = y + ts * .55, t = now / 1000;
@@ -1810,9 +1851,9 @@ const MapView = {
     // failles, sanctuaires, Brèche
     for (const st of game.sites) {
       if (st.plane !== p || st.closed || !ex[st.y * world.w + st.x]) continue;
-      const c = st.type === 'rift' ? '#c48cff' : st.type === 'breach' && !st.cleared ? '#ff3b2a' : st.type === 'shrine' ? (Pacts.ENT[st.entity] || {}).color : null;
+      const c = st.type === 'rift' ? '#c48cff' : st.type === 'breach' && !st.cleared ? '#ff3b2a' : st.finale && !st.cleared ? { phylactery: '#5ae68c', citadel: '#aa6eff', winterheart: '#aadcff' }[st.type] : st.type === 'shrine' ? (Pacts.ENT[st.entity] || {}).color : null;
       if (!c) continue;
-      const r = Math.max(1.6, s * (st.type === 'breach' ? 1.4 : .9));
+      const r = Math.max(1.6, s * (st.type === 'breach' || st.finale ? 1.4 : .9));
       ctx.fillStyle = c; ctx.strokeStyle = '#000'; ctx.lineWidth = .8;
       ctx.beginPath(); ctx.arc(st.x * s + s / 2, st.y * s + s / 2, r, 0, 7); ctx.fill(); ctx.stroke();
     }

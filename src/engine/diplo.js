@@ -9,7 +9,7 @@ Object.assign(Diplomacy, {
     treaty_broken: 'Vous avez rompu un traité avec lui', betrayal: 'Vous avez trahi un autre sorcier', attacked: 'Vous l\'avez attaqué',
     declared: 'Vous lui avez déclaré la guerre', gift: 'Vos présents', treaty: 'Les traités signés', peace: 'La paix entre vous', alliance: 'Votre alliance',
     aura: 'Votre Aura de majesté', refused: 'Vous avez repoussé ses offres', borders_closed: 'Vous lui avez fermé votre territoire',
-    hostile_spell: 'Vos sorts contre lui', subversion: 'Les rumeurs de Subversion', breach: 'Vous avez refermé la Brèche',
+    hostile_spell: 'Vos sorts contre lui', subversion: 'Les rumeurs de Subversion', breach: 'Vous avez refermé la Brèche', finale: 'Vous avez mis fin à la crise',
     demand_met: 'Vous avez cédé à ses exigences', demand_refused: 'Vous avez rejeté ses exigences', trade: 'Vos échanges de sorts',
     border: 'Vos frontières se touchent', realm_same: 'La même voie de magie', realm_opp: 'Vie contre Mort', common_enemy: 'Un ennemi commun',
     coalition_lead: 'Votre avance l\'inquiète', coalition_ally: 'Front commun contre le meneur', deserters: 'L\'affaire des déserteurs',

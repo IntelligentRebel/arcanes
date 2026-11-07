@@ -737,7 +737,7 @@ const AI = {
     return k === 1 ? n : Math.max(1, Math.round(n * k));
   },
   meldableNodes(game, pl) {
-    return game.sites.filter(s => s.type === 'node' && s.owner !== pl.id && Intel.knows(game, pl, s.plane, s.x, s.y) && !Game.siteHasGuardians(s) && (s.owner < 0 || pl.diplo[s.owner] === 'war'));
+    return game.sites.filter(s => s.type === 'node' && !s.devoured && s.owner !== pl.id && Intel.knows(game, pl, s.plane, s.x, s.y) && !Game.siteHasGuardians(s) && (s.owner < 0 || pl.diplo[s.owner] === 'war'));
   },
   // emplacements hors d'atteinte (pas de chemin depuis le colon) : écartés une trentaine de tours
   badSite(game, pl, p, x, y) { const t = pl.aiBadSites && pl.aiBadSites[p + ',' + x + ',' + y]; return t != null && game.turn - t < 30; },
@@ -1057,7 +1057,7 @@ const AI = {
       const portal = s.type === 'tower' && AI.feat(pl, 'planes', 2) ? 2 : 1;
       // un nœud gardé : une fois vidé, un esprit le lie et il rapporte chaque tour ; il vaut d'autant plus qu'il est puissant
       const node = s.type === 'node' && AI.feat(pl, 'nodes', 1) ? (1.5 + (s.power || 0) / 10) * AI.tune(pl, 'nodeValue') : 1;
-      consider(s.x, s.y, def, (40 + s.budget / 8) * (questSite.has(s.id) ? 2.5 : 1) * (s.type === 'breach' ? 1.6 : 1) * portal * node * AI.tune(pl, 'lairValue'), 'lair');
+      consider(s.x, s.y, def, (40 + s.budget / 8) * (questSite.has(s.id) ? 2.5 : 1) * (s.type === 'breach' ? 1.6 : s.finale ? 2.2 : 1) * portal * node * AI.tune(pl, 'lairValue'), 'lair');
     }
     // cités connues : leurs défenseurs tels qu'on les voit, ou tels que le dernier rapport les décrivait
     for (const c of Intel.knownCities(game, pl)) {
@@ -1091,7 +1091,8 @@ const AI = {
       const civ = AI.feat(pl, 'prey', 3) ? stack.filter(o => Units.isSettler(o) || Units.isEngineer(o)).length : 0;
       // Hardcore : un héros peu escorté est une proie (ses objets, son expérience, et la peine de son maître)
       const lone = AI.feat(pl, 'predator', 3) && stack.length <= 3 && stack.some(o => o.hero && !o.avatar) ? 70 : 0;
-      consider(u.x, u.y, U.sum(stack, s => Units.strength(game, s)), 35 + civ * 60 + lone, 'army');
+      // le monstre d'une crise de fin : l'abattre y met fin
+      consider(u.x, u.y, U.sum(stack, s => Units.strength(game, s)), 35 + civ * 60 + lone + (u.finaleBoss ? 260 : 0), 'army');
     }
     cands.sort((a, b) => b.sc - a.sc);
     pl._sim = pl._sim || {};

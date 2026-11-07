@@ -90,6 +90,9 @@ function bancReport(plan, all, total, errCount) {
       if (ex.id === 'palais') { const g = a.filter(r => r.governor != null).map(r => r.governor).sort((x, y) => x - y); line += '  palais bâti dans ' + Math.round(100 * g.length / a.length) + ' %' + (g.length ? ' (tour médian ' + g[g.length >> 1] + ')' : ''); }
       if (ex.id === 'cols') { const c = a.filter(r => r.pass); line += '  cols repérés dans ' + Math.round(100 * c.length / a.length) + ' % (' + bancMean(a.map(r => r.passRoad || 0)).toFixed(1) + ' chantiers en montagne par partie)'; }
       if (ex.agitation && a.some(r => r.rebels != null)) line += '  rebelles ' + (100 * m('rebels')).toFixed(1) + ' % des citoyens (sujet ' + (100 * m('rebels0')).toFixed(1) + ' %), plus grand empire ' + m('maxCities').toFixed(1) + ' cités';
+      // (v0.31.30) la crise de fin : dans quelle part des parties, au bout de combien de tours, finie ou non, et le sujet visé
+      { const fn = a.filter(r => r.finale && r.finale.start); if (fn.length) { const over = fn.filter(r => r.finale.state === 'over'), md = l => { const b = l.slice().sort((x, y) => x - y); return b.length ? b[b.length >> 1] : '-'; };
+        line += '  crise de fin dans ' + Math.round(100 * fn.length / a.length) + ' % (tour médian ' + md(fn.map(r => r.finale.start)) + ', vaincue ' + Math.round(100 * over.length / fn.length) + ' %' + (over.length ? ' en ' + md(over.map(r => r.finale.end - r.finale.start)) + ' tours' : '') + ', contre le sujet ' + Math.round(100 * bancMean(fn.map(r => r.finale.subj ? 1 : 0))) + ' %)'; } }
       const lk = a.filter(r => r.lead100Kept != null); if (lk.length && ex.meneur) line += '  meneur du t100 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead100Kept ? 1 : 0))) + ' %, avance finale ×' + bancMean(lk.map(r => r.gapEnd)).toFixed(2);
       L.push(line);
       if (lab !== lab0) {

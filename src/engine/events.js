@@ -38,7 +38,7 @@ const Dilemmas = {
   // les champions possibles pour un duel : les créatures seules dont la force est la plus proche de celle du héros, par force croissante
   champions(game, hero) {
     const s = Math.max(1, Units.strength(game, hero)), str = id => Units.strength(game, { type: id, ench: [], xp: 0, owner: -1, dmg: 0, weapon: 0 });
-    return Object.values(DATA.units).filter(d => d.figures === 1 && d.race !== 'hero' && !d.sailing && !d.abilities.siegeOnly && !d.abilities.meld && !d.abilities.nonCorporeal && !d.abilities.createOutpost && !d.abilities.construction && (d.melee || 0) > 0 && !d.flying)
+    return Object.values(DATA.units).filter(d => d.figures === 1 && d.race !== 'hero' && !d.finale && !d.sailing && !d.abilities.siegeOnly && !d.abilities.meld && !d.abilities.nonCorporeal && !d.abilities.createOutpost && !d.abilities.construction && (d.melee || 0) > 0 && !d.flying)
       .map(d => ({ id: d.id, s: str(d.id) })).sort((a, b) => Math.abs(Math.log(Math.max(1, a.s) / s)) - Math.abs(Math.log(Math.max(1, b.s) / s))).slice(0, 14)
       .sort((a, b) => a.s - b.s).map(o => o.id);
   },

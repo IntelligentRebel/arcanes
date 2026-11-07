@@ -216,6 +216,7 @@ const Cities = {
     const gaia = ench('gaias_blessing');
     for (const t of tiles) {
       const corrupt = World.get(world, p, 'corrupt', t.x, t.y);
+      const frost = world.planes[p].frost && Finale.frozen(world, p, t.x, t.y);   // le givre du Grand Hiver : plus de récoltes
       let tFood = 0, tProd = 0;
       if (!corrupt) {
         const key = World.terrainKey(world, p, t.x, t.y), td = DATA.terrain[key];
@@ -223,6 +224,7 @@ const Cities = {
         if (key === 'lake') { for (const [nx, ny] of World.neighbors(world, t.x, t.y)) if (World.terr(world, p, nx, ny) === T.RIVER) { tFood = 2; break; } }
         tProd = td ? td.prodPct : 0;
         if (gaia && key === 'forest') tProd *= 2;
+        if (frost) tFood = 0;
       }
       foodLevel += tFood * t.f;
       prodPct += tProd * t.f;
@@ -232,7 +234,7 @@ const Cities = {
       const mk = MIN_KEYS[World.get(world, p, 'mineral', t.x, t.y)];
       if (mk && !corrupt) {
         const md = DATA.minerals[mk];
-        if (mk === 'wildGame') wild += 2 * t.f; // partagé entre deux cités : moitié chacune (kazzmir BaseFoodLevel)
+        if (mk === 'wildGame' && !frost) wild += 2 * t.f; // partagé entre deux cités : moitié chacune (kazzmir BaseFoodLevel)
         mineralGold += (md.gold || 0) * t.f;
         mineralPower += (md.power || 0) * t.f;
         unitReduction += -(md.unitCostPct || 0);
@@ -272,6 +274,8 @@ const Cities = {
       if (enemyGlobal('armageddon') && !ench('consecration')) glob += 2;
       abs += glob; if (glob) why.push(['Sorts globaux ennemis', glob]);
       if (owner && owner.terror > game.turn) { abs += 2; why.push(['Terreur du Roi sans Visage', 2]); } // riposte du Roi sans Visage
+      const proph = typeof Finale !== 'undefined' ? Finale.unrest(game, c) : 0;
+      if (proph) { abs += proph; why.push(['Prêches du Prophète', proph]); }
       if (c.moods) { const m = Dilemmas.moodOf(game, c); if (m) { abs += m; why.push(['Humeur passagère', m]); } }   // humeurs passagères (dilemmes)
       // empire étendu : l'éloignement de la capitale et le nombre de cités pèsent (modérément) sur l'ordre
       // un rebelle de plus pour chacun. (v0.31.7 à 0.31.24 : +10 % par habitant, gardé en variante de banc, propOverstretch : au banc 15,
@@ -1048,7 +1052,7 @@ const Cities = {
     const t = World.terr(world, plane, x, y);
     if (t === T.SNODE || t === T.NNODE || t === T.CNODE) return { ok: false, why: 'Un nœud magique ne peut pas accueillir de cité.' };
     if (t === T.MOUNTAIN && Move.mountainsBlock(game)) return { ok: false, why: 'On ne fonde pas de cité sur une montagne.' };
-    if (World.get(world, plane, 'site', x, y) >= 0) { const s = game.sites[World.get(world, plane, 'site', x, y)]; if (s && !s.cleared || (s && ['tower', 'rift', 'shrine', 'breach'].includes(s.type))) return { ok: false, why: 'Un lieu de pouvoir occupe déjà cette case.' }; }
+    if (World.get(world, plane, 'site', x, y) >= 0) { const s = game.sites[World.get(world, plane, 'site', x, y)]; if (s && !s.cleared || (s && (['tower', 'rift', 'shrine', 'breach'].includes(s.type) || s.finale))) return { ok: false, why: 'Un lieu de pouvoir occupe déjà cette case.' }; }
     for (const id in game.cities) {
       const c = game.cities[id];
       if (c.plane === plane && World.dist(world, c.x, c.y, x, y) <= 3) return { ok: false, why: 'Trop proche de ' + c.name + ' (4 cases minimum).' };

@@ -43,6 +43,8 @@ const Sprites = {
     if (window.DATA && DATA.wonderList) for (const w of DATA.wonderList) Sprites.alias['spell:lore_' + w.race] = Sprites.has('bld:' + w.id) ? 'bld:' + w.id : w.icon;
     // le Démon légendaire du pacte : la figurine du Seigneur démon
     Sprites.alias['unit:RiteDemon'] = 'unit:DemonLord'; Sprites.alias['portrait:RiteDemon'] = 'portrait:DemonLord';
+    // les monstres des crises de fin : des figurines existantes
+    for (const [k, v] of Object.entries(Anim.alias)) if (/^(LichLord|FinaleArchmage|FrostGiant|NodeEater|Prophet)$/.test(k)) { Sprites.alias['unit:' + k] = 'unit:' + v; Sprites.alias['portrait:' + k] = 'portrait:' + v; }
     // les sorts du Livre de légende
     Object.assign(Sprites.alias, { 'spell:palimpsest': 'spell:dispel_magic_true', 'spell:erasure': 'spell:disjunction_true', 'spell:oblivion': 'spell:confusion',
       'spell:annals': 'spell:earth_lore', 'spell:deus_ex_machina': 'spell:spell_ward', 'spell:mise_en_abyme': 'spell:mass_invisibility', 'spell:legendary_artifact': 'spell:create_artifact' });
@@ -245,7 +247,7 @@ const Anim = {
   ROW: { idle: 0, walk: 1, attack: 2, death: 3 },
   // durée d'une image (ms) et bouclage par action
   SPEED: { idle: 260, walk: 110, attack: 105, death: 150 },
-  alias: { WizardAvatar: 'HighMenMagician', RiteDemon: 'DemonLord' },
+  alias: { WizardAvatar: 'HighMenMagician', RiteDemon: 'DemonLord', LichLord: 'Wraith', FinaleArchmage: 'DarkElfPriests', FrostGiant: 'StormGiant', NodeEater: 'ChaosSpawn', Prophet: 'HighMenPriest' },
   key(type) { return Anim.meta[type] ? type : Anim.alias[type]; },
   has(type) { return !!(Anim.img && Anim.meta[Anim.key(type)]); },
   // image à afficher : action en boucle (repos, marche) ou jouée une fois puis figée (attaque, mort)

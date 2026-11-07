@@ -101,7 +101,7 @@ const Chronicle = {
   KINDS: {
     mastery: { icon: '✶', major: true }, eliminated: { icon: '✝', major: true }, banished: { icon: '⚑', major: true }, mastery_cast: { icon: '✶', major: true },
     city_taken: { icon: '♜', major: true }, city_razed: { icon: '✖', major: true }, war: { icon: '⚔', major: true }, global: { icon: '✦', major: true },
-    crisis: { icon: '☄', major: true }, legend: { icon: '♛', major: true }, avatar_fall: { icon: '⚑', major: true },
+    crisis: { icon: '☄', major: true }, finale: { icon: '☠', major: true }, finale_end: { icon: '☀', major: true }, legend: { icon: '♛', major: true }, avatar_fall: { icon: '⚑', major: true },
     peace: { icon: '☮' }, alliance: { icon: '⚭' }, none: { icon: '✕' }, met: { icon: '◎' }, city_ceded: { icon: '✎' }, mastery_study: { icon: '✶' },
     hero_fall: { icon: '✝' }, city_new: { icon: '⌂', minor: true }, hero_join: { icon: '♟', minor: true },
   },
@@ -131,6 +131,8 @@ const Chronicle = {
       case 'hero_fall': return (e.a === viewer ? 'Votre héros ' + e.h : e.h + ', héros ' + U.de(W(e.a)) + ',') + ' tombe' + (e.lv ? ' (' + e.lv + ')' : '') + '.';
       case 'legend': return e.h + ' accomplit sa légende' + (e.place ? ' ' + e.place : '') + (e.item ? ' : ' + e.item : '') + '.';
       case 'crisis': return 'La Brèche s\'ouvre : la Crise commence.';
+      case 'finale': return (typeof Finale !== 'undefined' ? Finale.title(e.kind) : '') + ' : la crise de fin commence, contre ' + W(e.d) + '.';
+      case 'finale_end': { const T = typeof Finale !== 'undefined' ? Finale.title(e.kind) : ''; return e.a == null ? 'La crise de fin s\'achève.' : e.a === viewer ? 'Vous mettez fin à la crise (' + T + ').' : C(W(e.a)) + ' met fin à la crise (' + T + ').'; }
       default: return e.k;
     }
   },

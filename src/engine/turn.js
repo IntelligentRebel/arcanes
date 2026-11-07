@@ -23,6 +23,7 @@ const Turn = {
     Veil.tick(game);
     Pacts.tick(game);
     Crisis.tick(game);
+    Finale.tick(game);
     Game.tickFallen(game);
     Turn.randomEvents(game);
     Dilemmas.tick(game);
@@ -676,7 +677,7 @@ const Neutrals = {
     const rng = game.rng;
     // monstres qui quittent leur antre
     if (game.turn > 25 && rng.chance(0.05)) {
-      const sites = game.sites.filter(s => !s.cleared && !s.legend && s.type !== 'node' && s.type !== 'tower' && s.type !== 'breach' && s.guardians && s.guardians.length > 1);
+      const sites = game.sites.filter(s => !s.cleared && !s.legend && s.type !== 'node' && s.type !== 'tower' && s.type !== 'breach' && !s.finale && s.guardians && s.guardians.length > 1);
       if (sites.length) {
         const s = rng.pick(sites);
         const free = World.neighbors(game.world, s.x, s.y).filter(([x, y]) => !World.isWaterAt(game.world, s.plane, x, y) && !Units.at(game, s.plane, x, y).length && !Cities.at(game, s.plane, x, y) && World.get(game.world, s.plane, 'site', x, y) < 0 && !Move.blockedMountain(game, s.plane, x, y));
@@ -696,6 +697,8 @@ const Neutrals = {
       const city = Cities.at(game, u0.plane, u0.x, u0.y);
       // les garnisons de cités neutres n'attaquent que si elles sont nombreuses
       let movers = units;
+      // le monstre d'une crise de fin (le Dévoreur, le Prophète) va son chemin ; le Seigneur liche marche comme une vague
+      if (units.some(u => u.finaleBoss) && await Finale.moveBoss(game, units)) { if (game.over) return; continue; }
       // vagues de la Brèche : elles marchent sur le sorcier visé, à n'importe quelle distance, et ne s'attardent pas dans les cités prises
       if (u0.crisis) {
         const tc = Crisis.targetCity(game, u0);

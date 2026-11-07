@@ -22,6 +22,7 @@ Arcanes keeps what made *Master of Magic* unforgettable and drops the irritants 
 - **Heroes and legends**: heroes that level up and carry artifacts, epic quests in deadly lairs revealed clue by clue, a legendary Book whose fragments are scattered across the world.
 - **Tactical battles**: flanking, ranged fire from the ramparts, walls thick enough to stand on, gates to batter, towers that shoot back, Wall of Fire, and combat spells, with an optional auto-resolve you can replay by hand.
 - **An AI that does not cheat**: difficulty levels change how well rivals play, never what they get. On Hard, they ally against whoever runs away with the game; on Hardcore, a coalition can summon the **Legendary Demon** against the leader.
+- **Endgame crises**: past turn 200, a wizard who crushes the game draws one of five crises against them, from a Lich Lord who keeps rising to a winter that freezes the harvests.
 - **Living world**: territory borders, diplomacy and treaties, random events and dilemmas, illustrated moments for great deeds, a chronicle of the game.
 - **11 languages**: English, 简体中文, Deutsch, Español, Português, Русский, Français, 日本語, 한국어, Italiano, Polski. The game follows your browser's language (English otherwise); you can change it from the title screen or the menu.
 - **Original soundtrack**, a theme for each people.

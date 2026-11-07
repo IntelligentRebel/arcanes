@@ -17,6 +17,7 @@ const App = {
     Game.hooks.choose = (game, pid, q) => App.answer(q);
     Game.hooks.fx = ev => App.onFx(ev);
     Game.hooks.demonSlain = () => setTimeout(() => App.demonPrompt(), 450);
+    Game.hooks.finale = () => setTimeout(() => App.finalePrompts(), 450);
     UI.abilityHover();
     const loop = () => { if (App.game && !App.preparing) { MapView.draw(); if (App.spellFx && App.spellFx.length) App.flushSpellFx(); } if (App.dirty) { App.dirty = false; App.refresh(); } requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
@@ -68,6 +69,7 @@ const App = {
       await App.fallPrompt(); if (App.game !== game) return;
       await App.demonPrompt(); if (App.game !== game) return;
       await App.nodeLostPrompts(); if (App.game !== game) return;
+      await App.finalePrompts(); if (App.game !== game) return;
       await App.landmarkPrompts(); if (App.game !== game) return;
       await App.eventPrompts(); if (App.game !== game) return;
       if (Pacts.due(game, human).length) await App.pactPrompts(); if (App.game !== game) return;
@@ -496,6 +498,7 @@ const App = {
   // nœud : son aura, ce qu'il rapporte, et ce qu'il change en combat
   nodeHtml(s) {
     const game = App.game, me = App.me(), n = Game.aura(game, s).length, rn = REALM_NAMES[s.realm].toLowerCase();
+    if (s.devoured) return '<div class="danger">Dévoré : il n\'en reste rien.</div>';
     let html = '<div class="dim">' + (s.owner >= 0 ? (s.warped != null ? 'Aura de ' + n + ' cases, presque éteinte.' : 'Aura de ' + n + ' cases, qui scintille aux couleurs de son maître.') : 'Son aura se révélera quand un esprit le liera.') + '</div>';
     const gain = Magic.nodePower(game, me, s), gainFree = Magic.nodePower(game, me, Object.assign({}, s, { warped: null }));   // le lier efface la perversion
     if (s.warped != null) html += '<div class="danger">' + (s.warped === App.pid ? 'Vous l\'avez perverti' : 'Perverti par ' + U.esc(Players.nameFor(game, App.pid, s.warped))) + ' : ne produit rien et coûte 5 mana par tour à son maître. Un Désenchantement de zone peut le libérer.</div>';
@@ -508,6 +511,9 @@ const App = {
     const game = App.game, pl = App.me();
     if (s.type === 'rift') return '<div class="dim">Relie Arcane et le Miroir : une pile qui s\'y trouve peut changer de plan (P). Des créatures du Miroir en sortent de temps à autre. Le sort Sceller une faille la referme.</div>';
     if (s.type === 'breach') return '<div class="dim">Source de la Crise : elle corrompt les terres alentour, se renforce et lâche des vagues de créatures. Vaincre ses gardiens la referme.</div>';
+    if (s.type === 'phylactery') return '<div class="dim">Détruit, le Seigneur liche ne se relève plus et ses morts s\'effondrent.</div>';
+    if (s.type === 'citadel') return '<div class="dim">Tant qu\'elle tient, l\'Archimage frappe le meneur et lâche ses créatures. La prendre met fin à la crise.</div>';
+    if (s.type === 'winterheart') return '<div class="dim">Le givre s\'étend autour de lui. Brisé, tout dégèle.</div>';
     if (s.type !== 'shrine') return '';
     const e = Pacts.ENT[s.entity]; if (!e) return '';
     const mine = Pacts.pactWith(pl, s.entity);
@@ -694,7 +700,7 @@ const App = {
   // l'éclaireur le plus proche d'un lieu où le joueur n'est jamais entré (hors Brèche), à moins de maxSteps pas
   lairToScout(units, maxSteps, avoid) {
     const game = App.game, pl = App.me(), u0 = units[0], w = game.world, ex = pl.explored[u0.plane];
-    const cands = game.sites.filter(s => s.plane === u0.plane && s.type !== 'breach' && Game.isLair(s) && !Game.siteKnown(pl, s) && ex[s.y * w.w + s.x] && World.dist(w, s.x, s.y, u0.x, u0.y) <= maxSteps
+    const cands = game.sites.filter(s => s.plane === u0.plane && s.type !== 'breach' && !s.finale && Game.isLair(s) && !Game.siteKnown(pl, s) && ex[s.y * w.w + s.x] && World.dist(w, s.x, s.y, u0.x, u0.y) <= maxSteps
       && !(avoid || []).some(a => a[0] === s.x && a[1] === s.y))
       .sort((a, b) => World.dist(w, a.x, a.y, u0.x, u0.y) - World.dist(w, b.x, b.y, u0.x, u0.y)).slice(0, 6);
     let best = null, bl = Infinity;
@@ -882,7 +888,7 @@ const App = {
   // ressort aussitôt (tout son mouvement y passe) pour voir si les gardiens y sont encore. Rien à revoir : il attend sur place.
   async revisitLair(units) {
     const game = App.game, pl = App.me(), u0 = units[0], w = game.world, ids = units.map(u => u.id);
-    const due = game.sites.filter(s => s.plane === u0.plane && s.type !== 'breach' && Game.isLair(s)).map(s => ({ s, k: Game.siteKnown(pl, s) }))
+    const due = game.sites.filter(s => s.plane === u0.plane && s.type !== 'breach' && !s.finale && Game.isLair(s)).map(s => ({ s, k: Game.siteKnown(pl, s) }))
       .filter(({ k }) => k && !k.cleared && k.guards && k.guards.length && game.turn - k.t >= App.REVISIT)
       .sort((a, b) => a.k.t - b.k.t || World.dist(w, a.s.x, a.s.y, u0.x, u0.y) - World.dist(w, b.s.x, b.s.y, u0.x, u0.y));
     const peek = s => {
@@ -1459,6 +1465,40 @@ const App = {
       }
     } finally { App.nodeLostOpen = false; }
   },
+  // 0.31.30 : les crises de fin, au centre de l'écran (le début, le phylactère découvert, la fin)
+  async finalePrompts() {
+    const game = App.game, pl = App.me(); if (!game || !pl || !pl.finaleNews || !pl.finaleNews.length || App.finaleOpen) return;
+    App.finaleOpen = true;
+    try {
+      while (pl.finaleNews.length) {
+        const e = pl.finaleNews.shift(), f = game.finale || {};
+        const img = window.AUTO_CHOICE ? null : await App.eventArt('finale_' + e.kind); if (App.game !== game) return;
+        const art = h('div', { class: 'lm-art' + (img ? '' : ' none') });
+        if (img) { img.alt = ''; art.append(img); } else art.append(h('div', { class: 'lm-halo' }));
+        const color = { lich: '#5ae68c', archmage: '#aa6eff', winter: '#aadcff', eater: '#c45adc', prophet: '#e8b04a' }[e.kind] || '#c9a24a';
+        let kicker, text, extra = null;
+        if (e.type === 'begin') { kicker = 'Crise de fin'; text = Finale.beginText(game, pl.id); }
+        else if (e.type === 'reveal') { kicker = 'Le phylactère est découvert'; text = 'Détruisez-le, et le Seigneur liche ne se relèvera plus.'; }
+        else if (e.faded) { kicker = 'Crise éteinte'; text = 'Sa proie à terre, elle s\'éteint d\'elle-même.'; }
+        else {
+          kicker = 'Crise vaincue';
+          text = e.by === pl.id ? 'Vous y avez mis fin.' : e.by != null ? U.cap(Players.nameFor(game, pl.id, e.by)) + ' y a mis fin.' : 'Elle s\'est éteinte.';
+          if (e.found) extra = 'Récompense : ' + e.found.join(', ') + '.';
+        }
+        const at = e.type === 'end' ? (e.x != null ? { x: e.x, y: e.y, plane: e.plane } : null) : Finale.where(game, f);
+        const body = h('div', { class: 'lm', style: '--lc:' + color }, art,
+          h('div', { class: 'lm-kicker' }, kicker), h('div', { class: 'lm-name' }, Finale.title(e.kind)), h('div', { class: 'lm-text' }, text),
+          extra ? h('div', { class: 'lm-text gold' }, extra) : null);
+        Sfx.play(e.type === 'end' ? 'victory' : 'defeat');
+        const go = await new Promise(res => {
+          const m = UI.modal({ title: '', body, width: 760, cls: 'landmark-modal finale-modal', onClose: () => res(false),
+            footer: [h('button', { class: 'btn', onclick: () => { res(false); m.close(); } }, 'Continuer'), at ? h('button', { class: 'btn primary', onclick: () => { res(true); m.close(); } }, 'Voir') : null].filter(Boolean) });
+        });
+        if (App.game !== game) return;
+        if (go && at) { MapView.centerOn(at.x, at.y, at.plane); App.refresh(); }
+      }
+    } finally { App.finaleOpen = false; }
+  },
   // le Démon légendaire abattu : le grand moment, au centre de l'écran
   async demonPrompt() {
     const game = App.game, pl = App.me(), s = pl && pl.demonSlain;
@@ -1507,6 +1547,7 @@ const App = {
     await App.fallPrompt();
     await App.demonPrompt();
     await App.nodeLostPrompts();
+    await App.finalePrompts();
     await App.landmarkPrompts();
     await App.showContacts();
     await App.pactPrompts();
