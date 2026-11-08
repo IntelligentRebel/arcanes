@@ -33,6 +33,10 @@ const AI = {
   // en essai : actives seulement dans les bancs de test (AI.LAB), absentes du jeu livré tant que leur effet n'est pas mesuré
   PENDING: { purify: 1, vainstrike: 1, firststrike: 1, spells2: 1, cspells2: 1, truestanding: 1, civilians: 1, stackspells: 1, engineers: 1 },   // spells2 : sorts oubliés sur la carte ; cspells2 : en combat
   LAB: false,
+  // un essai de banc à activer (l'inverse de feat : absent du jeu tant qu'un banc ne l'a pas validé)
+  opt(pl, k) { return !!((AI.EXP && AI.EXP[k]) || (pl && pl.aiExp && pl.aiExp[k])); },
+  // un tireur qui peut défendre une cité (pas un engin de siège, pas un navire)
+  rangedDef(t) { const d = DATA.units[t]; return !!d && d.ranged > 0 && ['missile', 'magic', 'boulder'].includes(d.rangedType) && !d.sailing && !d.abilities.siegeOnly && !d.abilities.createOutpost && !d.abilities.construction && !d.abilities.scout; },
   feat(pl, name, min = 1) { return AI.lvl(pl) >= min && !(AI.PENDING[name] && !AI.LAB) && !(AI.EXP && AI.EXP['no_' + name]) && !(pl && pl.aiExp && pl.aiExp['no_' + name]); },
   async takeTurn(game, pl) {
     if (!pl.alive) return;
@@ -158,6 +162,26 @@ const AI = {
     const foodRoom = empireFood + U.sum(cities, x => { if (!x.autoFarmers) return 0; const ex = x === c ? e : Cities.econ(game, x); return Math.floor(ex.workers / 3) * (ex.farmerFood || 2); });
     // 1. défense minimale
     const want = AI.garrisonWant(game, c, threat);
+    // (à l'essai, garrison_ranged) au moins deux tireurs dans la garnison, les meilleurs que la cité sait former : sans eux,
+    // une garnison derrière ses murs ne peut rien contre des volants ou des archers
+    if (AI.opt(pl, 'garrison_ranged') && game.turn >= 30 && (foodRoom > 0 || threat > 0)) {
+      const shooters = garrison.filter(u => AI.isSoldier(game, u) && AI.rangedDef(u.type)).length;
+      const bestRanged = shooters < 2 ? U.max(units.filter(t => AI.rangedDef(t)), t => AI.unitValue(game, c, t, e, 'defense')) : null;
+      if (bestRanged) return { type: 'unit', id: bestRanged };
+      // aucun tireur à former ici : le bâtiment qui en ouvre un (scierie, caserne, parthénon...), dès 4 habitants
+      if (shooters < 2 && N >= 4 && garrison.length < MAX_STACK) {
+        const race = DATA.races[c.race], miss = t => (DATA.units[t].requires || []).filter(b => !c.buildings[b]);
+        const next = (race ? race.units : []).filter(t => AI.rangedDef(t) && !units.includes(t)).map(t => miss(t)).filter(m => m.length && m.every(b => DATA.buildings[b]))
+          .sort((p, q) => p.length - q.length || U.sum(p, b => DATA.buildings[b].cost) - U.sum(q, b => DATA.buildings[b].cost))[0];
+        const b = next && next.find(b => Cities.canBuild(game, c, b));
+        if (b) return { type: 'building', id: b };
+      }
+    }
+    // (à l'essai, towers_more) des murailles dès 5 habitants, puis les tours de défense
+    if (AI.opt(pl, 'towers_more') && game.turn >= 40 && (N >= 5 || c.fortress)) {
+      if (Cities.canBuild(game, c, 'cityWalls')) return { type: 'building', id: 'cityWalls' };
+      if (c.buildings.cityWalls && Cities.canBuild(game, c, 'defenseTowers')) return { type: 'building', id: 'defenseTowers' };
+    }
     if (garrison.filter(u => AI.isSoldier(game, u)).length < want && bestMil && (foodRoom > 0 || threat > 0)) return { type: 'unit', id: bestMil };
     // 1 bis. un colon attend une escorte ici : un soldat d'abord
     if (bestMil && garrison.some(u => Units.isSettler(u) && (u.aiWaitEscort || 0) > 0) && garrison.filter(u => AI.isSoldier(game, u)).length < 2) return { type: 'unit', id: bestMil };
@@ -217,8 +241,9 @@ const AI = {
     else for (const b of BUILD_ORDER) {
       if (!Cities.canBuild(game, c, b)) continue;
       const bd = DATA.buildings[b];
-      if (b === 'cityWalls' && threat <= 0 && !c.fortress && N < 8) continue;
-      if (b === 'defenseTowers' && threat <= 0 && N < 10) continue;
+      const towers = AI.opt(pl, 'towers_more');   // (à l'essai) murailles et tours plus tôt
+      if (b === 'cityWalls' && threat <= 0 && !c.fortress && N < (towers ? 5 : 8)) continue;
+      if (b === 'defenseTowers' && threat <= 0 && N < (towers ? 5 : 10)) continue;
       if (bd.upkeep > 2 && Players.goldPerTurn(game, pl).gold < bd.upkeep + 2 && !['marketplace', 'bank', 'merchantsGuild'].includes(b)) continue;
       if (bd.cost > e.prod * 40 && N < 6) continue;
       return { type: 'building', id: b };
@@ -516,8 +541,10 @@ const AI = {
     const pool = Object.values(game.units).filter(u => u.owner === pl.id && !u.hero && u.aiEscort == null && u.riteEscort == null && !engaged.has(u.id) && AI.isSoldier(game, u) && !DATA.units[u.type].abilities.siegeOnly);
     const citiesByNeed = Cities.ofPlayer(game, pl.id).map(c => ({ c, threat: AI.threatNear(game, pl, c) })).sort((a, b) => (b.c.fortress - a.c.fortress) || (b.threat - a.threat));
     const posted = c => pool.filter(u => u.aiPost === c.id).length;
+    const keepShooters = AI.opt(pl, 'garrison_ranged');
     const claimHere = (c, upTo) => {
-      const here = pool.filter(u => !u.aiRole && u.plane === c.plane && u.x === c.x && u.y === c.y).sort((a, b) => Units.strength(game, a) - Units.strength(game, b));
+      // (à l'essai, garrison_ranged) les tireurs restent en garnison d'abord
+      const here = pool.filter(u => !u.aiRole && u.plane === c.plane && u.x === c.x && u.y === c.y).sort((a, b) => (keepShooters ? AI.rangedDef(b.type) - AI.rangedDef(a.type) : 0) || Units.strength(game, a) - Units.strength(game, b));
       for (const u of here) { if (posted(c) >= upTo) break; u.aiRole = 'garrison'; u.aiPost = c.id; }
     };
     const pull = async (c, upTo) => {
@@ -534,6 +561,7 @@ const AI = {
     for (const { c } of citiesByNeed) if (!posted(c)) await pull(c, 1);
     for (const { c, threat } of citiesByNeed) {
       let want = AI.garrisonWant(game, c, threat);
+      if (keepShooters) want = Math.max(want, Math.min(2, pool.filter(u => u.plane === c.plane && u.x === c.x && u.y === c.y && AI.rangedDef(u.type)).length));
       // Difficile : assez de défenseurs pour la force qui arrive (ce qu'on en a vu), sans vider les autres cités
       if (AI.feat(pl, 'foresight', 2) && threat > 0) {
         const def = U.sum(pool.filter(u => u.aiPost === c.id || (u.plane === c.plane && u.x === c.x && u.y === c.y)), u => Units.strength(game, u)) * (c.buildings.cityWalls ? 1.5 : 1) + Battle.towerStrength(game, c);

@@ -3924,7 +3924,7 @@
    "data/spells.js:17"
   ]
  },
- "Ramène instantanément un héros ami du champ de bataille à votre forteresse.": {
+ "Ramène instantanément un héros ami à votre forteresse, depuis la carte ou du champ de bataille.": {
   "at": [
    "data/spells.js:17"
   ]
@@ -8861,7 +8861,7 @@
  "Aucune de vos unités n'est blessée.": {
   "at": [
    "src/engine/combat.js:1881",
-   "src/engine/spells.js:271"
+   "src/engine/spells.js:272"
   ]
  },
  "Les blessures de vos unités sont irréversibles (pétrification, désintégration…) : rien à soigner.": {
@@ -10255,7 +10255,7 @@
  " à {0}": {
   "at": [
    "src/engine/game.js:1011",
-   "src/engine/spells.js:326",
+   "src/engine/spells.js:327",
    "src/engine/chronicle.js:120"
   ],
   "args": [
@@ -10601,19 +10601,19 @@
  "Vous êtes déjà sur la carte.": {
   "at": [
    "src/engine/game.js:1360",
-   "src/engine/spells.js:269"
+   "src/engine/spells.js:270"
   ]
  },
  "Il faut votre forteresse.": {
   "at": [
    "src/engine/game.js:1361",
-   "src/engine/spells.js:270"
+   "src/engine/spells.js:271"
   ]
  },
  "Aucune place près de la forteresse.": {
   "at": [
    "src/engine/game.js:1362",
-   "src/engine/spells.js:646"
+   "src/engine/spells.js:647"
   ]
  },
  "Sorcier": {
@@ -10939,7 +10939,7 @@
  "Le Sceau planaire bloque tout passage.": {
   "at": [
    "src/engine/game.js:1601",
-   "src/engine/spells.js:342"
+   "src/engine/spells.js:343"
   ]
  },
  "Il faut encore du mouvement pour passer dans l'autre plan.": {
@@ -10955,7 +10955,7 @@
  "Le terrain de l'autre plan est impraticable.": {
   "at": [
    "src/engine/game.js:1606",
-   "src/engine/spells.js:343"
+   "src/engine/spells.js:344"
   ]
  },
  "Une force ennemie occupe la case de l'autre plan.": {
@@ -10971,7 +10971,7 @@
  "Des gardiens occupent la case de l'autre plan.": {
   "at": [
    "src/engine/game.js:1610",
-   "src/engine/spells.js:346"
+   "src/engine/spells.js:347"
   ]
  },
  "Or insuffisant.": {
@@ -11691,7 +11691,7 @@
    "src/engine/turn.js:89",
    "src/engine/turn.js:639",
    "src/engine/spells.js:31",
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1245"
   ]
  },
  "unités": {
@@ -12202,9 +12202,9 @@
  "Vous avez déjà six héros.": {
   "at": [
    "src/engine/turn.js:662",
-   "src/engine/spells.js:265",
-   "src/engine/spells.js:583",
-   "src/engine/spells.js:598"
+   "src/engine/spells.js:266",
+   "src/engine/spells.js:584",
+   "src/engine/spells.js:599"
   ]
  },
  "{0} sert déjà un autre sorcier.": {
@@ -12272,15 +12272,15 @@
  "terre corrompue": {
   "at": [
    "src/engine/spells.js:19",
-   "src/engine/spells.js:721"
+   "src/engine/spells.js:722"
   ]
  },
  "terres corrompues": {
   "at": [
    "src/engine/spells.js:19",
    "src/engine/spells.js:19",
-   "src/engine/spells.js:721",
-   "src/engine/spells.js:721"
+   "src/engine/spells.js:722",
+   "src/engine/spells.js:722"
   ],
   "hint": "pluriel de « terre corrompue »"
  },
@@ -12436,7 +12436,7 @@
  "Choisissez une case.": {
   "at": [
    "src/engine/spells.js:183",
-   "src/engine/spells.js:235"
+   "src/engine/spells.js:236"
   ]
  },
  "Aucune unité de la case à enchanter (elles {0}).": {
@@ -12527,40 +12527,45 @@
    "src/engine/spells.js:207"
   ]
  },
- "L'unité est déjà dans votre forteresse.": {
+ "Il faut viser un de vos héros.": {
   "at": [
    "src/engine/spells.js:209"
   ]
  },
- "Aucun enchantement à protéger sur cette unité.": {
+ "L'unité est déjà dans votre forteresse.": {
   "at": [
    "src/engine/spells.js:210"
   ]
  },
+ "Aucun enchantement à protéger sur cette unité.": {
+  "at": [
+   "src/engine/spells.js:211"
+  ]
+ },
  "Sa pile resterait sur l'eau sans rien pour la porter.": {
   "at": [
-   "src/engine/spells.js:214"
+   "src/engine/spells.js:215"
   ]
  },
  "Cité disparue.": {
   "at": [
-   "src/engine/spells.js:219"
+   "src/engine/spells.js:220"
   ]
  },
  "Il faut une cité amie.": {
   "at": [
-   "src/engine/spells.js:220",
+   "src/engine/spells.js:221",
    "src/engine/events.js:1108"
   ]
  },
  "Il faut une cité ennemie.": {
   "at": [
-   "src/engine/spells.js:221"
+   "src/engine/spells.js:222"
   ]
  },
  "Un traité vous lie à {0} : ses cités sont épargnées.": {
   "at": [
-   "src/engine/spells.js:222"
+   "src/engine/spells.js:223"
   ],
   "args": [
    "Players.nameFor(game, pl.id, c.owner)"
@@ -12568,63 +12573,63 @@
  },
  "Cet enchantement est déjà actif.": {
   "at": [
-   "src/engine/spells.js:223"
+   "src/engine/spells.js:224"
   ]
  },
  "La cité est consacrée.": {
   "at": [
-   "src/engine/spells.js:224",
-   "src/engine/spells.js:245"
+   "src/engine/spells.js:225",
+   "src/engine/spells.js:246"
   ]
  },
  "Choisissez le royaume dont la cité sera gardée.": {
   "at": [
-   "src/engine/spells.js:225"
+   "src/engine/spells.js:226"
   ]
  },
  "La cité a déjà des murailles.": {
   "at": [
-   "src/engine/spells.js:226"
+   "src/engine/spells.js:227"
   ]
  },
  "De l'autre côté, c'est la mer : seuls les volants et les nageurs passeraient.": {
   "at": [
-   "src/engine/spells.js:227"
+   "src/engine/spells.js:228"
   ]
  },
  "Son maître pratique la magie de la mort : sans effet.": {
   "at": [
-   "src/engine/spells.js:229"
+   "src/engine/spells.js:230"
   ]
  },
  "Aucun lieu de culte dans la cité : il n'y aurait que les inconvénients.": {
   "at": [
-   "src/engine/spells.js:230"
+   "src/engine/spells.js:231"
   ]
  },
  "La forteresse est déjà là.": {
   "at": [
-   "src/engine/spells.js:231"
+   "src/engine/spells.js:232"
   ]
  },
  "Le cercle d'invocation est déjà là.": {
   "at": [
-   "src/engine/spells.js:232"
+   "src/engine/spells.js:233"
   ]
  },
  "Case inexplorée.": {
   "at": [
-   "src/engine/spells.js:237"
+   "src/engine/spells.js:238"
   ]
  },
  "Il faut voir la case pour y viser des troupes.": {
   "at": [
-   "src/engine/spells.js:238"
+   "src/engine/spells.js:239"
   ]
  },
  "L'Égide arcanique de {0} repousse les sorts de ce royaume.": {
   "at": [
-   "src/engine/spells.js:244"
+   "src/engine/spells.js:245"
   ],
   "args": [
    "tc.name"
@@ -12632,25 +12637,25 @@
  },
  "Aucun rival connu n'entretient d'enchantement global.": {
   "at": [
-   "src/engine/spells.js:247",
+   "src/engine/spells.js:248",
    "src/ui/magicui.js:47",
    "src/ui/magicui.js:82"
   ]
  },
  "Choisissez un sorcier rival.": {
   "at": [
-   "src/engine/spells.js:248",
+   "src/engine/spells.js:249",
    "src/engine/events.js:1092"
   ]
  },
  "N'entretient aucun enchantement global.": {
   "at": [
-   "src/engine/spells.js:248"
+   "src/engine/spells.js:249"
   ]
  },
  "{0} n'est plus entretenu.": {
   "at": [
-   "src/engine/spells.js:248"
+   "src/engine/spells.js:249"
   ],
   "args": [
    "DATA.spells[target.spell].name"
@@ -12658,7 +12663,7 @@
  },
  "{0} n'incante rien en ce moment.": {
   "at": [
-   "src/engine/spells.js:250"
+   "src/engine/spells.js:251"
   ],
   "args": [
    "U.cap(Players.nameFor(game, pl.id, o.id))"
@@ -12666,12 +12671,12 @@
  },
  "Déjà actif.": {
   "at": [
-   "src/engine/spells.js:252"
+   "src/engine/spells.js:253"
   ]
  },
  "{0} entretient déjà cet enchantement.": {
   "at": [
-   "src/engine/spells.js:254"
+   "src/engine/spells.js:255"
   ],
   "args": [
    "U.cap(Players.nameFor(game, pl.id, holder.id))"
@@ -12679,24 +12684,24 @@
  },
  "Aucun héros à ressusciter.": {
   "at": [
-   "src/engine/spells.js:256"
+   "src/engine/spells.js:257"
   ]
  },
  "Ce héros n'est plus parmi les morts.": {
   "at": [
-   "src/engine/spells.js:257"
+   "src/engine/spells.js:258"
   ]
  },
  "Aucun enchantement global adverse.": {
   "at": [
-   "src/engine/spells.js:258",
-   "src/engine/spells.js:745",
+   "src/engine/spells.js:259",
+   "src/engine/spells.js:746",
    "src/ui/magicui.js:73"
   ]
  },
  "{0} n'est plus à portée : dissipé, ou un traité vous lie désormais à son maître.": {
   "at": [
-   "src/engine/spells.js:259"
+   "src/engine/spells.js:260"
   ],
   "args": [
    "DATA.spells[target.spell] ? DATA.spells[target.spell].name : 'Cet enchantement'"
@@ -12704,24 +12709,24 @@
  },
  "Cet enchantement": {
   "at": [
-   "src/engine/spells.js:259"
+   "src/engine/spells.js:260"
   ]
  },
  "Aucun héros disponible.": {
   "at": [
-   "src/engine/spells.js:262",
-   "src/engine/spells.js:587"
+   "src/engine/spells.js:263",
+   "src/engine/spells.js:588"
   ]
  },
  "L'Élu est déjà incarné.": {
   "at": [
-   "src/engine/spells.js:264",
-   "src/engine/spells.js:597"
+   "src/engine/spells.js:265",
+   "src/engine/spells.js:598"
   ]
  },
  "Aucune place autour de {0} pour accueillir le héros.": {
   "at": [
-   "src/engine/spells.js:266"
+   "src/engine/spells.js:267"
   ],
   "args": [
    "sc.name"
@@ -12729,24 +12734,24 @@
  },
  "Aucune terre corrompue ici ni autour.": {
   "at": [
-   "src/engine/spells.js:267",
-   "src/engine/spells.js:650"
+   "src/engine/spells.js:268",
+   "src/engine/spells.js:651"
   ]
  },
  "Il faut viser une faille ouverte.": {
   "at": [
-   "src/engine/spells.js:268"
+   "src/engine/spells.js:269"
   ]
  },
  "Aucune unité blessée à soigner ici.": {
   "at": [
-   "src/engine/spells.js:271"
+   "src/engine/spells.js:272"
   ]
  },
  "{0} or": {
   "at": [
-   "src/engine/spells.js:291",
-   "src/engine/spells.js:298",
+   "src/engine/spells.js:292",
+   "src/engine/spells.js:299",
    "src/ui/ui.js:205",
    "src/ui/city.js:658"
   ],
@@ -12756,7 +12761,7 @@
  },
  "{0} puissance": {
   "at": [
-   "src/engine/spells.js:292",
+   "src/engine/spells.js:293",
    "src/ui/city.js:396"
   ],
   "args": [
@@ -12765,7 +12770,7 @@
  },
  "troupes {0}{1} % de coût": {
   "at": [
-   "src/engine/spells.js:293"
+   "src/engine/spells.js:294"
   ],
   "args": [
    "du > 0 ? '+' : '−'",
@@ -12774,7 +12779,7 @@
  },
  "plus d'armes en mithril à {0}": {
   "at": [
-   "src/engine/spells.js:295"
+   "src/engine/spells.js:296"
   ],
   "args": [
    "city.name"
@@ -12782,12 +12787,12 @@
  },
  "plus d'armes en mithril possibles": {
   "at": [
-   "src/engine/spells.js:295"
+   "src/engine/spells.js:296"
   ]
  },
  "armes en mithril à {0}": {
   "at": [
-   "src/engine/spells.js:296"
+   "src/engine/spells.js:297"
   ],
   "args": [
    "city.name"
@@ -12795,12 +12800,12 @@
  },
  "armes en mithril avec une Guilde des alchimistes": {
   "at": [
-   "src/engine/spells.js:296"
+   "src/engine/spells.js:297"
   ]
  },
  "{0} puiss.": {
   "at": [
-   "src/engine/spells.js:298"
+   "src/engine/spells.js:299"
   ],
   "args": [
    "(dp > 0 ? '+' : '−') + Math.abs(dp)"
@@ -12808,13 +12813,13 @@
  },
  " (aucune de vos cités ne l'exploite)": {
   "at": [
-   "src/engine/spells.js:298",
-   "src/engine/spells.js:327"
+   "src/engine/spells.js:299",
+   "src/engine/spells.js:328"
   ]
  },
  "{0} nourriture{1}": {
   "at": [
-   "src/engine/spells.js:323"
+   "src/engine/spells.js:324"
   ],
   "args": [
    "sg(dFood) + f(Math.abs(dFood))",
@@ -12823,7 +12828,7 @@
  },
  " (taille maximale {0}{1})": {
   "at": [
-   "src/engine/spells.js:323"
+   "src/engine/spells.js:324"
   ],
   "args": [
    "sg(dPop)",
@@ -12832,17 +12837,17 @@
  },
  " (taille déjà au plafond)": {
   "at": [
-   "src/engine/spells.js:323"
+   "src/engine/spells.js:324"
   ]
  },
  " (taille maximale inchangée)": {
   "at": [
-   "src/engine/spells.js:323"
+   "src/engine/spells.js:324"
   ]
  },
  "{0} % de production": {
   "at": [
-   "src/engine/spells.js:324"
+   "src/engine/spells.js:325"
   ],
   "args": [
    "sg(dProd) + f(Math.abs(dProd))"
@@ -12850,17 +12855,17 @@
  },
  "passable sans route": {
   "at": [
-   "src/engine/spells.js:325"
+   "src/engine/spells.js:326"
   ]
  },
  "infranchissable sans route": {
   "at": [
-   "src/engine/spells.js:325"
+   "src/engine/spells.js:326"
   ]
  },
  " et ": {
   "at": [
-   "src/engine/spells.js:326",
+   "src/engine/spells.js:327",
    "src/ui/ui.js:168",
    "src/ui/combatview.js:1738",
    "src/ui/setup.js:262"
@@ -12869,12 +12874,12 @@
  },
  "rien de plus ni de moins": {
   "at": [
-   "src/engine/spells.js:327"
+   "src/engine/spells.js:328"
   ]
  },
  "{0} nour.": {
   "at": [
-   "src/engine/spells.js:332"
+   "src/engine/spells.js:333"
   ],
   "args": [
    "sg(dFood) + f(Math.abs(dFood))"
@@ -12882,7 +12887,7 @@
  },
  "{0} % prod.": {
   "at": [
-   "src/engine/spells.js:332"
+   "src/engine/spells.js:333"
   ],
   "args": [
    "sg(dProd) + f(Math.abs(dProd))"
@@ -12890,27 +12895,27 @@
  },
  "Aucune unité amie ici.": {
   "at": [
-   "src/engine/spells.js:339"
+   "src/engine/spells.js:340"
   ]
  },
  "Case occupée de l'autre côté.": {
   "at": [
-   "src/engine/spells.js:341"
+   "src/engine/spells.js:342"
   ]
  },
  "Une cité étrangère occupe la case de l'autre plan.": {
   "at": [
-   "src/engine/spells.js:344"
+   "src/engine/spells.js:345"
   ]
  },
  "Trop d'unités vous attendent déjà de l'autre côté.": {
   "at": [
-   "src/engine/spells.js:345"
+   "src/engine/spells.js:346"
   ]
  },
  "Un traité vous lie à {0}, à qui sont ces troupes.": {
   "at": [
-   "src/engine/spells.js:354"
+   "src/engine/spells.js:355"
   ],
   "args": [
    "Players.nameFor(game, pl.id, o.owner)"
@@ -12918,95 +12923,95 @@
  },
  "Ce terrain ne peut pas être changé.": {
   "at": [
-   "src/engine/spells.js:355",
-   "src/engine/spells.js:522"
+   "src/engine/spells.js:356",
+   "src/engine/spells.js:523"
   ]
  },
  "Impossible ici (ni eau, ni colline, ni montagne, ni nœud).": {
   "at": [
-   "src/engine/spells.js:356",
-   "src/engine/spells.js:526"
+   "src/engine/spells.js:357",
+   "src/engine/spells.js:527"
   ]
  },
  "C'est déjà un volcan.": {
   "at": [
-   "src/engine/spells.js:356",
-   "src/engine/spells.js:527"
+   "src/engine/spells.js:357",
+   "src/engine/spells.js:528"
   ]
  },
  "Impossible sur l'eau.": {
   "at": [
-   "src/engine/spells.js:357",
-   "src/engine/spells.js:536"
+   "src/engine/spells.js:358",
+   "src/engine/spells.js:537"
   ]
  },
  "Cette terre est déjà corrompue.": {
   "at": [
-   "src/engine/spells.js:357"
+   "src/engine/spells.js:358"
   ]
  },
  "Aucun minerai transmutable ici.": {
   "at": [
-   "src/engine/spells.js:358",
-   "src/engine/spells.js:545"
+   "src/engine/spells.js:359",
+   "src/engine/spells.js:546"
   ]
  },
  "Aucune unité ennemie ici.": {
   "at": [
-   "src/engine/spells.js:359",
-   "src/engine/spells.js:678",
-   "src/engine/spells.js:695"
+   "src/engine/spells.js:360",
+   "src/engine/spells.js:679",
+   "src/engine/spells.js:696"
   ]
  },
  "Aucune unité ennemie à figer ici.": {
   "at": [
-   "src/engine/spells.js:360",
-   "src/engine/spells.js:783"
+   "src/engine/spells.js:361",
+   "src/engine/spells.js:784"
   ]
  },
  "Rien à dissiper ici.": {
   "at": [
-   "src/engine/spells.js:364"
+   "src/engine/spells.js:365"
   ]
  },
  "Il faut une case d'océan.": {
   "at": [
-   "src/engine/spells.js:367",
-   "src/engine/spells.js:622"
+   "src/engine/spells.js:368",
+   "src/engine/spells.js:623"
   ]
  },
  "Des unités étrangères occupent cette case.": {
   "at": [
-   "src/engine/spells.js:367",
-   "src/engine/spells.js:623"
+   "src/engine/spells.js:368",
+   "src/engine/spells.js:624"
   ]
  },
  "Aucune route à enchanter ici.": {
   "at": [
-   "src/engine/spells.js:368"
+   "src/engine/spells.js:369"
   ]
  },
  "Il faut viser un nœud.": {
-  "at": [
-   "src/engine/spells.js:371",
-   "src/engine/spells.js:772"
-  ]
- },
- "Il faut un nœud lié à un sorcier rival.": {
   "at": [
    "src/engine/spells.js:372",
    "src/engine/spells.js:773"
   ]
  },
- "Ce nœud est déjà perverti.": {
+ "Il faut un nœud lié à un sorcier rival.": {
   "at": [
    "src/engine/spells.js:373",
    "src/engine/spells.js:774"
   ]
  },
+ "Ce nœud est déjà perverti.": {
+  "at": [
+   "src/engine/spells.js:374",
+   "src/engine/spells.js:775"
+  ]
+ },
  "La colère de la nature fait trembler {0} ({1}{2}).": {
   "at": [
-   "src/engine/spells.js:420"
+   "src/engine/spells.js:421"
   ],
   "args": [
    "c.name",
@@ -13016,24 +13021,24 @@
  },
  "unité perdue": {
   "at": [
-   "src/engine/spells.js:420"
+   "src/engine/spells.js:421"
   ]
  },
  "unités perdues": {
   "at": [
-   "src/engine/spells.js:420",
-   "src/engine/spells.js:420"
+   "src/engine/spells.js:421",
+   "src/engine/spells.js:421"
   ],
   "hint": "pluriel de « unité perdue »"
  },
  ", aucun bâtiment perdu": {
   "at": [
-   "src/engine/spells.js:420"
+   "src/engine/spells.js:421"
   ]
  },
  "La colère de la nature frappe {0}, cité de {1}.": {
   "at": [
-   "src/engine/spells.js:421"
+   "src/engine/spells.js:422"
   ],
   "args": [
    "c.name",
@@ -13042,12 +13047,12 @@
  },
  "Le Livre de légende vous a échappé : l'incantation se dissipe.": {
   "at": [
-   "src/engine/spells.js:458"
+   "src/engine/spells.js:459"
   ]
  },
  "{0} est dissipé par {1} de {2}.": {
   "at": [
-   "src/engine/spells.js:462"
+   "src/engine/spells.js:463"
   ],
   "args": [
    "sp.name",
@@ -13057,7 +13062,7 @@
  },
  "{0} dissipe {1} de {2}.": {
   "at": [
-   "src/engine/spells.js:463"
+   "src/engine/spells.js:464"
   ],
   "args": [
    "by",
@@ -13067,7 +13072,7 @@
  },
  "{0} est dissipé.": {
   "at": [
-   "src/engine/spells.js:464"
+   "src/engine/spells.js:465"
   ],
   "args": [
    "sp.name"
@@ -13075,12 +13080,12 @@
  },
  "Aucune place pour accueillir la créature.": {
   "at": [
-   "src/engine/spells.js:470"
+   "src/engine/spells.js:471"
   ]
  },
  "Invocation réussie à {0} : {1}.": {
   "at": [
-   "src/engine/spells.js:472"
+   "src/engine/spells.js:473"
   ],
   "args": [
    "c.name",
@@ -13089,24 +13094,24 @@
  },
  "Plus aucune unité à enchanter.": {
   "at": [
-   "src/engine/spells.js:475"
+   "src/engine/spells.js:476"
   ]
  },
  "unité enchantée": {
   "at": [
-   "src/engine/spells.js:477"
+   "src/engine/spells.js:478"
   ]
  },
  "unités enchantées": {
   "at": [
-   "src/engine/spells.js:477",
-   "src/engine/spells.js:477"
+   "src/engine/spells.js:478",
+   "src/engine/spells.js:478"
   ],
   "hint": "pluriel de « unité enchantée »"
  },
  "{0} par le chaos : {1}.": {
   "at": [
-   "src/engine/spells.js:480"
+   "src/engine/spells.js:481"
   ],
   "args": [
    "Units.subj(u, 'est transformé')",
@@ -13115,18 +13120,18 @@
  },
  "est transformé": {
   "at": [
-   "src/engine/spells.js:480"
+   "src/engine/spells.js:481"
   ]
  },
  "sont transformés": {
   "at": [
-   "src/engine/spells.js:480"
+   "src/engine/spells.js:481"
   ],
   "hint": "pluriel de « est transformé » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} sur {1}.": {
   "at": [
-   "src/engine/spells.js:481"
+   "src/engine/spells.js:482"
   ],
   "args": [
    "sp.name",
@@ -13135,7 +13140,7 @@
  },
  "{0} est consacrée : ses malédictions se lèvent.": {
   "at": [
-   "src/engine/spells.js:486"
+   "src/engine/spells.js:487"
   ],
   "args": [
    "c.name"
@@ -13143,7 +13148,7 @@
  },
  "{0} est protégée par {1}{2}.": {
   "at": [
-   "src/engine/spells.js:487"
+   "src/engine/spells.js:488"
   ],
   "args": [
    "c.name",
@@ -13153,7 +13158,7 @@
  },
  "L'Égide arcanique de {0} repousse {1}.": {
   "at": [
-   "src/engine/spells.js:491"
+   "src/engine/spells.js:492"
   ],
   "args": [
    "c.name",
@@ -13162,7 +13167,7 @@
  },
  "{0} s'abat sur {1}.": {
   "at": [
-   "src/engine/spells.js:493"
+   "src/engine/spells.js:494"
   ],
   "args": [
    "sp.name",
@@ -13171,7 +13176,7 @@
  },
  "{0} a lancé {1} sur {2} !": {
   "at": [
-   "src/engine/spells.js:494"
+   "src/engine/spells.js:495"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13181,7 +13186,7 @@
  },
  "Enchantement global actif : {0}.": {
   "at": [
-   "src/engine/spells.js:498"
+   "src/engine/spells.js:499"
   ],
   "args": [
    "sp.name"
@@ -13189,7 +13194,7 @@
  },
  "{0} a lancé {1}.": {
   "at": [
-   "src/engine/spells.js:499"
+   "src/engine/spells.js:500"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13198,9 +13203,9 @@
  },
  "{0} est lancé.": {
   "at": [
-   "src/engine/spells.js:504",
-   "src/engine/spells.js:506",
-   "src/engine/spells.js:553"
+   "src/engine/spells.js:505",
+   "src/engine/spells.js:507",
+   "src/engine/spells.js:554"
   ],
   "args": [
    "sp.name"
@@ -13208,12 +13213,12 @@
  },
  "Le terrain se transforme.": {
   "at": [
-   "src/engine/spells.js:523"
+   "src/engine/spells.js:524"
   ]
  },
  "Un volcan jaillit sous {0}, lancé par {1}{2}.": {
   "at": [
-   "src/engine/spells.js:531"
+   "src/engine/spells.js:532"
   ],
   "args": [
    "c.name",
@@ -13223,7 +13228,7 @@
  },
  "Un volcan jaillit du sol{0}.": {
   "at": [
-   "src/engine/spells.js:533"
+   "src/engine/spells.js:534"
   ],
   "args": [
    "c ? ' sous ' + c.name + (lost.length ? ' (' + Cities.lostText(lost) + ')' : '') : ''"
@@ -13231,7 +13236,7 @@
  },
  " sous {0}{1}": {
   "at": [
-   "src/engine/spells.js:533"
+   "src/engine/spells.js:534"
   ],
   "args": [
    "c.name",
@@ -13240,7 +13245,7 @@
  },
  "{0} a corrompu une terre de {1}.": {
   "at": [
-   "src/engine/spells.js:539"
+   "src/engine/spells.js:540"
   ],
   "args": [
    "U.cap(Players.nameFor(game, oc.owner, pl.id))",
@@ -13249,27 +13254,27 @@
  },
  "La terre est corrompue.": {
   "at": [
-   "src/engine/spells.js:540"
+   "src/engine/spells.js:541"
   ]
  },
  "Le minerai est transmuté.": {
   "at": [
-   "src/engine/spells.js:546"
+   "src/engine/spells.js:547"
   ]
  },
  "Les routes s'enchantent.": {
   "at": [
-   "src/engine/spells.js:550"
+   "src/engine/spells.js:551"
   ]
  },
  "Sort de combat.": {
   "at": [
-   "src/engine/spells.js:552"
+   "src/engine/spells.js:553"
   ]
  },
  "{0} a lancé le Sort de Maîtrise et règne désormais sur toute magie !": {
   "at": [
-   "src/engine/spells.js:561"
+   "src/engine/spells.js:562"
   ],
   "args": [
    "pl.name"
@@ -13277,12 +13282,12 @@
  },
  "Le Sort de Maîtrise est accompli.": {
   "at": [
-   "src/engine/spells.js:562"
+   "src/engine/spells.js:563"
   ]
  },
  "Vous revenez dans le monde à {0}.": {
   "at": [
-   "src/engine/spells.js:568"
+   "src/engine/spells.js:569"
   ],
   "args": [
    "c.name"
@@ -13290,7 +13295,7 @@
  },
  "Le cercle d'invocation est déplacé à {0}.": {
   "at": [
-   "src/engine/spells.js:570"
+   "src/engine/spells.js:571"
   ],
   "args": [
    "game.cities[t.city].name"
@@ -13298,7 +13303,7 @@
  },
  "La forteresse s'élève désormais à {0}{1}.": {
   "at": [
-   "src/engine/spells.js:578"
+   "src/engine/spells.js:579"
   ],
   "args": [
    "c.name",
@@ -13307,18 +13312,18 @@
  },
  ", avec son Relais de magie": {
   "at": [
-   "src/engine/spells.js:578"
+   "src/engine/spells.js:579"
   ]
  },
  "Aucune place pour accueillir le héros.": {
   "at": [
-   "src/engine/spells.js:589",
-   "src/engine/spells.js:613"
+   "src/engine/spells.js:590",
+   "src/engine/spells.js:614"
   ]
  },
  "{0} ({1}) répond à votre appel.": {
   "at": [
-   "src/engine/spells.js:594"
+   "src/engine/spells.js:595"
   ],
   "args": [
    "h.name",
@@ -13327,12 +13332,12 @@
  },
  "Aucune place pour accueillir l'Élu.": {
   "at": [
-   "src/engine/spells.js:600"
+   "src/engine/spells.js:601"
   ]
  },
  "L'Élu s'incarne à {0}.": {
   "at": [
-   "src/engine/spells.js:604"
+   "src/engine/spells.js:605"
   ],
   "args": [
    "c.name"
@@ -13340,32 +13345,23 @@
  },
  "Aucun héros.": {
   "at": [
-   "src/engine/spells.js:607"
+   "src/engine/spells.js:608"
   ]
  },
  "Ce héros est déjà revenu au monde.": {
   "at": [
-   "src/engine/spells.js:611"
+   "src/engine/spells.js:612"
   ]
  },
  "{0} revient d'entre les morts.": {
   "at": [
-   "src/engine/spells.js:617"
+   "src/engine/spells.js:618"
   ],
   "args": [
    "d.hero.name"
   ]
  },
  "Objet créé : {0} ({1}).": {
-  "at": [
-   "src/engine/spells.js:619"
-  ],
-  "args": [
-   "it.name",
-   "Items.describe(it)"
-  ]
- },
- "Artefact créé : {0} ({1}).": {
   "at": [
    "src/engine/spells.js:620"
   ],
@@ -13374,24 +13370,33 @@
    "Items.describe(it)"
   ]
  },
- "L'île ne parvient pas à émerger ici.": {
+ "Artefact créé : {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:623"
+   "src/engine/spells.js:621"
+  ],
+  "args": [
+   "it.name",
+   "Items.describe(it)"
   ]
  },
- "Trop d'unités sur cette case.": {
+ "L'île ne parvient pas à émerger ici.": {
   "at": [
    "src/engine/spells.js:624"
   ]
  },
- "Une île flottante émerge des flots.": {
+ "Trop d'unités sur cette case.": {
   "at": [
    "src/engine/spells.js:625"
   ]
  },
+ "Une île flottante émerge des flots.": {
+  "at": [
+   "src/engine/spells.js:626"
+  ]
+ },
  "La région se révèle à vous{0}.": {
   "at": [
-   "src/engine/spells.js:634"
+   "src/engine/spells.js:635"
   ],
   "args": [
    "n ? ' : ' + U.n(n, 'armée repérée', 'armées repérées') + ' (le détail au survol de leur ca"
@@ -13399,7 +13404,7 @@
  },
  " : {0} (le détail au survol de leur case)": {
   "at": [
-   "src/engine/spells.js:634"
+   "src/engine/spells.js:635"
   ],
   "args": [
    "U.n(n, 'armée repérée', 'armées repérées')"
@@ -13407,39 +13412,39 @@
  },
  "armée repérée": {
   "at": [
-   "src/engine/spells.js:634"
+   "src/engine/spells.js:635"
   ]
  },
  "armées repérées": {
   "at": [
-   "src/engine/spells.js:634",
-   "src/engine/spells.js:634"
+   "src/engine/spells.js:635",
+   "src/engine/spells.js:635"
   ],
   "hint": "pluriel de « armée repérée »"
  },
  ", sans armée en vue": {
   "at": [
-   "src/engine/spells.js:634"
+   "src/engine/spells.js:635"
   ]
  },
  "Vos troupes basculent dans l'autre plan.": {
   "at": [
-   "src/engine/spells.js:641"
+   "src/engine/spells.js:642"
   ]
  },
  "Pas de forteresse.": {
   "at": [
-   "src/engine/spells.js:644"
+   "src/engine/spells.js:645"
   ]
  },
  "Un navire ne peut pas être rappelé.": {
   "at": [
-   "src/engine/spells.js:645"
+   "src/engine/spells.js:646"
   ]
  },
  "{0} est rappelé à la forteresse.": {
   "at": [
-   "src/engine/spells.js:647"
+   "src/engine/spells.js:648"
   ],
   "args": [
    "Units.label(u)"
@@ -13447,7 +13452,7 @@
  },
  "{0} terres corrompues sont purifiées.": {
   "at": [
-   "src/engine/spells.js:652"
+   "src/engine/spells.js:653"
   ],
   "args": [
    "tiles.length"
@@ -13455,17 +13460,17 @@
  },
  "La terre est purifiée.": {
   "at": [
-   "src/engine/spells.js:652"
+   "src/engine/spells.js:653"
   ]
  },
  "Il faut viser une faille.": {
   "at": [
-   "src/engine/spells.js:655"
+   "src/engine/spells.js:656"
   ]
  },
  "Une faille entre les plans s'est refermée ({0}, {1}).": {
   "at": [
-   "src/engine/spells.js:657"
+   "src/engine/spells.js:658"
   ],
   "args": [
    "s.x",
@@ -13474,7 +13479,7 @@
  },
  "La faille se referme ; le voile se recoud un peu ({0} %).": {
   "at": [
-   "src/engine/spells.js:658"
+   "src/engine/spells.js:659"
   ],
   "args": [
    "Math.round(game.veil)"
@@ -13482,7 +13487,7 @@
  },
  "Vous voici sur la carte, à {0}.": {
   "at": [
-   "src/engine/spells.js:660"
+   "src/engine/spells.js:661"
   ],
   "args": [
    "game.cities[pl.fortress].name"
@@ -13490,13 +13495,13 @@
  },
  "Aucune unité blessée à soigner.": {
   "at": [
-   "src/engine/spells.js:666",
-   "src/engine/spells.js:673"
+   "src/engine/spells.js:667",
+   "src/engine/spells.js:674"
   ]
  },
  "{0} ({1} PV rendus).": {
   "at": [
-   "src/engine/spells.js:670"
+   "src/engine/spells.js:671"
   ],
   "args": [
    "U.n(units.length, 'unité soignée', 'unités soignées')",
@@ -13505,22 +13510,22 @@
  },
  "unité soignée": {
   "at": [
-   "src/engine/spells.js:670",
-   "src/engine/spells.js:671"
+   "src/engine/spells.js:671",
+   "src/engine/spells.js:672"
   ]
  },
  "unités soignées": {
   "at": [
-   "src/engine/spells.js:670",
-   "src/engine/spells.js:670",
    "src/engine/spells.js:671",
-   "src/engine/spells.js:671"
+   "src/engine/spells.js:671",
+   "src/engine/spells.js:672",
+   "src/engine/spells.js:672"
   ],
   "hint": "pluriel de « unité soignée »"
  },
  "{0}, {1} PV rendus.": {
   "at": [
-   "src/engine/spells.js:671"
+   "src/engine/spells.js:672"
   ],
   "args": [
    "U.n(units.length, 'unité soignée', 'unités soignées')",
@@ -13529,44 +13534,44 @@
  },
  "Les troupes sont entièrement soignées.": {
   "at": [
-   "src/engine/spells.js:673"
+   "src/engine/spells.js:674"
   ]
  },
  "La tempête": {
   "at": [
-   "src/engine/spells.js:680"
+   "src/engine/spells.js:681"
   ]
  },
  "détruites": {
   "at": [
-   "src/engine/spells.js:689"
+   "src/engine/spells.js:690"
   ]
  },
  "détruite": {
   "at": [
-   "src/engine/spells.js:689"
+   "src/engine/spells.js:690"
   ]
  },
  "aucune unité détruite": {
   "at": [
-   "src/engine/spells.js:689"
+   "src/engine/spells.js:690"
   ]
  },
  "autre blessée": {
   "at": [
-   "src/engine/spells.js:689"
+   "src/engine/spells.js:690"
   ]
  },
  "autres blessées": {
   "at": [
-   "src/engine/spells.js:689",
-   "src/engine/spells.js:689"
+   "src/engine/spells.js:690",
+   "src/engine/spells.js:690"
   ],
   "hint": "pluriel de « autre blessée »"
  },
  "{0} lance {1} sur vos troupes : {2}.": {
   "at": [
-   "src/engine/spells.js:691"
+   "src/engine/spells.js:692"
   ],
   "args": [
    "U.cap(Players.nameFor(game, vic, pl.id))",
@@ -13576,7 +13581,7 @@
  },
  "{0} s'abat : {1}.": {
   "at": [
-   "src/engine/spells.js:692"
+   "src/engine/spells.js:693"
   ],
   "args": [
    "sname",
@@ -13585,7 +13590,7 @@
  },
  "{0} emportée{1}{2}": {
   "at": [
-   "src/engine/spells.js:699"
+   "src/engine/spells.js:700"
   ],
   "args": [
    "U.n(figs, 'figurine')",
@@ -13595,7 +13600,7 @@
  },
  ", dont {0} ({1})": {
   "at": [
-   "src/engine/spells.js:699"
+   "src/engine/spells.js:700"
   ],
   "args": [
    "U.n(killed, 'unité entière', 'unités entières')",
@@ -13604,19 +13609,19 @@
  },
  "unité entière": {
   "at": [
-   "src/engine/spells.js:699"
+   "src/engine/spells.js:700"
   ]
  },
  "unités entières": {
   "at": [
-   "src/engine/spells.js:699",
-   "src/engine/spells.js:699"
+   "src/engine/spells.js:700",
+   "src/engine/spells.js:700"
   ],
   "hint": "pluriel de « unité entière »"
  },
  "Le vent noir {0} souffle sur vos troupes : {1}.": {
   "at": [
-   "src/engine/spells.js:701"
+   "src/engine/spells.js:702"
   ],
   "args": [
    "U.de(Players.nameFor(game, vic, pl.id))",
@@ -13625,7 +13630,7 @@
  },
  "Le vent noir : {0}.": {
   "at": [
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:703"
   ],
   "args": [
    "what"
@@ -13633,24 +13638,24 @@
  },
  "aucun bâtiment perdu": {
   "at": [
-   "src/engine/spells.js:709"
+   "src/engine/spells.js:710"
   ]
  },
  "unité engloutie": {
   "at": [
-   "src/engine/spells.js:709"
+   "src/engine/spells.js:710"
   ]
  },
  "unités englouties": {
   "at": [
-   "src/engine/spells.js:709",
-   "src/engine/spells.js:709"
+   "src/engine/spells.js:710",
+   "src/engine/spells.js:710"
   ],
   "hint": "pluriel de « unité engloutie »"
  },
  "{0} fait trembler la terre sous {1} ({2}).": {
   "at": [
-   "src/engine/spells.js:710"
+   "src/engine/spells.js:711"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13660,7 +13665,7 @@
  },
  "La terre tremble sous {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:711"
+   "src/engine/spells.js:712"
   ],
   "args": [
    "c.name",
@@ -13669,7 +13674,7 @@
  },
  "la moitié de la population disparaît{0}{1}{2}": {
   "at": [
-   "src/engine/spells.js:721"
+   "src/engine/spells.js:722"
   ],
   "args": [
    "lost.length ? ' ; ' + Cities.lostText(lost) : ''",
@@ -13679,19 +13684,19 @@
  },
  "unité anéantie": {
   "at": [
-   "src/engine/spells.js:721"
+   "src/engine/spells.js:722"
   ]
  },
  "unités anéanties": {
   "at": [
-   "src/engine/spells.js:721",
-   "src/engine/spells.js:721"
+   "src/engine/spells.js:722",
+   "src/engine/spells.js:722"
   ],
   "hint": "pluriel de « unité anéantie »"
  },
  " ; {0} alentour": {
   "at": [
-   "src/engine/spells.js:721"
+   "src/engine/spells.js:722"
   ],
   "args": [
    "U.n(nc, 'terre corrompue', 'terres corrompues')"
@@ -13699,7 +13704,7 @@
  },
  "{0} appelle le Néant sur {1} : {2}.": {
   "at": [
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:723"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13709,7 +13714,7 @@
  },
  "Le Néant frappe {0} : {1}.": {
   "at": [
-   "src/engine/spells.js:723"
+   "src/engine/spells.js:724"
   ],
   "args": [
    "c.name",
@@ -13718,7 +13723,7 @@
  },
  "{0} lance le Vœu de mort : {1}.": {
   "at": [
-   "src/engine/spells.js:728"
+   "src/engine/spells.js:729"
   ],
   "args": [
    "U.cap(Players.nameFor(game, +o, pl.id))",
@@ -13727,19 +13732,19 @@
  },
  "de vos unités périt": {
   "at": [
-   "src/engine/spells.js:728"
+   "src/engine/spells.js:729"
   ]
  },
  "de vos unités périssent": {
   "at": [
-   "src/engine/spells.js:728",
-   "src/engine/spells.js:728"
+   "src/engine/spells.js:729",
+   "src/engine/spells.js:729"
   ],
   "hint": "pluriel de « de vos unités périt »"
  },
  "Le Vœu de mort fauche {0}.": {
   "at": [
-   "src/engine/spells.js:729"
+   "src/engine/spells.js:730"
   ],
   "args": [
    "U.n(n, 'unité ennemie', 'unités ennemies')"
@@ -13747,19 +13752,19 @@
  },
  "unité ennemie": {
   "at": [
-   "src/engine/spells.js:729"
+   "src/engine/spells.js:730"
   ]
  },
  "unités ennemies": {
   "at": [
-   "src/engine/spells.js:729",
-   "src/engine/spells.js:729"
+   "src/engine/spells.js:730",
+   "src/engine/spells.js:730"
   ],
   "hint": "pluriel de « unité ennemie »"
  },
  "{0} lance le Grand Renvoi : vous perdez {1}.": {
   "at": [
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:735"
   ],
   "args": [
    "U.cap(Players.nameFor(game, +o, pl.id))",
@@ -13768,7 +13773,7 @@
  },
  "{0} dans {1}{2}.": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:736"
   ],
   "args": [
    "U.n(n, 'créature renvoyée', 'créatures renvoyées')",
@@ -13778,29 +13783,29 @@
  },
  "créature renvoyée": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:736"
   ]
  },
  "créatures renvoyées": {
   "at": [
-   "src/engine/spells.js:735",
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:736",
+   "src/engine/spells.js:736"
   ],
   "hint": "pluriel de « créature renvoyée »"
  },
  "leur royaume": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:736"
   ]
  },
  "son royaume": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:736"
   ]
  },
  ", dont les vôtres : {0}": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:736"
   ],
   "args": [
    "U.tally(per[pl.id])"
@@ -13808,7 +13813,7 @@
  },
  "{0} draine {1} points de votre mana !": {
   "at": [
-   "src/engine/spells.js:737"
+   "src/engine/spells.js:738"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13817,7 +13822,7 @@
  },
  "{0} points de mana drainés à {1}.": {
   "at": [
-   "src/engine/spells.js:737"
+   "src/engine/spells.js:738"
   ],
   "args": [
    "n",
@@ -13826,7 +13831,7 @@
  },
  "{0} répand des rumeurs contre vous : les autres sorciers se méfient de vous (Subversion).": {
   "at": [
-   "src/engine/spells.js:738"
+   "src/engine/spells.js:739"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -13834,7 +13839,7 @@
  },
  "Les sorciers se méfient désormais de {0}.": {
   "at": [
-   "src/engine/spells.js:738"
+   "src/engine/spells.js:739"
   ],
   "args": [
    "o.name"
@@ -13842,7 +13847,7 @@
  },
  "{0} a lacéré votre esprit : compétence réduite.": {
   "at": [
-   "src/engine/spells.js:739"
+   "src/engine/spells.js:740"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -13850,7 +13855,7 @@
  },
  "La compétence de {0} est entamée.": {
   "at": [
-   "src/engine/spells.js:739"
+   "src/engine/spells.js:740"
   ],
   "args": [
    "o.name"
@@ -13858,7 +13863,7 @@
  },
  "{0} ne lance aucun sort.": {
   "at": [
-   "src/engine/spells.js:740"
+   "src/engine/spells.js:741"
   ],
   "args": [
    "o.name"
@@ -13866,13 +13871,13 @@
  },
  "Mana insuffisant.": {
   "at": [
-   "src/engine/spells.js:740",
+   "src/engine/spells.js:741",
    "src/engine/events.js:695"
   ]
  },
  "{0} a pulvérisé votre incantation de {1}.": {
   "at": [
-   "src/engine/spells.js:740"
+   "src/engine/spells.js:741"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13881,12 +13886,12 @@
  },
  "Incantation adverse anéantie.": {
   "at": [
-   "src/engine/spells.js:740"
+   "src/engine/spells.js:741"
   ]
  },
  "{0} n'a aucun enchantement global.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:742"
   ],
   "args": [
    "o.name"
@@ -13894,7 +13899,7 @@
  },
  "{0} vous a volé {1}.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:742"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13903,7 +13908,7 @@
  },
  "Vous captez {0}.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:742"
   ],
   "args": [
    "DATA.spells[g].name"
@@ -13911,7 +13916,7 @@
  },
  "{0} a brisé votre {1}.": {
   "at": [
-   "src/engine/spells.js:747"
+   "src/engine/spells.js:748"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13920,7 +13925,7 @@
  },
  "Vous brisez {0} {1}.": {
   "at": [
-   "src/engine/spells.js:747"
+   "src/engine/spells.js:748"
   ],
   "args": [
    "DATA.spells[g].name",
@@ -13929,7 +13934,7 @@
  },
  "{0} a tenté de briser votre {1} : il a résisté.": {
   "at": [
-   "src/engine/spells.js:747"
+   "src/engine/spells.js:748"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13938,7 +13943,7 @@
  },
  "{0} {1} résiste à la Disjonction.": {
   "at": [
-   "src/engine/spells.js:747"
+   "src/engine/spells.js:748"
   ],
   "args": [
    "DATA.spells[g].name",
@@ -13947,33 +13952,33 @@
  },
  "Ces enchantements sont les vôtres.": {
   "at": [
-   "src/engine/spells.js:748",
-   "src/engine/spells.js:749"
+   "src/engine/spells.js:749",
+   "src/engine/spells.js:750"
   ]
  },
  "enchantement dissipé": {
   "at": [
-   "src/engine/spells.js:748",
-   "src/engine/spells.js:749"
+   "src/engine/spells.js:749",
+   "src/engine/spells.js:750"
   ]
  },
  "enchantements dissipés": {
   "at": [
-   "src/engine/spells.js:748",
-   "src/engine/spells.js:748",
    "src/engine/spells.js:749",
-   "src/engine/spells.js:749"
+   "src/engine/spells.js:749",
+   "src/engine/spells.js:750",
+   "src/engine/spells.js:750"
   ],
   "hint": "pluriel de « enchantement dissipé »"
  },
  "la garde de l'esprit gardien du nœud": {
   "at": [
-   "src/engine/spells.js:762"
+   "src/engine/spells.js:763"
   ]
  },
  "{0} a dissipé {1}.": {
   "at": [
-   "src/engine/spells.js:767"
+   "src/engine/spells.js:768"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o, pl.id))",
@@ -13982,7 +13987,7 @@
  },
  "Dissipés : {0}{1}.": {
   "at": [
-   "src/engine/spells.js:768"
+   "src/engine/spells.js:769"
   ],
   "args": [
    "names.join(', ')",
@@ -13991,17 +13996,17 @@
  },
  " et le sort qui pervertissait le nœud": {
   "at": [
-   "src/engine/spells.js:768"
+   "src/engine/spells.js:769"
   ]
  },
  "Rien n'a cédé.": {
   "at": [
-   "src/engine/spells.js:768"
+   "src/engine/spells.js:769"
   ]
  },
  "{0} a perverti votre {1} : il vous coûte 5 mana par tour.": {
   "at": [
-   "src/engine/spells.js:776"
+   "src/engine/spells.js:777"
   ],
   "args": [
    "U.cap(Players.nameFor(game, s.owner, pl.id))",
@@ -14010,7 +14015,7 @@
  },
  "Le {0} est perverti.": {
   "at": [
-   "src/engine/spells.js:778"
+   "src/engine/spells.js:779"
   ],
   "args": [
    "Game.siteName(s)"
@@ -14018,12 +14023,12 @@
  },
  "Vos soldats deviennent des loups-garous.": {
   "at": [
-   "src/engine/spells.js:780"
+   "src/engine/spells.js:781"
   ]
  },
  "{0} a figé vos troupes dans la stase.": {
   "at": [
-   "src/engine/spells.js:785"
+   "src/engine/spells.js:786"
   ],
   "args": [
    "U.cap(Players.nameFor(game, us[0].owner, pl.id))"
@@ -14031,7 +14036,7 @@
  },
  "Les ennemis sont figés.": {
   "at": [
-   "src/engine/spells.js:786"
+   "src/engine/spells.js:787"
   ]
  },
  "un citoyen": {
@@ -14625,29 +14630,29 @@
  },
  "Aucun traité": {
   "at": [
-   "src/engine/ai.js:1134"
+   "src/engine/ai.js:1162"
   ]
  },
  "Pacte de paix": {
   "at": [
-   "src/engine/ai.js:1134"
+   "src/engine/ai.js:1162"
   ]
  },
  "Alliance": {
   "at": [
-   "src/engine/ai.js:1134",
+   "src/engine/ai.js:1162",
    "src/ui/panels.js:405"
   ]
  },
  "Guerre": {
   "at": [
-   "src/engine/ai.js:1134",
+   "src/engine/ai.js:1162",
    "src/ui/panels.js:419"
   ]
  },
  "{0} a rompu son traité et vous attaque !": {
   "at": [
-   "src/engine/ai.js:1152"
+   "src/engine/ai.js:1180"
   ],
   "args": [
    "pa.name"
@@ -14655,7 +14660,7 @@
  },
  "Vous êtes en guerre contre {0}.": {
   "at": [
-   "src/engine/ai.js:1156"
+   "src/engine/ai.js:1184"
   ],
   "args": [
    "pb.name"
@@ -14663,7 +14668,7 @@
  },
  "{0} vous déclare la guerre.": {
   "at": [
-   "src/engine/ai.js:1156"
+   "src/engine/ai.js:1184"
   ],
   "args": [
    "pa.name"
@@ -14671,12 +14676,12 @@
  },
  "Seulement avec un sorcier en paix ou allié.": {
   "at": [
-   "src/engine/ai.js:1171"
+   "src/engine/ai.js:1199"
   ]
  },
  "{0} rouvre son territoire à vos troupes.": {
   "at": [
-   "src/engine/ai.js:1173"
+   "src/engine/ai.js:1201"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))"
@@ -14684,7 +14689,7 @@
  },
  "{0} vous interdit son territoire{1}": {
   "at": [
-   "src/engine/ai.js:1177"
+   "src/engine/ai.js:1205"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))",
@@ -14693,7 +14698,7 @@
  },
  " : {0} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1177",
+   "src/engine/ai.js:1205",
    "src/ui/panels.js:407"
   ],
   "args": [
@@ -14702,22 +14707,22 @@
  },
  "unité est reconduite": {
   "at": [
-   "src/engine/ai.js:1177",
-   "src/engine/ai.js:1216"
+   "src/engine/ai.js:1205",
+   "src/engine/ai.js:1244"
   ]
  },
  "unités sont reconduites": {
   "at": [
-   "src/engine/ai.js:1177",
-   "src/engine/ai.js:1177",
-   "src/engine/ai.js:1216",
-   "src/engine/ai.js:1216"
+   "src/engine/ai.js:1205",
+   "src/engine/ai.js:1205",
+   "src/engine/ai.js:1244",
+   "src/engine/ai.js:1244"
   ],
   "hint": "pluriel de « unité est reconduite »"
  },
  "{0} étend son territoire, qu'il vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1216"
+   "src/engine/ai.js:1244"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -14726,7 +14731,7 @@
  },
  "{0} {1}{2} sur votre territoire, qui lui est interdit : {3} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1245"
   ],
   "args": [
    "U.n(n, 'unité', 'unités')",
@@ -14737,27 +14742,27 @@
  },
  " se trouvaient": {
   "at": [
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1245"
   ]
  },
  " se trouvait": {
   "at": [
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1245"
   ]
  },
  "elles sont reconduites": {
   "at": [
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1245"
   ]
  },
  "elle est reconduite": {
   "at": [
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1245"
   ]
  },
  "{0} accepte : faisons front ensemble contre {1}.": {
   "at": [
-   "src/engine/ai.js:1242"
+   "src/engine/ai.js:1270"
   ],
   "args": [
    "pb.name",
@@ -14766,7 +14771,7 @@
  },
  "{0} accepte votre présent.": {
   "at": [
-   "src/engine/ai.js:1244"
+   "src/engine/ai.js:1272"
   ],
   "args": [
    "pb.name"
@@ -14774,7 +14779,7 @@
  },
  "La guerre est déclarée.{0}": {
   "at": [
-   "src/engine/ai.js:1245"
+   "src/engine/ai.js:1273"
   ],
   "args": [
    "broke ? ' Rompre un traité vous coûte l\\'estime de tous les sorciers.' : ''"
@@ -14782,12 +14787,12 @@
  },
  " Rompre un traité vous coûte l'estime de tous les sorciers.": {
   "at": [
-   "src/engine/ai.js:1245"
+   "src/engine/ai.js:1273"
   ]
  },
  "{0} vous a déjà répondu ce tour-ci.": {
   "at": [
-   "src/engine/ai.js:1249"
+   "src/engine/ai.js:1277"
   ],
   "args": [
    "pb.name"
@@ -14795,7 +14800,7 @@
  },
  "{0} accepte : {1}.": {
   "at": [
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1280"
   ],
   "args": [
    "pb.name",
@@ -14804,7 +14809,7 @@
  },
  "{0} refuse.": {
   "at": [
-   "src/engine/ai.js:1254"
+   "src/engine/ai.js:1282"
   ],
   "args": [
    "pb.name"
@@ -14812,7 +14817,7 @@
  },
  "{0} vous propose la paix{1}.": {
   "at": [
-   "src/engine/ai.js:1333"
+   "src/engine/ai.js:1361"
   ],
   "args": [
    "a.name",
@@ -14821,12 +14826,12 @@
  },
  ", avec des concessions": {
   "at": [
-   "src/engine/ai.js:1333"
+   "src/engine/ai.js:1361"
   ]
  },
  "{0} et {1} signent la paix.": {
   "at": [
-   "src/engine/ai.js:1335"
+   "src/engine/ai.js:1363"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, a.id))",
@@ -14835,8 +14840,8 @@
  },
  "{0} vous déclare la guerre !": {
   "at": [
-   "src/engine/ai.js:1352",
-   "src/engine/ai.js:1359"
+   "src/engine/ai.js:1380",
+   "src/engine/ai.js:1387"
   ],
   "args": [
    "a.name"
@@ -14844,8 +14849,8 @@
  },
  "Guerre déclarée à {0}.": {
   "at": [
-   "src/engine/ai.js:1353",
-   "src/engine/ai.js:1360",
+   "src/engine/ai.js:1381",
+   "src/engine/ai.js:1388",
    "src/engine/diplo.js:123"
   ],
   "args": [
@@ -14854,7 +14859,7 @@
  },
  "{0} vous propose un pacte de paix.": {
   "at": [
-   "src/engine/ai.js:1372"
+   "src/engine/ai.js:1400"
   ],
   "args": [
    "a.name"

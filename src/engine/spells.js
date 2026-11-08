@@ -206,6 +206,7 @@ const Spells = {
         if (id === 'flight' && st.flying) return { ok: false, why: 'L\'unité vole déjà.' };
         if (id === 'water_walking' && (st.flying || st.swimming || st.ab.waterWalking)) return { ok: false, why: st.flying ? 'L\'unité vole déjà.' : 'L\'unité va déjà sur l\'eau.' };
       }
+      if (sp.target === 'friendlyHero' && !u.hero) return { ok: false, why: 'Il faut viser un de vos héros.' };
       if ((id === 'word_of_recall' || id === 'recall_hero') && game.cities[pl.fortress] && (() => { const f = game.cities[pl.fortress]; return u.plane === f.plane && u.x === f.x && u.y === f.y; })()) return { ok: false, why: 'L\'unité est déjà dans votre forteresse.' };
       if (id === 'spell_lock' && !u.ench.some(e => e !== 'spell_lock')) return { ok: false, why: 'Aucun enchantement à protéger sur cette unité.' };
       // rappeler qui porte sa pile au-dessus de l'eau (Marche des vents, Navire volant) la laisserait se noyer

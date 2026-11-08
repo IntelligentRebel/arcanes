@@ -126,6 +126,8 @@ Object.assign(AI, {
     if (b === 'cityWalls') v = threat > 0 ? 4 : front || c.fortress ? 1.5 : e.citizens >= 8 ? 0.6 : 0.1;
     if (b === 'defenseTowers') v = threat > 0 ? 3 : front ? 0.8 : 0.1;
     if (['armory', 'fightersGuild', 'armorersGuild', 'warCollege'].includes(b) && front) v *= 1.5;
+    // (à l'essai, towers_more) des murailles dès 5 habitants, et les tours de défense dès qu'il y a des murailles
+    if (AI.opt(pl, 'towers_more')) { if (b === 'cityWalls' && e.citizens >= 5) v = Math.max(v, 2); if (b === 'defenseTowers') v = Math.max(v, 2.5); }
     if (b === 'cityWalls' || b === 'defenseTowers') v *= AI.tune(pl, 'wallsValue');
     return v;
   },
