@@ -1,0 +1,183 @@
+{
+ "nom": "Entraînement 18 : moteur 0.31.32 ; ce que chaque crise de fin fait au meneur",
+ "experiences": [
+  {
+   "id": "crises_de_fin",
+   "note": "Difficile, 300 tours. Au banc 17, une crise de fin se levait dans 42 % des parties (tour médian 209) et l'IA n'en venait presque jamais à bout (Prophète 26 %, Archimage 12 %, Grand Hiver 6 %, Seigneur liche 4 %, Dévoreur 2 %), mais les parties s'arrêtaient au tour 250. Chaque crise imposée, comparée à la même carte sans crise : le meneur du tour 200 est-il freiné, et de combien ? (Sans crise qui se lève, la partie est la même qu'avec.)",
+   "tours": 300,
+   "adversaires": "hard",
+   "graine": 540000,
+   "graines": 325,
+   "points": [
+    150,
+    200,
+    250
+   ],
+   "crise": true,
+   "variantes": [
+    {
+     "nom": "sans crise de fin",
+     "niveau": "hard",
+     "crise": "off",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Seigneur liche",
+     "niveau": "hard",
+     "crise": "lich",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Archimage oublié",
+     "niveau": "hard",
+     "crise": "archmage",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Grand Hiver",
+     "niveau": "hard",
+     "crise": "winter",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Dévoreur de nœuds",
+     "niveau": "hard",
+     "crise": "eater",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Prophète",
+     "niveau": "hard",
+     "crise": "prophet",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}

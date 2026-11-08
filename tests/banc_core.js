@@ -3,7 +3,7 @@
 
 // une variante : « niveau{"exp"}@adversaires », ou un objet { nom, niveau, exp, signes } (plans d'entraînement)
 function bancVariant(l) {
-  if (typeof l === 'object') return { level: l.niveau, exp: l.exp || {}, opp: l.adversaires || null, oppexp: l.expAdversaires || null, noRite: !!l.sansRituel, rite: l.rituel || null, bookGuard: l.gardiens || null, label: l.nom, signs: l.signes || null, otherPlane: l.autrePlan != null ? l.autrePlan : null, noWonders: !!l.sansOuvrages, flatOverstretch: !!l.malusFixes, propOverstretch: !!l.malusProportionnels };
+  if (typeof l === 'object') return { level: l.niveau, exp: l.exp || {}, opp: l.adversaires || null, oppexp: l.expAdversaires || null, noRite: !!l.sansRituel, rite: l.rituel || null, bookGuard: l.gardiens || null, label: l.nom, finale: l.crise || null, signs: l.signes || null, otherPlane: l.autrePlan != null ? l.autrePlan : null, noWonders: !!l.sansOuvrages, flatOverstretch: !!l.malusFixes, propOverstretch: !!l.malusProportionnels };
   const m = l.match(/^(\w+)(\{.*\})?(@(\w+))?$/);
   if (!m) throw new Error('variante illisible : ' + l);
   return { level: m[1], exp: m[2] ? JSON.parse(m[2]) : {}, opp: m[4] || null, label: l };
@@ -17,7 +17,7 @@ function bancJobs(plan) {
     for (let s = 0; s < ex.graines; s++) for (const v of vs) {
       const seed = ex.graine + s;
       jobs.push({ key: ex.id + '|' + v.label + '|' + seed, exp_id: ex.id, seed, level: v.level, exp: v.exp, label: v.label, opp: v.opp || ex.adversaires, subjexp: true,
-        turns: ex.tours, checkpoints: bancPoints(ex), bossPoints: !!ex.boss, benchHuman: ex.joueurHumain !== false, otherPlane: v.otherPlane, order: (s + 0.5) / ex.graines, oppmix: ex.melange || null, oppexp: v.oppexp || ex.expAdversaires || null, noRite: v.noRite || null, rite: v.rite || null, noWonders: v.noWonders || null, flatOverstretch: v.flatOverstretch || null, propOverstretch: v.propOverstretch || null, race: ex.races ? ex.races[s % ex.races.length] : null, boost: !!ex.avance, bookGuard: v.bookGuard || null, bookGift: ex.cadeauLivre || null });
+        turns: ex.tours, checkpoints: bancPoints(ex), bossPoints: !!ex.boss, benchHuman: ex.joueurHumain !== false, otherPlane: v.otherPlane, order: (s + 0.5) / ex.graines, oppmix: ex.melange || null, oppexp: v.oppexp || ex.expAdversaires || null, noRite: v.noRite || null, rite: v.rite || null, noWonders: v.noWonders || null, flatOverstretch: v.flatOverstretch || null, propOverstretch: v.propOverstretch || null, race: ex.races ? ex.races[s % ex.races.length] : null, boost: !!ex.avance, bookGuard: v.bookGuard || null, bookGift: ex.cadeauLivre || null, finale: v.finale || null });
     }
   }
   return jobs.sort((a, b) => a.order - b.order);
@@ -92,15 +92,23 @@ function bancReport(plan, all, total, errCount) {
       if (ex.agitation && a.some(r => r.rebels != null)) line += '  rebelles ' + (100 * m('rebels')).toFixed(1) + ' % des citoyens (sujet ' + (100 * m('rebels0')).toFixed(1) + ' %), plus grand empire ' + m('maxCities').toFixed(1) + ' cités';
       // (v0.31.30) la crise de fin : dans quelle part des parties, au bout de combien de tours, finie ou non, et le sujet visé
       { const fn = a.filter(r => r.finale && r.finale.start); if (fn.length) { const over = fn.filter(r => r.finale.state === 'over'), md = l => { const b = l.slice().sort((x, y) => x - y); return b.length ? b[b.length >> 1] : '-'; };
-        line += '  crise de fin dans ' + Math.round(100 * fn.length / a.length) + ' % (tour médian ' + md(fn.map(r => r.finale.start)) + ', vaincue ' + Math.round(100 * over.length / fn.length) + ' %' + (over.length ? ' en ' + md(over.map(r => r.finale.end - r.finale.start)) + ' tours' : '') + ', contre le sujet ' + Math.round(100 * bancMean(fn.map(r => r.finale.subj ? 1 : 0))) + ' %)'; } }
+        const won = over.filter(r => r.finale.by != null);
+        line += '  crise de fin dans ' + Math.round(100 * fn.length / a.length) + ' % (tour médian ' + md(fn.map(r => r.finale.start)) + ', vaincue ' + Math.round(100 * won.length / fn.length) + ' %' + (won.length ? ' en ' + md(won.map(r => r.finale.end - r.finale.start)) + ' tours' : '') + (over.length > won.length ? ', éteinte (cible éliminée) ' + Math.round(100 * (over.length - won.length) / fn.length) + ' %' : '') + ', contre le sujet ' + Math.round(100 * bancMean(fn.map(r => r.finale.subj ? 1 : 0))) + ' %'
+          + (fn.some(r => r.finale.tFirst != null) ? ', cible encore 1re à la fin ' + Math.round(100 * bancMean(fn.map(r => r.finale.tFirst || 0))) + ' %' : '')
+          + (fn.some(r => r.finale.eaten) ? ', nœuds dévorés ' + bancMean(fn.map(r => r.finale.eaten || 0)).toFixed(1) : '') + (fn.some(r => r.finale.seceded) ? ', sécessions ' + bancMean(fn.map(r => r.finale.seceded || 0)).toFixed(1) : '') + ')'; } }
+      // (v0.31.32) le meneur du tour 200 : l'est-il encore à la fin, et de combien mène-t-il (parties où il menait de 1,5 fois et plus au tour 200)
+      if (ex.crise) { const lk = a.filter(r => r.lead200Kept != null), big = lk.filter(r => r.gap200 >= 1.5);
+        if (lk.length) line += '  meneur du t200 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead200Kept))) + ' % (avance ×' + bancMean(lk.map(r => r.gap200)).toFixed(2) + ' au t200, ×' + bancMean(lk.map(r => r.gapEnd)).toFixed(2) + ' à la fin)'
+          + (big.length ? ' ; s\'il menait de ×1,5 au t200 (' + big.length + ' parties) : encore 1er ' + Math.round(100 * bancMean(big.map(r => r.lead200Kept))) + ' %, avance finale ×' + bancMean(big.map(r => r.gapEnd)).toFixed(2) : ''); }
       const lk = a.filter(r => r.lead100Kept != null); if (lk.length && ex.meneur) line += '  meneur du t100 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead100Kept ? 1 : 0))) + ' %, avance finale ×' + bancMean(lk.map(r => r.gapEnd)).toFixed(2);
       L.push(line);
       if (lab !== lab0) {
-        const name = k => k === 'score' ? 'final' : k === 'rank' ? 'rang final' : 't' + k.slice(5);
+        const name = k => k === 'score' ? 'final' : k === 'rank' ? 'rang final' : k === 'lead200Kept' ? 'meneur du t200 encore 1er' : k === 'gapEnd' ? 'avance finale du 1er' : 't' + k.slice(5);
+        const fine = k => k === 'rank' || k === 'lead200Kept' || k === 'gapEnd';
         let d = '      écart à ' + lab0 + ' (même carte) :';
-        for (const k of ['score'].concat(cps.map(c => 'score' + c), ['rank'])) {
+        for (const k of ['score'].concat(cps.map(c => 'score' + c), ['rank'], ex.crise ? ['lead200Kept', 'gapEnd'] : [])) {
           const p = bancPaired(a, base, k); if (!p) continue;
-          d += '  ' + name(k) + ' ' + (k === 'rank' ? (p.m >= 0 ? '+' : '') + p.m.toFixed(2) + ' ± ' + p.se.toFixed(2) : sgn(p.m) + ' ± ' + Math.round(p.se)) + (k === 'score' ? ' (mieux ' + p.wins + ', pire ' + p.losses + ' sur ' + p.n + ')' : '');
+          d += '  ' + name(k) + ' ' + (fine(k) ? (p.m >= 0 ? '+' : '') + p.m.toFixed(2) + ' ± ' + p.se.toFixed(2) : sgn(p.m) + ' ± ' + Math.round(p.se)) + (k === 'score' ? ' (mieux ' + p.wins + ', pire ' + p.losses + ' sur ' + p.n + ')' : '');
         }
         L.push(d);
       }

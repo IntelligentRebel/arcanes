@@ -141,6 +141,8 @@ async function playOne(E, job) {
   for (const c in marks) { res['score' + c] = marks[c].score; res['rank' + c] = marks[c].rank; }
   // le meneur du tour 100 l'est-il encore à la fin, et de combien (le pacte contre le meneur se mesure ainsi)
   if (marks[100]) { const L = marks[100].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead100 = L; res.lead100Kept = sc.indexOf(Math.max(...sc)) === L; res.gap100 = +marks[100].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); }
+  // (v0.31.32) de même au tour 200, quand les crises de fin peuvent commencer : le meneur l'est-il encore, et de combien
+  if (marks[200] && marks[200].gap != null) { const L = marks[200].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead200 = L; res.lead200Kept = sc.indexOf(Math.max(...sc)) === L ? 1 : 0; res.gap200 = +marks[200].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); res.leadScore200 = sc[L] || 0; }
   integrity(E, game, inv);
   if (Object.keys(inv.n).length) { res.inv = inv.n; res.invEx = inv.ex; }
   if (govTurn != null) res.governor = govTurn;
@@ -159,7 +161,8 @@ async function playOne(E, job) {
   res.corrupt = E.U.sum(E.Cities.ofPlayer(game, 0), c => E.World.catchment(game.world, c.x, c.y).filter(([x, y]) => E.World.get(game.world, c.plane, 'corrupt', x, y)).length);
   if (game.riteStats) res.rite = Object.assign({}, game.riteStats);
   // la crise de fin (v0.31.30) : laquelle, contre qui, quand, comment elle a fini
-  { const f = game.finale; if (f && f.kind) res.finale = { kind: f.kind, state: f.state, omen: f.omen || null, start: f.start || null, end: f.end || null, by: f.by != null ? f.by : null, target: f.target, subj: f.target === 0, force: f.force || null, waves: f.waves || 0, eaten: f.eaten || 0, seceded: f.seceded || 0, clues: f.clues || 0, rises: f.rises || 0 }; }
+  { const f = game.finale; if (f && f.kind) res.finale = { kind: f.kind, state: f.state, omen: f.omen || null, start: f.start || null, end: f.end || null, by: f.by != null ? f.by : null, target: f.target, subj: f.target === 0, force: f.force || null, waves: f.waves || 0, eaten: f.eaten || 0, seceded: f.seceded || 0, clues: f.clues || 0, rises: f.rises || 0,
+    faded: !!f.faded, tFirst: f.target != null && sc.indexOf(Math.max(...sc)) === f.target ? 1 : 0, tRank: f.target != null ? 1 + sc.filter((v, i) => i !== f.target && v > sc[f.target]).length : null }; }
   // un démon encore debout à la fin : ce qu'il a fait compte aussi (v0.31.26)
   { const r = game.rite; if (res.rite && r && r.phase === 'demon' && r.summoned != null) { const rs = res.rite; rs.escorts = (rs.escorts || 0) + (r.maxEsc || 0); rs.demonCaps = (rs.demonCaps || 0) + (r.caps || 0); rs.life = (rs.life || 0) + game.turn - r.summoned; } }
   // le Livre de légende : fragments trouvés (lus par quelqu'un), ce qu'en tient le sujet, sceau, prise, artefacts

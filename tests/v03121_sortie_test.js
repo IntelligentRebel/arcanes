@@ -1,5 +1,6 @@
 // v0.31.21 : une garnison sans tireurs, derrière ses murs, face à un assaillant qui tire, sort l'attaquer au lieu d'attendre la mort ;
 // contre des volants qu'elle ne peut atteindre, elle reste à l'abri. Les défenseurs traversent leur propre Mur de feu.
+// (0.31.32) la sortie n'est plus qu'un essai de banc (sally_half) : par défaut, la garnison reste à l'abri.
 const { loadEngine } = require('./load');
 const E = loadEngine(); E.AI.LAB = false; const { Game, Units, World, Cities, Battle, RNG, CombatAI } = E;
 const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) process.exitCode = 1; };
@@ -22,9 +23,13 @@ function run(att, fire) {
   }
   return { outside, wins };
 }
+const shelter = run(['Longbowmen', 'Longbowmen', 'Longbowmen', 'Longbowmen']);
+console.log('      par défaut, contre des archers :', JSON.stringify(shelter));
+ok(shelter.outside === 0, 'par défaut, la garnison reste à l\'abri même face aux archers');
+E.AI.EXP = { sally_half: true };
 const archers = run(['Longbowmen', 'Longbowmen', 'Longbowmen', 'Longbowmen']);
-console.log('      contre des archers :', JSON.stringify(archers));
-ok(archers.outside > 0, 'la garnison sort attaquer les archers');
+console.log('      essai sally_half, contre des archers :', JSON.stringify(archers));
+ok(archers.outside > 0, 'essai sally_half : la garnison sort attaquer les archers');
 const flyers = run(['Pegasai', 'Pegasai', 'Pegasai']);
 console.log('      contre des volants :', JSON.stringify(flyers));
 ok(flyers.outside === 0, 'contre des volants hors d\'atteinte, elle reste à l\'abri');
