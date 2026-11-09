@@ -1,0 +1,289 @@
+{
+ "nom": "Entraînement 19 : moteur 0.31.33 ; trois crises de fin retouchées ; des tireurs et des tours dans les garnisons",
+ "experiences": [
+  {
+   "id": "crises_retouchees",
+   "note": "Difficile, 300 tours. Au banc 18, quand la crise se levait, le meneur du tour 200 restait 1er : 77 % sans crise, 75 % avec le Dévoreur (il mangeait surtout les nœuds des autres), 68 % avec le Prophète (les cités parties se reprenaient sans combat), 37 % avec l'Archimage, qui éliminait sa cible dans 31 % des crises. Retouches : le Dévoreur ne mange que les nœuds de la cible, puis marche sur ses cités ; les cités qui suivent le Prophète gardent une garnison rebelle ; l'Archimage frappe moins souvent (vagues tous les 10 tours au lieu de 7, sorts tous les 6 au lieu de 4).",
+   "tours": 300,
+   "adversaires": "hard",
+   "graine": 560000,
+   "graines": 200,
+   "points": [
+    150,
+    200,
+    250
+   ],
+   "crise": true,
+   "variantes": [
+    {
+     "nom": "sans crise de fin",
+     "niveau": "hard",
+     "crise": "off",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Dévoreur, nœuds de la cible seulement",
+     "niveau": "hard",
+     "crise": "eater",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "reglagesCrise": {
+      "EATER_TARGET_ONLY": 1
+     }
+    },
+    {
+     "nom": "Prophète, cités tenues par les rebelles",
+     "niveau": "hard",
+     "crise": "prophet",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "reglagesCrise": {
+      "PROPHET_HOLD": 1
+     }
+    },
+    {
+     "nom": "Archimage d'aujourd'hui",
+     "niveau": "hard",
+     "crise": "archmage",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Archimage adouci",
+     "niveau": "hard",
+     "crise": "archmage",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "reglagesCrise": {
+      "ARCH_WAVE": 10,
+      "ARCH_CURSE": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "garnisons",
+   "note": "Difficile, pour le sorcier observé seul. Beaucoup de cités de l'IA n'ont aucun tireur : des volants ou des archers les prennent sans perte. Deux tireurs au moins par garnison (les meilleurs que la cité forme, sinon le bâtiment qui en ouvre un, dès 4 habitants), et murailles dès 5 habitants puis tours de défense.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 550000,
+   "graines": 250,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "variantes": [
+    {
+     "nom": "garnison d'aujourd'hui",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "deux tireurs en garnison",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "garrison_ranged": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "murailles et tours plus tôt",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "towers_more": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "tireurs, murailles et tours",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "garrison_ranged": true,
+      "towers_more": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}

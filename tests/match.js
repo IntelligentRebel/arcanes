@@ -93,7 +93,7 @@ async function playOne(E, job) {
   // oppmix : des adversaires de niveaux mêlés, qui tournent d'une carte à l'autre
   const mix = job.oppmix ? job.oppmix.split(',') : null;
   const levels = mix ? [0, 1, 2].map(i => mix[(i + job.seed) % mix.length]) : [job.opp, job.opp, job.opp];
-  const game = E.Game.newGame({ seed: job.seed, mapW: 60, mapH: 40, landSize: 'medium', opponents: 3, otherPlane: job.otherPlane != null ? job.otherPlane : undefined, difficulty: levels[0], crisis: 'normal', finale: job.finale || 'random', aiLevels: levels, noRite: !!job.noRite, rite: job.rite || null, bookGuard: job.bookGuard || null, noWonders: !!job.noWonders, flatOverstretch: !!job.flatOverstretch, propOverstretch: !!job.propOverstretch,
+  const game = E.Game.newGame({ seed: job.seed, mapW: 60, mapH: 40, landSize: 'medium', opponents: 3, otherPlane: job.otherPlane != null ? job.otherPlane : undefined, difficulty: levels[0], crisis: 'normal', finale: job.finale || 'random', finaleCfg: job.finaleCfg || null, aiLevels: levels, noRite: !!job.noRite, rite: job.rite || null, bookGuard: job.bookGuard || null, noWonders: !!job.noWonders, flatOverstretch: !!job.flatOverstretch, propOverstretch: !!job.propOverstretch,
     human: { name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: job.race || 'highmen' } });
   const p0 = game.players[0]; p0.human = false; p0.aiLevel = job.level; p0.aiPersonality = 'balanced';
   const plane0 = (game.cities[p0.fortress] || { plane: 0 }).plane;   // le plan de départ du sorcier observé ; l'autre est celui du « boss final »
@@ -142,7 +142,7 @@ async function playOne(E, job) {
   // le meneur du tour 100 l'est-il encore à la fin, et de combien (le pacte contre le meneur se mesure ainsi)
   if (marks[100]) { const L = marks[100].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead100 = L; res.lead100Kept = sc.indexOf(Math.max(...sc)) === L; res.gap100 = +marks[100].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); }
   // (v0.31.32) de même au tour 200, quand les crises de fin peuvent commencer : le meneur l'est-il encore, et de combien
-  if (marks[200] && marks[200].gap != null) { const L = marks[200].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead200 = L; res.lead200Kept = sc.indexOf(Math.max(...sc)) === L ? 1 : 0; res.gap200 = +marks[200].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); res.leadScore200 = sc[L] || 0; }
+  if (marks[200] && marks[200].gap != null) { const L = marks[200].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead200 = L; res.lead200Kept = sc.indexOf(Math.max(...sc)) === L ? 1 : 0; res.gap200 = +marks[200].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); res.leadScore200 = sc[L] || 0; res.gapEndLn = +Math.log(Math.max(0.5, res.gapEnd)).toFixed(3); }
   integrity(E, game, inv);
   if (Object.keys(inv.n).length) { res.inv = inv.n; res.invEx = inv.ex; }
   if (govTurn != null) res.governor = govTurn;

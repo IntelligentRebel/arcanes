@@ -35,6 +35,13 @@ if (typeof DATA !== 'undefined' && DATA.units && DATA.units.Wraith && !DATA.unit
 
 const Finale = {
   MIN_TURN: 200, LEAD: 1.5, STREAK: 5, OMEN: 5, LEAD_SLAIN: 1.25, STREAK_SLAIN: 3, MAX_OUT: 18,
+  // réglages à l'essai au banc 19 (game.opts.finaleCfg) : au banc 18, le Dévoreur ne freinait pas le meneur (il mangeait surtout
+  // les nœuds des autres) et le Prophète à peine (les cités parties se reprenaient sans combat), tandis que l'Archimage éliminait
+  // sa cible dans 31 % des crises.
+  //   EATER_TARGET_ONLY : il ne mange que les nœuds de la cible, puis marche sur ses cités
+  //   PROPHET_HOLD : une cité qui fait sécession se donne une garnison rebelle ; une sécession possible tous les 2 tours
+  //   ARCH_WAVE, ARCH_CURSE : tours entre deux vagues, entre deux sorts de l'Archimage
+  EATER_TARGET_ONLY: 0, PROPHET_HOLD: 0, ARCH_WAVE: 7, ARCH_CURSE: 4,
   KINDS: FINALE_KINDS,
   SITES: ['phylactery', 'citadel', 'winterheart'],
   // réglages : ceux du jeu, sauf essai (game.opts.finaleCfg)
@@ -246,7 +253,7 @@ const Finale = {
         if (game.turn >= f.curseAt) Finale.curse(game, f);
         if ((game.turn - f.start) % 8 === 0) Finale.reinforce(game, f, s, ['sorcery', 'chaos']);
         if (game.turn >= f.next) {
-          f.next = game.turn + 7;
+          f.next = game.turn + Finale.cfg(game, 'ARCH_WAVE');
           Finale.wave(game, f, Veil.muster(game, ['sorcery', 'chaos'], Finale.budget(game, f), 5, Finale.cap(game, f)), s.plane, s.x, s.y, 'Des créatures sortent de la citadelle de l\'Archimage');
         }
       },
@@ -329,11 +336,14 @@ const Finale = {
         }
         // une cité dont la moitié des habitants se révolte fait sécession
         if (game.turn >= f.secAt) {
-          f.secAt = game.turn + 3;
+          const hold = Finale.cfg(game, 'PROPHET_HOLD');
+          f.secAt = game.turn + (hold ? 2 : 3);
           const c = near().find(c => Cities.econ(game, c).unrest >= Cities.citizens(c) / 2);
           if (c) {
             const owner = c.owner;
             Game.cedeCity(game, c, -1, true); f.seceded++;
+            // (essai PROPHET_HOLD) les insurgés tiennent la cité : il faudra la reprendre de force
+            if (hold) for (const t of Finale.rebels(game, c.race, Finale.budget(game, f) / 2, 5)) Units.create(game, t, -1, c.plane, c.x, c.y);
             Game.logEach(game, v => v === owner ? c.name + ' fait sécession et se range derrière le Prophète.' : game.players[v].contact[owner] ? c.name + ' fait sécession et quitte ' + Players.nameFor(game, v, owner) + ' pour le Prophète.' : null, { city: c.id, crisis: true });
           }
         }
@@ -380,7 +390,7 @@ const Finale = {
   // ---------- l'Archimage oublié ----------
   // ses sorts contre la cible : son mana, puis une de ses cités, à tour de rôle
   curse(game, f) {
-    const tp = game.players[f.target]; f.curseAt = game.turn + 4; if (!tp) return;
+    const tp = game.players[f.target]; f.curseAt = game.turn + Finale.cfg(game, 'ARCH_CURSE'); if (!tp) return;
     if (f.curses++ % 2 === 0) {
       const amt = Math.min(tp.mana, Math.max(50, Math.floor(tp.mana * 0.3)));
       if (amt > 0) { tp.mana -= amt; Game.log(game, tp.id, 'L\'Archimage oublié vous arrache ' + amt + ' mana.', { crisis: true }); }
@@ -407,7 +417,8 @@ const Finale = {
   // ---------- le Dévoreur de nœuds ----------
   eaterTarget(game, f, p, u) {
     const w = game.world;
-    const ns = game.sites.filter(s => s.type === 'node' && s.plane === p && !s.devoured && !Game.siteHasGuardians(s));
+    const only = Finale.cfg(game, 'EATER_TARGET_ONLY');   // (essai) les nœuds de la cible seulement
+    const ns = game.sites.filter(s => s.type === 'node' && s.plane === p && !s.devoured && !Game.siteHasGuardians(s) && (!only || s.owner === f.target));
     const rank = s => (s.owner === f.target ? 0 : s.owner >= 0 ? 1000 : 2000) + World.dist(w, s.x, s.y, u.x, u.y);
     return U.min(ns, rank);
   },

@@ -152,3 +152,35 @@ async function start(seed, kind) {
     ok(!err && (f.state === 'active' || f.state === 'over'), kind + ' : douze tours joués (' + f.state + ', vagues ' + (f.waves || 0) + ')');
   }
 })();
+// 8. (banc 19) réglages à l'essai : le Dévoreur ne vise que les nœuds de la cible ; les cités du Prophète gardent des rebelles ;
+// l'Archimage frappe à d'autres intervalles
+(async () => {
+  await new Promise(r => setTimeout(r, 50));
+  {
+    const g = mk(14, 'eater', { EATER_TARGET_ONLY: 1 }); g.turn = 200;
+    const fc = g.cities[g.players[0].fortress];
+    const nodes = g.sites.filter(s => s.type === 'node' && s.plane === fc.plane).sort((a, b) => World.dist(g.world, a.x, a.y, fc.x, fc.y) - World.dist(g.world, b.x, b.y, fc.x, fc.y));
+    const other = nodes[1]; Object.assign(other, { owner: 1, cleared: true, guardians: [] });
+    const f = g.finale; f.kind = 'eater'; f.target = 0; f.state = 'omen'; f.at = 200; Finale.begin(g);
+    const u = g.units[f.boss];
+    ok(u && !Finale.eaterTarget(g, f, u.plane, u), 'essai : la cible n\'a pas de nœud, le Dévoreur ne vise pas ceux des autres');
+    Object.assign(nodes[0], { owner: 0, cleared: true, guardians: [] });
+    ok(Finale.eaterTarget(g, f, u.plane, u) === nodes[0], 'essai : il vise le nœud de la cible');
+  }
+  {
+    const g = mk(15, 'prophet', { PROPHET_HOLD: 1 }); g.turn = 200;
+    const f = g.finale; f.kind = 'prophet'; f.target = 0; f.state = 'omen'; f.at = 200; Finale.begin(g);
+    const u = g.units[f.boss], fc = g.cities[g.players[0].fortress];
+    // une seconde cité de la cible, tout près du Prophète, en pleine révolte
+    const c2 = Object.values(g.cities).find(c => c.owner < 0 && c.plane === u.plane) || null;
+    if (c2) { c2.owner = 0; Cities.econ = (orig => (game, c) => { const e = orig(game, c); return c === c2 ? Object.assign({}, e, { unrest: 99 }) : e; })(Cities.econ); u.x = c2.x + 1; u.y = c2.y; }
+    for (let t = 0; t < 6 && c2 && c2.owner === 0; t++) { g.turn++; Finale.tick(g); }
+    ok(!c2 || (c2.owner === -1 && Units.at(g, c2.plane, c2.x, c2.y).some(x => x.owner === -1)), 'essai : la cité qui fait sécession garde une garnison rebelle');
+  }
+  {
+    const g = mk(12, 'archmage', { ARCH_CURSE: 6 }); g.turn = 200;
+    const f = g.finale; f.kind = 'archmage'; f.target = 0; f.state = 'omen'; f.at = 200; Finale.begin(g);
+    g.turn = f.curseAt; Finale.tick(g);
+    ok(f.curseAt === g.turn + 6, 'essai : l\'Archimage lance un sort tous les 6 tours');
+  }
+})();
