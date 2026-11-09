@@ -2238,7 +2238,12 @@ const CombatAI = {
     if (bt.round < 2) return false;
     if (!bt.canEscape(side)) return false;   // garnison d'une cité ou pile encerclée : fuir, c'est mourir ; autant vendre chèrement sa peau
     const mine = U.sum(bt.alive(side), b => Units.strength(bt.game, b.u)), theirs = U.sum(bt.alive(1 - side), b => Units.strength(bt.game, b.u));
-    return mine < theirs * 0.15;
+    if (mine >= theirs * 0.15) return false;
+    // (0.31.34) on ne fuit que si la fuite sauve au moins la moitié de ce qui reste : poursuivis par plus rapides qu'eux (des volants
+    // contre des fantassins), les fuyards seraient presque tous rattrapés ; autant vendre chèrement sa peau
+    const plan = bt.fleePlan(side);
+    const saved = U.sum(bt.alive(side), b => Units.strength(bt.game, b.u) * (1 - ((plan.get(b) || {}).risk || 0)));
+    return saved >= mine * 0.5;
   },
   // joue tout le tour du camp courant
   playSide(bt) {
