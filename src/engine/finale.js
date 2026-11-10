@@ -41,7 +41,12 @@ const Finale = {
   //   EATER_TARGET_ONLY : il ne mange que les nœuds de la cible, puis marche sur ses cités
   //   PROPHET_HOLD : une cité qui fait sécession se donne une garnison rebelle ; une sécession possible tous les 2 tours
   //   ARCH_WAVE, ARCH_CURSE : tours entre deux vagues, entre deux sorts de l'Archimage
-  EATER_TARGET_ONLY: 0, PROPHET_HOLD: 0, ARCH_WAVE: 7, ARCH_CURSE: 4,
+  // (0.31.35, d'après le banc 19) le Dévoreur ciblé, les cités du Prophète tenues, l'Archimage adouci : le meneur y perd autant la
+  // tête (Archimage : 33 % encore 1er au lieu de 36 %) mais n'est plus éliminé que dans 19 % des crises au lieu de 29 % ; le Dévoreur
+  // le freine enfin (62 % encore 1er contre 79 % sans crise) sans plus ruiner les autres
+  //   PROPHET_PLUS (à l'essai au banc 20) : ses prêches portent sur tout l'empire de la cible (3 rebelles près de lui, 2 ailleurs sur son
+  //   plan, 1 sur l'autre plan) et une cité fait sécession dès que 40 % de ses habitants se révoltent
+  EATER_TARGET_ONLY: 1, PROPHET_HOLD: 1, ARCH_WAVE: 10, ARCH_CURSE: 6, PROPHET_PLUS: 0,
   KINDS: FINALE_KINDS,
   SITES: ['phylactery', 'citadel', 'winterheart'],
   // réglages : ceux du jeu, sauf essai (game.opts.finaleCfg)
@@ -112,7 +117,7 @@ const Finale = {
       case 'lich': return me ? 'Un Seigneur liche s\'est relevé, et ses morts marchent sur vous. Tant que son phylactère tient, il revient.' : 'Un Seigneur liche s\'est relevé, et ses morts marchent sur ' + who + '. Tant que son phylactère tient, il revient.';
       case 'archmage': return me ? 'Une citadelle a jailli du sol' + pos + '. L\'Archimage oublié qui l\'habite s\'en prend à vous : votre mana, vos cités, vos sorts. Prenez la citadelle.' : 'Une citadelle a jailli du sol' + pos + '. L\'Archimage oublié qui l\'habite s\'en prend à ' + who + '. Prenez la citadelle.';
       case 'winter': return me ? 'Le Cœur de l\'Hiver bat' + pos + ' : le givre gagne vos terres et tue les récoltes. Brisez-le.' : 'Le Cœur de l\'Hiver bat' + pos + ' : le givre s\'étend, à commencer par les terres de ' + who + '. Brisez-le.';
-      case 'eater': return me ? 'Une chose venue d\'entre les plans dévore les nœuds de magie, les vôtres d\'abord. Chacun la rend plus forte. Tuez-la.' : 'Une chose venue d\'entre les plans dévore les nœuds de magie, ceux de ' + who + ' d\'abord. Chacun la rend plus forte. Tuez-la.';
+      case 'eater': return me ? 'Une chose venue d\'entre les plans dévore vos nœuds de magie, et chacun la rend plus forte. Puis elle viendra pour vos cités. Tuez-la.' : 'Une chose venue d\'entre les plans dévore les nœuds de magie de ' + who + ', et chacun la rend plus forte. Tuez-la.';
       case 'prophet': return me ? 'Un prophète soulève vos cités contre vous. Tant qu\'il prêche, elles grondent, et certaines feront sécession. Faites-le taire.' : 'Un prophète soulève les cités de ' + who + ' contre leur maître. Faites-le taire.';
     }
     return '';
@@ -338,7 +343,8 @@ const Finale = {
         if (game.turn >= f.secAt) {
           const hold = Finale.cfg(game, 'PROPHET_HOLD');
           f.secAt = game.turn + (hold ? 2 : 3);
-          const c = near().find(c => Cities.econ(game, c).unrest >= Cities.citizens(c) / 2);
+          const share = Finale.cfg(game, 'PROPHET_PLUS') ? 0.4 : 0.5;
+          const c = near().find(c => Cities.econ(game, c).unrest >= Cities.citizens(c) * share);
           if (c) {
             const owner = c.owner;
             Game.cedeCity(game, c, -1, true); f.seceded++;
@@ -448,8 +454,10 @@ const Finale = {
   // ses prêches : un rebelle de plus dans chaque cité de la cible sur son plan, deux près de lui
   unrest(game, c) {
     const f = game.finale; if (!f || f.state !== 'active' || f.kind !== 'prophet' || c.owner !== f.target) return 0;
-    const u = f.boss != null ? game.units[f.boss] : null; if (!u || u.plane !== c.plane) return 0;
-    return World.dist(game.world, u.x, u.y, c.x, c.y) <= 6 ? 2 : 1;
+    const u = f.boss != null ? game.units[f.boss] : null, plus = Finale.cfg(game, 'PROPHET_PLUS');
+    if (!u || (u.plane !== c.plane && !plus)) return 0;
+    if (u.plane !== c.plane) return 1;
+    return World.dist(game.world, u.x, u.y, c.x, c.y) <= 6 ? (plus ? 3 : 2) : (plus ? 2 : 1);
   },
   // des troupes du peuple de la cité, les meilleures que le budget permet
   rebels(game, race, budget, max) {

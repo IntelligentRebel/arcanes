@@ -1,0 +1,173 @@
+{
+ "nom": "Entraînement 20 : moteur 0.31.35 ; un Prophète plus mordant ; des tireurs en garnison face à la menace seulement",
+ "experiences": [
+  {
+   "id": "prophete_renforce",
+   "note": "Difficile, 300 tours. Au banc 19, quand le Prophète se levait, le meneur du tour 200 restait 1er dans 69 % des cas (79 % sans crise, mêmes cartes) : la crise la plus faible avec le Dévoreur. Renforcé : ses prêches portent sur tout l'empire de la cible (3 rebelles près de lui, 2 ailleurs sur son plan, 1 sur l'autre plan) et une cité fait sécession dès que 40 % de ses habitants se révoltent (au lieu de la moitié).",
+   "tours": 300,
+   "adversaires": "hard",
+   "graine": 570000,
+   "graines": 300,
+   "points": [
+    150,
+    200,
+    250
+   ],
+   "crise": true,
+   "variantes": [
+    {
+     "nom": "sans crise de fin",
+     "niveau": "hard",
+     "crise": "off",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Prophète (jeu)",
+     "niveau": "hard",
+     "crise": "prophet",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "Prophète renforcé",
+     "niveau": "hard",
+     "crise": "prophet",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "reglagesCrise": {
+      "PROPHET_PLUS": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "garnisons_menace",
+   "note": "Difficile, pour le sorcier observé seul. Au banc 19, deux tireurs dans chaque garnison coûtaient en début de partie (t100 -17 ± 6, final -23 ± 51) : il fallait bâtir scieries et casernes partout. Ici, seulement face à une menace, et seulement les tireurs que la cité sait déjà former ; les tireurs présents restent alors en garnison.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 580000,
+   "graines": 400,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "variantes": [
+    {
+     "nom": "garnison d'aujourd'hui",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "tireurs face à la menace",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "garrison_threat": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}
