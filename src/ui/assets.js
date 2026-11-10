@@ -6,10 +6,74 @@ const Sprites = {
   loadImg(src) {
     return new Promise(res => { if (!src) return res(null); const img = new Image(); img.onload = () => res(img); img.onerror = () => { console.warn('Image introuvable : ' + String(src).slice(0, 60)); res(null); }; img.src = src; });
   },
+  // (0.31.38) les grandes planches (plus de 120 Mo en tout) : téléchargées en flux, pour dire où l'on en est, et réessayées
+  // jusqu'à trois fois. Hors http (la copie locale), l'image se charge directement.
+  prog: { got: 0, total: 0, cb: null },
+  async fetchImg(src) {
+    if (!src) return null;
+    const P = Sprites.prog, size = (window.ASSET_SIZES || {})[src] || 0; P.total += size;
+    let mine = 0; const bump = n => { mine += n; P.got += n; if (P.cb) P.cb(); };
+    const plain = url => new Promise(res => { const img = new Image(); img.onload = () => res(img); img.onerror = () => res(null); img.src = url; });
+    const stream = /^https?:/.test(location.protocol) && window.fetch && window.ReadableStream && !/^data:/.test(src);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      let img = null;
+      if (stream) {
+        try {
+          const r = await fetch(src, attempt ? { cache: 'reload' } : undefined); if (!r.ok) throw new Error('HTTP ' + r.status);
+          const reader = r.body.getReader(), chunks = [];
+          for (;;) { const { done, value } = await reader.read(); if (done) break; chunks.push(value); bump(value.length); }
+          const url = URL.createObjectURL(new Blob(chunks, { type: r.headers.get('content-type') || '' }));
+          img = await plain(url); URL.revokeObjectURL(url);
+        } catch (e) { img = null; }
+      } else img = await plain(src);
+      if (img) { if (size > mine) bump(size - mine); return img; }
+      bump(-mine);
+      if (attempt < 2) await new Promise(r => setTimeout(r, 700 * (attempt + 1)));
+    }
+    console.warn('Image introuvable : ' + String(src).slice(0, 60)); bump(size);
+    return null;
+  },
+  // l'écran d'attente : ce qui se télécharge, et où l'on en est
+  bootScreen() {
+    if (typeof document === 'undefined') return { remove() {} };
+    const bar = h('i'), txt = h('div', { class: 'boot-txt' }, 'Chargement des graphismes…');
+    const el = h('div', { id: 'boot' }, h('div', { class: 'boot-box' }, h('div', { class: 'boot-title' }, 'Arcanes'), h('div', { class: 'boot-bar' }, bar), txt));
+    document.body.append(el);
+    const mo = n => String(Math.round(n / 1048576));
+    Sprites.prog.cb = () => { const P = Sprites.prog; if (!P.total) return; bar.style.width = Math.min(100, 100 * P.got / P.total) + '%'; if (P.got > 0 && P.got < P.total) txt.textContent = 'Chargement des graphismes : ' + mo(P.got) + ' / ' + mo(P.total) + ' Mo'; };
+    return el;
+  },
+  // les animations des figurines (90 Mo) : après l'écran titre, sans faire attendre ; d'ici là, les figurines restent immobiles
+  async loadAnim() {
+    const pages = String(window.ANIM_PNG || '').split(',').filter(Boolean); if (!pages.length) return;
+    const el = typeof document !== 'undefined' ? h('div', { id: 'bgload' }) : null; if (el) document.body.append(el);
+    Sprites.prog = { got: 0, total: 0, cb: null };
+    for (const p of pages) Sprites.prog.total += (window.ASSET_SIZES || {})[p] || 0;
+    const total = Sprites.prog.total; Sprites.prog.total = 0;
+    Sprites.prog.cb = () => { if (el && total && Sprites.prog.got < total) el.textContent = 'Animations : ' + Math.round(100 * Sprites.prog.got / total) + ' %'; };
+    const imgs = [];
+    for (const p of pages) { const im = await Sprites.fetchImg(p); if (!im) break; imgs.push(im); }
+    if (el) el.remove();
+    if (imgs.length !== pages.length) return;
+    Anim.img = imgs; Anim.meta = window.ANIM_JSON || {};
+    if (typeof App !== 'undefined') App.dirty = true;
+    if (typeof MapView !== 'undefined' && MapView.invalidate && MapView.cv) MapView.invalidate();
+  },
+  // planches haute définition restées introuvables : le jeu tourne avec les graphismes de secours, et le dit
+  gfxWarn() {
+    if (!Sprites.failed.length || typeof document === 'undefined' || document.getElementById('gfxwarn')) return;
+    const el = h('div', { id: 'gfxwarn' }, h('span', null, 'Les graphismes haute définition n\'ont pas pu être téléchargés : le jeu s\'affiche avec des graphismes de secours.'),
+      h('button', { class: 'abtn primary', onclick: () => location.reload() }, 'Recharger'), h('button', { class: 'abtn', title: 'Fermer', onclick: () => el.remove() }, '×'));
+    document.body.append(el);
+  },
+  failed: [],
   async load() {
     Sprites.map = window.ATLAS_JSON || {};
     Sprites.hdMap = window.HD_JSON || {};
-    const [img, hd, title, anim, hd2, wpn, fx] = await Promise.all([Sprites.loadImg(window.ATLAS_PNG), Sprites.loadImg(window.HD_PNG), Sprites.loadImg(window.TITLE_IMG), Promise.all(String(window.ANIM_PNG || '').split(',').filter(Boolean).map(Sprites.loadImg)).then(a => a.length && a.every(Boolean) ? a : null), Sprites.loadImg(window.HD2_PNG), Sprites.loadImg(window.WEAPONS_PNG), Sprites.loadImg(window.FX_PNG)]);
+    const boot = Sprites.bootScreen();
+    const [img, hd, title, hd2, wpn, fx] = await Promise.all([Sprites.fetchImg(window.ATLAS_PNG), Sprites.fetchImg(window.HD_PNG), Sprites.fetchImg(window.TITLE_IMG), Sprites.fetchImg(window.HD2_PNG), Sprites.fetchImg(window.WEAPONS_PNG), Sprites.fetchImg(window.FX_PNG)]);
+    const anim = null;
+    Sprites.failed = [!hd && window.HD_PNG ? 'hd' : null, !hd2 && window.HD2_PNG ? 'hd2' : null].filter(Boolean);
     Weapons.img = wpn; Weapons.meta = wpn ? Object.assign({ s: {}, a: {} }, window.WEAPONS_JSON || {}) : { s: {}, a: {} };
     Fx.img = fx; Fx.meta = fx ? (window.FX_JSON || {}) : {};
     Sprites.img = img; Sprites.hd = hd; Sprites.title = title;
@@ -50,6 +114,9 @@ const Sprites = {
       'spell:annals': 'spell:earth_lore', 'spell:deus_ex_machina': 'spell:spell_ward', 'spell:mise_en_abyme': 'spell:mass_invisibility', 'spell:legendary_artifact': 'spell:create_artifact' });
     if (hd) Sprites.buildVirtual();
     Sprites.ready = true;
+    Sprites.prog.cb = null; boot.remove();
+    Sprites.gfxWarn();
+    Sprites.loadAnim();   // sans attendre
   },
   // sprites composés à la volée et rangés comme des sprites HD : icônes des sorts d'invocation (la créature sur une vignette du royaume)
   REALM_VIG: {

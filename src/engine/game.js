@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.37';
+const GAME_VERSION = '0.31.38';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -2043,8 +2043,9 @@ const Items = {
   },
   describe(it) {
     const parts = [];
-    const L = { melee: 'attaque', ranged: 'tir', def: 'défense', res: 'résistance', move: 'mouvement', toHit: 'précision', hp: 'PV', skill: 'mana' };
-    for (const k in L) if (it[k]) parts.push('+' + (k === 'toHit' ? it[k] * 10 + '% ' : it[k] + ' ') + L[k]);
+    // un modèle par caractéristique : « attaque » est aussi un verbe du journal de bataille, que les autres langues traduisent autrement
+    const L = { melee: v => '+' + v + ' attaque', ranged: v => '+' + v + ' tir', def: v => '+' + v + ' défense', res: v => '+' + v + ' résistance', move: v => '+' + v + ' mouvement', toHit: v => '+' + v * 10 + '% précision', hp: v => '+' + v + ' PV', skill: v => '+' + v + ' mana' };
+    for (const k in L) if (it[k]) parts.push(L[k](it[k]));
     for (const p of it.powers) parts.push(ITEM_POWERS[p].name + (ITEM_POWERS[p].melee ? ' (+' + ITEM_POWERS[p].melee + ' attaque)' : ''));
     return parts.join(', ');
   },

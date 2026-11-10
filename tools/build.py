@@ -60,6 +60,10 @@ def main():
     # effets dessinés (tools/build_fx.py) : projectiles et sol corrompu
     fx_json = json.dumps(json.loads(read('assets/fx.json')), separators=(',', ':')) if os.path.exists(os.path.join(ROOT, 'assets/fx.json')) else '{}'
     music_json = json.dumps(json.loads(read('assets/music.json')), ensure_ascii=False, separators=(',', ':')) if os.path.exists(os.path.join(ROOT, 'assets/music.json')) else '{}'
+    # taille des grandes images, pour la barre de chargement
+    big = ['atlas.png', 'hd.png', 'hd2.png', 'title.jpg', 'weapons.png', 'fx.png'] + ANIM_PAGES
+    sizes = {'assets/' + f: os.path.getsize(os.path.join(ROOT, 'assets', f)) for f in big if os.path.exists(os.path.join(ROOT, 'assets', f))}
+    html = html.replace('/*__ASSET_SIZES__*/{}', json.dumps(sizes, separators=(',', ':')))
     html = (html.replace('/*__CSS__*/', css).replace('/*__MUSIC_JSON__*/', music_json).replace('/*__ATLAS_JSON__*/', atlas_json).replace('/*__ATLAS_PNG__*/', 'assets/atlas.png')
             .replace('/*__WEAPONS_JSON__*/', weapons_json).replace('/*__WEAPONS_PNG__*/', 'assets/weapons.png' if weapons_json != '{}' else '')
             .replace('/*__FX_JSON__*/', fx_json).replace('/*__FX_PNG__*/', 'assets/fx.png' if fx_json != '{}' else '')

@@ -16,7 +16,7 @@ const FR = new Set(('de du des la le les un une et ou en à au aux pour par sur 
 // propriétés dont la valeur est une clé, jamais un texte affiché
 const KEY_PROPS = new Set(['en', 'id', 'key', 'icon', 'sprite', 'img', 'type', 'kind', 'realm', 'race', 'color', 'cls', 'class', 'className', 'style', 'anim', 'sfx', 'sound', 'tag', 'cmd', 'k', 'ref', 'file', 'src', 'font', 'family', 'align', 'dir', 'side', 'action', 'mode', 'status', 'state', 'value', 'target', 'effect', 'fx', 'unit', 'spell', 'building', 'terrain', 'mineral', 'shape', 'pose', 'act', 'lineCap', 'lineJoin', 'textAlign', 'textBaseline', 'cursor', 'display', 'position', 'event', 'Accept']);
 // zones où tout texte est affiché, même un mot seul en minuscules (fonctions, méthodes ou propriétés de ce nom)
-const FORCE_NAMES = new Set(['raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
+const FORCE_NAMES = new Set(['PLAN_NAMES', 'GOV_WORDS', 'RARITY_WORDS', 'raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
 const DISPLAY_PROPS = new Set(['name', 'label', 'title', 'text', 'desc', 'tip', 'msg', 'why', 'hint', 'note', 'sub', 'body', 'kicker', 'lore', 'story', 'epithet', 'quote', 'help', 'caption', 'short', 'long', 'verb', 'one', 'many', 'plural', 'singular', 'placeholder']);
 
 // identifiants du jeu (types d'unités, sorts, bâtiments…) et noms anglais d'origine : des clés, même s'ils ressemblent à des mots
@@ -36,8 +36,15 @@ function loadKeywords() {
 }
 // les classes de la feuille de style : « 'row ' + (sel ? 'sel' : '') » construit une classe, pas un texte
 const CSS_CLASSES = new Set((fs.readFileSync(path.join(ROOT, 'src', 'ui', 'style.css'), 'utf8').match(/\.[a-zA-Z][\w-]*/g) || []).map(c => c.slice(1)));
+// textes que les règles ci-dessous prennent pour des clés (minuscules, sans accent, un mot ou deux) : affichés, à coup sûr.
+// Un mot qui sert AUSSI de clé ailleurs (« rare », « production », « impossible ») n'a pas sa place ici : le ranger dans une
+// table nommée (FORCE_NAMES) ou l'écrire avec une majuscule. tools/i18n_audit.js liste ce qui reste hors traduction.
+const EXTRA_TEXTS = new Set(['agitation -{0}', 'cible invisible', '+{0} tir', '+{0} PV', '+{0} mana', 'deux citoyens', 'trois citoyens', 'quatre citoyens', 'cinq citoyens',
+  'grain revendu', 'jamais', 'personne', 'porte -', 'morte-vivante', 'rien',
+  'stase', 'terreur', 'bris', 'riposte ≈ {0}{1}{2}', 'PV', ' PV']);
 let forcing = 0;
 function natural(s, ctx) {
+  if (EXTRA_TEXTS.has(s)) return true;
   if (/^ ?(\{\d+\})? t$/.test(s)) return true;   // « 12 t » : tours, en abrégé
   // un morceau de balise ouverte (« <path d="M ») : du code, sauf une infobulle
   if (/<[a-z][\w-]*(\s[^>]*)?$/i.test(s) && !/\btitle="[^"]*[A-Za-zÀ-ÿ]{2}/.test(s)) return false;
@@ -72,6 +79,7 @@ function natural(s, ctx) {
     const w = words[0];
     if (ctx && ctx.forced) return true;
     if (acc) return true;
+    if (/^[LDNSJMTCldnsjmtc]'[aeiouyhéèêàâîôûAEIOUYHÉ][a-zà-ÿ]{2,}$/.test(w)) return true;   // « L'annexer », « l'emporte » : une élision, donc du texte
     if (/^[a-z]/.test(w) && /\{\d+\} [a-zà-ÿ]{3,}|[a-zà-ÿ]{3,} \{\d+\}/.test(s)) return true;   // « {0} rebelle »
     if (/^[a-z]/.test(w)) return w.length >= 4 && /[·:+%0-9()\[\]«»?!…,.\/]/.test(s.replace(/<[^>]*>/g, '').replace(/\{\d+\}/g, ''));
     return /^[A-ZÀ-Ý][a-zà-ÿ]+$/.test(w) || /^[A-ZÀ-Ý][a-zà-ÿ]+[ ,.!?…:]*$/.test(t);
@@ -258,6 +266,13 @@ function transform(src, file) {
     if (isStr(n)) {
       if (natural(n.value, ctx)) { add(n.start, n.end, '__t(' + J(n.value) + ')', depth); record(n.value, n, []); }
       return;
+    }
+    // une chaîne de « a ? x : b ? y : z » dont une issue est un texte : les autres issues écrites en toutes lettres le sont aussi
+    // (« favorable », « incertaine » à côté de « écrasante »)
+    if (n.type === 'ConditionalExpression' && !(ctx && ctx.forced)) {
+      const br = []; (function fl(c) { if (c.type === 'ConditionalExpression') { fl(c.consequent); fl(c.alternate); } else br.push(c); })(n);
+      const text = b => isStr(b) ? natural(b.value, ctx) : isPlus(b) ? (F => F.stringy && natural(build(F.parts).tpl, ctx))(flat(b)) : false;
+      if (br.some(text) && br.some(b => isStr(b) && /[A-Za-zÀ-ÿ]{3}/.test(b.value) && !natural(b.value, ctx) && !KEYWORDS.has(b.value))) ctx = Object.assign({}, ctx, { display: true, forced: true });
     }
     for (const k of Object.keys(n)) {
       if (k === 'loc' || k === 'start' || k === 'end' || k === 'type') continue;

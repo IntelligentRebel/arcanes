@@ -416,7 +416,8 @@ const CityUI = {
     const inc = e1.goldIncome - e0.goldIncome, up = bd.upkeep || 0, net = e1.gold - e0.gold;
     if (inc || up) out.push('<span class="' + (net > 0 ? 'ok' : net < 0 ? 'danger' : '') + '">or ' + sg(net) + ' par tour</span>' + (inc && up ? ' (rapporte ' + sg(inc) + ', entretien −' + up + ')' : !inc && up ? ' (entretien)' : ''));
     const d = (k, lab) => { const v = (e1[k] || 0) - (e0[k] || 0); if (Math.round(v)) out.push(lab + ' ' + sg(v)); };
-    d('prod', 'production'); d('research', 'recherche'); d('power', 'puissance'); d('foodSurplus', 'nourriture'); d('growth', 'croissance');
+    const GOV_WORDS = { prod: 'production', research: 'recherche', power: 'puissance', foodSurplus: 'nourriture', growth: 'croissance' };
+    for (const k in GOV_WORDS) d(k, GOV_WORDS[k]);
     const rb = e1.rebels - e0.rebels; if (rb) out.push((rb < 0 ? '−' : '+') + U.n(Math.abs(rb), 'rebelle'));
     return out.length ? '<div class="muted" style="margin-top:3px">Ici, aujourd\'hui : ' + out.join(' · ') + '</div>' : '';
   },

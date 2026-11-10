@@ -551,7 +551,7 @@ const Rite = {
   // « Nérissa, Tsevan et deux autres sorciers » : les inconnus ne sont pas nommés
   names(game, v, ids) {
     const known = ids.filter(id => id !== v && Players.knows(game, v, id)).map(id => game.players[id].name), unk = ids.filter(id => id !== v && !Players.knows(game, v, id)).length;
-    if (unk) known.push(unk === 1 ? (known.length ? 'un autre sorcier' : 'un sorcier') : (['', '', 'deux', 'trois', 'quatre', 'cinq'][unk] || unk) + (known.length ? ' autres sorciers' : ' sorciers'));
+    if (unk) known.push(unk === 1 ? (known.length ? 'un autre sorcier' : 'un sorcier') : (known.length ? ['', '', 'deux autres sorciers', 'trois autres sorciers', 'quatre autres sorciers', 'cinq autres sorciers'][unk] || unk + ' autres sorciers' : ['', '', 'deux sorciers', 'trois sorciers', 'quatre sorciers', 'cinq sorciers'][unk] || unk + ' sorciers'));
     return known.length > 1 ? known.slice(0, -1).join(', ') + ' et ' + known[known.length - 1] : known[0] || '';
   },
   stats(game) { return (game.riteStats = game.riteStats || { rituals: 0, demons: 0, slain: 0, caught: 0 }); },

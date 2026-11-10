@@ -116,11 +116,11 @@ const Chronicle = {
         if (e.a === viewer || e.b === viewer) { const o = W(e.a === viewer ? e.b : e.a); return ({ war: 'Vous entrez en guerre contre ', peace: 'Vous signez la paix avec ', alliance: 'Vous concluez une alliance avec ', none: 'Vous rompez votre traité avec ' }[e.st] || 'Vous et ') + o + brk + '.'; }
         return C(W(e.a)) + ' et ' + W(e.b) + ' ' + (Chronicle.DIPLO[e.st] || e.st) + brk + '.';
       }
-      case 'city_new': return C(W(e.a)) + (e.a === viewer ? ' fondez ' : ' fonde ') + e.c + '.';
-      case 'city_taken': return e.d === viewer ? C(W(e.a)) + ' vous prend ' + e.c + (e.fort ? ', votre forteresse !' : '.') : C(W(e.a)) + (e.a === viewer ? ' prenez ' : ' prend ') + e.c + (e.d >= 0 ? ' à ' + W(e.d) : '') + (e.fort ? ', sa forteresse !' : '.');
-      case 'city_razed': return C(W(e.a)) + (e.a === viewer ? ' rasez ' : ' rase ') + e.c + (e.d >= 0 ? (e.d === viewer ? ', votre cité' : ', cité ' + U.de(W(e.d))) : '') + '.';
+      case 'city_new': return e.a === viewer ? 'Vous fondez ' + e.c + '.' : C(W(e.a)) + ' fonde ' + e.c + '.';
+      case 'city_taken': return e.d === viewer ? C(W(e.a)) + ' vous prend ' + e.c + (e.fort ? ', votre forteresse !' : '.') : (e.a === viewer ? 'Vous prenez ' + e.c : C(W(e.a)) + ' prend ' + e.c) + (e.d >= 0 ? ' à ' + W(e.d) : '') + (e.fort ? ', sa forteresse !' : '.');
+      case 'city_razed': return (e.a === viewer ? 'Vous rasez ' + e.c : C(W(e.a)) + ' rase ' + e.c) + (e.d >= 0 ? (e.d === viewer ? ', votre cité' : ', cité ' + U.de(W(e.d))) : '') + '.';
       case 'city_ceded': return e.a === viewer ? C(W(e.d)) + ' vous cède ' + e.c + ' par traité.' : C(W(e.d)) + (e.d === viewer ? ' cédez ' : ' cède ') + e.c + ' à ' + W(e.a) + ' par traité.';
-      case 'global': return C(W(e.a)) + (e.a === viewer ? ' lancez ' : ' lance ') + sp(e.s) + '.';
+      case 'global': return e.a === viewer ? 'Vous lancez ' + sp(e.s) + '.' : C(W(e.a)) + ' lance ' + sp(e.s) + '.';
       case 'mastery_study': return C(W(e.a)) + (e.a === viewer ? ' étudiez' : ' étudie') + ' le Sort de Maîtrise.';
       case 'mastery_cast': return C(W(e.a)) + (e.a === viewer ? ' commencez' : ' commence') + ' à lancer le Sort de Maîtrise.';
       case 'mastery': return C(W(e.a)) + (e.a === viewer ? ' accomplissez' : ' accomplit') + ' le Sort de Maîtrise.';
@@ -147,6 +147,6 @@ const Chronicle = {
     const W = id => id === b.a ? Chronicle.sideName(game, b, 0, viewer, reveal) : Chronicle.sideName(game, b, 1, viewer, reveal);
     const place = b.city ? (b.siege ? 'Siège de ' : 'Bataille de ') + b.city : b.site ? U.cap(b.site) : 'Bataille en rase campagne';
     const won = b.w === 0 ? b.a : b.w === 1 ? b.d : null;
-    return { place, sides: U.cap(W(b.a)) + ' contre ' + W(b.d), won: b.w == null ? 'issue indécise' : U.cap(W(won)) + (won === viewer ? ' l\'emportez' : /^(des|les) /.test(W(won)) ? ' l\'emportent' : ' l\'emporte') };
+    return { place, sides: U.cap(W(b.a)) + ' contre ' + W(b.d), won: b.w == null ? 'issue indécise' : (won === viewer ? 'Vous l\'emportez' : /^(des|les) /.test(W(won)) ? U.cap(W(won)) + ' l\'emportent' : U.cap(W(won)) + ' l\'emporte') };
   },
 };

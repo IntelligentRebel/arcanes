@@ -707,10 +707,13 @@ const Panels = {
     m = UI.modal({ title: c.name, width: 560, body });
   },
 
-  menu() {
+  // top : rouvert après un réglage, au même défilement (le clic suivant tombe sur la même ligne, pas sur une autre) ; le second
+  // clic d'un double-clic n'y bascule pas le réglage une deuxième fois
+  menu(top) {
     const body = h('div', { class: 'list' });
-    const m = UI.modal({ title: 'Menu', width: 520, body });
-    const row = (t, d, fn) => body.append(h('div', { class: 'row', onclick: fn }, h('div', { class: 'grow' }, h('div', { class: 't1' }, t), h('div', { class: 't2' }, d))));
+    const m = UI.modal({ title: 'Menu', width: 520, body }), t0 = performance.now();
+    const again = () => { const y = m.body.scrollTop; m.close(); Panels.menu(y); };
+    const row = (t, d, fn) => body.append(h('div', { class: 'row', onclick: e => { if (top != null && performance.now() - t0 < 400) return; fn(e); } }, h('div', { class: 'grow' }, h('div', { class: 't1' }, t), h('div', { class: 't2' }, d))));
     row('Sauvegarder', 'Enregistrer dans le navigateur', async () => {
       const old = App.saveMeta('manual');
       if (old && old.uid !== App.game.uid && !await UI.confirm('Sauvegarder', 'Remplacer la sauvegarde manuelle d\'une autre partie (' + U.esc(old.name || '?') + ', tour ' + old.turn + ') ?', 'Remplacer')) return;
@@ -722,7 +725,7 @@ const Panels = {
       const num = h('input', { type: 'number', min: 1, max: 200, step: 1, value: n, style: 'width:64px', onclick: e => e.stopPropagation(),
         onchange: e => { const v = Math.max(1, Math.min(200, Math.round(+e.target.value) || 10)); e.target.value = v; App.setPref('autoExportN', v); if (App.prefs.autoExport > 0) App.setPref('autoExport', v); lab.textContent = App.prefs.autoExport > 0 ? 'tous les ' + v + ' tours' : 'coupée'; } });
       const lab = h('span', null, on ? 'tous les ' + n + ' tours' : 'coupée');
-      body.append(h('div', { class: 'row', onclick: () => { App.setPref('autoExport', App.prefs.autoExport > 0 ? 0 : (App.prefs.autoExportN || 10)); m.close(); Panels.menu(); } },
+      body.append(h('div', { class: 'row', onclick: () => { App.setPref('autoExport', App.prefs.autoExport > 0 ? 0 : (App.prefs.autoExportN || 10)); again(); } },
         h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Sauvegarde téléchargée automatiquement : ', lab),
           h('div', { class: 't2' }, 'Un fichier de sauvegarde arrive dans vos téléchargements à la fin du tour, tous les ', num, ' tours.')))); }
     // la copie locale : les nouvelles versions publiées sur GitHub (src/ui/update.js)
@@ -739,15 +742,17 @@ const Panels = {
       const v = await UI.choice('Langue', '', I18N.available().map(l => ({ label: l.name, value: l.id, primary: l.id === I18N.lang })));
       if (v) I18N.switchTo(v); });
     row('Aide et raccourcis', 'Contrôles du jeu', () => { m.close(); Panels.help(); });
-    row('Son : ' + (Sfx.on ? 'activé' : 'coupé'), 'Effets de combat, de magie et d\'interface, synthétisés dans le navigateur (coupe aussi la musique)', () => { Sfx.setOn(!Sfx.on); const t = $('#tb-sound span'); if (t) t.innerHTML = ICONS[Sfx.on ? 'sound' : 'mute']; m.close(); Panels.menu(); });
-    row('Musique : ' + (Sfx.music ? 'activée' : 'coupée'), Music.hasTracks() ? 'Bande originale orchestrale : titre, Arcane, Miroir, combats, victoire et défaite' + (Music.nowPlaying() ? ' (en cours : ' + Music.nowPlaying() + ')' : '') : 'Nappes génératives discrètes (jamais la même boucle)', () => { Sfx.setMusic(!Sfx.music); m.close(); Panels.menu(); });
+    row('Son : ' + (Sfx.on ? 'activé' : 'coupé'), 'Effets de combat, de magie et d\'interface, synthétisés dans le navigateur (coupe aussi la musique)', () => { Sfx.setOn(!Sfx.on); const t = $('#tb-sound span'); if (t) t.innerHTML = ICONS[Sfx.on ? 'sound' : 'mute']; again(); });
+    row('Musique : ' + (Sfx.music ? 'activée' : 'coupée'), Music.hasTracks() ? 'Bande originale orchestrale : titre, Arcane, Miroir, combats, victoire et défaite' + (Music.nowPlaying() ? ' (en cours : ' + Music.nowPlaying() + ')' : '') : 'Nappes génératives discrètes (jamais la même boucle)', () => { Sfx.setMusic(!Sfx.music); again(); });
     const vol = h('input', { type: 'range', min: 0, max: 100, step: 5, value: Math.round(Sfx.mvol * 100), style: 'width:100%', onclick: e => e.stopPropagation(), oninput: e => { Sfx.setMusicVolume(e.target.value / 100); vlab.textContent = e.target.value + ' %'; } });
     const vlab = h('span', { class: 'dim' }, Math.round(Sfx.mvol * 100) + ' %');
     body.append(h('div', { class: 'row' }, h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Volume de la musique ', vlab), h('div', { class: 't2' }, vol))));
-    row('Unité suivante automatique : ' + (App.prefs.autoNext ? 'activée' : 'coupée'), 'Quand une unité a épuisé ses mouvements, la sélection passe d\'elle-même à la prochaine unité qui attend des ordres', () => { App.setPref('autoNext', !App.prefs.autoNext); m.close(); Panels.menu(); });
-    row('Ronde des éclaireurs : ' + (App.prefs.scoutRevisit !== false ? 'activée' : 'coupée'), 'Quand il n\'y a plus rien à explorer, les éclaireurs en exploration automatique revisitent les antres qu\'on croit gardés, pour vérifier que leurs gardiens y sont toujours', () => { App.setPref('scoutRevisit', App.prefs.scoutRevisit === false); m.close(); Panels.menu(); });
+    row('Unité suivante automatique : ' + (App.prefs.autoNext ? 'activée' : 'coupée'), 'Quand une unité a épuisé ses mouvements, la sélection passe d\'elle-même à la prochaine unité qui attend des ordres', () => { App.setPref('autoNext', !App.prefs.autoNext); again(); });
+    row('Ronde des éclaireurs : ' + (App.prefs.scoutRevisit !== false ? 'activée' : 'coupée'), 'Quand il n\'y a plus rien à explorer, les éclaireurs en exploration automatique revisitent les antres qu\'on croit gardés, pour vérifier que leurs gardiens y sont toujours', () => { App.setPref('scoutRevisit', App.prefs.scoutRevisit === false); again(); });
     row('Journal', 'Afficher ou masquer le journal des événements (L)', () => { $('#logbox').classList.toggle('hidden'); m.close(); });
     row('Nouvelle partie', 'Abandonner et revenir à l\'écran titre', async () => { if (await UI.confirm('Nouvelle partie', 'Quitter la partie en cours ? Sa sauvegarde automatique restera disponible : « Continuer » tant que vous ne jouez pas de tour, puis « Partie précédente ».')) { UI.closeAll(); Setup.titleScreen(); } });
+    if (top) m.body.scrollTop = top;
+    return m;
   },
 
   help() {

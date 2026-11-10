@@ -211,8 +211,8 @@ const Setup = {
     sorcery: 'Air, illusions et contre-magie. Le royaume qui défait la magie des autres (Contre-magie, Brise-sort, Suppression de la magie), donne la mobilité (Vol, Célérité, Invisibilité), trouble les esprits (Confusion, Tempête mentale) et invoque créatures de l\'air et illusions (Nagas, Guerriers fantômes, Djinn, Drake céleste).',
   },
   realmTip(r, n) {
-    const RAR = [['common', 'commun'], ['uncommon', 'peu commun'], ['rare', 'rare'], ['veryrare', 'très rare']];
-    const pl = (k, l) => k + ' ' + (k > 1 ? l.replace(/(\w+)$/, '$1s') : l);
+    const RARITY_WORDS = { common: 'commun', uncommon: 'peu commun', rare: 'rare', veryrare: 'très rare' }, RAR = Object.keys(RARITY_WORDS).map(k => [k, RARITY_WORDS[k]]);
+    const pl = (k, l) => k + ' ' + (k > 1 && U.fr() ? l.replace(/(\w+)$/, '$1s') : l);   // l'accord au pluriel : en français seulement
     let html = '<h4 style="color:' + REALM_COLORS[r] + '">' + REALM_NAMES[r] + '</h4><div style="max-width:380px">' + Setup.REALM_BLURB[r] + '</div>';
     if (r === 'life' || r === 'death') html += '<div class="dim" style="margin-top:4px">Incompatible avec la ' + (r === 'life' ? 'Mort' : 'Vie') + ' : prendre l\'un retire l\'autre.</div>';
     if (r === 'chaos' || r === 'nature' || r === 'sorcery') html += '<div class="dim" style="margin-top:4px">Ses nœuds naissent ' + { chaos: 'dans les montagnes et les collines', nature: 'dans les forêts et les prairies', sorcery: 'dans les prairies et au bord des rivières' }[r] + '. Lors d\'un combat livré sur l\'un d\'eux, ses créatures gagnent +2 en attaque, défense et résistance, et ses sorts échappent au flux du nœud.</div>';

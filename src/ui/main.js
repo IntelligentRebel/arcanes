@@ -19,7 +19,14 @@ const App = {
     Game.hooks.demonSlain = () => setTimeout(() => App.demonPrompt(), 450);
     Game.hooks.finale = () => setTimeout(() => App.finalePrompts(), 450);
     UI.abilityHover();
-    const loop = () => { if (App.game && !App.preparing) { MapView.draw(); if (App.spellFx && App.spellFx.length) App.flushSpellFx(); } if (App.dirty) { App.dirty = false; App.refresh(); } requestAnimationFrame(loop); };
+    // une erreur d'affichage ne doit pas arrêter la boucle : sans elle, plus rien ne se redessine et le jeu paraît figé
+    const loop = () => {
+      try { if (App.game && !App.preparing) { MapView.draw(); if (App.spellFx && App.spellFx.length) App.flushSpellFx(); } if (App.dirty) { App.dirty = false; App.refresh(); } }
+      catch (e) { App.oops(e); }
+      requestAnimationFrame(loop);
+    };
+    window.addEventListener('error', ev => App.oops(ev.error || ev.message));
+    window.addEventListener('unhandledrejection', ev => App.oops(ev.reason));
     requestAnimationFrame(loop);
     Sfx.init();
     // liens des messages recopiés en HTML (toasts) : délégation
@@ -27,6 +34,14 @@ const App = {
     Setup.titleScreen();
     // la copie locale demande à GitHub s'il existe une version plus récente (src/ui/update.js)
     setTimeout(() => { Update.check(); }, 1500);
+  },
+
+  // erreur inattendue : notée dans la console, dite une fois au joueur (trois messages au plus par session)
+  oops(e) {
+    const msg = String(e && e.message || e || '').slice(0, 160); console.error(e);
+    App._oops = App._oops || new Set(); if (!msg || App._oops.has(msg) || App._oops.size >= 3) return;
+    App._oops.add(msg);
+    try { UI.toast('Erreur inattendue : ' + U.esc(msg), 'warn'); } catch (x) { /* rien */ }
   },
 
   start(game, opts = {}) {
@@ -1066,8 +1081,9 @@ const App = {
     try { await Turn.endTurn(game); } catch (e) { console.error(e); UI.toast('Erreur pendant le tour : ' + U.esc(e.message), 'warn'); }
     UI.busyLog = false;
     MapView.invalidate(); MapView.invalidateVis();
-    // ordres de déplacement en cours
+    // ordres de déplacement en cours (une erreur ici ne doit pas laisser l'écran d'attente en place : le jeu ne répondrait plus)
     UI.setBusy('Vos troupes se mettent en marche…');
+    try {
     await App.advanceRoads();
     for (const u of Object.values(game.units)) {
       if (u.owner !== App.pid || !u.path || !u.path.length || !game.units[u.id] || u.status === 'explore') continue;
@@ -1081,6 +1097,7 @@ const App = {
     // purificateurs automatiques
     const purifiers = U.groupBy(Object.values(game.units).filter(u => u.owner === App.pid && u.status === 'autopurify'), u => u.plane + ',' + u.x + ',' + u.y + ':' + (u.purifyGroup != null ? u.purifyGroup : u.id));
     for (const k in purifiers) await App.purifyStep(purifiers[k]);
+    } catch (e) { App.oops(e); }
     UI.setBusy(null);
     if ((App.pendingScouts || []).length) await App.flushScouts();
     Sfx.afterTurn();

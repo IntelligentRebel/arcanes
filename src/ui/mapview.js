@@ -905,7 +905,7 @@ const MapView = {
           const col = fc.refused ? '#ff6a5a' : fc.unknown ? '#a8a294' : fc.empty || pct >= 65 ? '#6fdc7f' : pct >= 40 ? '#f0c24a' : '#ff6a5a';
           ctx.strokeStyle = col; ctx.lineWidth = Math.max(2.5, ts / 18);
           ctx.beginPath(); ctx.arc(P.x + ts / 2, P.y + ts / 2, ts * .46, 0, 7); ctx.stroke();
-          const label = fc.refused ? 'impossible' : fc.unknown ? '?' : (fc.empty ? 'prise' : U.cap(Game.chanceWord(fc.win))) + (fc.reportAge != null ? ' ?' : ''), fs = Math.max(12, ts * .24);
+          const label = fc.refused ? 'Impossible' : fc.unknown ? '?' : (fc.empty ? 'Prise' : U.cap(Game.chanceWord(fc.win))) + (fc.reportAge != null ? ' ?' : ''), fs = Math.max(12, ts * .24);
           ctx.font = '700 ' + fs + 'px system-ui'; ctx.textAlign = 'center';
           const tw = ctx.measureText(label).width + 10;
           ctx.fillStyle = 'rgba(10,10,14,.85)'; ctx.fillRect(P.x + ts / 2 - tw / 2, P.y - fs * .9, tw, fs * 1.35);
