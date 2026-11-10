@@ -96,7 +96,8 @@ function bancReport(plan, all, total, errCount) {
         line += '  crise de fin dans ' + Math.round(100 * fn.length / a.length) + ' % (tour médian ' + md(fn.map(r => r.finale.start)) + ', vaincue ' + Math.round(100 * won.length / fn.length) + ' %' + (won.length ? ' en ' + md(won.map(r => r.finale.end - r.finale.start)) + ' tours' : '') + (over.length > won.length ? ', éteinte (cible éliminée) ' + Math.round(100 * (over.length - won.length) / fn.length) + ' %' : '') + ', contre le sujet ' + Math.round(100 * bancMean(fn.map(r => r.finale.subj ? 1 : 0))) + ' %'
           + (fn.some(r => r.finale.tFirst != null) ? ', cible encore 1re à la fin ' + Math.round(100 * bancMean(fn.map(r => r.finale.tFirst || 0))) + ' %' : '')
           + (ex.crise && lab !== lab0 ? (() => { const bs = new Map(base.map(r => [r.seed, r])), pr = fn.filter(r => r.lead200Kept != null && bs.has(r.seed) && bs.get(r.seed).lead200Kept != null);
-              return pr.length ? ', meneur du t200 encore 1er ' + Math.round(100 * bancMean(pr.map(r => r.lead200Kept))) + ' % (sans crise, mêmes cartes : ' + Math.round(100 * bancMean(pr.map(r => bs.get(r.seed).lead200Kept))) + ' %)' : ''; })() : '')
+              return pr.length ? ', meneur du t200 encore 1er ' + Math.round(100 * bancMean(pr.map(r => r.lead200Kept))) + ' % (' + lab0 + ', mêmes cartes : ' + Math.round(100 * bancMean(pr.map(r => bs.get(r.seed).lead200Kept))) + ' %)' : ''; })() : '')
+          + (fn.some(r => r.finale.tier) ? ', paliers 1/2/3 : ' + [1, 2, 3].map(t => Math.round(100 * bancMean(fn.map(r => r.finale.tier === t ? 1 : 0))) + ' %').join(' / ') : '')
           + (fn.some(r => r.finale.eaten) ? ', nœuds dévorés ' + bancMean(fn.map(r => r.finale.eaten || 0)).toFixed(1) : '') + (fn.some(r => r.finale.seceded) ? ', sécessions ' + bancMean(fn.map(r => r.finale.seceded || 0)).toFixed(1) : '') + ')'; } }
       // (v0.31.32) le meneur du tour 200 : l'est-il encore à la fin, et de combien mène-t-il (parties où il menait de 1,5 fois et plus au tour 200)
       if (ex.crise) { const lk = a.filter(r => r.lead200Kept != null), big = lk.filter(r => r.gap200 >= 1.5);
@@ -104,12 +105,13 @@ function bancReport(plan, all, total, errCount) {
         if (lk.length) line += '  meneur du t200 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead200Kept))) + ' % (avance médiane ×' + med(lk.map(r => r.gap200)).toFixed(2) + ' au t200, ×' + med(lk.map(r => r.gapEnd)).toFixed(2) + ' à la fin)'
           + (big.length ? ' ; s\'il menait de ×1,5 au t200 (' + big.length + ' parties) : encore 1er ' + Math.round(100 * bancMean(big.map(r => r.lead200Kept))) + ' %, avance finale médiane ×' + med(big.map(r => r.gapEnd)).toFixed(2) : ''); }
       const lk = a.filter(r => r.lead100Kept != null); if (lk.length && ex.meneur) line += '  meneur du t100 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead100Kept ? 1 : 0))) + ' %, avance finale ×' + bancMean(lk.map(r => r.gapEnd)).toFixed(2);
+      if (ex.croisade) line += '  croisade : failles ouvertes par sort ' + m('riftsCast').toFixed(2) + ' par partie, cités prises d\'un plan à l\'autre ' + m('xcaps').toFixed(2) + ' (au meneur du moment ' + m('xcapsL').toFixed(2) + ')';
       L.push(line);
       if (lab !== lab0) {
-        const name = k => k === 'score' ? 'final' : k === 'rank' ? 'rang final' : k === 'lead200Kept' ? 'meneur du t200 encore 1er' : k === 'gapEndLn' ? 'avance finale du 1er (log)' : 't' + k.slice(5);
-        const fine = k => k === 'rank' || k === 'lead200Kept' || k === 'gapEndLn';
+        const name = k => k === 'score' ? 'final' : k === 'rank' ? 'rang final' : k === 'lead200Kept' ? 'meneur du t200 encore 1er' : k === 'lead100Kept' ? 'meneur du t100 encore 1er' : k === 'gapEndLn' ? 'avance finale du 1er (log)' : 't' + k.slice(5);
+        const fine = k => k === 'rank' || k === 'lead200Kept' || k === 'lead100Kept' || k === 'gapEndLn';
         let d = '      écart à ' + lab0 + ' (même carte) :';
-        for (const k of ['score'].concat(cps.map(c => 'score' + c), ['rank'], ex.crise ? ['lead200Kept', 'gapEndLn'] : [])) {
+        for (const k of ['score'].concat(cps.map(c => 'score' + c), ['rank'], ex.crise ? ['lead200Kept', 'gapEndLn'] : [], ex.meneur ? ['lead100Kept'] : [])) {
           const p = bancPaired(a, base, k); if (!p) continue;
           d += '  ' + name(k) + ' ' + (fine(k) ? (p.m >= 0 ? '+' : '') + p.m.toFixed(2) + ' ± ' + p.se.toFixed(2) : sgn(p.m) + ' ± ' + Math.round(p.se)) + (k === 'score' ? ' (mieux ' + p.wins + ', pire ' + p.losses + ' sur ' + p.n + ')' : '');
         }

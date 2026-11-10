@@ -277,22 +277,24 @@ Object.assign(AI, {
       const s = game.sites[T.site];
       const members = T.members.map(id => game.units[id]).filter(u => u && u.owner === pl.id && u.plane === home);
       const fort = game.cities[pl.fortress];
-      if (!s || !s.cleared || members.length < 3 || game.turn - T.since > 15 || (fort && AI.threatNear(game, pl, fort) > 0)) { pl.aiTrip = null; pl.aiTripCool = game.turn + 15; return new Set(); }
+      if (!s || !s.cleared || s.closed || members.length < 3 || game.turn - T.since > 15 || (fort && AI.threatNear(game, pl, fort) > 0)) { pl.aiTrip = null; pl.aiTripCool = game.turn + 15; return new Set(); }
       for (const u of members) if (u.moves > 0 && (u.x !== s.x || u.y !== s.y)) await Game.moveGroup(game, [u.id], s.x, s.y, { noAttack: true });
       const here = members.filter(u => game.units[u.id] && u.x === s.x && u.y === s.y);
       if (here.length === members.filter(u => game.units[u.id]).length && Game.planeShift(game, here.map(u => u.id)).ok) {
-        pl.aiTrip = null; pl.aiTripCool = game.turn + AI.TRIP_COOL;
+        pl.aiTrip = null; pl.aiTripCool = game.turn + (AI.crusadeTarget(game, pl) ? AI.CRUSADE_COOL : AI.TRIP_COOL);
         return new Set(here.map(u => u.id));
       }
       return new Set(members.map(u => u.id));
     }
     if (game.turn < AI.TRIP_TURN || (pl.aiTripCool || 0) > game.turn || !mineOn(home)) return new Set();
-    // une seule expédition à la fois : des soldats déjà sur un plan sans cité à soi
-    if (Object.values(game.units).some(u => u.owner === pl.id && u.plane !== home && AI.isSoldier(game, u) && !mineOn(u.plane))) return new Set();
+    // une seule expédition à la fois : des soldats déjà sur un plan sans cité à soi (en croisade, les renforts suivent)
+    const crus = AI.crusadeTarget(game, pl);
+    if (!crus && Object.values(game.units).some(u => u.owner === pl.id && u.plane !== home && AI.isSoldier(game, u) && !mineOn(u.plane))) return new Set();
     if (Cities.ofPlayer(game, pl.id).some(c => AI.threatNear(game, pl, c) > 0)) return new Set();
     const cities = Cities.ofPlayer(game, pl.id).filter(c => c.plane === home);
     const near = s => Math.min(...cities.map(c => World.dist(world, c.x, c.y, s.x, s.y)));
-    const tower = U.min(game.sites.filter(s => s.type === 'tower' && s.plane === home && s.cleared && Intel.knows(game, pl, home, s.x, s.y) && near(s) <= 25), near);
+    // une tour dégagée ; en croisade, une faille aussi
+    const tower = U.min(game.sites.filter(s => s.plane === home && Intel.knows(game, pl, home, s.x, s.y) && near(s) <= 25 && ((s.type === 'tower' && s.cleared) || (crus && s.type === 'rift' && !s.closed))), near);
     if (!tower || Move.hostileAt(game, pl.id, home, tower.x, tower.y)) return new Set();
     const free = Object.values(game.units).filter(u => u.owner === pl.id && u.plane === home && u.aiRole !== 'garrison' && u.aiEscort == null && u.riteEscort == null && u.status !== 'governor'
       && !busy.has(u.id) && AI.isSoldier(game, u) && World.dist(world, u.x, u.y, tower.x, tower.y) <= 30);
@@ -300,5 +302,47 @@ Object.assign(AI, {
     if (force.length < 4 || U.sum(force, u => Units.strength(game, u)) < AI.TRIP_POWER) return new Set();
     pl.aiTrip = { site: tower.id, members: force.map(u => u.id), since: game.turn };
     return AI.tripUnits(game, pl, busy);
+  },
+});
+
+// ---------- (0.31.36, crusade) Difficile et Hardcore : la croisade contre le meneur de l'autre plan ----------
+// Le meneur est né sur l'autre plan ; les sorciers de ce plan-ci nettement derrière lui (0,8 fois au plus) vont le chercher : ses expéditions visent ses cités, partent plus souvent (les renforts suivent), passent aussi par les failles,
+// et faute de passage près de chez lui, il apprend et lance Ouvrir une faille sous une armée prête à passer.
+Object.assign(AI, {
+  CRUSADE_COOL: 8, _crus: new WeakMap(),
+  crusadeTarget(game, pl) {
+    if (!AI.feat(pl, 'crusade', 2) || !AI.feat(pl, 'planes', 2) || game.turn < 60 || pl.banished) return null;
+    const memo = AI._crus.get(pl); if (memo && memo.turn === game.turn) return memo.t;   // (hors sauvegarde)
+    const alive = game.players.filter(p => p.alive && !p.banished);
+    const sc = new Map(alive.map(p => [p, Crisis.score(game, p)]));
+    const L = U.max(alive, p => sc.get(p));
+    let t = null;
+    if (L && L !== pl && L.plane !== pl.plane && sc.get(pl) <= 0.8 * sc.get(L) && !['peace', 'alliance'].includes(pl.diplo[L.id])) t = L;
+    AI._crus.set(pl, { turn: game.turn, t });
+    return t;
+  },
+  // un passage vers l'autre plan (tour dégagée, faille) à 25 cases au plus de ses cités, qui débouche à 20 cases au plus d'une cité du meneur
+  crossingNear(game, pl) {
+    const T = AI.crusadeTarget(game, pl); if (!T) return false;
+    const home = pl.plane, w = game.world, cs = Cities.ofPlayer(game, pl.id).filter(c => c.plane === home), ts = Cities.ofPlayer(game, T.id).filter(c => c.plane !== home);
+    return game.sites.some(s => s.plane === home && ((s.type === 'tower' && s.cleared) || (s.type === 'rift' && !s.closed))
+      && cs.some(c => World.dist(w, c.x, c.y, s.x, s.y) <= 25) && ts.some(c => World.dist(w, c.x, c.y, s.x, s.y) <= 20));
+  },
+  // où ouvrir la faille : sous une armée d'au moins trois soldats, sur ses terres ou des terres libres, au plus près des cités du meneur
+  riftTileFor(game, pl) {
+    const T = AI.crusadeTarget(game, pl); if (!T || AI.crossingNear(game, pl)) return null;
+    const home = pl.plane, w = game.world;
+    const theirs = Cities.ofPlayer(game, T.id).filter(c => c.plane !== home);
+    if (!theirs.length) return null;
+    const stacks = U.groupBy(Object.values(game.units).filter(u => u.owner === pl.id && u.plane === home && AI.isSoldier(game, u) && !Cities.at(game, u.plane, u.x, u.y)), u => u.x + ',' + u.y);
+    let best = null, bs = Infinity;
+    for (const k in stacks) {
+      const g = stacks[k]; if (g.length < 3) continue;
+      const u = g[0], t = { plane: home, x: u.x, y: u.y };
+      const own = World.get(w, home, 'owner', u.x, u.y); if ((own >= 0 && own !== pl.id) || !Spells.validate(game, pl, 'open_rift', t).ok) continue;
+      const d = Math.min(...theirs.map(c => World.dist(w, c.x, c.y, u.x, u.y)));
+      if (d < bs) { bs = d; best = t; }
+    }
+    return best;
   },
 });

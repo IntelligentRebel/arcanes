@@ -103,7 +103,7 @@ const Sprites = {
     'unit:HeroAerie': 'unit:DarkElfPriests', 'unit:HeroMarcus': 'unit:HighMenBowmen', 'unit:HeroReywind': 'unit:HighMenMagician', 'unit:HeroAlorra': 'unit:Longbowmen',
     'unit:HeroZaldron': 'unit:HighMenMagician', 'unit:HeroShinBo': 'unit:Nightblades', 'unit:HeroSerena': 'unit:HalflingShamans', 'unit:HeroShuri': 'unit:Longbowmen',
     'unit:HeroTheria': 'unit:Nightblades', 'unit:HeroTumu': 'unit:Nightblades', 'unit:HeroAureus': 'unit:Angel',
-    'bld:fortress': 'city:fortress', 'spell:purify_land': 'spell:tranquility', 'spell:field_healing': 'spell:healing', 'unit:WizardAvatar': 'unit:HighMenMagician', 'spell:wizard_avatar': 'unit:HighMenMagician',
+    'bld:fortress': 'city:fortress', 'spell:purify_land': 'spell:tranquility', 'spell:field_healing': 'spell:healing', 'spell:open_rift': 'spell:chaos_rift', 'unit:WizardAvatar': 'unit:HighMenMagician', 'spell:wizard_avatar': 'unit:HighMenMagician',
   },
   resolve(key) {
     if (Sprites.hasHD(key)) return key;

@@ -267,6 +267,11 @@ const Spells = {
     if (['summon_hero', 'summon_champion', 'incarnation', 'resurrection'].includes(id)) { const sc = Spells.summonCity(game, pl); if (sc && !Spells.spotNear(game, pl, sc, 'HeroTorin')) return { ok: false, why: 'Aucune place autour de ' + sc.name + ' pour accueillir le héros.' }; }
     if (id === 'purify_land' && !(target && target.x != null && Spells.corruptAround(game, target.plane, target.x, target.y).length)) return { ok: false, why: 'Aucune terre corrompue ici ni autour.' };
     if (id === 'seal_rift' && !(target && target.x != null && Veil.riftAt(game, target.plane, target.x, target.y))) return { ok: false, why: 'Il faut viser une faille ouverte.' };
+    if (id === 'open_rift') {
+      if (Veil.sealed(game)) return { ok: false, why: 'Le Sceau planaire fige le voile.' };
+      if (!(target && target.x != null && Units.at(game, target.plane, World.wx(game.world, target.x), target.y).some(u => u.owner === pl.id))) return { ok: false, why: 'Il faut viser une case où se tiennent vos troupes.' };
+      const why = Veil.riftSpotWhy(game, World.wx(game.world, target.x), target.y); if (why) return { ok: false, why };
+    }
     if (id === 'wizard_avatar' && Game.avatarOf(game, pl)) return { ok: false, why: 'Vous êtes déjà sur la carte.' };
     if (id === 'wizard_avatar' && !game.cities[pl.fortress]) return { ok: false, why: 'Il faut votre forteresse.' };
     if (sp.kind === 'heal' && !Spells.healTargets(game, pl, id, target).length) return { ok: false, why: id === 'mass_healing' ? 'Aucune de vos unités n\'est blessée.' : 'Aucune unité blessée à soigner ici.' };
@@ -651,6 +656,12 @@ const OVERLAND_HANDLERS = {
     const tiles = Spells.corruptAround(game, t.plane, t.x, t.y); if (!tiles.length) return { ok: false, why: 'Aucune terre corrompue ici ni autour.' };
     for (const [x, y] of tiles) World.set(game.world, t.plane, 'corrupt', x, y, 0);
     return { msg: tiles.length > 1 ? tiles.length + ' terres corrompues sont purifiées.' : 'La terre est purifiée.' };
+  },
+  open_rift(game, pl, t) {
+    const x = World.wx(game.world, t.x), why = Veil.riftSpotWhy(game, x, t.y); if (why) return { ok: false, why };
+    const s = Veil.openRiftAt(game, x, t.y); s.by = game.sites[s.pair].by = pl.id; Veil.thin(game, 3);
+    for (const o of game.players) if (o !== pl && o.alive && (Cities.ofPlayer(game, o.id).some(c => World.dist(game.world, c.x, c.y, x, t.y) <= 12) || o.contact[pl.id])) Game.log(game, o.id, 'Une faille s\'est ouverte entre les plans (' + x + ', ' + t.y + ').', { x, y: t.y, plane: t.plane, rift: true, minor: true });
+    return { msg: 'La faille s\'ouvre sous vos troupes ; le voile s\'use (' + Math.round(game.veil) + ' %).' };
   },
   seal_rift(game, pl, t) {
     const s = Veil.riftAt(game, t.plane, t.x, t.y); if (!s) return { ok: false, why: 'Il faut viser une faille.' };

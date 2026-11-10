@@ -108,7 +108,12 @@ async function playOne(E, job) {
     for (const t of race.units.filter(t => E.DATA.units[t].abilities.createOutpost).concat(race.units.filter(t => { const d = E.DATA.units[t]; return d.melee >= 3 && !d.sailing; }).slice(0, 1))) for (let k = 0; k < 3; k++) E.Units.create(game, t, 0, fc.plane, fc.x, fc.y); }
   let caps = 0, lost = 0, deathTurn = null, book3 = null;
   const Bk = E.Book || (typeof Book !== 'undefined' ? Book : null);   // le Livre de légende : premier tour où un sorcier tient trois fragments
-  const oc = E.Game.captureCity; E.Game.captureCity = async function (g, city, pid) { if (pid === 0) caps++; else if (city.owner === 0) lost++; return oc.apply(this, arguments); };
+  // (v0.31.36) cités prises d'un plan à l'autre (le sorcier né sur l'autre plan que l'ancien maître), et parmi elles celles du meneur
+  let xcaps = 0, xcapsL = 0;
+  const oc = E.Game.captureCity; E.Game.captureCity = async function (g, city, pid) { if (pid === 0) caps++; else if (city.owner === 0) lost++;
+    const a = g.players[pid], b = g.players[city.owner];
+    if (a && b && a.plane !== b.plane) { xcaps++; const al = g.players.filter(p => p.alive && !p.banished); if (E.U.max(al, p => E.Crisis.score(g, p)) === b) xcapsL++; }
+    return oc.apply(this, arguments); };
   const marks = {}, cps = job.checkpoints || [150], inv = { n: {}, ex: {} };
   const wonder = { lore: null, built: null, all: 0 }, wseen = new Set(); let govTurn = null;   // ouvrages : quand le sujet achève sa recherche et le bâtit ; combien en tout
   for (let t = 0; t < job.turns && !game.over; t++) {
@@ -143,6 +148,7 @@ async function playOne(E, job) {
   if (marks[100]) { const L = marks[100].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead100 = L; res.lead100Kept = sc.indexOf(Math.max(...sc)) === L; res.gap100 = +marks[100].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); }
   // (v0.31.32) de même au tour 200, quand les crises de fin peuvent commencer : le meneur l'est-il encore, et de combien
   if (marks[200] && marks[200].gap != null) { const L = marks[200].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead200 = L; res.lead200Kept = sc.indexOf(Math.max(...sc)) === L ? 1 : 0; res.gap200 = +marks[200].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); res.leadScore200 = sc[L] || 0; res.gapEndLn = +Math.log(Math.max(0.5, res.gapEnd)).toFixed(3); }
+  res.xcaps = xcaps; res.xcapsL = xcapsL; res.riftsCast = game.sites.filter(s => s.type === 'rift' && s.plane === 0 && s.by != null).length;
   integrity(E, game, inv);
   if (Object.keys(inv.n).length) { res.inv = inv.n; res.invEx = inv.ex; }
   if (govTurn != null) res.governor = govTurn;
@@ -161,7 +167,7 @@ async function playOne(E, job) {
   res.corrupt = E.U.sum(E.Cities.ofPlayer(game, 0), c => E.World.catchment(game.world, c.x, c.y).filter(([x, y]) => E.World.get(game.world, c.plane, 'corrupt', x, y)).length);
   if (game.riteStats) res.rite = Object.assign({}, game.riteStats);
   // la crise de fin (v0.31.30) : laquelle, contre qui, quand, comment elle a fini
-  { const f = game.finale; if (f && f.kind) res.finale = { kind: f.kind, state: f.state, omen: f.omen || null, start: f.start || null, end: f.end || null, by: f.by != null ? f.by : null, target: f.target, subj: f.target === 0, force: f.force || null, waves: f.waves || 0, eaten: f.eaten || 0, seceded: f.seceded || 0, clues: f.clues || 0, rises: f.rises || 0,
+  { const f = game.finale; if (f && f.kind) res.finale = { kind: f.kind, state: f.state, omen: f.omen || null, start: f.start || null, end: f.end || null, by: f.by != null ? f.by : null, target: f.target, subj: f.target === 0, force: f.force || null, waves: f.waves || 0, eaten: f.eaten || 0, seceded: f.seceded || 0, clues: f.clues || 0, rises: f.rises || 0, tier: f.tier || null, leadAt: f.leadAt || null,
     faded: !!f.faded, tFirst: f.target != null && sc.indexOf(Math.max(...sc)) === f.target ? 1 : 0, tRank: f.target != null ? 1 + sc.filter((v, i) => i !== f.target && v > sc[f.target]).length : null }; }
   // un démon encore debout à la fin : ce qu'il a fait compte aussi (v0.31.26)
   { const r = game.rite; if (res.rite && r && r.phase === 'demon' && r.summoned != null) { const rs = res.rite; rs.escorts = (rs.escorts || 0) + (r.maxEsc || 0); rs.demonCaps = (rs.demonCaps || 0) + (r.caps || 0); rs.life = (rs.life || 0) + game.turn - r.summoned; } }

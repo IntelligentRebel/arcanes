@@ -98,6 +98,7 @@ const AI = {
       // Purification : utile seulement quand ses terres sont corrompues
       if (id === 'purify_land') sc += AI.feat(pl, 'purify', 1) && U.sum(Cities.ofPlayer(game, pl.id), c => World.catchment(game.world, c.x, c.y).filter(([x, y]) => World.get(game.world, c.plane, 'corrupt', x, y)).length) >= 3 ? 25 : -60;
       if (id === 'spell_of_mastery') sc = pl.known.length > 35 ? 500 : -100;
+      if (id === 'open_rift') sc += AI.crusadeTarget(game, pl) && !AI.crossingNear(game, pl) ? 70 : -30;
       sc += AI.counterResearch(game, pl, id);
       sc += game.rng.next() * 15;
       if (sc > bs) { bs = sc; best = id; }
@@ -379,10 +380,15 @@ const AI = {
         if (!bt || bn < 2) continue;
         target = bt; sc = 8 + bn * 4;
       }
+      else if (id === 'open_rift') {
+        // (crusade) une porte vers le meneur de l'autre plan, sous une armée prête à passer
+        const t = AI.riftTileFor(game, pl); if (!t) continue;
+        target = t; sc = 55;
+      }
       else if (id === 'seal_rift') {
         const mine = Cities.ofPlayer(game, pl.id);
         const near = s => U.min(mine.filter(c => c.plane === s.plane), c => World.dist(game.world, c.x, c.y, s.x, s.y));
-        const r = U.min(Veil.rifts(game, 0).concat(Veil.rifts(game, 1)).filter(s => { const c = near(s); return c && Intel.knows(game, pl, s.plane, s.x, s.y) && World.dist(game.world, c.x, c.y, s.x, s.y) <= 8; }), s => { const c = near(s); return World.dist(game.world, c.x, c.y, s.x, s.y); });
+        const r = U.min(Veil.rifts(game, 0).concat(Veil.rifts(game, 1)).filter(s => s.by !== pl.id).filter(s => { const c = near(s); return c && Intel.knows(game, pl, s.plane, s.x, s.y) && World.dist(game.world, c.x, c.y, s.x, s.y) <= 8; }), s => { const c = near(s); return World.dist(game.world, c.x, c.y, s.x, s.y); });
         if (!r) continue;
         target = { plane: r.plane, x: r.x, y: r.y }; sc = 24;
       }
@@ -724,7 +730,8 @@ const AI = {
     if (mineHere.length >= 3 || (rally && rally.owner === pl.id && rally.plane === here)) { for (const u of units) delete u.aiGoHome; return false; }
     const goHome = units.some(u => u.aiGoHome != null);
     const foes = Intel.knownCities(game, pl).filter(c => c.plane === here && c.owner !== pl.id && !(c.owner >= 0 && (pl.diplo[c.owner] === 'peace' || pl.diplo[c.owner] === 'alliance')) && !AI.badTarget(game, pl, here, c.x, c.y));
-    const goal = goHome ? null : U.min(foes, c => World.dist(world, c.x, c.y, u0.x, u0.y));
+    const crus = AI.crusadeTarget(game, pl), pref = crus ? foes.filter(c => c.owner === crus.id) : [];   // (crusade)
+    const goal = goHome ? null : U.min(pref.length ? pref : foes, c => World.dist(world, c.x, c.y, u0.x, u0.y));
     if (goal) {
       const st = AI.stagingTile(game, pl, u0, goal.x, goal.y);
       if (st && (st[0] !== u0.x || st[1] !== u0.y)) { for (const u of units) delete u.aiStageSince; await Game.moveGroup(game, ids, st[0], st[1], { noAttack: true }); return true; }
@@ -738,7 +745,7 @@ const AI = {
     }
     const fr = goHome ? null : Move.nearestFrontier(game, units, 3000);
     if (fr) { await Game.moveGroup(game, ids, fr[0], fr[1], { noAttack: true }); return true; }
-    const tower = U.min(game.sites.filter(s => s.type === 'tower' && s.plane === here && s.cleared), s => World.dist(world, s.x, s.y, u0.x, u0.y));
+    const tower = U.min(game.sites.filter(s => s.plane === here && ((s.type === 'tower' && s.cleared) || (crus && s.type === 'rift' && !s.closed))), s => World.dist(world, s.x, s.y, u0.x, u0.y));
     if (!tower || AI.sealed(game)) return false;
     if (u0.x === tower.x && u0.y === tower.y) return Game.planeShift(game, ids).ok;
     await Game.moveGroup(game, ids, tower.x, tower.y, { noAttack: true });
@@ -1108,7 +1115,8 @@ const AI = {
       // le Sort de Maîtrise en cours : sa forteresse est la cible de tous
       const som = c.owner >= 0 && Endgame.casting(game, c.owner) ? (c.fortress ? 5 : 1.5) : 1;
       // le plan : les cités de l'ennemi visé valent davantage, et l'on va les chercher plus loin
-      const camp = plan && plan.kind === 'war' && c.owner === plan.target ? AI.tune(pl, 'campValue') : 1;
+      const crus = AI.crusadeTarget(game, pl), cr = crus && c.owner === crus.id;   // (crusade) le meneur de l'autre plan
+      const camp = cr ? Math.max(1.8, AI.tune(pl, 'campValue')) : plan && plan.kind === 'war' && c.owner === plan.target ? AI.tune(pl, 'campValue') : 1;
       // Hardcore : plusieurs fronts ; une cité déjà visée ce tour par une autre de nos armées en attire moins une seconde
       const front = AI.feat(pl, 'fronts', 3) && pl._fronts && pl._fronts.turn === game.turn && pl._fronts.keys.includes(c.plane + ',' + c.x + ',' + c.y) ? 0.5 : 1;
       // une cité neutre ne se défend que chez elle : on va la chercher plus loin (sinon, passé les abords de la capitale,

@@ -265,7 +265,7 @@
  "Chiens infernaux": {
   "at": [
    "data/units.js:46",
-   "data/spells.js:111"
+   "data/spells.js:112"
   ]
  },
  "Meute de chiens démoniaques au souffle de feu.": {
@@ -276,7 +276,7 @@
  "Gargouilles": {
   "at": [
    "data/units.js:47",
-   "data/spells.js:122"
+   "data/spells.js:123"
   ]
  },
  "Statues ailées vivantes, très résistantes.": {
@@ -287,7 +287,7 @@
  "Géant de feu": {
   "at": [
    "data/units.js:48",
-   "data/spells.js:119"
+   "data/spells.js:120"
   ]
  },
  "Géant ardent qui lance des rochers et fracasse les murs.": {
@@ -298,7 +298,7 @@
  "Élémentaire de feu": {
   "at": [
    "data/units.js:49",
-   "data/spells.js:117"
+   "data/spells.js:118"
   ]
  },
  "Flamme vivante appelée pour la durée d'un combat.": {
@@ -309,7 +309,7 @@
  "Rejeton du chaos": {
   "at": [
    "data/units.js:50",
-   "data/spells.js:130"
+   "data/spells.js:131"
   ]
  },
  "Abomination aux multiples regards mortels qui sème la peur.": {
@@ -320,7 +320,7 @@
  "Chimères": {
   "at": [
    "data/units.js:51",
-   "data/spells.js:127"
+   "data/spells.js:128"
   ]
  },
  "Bêtes volantes à trois têtes crachant le feu.": {
@@ -331,7 +331,7 @@
  "Chauve-souris funeste": {
   "at": [
    "data/units.js:52",
-   "data/spells.js:124"
+   "data/spells.js:125"
   ]
  },
  "Chauve-souris géante entourée d'un brasier.": {
@@ -342,7 +342,7 @@
  "Éfrit": {
   "at": [
    "data/units.js:53",
-   "data/spells.js:133"
+   "data/spells.js:134"
   ]
  },
  "Génie du feu qui lance des sorts de chaos.": {
@@ -353,7 +353,7 @@
  "Hydre": {
   "at": [
    "data/units.js:54",
-   "data/spells.js:138"
+   "data/spells.js:139"
   ]
  },
  "Serpent à neuf têtes qui crache le feu et se régénère.": {
@@ -364,7 +364,7 @@
  "Grand Drake": {
   "at": [
    "data/units.js:55",
-   "data/spells.js:145"
+   "data/spells.js:146"
   ]
  },
  "Dragon rouge colossal au souffle dévastateur.": {
@@ -375,7 +375,7 @@
  "Squelettes": {
   "at": [
    "data/units.js:56",
-   "data/spells.js:67"
+   "data/spells.js:68"
   ]
  },
  "Squelettes animés, insensibles aux projectiles.": {
@@ -386,7 +386,7 @@
  "Goules": {
   "at": [
    "data/units.js:57",
-   "data/spells.js:72"
+   "data/spells.js:73"
   ]
  },
  "Morts affamés dont la morsure relève les victimes en morts-vivants.": {
@@ -397,7 +397,7 @@
  "Traqueur nocturne": {
   "at": [
    "data/units.js:58",
-   "data/spells.js:83"
+   "data/spells.js:84"
   ]
  },
  "Prédateur invisible au regard mortel.": {
@@ -428,7 +428,7 @@
  "Spectres": {
   "at": [
    "data/units.js:61",
-   "data/spells.js:91"
+   "data/spells.js:92"
   ]
  },
  "Ombres volantes qui drainent la vie de leurs victimes.": {
@@ -439,7 +439,7 @@
  "Démons des ombres": {
   "at": [
    "data/units.js:62",
-   "data/spells.js:87"
+   "data/spells.js:88"
   ]
  },
  "Démons immatériels capables de changer de plan.": {
@@ -450,7 +450,7 @@
  "Chevaliers de la mort": {
   "at": [
    "data/units.js:63",
-   "data/spells.js:100"
+   "data/spells.js:101"
   ]
  },
  "Cavaliers morts-vivants qui volent la vie de leurs adversaires.": {
@@ -461,7 +461,7 @@
  "Seigneur démon": {
   "at": [
    "data/units.js:64",
-   "data/spells.js:107"
+   "data/spells.js:108"
   ]
  },
  "Seigneur infernal qui sème la peur et appelle des démons.": {
@@ -482,7 +482,7 @@
  "Licornes": {
   "at": [
    "data/units.js:66",
-   "data/spells.js:42"
+   "data/spells.js:43"
   ]
  },
  "Licornes qui se téléportent et renforcent la résistance alliée.": {
@@ -493,7 +493,7 @@
  "Esprit gardien": {
   "at": [
    "data/units.js:67",
-   "data/spells.js:35"
+   "data/spells.js:36"
   ]
  },
  "Esprit protecteur qui peut se lier à un nœud.": {
@@ -504,7 +504,7 @@
  "Ange": {
   "at": [
    "data/units.js:68",
-   "data/spells.js:53"
+   "data/spells.js:54"
   ]
  },
  "Messager céleste qui chasse les créatures maléfiques.": {
@@ -515,7 +515,7 @@
  "Archange": {
   "at": [
    "data/units.js:69",
-   "data/spells.js:65"
+   "data/spells.js:66"
   ]
  },
  "Champion céleste capable de lancer des sorts de vie.": {
@@ -526,7 +526,7 @@
  "Ours de guerre": {
   "at": [
    "data/units.js:70",
-   "data/spells.js:153"
+   "data/spells.js:154"
   ]
  },
  "Ours dressés pour la guerre, à l'aise en forêt.": {
@@ -537,7 +537,7 @@
  "Lutins": {
   "at": [
    "data/units.js:71",
-   "data/spells.js:157"
+   "data/spells.js:158"
   ]
  },
  "Petites fées volantes qui lancent des traits magiques.": {
@@ -548,7 +548,7 @@
  "Cocatrix": {
   "at": [
    "data/units.js:72",
-   "data/spells.js:165"
+   "data/spells.js:166"
   ]
  },
  "Oiseaux-serpents dont le contact pétrifie.": {
@@ -559,7 +559,7 @@
  "Basilic": {
   "at": [
    "data/units.js:73",
-   "data/spells.js:168"
+   "data/spells.js:169"
   ]
  },
  "Reptile géant au regard pétrifiant.": {
@@ -570,7 +570,7 @@
  "Araignées géantes": {
   "at": [
    "data/units.js:74",
-   "data/spells.js:162"
+   "data/spells.js:163"
   ]
  },
  "Araignées venimeuses qui tissent des toiles.": {
@@ -581,7 +581,7 @@
  "Géant de pierre": {
   "at": [
    "data/units.js:75",
-   "data/spells.js:171"
+   "data/spells.js:172"
   ]
  },
  "Géant de roc qui lance des pierres et abat les murs.": {
@@ -592,7 +592,7 @@
  "Colosse": {
   "at": [
    "data/units.js:76",
-   "data/spells.js:184"
+   "data/spells.js:185"
   ]
  },
  "Statue géante animée, frappe d'abord et projette des rocs.": {
@@ -603,7 +603,7 @@
  "Gorgones": {
   "at": [
    "data/units.js:77",
-   "data/spells.js:175"
+   "data/spells.js:176"
   ]
  },
  "Créatures ailées au regard pétrifiant.": {
@@ -614,7 +614,7 @@
  "Élémentaire de terre": {
   "at": [
    "data/units.js:78",
-   "data/spells.js:178"
+   "data/spells.js:179"
   ]
  },
  "Terre vivante appelée pour un combat, brise les murailles.": {
@@ -625,7 +625,7 @@
  "Béhémoth": {
   "at": [
    "data/units.js:79",
-   "data/spells.js:180"
+   "data/spells.js:181"
   ]
  },
  "Bête titanesque d'une force brute immense.": {
@@ -636,7 +636,7 @@
  "Grande Vouivre": {
   "at": [
    "data/units.js:80",
-   "data/spells.js:187"
+   "data/spells.js:188"
   ]
  },
  "Ver géant venimeux qui voyage sous terre.": {
@@ -647,7 +647,7 @@
  "Île flottante": {
   "at": [
    "data/units.js:81",
-   "data/spells.js:191"
+   "data/spells.js:192"
   ]
  },
  "Île magique qui transporte jusqu'à huit unités sur l'eau.": {
@@ -658,7 +658,7 @@
  "Bête fantôme": {
   "at": [
    "data/units.js:82",
-   "data/spells.js:211"
+   "data/spells.js:212"
   ]
  },
  "Bête illusoire dont les coups ignorent l'armure.": {
@@ -669,7 +669,7 @@
  "Guerriers fantômes": {
   "at": [
    "data/units.js:83",
-   "data/spells.js:193"
+   "data/spells.js:194"
   ]
  },
  "Guerriers illusoires appelés pour un combat.": {
@@ -680,7 +680,7 @@
  "Géant des tempêtes": {
   "at": [
    "data/units.js:84",
-   "data/spells.js:216"
+   "data/spells.js:217"
   ]
  },
  "Géant qui lance la foudre et perce les armures.": {
@@ -691,7 +691,7 @@
  "Élémentaire d'air": {
   "at": [
    "data/units.js:85",
-   "data/spells.js:217"
+   "data/spells.js:218"
   ]
  },
  "Vent vivant invisible, insensible aux armes ordinaires.": {
@@ -702,7 +702,7 @@
  "Djinn": {
   "at": [
    "data/units.js:86",
-   "data/spells.js:222"
+   "data/spells.js:223"
   ]
  },
  "Génie de l'air qui se téléporte et lance des sorts.": {
@@ -713,7 +713,7 @@
  "Drake céleste": {
   "at": [
    "data/units.js:87",
-   "data/spells.js:229"
+   "data/spells.js:230"
   ]
  },
  "Dragon bleu au souffle de foudre, immunisé contre la magie.": {
@@ -724,7 +724,7 @@
  "Nagas": {
   "at": [
    "data/units.js:88",
-   "data/spells.js:197"
+   "data/spells.js:198"
   ]
  },
  "Serpents à buste humain qui frappent les premiers de leur venin.": {
@@ -2900,7 +2900,7 @@
  "Avatar du sorcier": {
   "at": [
    "data/avatar.js:6",
-   "data/spells.js:15"
+   "data/spells.js:16"
   ]
  },
  "Le sorcier en personne, descendu sur la carte.": {
@@ -3893,2007 +3893,2017 @@
    "data/spells.js:13"
   ]
  },
+ "Ouvrir une faille": {
+  "at": [
+   "data/spells.js:14"
+  ]
+ },
+ "Ajout d'Arcanes, accessible à tous les sorciers : déchire le voile sous vos troupes. La faille relie les deux plans comme une tour de sorcellerie, mais elle use le voile, et des créatures du Miroir finissent par en sortir.": {
+  "at": [
+   "data/spells.js:14"
+  ]
+ },
  "Purification": {
   "at": [
-   "data/spells.js:14",
+   "data/spells.js:15",
    "src/core/util.js:117"
   ]
  },
  "Ajout d'Arcanes, accessible à tous les sorciers : purifie la terre corrompue de la case visée et des huit cases voisines.": {
   "at": [
-   "data/spells.js:14"
+   "data/spells.js:15"
   ]
  },
  "Ajout d'Arcanes : vous descendez en personne sur la carte, à votre forteresse. Votre force dépend de vos livres de magie, vous lancez vos sorts de combat sur votre propre réserve et vous gagnez des niveaux comme un héros. Tant que vous êtes incarné, votre compétence de lancement est divisée par deux ; si vous tombez, vous êtes banni.": {
   "at": [
-   "data/spells.js:15"
+   "data/spells.js:16"
   ]
  },
  "Désenchantement de zone": {
   "at": [
-   "data/spells.js:16"
+   "data/spells.js:17"
   ]
  },
  "Tente de retirer tous les enchantements hostiles d'une case de carte (unités, ville, nœud perverti) ou, en combat, de tout le champ de bataille, avec une force égale au mana investi. Sur un nœud rival, fait tomber la garde de son esprit gardien.": {
   "at": [
-   "data/spells.js:16"
+   "data/spells.js:17"
   ]
  },
  "Rappel du héros": {
   "at": [
-   "data/spells.js:17"
+   "data/spells.js:18"
   ]
  },
  "Ramène instantanément un héros ami à votre forteresse, depuis la carte ou du champ de bataille.": {
   "at": [
-   "data/spells.js:17"
+   "data/spells.js:18"
   ]
  },
  "Détection de la magie": {
   "at": [
-   "data/spells.js:18"
+   "data/spells.js:19"
   ]
  },
  "Vous montre en permanence le sort que lance chaque sorcier rival, même ceux que vous n'avez pas encore rencontrés (anonymes).": {
   "at": [
-   "data/spells.js:18"
+   "data/spells.js:19"
   ]
  },
  "Enchantement d'objet": {
   "at": [
-   "data/spells.js:19"
+   "data/spells.js:20"
   ]
  },
  "Forge un objet magique de puissance modeste pour vos héros : bonus tirés au hasard, un pouvoir une fois sur quatre.": {
   "at": [
-   "data/spells.js:19"
+   "data/spells.js:20"
   ]
  },
  "Appel du héros": {
   "at": [
-   "data/spells.js:20"
+   "data/spells.js:21"
   ]
  },
  "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).": {
   "at": [
-   "data/spells.js:20"
+   "data/spells.js:21"
   ]
  },
  "Clairvoyance": {
   "at": [
-   "data/spells.js:21"
+   "data/spells.js:22"
   ]
  },
  "Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": {
   "at": [
-   "data/spells.js:21"
+   "data/spells.js:22"
   ]
  },
  "Disjonction": {
   "at": [
-   "data/spells.js:22"
+   "data/spells.js:23"
   ]
  },
  "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).": {
   "at": [
-   "data/spells.js:22"
+   "data/spells.js:23"
   ]
  },
  "Création d'artefact": {
   "at": [
-   "data/spells.js:23"
+   "data/spells.js:24"
   ]
  },
  "Forge un puissant objet magique pour vos héros : bonus tirés au hasard, un pouvoir une fois sur deux.": {
   "at": [
-   "data/spells.js:23"
+   "data/spells.js:24"
   ]
  },
  "Appel du champion": {
   "at": [
-   "data/spells.js:24"
+   "data/spells.js:25"
   ]
  },
  "Fait venir à votre cercle d'invocation un champion au hasard, au niveau de l'époque, qui vous rejoint gratuitement (moins de 6 héros requis).": {
   "at": [
-   "data/spells.js:24"
+   "data/spells.js:25"
   ]
  },
  "Sort de Maîtrise": {
   "at": [
-   "data/spells.js:25"
+   "data/spells.js:26"
   ]
  },
  "Une fois lancé, vous contrôlez toute la magie des deux plans : vos rivaux ne peuvent plus lancer de sorts et vous remportez la partie.": {
   "at": [
-   "data/spells.js:25"
+   "data/spells.js:26"
   ]
  },
  "Trompettes de Jéricho": {
   "at": [
-   "data/spells.js:26"
+   "data/spells.js:27"
   ]
  },
  "Le chant des trompettes ébranle la cité assiégée : chaque tour de défense perd 10 points de vie, la tour du sorcier 6, chaque porte 8, et chaque pan de muraille a une chance sur quatre de s'écrouler.": {
   "at": [
-   "data/spells.js:26"
+   "data/spells.js:27"
   ]
  },
  "Bénédiction": {
   "at": [
-   "data/spells.js:27"
+   "data/spells.js:28"
   ]
  },
  "+3 en défense et +3 en résistance contre les attaques et sorts de mort et de chaos.": {
   "at": [
-   "data/spells.js:27"
+   "data/spells.js:28"
   ]
  },
  "Feux stellaires": {
   "at": [
-   "data/spells.js:28"
+   "data/spells.js:29"
   ]
  },
  "Attaque magique de force 15 tombée des étoiles, réservée aux créatures du chaos ou de la mort et aux morts-vivants.": {
   "at": [
-   "data/spells.js:28"
+   "data/spells.js:29"
   ]
  },
  "Endurance": {
   "at": [
-   "data/spells.js:29"
+   "data/spells.js:30"
   ]
  },
  "+1 en vitesse de déplacement.": {
   "at": [
-   "data/spells.js:29"
+   "data/spells.js:30"
   ]
  },
  "Arme bénie": {
   "at": [
-   "data/spells.js:30"
+   "data/spells.js:31"
   ]
  },
  "Les armes d'une unité normale deviennent magiques (elles touchent les immunisés aux armes) et gagnent +10 % pour toucher en mêlée, au jet et au tir.": {
   "at": [
-   "data/spells.js:30"
+   "data/spells.js:31"
   ]
  },
  "Guérison": {
   "at": [
-   "data/spells.js:31"
+   "data/spells.js:32"
   ]
  },
  "En combat, rend jusqu'à 5 PV à une unité amie. Sur la carte, rend 5 PV à chaque unité blessée de la pile visée. Sans effet sur les créatures de la mort.": {
   "at": [
-   "data/spells.js:31"
+   "data/spells.js:32"
   ]
  },
  "Armure bénie": {
   "at": [
-   "data/spells.js:32"
+   "data/spells.js:33"
   ]
  },
  "+2 en défense pour une unité normale.": {
   "at": [
-   "data/spells.js:32"
+   "data/spells.js:33"
   ]
  },
  "Juste cause": {
   "at": [
-   "data/spells.js:33"
+   "data/spells.js:34"
   ]
  },
  "+10 en renommée tant que le sort est actif, et −1 d'agitation dans vos villes.": {
   "at": [
-   "data/spells.js:33"
+   "data/spells.js:34"
   ]
  },
  "Lumière vraie": {
   "at": [
-   "data/spells.js:34"
+   "data/spells.js:35"
   ]
  },
  "Sur tout le champ de bataille, les créatures de la vie (et l'avatar d'un sorcier de la vie) gagnent +1 en attaque, défense et résistance, celles de la mort perdent 1. Annule Ténèbres.": {
   "at": [
-   "data/spells.js:34"
+   "data/spells.js:35"
   ]
  },
  "Invoque un esprit gardien qui peut s'unir à un nœud ; une fois uni, un esprit magique n'a que 25 % de chances de l'en déloger (un esprit gardien, 75 %).": {
   "at": [
-   "data/spells.js:35"
+   "data/spells.js:36"
   ]
  },
  "Héroïsme": {
   "at": [
-   "data/spells.js:36"
+   "data/spells.js:37"
   ]
  },
  "Une unité normale combat comme si elle avait le niveau d'expérience Élite.": {
   "at": [
-   "data/spells.js:36"
+   "data/spells.js:37"
   ]
  },
  "Vision vraie": {
   "at": [
-   "data/spells.js:37",
+   "data/spells.js:38",
    "src/engine/units.js:456"
   ]
  },
  "L'unité devient insensible aux illusions et voit à travers le Mur de ténèbres et l'invisibilité.": {
   "at": [
-   "data/spells.js:37"
+   "data/spells.js:38"
   ]
  },
  "Saut de plan": {
   "at": [
-   "data/spells.js:38",
+   "data/spells.js:39",
    "src/core/util.js:117"
   ]
  },
  "Transporte toutes les unités amies d'une case sur l'autre plan, si elles peuvent entrer sur la case correspondante.": {
   "at": [
-   "data/spells.js:38"
+   "data/spells.js:39"
   ]
  },
  "Résurrection": {
   "at": [
-   "data/spells.js:39",
+   "data/spells.js:40",
    "src/ui/magicui.js:100"
   ]
  },
  "Ramène le héros mort de votre choix, en pleine santé et à son ancien niveau, à votre cercle d'invocation, si vous avez moins de 6 héros.": {
   "at": [
-   "data/spells.js:39"
+   "data/spells.js:40"
   ]
  },
  "Exorcisme": {
   "at": [
-   "data/spells.js:40"
+   "data/spells.js:41"
   ]
  },
  "Une créature du chaos ou de la mort doit résister (−4, −9 si morte-vivante) ou être détruite par un feu sacré.": {
   "at": [
-   "data/spells.js:40"
+   "data/spells.js:41"
   ]
  },
  "Sceau planaire": {
   "at": [
-   "data/spells.js:41"
+   "data/spells.js:42"
   ]
  },
  "Bloque tout passage entre les deux plans. Ajout d'Arcanes : tant qu'il dure, le voile ne s'use plus et les failles restent muettes.": {
   "at": [
-   "data/spells.js:41"
+   "data/spells.js:42"
   ]
  },
  "Invoque 4 licornes qui se téléportent en combat et donnent +2 en résistance à leurs alliés.": {
   "at": [
-   "data/spells.js:42"
+   "data/spells.js:43"
   ]
  },
  "Relever les morts": {
   "at": [
-   "data/spells.js:43"
+   "data/spells.js:44"
   ]
  },
  "Ramène au combat une unité normale amie tombée pendant cette bataille, avec la moitié de ses PV et sans ses enchantements.": {
   "at": [
-   "data/spells.js:43"
+   "data/spells.js:44"
   ]
  },
  "Voyage planaire": {
   "at": [
-   "data/spells.js:44"
+   "data/spells.js:45"
   ]
  },
  "L'unité peut passer à volonté d'un plan à l'autre, si le terrain d'arrivée le lui permet.": {
   "at": [
-   "data/spells.js:44"
+   "data/spells.js:45"
   ]
  },
  "Lumière céleste": {
   "at": [
-   "data/spells.js:45"
+   "data/spells.js:46"
   ]
  },
  "Tous les combats dans la ville se déroulent sous l'effet de Lumière vraie.": {
   "at": [
-   "data/spells.js:45"
+   "data/spells.js:46"
   ]
  },
  "Prière": {
   "at": [
-   "data/spells.js:46"
+   "data/spells.js:47"
   ]
  },
  "Toutes vos unités gagnent +10 % pour toucher, +10 % de parade par bouclier et +1 en résistance.": {
   "at": [
-   "data/spells.js:46"
+   "data/spells.js:47"
   ]
  },
  "Cœur de lion": {
   "at": [
-   "data/spells.js:47"
+   "data/spells.js:48"
   ]
  },
  "+3 en mêlée, +3 en attaque de jet ou de tir non magique, +3 PV par figurine et +3 en résistance.": {
   "at": [
-   "data/spells.js:47"
+   "data/spells.js:48"
   ]
  },
  "Incarnation": {
   "at": [
-   "data/spells.js:48"
+   "data/spells.js:49"
   ]
  },
  "Fait venir le plus grand des héros, l'Élu, au niveau de l'époque ; il ne peut être recruté autrement.": {
   "at": [
-   "data/spells.js:48"
+   "data/spells.js:49"
   ]
  },
  "Invulnérabilité": {
   "at": [
-   "data/spells.js:49"
+   "data/spells.js:50"
   ]
  },
  "L'unité devient immunisée aux armes normales et ignore les 2 premiers dégâts de chaque attaque.": {
   "at": [
-   "data/spells.js:49"
+   "data/spells.js:50"
   ]
  },
  "Sainte droiture": {
   "at": [
-   "data/spells.js:50"
+   "data/spells.js:51"
   ]
  },
  "Insensible aux sorts et aux attaques magiques de mort et de chaos : tirs, souffles, regards, vol de vie, effroi. Les coups de mêlée portent toujours.": {
   "at": [
-   "data/spells.js:50"
+   "data/spells.js:51"
   ]
  },
  "Prospérité": {
   "at": [
-   "data/spells.js:51",
+   "data/spells.js:52",
    "src/engine/cities.js:388"
   ]
  },
  "Double le revenu en or que la ville tire des impôts et des minerais (+100 % de cette base).": {
   "at": [
-   "data/spells.js:51"
+   "data/spells.js:52"
   ]
  },
  "Autel de bataille": {
   "at": [
-   "data/spells.js:52"
+   "data/spells.js:53"
   ]
  },
  "Toutes les unités produites dans la ville commencent au niveau Élite.": {
   "at": [
-   "data/spells.js:52"
+   "data/spells.js:53"
   ]
  },
  "Invoque un ange volant (mêlée 13) qui galvanise les unités alliées et dissipe le mal par son toucher.": {
   "at": [
-   "data/spells.js:53"
+   "data/spells.js:54"
   ]
  },
  "Source de vie": {
   "at": [
-   "data/spells.js:54",
+   "data/spells.js:55",
    "src/ui/main.js:566"
   ]
  },
  "La croissance de la ville double, les unités qui s'y trouvent sont entièrement soignées chaque tour et toute agitation disparaît.": {
   "at": [
-   "data/spells.js:54"
+   "data/spells.js:55"
   ]
  },
  "Guérison de masse": {
   "at": [
-   "data/spells.js:55"
+   "data/spells.js:56"
   ]
  },
  "En combat, rend jusqu'à 5 PV à chacune de vos unités. Sur la carte, rend 5 PV à toutes vos unités blessées, où qu'elles soient. Sans effet sur les créatures de la mort.": {
   "at": [
-   "data/spells.js:55"
+   "data/spells.js:56"
   ]
  },
  "Parole sacrée": {
   "at": [
-   "data/spells.js:56"
+   "data/spells.js:57"
   ]
  },
  "Chaque figurine des créatures invoquées et morts-vivants ennemis doit résister (−2, −7 pour les morts-vivants) ou être bannie.": {
   "at": [
-   "data/spells.js:56"
+   "data/spells.js:57"
   ]
  },
  "Grande Prière": {
   "at": [
-   "data/spells.js:57"
+   "data/spells.js:58"
   ]
  },
  "Toutes vos unités gagnent +2 en attaque et en défense, +3 en résistance, +10 % pour toucher et +10 % de parade.": {
   "at": [
-   "data/spells.js:57"
+   "data/spells.js:58"
   ]
  },
  "Inspiration": {
   "at": [
-   "data/spells.js:58"
+   "data/spells.js:59"
   ]
  },
  "Double la production fournie par les ouvriers et les fermiers de la ville (+100 % de cette base).": {
   "at": [
-   "data/spells.js:58"
+   "data/spells.js:59"
   ]
  },
  "Porte astrale": {
   "at": [
-   "data/spells.js:59"
+   "data/spells.js:60"
   ]
  },
  "Ouvre un portail vers l'autre plan depuis la ville, inutilisable si l'arrivée est en mer, dans une ville étrangère ou occupée par des troupes ennemies.": {
   "at": [
-   "data/spells.js:59"
+   "data/spells.js:60"
   ]
  },
  "Armes saintes": {
   "at": [
-   "data/spells.js:60"
+   "data/spells.js:61"
   ]
  },
  "Toutes vos unités normales bénéficient en permanence des effets d'Arme bénie (+10 % pour toucher, armes magiques) ; les deux ne se cumulent pas.": {
   "at": [
-   "data/spells.js:60"
+   "data/spells.js:61"
   ]
  },
  "Consécration": {
   "at": [
-   "data/spells.js:61"
+   "data/spells.js:62"
   ]
  },
  "Lève toutes les malédictions de la ville et la protège des sorts de ville et effets globaux de chaos et de mort.": {
   "at": [
-   "data/spells.js:61"
+   "data/spells.js:62"
   ]
  },
  "Force vitale": {
   "at": [
-   "data/spells.js:62"
+   "data/spells.js:63"
   ]
  },
  "Chaque sort de mort lancé hors combat par un rival doit vaincre une dissipation de force 500 pour prendre effet.": {
   "at": [
-   "data/spells.js:62"
+   "data/spells.js:63"
   ]
  },
  "Sérénité": {
   "at": [
-   "data/spells.js:63"
+   "data/spells.js:64"
   ]
  },
  "Chaque sort de chaos lancé hors combat par un rival doit vaincre une dissipation de force 500 pour prendre effet.": {
   "at": [
-   "data/spells.js:63"
+   "data/spells.js:64"
   ]
  },
  "Croisade": {
   "at": [
-   "data/spells.js:64"
+   "data/spells.js:65"
   ]
  },
  "Vos unités normales (morts-vivants relevés compris) et vos héros gagnent un niveau d'expérience (recrue → régulier, etc.).": {
   "at": [
-   "data/spells.js:64"
+   "data/spells.js:65"
   ]
  },
  "Invoque un archange (mêlée 15), insensible aux illusions, qui galvanise les alliés et peut lancer jusqu'à 40 points de sorts de vie par combat.": {
   "at": [
-   "data/spells.js:65"
+   "data/spells.js:66"
   ]
  },
  "Charme de vie": {
   "at": [
-   "data/spells.js:66"
+   "data/spells.js:67"
   ]
  },
  "Chaque figurine de vos unités gagne 25 % de PV supplémentaires (au moins 1).": {
   "at": [
-   "data/spells.js:66"
+   "data/spells.js:67"
   ]
  },
  "Invoque 6 squelettes peu coûteux, immunisés aux projectiles.": {
   "at": [
-   "data/spells.js:67"
+   "data/spells.js:68"
   ]
  },
  "Faiblesse": {
   "at": [
-   "data/spells.js:68",
+   "data/spells.js:69",
    "src/ui/combatview.js:1789"
   ]
  },
  "Si l'unité échoue à résister (−2), elle perd 2 en attaque de mêlée, de jet et de tir physique.": {
   "at": [
-   "data/spells.js:68"
+   "data/spells.js:69"
   ]
  },
  "Rites ténébreux": {
   "at": [
-   "data/spells.js:69"
+   "data/spells.js:70"
   ]
  },
  "Double le mana produit par les sanctuaires, temples, parthénons et cathédrales de la ville ; croissance −25 % et agitation +1.": {
   "at": [
-   "data/spells.js:69"
+   "data/spells.js:70"
   ]
  },
  "Manteau d'effroi": {
   "at": [
-   "data/spells.js:70"
+   "data/spells.js:71"
   ]
  },
  "Les ennemis qui engagent l'unité en mêlée doivent, figurine par figurine, vaincre leur peur pour attaquer ou riposter.": {
   "at": [
-   "data/spells.js:70"
+   "data/spells.js:71"
   ]
  },
  "Sommeil noir": {
   "at": [
-   "data/spells.js:71"
+   "data/spells.js:72"
   ]
  },
  "Si l'unité échoue à résister (−2), elle dort jusqu'à la fin du combat et subit de plein fouet toutes les attaques.": {
   "at": [
-   "data/spells.js:71"
+   "data/spells.js:72"
   ]
  },
  "Invoque 4 goules : les unités normales tuées surtout par leurs morsures se relèvent en morts-vivants à votre service si vous gagnez la bataille.": {
   "at": [
-   "data/spells.js:72"
+   "data/spells.js:73"
   ]
  },
  "Drain de vie": {
   "at": [
-   "data/spells.js:73"
+   "data/spells.js:74"
   ]
  },
  "Draine 1d10 moins la résistance de la cible en PV ; un héros lanceur les récupère, un sorcier gagne 3 mana par PV volé. Une unité normale tuée surtout par lui se relève en mort-vivant à votre service si vous gagnez. Chaque tranche de 5 mana supplémentaires réduit la résistance de 1.": {
   "at": [
-   "data/spells.js:73"
+   "data/spells.js:74"
   ]
  },
  "Hantise des remparts": {
   "at": [
-   "data/spells.js:74"
+   "data/spells.js:75"
   ]
  },
  "Des spectres hantent les remparts ennemis : les servants des tours de défense s'enfuient, et elles ne tirent plus pendant 4 rounds.": {
   "at": [
-   "data/spells.js:74"
+   "data/spells.js:75"
   ]
  },
  "Terreur": {
   "at": [
-   "data/spells.js:75"
+   "data/spells.js:76"
   ]
  },
  "Chaque tour, chaque unité ennemie doit résister (avec +1) ou rester paralysée par la peur ; elle peut encore riposter.": {
   "at": [
-   "data/spells.js:75"
+   "data/spells.js:76"
   ]
  },
  "Fuite de mana": {
   "at": [
-   "data/spells.js:76"
+   "data/spells.js:77"
   ]
  },
  "Chaque tour, le sorcier ennemi et chacun de ses lanceurs de sorts perdent 5 mana, et les unités à tir magique perdent 1 tir.": {
   "at": [
-   "data/spells.js:76"
+   "data/spells.js:77"
   ]
  },
  "Ténèbres": {
   "at": [
-   "data/spells.js:77"
+   "data/spells.js:78"
   ]
  },
  "Sur tout le champ de bataille, les créatures de la mort (et l'avatar d'un sorcier de la mort) gagnent +1 en attaque, défense et résistance, celles de la vie perdent 1. Annule Lumière vraie.": {
   "at": [
-   "data/spells.js:77"
+   "data/spells.js:78"
   ]
  },
  "Siphon de mana": {
   "at": [
-   "data/spells.js:78"
+   "data/spells.js:79"
   ]
  },
  "Retire de 50 à 150 points de mana à la réserve d'un sorcier ennemi.": {
   "at": [
-   "data/spells.js:78"
+   "data/spells.js:79"
   ]
  },
  "Possession": {
   "at": [
-   "data/spells.js:79"
+   "data/spells.js:80"
   ]
  },
  "Une unité normale ennemie qui rate sa résistance (−1) passe sous votre contrôle jusqu'à la fin du combat.": {
   "at": [
-   "data/spells.js:79"
+   "data/spells.js:80"
   ]
  },
  "Lycanthropie": {
   "at": [
-   "data/spells.js:80"
+   "data/spells.js:81"
   ]
  },
  "Change une unité normale amie en meute de loups-garous, immunisés aux armes normales.": {
   "at": [
-   "data/spells.js:80"
+   "data/spells.js:81"
   ]
  },
  "Prière noire": {
   "at": [
-   "data/spells.js:81"
+   "data/spells.js:82"
   ]
  },
  "Toutes les unités ennemies perdent 1 en attaque et en défense, et 2 en résistance.": {
   "at": [
-   "data/spells.js:81"
+   "data/spells.js:82"
   ]
  },
  "Canaux noirs": {
   "at": [
-   "data/spells.js:82"
+   "data/spells.js:83"
   ]
  },
  "Change une unité normale en mort-vivant : +2 en mêlée, +1 en tir et souffle, en défense, en résistance et en PV ; comme tout mort-vivant, elle ne guérit plus (sauf régénération).": {
   "at": [
-   "data/spells.js:82"
+   "data/spells.js:83"
   ]
  },
  "Invoque un traqueur nocturne invisible au regard mortel (résistance −2).": {
   "at": [
-   "data/spells.js:83"
+   "data/spells.js:84"
   ]
  },
  "Subversion": {
   "at": [
-   "data/spells.js:84"
+   "data/spells.js:85"
   ]
  },
  "Dresse tous les autres sorciers contre le sorcier visé : ses relations diplomatiques se dégradent fortement.": {
   "at": [
-   "data/spells.js:84"
+   "data/spells.js:85"
   ]
  },
  "Mur de ténèbres": {
   "at": [
-   "data/spells.js:85"
+   "data/spells.js:86"
   ]
  },
  "Entoure la ville d'une nuit opaque : la garnison ne peut être visée à distance de l'extérieur (sauf vision vraie), mais tire normalement.": {
   "at": [
-   "data/spells.js:85"
+   "data/spells.js:86"
   ]
  },
  "Furie": {
   "at": [
-   "data/spells.js:86"
+   "data/spells.js:87"
   ]
  },
  "L'unité attaque en mêlée avec une force doublée, mais sa défense tombe à 0 quels que soient ses bonus.": {
   "at": [
-   "data/spells.js:86"
+   "data/spells.js:87"
   ]
  },
  "Invoque 4 démons des ombres volants et immatériels qui se régénèrent et changent de plan à volonté.": {
   "at": [
-   "data/spells.js:87"
+   "data/spells.js:88"
   ]
  },
  "Forme spectrale": {
   "at": [
-   "data/spells.js:88"
+   "data/spells.js:89"
   ]
  },
  "L'unité devient immatérielle et immunisée aux armes normales.": {
   "at": [
-   "data/spells.js:88"
+   "data/spells.js:89"
   ]
  },
  "Supplice": {
   "at": [
-   "data/spells.js:89"
+   "data/spells.js:90"
   ]
  },
  "Chaque tour, chaque figurine ennemie qui n'est pas de la mort doit résister (avec +1) ou perdre 1 PV.": {
   "at": [
-   "data/spells.js:89"
+   "data/spells.js:90"
   ]
  },
  "Présence maléfique": {
   "at": [
-   "data/spells.js:90"
+   "data/spells.js:91"
   ]
  },
  "Annule le mana et l'effet apaisant des sanctuaires, temples, parthénons et cathédrales d'une ville, sauf si son maître pratique la magie de mort.": {
   "at": [
-   "data/spells.js:90"
+   "data/spells.js:91"
   ]
  },
  "Invoque 4 spectres volants et immatériels dont le toucher vole la vie (résistance −3).": {
   "at": [
-   "data/spells.js:91"
+   "data/spells.js:92"
   ]
  },
  "Nuée d'ombre": {
   "at": [
-   "data/spells.js:92"
+   "data/spells.js:93"
   ]
  },
  "Tous les combats dans la ville se déroulent sous l'effet de Ténèbres.": {
   "at": [
-   "data/spells.js:92"
+   "data/spells.js:93"
   ]
  },
  "Nœud perverti": {
   "at": [
-   "data/spells.js:93"
+   "data/spells.js:94"
   ]
  },
  "Pervertit un nœud ennemi : au lieu de produire du mana, il en retire 5 par tour à son maître jusqu'à ce qu'il soit désenchanté.": {
   "at": [
-   "data/spells.js:93"
+   "data/spells.js:94"
   ]
  },
  "Vent noir": {
   "at": [
-   "data/spells.js:94"
+   "data/spells.js:95"
   ]
  },
  "Un vent pestilentiel frappe toutes les unités d'une case ennemie : chaque figurine doit résister (−1) ou mourir.": {
   "at": [
-   "data/spells.js:94"
+   "data/spells.js:95"
   ]
  },
  "Maîtrise des zombies": {
   "at": [
-   "data/spells.js:95"
+   "data/spells.js:96"
   ]
  },
  "Après chaque bataille, les unités normales tuées deviennent des zombies à votre service, qui ne guérissent jamais.": {
   "at": [
-   "data/spells.js:95"
+   "data/spells.js:96"
   ]
  },
  "Famine": {
   "at": [
-   "data/spells.js:96",
+   "data/spells.js:97",
    "src/ui/main.js:1311"
   ]
  },
  "La production de nourriture de la ville est divisée par deux (et l'agitation augmente de 25 %) ; ses habitants peuvent mourir de faim.": {
   "at": [
-   "data/spells.js:96"
+   "data/spells.js:97"
   ]
  },
  "Terres maudites": {
   "at": [
-   "data/spells.js:97"
+   "data/spells.js:98"
   ]
  },
  "Agitation +1 et production de la ville divisée par deux.": {
   "at": [
-   "data/spells.js:97"
+   "data/spells.js:98"
   ]
  },
  "Démence cruelle": {
   "at": [
-   "data/spells.js:98"
+   "data/spells.js:99"
   ]
  },
  "Détruit définitivement de 1 à 10 % de la compétence de lancement d'un sorcier ennemi.": {
   "at": [
-   "data/spells.js:98"
+   "data/spells.js:99"
   ]
  },
  "Mot de mort": {
   "at": [
-   "data/spells.js:99"
+   "data/spells.js:100"
   ]
  },
  "Chaque figurine de l'unité visée doit résister (−5) ou mourir sur-le-champ.": {
   "at": [
-   "data/spells.js:99"
+   "data/spells.js:100"
   ]
  },
  "Invoque 4 chevaliers de la mort volants, qui frappent en premier, percent les armures et volent la vie.": {
   "at": [
-   "data/spells.js:100"
+   "data/spells.js:101"
   ]
  },
  "Sort de mort": {
   "at": [
-   "data/spells.js:101"
+   "data/spells.js:102"
   ]
  },
  "Chaque figurine ennemie doit résister (−2) ou mourir sur-le-champ.": {
   "at": [
-   "data/spells.js:101"
+   "data/spells.js:102"
   ]
  },
  "Animation des morts": {
   "at": [
-   "data/spells.js:102"
+   "data/spells.js:103"
   ]
  },
  "Relève une unité tombée pendant ce combat, amie ou ennemie, en mort-vivant à votre service ; elle reste après la bataille avec un entretien majoré de 50 %, et ne guérit plus (sauf régénération).": {
   "at": [
-   "data/spells.js:102"
+   "data/spells.js:103"
   ]
  },
  "Pestilence": {
   "at": [
-   "data/spells.js:103"
+   "data/spells.js:104"
   ]
  },
  "Agitation +2 dans la ville ennemie, et jusqu'à un habitant meurt chaque tour.": {
   "at": [
-   "data/spells.js:103"
+   "data/spells.js:104"
   ]
  },
  "Nuit éternelle": {
   "at": [
-   "data/spells.js:104"
+   "data/spells.js:105"
   ]
  },
  "Tous les combats ont lieu sous l'effet de Ténèbres, sauf dans les villes protégées par Lumière céleste.": {
   "at": [
-   "data/spells.js:104"
+   "data/spells.js:105"
   ]
  },
  "Sinistres présages": {
   "at": [
-   "data/spells.js:105"
+   "data/spells.js:106"
   ]
  },
  "Les sorts de vie et de nature coûtent 50 % de mana en plus à vos rivaux.": {
   "at": [
-   "data/spells.js:105"
+   "data/spells.js:106"
   ]
  },
  "Vœu de mort": {
   "at": [
-   "data/spells.js:106"
+   "data/spells.js:107"
   ]
  },
  "Toutes les unités normales ennemies des deux plans doivent résister ou mourir.": {
   "at": [
-   "data/spells.js:106"
+   "data/spells.js:107"
   ]
  },
  "Invoque un seigneur démon volant (mêlée 20, tir magique 10) qui vole la vie, inspire la peur et appelle des démons en combat.": {
   "at": [
-   "data/spells.js:107"
+   "data/spells.js:108"
   ]
  },
  "Bois tordu": {
   "at": [
-   "data/spells.js:108"
+   "data/spells.js:109"
   ]
  },
  "Détruit toutes les munitions de tir physiques (arcs, frondes…) d'une unité ennemie, sans jet de résistance.": {
   "at": [
-   "data/spells.js:108"
+   "data/spells.js:109"
   ]
  },
  "Disruption": {
   "at": [
-   "data/spells.js:109"
+   "data/spells.js:110"
   ]
  },
  "Pulvérise une section de muraille, une porte ou une tour de défense ennemie.": {
   "at": [
-   "data/spells.js:109"
+   "data/spells.js:110"
   ]
  },
  "Trait de feu": {
   "at": [
-   "data/spells.js:110",
+   "data/spells.js:111",
    "src/engine/combat.js:2044"
   ]
  },
  "Trait de flammes de force 5 sur une unité ennemie, les dégâts passant d'une figurine à l'autre ; +1 de force par mana supplémentaire (max 25).": {
   "at": [
-   "data/spells.js:110"
+   "data/spells.js:111"
   ]
  },
  "Invoque une meute de 4 chiens de l'enfer cracheurs de feu (souffle 3).": {
   "at": [
-   "data/spells.js:111"
+   "data/spells.js:112"
   ]
  },
  "Corruption": {
   "at": [
-   "data/spells.js:112"
+   "data/spells.js:113"
   ]
  },
  "Souille une case terrestre : elle ne produit plus ni nourriture ni minerai jusqu'à ce qu'on la purifie (prêtres, chamanes, sort de Purification).": {
   "at": [
-   "data/spells.js:112"
+   "data/spells.js:113"
   ]
  },
  "Arme surnaturelle": {
   "at": [
-   "data/spells.js:113"
+   "data/spells.js:114"
   ]
  },
  "Les armes d'une unité normale deviennent magiques : elles touchent les immunisés aux armes et réduisent de 10 % les chances de parade adverses. Cumulable avec Lame de flammes.": {
   "at": [
-   "data/spells.js:113"
+   "data/spells.js:114"
   ]
  },
  "Mur de feu": {
   "at": [
-   "data/spells.js:114"
+   "data/spells.js:115"
   ]
  },
  "Encercle une ville amie d'un mur de flammes : tout assaillant non volant qui le franchit subit une attaque de feu magique de force 5. Les défenseurs le traversent sans dommage.": {
   "at": [
-   "data/spells.js:114"
+   "data/spells.js:115"
   ]
  },
  "Bris d'armes": {
   "at": [
-   "data/spells.js:115"
+   "data/spells.js:116"
   ]
  },
  "Si l'unité normale visée échoue à résister, toutes ses attaques (mêlée, jet, tir physique) tombent à 1.": {
   "at": [
-   "data/spells.js:115"
+   "data/spells.js:116"
   ]
  },
  "Déformation": {
   "at": [
-   "data/spells.js:116"
+   "data/spells.js:117"
   ]
  },
  "Si l'unité échoue à résister (−1), elle subit une mutation au hasard : attaque de mêlée divisée par 2, défense divisée par 2 ou résistance réduite à 0.": {
   "at": [
-   "data/spells.js:116"
+   "data/spells.js:117"
   ]
  },
  "Invoque pour le combat un élémentaire de feu (mêlée 12, 10 PV). Impossible si 9 unités alliées sont déjà sur le terrain.": {
   "at": [
-   "data/spells.js:117"
+   "data/spells.js:118"
   ]
  },
  "Éclair": {
   "at": [
-   "data/spells.js:118"
+   "data/spells.js:119"
   ]
  },
  "Éclair perforant de force 5 sur une unité ennemie (la défense compte moitié) ; +1 de force par mana supplémentaire (max 45).": {
   "at": [
-   "data/spells.js:118"
+   "data/spells.js:119"
   ]
  },
  "Invoque un géant de feu (mêlée 10, rochers 10), immunisé au feu, qui abat les murailles.": {
   "at": [
-   "data/spells.js:119"
+   "data/spells.js:120"
   ]
  },
  "Canaux du chaos": {
   "at": [
-   "data/spells.js:120"
+   "data/spells.js:121"
   ]
  },
  "Mute définitivement une unité normale avec l'un de ces dons au hasard : peau de démon (+3 en défense), ailes de démon (vol, vitesse 2) ou souffle de feu de force 2.": {
   "at": [
-   "data/spells.js:120"
+   "data/spells.js:121"
   ]
  },
  "Lame de flammes": {
   "at": [
-   "data/spells.js:121"
+   "data/spells.js:122"
   ]
  },
  "+2 en attaque de mêlée, de jet et de tir physique ; les armes deviennent magiques. Cumulable avec Arme surnaturelle.": {
   "at": [
-   "data/spells.js:121"
+   "data/spells.js:122"
   ]
  },
  "Invoque 4 gargouilles volantes (défense 8), immunisées au poison et à la pétrification.": {
   "at": [
-   "data/spells.js:122"
+   "data/spells.js:123"
   ]
  },
  "Boule de feu": {
   "at": [
-   "data/spells.js:123",
+   "data/spells.js:124",
    "src/core/util.js:113"
   ]
  },
  "Explosion de force 5 qui frappe chaque figurine de l'unité visée ; +1 de force tous les 3 mana supplémentaires (max 25).": {
   "at": [
-   "data/spells.js:123"
+   "data/spells.js:124"
   ]
  },
  "Invoque une chauve-souris géante (vitesse 4) entourée d'une aura de feu qui blesse ses adversaires en mêlée.": {
   "at": [
-   "data/spells.js:124"
+   "data/spells.js:125"
   ]
  },
  "Éruption": {
   "at": [
-   "data/spells.js:125"
+   "data/spells.js:126"
   ]
  },
  "Fait surgir un volcan sur une case sans colline, montagne ni nœud : elle ne produit plus rien mais vous rapporte 1 point de puissance magique par tour. Sur une ville, chaque bâtiment a 15 % de chances d'être détruit.": {
   "at": [
-   "data/spells.js:125"
+   "data/spells.js:126"
   ]
  },
  "Immolation": {
   "at": [
-   "data/spells.js:126"
+   "data/spells.js:127"
   ]
  },
  "Une aura de feu inflige une attaque magique de force 4 à chaque ennemi engagé en mêlée avec l'unité, en plus de ses attaques normales.": {
   "at": [
-   "data/spells.js:126"
+   "data/spells.js:127"
   ]
  },
  "Invoque 4 chimères volantes à trois têtes cracheuses de feu (souffle 4).": {
   "at": [
-   "data/spells.js:127"
+   "data/spells.js:128"
   ]
  },
  "Foudre distordue": {
   "at": [
-   "data/spells.js:128"
+   "data/spells.js:129"
   ]
  },
  "Une chaîne de 10 éclairs perforants frappe la même unité, de force 10, puis 9, 8… jusqu'à 1.": {
   "at": [
-   "data/spells.js:128"
+   "data/spells.js:129"
   ]
  },
  "Métal ardent": {
   "at": [
-   "data/spells.js:129"
+   "data/spells.js:130"
   ]
  },
  "Les armes de toutes vos unités normales s'enflamment : +1 en mêlée et en tir, et elles touchent les immunisés aux armes. Non cumulable avec Lame de flammes.": {
   "at": [
-   "data/spells.js:129"
+   "data/spells.js:130"
   ]
  },
  "Invoque un rejeton du chaos volant dont les regards tuent, pétrifient ou brûlent (regards −4, regard funeste 4) et dont la morsure empoisonne.": {
   "at": [
-   "data/spells.js:130"
+   "data/spells.js:131"
   ]
  },
  "Trait funeste": {
   "at": [
-   "data/spells.js:131",
+   "data/spells.js:132",
    "src/core/util.js:112"
   ]
  },
  "Inflige 10 points de dégâts à l'unité visée, sans jet de défense, même immunisée contre la magie.": {
   "at": [
-   "data/spells.js:131"
+   "data/spells.js:132"
   ]
  },
  "Vortex magique": {
   "at": [
-   "data/spells.js:132"
+   "data/spells.js:133"
   ]
  },
  "Crée un tourbillon qui parcourt 4 cases par tour, au hasard ou vers l'ennemi le plus proche : 5 dégâts sans défense à l'unité traversée, 33 % de chances d'un éclair perforant de force 5 sur chaque voisine. Dure tout le combat.": {
   "at": [
-   "data/spells.js:132"
+   "data/spells.js:133"
   ]
  },
  "Invoque un éfrit volant à attaque magique (force 9), immunisé au feu, qui peut lancer jusqu'à 20 points de sorts de chaos par combat.": {
   "at": [
-   "data/spells.js:133"
+   "data/spells.js:134"
   ]
  },
  "Tempête de feu": {
   "at": [
-   "data/spells.js:134"
+   "data/spells.js:135"
   ]
  },
  "Pluie de grêle ardente sur une case ennemie : chaque figurine présente, même en garnison, subit une attaque de feu magique de force 8.": {
   "at": [
-   "data/spells.js:134"
+   "data/spells.js:135"
   ]
  },
  "Distorsion du réel": {
   "at": [
-   "data/spells.js:135"
+   "data/spells.js:136"
   ]
  },
  "Toutes les unités qui ne relèvent pas du chaos, amies comme ennemies, subissent −20 % pour toucher.": {
   "at": [
-   "data/spells.js:135"
+   "data/spells.js:136"
   ]
  },
  "Frappe de flammes": {
   "at": [
-   "data/spells.js:136",
+   "data/spells.js:137",
    "src/engine/combat.js:1933"
   ]
  },
  "Des arcs de feu frappent chaque figurine ennemie d'une attaque de feu de force 15.": {
   "at": [
-   "data/spells.js:136"
+   "data/spells.js:137"
   ]
  },
  "Faille du chaos": {
   "at": [
-   "data/spells.js:137"
+   "data/spells.js:138"
   ]
  },
  "Un vortex au-dessus d'une ville ennemie lance chaque tour 5 éclairs perforants de force 8 sur sa garnison ; chaque bâtiment a 5 % de chances par tour d'être détruit.": {
   "at": [
-   "data/spells.js:137"
+   "data/spells.js:138"
   ]
  },
  "Invoque une hydre à 9 têtes cracheuses de feu (chaque tête compte comme une figurine) qui se régénère.": {
   "at": [
-   "data/spells.js:138"
+   "data/spells.js:139"
   ]
  },
  "Désintégration": {
   "at": [
-   "data/spells.js:139"
+   "data/spells.js:140"
   ]
  },
  "Anéantit l'unité visée si sa résistance est de 9 ou moins ; ni régénération ni résurrection possibles.": {
   "at": [
-   "data/spells.js:139"
+   "data/spells.js:140"
   ]
  },
  "Pluie de météores": {
   "at": [
-   "data/spells.js:140"
+   "data/spells.js:141"
   ]
  },
  "Chaque tour, toute unité hors d'une ville subit une attaque de feu magique de force 4 et chaque bâtiment a 5 % de chances d'être détruit. Vos villes et leurs garnisons sont épargnées.": {
   "at": [
-   "data/spells.js:140"
+   "data/spells.js:141"
   ]
  },
  "Grande Dévastation": {
   "at": [
-   "data/spells.js:141",
+   "data/spells.js:142",
    "src/engine/turn.js:458"
   ]
  },
  "Corrompt chaque tour jusqu'à 6 cases sur les deux plans, en épargnant vos villes et leurs environs ; +1 d'agitation dans les villes rivales.": {
   "at": [
-   "data/spells.js:141"
+   "data/spells.js:142"
   ]
  },
  "Appel du chaos": {
   "at": [
-   "data/spells.js:142"
+   "data/spells.js:143"
   ]
  },
  "Chaque unité ennemie subit au hasard l'un de ces sorts : rien, soin de 5 PV, Canaux du chaos, Déformation, trait de feu de force 15, Foudre distordue, Trait funeste ou Désintégration.": {
   "at": [
-   "data/spells.js:142"
+   "data/spells.js:143"
   ]
  },
  "Déferlement du chaos": {
   "at": [
-   "data/spells.js:143"
+   "data/spells.js:144"
   ]
  },
  "Toutes les créatures du chaos gagnent +2 en mêlée, en tir, en attaque magique et en souffle de feu.": {
   "at": [
-   "data/spells.js:143"
+   "data/spells.js:144"
   ]
  },
  "Maîtrise funeste": {
   "at": [
-   "data/spells.js:144"
+   "data/spells.js:145"
   ]
  },
  "Chaque nouvelle unité normale que vous recrutez reçoit Canaux du chaos.": {
   "at": [
-   "data/spells.js:144"
+   "data/spells.js:145"
   ]
  },
  "Invoque un grand drake (mêlée 30, souffle de feu 30, 30 PV).": {
   "at": [
-   "data/spells.js:145"
+   "data/spells.js:146"
   ]
  },
  "Appel du néant": {
   "at": [
-   "data/spells.js:146"
+   "data/spells.js:147"
   ]
  },
  "Aspire une ville ennemie dans le néant : chaque bâtiment et chaque habitant a 50 % de chances de disparaître, les unités subissent 10 dégâts sans défense, et la moitié des terres alentour sont corrompues.": {
   "at": [
-   "data/spells.js:146"
+   "data/spells.js:147"
   ]
  },
  "Armageddon": {
   "at": [
-   "data/spells.js:147",
+   "data/spells.js:148",
    "src/engine/turn.js:458"
   ]
  },
  "Fait surgir des volcans à travers les deux plans (4 à 5 par tour) ; chacun vous rapporte 1 point de puissance magique par tour, et les villes rivales subissent +2 d'agitation.": {
   "at": [
-   "data/spells.js:147"
+   "data/spells.js:148"
   ]
  },
  "Bourbier": {
   "at": [
-   "data/spells.js:148"
+   "data/spells.js:149"
   ]
  },
  "Change une zone de 5×5 cases du champ de bataille en boue : y entrer coûte tout le mouvement restant et on n'y avance que d'une case par tour, sauf aux unités volantes ou immatérielles. Dure tout le combat.": {
   "at": [
-   "data/spells.js:148"
+   "data/spells.js:149"
   ]
  },
  "Résistance aux éléments": {
   "at": [
-   "data/spells.js:149"
+   "data/spells.js:150"
   ]
  },
  "L'unité gagne +3 en résistance et +3 en défense contre les attaques et sorts de nature et de chaos.": {
   "at": [
-   "data/spells.js:149"
+   "data/spells.js:150"
   ]
  },
  "Mur de pierre": {
   "at": [
-   "data/spells.js:150"
+   "data/spells.js:151"
   ]
  },
  "Entoure une ville amie de remparts de pierre permanents, équivalents au bâtiment Remparts.": {
   "at": [
-   "data/spells.js:150"
+   "data/spells.js:151"
   ]
  },
  "Force de géant": {
   "at": [
-   "data/spells.js:151"
+   "data/spells.js:152"
   ]
  },
  "+1 en attaque de mêlée (et de jet) pour chaque figurine de l'unité.": {
   "at": [
-   "data/spells.js:151"
+   "data/spells.js:152"
   ]
  },
  "Toile": {
   "at": [
-   "data/spells.js:152",
+   "data/spells.js:153",
    "src/core/util.js:120"
   ]
  },
  "Immobilise l'unité ennemie dans une toile de 12 points de vie sans défense, qu'elle doit détruire en mêlée ou par magie avant de bouger. Une unité volante prise ne vole plus de tout le combat.": {
   "at": [
-   "data/spells.js:152"
+   "data/spells.js:153"
   ]
  },
  "Invoque une unité de 2 ours de guerre (mêlée 7, 8 PV chacun).": {
   "at": [
-   "data/spells.js:153"
+   "data/spells.js:154"
   ]
  },
  "Peau de pierre": {
   "at": [
-   "data/spells.js:154"
+   "data/spells.js:155"
   ]
  },
  "+1 en défense. Non cumulable avec Peau de fer.": {
   "at": [
-   "data/spells.js:154"
+   "data/spells.js:155"
   ]
  },
  "Marche sur l'eau mineure": {
   "at": [
-   "data/spells.js:155"
+   "data/spells.js:156"
   ]
  },
  "Une seule unité : elle se déplace sur les cases d'eau comme sur la terre ferme, à vitesse inchangée. Une pile ne va sur l'eau que si chacune de ses unités le peut (vol, nage, Marche sur l'eau), ou portée par un navire.": {
   "at": [
-   "data/spells.js:155"
+   "data/spells.js:156"
   ]
  },
  "Marche sur l'eau majeure": {
   "at": [
-   "data/spells.js:156"
+   "data/spells.js:157"
   ]
  },
  "Toutes les unités de la case qui ne vont pas déjà sur l'eau reçoivent Marche sur l'eau mineure : la pile entière passe. Le coût est par unité enchantée, moins cher qu'une par une ; chacune garde l'entretien de la version mineure.": {
   "at": [
-   "data/spells.js:156"
+   "data/spells.js:157"
   ]
  },
  "Invoque 4 lutins volants dotés d'une petite attaque magique à distance (force 3).": {
   "at": [
-   "data/spells.js:157"
+   "data/spells.js:158"
   ]
  },
  "Savoir de la terre": {
   "at": [
-   "data/spells.js:158"
+   "data/spells.js:159"
   ]
  },
  "Révèle définitivement terrains, ressources et villes dans une large zone autour de la case visée (rayon de 5 cases) et repère les armées qui s'y trouvent au moment du sort.": {
   "at": [
-   "data/spells.js:158"
+   "data/spells.js:159"
   ]
  },
  "Appel des failles": {
   "at": [
-   "data/spells.js:159"
+   "data/spells.js:160"
   ]
  },
  "Une crevasse s'ouvre sous l'unité visée : 25 % de chances qu'elle soit engloutie, quelle que soit sa défense, même immunisée contre la magie. Sans effet sur les volants et les immatériels ; détruit un mur sur la faille.": {
   "at": [
-   "data/spells.js:159"
+   "data/spells.js:160"
   ]
  },
  "Œil de la nature": {
   "at": [
-   "data/spells.js:160"
+   "data/spells.js:161"
   ]
  },
  "Le rayon de vision de la ville passe à 5 cases.": {
   "at": [
-   "data/spells.js:160"
+   "data/spells.js:161"
   ]
  },
  "Trait de glace": {
   "at": [
-   "data/spells.js:161"
+   "data/spells.js:162"
   ]
  },
  "Trait de froid magique de force 10 sur une unité ennemie ; chaque mana supplémentaire ajoute +1 de force (max 50).": {
   "at": [
-   "data/spells.js:161"
+   "data/spells.js:162"
   ]
  },
  "Invoque 2 araignées géantes à morsure venimeuse (poison 4) capables de tisser des toiles.": {
   "at": [
-   "data/spells.js:162"
+   "data/spells.js:163"
   ]
  },
  "Modelage du terrain": {
   "at": [
-   "data/spells.js:163"
+   "data/spells.js:164"
   ]
  },
  "Transforme la case visée : désert, toundra, forêt, colline ou marais deviennent prairie ; prairie devient forêt ; volcan devient montagne ; montagne devient colline. Les nœuds ne peuvent pas être visés.": {
   "at": [
-   "data/spells.js:163"
+   "data/spells.js:164"
   ]
  },
  "Éclaireur": {
   "at": [
-   "data/spells.js:164",
+   "data/spells.js:165",
    "src/core/util.js:118"
   ]
  },
  "L'unité et toute sa pile traversent n'importe quel terrain pour 1 point de mouvement par case.": {
   "at": [
-   "data/spells.js:164"
+   "data/spells.js:165"
   ]
  },
  "Invoque 4 cocatrix volantes dont le toucher pétrifie (résistance −3).": {
   "at": [
-   "data/spells.js:165"
+   "data/spells.js:166"
   ]
  },
  "Transmutation": {
   "at": [
-   "data/spells.js:166"
+   "data/spells.js:167"
   ]
  },
  "Change définitivement le minerai d'une case, dans un sens ou dans l'autre : charbon ↔ gemmes, fer ↔ or, argent ↔ mithril. Vers les gemmes, l'or et le mithril on gagne ; l'inverse fait perdre.": {
   "at": [
-   "data/spells.js:166"
+   "data/spells.js:167"
   ]
  },
  "Remèdes de la nature": {
   "at": [
-   "data/spells.js:167"
+   "data/spells.js:168"
   ]
  },
  "Soigne entièrement toutes les unités amies de la case visée, à l'exception des créatures de la mort.": {
   "at": [
-   "data/spells.js:167"
+   "data/spells.js:168"
   ]
  },
  "Invoque un basilic (mêlée 15, 30 PV) dont le regard pétrifie (résistance −1).": {
   "at": [
-   "data/spells.js:168"
+   "data/spells.js:169"
   ]
  },
  "Armure élémentaire": {
   "at": [
-   "data/spells.js:169"
+   "data/spells.js:170"
   ]
  },
  "+10 en défense et +10 en résistance contre la nature et le chaos. Non cumulable avec Résistance aux éléments.": {
   "at": [
-   "data/spells.js:169"
+   "data/spells.js:170"
   ]
  },
  "Pétrification": {
   "at": [
-   "data/spells.js:170"
+   "data/spells.js:171"
   ]
  },
  "Chaque figurine de l'unité visée doit réussir un jet de résistance ou être changée en pierre, sans retour possible. Les immunisés à la pétrification sont épargnés.": {
   "at": [
-   "data/spells.js:170"
+   "data/spells.js:171"
   ]
  },
  "Invoque un géant de pierre (mêlée 15, rochers 15) qui abat les murailles et ignore la pétrification.": {
   "at": [
-   "data/spells.js:171"
+   "data/spells.js:172"
   ]
  },
  "Peau de fer": {
   "at": [
-   "data/spells.js:172"
+   "data/spells.js:173"
   ]
  },
  "+5 en défense. Non cumulable avec Peau de pierre.": {
   "at": [
-   "data/spells.js:172"
+   "data/spells.js:173"
   ]
  },
  "Tempête de glace": {
   "at": [
-   "data/spells.js:173"
+   "data/spells.js:174"
   ]
  },
  "Grêle glacée sur une case ennemie : chaque figurine présente, même en garnison, subit une attaque de froid magique de force 6.": {
   "at": [
-   "data/spells.js:173"
+   "data/spells.js:174"
   ]
  },
  "Tremblement de terre": {
   "at": [
-   "data/spells.js:174",
+   "data/spells.js:175",
    "src/ui/main.js:1409"
   ]
  },
  "Secoue une ville ennemie : chaque bâtiment a 10 % de chances d'être détruit, chaque unité non volante et matérielle 15 % de chances de périr.": {
   "at": [
-   "data/spells.js:174"
+   "data/spells.js:175"
   ]
  },
  "Invoque 2 gorgones volantes dont le regard pétrifie (résistance −2).": {
   "at": [
-   "data/spells.js:175"
+   "data/spells.js:176"
   ]
  },
  "Déplacement de la forteresse": {
   "at": [
-   "data/spells.js:176"
+   "data/spells.js:177"
   ]
  },
  "Transfère la forteresse du sorcier, avec son Relais de magie et le cercle d'invocation s'il s'y trouve, dans une autre ville amie.": {
   "at": [
-   "data/spells.js:176"
+   "data/spells.js:177"
   ]
  },
  "Bénédiction de Gaïa": {
   "at": [
-   "data/spells.js:177",
+   "data/spells.js:178",
    "src/engine/cities.js:432"
   ]
  },
  "Nourriture du terrain +50 % (plafond de population), récoltes des fermiers +20 % et agitation −2, production des forêts doublée et croissance accrue. Chaque tour, 10 % de chances par case que ses déserts deviennent prairies et ses volcans collines, 20 % qu'une terre corrompue soit purifiée.": {
   "at": [
-   "data/spells.js:177"
+   "data/spells.js:178"
   ]
  },
  "Invoque pour la durée du combat un élémentaire de terre (mêlée 25, 30 PV) qui abat les murs. Impossible si 9 unités alliées sont déjà sur le terrain.": {
   "at": [
-   "data/spells.js:178"
+   "data/spells.js:179"
   ]
  },
  "Régénération": {
   "at": [
-   "data/spells.js:179",
+   "data/spells.js:180",
    "src/core/util.js:117",
    "src/engine/units.js:455"
   ]
  },
  "L'unité récupère 1 PV par tour de combat, retrouve tous ses PV après la bataille et revient à la vie si son camp l'emporte.": {
   "at": [
-   "data/spells.js:179"
+   "data/spells.js:180"
   ]
  },
  "Invoque un béhémoth (mêlée 25, défense 9, 45 PV).": {
   "at": [
-   "data/spells.js:180"
+   "data/spells.js:181"
   ]
  },
  "Enchevêtrement": {
   "at": [
-   "data/spells.js:181"
+   "data/spells.js:182"
   ]
  },
  "Toutes les unités ennemies non volantes et matérielles perdent 1 point de mouvement par tour ; à 0, elles ne peuvent plus bouger ni attaquer, mais ripostent.": {
   "at": [
-   "data/spells.js:181"
+   "data/spells.js:182"
   ]
  },
  "Conscience de la nature": {
   "at": [
-   "data/spells.js:182"
+   "data/spells.js:183"
   ]
  },
  "Révèle en permanence les deux plans en entier : terrains, villes et unités non invisibles.": {
   "at": [
-   "data/spells.js:182"
+   "data/spells.js:183"
   ]
  },
  "Appel de la foudre": {
   "at": [
-   "data/spells.js:183"
+   "data/spells.js:184"
   ]
  },
  "À chaque tour jusqu'à la fin du combat, 3 à 5 éclairs perforants de force 8 frappent des ennemis au hasard.": {
   "at": [
-   "data/spells.js:183"
+   "data/spells.js:184"
   ]
  },
  "Invoque un colosse (mêlée 20, rochers 20, frappe en premier), immunisé au poison et à la pétrification.": {
   "at": [
-   "data/spells.js:184"
+   "data/spells.js:185"
   ]
  },
  "Porte tellurique": {
   "at": [
-   "data/spells.js:185",
+   "data/spells.js:186",
    "src/ui/main.js:575",
    "src/ui/main.js:576"
   ]
  },
  "Les unités amies passent d'une ville dotée d'une porte tellurique à une autre pour 1 point de mouvement.": {
   "at": [
-   "data/spells.js:185"
+   "data/spells.js:186"
   ]
  },
  "Maîtrise des simples": {
   "at": [
-   "data/spells.js:186",
+   "data/spells.js:187",
    "src/ui/main.js:566"
   ]
  },
  "Toutes les unités blessées du sorcier sont entièrement soignées à chaque tour, sauf les créatures de la mort.": {
   "at": [
-   "data/spells.js:186"
+   "data/spells.js:187"
   ]
  },
  "Invoque une grande vouivre (mêlée 25, 45 PV, morsure venimeuse 15) qui se déplace sous terre pendant les combats.": {
   "at": [
-   "data/spells.js:187"
+   "data/spells.js:188"
   ]
  },
  "Colère de la nature": {
   "at": [
-   "data/spells.js:188"
+   "data/spells.js:189"
   ]
  },
  "Chaque fois qu'un rival lance un sort de mort ou de chaos hors combat, une de ses villes, tirée au hasard, tremble : 10 % de chances de détruire chaque unité non volante et matérielle, 5 % chaque bâtiment.": {
   "at": [
-   "data/spells.js:188"
+   "data/spells.js:189"
   ]
  },
  "Résistance à la magie": {
   "at": [
-   "data/spells.js:189"
+   "data/spells.js:190"
   ]
  },
  "+5 en résistance contre les sorts de tous les royaumes.": {
   "at": [
-   "data/spells.js:189"
+   "data/spells.js:190"
   ]
  },
  "Dissipation véritable": {
   "at": [
-   "data/spells.js:190"
+   "data/spells.js:191"
   ]
  },
  "Tente de retirer d'une unité les enchantements qui vous nuisent, avec une force de dissipation égale au triple du mana investi.": {
   "at": [
-   "data/spells.js:190"
+   "data/spells.js:191"
   ]
  },
  "Fait apparaître sur une case d'océan visible une nuée solide qui transporte jusqu'à 8 unités et se déplace de 2 cases par tour.": {
   "at": [
-   "data/spells.js:191"
+   "data/spells.js:192"
   ]
  },
  "Vent gardien": {
   "at": [
-   "data/spells.js:192"
+   "data/spells.js:193"
   ]
  },
  "Un vent protecteur rend l'unité immunisée aux projectiles (arcs, frondes, javelots).": {
   "at": [
-   "data/spells.js:192"
+   "data/spells.js:193"
   ]
  },
  "Invoque pour le combat 6 guerriers illusoires et immatériels. Impossible si 9 unités alliées sont déjà sur le terrain.": {
   "at": [
-   "data/spells.js:193"
+   "data/spells.js:194"
   ]
  },
  "Confusion": {
   "at": [
-   "data/spells.js:194"
+   "data/spells.js:195"
   ]
  },
  "L'unité visée (résistance −4) devient confuse jusqu'à la fin du combat : chaque tour elle reste plantée, erre au hasard ou attaque ses alliés ou ses ennemis.": {
   "at": [
-   "data/spells.js:194"
+   "data/spells.js:195"
   ]
  },
  "Mot de rappel": {
   "at": [
-   "data/spells.js:195"
+   "data/spells.js:196"
   ]
  },
  "Renvoie instantanément une unité amie dans la ville de votre forteresse (sur une case voisine si la place manque).": {
   "at": [
-   "data/spells.js:195"
+   "data/spells.js:196"
   ]
  },
  "Contre-magie": {
   "at": [
-   "data/spells.js:196"
+   "data/spells.js:197"
   ]
  },
  "Chaque sort ennemi lancé pendant le combat doit d'abord vaincre une dissipation de force égale au mana investi ; chaque tentative réduit cette réserve de 5.": {
   "at": [
-   "data/spells.js:196"
+   "data/spells.js:197"
   ]
  },
  "Invoque 2 nagas nageurs armés de tridents, au crachat venimeux (poison 4, frappe en premier).": {
   "at": [
-   "data/spells.js:197"
+   "data/spells.js:198"
   ]
  },
  "Rupture du flux": {
   "at": [
-   "data/spells.js:198"
+   "data/spells.js:199"
   ]
  },
  "Coupe la tour du sorcier ennemi de son flux : elle ne tire plus pendant 3 rounds, et sa pierre perd toute défense jusqu'à la fin du combat.": {
   "at": [
-   "data/spells.js:198"
+   "data/spells.js:199"
   ]
  },
  "Onde psionique": {
   "at": [
-   "data/spells.js:199"
+   "data/spells.js:200"
   ]
  },
  "Onde mentale de force 5 sur une unité ennemie ; +1 de force tous les 2 mana supplémentaires (max 25).": {
   "at": [
-   "data/spells.js:199"
+   "data/spells.js:200"
   ]
  },
  "Déguisement": {
   "at": [
-   "data/spells.js:200"
+   "data/spells.js:201"
   ]
  },
  "Donne à une unité normale l'apparence d'une créature fantastique au choix, sans changer ses caractéristiques. Inutilisable sur les héros.": {
   "at": [
-   "data/spells.js:200"
+   "data/spells.js:201"
   ]
  },
  "Flou": {
   "at": [
-   "data/spells.js:201"
+   "data/spells.js:202"
   ]
  },
  "Vos unités deviennent floues : chaque touche ennemie a 10 % de chances d'être annulée pendant tout le combat.": {
   "at": [
-   "data/spells.js:201"
+   "data/spells.js:202"
   ]
  },
  "Désenchantement véritable": {
   "at": [
-   "data/spells.js:202"
+   "data/spells.js:203"
   ]
  },
  "Tente de retirer tous les enchantements hostiles d'une case de carte (ou de tout le champ de bataille en combat), avec une force égale au triple du mana investi. Sur un nœud rival, fait tomber la garde de son esprit gardien.": {
   "at": [
-   "data/spells.js:202"
+   "data/spells.js:203"
   ]
  },
  "Vertige": {
   "at": [
-   "data/spells.js:203",
+   "data/spells.js:204",
    "src/ui/combatview.js:1789"
   ]
  },
  "Si l'unité échoue à résister, elle subit −20 % pour toucher et −1 en défense jusqu'à la fin du combat.": {
   "at": [
-   "data/spells.js:203"
+   "data/spells.js:204"
   ]
  },
  "Sceau des sorts": {
   "at": [
-   "data/spells.js:204"
+   "data/spells.js:205"
   ]
  },
  "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.": {
   "at": [
-   "data/spells.js:204"
+   "data/spells.js:205"
   ]
  },
  "Routes enchantées": {
   "at": [
-   "data/spells.js:205"
+   "data/spells.js:206"
   ]
  },
  "Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.": {
   "at": [
-   "data/spells.js:205"
+   "data/spells.js:206"
   ]
  },
  "Vol mineur": {
   "at": [
-   "data/spells.js:206"
+   "data/spells.js:207"
   ]
  },
  "L'unité vole, avec une vitesse d'au moins 3.": {
   "at": [
-   "data/spells.js:206"
+   "data/spells.js:207"
   ]
  },
  "Vol majeur": {
   "at": [
-   "data/spells.js:207"
+   "data/spells.js:208"
   ]
  },
  "Toutes les unités de la case qui ne volent pas reçoivent Vol mineur, en combat comme sur la carte. Le coût est par unité enchantée, moins cher qu'une par une ; chacune garde l'entretien de la version mineure.": {
   "at": [
-   "data/spells.js:207"
+   "data/spells.js:208"
   ]
  },
  "Maîtrise des vents": {
   "at": [
-   "data/spells.js:208"
+   "data/spells.js:209"
   ]
  },
  "Les navires du lanceur (îles flottantes et navires volants compris) gagnent +50 % de mouvement, ceux de ses rivaux perdent 50 %.": {
   "at": [
-   "data/spells.js:208"
+   "data/spells.js:209"
   ]
  },
  "Brise-sort": {
   "at": [
-   "data/spells.js:209"
+   "data/spells.js:210"
   ]
  },
  "Annule le sort qu'un sorcier ennemi est en train de lancer, à condition de payer autant de mana qu'il y en a déjà investi.": {
   "at": [
-   "data/spells.js:209"
+   "data/spells.js:210"
   ]
  },
  "Aura de majesté": {
   "at": [
-   "data/spells.js:210"
+   "data/spells.js:211"
   ]
  },
  "Chaque tour, les relations des autres sorciers envers vous s'améliorent.": {
   "at": [
-   "data/spells.js:210"
+   "data/spells.js:211"
   ]
  },
  "Invoque pour le combat une bête illusoire (mêlée 18, 20 PV), immatérielle et insensible à la magie de mort. Impossible si 9 unités alliées sont déjà sur le terrain.": {
   "at": [
-   "data/spells.js:211"
+   "data/spells.js:212"
   ]
  },
  "Disjonction véritable": {
   "at": [
-   "data/spells.js:212"
+   "data/spells.js:213"
   ]
  },
  "Tente de dissiper l'enchantement global ennemi de votre choix (force 600, le triple de la Disjonction).": {
   "at": [
-   "data/spells.js:212"
+   "data/spells.js:213"
   ]
  },
  "Invisibilité": {
   "at": [
-   "data/spells.js:213",
+   "data/spells.js:214",
    "src/core/util.js:115",
    "src/engine/units.js:452"
   ]
  },
  "L'unité n'est repérée que par un ennemi adjacent : elle ne peut pas être visée à distance et impose −10 % pour toucher en mêlée.": {
   "at": [
-   "data/spells.js:213"
+   "data/spells.js:214"
   ]
  },
  "Marche des vents": {
   "at": [
-   "data/spells.js:214"
+   "data/spells.js:215"
   ]
  },
  "Hors combat, l'unité vole à vitesse 3 et emporte toute sa pile avec elle. Aucun effet en combat.": {
   "at": [
-   "data/spells.js:214"
+   "data/spells.js:215"
   ]
  },
  "Bannissement": {
   "at": [
-   "data/spells.js:215"
+   "data/spells.js:216"
   ]
  },
  "Chaque figurine d'une créature invoquée ennemie doit résister (−3) ou être renvoyée dans son royaume ; chaque tranche de 15 mana supplémentaires ajoute −1.": {
   "at": [
-   "data/spells.js:215"
+   "data/spells.js:216"
   ]
  },
  "Invoque un géant des tempêtes qui lance des éclairs perforants (force 10) à distance et en mêlée, et abat les murailles.": {
   "at": [
-   "data/spells.js:216"
+   "data/spells.js:217"
   ]
  },
  "Invoque pour le combat un élémentaire d'air invisible et volant (mêlée 15, vitesse 5). Impossible si 9 unités alliées sont déjà sur le terrain.": {
   "at": [
-   "data/spells.js:217"
+   "data/spells.js:218"
   ]
  },
  "Tempête mentale": {
   "at": [
-   "data/spells.js:218",
+   "data/spells.js:219",
    "src/ui/combatview.js:1789"
   ]
  },
  "Sans jet de résistance, l'unité perd 5 en attaque (mêlée, jet, distance), en défense et en résistance. Sans effet sur les immunisés aux illusions.": {
   "at": [
-   "data/spells.js:218"
+   "data/spells.js:219"
   ]
  },
  "Stase": {
   "at": [
-   "data/spells.js:219"
+   "data/spells.js:220"
   ]
  },
  "Paralyse les unités ennemies d'une case pendant au moins un tour ; ensuite, chacune tente chaque tour de se libérer par un jet de résistance à −5.": {
   "at": [
-   "data/spells.js:219"
+   "data/spells.js:220"
   ]
  },
  "Immunité magique": {
   "at": [
-   "data/spells.js:220",
+   "data/spells.js:221",
    "src/engine/units.js:458"
   ]
  },
  "L'unité devient insensible aux sorts qui la visent, aux souffles, aux regards et aux tirs magiques.": {
   "at": [
-   "data/spells.js:220"
+   "data/spells.js:221"
   ]
  },
  "Célérité": {
   "at": [
-   "data/spells.js:221"
+   "data/spells.js:222"
   ]
  },
  "Double la vitesse de l'unité et son nombre d'attaques (mêlée, distance et ripostes) pendant le combat.": {
   "at": [
-   "data/spells.js:221"
+   "data/spells.js:222"
   ]
  },
  "Invoque un djinn volant à attaque magique (force 8) qui se téléporte et peut lancer jusqu'à 20 points de sorts de sorcellerie par combat.": {
   "at": [
-   "data/spells.js:222"
+   "data/spells.js:223"
   ]
  },
  "Égide arcanique": {
   "at": [
-   "data/spells.js:223"
+   "data/spells.js:224"
   ]
  },
  "La ville devient immunisée aux sorts d'un royaume choisi : ses sorts de combat y sont interdits et ses créatures ne peuvent y entrer.": {
   "at": [
-   "data/spells.js:223"
+   "data/spells.js:224"
   ]
  },
  "Asservissement": {
   "at": [
-   "data/spells.js:224"
+   "data/spells.js:225"
   ]
  },
  "Une créature invoquée ennemie qui rate sa résistance (−2) combat pour vous jusqu'à la fin de la bataille, puis disparaît.": {
   "at": [
-   "data/spells.js:224"
+   "data/spells.js:225"
   ]
  },
  "Invisibilité de masse": {
   "at": [
-   "data/spells.js:225"
+   "data/spells.js:226"
   ]
  },
  "Toutes vos unités deviennent invisibles : impossibles à viser à distance, et −10 % pour toucher contre elles en mêlée.": {
   "at": [
-   "data/spells.js:225"
+   "data/spells.js:226"
   ]
  },
  "Grand Renvoi": {
   "at": [
-   "data/spells.js:226"
+   "data/spells.js:227"
   ]
  },
  "Toutes les créatures invoquées des deux plans, y compris les vôtres, doivent résister (−3) ou être bannies.": {
   "at": [
-   "data/spells.js:226"
+   "data/spells.js:227"
   ]
  },
  "Captation de sort": {
   "at": [
-   "data/spells.js:227"
+   "data/spells.js:228"
   ]
  },
  "Vole un enchantement global d'un autre sorcier : vous en prenez le contrôle et l'entretien.": {
   "at": [
-   "data/spells.js:227"
+   "data/spells.js:228"
   ]
  },
  "Forteresse volante": {
   "at": [
-   "data/spells.js:228"
+   "data/spells.js:229"
   ]
  },
  "La ville s'élève dans les airs : seules les unités volantes peuvent l'attaquer.": {
   "at": [
-   "data/spells.js:228"
+   "data/spells.js:229"
   ]
  },
  "Invoque un drake céleste (mêlée 20, souffle de foudre 20), immunisé à la magie et aux illusions.": {
   "at": [
-   "data/spells.js:229"
+   "data/spells.js:230"
   ]
  },
  "Suppression de la magie": {
   "at": [
-   "data/spells.js:230"
+   "data/spells.js:231"
   ]
  },
  "Chaque sort hors combat lancé par un rival doit vaincre une dissipation de force 500 pour prendre effet.": {
   "at": [
-   "data/spells.js:230"
+   "data/spells.js:231"
   ]
  },
  "Arrêt du temps": {
   "at": [
-   "data/spells.js:231"
+   "data/spells.js:232"
   ]
  },
  "Le temps s'arrête pour tous les autres sorciers : vous seul agissez. Vos cités et vos revenus s'arrêtent aussi : vous ne payez que l'entretien de ce sort.": {
   "at": [
-   "data/spells.js:231"
+   "data/spells.js:232"
   ]
  },
  "Halle des Jarls": {
@@ -6727,7 +6737,7 @@
    "src/core/util.js:70",
    "src/core/util.js:77",
    "src/engine/game.js:1809",
-   "src/engine/veil.js:550"
+   "src/engine/veil.js:568"
   ]
  },
  "Commun": {
@@ -8861,7 +8871,7 @@
  "Aucune de vos unités n'est blessée.": {
   "at": [
    "src/engine/combat.js:1881",
-   "src/engine/spells.js:272"
+   "src/engine/spells.js:277"
   ]
  },
  "Les blessures de vos unités sont irréversibles (pétrification, désintégration…) : rien à soigner.": {
@@ -10255,7 +10265,7 @@
  " à {0}": {
   "at": [
    "src/engine/game.js:1011",
-   "src/engine/spells.js:327",
+   "src/engine/spells.js:332",
    "src/engine/chronicle.js:120"
   ],
   "args": [
@@ -10601,19 +10611,19 @@
  "Vous êtes déjà sur la carte.": {
   "at": [
    "src/engine/game.js:1360",
-   "src/engine/spells.js:270"
+   "src/engine/spells.js:275"
   ]
  },
  "Il faut votre forteresse.": {
   "at": [
    "src/engine/game.js:1361",
-   "src/engine/spells.js:271"
+   "src/engine/spells.js:276"
   ]
  },
  "Aucune place près de la forteresse.": {
   "at": [
    "src/engine/game.js:1362",
-   "src/engine/spells.js:647"
+   "src/engine/spells.js:652"
   ]
  },
  "Sorcier": {
@@ -10666,7 +10676,7 @@
   "at": [
    "src/engine/game.js:1432",
    "src/engine/game.js:1452",
-   "src/engine/veil.js:245",
+   "src/engine/veil.js:263",
    "src/engine/diplo.js:222"
   ],
   "args": [
@@ -10677,8 +10687,8 @@
   "at": [
    "src/engine/game.js:1433",
    "src/engine/game.js:1448",
-   "src/engine/veil.js:598",
-   "src/engine/finale.js:523"
+   "src/engine/veil.js:616",
+   "src/engine/finale.js:529"
   ],
   "args": [
    "it.name"
@@ -10688,7 +10698,7 @@
   "at": [
    "src/engine/game.js:1434",
    "src/engine/game.js:1446",
-   "src/engine/veil.js:187",
+   "src/engine/veil.js:205",
    "src/engine/diplo.js:222"
   ],
   "args": [
@@ -10713,8 +10723,8 @@
  "{0} (équipé par {1})": {
   "at": [
    "src/engine/game.js:1448",
-   "src/engine/veil.js:598",
-   "src/engine/finale.js:523"
+   "src/engine/veil.js:616",
+   "src/engine/finale.js:529"
   ],
   "args": [
    "it.name",
@@ -10939,7 +10949,7 @@
  "Le Sceau planaire bloque tout passage.": {
   "at": [
    "src/engine/game.js:1601",
-   "src/engine/spells.js:343"
+   "src/engine/spells.js:348"
   ]
  },
  "Il faut encore du mouvement pour passer dans l'autre plan.": {
@@ -10955,7 +10965,7 @@
  "Le terrain de l'autre plan est impraticable.": {
   "at": [
    "src/engine/game.js:1606",
-   "src/engine/spells.js:344"
+   "src/engine/spells.js:349"
   ]
  },
  "Une force ennemie occupe la case de l'autre plan.": {
@@ -10971,7 +10981,7 @@
  "Des gardiens occupent la case de l'autre plan.": {
   "at": [
    "src/engine/game.js:1610",
-   "src/engine/spells.js:347"
+   "src/engine/spells.js:352"
   ]
  },
  "Or insuffisant.": {
@@ -11139,8 +11149,8 @@
  "le Miroir": {
   "at": [
    "src/engine/game.js:1809",
-   "src/engine/veil.js:550",
-   "src/engine/finale.js:382",
+   "src/engine/veil.js:568",
+   "src/engine/finale.js:388",
    "src/ui/main.js:478"
   ]
  },
@@ -11691,7 +11701,7 @@
    "src/engine/turn.js:89",
    "src/engine/turn.js:639",
    "src/engine/spells.js:31",
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1260"
   ]
  },
  "unités": {
@@ -12203,8 +12213,8 @@
   "at": [
    "src/engine/turn.js:662",
    "src/engine/spells.js:266",
-   "src/engine/spells.js:584",
-   "src/engine/spells.js:599"
+   "src/engine/spells.js:589",
+   "src/engine/spells.js:604"
   ]
  },
  "{0} sert déjà un autre sorcier.": {
@@ -12272,15 +12282,15 @@
  "terre corrompue": {
   "at": [
    "src/engine/spells.js:19",
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:733"
   ]
  },
  "terres corrompues": {
   "at": [
    "src/engine/spells.js:19",
    "src/engine/spells.js:19",
-   "src/engine/spells.js:722",
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:733",
+   "src/engine/spells.js:733"
   ],
   "hint": "pluriel de « terre corrompue »"
  },
@@ -12695,7 +12705,7 @@
  "Aucun enchantement global adverse.": {
   "at": [
    "src/engine/spells.js:259",
-   "src/engine/spells.js:746",
+   "src/engine/spells.js:757",
    "src/ui/magicui.js:73"
   ]
  },
@@ -12715,13 +12725,13 @@
  "Aucun héros disponible.": {
   "at": [
    "src/engine/spells.js:263",
-   "src/engine/spells.js:588"
+   "src/engine/spells.js:593"
   ]
  },
  "L'Élu est déjà incarné.": {
   "at": [
    "src/engine/spells.js:265",
-   "src/engine/spells.js:598"
+   "src/engine/spells.js:603"
   ]
  },
  "Aucune place autour de {0} pour accueillir le héros.": {
@@ -12735,7 +12745,7 @@
  "Aucune terre corrompue ici ni autour.": {
   "at": [
    "src/engine/spells.js:268",
-   "src/engine/spells.js:651"
+   "src/engine/spells.js:656"
   ]
  },
  "Il faut viser une faille ouverte.": {
@@ -12743,15 +12753,25 @@
    "src/engine/spells.js:269"
   ]
  },
- "Aucune unité blessée à soigner ici.": {
+ "Le Sceau planaire fige le voile.": {
+  "at": [
+   "src/engine/spells.js:271"
+  ]
+ },
+ "Il faut viser une case où se tiennent vos troupes.": {
   "at": [
    "src/engine/spells.js:272"
   ]
  },
+ "Aucune unité blessée à soigner ici.": {
+  "at": [
+   "src/engine/spells.js:277"
+  ]
+ },
  "{0} or": {
   "at": [
-   "src/engine/spells.js:292",
-   "src/engine/spells.js:299",
+   "src/engine/spells.js:297",
+   "src/engine/spells.js:304",
    "src/ui/ui.js:205",
    "src/ui/city.js:658"
   ],
@@ -12761,7 +12781,7 @@
  },
  "{0} puissance": {
   "at": [
-   "src/engine/spells.js:293",
+   "src/engine/spells.js:298",
    "src/ui/city.js:396"
   ],
   "args": [
@@ -12770,7 +12790,7 @@
  },
  "troupes {0}{1} % de coût": {
   "at": [
-   "src/engine/spells.js:294"
+   "src/engine/spells.js:299"
   ],
   "args": [
    "du > 0 ? '+' : '−'",
@@ -12779,7 +12799,7 @@
  },
  "plus d'armes en mithril à {0}": {
   "at": [
-   "src/engine/spells.js:296"
+   "src/engine/spells.js:301"
   ],
   "args": [
    "city.name"
@@ -12787,12 +12807,12 @@
  },
  "plus d'armes en mithril possibles": {
   "at": [
-   "src/engine/spells.js:296"
+   "src/engine/spells.js:301"
   ]
  },
  "armes en mithril à {0}": {
   "at": [
-   "src/engine/spells.js:297"
+   "src/engine/spells.js:302"
   ],
   "args": [
    "city.name"
@@ -12800,12 +12820,12 @@
  },
  "armes en mithril avec une Guilde des alchimistes": {
   "at": [
-   "src/engine/spells.js:297"
+   "src/engine/spells.js:302"
   ]
  },
  "{0} puiss.": {
   "at": [
-   "src/engine/spells.js:299"
+   "src/engine/spells.js:304"
   ],
   "args": [
    "(dp > 0 ? '+' : '−') + Math.abs(dp)"
@@ -12813,13 +12833,13 @@
  },
  " (aucune de vos cités ne l'exploite)": {
   "at": [
-   "src/engine/spells.js:299",
-   "src/engine/spells.js:328"
+   "src/engine/spells.js:304",
+   "src/engine/spells.js:333"
   ]
  },
  "{0} nourriture{1}": {
   "at": [
-   "src/engine/spells.js:324"
+   "src/engine/spells.js:329"
   ],
   "args": [
    "sg(dFood) + f(Math.abs(dFood))",
@@ -12828,7 +12848,7 @@
  },
  " (taille maximale {0}{1})": {
   "at": [
-   "src/engine/spells.js:324"
+   "src/engine/spells.js:329"
   ],
   "args": [
    "sg(dPop)",
@@ -12837,17 +12857,17 @@
  },
  " (taille déjà au plafond)": {
   "at": [
-   "src/engine/spells.js:324"
+   "src/engine/spells.js:329"
   ]
  },
  " (taille maximale inchangée)": {
   "at": [
-   "src/engine/spells.js:324"
+   "src/engine/spells.js:329"
   ]
  },
  "{0} % de production": {
   "at": [
-   "src/engine/spells.js:325"
+   "src/engine/spells.js:330"
   ],
   "args": [
    "sg(dProd) + f(Math.abs(dProd))"
@@ -12855,17 +12875,17 @@
  },
  "passable sans route": {
   "at": [
-   "src/engine/spells.js:326"
+   "src/engine/spells.js:331"
   ]
  },
  "infranchissable sans route": {
   "at": [
-   "src/engine/spells.js:326"
+   "src/engine/spells.js:331"
   ]
  },
  " et ": {
   "at": [
-   "src/engine/spells.js:327",
+   "src/engine/spells.js:332",
    "src/ui/ui.js:168",
    "src/ui/combatview.js:1738",
    "src/ui/setup.js:262"
@@ -12874,12 +12894,12 @@
  },
  "rien de plus ni de moins": {
   "at": [
-   "src/engine/spells.js:328"
+   "src/engine/spells.js:333"
   ]
  },
  "{0} nour.": {
   "at": [
-   "src/engine/spells.js:333"
+   "src/engine/spells.js:338"
   ],
   "args": [
    "sg(dFood) + f(Math.abs(dFood))"
@@ -12887,7 +12907,7 @@
  },
  "{0} % prod.": {
   "at": [
-   "src/engine/spells.js:333"
+   "src/engine/spells.js:338"
   ],
   "args": [
    "sg(dProd) + f(Math.abs(dProd))"
@@ -12895,27 +12915,27 @@
  },
  "Aucune unité amie ici.": {
   "at": [
-   "src/engine/spells.js:340"
+   "src/engine/spells.js:345"
   ]
  },
  "Case occupée de l'autre côté.": {
   "at": [
-   "src/engine/spells.js:342"
+   "src/engine/spells.js:347"
   ]
  },
  "Une cité étrangère occupe la case de l'autre plan.": {
   "at": [
-   "src/engine/spells.js:345"
+   "src/engine/spells.js:350"
   ]
  },
  "Trop d'unités vous attendent déjà de l'autre côté.": {
   "at": [
-   "src/engine/spells.js:346"
+   "src/engine/spells.js:351"
   ]
  },
  "Un traité vous lie à {0}, à qui sont ces troupes.": {
   "at": [
-   "src/engine/spells.js:355"
+   "src/engine/spells.js:360"
   ],
   "args": [
    "Players.nameFor(game, pl.id, o.owner)"
@@ -12923,95 +12943,96 @@
  },
  "Ce terrain ne peut pas être changé.": {
   "at": [
-   "src/engine/spells.js:356",
-   "src/engine/spells.js:523"
+   "src/engine/spells.js:361",
+   "src/engine/spells.js:528"
   ]
  },
  "Impossible ici (ni eau, ni colline, ni montagne, ni nœud).": {
   "at": [
-   "src/engine/spells.js:357",
-   "src/engine/spells.js:527"
+   "src/engine/spells.js:362",
+   "src/engine/spells.js:532"
   ]
  },
  "C'est déjà un volcan.": {
   "at": [
-   "src/engine/spells.js:357",
-   "src/engine/spells.js:528"
+   "src/engine/spells.js:362",
+   "src/engine/spells.js:533"
   ]
  },
  "Impossible sur l'eau.": {
   "at": [
-   "src/engine/spells.js:358",
-   "src/engine/spells.js:537"
+   "src/engine/spells.js:363",
+   "src/engine/spells.js:542",
+   "src/engine/veil.js:147"
   ]
  },
  "Cette terre est déjà corrompue.": {
   "at": [
-   "src/engine/spells.js:358"
+   "src/engine/spells.js:363"
   ]
  },
  "Aucun minerai transmutable ici.": {
   "at": [
-   "src/engine/spells.js:359",
-   "src/engine/spells.js:546"
+   "src/engine/spells.js:364",
+   "src/engine/spells.js:551"
   ]
  },
  "Aucune unité ennemie ici.": {
   "at": [
-   "src/engine/spells.js:360",
-   "src/engine/spells.js:679",
-   "src/engine/spells.js:696"
+   "src/engine/spells.js:365",
+   "src/engine/spells.js:690",
+   "src/engine/spells.js:707"
   ]
  },
  "Aucune unité ennemie à figer ici.": {
   "at": [
-   "src/engine/spells.js:361",
-   "src/engine/spells.js:784"
+   "src/engine/spells.js:366",
+   "src/engine/spells.js:795"
   ]
  },
  "Rien à dissiper ici.": {
   "at": [
-   "src/engine/spells.js:365"
+   "src/engine/spells.js:370"
   ]
  },
  "Il faut une case d'océan.": {
   "at": [
-   "src/engine/spells.js:368",
-   "src/engine/spells.js:623"
+   "src/engine/spells.js:373",
+   "src/engine/spells.js:628"
   ]
  },
  "Des unités étrangères occupent cette case.": {
   "at": [
-   "src/engine/spells.js:368",
-   "src/engine/spells.js:624"
+   "src/engine/spells.js:373",
+   "src/engine/spells.js:629"
   ]
  },
  "Aucune route à enchanter ici.": {
   "at": [
-   "src/engine/spells.js:369"
+   "src/engine/spells.js:374"
   ]
  },
  "Il faut viser un nœud.": {
   "at": [
-   "src/engine/spells.js:372",
-   "src/engine/spells.js:773"
+   "src/engine/spells.js:377",
+   "src/engine/spells.js:784"
   ]
  },
  "Il faut un nœud lié à un sorcier rival.": {
   "at": [
-   "src/engine/spells.js:373",
-   "src/engine/spells.js:774"
+   "src/engine/spells.js:378",
+   "src/engine/spells.js:785"
   ]
  },
  "Ce nœud est déjà perverti.": {
   "at": [
-   "src/engine/spells.js:374",
-   "src/engine/spells.js:775"
+   "src/engine/spells.js:379",
+   "src/engine/spells.js:786"
   ]
  },
  "La colère de la nature fait trembler {0} ({1}{2}).": {
   "at": [
-   "src/engine/spells.js:421"
+   "src/engine/spells.js:426"
   ],
   "args": [
    "c.name",
@@ -13021,24 +13042,24 @@
  },
  "unité perdue": {
   "at": [
-   "src/engine/spells.js:421"
+   "src/engine/spells.js:426"
   ]
  },
  "unités perdues": {
   "at": [
-   "src/engine/spells.js:421",
-   "src/engine/spells.js:421"
+   "src/engine/spells.js:426",
+   "src/engine/spells.js:426"
   ],
   "hint": "pluriel de « unité perdue »"
  },
  ", aucun bâtiment perdu": {
   "at": [
-   "src/engine/spells.js:421"
+   "src/engine/spells.js:426"
   ]
  },
  "La colère de la nature frappe {0}, cité de {1}.": {
   "at": [
-   "src/engine/spells.js:422"
+   "src/engine/spells.js:427"
   ],
   "args": [
    "c.name",
@@ -13047,12 +13068,12 @@
  },
  "Le Livre de légende vous a échappé : l'incantation se dissipe.": {
   "at": [
-   "src/engine/spells.js:459"
+   "src/engine/spells.js:464"
   ]
  },
  "{0} est dissipé par {1} de {2}.": {
   "at": [
-   "src/engine/spells.js:463"
+   "src/engine/spells.js:468"
   ],
   "args": [
    "sp.name",
@@ -13062,7 +13083,7 @@
  },
  "{0} dissipe {1} de {2}.": {
   "at": [
-   "src/engine/spells.js:464"
+   "src/engine/spells.js:469"
   ],
   "args": [
    "by",
@@ -13072,7 +13093,7 @@
  },
  "{0} est dissipé.": {
   "at": [
-   "src/engine/spells.js:465"
+   "src/engine/spells.js:470"
   ],
   "args": [
    "sp.name"
@@ -13080,12 +13101,12 @@
  },
  "Aucune place pour accueillir la créature.": {
   "at": [
-   "src/engine/spells.js:471"
+   "src/engine/spells.js:476"
   ]
  },
  "Invocation réussie à {0} : {1}.": {
   "at": [
-   "src/engine/spells.js:473"
+   "src/engine/spells.js:478"
   ],
   "args": [
    "c.name",
@@ -13094,24 +13115,24 @@
  },
  "Plus aucune unité à enchanter.": {
   "at": [
-   "src/engine/spells.js:476"
+   "src/engine/spells.js:481"
   ]
  },
  "unité enchantée": {
   "at": [
-   "src/engine/spells.js:478"
+   "src/engine/spells.js:483"
   ]
  },
  "unités enchantées": {
   "at": [
-   "src/engine/spells.js:478",
-   "src/engine/spells.js:478"
+   "src/engine/spells.js:483",
+   "src/engine/spells.js:483"
   ],
   "hint": "pluriel de « unité enchantée »"
  },
  "{0} par le chaos : {1}.": {
   "at": [
-   "src/engine/spells.js:481"
+   "src/engine/spells.js:486"
   ],
   "args": [
    "Units.subj(u, 'est transformé')",
@@ -13120,18 +13141,18 @@
  },
  "est transformé": {
   "at": [
-   "src/engine/spells.js:481"
+   "src/engine/spells.js:486"
   ]
  },
  "sont transformés": {
   "at": [
-   "src/engine/spells.js:481"
+   "src/engine/spells.js:486"
   ],
   "hint": "pluriel de « est transformé » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} sur {1}.": {
   "at": [
-   "src/engine/spells.js:482"
+   "src/engine/spells.js:487"
   ],
   "args": [
    "sp.name",
@@ -13140,7 +13161,7 @@
  },
  "{0} est consacrée : ses malédictions se lèvent.": {
   "at": [
-   "src/engine/spells.js:487"
+   "src/engine/spells.js:492"
   ],
   "args": [
    "c.name"
@@ -13148,7 +13169,7 @@
  },
  "{0} est protégée par {1}{2}.": {
   "at": [
-   "src/engine/spells.js:488"
+   "src/engine/spells.js:493"
   ],
   "args": [
    "c.name",
@@ -13158,7 +13179,7 @@
  },
  "L'Égide arcanique de {0} repousse {1}.": {
   "at": [
-   "src/engine/spells.js:492"
+   "src/engine/spells.js:497"
   ],
   "args": [
    "c.name",
@@ -13167,7 +13188,7 @@
  },
  "{0} s'abat sur {1}.": {
   "at": [
-   "src/engine/spells.js:494"
+   "src/engine/spells.js:499"
   ],
   "args": [
    "sp.name",
@@ -13176,7 +13197,7 @@
  },
  "{0} a lancé {1} sur {2} !": {
   "at": [
-   "src/engine/spells.js:495"
+   "src/engine/spells.js:500"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13186,7 +13207,7 @@
  },
  "Enchantement global actif : {0}.": {
   "at": [
-   "src/engine/spells.js:499"
+   "src/engine/spells.js:504"
   ],
   "args": [
    "sp.name"
@@ -13194,7 +13215,7 @@
  },
  "{0} a lancé {1}.": {
   "at": [
-   "src/engine/spells.js:500"
+   "src/engine/spells.js:505"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13203,9 +13224,9 @@
  },
  "{0} est lancé.": {
   "at": [
-   "src/engine/spells.js:505",
-   "src/engine/spells.js:507",
-   "src/engine/spells.js:554"
+   "src/engine/spells.js:510",
+   "src/engine/spells.js:512",
+   "src/engine/spells.js:559"
   ],
   "args": [
    "sp.name"
@@ -13213,12 +13234,12 @@
  },
  "Le terrain se transforme.": {
   "at": [
-   "src/engine/spells.js:524"
+   "src/engine/spells.js:529"
   ]
  },
  "Un volcan jaillit sous {0}, lancé par {1}{2}.": {
   "at": [
-   "src/engine/spells.js:532"
+   "src/engine/spells.js:537"
   ],
   "args": [
    "c.name",
@@ -13228,7 +13249,7 @@
  },
  "Un volcan jaillit du sol{0}.": {
   "at": [
-   "src/engine/spells.js:534"
+   "src/engine/spells.js:539"
   ],
   "args": [
    "c ? ' sous ' + c.name + (lost.length ? ' (' + Cities.lostText(lost) + ')' : '') : ''"
@@ -13236,7 +13257,7 @@
  },
  " sous {0}{1}": {
   "at": [
-   "src/engine/spells.js:534"
+   "src/engine/spells.js:539"
   ],
   "args": [
    "c.name",
@@ -13245,7 +13266,7 @@
  },
  "{0} a corrompu une terre de {1}.": {
   "at": [
-   "src/engine/spells.js:540"
+   "src/engine/spells.js:545"
   ],
   "args": [
    "U.cap(Players.nameFor(game, oc.owner, pl.id))",
@@ -13254,27 +13275,27 @@
  },
  "La terre est corrompue.": {
   "at": [
-   "src/engine/spells.js:541"
+   "src/engine/spells.js:546"
   ]
  },
  "Le minerai est transmuté.": {
   "at": [
-   "src/engine/spells.js:547"
+   "src/engine/spells.js:552"
   ]
  },
  "Les routes s'enchantent.": {
   "at": [
-   "src/engine/spells.js:551"
+   "src/engine/spells.js:556"
   ]
  },
  "Sort de combat.": {
   "at": [
-   "src/engine/spells.js:553"
+   "src/engine/spells.js:558"
   ]
  },
  "{0} a lancé le Sort de Maîtrise et règne désormais sur toute magie !": {
   "at": [
-   "src/engine/spells.js:562"
+   "src/engine/spells.js:567"
   ],
   "args": [
    "pl.name"
@@ -13282,12 +13303,12 @@
  },
  "Le Sort de Maîtrise est accompli.": {
   "at": [
-   "src/engine/spells.js:563"
+   "src/engine/spells.js:568"
   ]
  },
  "Vous revenez dans le monde à {0}.": {
   "at": [
-   "src/engine/spells.js:569"
+   "src/engine/spells.js:574"
   ],
   "args": [
    "c.name"
@@ -13295,7 +13316,7 @@
  },
  "Le cercle d'invocation est déplacé à {0}.": {
   "at": [
-   "src/engine/spells.js:571"
+   "src/engine/spells.js:576"
   ],
   "args": [
    "game.cities[t.city].name"
@@ -13303,7 +13324,7 @@
  },
  "La forteresse s'élève désormais à {0}{1}.": {
   "at": [
-   "src/engine/spells.js:579"
+   "src/engine/spells.js:584"
   ],
   "args": [
    "c.name",
@@ -13312,18 +13333,18 @@
  },
  ", avec son Relais de magie": {
   "at": [
-   "src/engine/spells.js:579"
+   "src/engine/spells.js:584"
   ]
  },
  "Aucune place pour accueillir le héros.": {
   "at": [
-   "src/engine/spells.js:590",
-   "src/engine/spells.js:614"
+   "src/engine/spells.js:595",
+   "src/engine/spells.js:619"
   ]
  },
  "{0} ({1}) répond à votre appel.": {
   "at": [
-   "src/engine/spells.js:595"
+   "src/engine/spells.js:600"
   ],
   "args": [
    "h.name",
@@ -13332,12 +13353,12 @@
  },
  "Aucune place pour accueillir l'Élu.": {
   "at": [
-   "src/engine/spells.js:601"
+   "src/engine/spells.js:606"
   ]
  },
  "L'Élu s'incarne à {0}.": {
   "at": [
-   "src/engine/spells.js:605"
+   "src/engine/spells.js:610"
   ],
   "args": [
    "c.name"
@@ -13345,17 +13366,17 @@
  },
  "Aucun héros.": {
   "at": [
-   "src/engine/spells.js:608"
+   "src/engine/spells.js:613"
   ]
  },
  "Ce héros est déjà revenu au monde.": {
   "at": [
-   "src/engine/spells.js:612"
+   "src/engine/spells.js:617"
   ]
  },
  "{0} revient d'entre les morts.": {
   "at": [
-   "src/engine/spells.js:618"
+   "src/engine/spells.js:623"
   ],
   "args": [
    "d.hero.name"
@@ -13363,7 +13384,7 @@
  },
  "Objet créé : {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:620"
+   "src/engine/spells.js:625"
   ],
   "args": [
    "it.name",
@@ -13372,7 +13393,7 @@
  },
  "Artefact créé : {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:621"
+   "src/engine/spells.js:626"
   ],
   "args": [
    "it.name",
@@ -13381,22 +13402,22 @@
  },
  "L'île ne parvient pas à émerger ici.": {
   "at": [
-   "src/engine/spells.js:624"
+   "src/engine/spells.js:629"
   ]
  },
  "Trop d'unités sur cette case.": {
   "at": [
-   "src/engine/spells.js:625"
+   "src/engine/spells.js:630"
   ]
  },
  "Une île flottante émerge des flots.": {
   "at": [
-   "src/engine/spells.js:626"
+   "src/engine/spells.js:631"
   ]
  },
  "La région se révèle à vous{0}.": {
   "at": [
-   "src/engine/spells.js:635"
+   "src/engine/spells.js:640"
   ],
   "args": [
    "n ? ' : ' + U.n(n, 'armée repérée', 'armées repérées') + ' (le détail au survol de leur ca"
@@ -13404,7 +13425,7 @@
  },
  " : {0} (le détail au survol de leur case)": {
   "at": [
-   "src/engine/spells.js:635"
+   "src/engine/spells.js:640"
   ],
   "args": [
    "U.n(n, 'armée repérée', 'armées repérées')"
@@ -13412,39 +13433,39 @@
  },
  "armée repérée": {
   "at": [
-   "src/engine/spells.js:635"
+   "src/engine/spells.js:640"
   ]
  },
  "armées repérées": {
   "at": [
-   "src/engine/spells.js:635",
-   "src/engine/spells.js:635"
+   "src/engine/spells.js:640",
+   "src/engine/spells.js:640"
   ],
   "hint": "pluriel de « armée repérée »"
  },
  ", sans armée en vue": {
   "at": [
-   "src/engine/spells.js:635"
+   "src/engine/spells.js:640"
   ]
  },
  "Vos troupes basculent dans l'autre plan.": {
   "at": [
-   "src/engine/spells.js:642"
+   "src/engine/spells.js:647"
   ]
  },
  "Pas de forteresse.": {
   "at": [
-   "src/engine/spells.js:645"
+   "src/engine/spells.js:650"
   ]
  },
  "Un navire ne peut pas être rappelé.": {
   "at": [
-   "src/engine/spells.js:646"
+   "src/engine/spells.js:651"
   ]
  },
  "{0} est rappelé à la forteresse.": {
   "at": [
-   "src/engine/spells.js:648"
+   "src/engine/spells.js:653"
   ],
   "args": [
    "Units.label(u)"
@@ -13452,7 +13473,7 @@
  },
  "{0} terres corrompues sont purifiées.": {
   "at": [
-   "src/engine/spells.js:653"
+   "src/engine/spells.js:658"
   ],
   "args": [
    "tiles.length"
@@ -13460,17 +13481,34 @@
  },
  "La terre est purifiée.": {
   "at": [
-   "src/engine/spells.js:653"
+   "src/engine/spells.js:658"
+  ]
+ },
+ "Une faille s'est ouverte entre les plans ({0}, {1}).": {
+  "at": [
+   "src/engine/spells.js:663"
+  ],
+  "args": [
+   "x",
+   "t.y"
+  ]
+ },
+ "La faille s'ouvre sous vos troupes ; le voile s'use ({0} %).": {
+  "at": [
+   "src/engine/spells.js:664"
+  ],
+  "args": [
+   "Math.round(game.veil)"
   ]
  },
  "Il faut viser une faille.": {
   "at": [
-   "src/engine/spells.js:656"
+   "src/engine/spells.js:667"
   ]
  },
  "Une faille entre les plans s'est refermée ({0}, {1}).": {
   "at": [
-   "src/engine/spells.js:658"
+   "src/engine/spells.js:669"
   ],
   "args": [
    "s.x",
@@ -13479,7 +13517,7 @@
  },
  "La faille se referme ; le voile se recoud un peu ({0} %).": {
   "at": [
-   "src/engine/spells.js:659"
+   "src/engine/spells.js:670"
   ],
   "args": [
    "Math.round(game.veil)"
@@ -13487,7 +13525,7 @@
  },
  "Vous voici sur la carte, à {0}.": {
   "at": [
-   "src/engine/spells.js:661"
+   "src/engine/spells.js:672"
   ],
   "args": [
    "game.cities[pl.fortress].name"
@@ -13495,13 +13533,13 @@
  },
  "Aucune unité blessée à soigner.": {
   "at": [
-   "src/engine/spells.js:667",
-   "src/engine/spells.js:674"
+   "src/engine/spells.js:678",
+   "src/engine/spells.js:685"
   ]
  },
  "{0} ({1} PV rendus).": {
   "at": [
-   "src/engine/spells.js:671"
+   "src/engine/spells.js:682"
   ],
   "args": [
    "U.n(units.length, 'unité soignée', 'unités soignées')",
@@ -13510,22 +13548,22 @@
  },
  "unité soignée": {
   "at": [
-   "src/engine/spells.js:671",
-   "src/engine/spells.js:672"
+   "src/engine/spells.js:682",
+   "src/engine/spells.js:683"
   ]
  },
  "unités soignées": {
   "at": [
-   "src/engine/spells.js:671",
-   "src/engine/spells.js:671",
-   "src/engine/spells.js:672",
-   "src/engine/spells.js:672"
+   "src/engine/spells.js:682",
+   "src/engine/spells.js:682",
+   "src/engine/spells.js:683",
+   "src/engine/spells.js:683"
   ],
   "hint": "pluriel de « unité soignée »"
  },
  "{0}, {1} PV rendus.": {
   "at": [
-   "src/engine/spells.js:672"
+   "src/engine/spells.js:683"
   ],
   "args": [
    "U.n(units.length, 'unité soignée', 'unités soignées')",
@@ -13534,44 +13572,44 @@
  },
  "Les troupes sont entièrement soignées.": {
   "at": [
-   "src/engine/spells.js:674"
+   "src/engine/spells.js:685"
   ]
  },
  "La tempête": {
   "at": [
-   "src/engine/spells.js:681"
+   "src/engine/spells.js:692"
   ]
  },
  "détruites": {
   "at": [
-   "src/engine/spells.js:690"
+   "src/engine/spells.js:701"
   ]
  },
  "détruite": {
   "at": [
-   "src/engine/spells.js:690"
+   "src/engine/spells.js:701"
   ]
  },
  "aucune unité détruite": {
   "at": [
-   "src/engine/spells.js:690"
+   "src/engine/spells.js:701"
   ]
  },
  "autre blessée": {
   "at": [
-   "src/engine/spells.js:690"
+   "src/engine/spells.js:701"
   ]
  },
  "autres blessées": {
   "at": [
-   "src/engine/spells.js:690",
-   "src/engine/spells.js:690"
+   "src/engine/spells.js:701",
+   "src/engine/spells.js:701"
   ],
   "hint": "pluriel de « autre blessée »"
  },
  "{0} lance {1} sur vos troupes : {2}.": {
   "at": [
-   "src/engine/spells.js:692"
+   "src/engine/spells.js:703"
   ],
   "args": [
    "U.cap(Players.nameFor(game, vic, pl.id))",
@@ -13581,7 +13619,7 @@
  },
  "{0} s'abat : {1}.": {
   "at": [
-   "src/engine/spells.js:693"
+   "src/engine/spells.js:704"
   ],
   "args": [
    "sname",
@@ -13590,7 +13628,7 @@
  },
  "{0} emportée{1}{2}": {
   "at": [
-   "src/engine/spells.js:700"
+   "src/engine/spells.js:711"
   ],
   "args": [
    "U.n(figs, 'figurine')",
@@ -13600,7 +13638,7 @@
  },
  ", dont {0} ({1})": {
   "at": [
-   "src/engine/spells.js:700"
+   "src/engine/spells.js:711"
   ],
   "args": [
    "U.n(killed, 'unité entière', 'unités entières')",
@@ -13609,19 +13647,19 @@
  },
  "unité entière": {
   "at": [
-   "src/engine/spells.js:700"
+   "src/engine/spells.js:711"
   ]
  },
  "unités entières": {
   "at": [
-   "src/engine/spells.js:700",
-   "src/engine/spells.js:700"
+   "src/engine/spells.js:711",
+   "src/engine/spells.js:711"
   ],
   "hint": "pluriel de « unité entière »"
  },
  "Le vent noir {0} souffle sur vos troupes : {1}.": {
   "at": [
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:713"
   ],
   "args": [
    "U.de(Players.nameFor(game, vic, pl.id))",
@@ -13630,7 +13668,7 @@
  },
  "Le vent noir : {0}.": {
   "at": [
-   "src/engine/spells.js:703"
+   "src/engine/spells.js:714"
   ],
   "args": [
    "what"
@@ -13638,24 +13676,24 @@
  },
  "aucun bâtiment perdu": {
   "at": [
-   "src/engine/spells.js:710"
+   "src/engine/spells.js:721"
   ]
  },
  "unité engloutie": {
   "at": [
-   "src/engine/spells.js:710"
+   "src/engine/spells.js:721"
   ]
  },
  "unités englouties": {
   "at": [
-   "src/engine/spells.js:710",
-   "src/engine/spells.js:710"
+   "src/engine/spells.js:721",
+   "src/engine/spells.js:721"
   ],
   "hint": "pluriel de « unité engloutie »"
  },
  "{0} fait trembler la terre sous {1} ({2}).": {
   "at": [
-   "src/engine/spells.js:711"
+   "src/engine/spells.js:722"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13665,7 +13703,7 @@
  },
  "La terre tremble sous {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:712"
+   "src/engine/spells.js:723"
   ],
   "args": [
    "c.name",
@@ -13674,7 +13712,7 @@
  },
  "la moitié de la population disparaît{0}{1}{2}": {
   "at": [
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:733"
   ],
   "args": [
    "lost.length ? ' ; ' + Cities.lostText(lost) : ''",
@@ -13684,19 +13722,19 @@
  },
  "unité anéantie": {
   "at": [
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:733"
   ]
  },
  "unités anéanties": {
   "at": [
-   "src/engine/spells.js:722",
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:733",
+   "src/engine/spells.js:733"
   ],
   "hint": "pluriel de « unité anéantie »"
  },
  " ; {0} alentour": {
   "at": [
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:733"
   ],
   "args": [
    "U.n(nc, 'terre corrompue', 'terres corrompues')"
@@ -13704,7 +13742,7 @@
  },
  "{0} appelle le Néant sur {1} : {2}.": {
   "at": [
-   "src/engine/spells.js:723"
+   "src/engine/spells.js:734"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13714,7 +13752,7 @@
  },
  "Le Néant frappe {0} : {1}.": {
   "at": [
-   "src/engine/spells.js:724"
+   "src/engine/spells.js:735"
   ],
   "args": [
    "c.name",
@@ -13723,7 +13761,7 @@
  },
  "{0} lance le Vœu de mort : {1}.": {
   "at": [
-   "src/engine/spells.js:729"
+   "src/engine/spells.js:740"
   ],
   "args": [
    "U.cap(Players.nameFor(game, +o, pl.id))",
@@ -13732,19 +13770,19 @@
  },
  "de vos unités périt": {
   "at": [
-   "src/engine/spells.js:729"
+   "src/engine/spells.js:740"
   ]
  },
  "de vos unités périssent": {
   "at": [
-   "src/engine/spells.js:729",
-   "src/engine/spells.js:729"
+   "src/engine/spells.js:740",
+   "src/engine/spells.js:740"
   ],
   "hint": "pluriel de « de vos unités périt »"
  },
  "Le Vœu de mort fauche {0}.": {
   "at": [
-   "src/engine/spells.js:730"
+   "src/engine/spells.js:741"
   ],
   "args": [
    "U.n(n, 'unité ennemie', 'unités ennemies')"
@@ -13752,19 +13790,19 @@
  },
  "unité ennemie": {
   "at": [
-   "src/engine/spells.js:730"
+   "src/engine/spells.js:741"
   ]
  },
  "unités ennemies": {
   "at": [
-   "src/engine/spells.js:730",
-   "src/engine/spells.js:730"
+   "src/engine/spells.js:741",
+   "src/engine/spells.js:741"
   ],
   "hint": "pluriel de « unité ennemie »"
  },
  "{0} lance le Grand Renvoi : vous perdez {1}.": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:746"
   ],
   "args": [
    "U.cap(Players.nameFor(game, +o, pl.id))",
@@ -13773,7 +13811,7 @@
  },
  "{0} dans {1}{2}.": {
   "at": [
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:747"
   ],
   "args": [
    "U.n(n, 'créature renvoyée', 'créatures renvoyées')",
@@ -13783,29 +13821,29 @@
  },
  "créature renvoyée": {
   "at": [
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:747"
   ]
  },
  "créatures renvoyées": {
   "at": [
-   "src/engine/spells.js:736",
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:747",
+   "src/engine/spells.js:747"
   ],
   "hint": "pluriel de « créature renvoyée »"
  },
  "leur royaume": {
   "at": [
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:747"
   ]
  },
  "son royaume": {
   "at": [
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:747"
   ]
  },
  ", dont les vôtres : {0}": {
   "at": [
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:747"
   ],
   "args": [
    "U.tally(per[pl.id])"
@@ -13813,7 +13851,7 @@
  },
  "{0} draine {1} points de votre mana !": {
   "at": [
-   "src/engine/spells.js:738"
+   "src/engine/spells.js:749"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13822,7 +13860,7 @@
  },
  "{0} points de mana drainés à {1}.": {
   "at": [
-   "src/engine/spells.js:738"
+   "src/engine/spells.js:749"
   ],
   "args": [
    "n",
@@ -13831,7 +13869,7 @@
  },
  "{0} répand des rumeurs contre vous : les autres sorciers se méfient de vous (Subversion).": {
   "at": [
-   "src/engine/spells.js:739"
+   "src/engine/spells.js:750"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -13839,7 +13877,7 @@
  },
  "Les sorciers se méfient désormais de {0}.": {
   "at": [
-   "src/engine/spells.js:739"
+   "src/engine/spells.js:750"
   ],
   "args": [
    "o.name"
@@ -13847,7 +13885,7 @@
  },
  "{0} a lacéré votre esprit : compétence réduite.": {
   "at": [
-   "src/engine/spells.js:740"
+   "src/engine/spells.js:751"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -13855,7 +13893,7 @@
  },
  "La compétence de {0} est entamée.": {
   "at": [
-   "src/engine/spells.js:740"
+   "src/engine/spells.js:751"
   ],
   "args": [
    "o.name"
@@ -13863,7 +13901,7 @@
  },
  "{0} ne lance aucun sort.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:752"
   ],
   "args": [
    "o.name"
@@ -13871,13 +13909,13 @@
  },
  "Mana insuffisant.": {
   "at": [
-   "src/engine/spells.js:741",
+   "src/engine/spells.js:752",
    "src/engine/events.js:695"
   ]
  },
  "{0} a pulvérisé votre incantation de {1}.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:752"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13886,12 +13924,12 @@
  },
  "Incantation adverse anéantie.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:752"
   ]
  },
  "{0} n'a aucun enchantement global.": {
   "at": [
-   "src/engine/spells.js:742"
+   "src/engine/spells.js:753"
   ],
   "args": [
    "o.name"
@@ -13899,7 +13937,7 @@
  },
  "{0} vous a volé {1}.": {
   "at": [
-   "src/engine/spells.js:742"
+   "src/engine/spells.js:753"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13908,7 +13946,7 @@
  },
  "Vous captez {0}.": {
   "at": [
-   "src/engine/spells.js:742"
+   "src/engine/spells.js:753"
   ],
   "args": [
    "DATA.spells[g].name"
@@ -13916,7 +13954,7 @@
  },
  "{0} a brisé votre {1}.": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:759"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13925,7 +13963,7 @@
  },
  "Vous brisez {0} {1}.": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:759"
   ],
   "args": [
    "DATA.spells[g].name",
@@ -13934,7 +13972,7 @@
  },
  "{0} a tenté de briser votre {1} : il a résisté.": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:759"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13943,7 +13981,7 @@
  },
  "{0} {1} résiste à la Disjonction.": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:759"
   ],
   "args": [
    "DATA.spells[g].name",
@@ -13952,33 +13990,33 @@
  },
  "Ces enchantements sont les vôtres.": {
   "at": [
-   "src/engine/spells.js:749",
-   "src/engine/spells.js:750"
+   "src/engine/spells.js:760",
+   "src/engine/spells.js:761"
   ]
  },
  "enchantement dissipé": {
   "at": [
-   "src/engine/spells.js:749",
-   "src/engine/spells.js:750"
+   "src/engine/spells.js:760",
+   "src/engine/spells.js:761"
   ]
  },
  "enchantements dissipés": {
   "at": [
-   "src/engine/spells.js:749",
-   "src/engine/spells.js:749",
-   "src/engine/spells.js:750",
-   "src/engine/spells.js:750"
+   "src/engine/spells.js:760",
+   "src/engine/spells.js:760",
+   "src/engine/spells.js:761",
+   "src/engine/spells.js:761"
   ],
   "hint": "pluriel de « enchantement dissipé »"
  },
  "la garde de l'esprit gardien du nœud": {
   "at": [
-   "src/engine/spells.js:763"
+   "src/engine/spells.js:774"
   ]
  },
  "{0} a dissipé {1}.": {
   "at": [
-   "src/engine/spells.js:768"
+   "src/engine/spells.js:779"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o, pl.id))",
@@ -13987,7 +14025,7 @@
  },
  "Dissipés : {0}{1}.": {
   "at": [
-   "src/engine/spells.js:769"
+   "src/engine/spells.js:780"
   ],
   "args": [
    "names.join(', ')",
@@ -13996,17 +14034,17 @@
  },
  " et le sort qui pervertissait le nœud": {
   "at": [
-   "src/engine/spells.js:769"
+   "src/engine/spells.js:780"
   ]
  },
  "Rien n'a cédé.": {
   "at": [
-   "src/engine/spells.js:769"
+   "src/engine/spells.js:780"
   ]
  },
  "{0} a perverti votre {1} : il vous coûte 5 mana par tour.": {
   "at": [
-   "src/engine/spells.js:777"
+   "src/engine/spells.js:788"
   ],
   "args": [
    "U.cap(Players.nameFor(game, s.owner, pl.id))",
@@ -14015,7 +14053,7 @@
  },
  "Le {0} est perverti.": {
   "at": [
-   "src/engine/spells.js:779"
+   "src/engine/spells.js:790"
   ],
   "args": [
    "Game.siteName(s)"
@@ -14023,12 +14061,12 @@
  },
  "Vos soldats deviennent des loups-garous.": {
   "at": [
-   "src/engine/spells.js:781"
+   "src/engine/spells.js:792"
   ]
  },
  "{0} a figé vos troupes dans la stase.": {
   "at": [
-   "src/engine/spells.js:786"
+   "src/engine/spells.js:797"
   ],
   "args": [
    "U.cap(Players.nameFor(game, us[0].owner, pl.id))"
@@ -14036,7 +14074,7 @@
  },
  "Les ennemis sont figés.": {
   "at": [
-   "src/engine/spells.js:787"
+   "src/engine/spells.js:798"
   ]
  },
  "un citoyen": {
@@ -14101,9 +14139,34 @@
    "src/engine/veil.js:92"
   ]
  },
+ "Trop près du bord du monde.": {
+  "at": [
+   "src/engine/veil.js:145"
+  ]
+ },
+ "De l'autre côté, c'est la mer.": {
+  "at": [
+   "src/engine/veil.js:147"
+  ]
+ },
+ "Impossible sur une montagne ou un volcan, d'un côté ou de l'autre.": {
+  "at": [
+   "src/engine/veil.js:148"
+  ]
+ },
+ "Un lieu occupe déjà la case, d'un côté ou de l'autre.": {
+  "at": [
+   "src/engine/veil.js:149"
+  ]
+ },
+ "Trop près d'une cité (sur l'un des deux plans).": {
+  "at": [
+   "src/engine/veil.js:151"
+  ]
+ },
  "Des créatures du Miroir franchissent la faille ({0}, {1}) : {2}.": {
   "at": [
-   "src/engine/veil.js:169"
+   "src/engine/veil.js:187"
   ],
   "args": [
    "s.x",
@@ -14113,12 +14176,12 @@
  },
  "Prête de l'or tout de suite ; réclame le double 20 tours plus tard.": {
   "at": [
-   "src/engine/veil.js:179"
+   "src/engine/veil.js:197"
   ]
  },
  "Le double de son prêt : {0} or.": {
   "at": [
-   "src/engine/veil.js:180"
+   "src/engine/veil.js:198"
   ],
   "args": [
    "2 * b.gold"
@@ -14126,17 +14189,17 @@
  },
  "l'Usurier d'Ombre": {
   "at": [
-   "src/engine/veil.js:181"
+   "src/engine/veil.js:199"
   ]
  },
  "Une silhouette sans visage compte des pièces qui ne tintent pas. Elle prête à qui veut, et n'oublie personne.": {
   "at": [
-   "src/engine/veil.js:182"
+   "src/engine/veil.js:200"
   ]
  },
  "Il vous prête {0} pièces d'or, tout de suite.": {
   "at": [
-   "src/engine/veil.js:184"
+   "src/engine/veil.js:202"
   ],
   "args": [
    "b.gold"
@@ -14144,7 +14207,7 @@
  },
  "Dans 20 tours, il reviendra chercher le double : {0} or.": {
   "at": [
-   "src/engine/veil.js:185"
+   "src/engine/veil.js:203"
   ],
   "args": [
    "2 * b.gold"
@@ -14152,12 +14215,12 @@
  },
  "Ses huissiers se paient eux-mêmes : deux traqueurs nocturnes surgissent près de votre plus grande cité, et votre renommée en pâtit (-5).": {
   "at": [
-   "src/engine/veil.js:186"
+   "src/engine/veil.js:204"
   ]
  },
  "Rembourser {0} or": {
   "at": [
-   "src/engine/veil.js:188"
+   "src/engine/veil.js:206"
   ],
   "args": [
    "g"
@@ -14165,27 +14228,27 @@
  },
  "Offre des créatures de la nature sans entretien ; réclame trois soldats 25 tours plus tard.": {
   "at": [
-   "src/engine/veil.js:196"
+   "src/engine/veil.js:214"
   ]
  },
  "Trois de vos soldats, pour nourrir l'essaim.": {
   "at": [
-   "src/engine/veil.js:197"
+   "src/engine/veil.js:215"
   ]
  },
  "la Mère des Essaims": {
   "at": [
-   "src/engine/veil.js:198"
+   "src/engine/veil.js:216"
   ]
  },
  "Sous la colline, quelque chose de très vieux pond sans relâche, et nourrit ses petits de ce qu'on lui apporte.": {
   "at": [
-   "src/engine/veil.js:199"
+   "src/engine/veil.js:217"
   ]
  },
  "Ses enfants vous suivent, sans entretien : {0}.": {
   "at": [
-   "src/engine/veil.js:201"
+   "src/engine/veil.js:219"
   ],
   "args": [
    "b.units.map(t => DATA.units[t].name.toLowerCase()).join(', ')"
@@ -14193,18 +14256,18 @@
  },
  "Dans 25 tours, elle réclamera trois de vos soldats pour nourrir l'essaim.": {
   "at": [
-   "src/engine/veil.js:202"
+   "src/engine/veil.js:220"
   ]
  },
  "Ses enfants se retournent contre vous, et l'essaim surgit près de votre plus grande cité.": {
   "at": [
-   "src/engine/veil.js:203"
+   "src/engine/veil.js:221"
   ]
  },
  "Livrer {0}": {
   "at": [
-   "src/engine/veil.js:220",
-   "src/engine/veil.js:311"
+   "src/engine/veil.js:238",
+   "src/engine/veil.js:329"
   ],
   "args": [
    "s.map(u => Units.label(u).toLowerCase()).join(', ')"
@@ -14212,17 +14275,17 @@
  },
  "Livrer trois soldats (vous n'en avez pas assez)": {
   "at": [
-   "src/engine/veil.js:220"
+   "src/engine/veil.js:238"
   ]
  },
  "Enseigne aussitôt le sort que vous étudiez ; réclame du mana 25 tours plus tard.": {
   "at": [
-   "src/engine/veil.js:229"
+   "src/engine/veil.js:247"
   ]
  },
  "{0} mana, en échange de son savoir.": {
   "at": [
-   "src/engine/veil.js:230"
+   "src/engine/veil.js:248"
   ],
   "args": [
    "b.spell ? b.mana : 300"
@@ -14230,17 +14293,17 @@
  },
  "l'Archiviste aveugle": {
   "at": [
-   "src/engine/veil.js:231"
+   "src/engine/veil.js:249"
   ]
  },
  "Il a lu tous les grimoires du monde, puis s'est crevé les yeux pour ne plus rien lire d'autre. Il échange ce qu'il sait contre ce que vous avez.": {
   "at": [
-   "src/engine/veil.js:232"
+   "src/engine/veil.js:250"
   ]
  },
  "Il vous enseigne aussitôt {0}.": {
   "at": [
-   "src/engine/veil.js:238"
+   "src/engine/veil.js:256"
   ],
   "args": [
    "DATA.spells[b.spell].name"
@@ -14248,12 +14311,12 @@
  },
  "Il n'a rien à vous apprendre que vous ne cherchiez déjà ; il vous cède 200 mana.": {
   "at": [
-   "src/engine/veil.js:238"
+   "src/engine/veil.js:256"
   ]
  },
  "Dans 25 tours, il exigera {0} mana en échange.": {
   "at": [
-   "src/engine/veil.js:239"
+   "src/engine/veil.js:257"
   ],
   "args": [
    "b.mana"
@@ -14261,27 +14324,27 @@
  },
  "Dans 25 tours, il exigera 300 mana.": {
   "at": [
-   "src/engine/veil.js:239"
+   "src/engine/veil.js:257"
   ]
  },
  "Il reprend ce qu'il a donné : vous oubliez le sort enseigné, et votre renommée en pâtit (-3).": {
   "at": [
-   "src/engine/veil.js:240"
+   "src/engine/veil.js:258"
   ]
  },
  "Il ne l'oubliera pas : votre renommée en pâtit (-3).": {
   "at": [
-   "src/engine/veil.js:240"
+   "src/engine/veil.js:258"
   ]
  },
  "200 mana": {
   "at": [
-   "src/engine/veil.js:242"
+   "src/engine/veil.js:260"
   ]
  },
  "Lui céder {0} mana": {
   "at": [
-   "src/engine/veil.js:247"
+   "src/engine/veil.js:265"
   ],
   "args": [
    "m"
@@ -14289,12 +14352,12 @@
  },
  "Offre un serviteur de feu sans entretien ; réclame des citoyens ou du mana 20 tours plus tard.": {
   "at": [
-   "src/engine/veil.js:257"
+   "src/engine/veil.js:275"
   ]
  },
  "{0} d'une cité qui en compte au moins {1}, ou {2} mana.": {
   "at": [
-   "src/engine/veil.js:258"
+   "src/engine/veil.js:276"
   ],
   "args": [
    "U.cap(Veil.citizensText(b.pop || 2))",
@@ -14304,17 +14367,17 @@
  },
  "le Prince des Cendres": {
   "at": [
-   "src/engine/veil.js:259"
+   "src/engine/veil.js:277"
   ]
  },
  "Un trône de braises sur lequel rien ne siège. Quelqu'un répond pourtant, d'une voix de forge.": {
   "at": [
-   "src/engine/veil.js:260"
+   "src/engine/veil.js:278"
   ]
  },
  "Un serviteur de feu vous rejoint, sans entretien : {0}.": {
   "at": [
-   "src/engine/veil.js:265"
+   "src/engine/veil.js:283"
   ],
   "args": [
    "DATA.units[b.unit].name.toLowerCase()"
@@ -14322,7 +14385,7 @@
  },
  "Dans 20 tours, il exigera une offrande : {0} d'une grande cité, ou {1} mana.": {
   "at": [
-   "src/engine/veil.js:266"
+   "src/engine/veil.js:284"
   ],
   "args": [
    "Veil.citizensText(b.pop || 2)",
@@ -14331,12 +14394,12 @@
  },
  "Son serviteur se retourne contre vous, escorté de chiens infernaux.": {
   "at": [
-   "src/engine/veil.js:267"
+   "src/engine/veil.js:285"
   ]
  },
  "Offrir {0} de {1}": {
   "at": [
-   "src/engine/veil.js:273"
+   "src/engine/veil.js:291"
   ],
   "args": [
    "Veil.citizensText(k)",
@@ -14345,7 +14408,7 @@
  },
  "Offrir {0} (aucune cité assez grande)": {
   "at": [
-   "src/engine/veil.js:273"
+   "src/engine/veil.js:291"
   ],
   "args": [
    "Veil.citizensText(k)"
@@ -14353,7 +14416,7 @@
  },
  "Offrir {0} mana": {
   "at": [
-   "src/engine/veil.js:274"
+   "src/engine/veil.js:292"
   ],
   "args": [
    "m"
@@ -14361,27 +14424,27 @@
  },
  "Prête un héros aguerri ; réclame l'un de vos héros 30 tours plus tard.": {
   "at": [
-   "src/engine/veil.js:289"
+   "src/engine/veil.js:307"
   ]
  },
  "L'un de vos héros, pour toujours.": {
   "at": [
-   "src/engine/veil.js:290"
+   "src/engine/veil.js:308"
   ]
  },
  "le Roi sans Visage": {
   "at": [
-   "src/engine/veil.js:291"
+   "src/engine/veil.js:309"
   ]
  },
  "Ses courtisans sont morts depuis mille ans et lui obéissent encore. Il prête volontiers ses champions.": {
   "at": [
-   "src/engine/veil.js:292"
+   "src/engine/veil.js:310"
   ]
  },
  "Un champion de sa cour vous rejoint : {0}, déjà aguerri.": {
   "at": [
-   "src/engine/veil.js:294"
+   "src/engine/veil.js:312"
   ],
   "args": [
    "DATA.heroes[b.hero].name"
@@ -14389,22 +14452,22 @@
  },
  "Un spectre de sa cour vous rejoint, sans entretien.": {
   "at": [
-   "src/engine/veil.js:294"
+   "src/engine/veil.js:312"
   ]
  },
  "Dans 30 tours, il réclamera l'un de vos héros, pour toujours.": {
   "at": [
-   "src/engine/veil.js:295"
+   "src/engine/veil.js:313"
   ]
  },
  "La Terreur s'abat sur vos terres : +2 d'agitation dans toutes vos cités pendant 15 tours, et -5 de renommée.": {
   "at": [
-   "src/engine/veil.js:296"
+   "src/engine/veil.js:314"
   ]
  },
  "le héros {0}": {
   "at": [
-   "src/engine/veil.js:303"
+   "src/engine/veil.js:321"
   ],
   "args": [
    "u.hero.name"
@@ -14412,57 +14475,57 @@
  },
  "un spectre": {
   "at": [
-   "src/engine/veil.js:306"
+   "src/engine/veil.js:324"
   ]
  },
  "Livrer un héros (vous n'en avez aucun)": {
   "at": [
-   "src/engine/veil.js:310"
+   "src/engine/veil.js:328"
   ]
  },
  "Guérit vos troupes et fait grandir vos cités ; réclame le quart de vos réserves 25 tours plus tard.": {
   "at": [
-   "src/engine/veil.js:318"
+   "src/engine/veil.js:336"
   ]
  },
  "Le quart de votre or et de votre mana.": {
   "at": [
-   "src/engine/veil.js:319"
+   "src/engine/veil.js:337"
   ]
  },
  "la Dame des Brumes": {
   "at": [
-   "src/engine/veil.js:320"
+   "src/engine/veil.js:338"
   ]
  },
  "Ses brumes referment les plaies et font lever les épis. Elle demande seulement qu'on lui rende la pareille, le moment venu.": {
   "at": [
-   "src/engine/veil.js:321"
+   "src/engine/veil.js:339"
   ]
  },
  "Toutes vos unités sont guéries, et chacune de vos cités gagne un citoyen.": {
   "at": [
-   "src/engine/veil.js:323"
+   "src/engine/veil.js:341"
   ]
  },
  "Dans 25 tours, elle prendra le quart de votre or et de votre mana.": {
   "at": [
-   "src/engine/veil.js:324"
+   "src/engine/veil.js:342"
   ]
  },
  "Ses brumes se retirent en emportant un citoyen de chacune de vos cités.": {
   "at": [
-   "src/engine/veil.js:325"
+   "src/engine/veil.js:343"
   ]
  },
  "soins et croissance": {
   "at": [
-   "src/engine/veil.js:329"
+   "src/engine/veil.js:347"
   ]
  },
  "Lui céder {0} or et {1} mana": {
   "at": [
-   "src/engine/veil.js:333"
+   "src/engine/veil.js:351"
   ],
   "args": [
    "g",
@@ -14471,17 +14534,17 @@
  },
  "Une puissance": {
   "at": [
-   "src/engine/veil.js:341"
+   "src/engine/veil.js:359"
   ]
  },
  "Un pacte vous lie déjà à cette puissance.": {
   "at": [
-   "src/engine/veil.js:387"
+   "src/engine/veil.js:405"
   ]
  },
  "Pacte scellé avec {0} : {1}. Échéance au tour {2}.": {
   "at": [
-   "src/engine/veil.js:392"
+   "src/engine/veil.js:410"
   ],
   "args": [
    "d.name",
@@ -14491,7 +14554,7 @@
  },
  "{0} a reçu son dû. Le pacte est soldé.": {
   "at": [
-   "src/engine/veil.js:404"
+   "src/engine/veil.js:422"
   ],
   "args": [
    "U.cap(d.name)"
@@ -14499,7 +14562,7 @@
  },
  "Vous refusez de payer {0}. {1}": {
   "at": [
-   "src/engine/veil.js:410"
+   "src/engine/veil.js:428"
   ],
   "args": [
    "d.name",
@@ -14508,7 +14571,7 @@
  },
  "{0} ne traite qu'une fois avec chaque sorcier.": {
   "at": [
-   "src/engine/veil.js:432"
+   "src/engine/veil.js:450"
   ],
   "args": [
    "U.cap(d.name)"
@@ -14516,7 +14579,7 @@
  },
  "Vos troupes atteignent le {0} : sélectionnez-les et choisissez Pacte pour entendre son offre.": {
   "at": [
-   "src/engine/veil.js:435"
+   "src/engine/veil.js:453"
   ],
   "args": [
    "Game.siteName(s)"
@@ -14524,7 +14587,7 @@
  },
  "{0} viendra réclamer son dû dans 3 tours. {1}": {
   "at": [
-   "src/engine/veil.js:455"
+   "src/engine/veil.js:473"
   ],
   "args": [
    "U.cap(PACTS[pact.entity].name)",
@@ -14533,12 +14596,12 @@
  },
  "Les astrologues s'alarment : une étoile noire grandit dans le ciel. Dans dix tours, quelque chose va s'ouvrir.": {
   "at": [
-   "src/engine/veil.js:488"
+   "src/engine/veil.js:506"
   ]
  },
  "La Brèche s'est ouverte sur {0} ({1}, {2}). Ce qui en sort ne négocie pas : refermez-la avant qu'elle ne dévore le monde.": {
   "at": [
-   "src/engine/veil.js:550"
+   "src/engine/veil.js:568"
   ],
   "args": [
    "p ? 'le Miroir' : 'Arcane'",
@@ -14548,12 +14611,12 @@
  },
  "Une vague de la Brèche marche sur vos terres : ": {
   "at": [
-   "src/engine/veil.js:577"
+   "src/engine/veil.js:595"
   ]
  },
  "Une vague sort de la Brèche{0} : ": {
   "at": [
-   "src/engine/veil.js:577"
+   "src/engine/veil.js:595"
   ],
   "args": [
    "target ? ' et marche sur les terres de ' + Players.nameFor(game, pl.id, target.id) : ''"
@@ -14561,7 +14624,7 @@
  },
  " et marche sur les terres de {0}": {
   "at": [
-   "src/engine/veil.js:577"
+   "src/engine/veil.js:595"
   ],
   "args": [
    "Players.nameFor(game, pl.id, target.id)"
@@ -14569,27 +14632,27 @@
  },
  "500 pièces d'or": {
   "at": [
-   "src/engine/veil.js:594"
+   "src/engine/veil.js:612"
   ]
  },
  "500 cristaux de mana": {
   "at": [
-   "src/engine/veil.js:595"
+   "src/engine/veil.js:613"
   ]
  },
  "+10 de renommée": {
   "at": [
-   "src/engine/veil.js:599"
+   "src/engine/veil.js:617"
   ]
  },
  "Vous avez refermé la Brèche. Les deux plans respirent ; les autres sorciers vous en savent gré.": {
   "at": [
-   "src/engine/veil.js:602"
+   "src/engine/veil.js:620"
   ]
  },
  "{0} a refermé la Brèche. La Crise est terminée.": {
   "at": [
-   "src/engine/veil.js:602"
+   "src/engine/veil.js:620"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pid))"
@@ -14597,7 +14660,7 @@
  },
  "Brèche refermée : {0}.": {
   "at": [
-   "src/engine/veil.js:603"
+   "src/engine/veil.js:621"
   ],
   "args": [
    "found.join(', ')"
@@ -14630,29 +14693,29 @@
  },
  "Aucun traité": {
   "at": [
-   "src/engine/ai.js:1169"
+   "src/engine/ai.js:1177"
   ]
  },
  "Pacte de paix": {
   "at": [
-   "src/engine/ai.js:1169"
+   "src/engine/ai.js:1177"
   ]
  },
  "Alliance": {
   "at": [
-   "src/engine/ai.js:1169",
+   "src/engine/ai.js:1177",
    "src/ui/panels.js:405"
   ]
  },
  "Guerre": {
   "at": [
-   "src/engine/ai.js:1169",
+   "src/engine/ai.js:1177",
    "src/ui/panels.js:419"
   ]
  },
  "{0} a rompu son traité et vous attaque !": {
   "at": [
-   "src/engine/ai.js:1187"
+   "src/engine/ai.js:1195"
   ],
   "args": [
    "pa.name"
@@ -14660,7 +14723,7 @@
  },
  "Vous êtes en guerre contre {0}.": {
   "at": [
-   "src/engine/ai.js:1191"
+   "src/engine/ai.js:1199"
   ],
   "args": [
    "pb.name"
@@ -14668,7 +14731,7 @@
  },
  "{0} vous déclare la guerre.": {
   "at": [
-   "src/engine/ai.js:1191"
+   "src/engine/ai.js:1199"
   ],
   "args": [
    "pa.name"
@@ -14676,12 +14739,12 @@
  },
  "Seulement avec un sorcier en paix ou allié.": {
   "at": [
-   "src/engine/ai.js:1206"
+   "src/engine/ai.js:1214"
   ]
  },
  "{0} rouvre son territoire à vos troupes.": {
   "at": [
-   "src/engine/ai.js:1208"
+   "src/engine/ai.js:1216"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))"
@@ -14689,7 +14752,7 @@
  },
  "{0} vous interdit son territoire{1}": {
   "at": [
-   "src/engine/ai.js:1212"
+   "src/engine/ai.js:1220"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))",
@@ -14698,7 +14761,7 @@
  },
  " : {0} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1212",
+   "src/engine/ai.js:1220",
    "src/ui/panels.js:407"
   ],
   "args": [
@@ -14707,22 +14770,22 @@
  },
  "unité est reconduite": {
   "at": [
-   "src/engine/ai.js:1212",
-   "src/engine/ai.js:1251"
+   "src/engine/ai.js:1220",
+   "src/engine/ai.js:1259"
   ]
  },
  "unités sont reconduites": {
   "at": [
-   "src/engine/ai.js:1212",
-   "src/engine/ai.js:1212",
-   "src/engine/ai.js:1251",
-   "src/engine/ai.js:1251"
+   "src/engine/ai.js:1220",
+   "src/engine/ai.js:1220",
+   "src/engine/ai.js:1259",
+   "src/engine/ai.js:1259"
   ],
   "hint": "pluriel de « unité est reconduite »"
  },
  "{0} étend son territoire, qu'il vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1251"
+   "src/engine/ai.js:1259"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -14731,7 +14794,7 @@
  },
  "{0} {1}{2} sur votre territoire, qui lui est interdit : {3} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1260"
   ],
   "args": [
    "U.n(n, 'unité', 'unités')",
@@ -14742,27 +14805,27 @@
  },
  " se trouvaient": {
   "at": [
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1260"
   ]
  },
  " se trouvait": {
   "at": [
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1260"
   ]
  },
  "elles sont reconduites": {
   "at": [
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1260"
   ]
  },
  "elle est reconduite": {
   "at": [
-   "src/engine/ai.js:1252"
+   "src/engine/ai.js:1260"
   ]
  },
  "{0} accepte : faisons front ensemble contre {1}.": {
   "at": [
-   "src/engine/ai.js:1277"
+   "src/engine/ai.js:1285"
   ],
   "args": [
    "pb.name",
@@ -14771,7 +14834,7 @@
  },
  "{0} accepte votre présent.": {
   "at": [
-   "src/engine/ai.js:1279"
+   "src/engine/ai.js:1287"
   ],
   "args": [
    "pb.name"
@@ -14779,7 +14842,7 @@
  },
  "La guerre est déclarée.{0}": {
   "at": [
-   "src/engine/ai.js:1280"
+   "src/engine/ai.js:1288"
   ],
   "args": [
    "broke ? ' Rompre un traité vous coûte l\\'estime de tous les sorciers.' : ''"
@@ -14787,12 +14850,12 @@
  },
  " Rompre un traité vous coûte l'estime de tous les sorciers.": {
   "at": [
-   "src/engine/ai.js:1280"
+   "src/engine/ai.js:1288"
   ]
  },
  "{0} vous a déjà répondu ce tour-ci.": {
   "at": [
-   "src/engine/ai.js:1284"
+   "src/engine/ai.js:1292"
   ],
   "args": [
    "pb.name"
@@ -14800,7 +14863,7 @@
  },
  "{0} accepte : {1}.": {
   "at": [
-   "src/engine/ai.js:1287"
+   "src/engine/ai.js:1295"
   ],
   "args": [
    "pb.name",
@@ -14809,7 +14872,7 @@
  },
  "{0} refuse.": {
   "at": [
-   "src/engine/ai.js:1289"
+   "src/engine/ai.js:1297"
   ],
   "args": [
    "pb.name"
@@ -14817,7 +14880,7 @@
  },
  "{0} vous propose la paix{1}.": {
   "at": [
-   "src/engine/ai.js:1368"
+   "src/engine/ai.js:1376"
   ],
   "args": [
    "a.name",
@@ -14826,12 +14889,12 @@
  },
  ", avec des concessions": {
   "at": [
-   "src/engine/ai.js:1368"
+   "src/engine/ai.js:1376"
   ]
  },
  "{0} et {1} signent la paix.": {
   "at": [
-   "src/engine/ai.js:1370"
+   "src/engine/ai.js:1378"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, a.id))",
@@ -14840,8 +14903,8 @@
  },
  "{0} vous déclare la guerre !": {
   "at": [
-   "src/engine/ai.js:1387",
-   "src/engine/ai.js:1394"
+   "src/engine/ai.js:1395",
+   "src/engine/ai.js:1402"
   ],
   "args": [
    "a.name"
@@ -14849,8 +14912,8 @@
  },
  "Guerre déclarée à {0}.": {
   "at": [
-   "src/engine/ai.js:1388",
-   "src/engine/ai.js:1395",
+   "src/engine/ai.js:1396",
+   "src/engine/ai.js:1403",
    "src/engine/diplo.js:123"
   ],
   "args": [
@@ -14859,7 +14922,7 @@
  },
  "{0} vous propose un pacte de paix.": {
   "at": [
-   "src/engine/ai.js:1407"
+   "src/engine/ai.js:1415"
   ],
   "args": [
    "a.name"
@@ -17436,62 +17499,62 @@
  },
  "Le Seigneur liche": {
   "at": [
-   "src/engine/finale.js:60"
+   "src/engine/finale.js:61"
   ]
  },
  "L'Archimage oublié": {
   "at": [
-   "src/engine/finale.js:60"
+   "src/engine/finale.js:61"
   ]
  },
  "Le Grand Hiver": {
   "at": [
-   "src/engine/finale.js:60"
+   "src/engine/finale.js:61"
   ]
  },
  "Le Dévoreur de nœuds": {
   "at": [
-   "src/engine/finale.js:60"
+   "src/engine/finale.js:61"
   ]
  },
  "Le Prophète": {
   "at": [
-   "src/engine/finale.js:60"
+   "src/engine/finale.js:61"
   ]
  },
  "Les tombes remuent sous la lune. Quelque part, quelque chose a cessé de mourir.": {
   "at": [
-   "src/engine/finale.js:88"
+   "src/engine/finale.js:94"
   ]
  },
  "Chaque nuit, la terre tremble au même endroit, un peu plus fort. Quelque chose d'ancien remonte.": {
   "at": [
-   "src/engine/finale.js:89"
+   "src/engine/finale.js:95"
   ]
  },
  "Le givre tient jusqu'à midi, puis jusqu'au soir. Les oiseaux partent et ne reviennent pas.": {
   "at": [
-   "src/engine/finale.js:90"
+   "src/engine/finale.js:96"
   ]
  },
  "Les nœuds de magie vacillent comme une flamme sous un souffle. Quelque chose a faim.": {
   "at": [
-   "src/engine/finale.js:91"
+   "src/engine/finale.js:97"
   ]
  },
  "Sur les marchés, un nom passe de bouche en bouche. Les gardes ne savent pas lequel.": {
   "at": [
-   "src/engine/finale.js:92"
+   "src/engine/finale.js:98"
   ]
  },
  "Un Seigneur liche s'est relevé, et ses morts marchent sur vous. Tant que son phylactère tient, il revient.": {
   "at": [
-   "src/engine/finale.js:117"
+   "src/engine/finale.js:123"
   ]
  },
  "Un Seigneur liche s'est relevé, et ses morts marchent sur {0}. Tant que son phylactère tient, il revient.": {
   "at": [
-   "src/engine/finale.js:117"
+   "src/engine/finale.js:123"
   ],
   "args": [
    "who"
@@ -17499,7 +17562,7 @@
  },
  "Une citadelle a jailli du sol{0}. L'Archimage oublié qui l'habite s'en prend à vous : votre mana, vos cités, vos sorts. Prenez la citadelle.": {
   "at": [
-   "src/engine/finale.js:118"
+   "src/engine/finale.js:124"
   ],
   "args": [
    "pos"
@@ -17507,7 +17570,7 @@
  },
  "Une citadelle a jailli du sol{0}. L'Archimage oublié qui l'habite s'en prend à {1}. Prenez la citadelle.": {
   "at": [
-   "src/engine/finale.js:118"
+   "src/engine/finale.js:124"
   ],
   "args": [
    "pos",
@@ -17516,7 +17579,7 @@
  },
  "Le Cœur de l'Hiver bat{0} : le givre gagne vos terres et tue les récoltes. Brisez-le.": {
   "at": [
-   "src/engine/finale.js:119"
+   "src/engine/finale.js:125"
   ],
   "args": [
    "pos"
@@ -17524,7 +17587,7 @@
  },
  "Le Cœur de l'Hiver bat{0} : le givre s'étend, à commencer par les terres de {1}. Brisez-le.": {
   "at": [
-   "src/engine/finale.js:119"
+   "src/engine/finale.js:125"
   ],
   "args": [
    "pos",
@@ -17533,12 +17596,12 @@
  },
  "Une chose venue d'entre les plans dévore vos nœuds de magie, et chacun la rend plus forte. Puis elle viendra pour vos cités. Tuez-la.": {
   "at": [
-   "src/engine/finale.js:120"
+   "src/engine/finale.js:126"
   ]
  },
  "Une chose venue d'entre les plans dévore les nœuds de magie de {0}, et chacun la rend plus forte. Tuez-la.": {
   "at": [
-   "src/engine/finale.js:120"
+   "src/engine/finale.js:126"
   ],
   "args": [
    "who"
@@ -17546,12 +17609,12 @@
  },
  "Un prophète soulève vos cités contre vous. Tant qu'il prêche, elles grondent, et certaines feront sécession. Faites-le taire.": {
   "at": [
-   "src/engine/finale.js:121"
+   "src/engine/finale.js:127"
   ]
  },
  "Un prophète soulève les cités de {0} contre leur maître. Faites-le taire.": {
   "at": [
-   "src/engine/finale.js:121"
+   "src/engine/finale.js:127"
   ],
   "args": [
    "who"
@@ -17559,7 +17622,7 @@
  },
  "Vous voilà à terre : la crise s'éteint ({0}).": {
   "at": [
-   "src/engine/finale.js:145"
+   "src/engine/finale.js:151"
   ],
   "args": [
    "T"
@@ -17567,7 +17630,7 @@
  },
  "Sa proie à terre, la crise s'éteint ({0}).": {
   "at": [
-   "src/engine/finale.js:145"
+   "src/engine/finale.js:151"
   ],
   "args": [
    "T"
@@ -17575,7 +17638,7 @@
  },
  "{0} et marchent sur vous : {1}.": {
   "at": [
-   "src/engine/finale.js:202"
+   "src/engine/finale.js:208"
   ],
   "args": [
    "verb",
@@ -17584,17 +17647,17 @@
  },
  "Le Seigneur liche relève les morts, qui se dressent": {
   "at": [
-   "src/engine/finale.js:245"
+   "src/engine/finale.js:251"
   ]
  },
  "Des créatures sortent de la citadelle de l'Archimage": {
   "at": [
-   "src/engine/finale.js:262"
+   "src/engine/finale.js:268"
   ]
  },
  "Le givre gagne les terres de {0} : les récoltes y gèlent.": {
   "at": [
-   "src/engine/finale.js:289"
+   "src/engine/finale.js:295"
   ],
   "args": [
    "c.name"
@@ -17602,12 +17665,12 @@
  },
  "Des géants du givre quittent le Cœur de l'Hiver": {
   "at": [
-   "src/engine/finale.js:295"
+   "src/engine/finale.js:301"
   ]
  },
  "À l'appel du Prophète, les habitants de {0} prennent les armes": {
   "at": [
-   "src/engine/finale.js:340"
+   "src/engine/finale.js:346"
   ],
   "args": [
    "c.name"
@@ -17615,7 +17678,7 @@
  },
  "{0} fait sécession et se range derrière le Prophète.": {
   "at": [
-   "src/engine/finale.js:353"
+   "src/engine/finale.js:359"
   ],
   "args": [
    "c.name"
@@ -17623,7 +17686,7 @@
  },
  "{0} fait sécession et quitte {1} pour le Prophète.": {
   "at": [
-   "src/engine/finale.js:353"
+   "src/engine/finale.js:359"
   ],
   "args": [
    "c.name",
@@ -17632,17 +17695,17 @@
  },
  "Le Seigneur liche s'est relevé, plus fort, et revient vers vous.": {
   "at": [
-   "src/engine/finale.js:375"
+   "src/engine/finale.js:381"
   ]
  },
  "Le Seigneur liche s'est relevé, plus fort.": {
   "at": [
-   "src/engine/finale.js:375"
+   "src/engine/finale.js:381"
   ]
  },
  "Un indice : le phylactère du Seigneur liche est caché sur {0}, à quelques cases de ({1}, {2}).": {
   "at": [
-   "src/engine/finale.js:385"
+   "src/engine/finale.js:391"
   ],
   "args": [
    "pn",
@@ -17652,7 +17715,7 @@
  },
  "Le phylactère du Seigneur liche est découvert sur {0} ({1}, {2}). Détruisez-le, et le liche ne se relèvera plus.": {
   "at": [
-   "src/engine/finale.js:392"
+   "src/engine/finale.js:398"
   ],
   "args": [
    "pn",
@@ -17662,7 +17725,7 @@
  },
  "L'Archimage oublié vous arrache {0} mana.": {
   "at": [
-   "src/engine/finale.js:402"
+   "src/engine/finale.js:408"
   ],
   "args": [
    "amt"
@@ -17670,7 +17733,7 @@
  },
  "L'Archimage oublié frappe {0} ({1}).": {
   "at": [
-   "src/engine/finale.js:408"
+   "src/engine/finale.js:414"
   ],
   "args": [
    "c.name",
@@ -17679,7 +17742,7 @@
  },
  "Le Dévoreur de nœuds a englouti votre {0} : le contrecoup vous coûte {1} mana, et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:438"
+   "src/engine/finale.js:444"
   ],
   "args": [
    "name",
@@ -17688,7 +17751,7 @@
  },
  "Le Dévoreur de nœuds a englouti votre {0}, et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:438"
+   "src/engine/finale.js:444"
   ],
   "args": [
    "name"
@@ -17696,7 +17759,7 @@
  },
  "Le Dévoreur de nœuds a englouti le {0} ({1}, {2}), et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:438"
+   "src/engine/finale.js:444"
   ],
   "args": [
    "name",
@@ -17706,32 +17769,32 @@
  },
  "Le Seigneur liche tombe sous vos coups. Il se relèvera, tant que son phylactère tient.": {
   "at": [
-   "src/engine/finale.js:498"
+   "src/engine/finale.js:504"
   ]
  },
  "Le Seigneur liche est tombé. Il se relèvera, tant que son phylactère tient.": {
   "at": [
-   "src/engine/finale.js:498"
+   "src/engine/finale.js:504"
   ]
  },
  "600 pièces d'or": {
   "at": [
-   "src/engine/finale.js:519"
+   "src/engine/finale.js:525"
   ]
  },
  "600 cristaux de mana": {
   "at": [
-   "src/engine/finale.js:520"
+   "src/engine/finale.js:526"
   ]
  },
  "+15 de renommée": {
   "at": [
-   "src/engine/finale.js:524"
+   "src/engine/finale.js:530"
   ]
  },
  "Vous avez mis fin à la crise ({0}).": {
   "at": [
-   "src/engine/finale.js:529"
+   "src/engine/finale.js:535"
   ],
   "args": [
    "T"
@@ -17739,7 +17802,7 @@
  },
  "{0} a mis fin à la crise ({1}).": {
   "at": [
-   "src/engine/finale.js:529"
+   "src/engine/finale.js:535"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pid))",
@@ -17748,7 +17811,7 @@
  },
  "La crise est finie ({0}).": {
   "at": [
-   "src/engine/finale.js:529"
+   "src/engine/finale.js:535"
   ],
   "args": [
    "T"
@@ -17756,7 +17819,7 @@
  },
  "Récompense : {0}.": {
   "at": [
-   "src/engine/finale.js:530",
+   "src/engine/finale.js:536",
    "src/ui/main.js:1486"
   ],
   "args": [

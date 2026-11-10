@@ -48,6 +48,7 @@ const Finale = {
   //   plan, 1 sur l'autre plan) et une cité fait sécession dès que 40 % de ses habitants se révoltent
   EATER_TARGET_ONLY: 1, PROPHET_HOLD: 1, ARCH_WAVE: 10, ARCH_CURSE: 6, PROPHET_PLUS: 0,
   KINDS: FINALE_KINDS,
+  TIERS: { 1: ['prophet', 'eater', 'winter'], 2: ['winter', 'lich', 'archmage'], 3: ['archmage'] },
   SITES: ['phylactery', 'citadel', 'winterheart'],
   // réglages : ceux du jeu, sauf essai (game.opts.finaleCfg)
   cfg(game, k) { const o = game.opts && game.opts.finaleCfg; return o && o[k] != null ? o[k] : Finale[k]; },
@@ -82,7 +83,12 @@ const Finale = {
     const lead = Finale.cfg(game, slain ? 'LEAD_SLAIN' : 'LEAD'), need = Finale.cfg(game, slain ? 'STREAK_SLAIN' : 'STREAK');
     if (r[0].v >= lead * r[1].v) { if (f.leader !== r[0].p.id) { f.leader = r[0].p.id; f.streak = 0; } f.streak++; } else f.streak = 0;
     if (f.streak < need) return;
-    f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(FINALE_KINDS);
+    // (0.31.36) la crise à la mesure de l'avance : jusqu'à deux fois le deuxième, l'une des trois plus douces ; au-delà, l'une des
+    // trois plus dures ; deux fois le deuxième et autant que tous les autres réunis, l'Archimage (aux bancs 18 et 19, le meneur
+    // restait 1er : Prophète 69 %, Dévoreur 62 %, Hiver 47 %, Liche 38 %, Archimage 33 %, contre 79 % sans crise)
+    const gap = r[0].v / Math.max(1, r[1].v), rest = U.sum(r.slice(1), x => x.v);
+    f.tier = gap >= 2 && r[0].v >= rest ? 3 : gap >= 2 ? 2 : 1; f.leadAt = +gap.toFixed(2);
+    f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(Finale.TIERS[f.tier]);
     f.state = 'omen'; f.omen = game.turn; f.at = game.turn + Finale.cfg(game, 'OMEN'); f.target = f.leader;
     const txt = {
       lich: 'Les tombes remuent sous la lune. Quelque part, quelque chose a cessé de mourir.',

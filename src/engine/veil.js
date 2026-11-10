@@ -139,6 +139,24 @@ const Veil = {
     for (const pl of game.players) if (pl.alive) { Move.reveal(game, pl, 0, x, y, 1); Move.reveal(game, pl, 1, x, y, 1); }
     return a;
   },
+  // (0.31.36, sort Ouvrir une faille) pourquoi on ne peut pas ouvrir de faille ici, ou null
+  riftSpotWhy(game, x, y) {
+    const w = game.world;
+    if (!World.inY(w, y) || y < 2 || y >= w.h - 2) return 'Trop près du bord du monde.';
+    for (const p of [0, 1]) {
+      if (World.isWaterAt(w, p, x, y)) return p ? 'De l\'autre côté, c\'est la mer.' : 'Impossible sur l\'eau.';
+      const t = World.terr(w, p, x, y); if (t === T.MOUNTAIN || t === T.VOLCANO) return 'Impossible sur une montagne ou un volcan, d\'un côté ou de l\'autre.';
+      if (World.get(w, p, 'site', x, y) >= 0) return 'Un lieu occupe déjà la case, d\'un côté ou de l\'autre.';
+    }
+    if (Object.values(game.cities).some(c => World.dist(w, c.x, c.y, x, y) < 2)) return 'Trop près d\'une cité (sur l\'un des deux plans).';
+    return null;
+  },
+  openRiftAt(game, x, y) {
+    const a = MapGen.addSite(game, { type: 'rift', plane: 0, x, y, cleared: true, guardians: [], budget: 0, born: game.turn });
+    const b = MapGen.addSite(game, { type: 'rift', plane: 1, x, y, cleared: true, guardians: [], budget: 0, born: game.turn });
+    a.pair = b.id; b.pair = a.id;
+    return a;
+  },
   closeRift(game, s, by) {
     for (const r of [s, game.sites[s.pair]]) {
       if (!r) continue;

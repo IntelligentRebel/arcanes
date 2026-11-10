@@ -1,5 +1,5 @@
 {
- "nom": "Entraînement 20 : moteur 0.31.35 ; un Prophète plus mordant ; des tireurs en garnison face à la menace seulement",
+ "nom": "Entraînement 20 : moteur 0.31.36 ; un Prophète plus mordant ; des tireurs en garnison face à la menace seulement ; la croisade contre le meneur de l'autre plan",
  "experiences": [
   {
    "id": "prophete_renforce",
@@ -7,7 +7,7 @@
    "tours": 300,
    "adversaires": "hard",
    "graine": 570000,
-   "graines": 300,
+   "graines": 230,
    "points": [
     150,
     200,
@@ -107,7 +107,7 @@
    "tours": 250,
    "adversaires": "hard",
    "graine": 580000,
-   "graines": 400,
+   "graines": 300,
    "points": [
     100,
     150,
@@ -154,6 +154,78 @@
       "no_stackspells": true,
       "no_engineers": true,
       "garrison_threat": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "croisade",
+   "note": "Difficile, 250 tours, toutes les IA. La croisade est dans le jeu (ta demande) ; ici, ce qu'elle change. Quand le meneur est né sur l'autre plan, les sorciers de ce plan-ci nettement derrière lui (0,8 fois au plus) le prennent pour cible dès le tour 60 : leurs expéditions visent ses cités, repartent au bout de 8 tours au lieu de 25 (les renforts suivent), passent aussi par les failles, et faute de passage utile (à 25 cases de leurs cités et à 20 cases d'une cité du meneur), ils apprennent et lancent Ouvrir une faille sous une armée de trois soldats ou plus. Mesure : le meneur du t100 et du t200 l'est-il encore, de combien mène-t-il, et ce que coûte la croisade au sorcier observé.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 590000,
+   "graines": 300,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "crise": true,
+   "meneur": true,
+   "croisade": true,
+   "variantes": [
+    {
+     "nom": "sans croisade",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "no_crusade": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "no_crusade": true
+     }
+    },
+    {
+     "nom": "croisade (jeu)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
      },
      "expAdversaires": {
       "no_vainstrike": true,
