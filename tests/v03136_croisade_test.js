@@ -33,7 +33,20 @@ function mk(seed, opts = {}) {
 // ---------- 2. Ouvrir une faille ----------
 {
   const g = mk(2), pl = g.players[0], w = g.world;
-  ok(DATA.spells.open_rift && DATA.spells.open_rift.realm === 'arcane' && pl.researchPool.concat(pl.known).includes('open_rift'), 'le sort est dans le grimoire arcanique de chacun');
+  // (0.31.37) le sort ne s'offre qu'aux sorciers d'un plan écrasé par le meneur de l'autre
+  ok(g.players.every(p => !p.researchPool.includes('open_rift') && !p.researchOptions.includes('open_rift')), 'au départ, personne ne peut le chercher');
+  const keep = Crisis.score, other = g.players.find(p => p.plane !== pl.plane), mate = g.players.find(p => p !== pl && p.plane === pl.plane);
+  g.turn = 60; Crisis.score = (game, p) => p === pl ? 140 : 100; E.Magic._gate = new WeakMap();
+  for (const p of g.players) E.Magic.gateOptions(g, p);
+  ok(!other.researchOptions.includes('open_rift'), 'meneur à 1,4 fois l\'autre plan : rien');
+  g.turn++; Crisis.score = (game, p) => p === pl ? 160 : 100;
+  const nOpt = other.researchOptions.length;
+  for (const p of g.players) E.Magic.gateOptions(g, p);
+  ok(other.researchOptions.includes('open_rift') && other.researchOptions.length === nOpt + 1, 'à 1,6 fois : offert à l\'autre plan, en plus des autres recherches');
+  ok(!pl.researchOptions.includes('open_rift') && !(mate && mate.researchOptions.includes('open_rift')), 'jamais au meneur ni à son plan');
+  g.turn++; Crisis.score = keep; E.Magic.refreshResearchOptions(g, other);
+  ok(other.researchOptions.includes('open_rift'), 'il le garde ensuite');
+  ok(!E.Diplomacy.canLearn(pl, 'open_rift') && E.Diplomacy.canLearn(other, 'open_rift'), 'le meneur ne peut pas l\'obtenir par échange');
   pl.known.push('open_rift'); pl.mana = 1000;
   const c = Cities.ofPlayer(g, pl.id)[0];
   // une case de terre libre à 3 cases de la cité, terre sur les deux plans
@@ -97,4 +110,15 @@ function mk(seed, opts = {}) {
   const t = AI.riftTileFor(g, other);
   ok(t && t.x === spot.x && t.y === spot.y, 'la faille s\'ouvrirait sous son armée');
   Crisis.score = keep;
+}
+
+// ---------- 4. (0.31.37) une sauvegarde d'avant : le sort retiré des recherches de qui ne l'a ni appris ni entamé ----------
+{
+  const g = mk(7), a = g.players[1], b = g.players[2], c = g.players[3];
+  for (const p of [a, b, c]) { p.researchPool.push('open_rift'); p.researchOptions.push('open_rift'); }
+  b.researching = 'open_rift'; c.known.push('open_rift'); c.researchPool = c.researchPool.filter(id => id !== 'open_rift'); c.researchOptions = c.researchOptions.filter(id => id !== 'open_rift');
+  Game.upgrade(g);
+  ok(!a.researchPool.includes('open_rift') && !a.researchOptions.includes('open_rift'), 'retiré à qui ne l\'a pas entamé');
+  ok(b.researchOptions.includes('open_rift') && b.researching === 'open_rift', 'gardé par qui le cherche déjà');
+  ok(c.known.includes('open_rift'), 'gardé par qui le connaît');
 }

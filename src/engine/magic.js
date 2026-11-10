@@ -50,8 +50,8 @@ const Magic = {
         for (const id of start) if (!pool.includes(id)) { /* déjà connu */ }
       }
     }
-    // arcane : accessible à tous
-    for (const s of Magic.spellsOf('arcane')) if (!pl.known.includes(s.id) && !pl.researchPool.includes(s.id)) pl.researchPool.push(s.id);
+    // arcane : accessible à tous (sauf Ouvrir une faille, qui ne s'offre qu'aux sorciers d'un plan écrasé : Magic.gateOptions)
+    for (const s of Magic.spellsOf('arcane')) if (!(s.params && s.params.gate) && !pl.known.includes(s.id) && !pl.researchPool.includes(s.id)) pl.researchPool.push(s.id);
     pl.researchOptions = [];
     pl.researching = null; pl.researchProgress = 0;
     pl.somCost = 60000 - (Math.max(...Object.values(pl.books)) >= 11 ? 3000 : 0);
@@ -61,12 +61,34 @@ const Magic = {
     pl.skillPoints = s0 * s0 - s0 + 1;
   },
 
+  // (0.31.37) Ouvrir une faille : à partir du tour GATE_TURN, quand le meneur pèse GATE_LEAD fois le plus fort des sorciers de l'autre plan, ces derniers voient
+  // le sort s'ajouter à leurs recherches (en plus des huit), et le gardent ensuite. Le meneur et son plan ne l'ont jamais.
+  GATE_LEAD: 1.5, GATE_TURN: 60, _gate: new WeakMap(),
+  gateOpen(game, pl) {
+    if (!pl.alive || pl.banished || game.turn < Magic.GATE_TURN) return false;
+    let g = Magic._gate.get(game);
+    if (!g || g.turn !== game.turn) {
+      const al = game.players.filter(p => p.alive && !p.banished), sc = new Map(al.map(p => [p, Crisis.score(game, p)]));
+      const L = U.max(al, p => sc.get(p)), other = L ? al.filter(p => p.plane !== L.plane) : [];
+      const best = other.length ? Math.max(...other.map(p => sc.get(p))) : Infinity;
+      g = { turn: game.turn, plane: L && sc.get(L) >= Magic.GATE_LEAD * Math.max(1, best) ? 1 - L.plane : null };
+      Magic._gate.set(game, g);
+    }
+    return g.plane != null && pl.plane === g.plane;
+  },
+  gateOptions(game, pl) {
+    const id = 'open_rift';
+    if (!DATA.spells[id] || !pl.researchOptions || pl.known.includes(id) || pl.researchPool.includes(id) || !Magic.gateOpen(game, pl)) return;
+    pl.researchPool.push(id); pl.researchOptions.push(id);
+    if (pl.human) Game.log(game, pl.id, 'Le voile cède entre les plans : Ouvrir une faille s\'offre à vos recherches.');
+  },
+
   refreshResearchOptions(game, pl) {
     const rng = game.rng;
     const avail = pl.researchPool.filter(id => !pl.known.includes(id) && !pl.researchOptions.includes(id) && DATA.spells[id] && DATA.spells[id].research != null && (pl.human || DATA.spells[id].kind !== 'stackEnchant'));
     const realms = ['life', 'sorcery', 'nature', 'death', 'chaos', 'arcane'];
     // les recherches d'ouvrage s'ajoutent aux huit sorts proposés, sans leur prendre de place
-    const nSpells = () => pl.researchOptions.filter(id => !(DATA.spells[id] && DATA.spells[id].lore)).length;
+    const nSpells = () => pl.researchOptions.filter(id => !(DATA.spells[id] && (DATA.spells[id].lore || DATA.spells[id].params.gate))).length;
     while (nSpells() < 8 && avail.length) {
       let picked = null;
       for (const realm of rng.shuffle(realms.slice())) {

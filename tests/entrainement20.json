@@ -1,5 +1,5 @@
 {
- "nom": "Entraînement 20 : moteur 0.31.36 ; un Prophète plus mordant ; des tireurs en garnison face à la menace seulement ; la croisade contre le meneur de l'autre plan",
+ "nom": "Entraînement 20 : moteur 0.31.37 ; un Prophète plus mordant ; des tireurs en garnison face à la menace seulement ; la croisade contre le meneur de l'autre plan",
  "experiences": [
   {
    "id": "prophete_renforce",
@@ -171,7 +171,7 @@
   },
   {
    "id": "croisade",
-   "note": "Difficile, 250 tours, toutes les IA. La croisade est dans le jeu (ta demande) ; ici, ce qu'elle change. Quand le meneur est né sur l'autre plan, les sorciers de ce plan-ci nettement derrière lui (0,8 fois au plus) le prennent pour cible dès le tour 60 : leurs expéditions visent ses cités, repartent au bout de 8 tours au lieu de 25 (les renforts suivent), passent aussi par les failles, et faute de passage utile (à 25 cases de leurs cités et à 20 cases d'une cité du meneur), ils apprennent et lancent Ouvrir une faille sous une armée de trois soldats ou plus. Mesure : le meneur du t100 et du t200 l'est-il encore, de combien mène-t-il, et ce que coûte la croisade au sorcier observé.",
+   "note": "Difficile, 250 tours, toutes les IA. La croisade est dans le jeu (ta demande) ; ici, ce qu'elle change. Quand le meneur est né sur l'autre plan, les sorciers de ce plan-ci nettement derrière lui (0,8 fois au plus) le prennent pour cible dès le tour 60 : leurs expéditions visent ses cités, repartent au bout de 8 tours au lieu de 25 (les renforts suivent), passent aussi par les failles, et faute de passage utile (à 25 cases de leurs cités et à 20 cases d'une cité du meneur), ils cherchent et lancent Ouvrir une faille sous une armée de trois soldats ou plus (le sort ne leur est offert que si le meneur pèse 1,5 fois le plus fort de leur plan, dès le tour 60). Mesure : le meneur du t100 et du t200 l'est-il encore, de combien mène-t-il, et ce que coûte la croisade au sorcier observé.",
    "tours": 250,
    "adversaires": "hard",
    "graine": 590000,

@@ -129,7 +129,7 @@ Object.assign(Diplomacy, {
   canLearn(pl, id) {
     const sp = DATA.spells[id];
     if (!sp || sp.research == null || id === 'spell_of_mastery' || pl.known.includes(id)) return false;
-    return sp.realm === 'arcane' || (pl.researchPool || []).includes(id);
+    return (sp.realm === 'arcane' && !(sp.params && sp.params.gate)) || (pl.researchPool || []).includes(id);
   },
   tradeable(game, giver, receiver) { return giver.known.filter(id => Diplomacy.canLearn(receiver, id)).sort((x, y) => DATA.spells[y].research - DATA.spells[x].research); },
   spellValue(id) { return DATA.spells[id] ? DATA.spells[id].research || 0 : 0; },

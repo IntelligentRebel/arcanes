@@ -118,6 +118,7 @@ const Turn = {
     // compétence
     pl.skillPoints += split.skill;
     // recherche
+    Magic.gateOptions(game, pl);
     Wonders.loreOptions(game, pl);
     if (!pl.researching && pl.researchOptions.length && !pl.human) pl.researching = AI.pickResearch(game, pl);
     if (pl.researching) {

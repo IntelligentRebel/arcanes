@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.36';
+const GAME_VERSION = '0.31.37';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -176,7 +176,9 @@ const Game = {
     }
     for (const pl of game.players) {
       if (!pl.known || !pl.researchPool) continue;
-      for (const s of Magic.spellsOf('arcane')) if (!pl.known.includes(s.id) && !pl.researchPool.includes(s.id)) pl.researchPool.push(s.id);
+      for (const s of Magic.spellsOf('arcane')) if (!(s.params && s.params.gate) && !pl.known.includes(s.id) && !pl.researchPool.includes(s.id)) pl.researchPool.push(s.id);
+      // (0.31.37) Ouvrir une faille n'est plus offert à tous : retiré des recherches de qui ne l'a ni appris, ni entamé
+      if (!pl.known.includes('open_rift') && pl.researching !== 'open_rift') { pl.researchPool = pl.researchPool.filter(id => id !== 'open_rift'); if (pl.researchOptions) pl.researchOptions = pl.researchOptions.filter(id => id !== 'open_rift'); }
     }
     return game;
   },

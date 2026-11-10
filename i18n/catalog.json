@@ -3437,7 +3437,7 @@
  "Nœud de sorcellerie": {
   "at": [
    "data/terrain.js:20",
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Bassin de magie bleue, source de mana de sorcellerie.": {
@@ -3448,7 +3448,7 @@
  "Nœud de nature": {
   "at": [
    "data/terrain.js:21",
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Bosquet chatoyant, source de mana de nature (compte comme forêt).": {
@@ -3459,7 +3459,7 @@
  "Nœud de chaos": {
   "at": [
    "data/terrain.js:22",
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Cratère volcanique, source de mana de chaos.": {
@@ -3898,7 +3898,7 @@
    "data/spells.js:14"
   ]
  },
- "Ajout d'Arcanes, accessible à tous les sorciers : déchire le voile sous vos troupes. La faille relie les deux plans comme une tour de sorcellerie, mais elle use le voile, et des créatures du Miroir finissent par en sortir.": {
+ "Ajout d'Arcanes, offert aux sorciers d'un plan quand un sorcier de l'autre plan les écrase : déchire le voile sous vos troupes. La faille relie les deux plans comme une tour de sorcellerie, mais elle use le voile, et des créatures du Miroir finissent par en sortir.": {
   "at": [
    "data/spells.js:14"
   ]
@@ -5083,7 +5083,7 @@
  "Grande Dévastation": {
   "at": [
    "data/spells.js:142",
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459"
   ]
  },
  "Corrompt chaque tour jusqu'à 6 cases sur les deux plans, en épargnant vos villes et leurs environs ; +1 d'agitation dans les villes rivales.": {
@@ -5139,7 +5139,7 @@
  "Armageddon": {
   "at": [
    "data/spells.js:148",
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459"
   ]
  },
  "Fait surgir des volcans à travers les deux plans (4 à 5 par tour) ; chacun vous rapporte 1 point de puissance magique par tour, et les villes rivales subissent +2 d'agitation.": {
@@ -6052,7 +6052,7 @@
  "du {0}": {
   "at": [
    "src/core/util.js:9",
-   "src/engine/game.js:1861",
+   "src/engine/game.js:1863",
    "src/ui/main.js:1270"
   ],
   "args": [
@@ -6063,7 +6063,7 @@
   "at": [
    "src/core/util.js:9",
    "src/engine/cities.js:266",
-   "src/engine/game.js:1861",
+   "src/engine/game.js:1863",
    "src/ui/main.js:1270"
   ],
   "args": [
@@ -6736,7 +6736,7 @@
   "at": [
    "src/core/util.js:70",
    "src/core/util.js:77",
-   "src/engine/game.js:1809",
+   "src/engine/game.js:1811",
    "src/engine/veil.js:568"
   ]
  },
@@ -7605,7 +7605,7 @@
  "périssent": {
   "at": [
    "src/engine/units.js:410",
-   "src/engine/game.js:1028"
+   "src/engine/game.js:1030"
   ],
   "hint": "pluriel de « périt » (le sujet est une troupe de plusieurs figurines)"
  },
@@ -8067,21 +8067,26 @@
    "src/engine/cities.js:1061"
   ]
  },
+ "Le voile cède entre les plans : Ouvrir une faille s'offre à vos recherches.": {
+  "at": [
+   "src/engine/magic.js:83"
+  ]
+ },
  "des pillards": {
   "at": [
-   "src/engine/magic.js:265",
-   "src/engine/game.js:1010",
+   "src/engine/magic.js:287",
+   "src/engine/game.js:1012",
    "src/ui/main.js:1519"
   ]
  },
  "un sorcier inconnu": {
   "at": [
-   "src/engine/magic.js:266"
+   "src/engine/magic.js:288"
   ]
  },
  "{0}, héros {1}": {
   "at": [
-   "src/engine/magic.js:289"
+   "src/engine/magic.js:311"
   ],
   "args": [
    "u.hero.name",
@@ -8090,18 +8095,18 @@
  },
  "super légendaire": {
   "at": [
-   "src/engine/magic.js:289"
+   "src/engine/magic.js:311"
   ]
  },
  "légendaire": {
   "at": [
-   "src/engine/magic.js:289",
+   "src/engine/magic.js:311",
    "src/ui/main.js:293"
   ]
  },
  "{0} (sort actif)": {
   "at": [
-   "src/engine/magic.js:291"
+   "src/engine/magic.js:313"
   ],
   "args": [
    "DATA.spells.just_cause.name"
@@ -9550,12 +9555,12 @@
  },
  "Cité sans défenseurs : prise assurée.": {
   "at": [
-   "src/engine/game.js:276"
+   "src/engine/game.js:278"
   ]
  },
  "chances de victoire {0}": {
   "at": [
-   "src/engine/game.js:277"
+   "src/engine/game.js:279"
   ],
   "args": [
    "Game.chanceWord(f.win)"
@@ -9563,12 +9568,12 @@
  },
  "pertes négligeables": {
   "at": [
-   "src/engine/game.js:279"
+   "src/engine/game.js:281"
   ]
  },
  "environ {0} unité{1} perdue{2}": {
   "at": [
-   "src/engine/game.js:279"
+   "src/engine/game.js:281"
   ],
   "args": [
    "k",
@@ -9578,77 +9583,77 @@
  },
  "extrêmement favorables": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "très favorables": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "bonnes": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "moyennes": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "faibles": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "très faibles": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "quasi nulles": {
   "at": [
-   "src/engine/game.js:283"
+   "src/engine/game.js:285"
   ]
  },
  "Coffre abandonné": {
   "at": [
-   "src/engine/game.js:288"
+   "src/engine/game.js:290"
   ]
  },
  "Éclats de cristal": {
   "at": [
-   "src/engine/game.js:289"
+   "src/engine/game.js:291"
   ]
  },
  "Bois et pierres de taille": {
   "at": [
-   "src/engine/game.js:290"
+   "src/engine/game.js:292"
   ]
  },
  "Grenier oublié": {
   "at": [
-   "src/engine/game.js:291"
+   "src/engine/game.js:293"
   ]
  },
  "Parchemins anciens": {
   "at": [
-   "src/engine/game.js:292"
+   "src/engine/game.js:294"
   ]
  },
  "Carte ancienne": {
   "at": [
-   "src/engine/game.js:293"
+   "src/engine/game.js:295"
   ]
  },
  "Volontaires": {
   "at": [
-   "src/engine/game.js:294"
+   "src/engine/game.js:296"
   ]
  },
  "{0} pièces d'or{1}": {
   "at": [
-   "src/engine/game.js:370"
+   "src/engine/game.js:372"
   ],
   "args": [
    "n",
@@ -9657,7 +9662,7 @@
  },
  "+{0} or": {
   "at": [
-   "src/engine/game.js:370",
+   "src/engine/game.js:372",
    "src/ui/city.js:58",
    "src/ui/main.js:1025",
    "src/ui/main.js:1775"
@@ -9668,8 +9673,8 @@
  },
  "{0} cristaux de mana": {
   "at": [
-   "src/engine/game.js:373",
-   "src/engine/game.js:1447"
+   "src/engine/game.js:375",
+   "src/engine/game.js:1449"
   ],
   "args": [
    "cc.amt"
@@ -9677,8 +9682,8 @@
  },
  "+{0} mana": {
   "at": [
-   "src/engine/game.js:373",
-   "src/engine/game.js:397",
+   "src/engine/game.js:375",
+   "src/engine/game.js:399",
    "src/ui/combatview.js:1668"
   ],
   "args": [
@@ -9687,12 +9692,12 @@
  },
  "matériaux revendus": {
   "at": [
-   "src/engine/game.js:376"
+   "src/engine/game.js:378"
   ]
  },
  "{0} de production pour {1} ({2})": {
   "at": [
-   "src/engine/game.js:379"
+   "src/engine/game.js:381"
   ],
   "args": [
    "used",
@@ -9702,7 +9707,7 @@
  },
  "+{0} production": {
   "at": [
-   "src/engine/game.js:380",
+   "src/engine/game.js:382",
    "src/ui/main.js:1775"
   ],
   "args": [
@@ -9711,7 +9716,7 @@
  },
  ", le reste revendu {0} or": {
   "at": [
-   "src/engine/game.js:381"
+   "src/engine/game.js:383"
   ],
   "args": [
    "(cc.amt - used) * 2"
@@ -9719,7 +9724,7 @@
  },
  "des vivres pour {0} : {1} habitants de plus": {
   "at": [
-   "src/engine/game.js:390"
+   "src/engine/game.js:392"
   ],
   "args": [
    "home.name",
@@ -9728,7 +9733,7 @@
  },
  "+{0} hab.": {
   "at": [
-   "src/engine/game.js:391"
+   "src/engine/game.js:393"
   ],
   "args": [
    "add"
@@ -9736,7 +9741,7 @@
  },
  "{0} points de recherche ({1})": {
   "at": [
-   "src/engine/game.js:396"
+   "src/engine/game.js:398"
   ],
   "args": [
    "cc.amt",
@@ -9745,7 +9750,7 @@
  },
  "+{0} recherche": {
   "at": [
-   "src/engine/game.js:396",
+   "src/engine/game.js:398",
    "src/ui/city.js:58",
    "src/ui/city.js:396",
    "src/ui/main.js:1025"
@@ -9756,7 +9761,7 @@
  },
  "{0} cristaux de mana (aucune recherche en cours)": {
   "at": [
-   "src/engine/game.js:397"
+   "src/engine/game.js:399"
   ],
   "args": [
    "cc.amt"
@@ -9764,17 +9769,17 @@
  },
  "une carte qui dévoile une région lointaine": {
   "at": [
-   "src/engine/game.js:411"
+   "src/engine/game.js:413"
   ]
  },
  "les volontaires repartent avec vos remerciements": {
   "at": [
-   "src/engine/game.js:418"
+   "src/engine/game.js:420"
   ]
  },
  "des {0} se joignent à vous": {
   "at": [
-   "src/engine/game.js:420"
+   "src/engine/game.js:422"
   ],
   "args": [
    "DATA.units[t].name.toLowerCase()"
@@ -9782,12 +9787,12 @@
  },
  "+1 unité": {
   "at": [
-   "src/engine/game.js:420"
+   "src/engine/game.js:422"
   ]
  },
  "Trouvaille : {0}, {1}.": {
   "at": [
-   "src/engine/game.js:424"
+   "src/engine/game.js:426"
   ],
   "args": [
    "Game.CACHE[cc.kind].name.toLowerCase()",
@@ -9796,47 +9801,47 @@
  },
  "Grotte": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Ruines": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Temple ancien": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Donjon abandonné": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Souterrain": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Temple déchu": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Antre de monstres": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Tour de sorcellerie": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Tombeau de {0}": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ],
   "args": [
    "s.relic.wizard"
@@ -9844,37 +9849,37 @@
  },
  "Tombeau de sorcier": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Faille entre les plans": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "la Brèche": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Phylactère du Seigneur liche": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Citadelle de l'Archimage": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Cœur de l'Hiver": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Sanctuaire de {0}": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ],
   "args": [
    "Pacts.ENT[s.entity].name"
@@ -9882,17 +9887,17 @@
  },
  "Sanctuaire d'une puissance": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "Lieu mystérieux": {
   "at": [
-   "src/engine/game.js:527"
+   "src/engine/game.js:529"
   ]
  },
  "{0} de la stase.": {
   "at": [
-   "src/engine/game.js:583"
+   "src/engine/game.js:585"
   ],
   "args": [
    "Units.subj(u, 'se libère')"
@@ -9900,20 +9905,20 @@
  },
  "se libère": {
   "at": [
-   "src/engine/game.js:583",
-   "src/engine/game.js:593"
+   "src/engine/game.js:585",
+   "src/engine/game.js:595"
   ]
  },
  "se libèrent": {
   "at": [
-   "src/engine/game.js:583",
-   "src/engine/game.js:593"
+   "src/engine/game.js:585",
+   "src/engine/game.js:595"
   ],
   "hint": "pluriel de « se libère » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} de votre stase.": {
   "at": [
-   "src/engine/game.js:593"
+   "src/engine/game.js:595"
   ],
   "args": [
    "Units.subj(u, 'se libère')"
@@ -9921,33 +9926,33 @@
  },
  "Aucune unité.": {
   "at": [
-   "src/engine/game.js:601",
-   "src/engine/game.js:1581"
+   "src/engine/game.js:603",
+   "src/engine/game.js:1583"
   ]
  },
  "Montagne infranchissable sans route : seuls les volants, les montagnards et les ingénieurs y vont.": {
   "at": [
-   "src/engine/game.js:607"
+   "src/engine/game.js:609"
   ]
  },
  "Aucun chemin.": {
   "at": [
-   "src/engine/game.js:608"
+   "src/engine/game.js:610"
   ]
  },
  "Un obstacle imprévu barre la route : vos troupes s'arrêtent.": {
   "at": [
-   "src/engine/game.js:663"
+   "src/engine/game.js:665"
   ]
  },
  "Des ennemis occupent la destination : vos troupes s'arrêtent devant.": {
   "at": [
-   "src/engine/game.js:664"
+   "src/engine/game.js:666"
   ]
  },
  "Vos troupes découvrent {0} et s'arrêtent devant.": {
   "at": [
-   "src/engine/game.js:666"
+   "src/engine/game.js:668"
   ],
   "args": [
    "city.name"
@@ -9955,22 +9960,22 @@
  },
  "Vos troupes découvrent des ennemis sur leur chemin et s'arrêtent.": {
   "at": [
-   "src/engine/game.js:667"
+   "src/engine/game.js:669"
   ]
  },
  "Vos troupes découvrent un lieu gardé et s'arrêtent devant.": {
   "at": [
-   "src/engine/game.js:667"
+   "src/engine/game.js:669"
   ]
  },
  "La cible a changé : vos troupes s'arrêtent sans attaquer.": {
   "at": [
-   "src/engine/game.js:669"
+   "src/engine/game.js:671"
   ]
  },
  "{0} interdit son territoire à vos troupes.": {
   "at": [
-   "src/engine/game.js:675"
+   "src/engine/game.js:677"
   ],
   "args": [
    "o ? U.cap(Players.nameFor(game, pid, o.id)) : 'Ce sorcier'"
@@ -9978,17 +9983,17 @@
  },
  "Ce sorcier": {
   "at": [
-   "src/engine/game.js:675"
+   "src/engine/game.js:677"
   ]
  },
  "Passage impossible.": {
   "at": [
-   "src/engine/game.js:676"
+   "src/engine/game.js:678"
   ]
  },
  "Ce départ laisserait {0} sur l'eau, sans rien pour les porter.": {
   "at": [
-   "src/engine/game.js:681"
+   "src/engine/game.js:683"
   ],
   "args": [
    "U.tally(carry.stranded.map(u => Units.label(u)))"
@@ -9996,12 +10001,12 @@
  },
  "Pile pleine (9 unités maximum).": {
   "at": [
-   "src/engine/game.js:694"
+   "src/engine/game.js:696"
   ]
  },
  "{0} : d'autres sont passés avant vous, il n'y reste rien.": {
   "at": [
-   "src/engine/game.js:710"
+   "src/engine/game.js:712"
   ],
   "args": [
    "U.cap(Game.siteName(site))"
@@ -10009,7 +10014,7 @@
  },
  "la garnison de {0}": {
   "at": [
-   "src/engine/game.js:731",
+   "src/engine/game.js:733",
    "src/engine/chronicle.js:144"
   ],
   "args": [
@@ -10018,15 +10023,15 @@
  },
  "des monstres": {
   "at": [
-   "src/engine/game.js:731",
-   "src/engine/game.js:1010",
+   "src/engine/game.js:733",
+   "src/engine/game.js:1012",
    "src/engine/chronicle.js:94",
    "src/engine/chronicle.js:144"
   ]
  },
  "des troupes de {0}": {
   "at": [
-   "src/engine/game.js:731"
+   "src/engine/game.js:733"
   ],
   "args": [
    "Players.nameFor(game, pid, found.owner)"
@@ -10034,7 +10039,7 @@
  },
  "Vos troupes aperçoivent {0} ({1}) et s'arrêtent.": {
   "at": [
-   "src/engine/game.js:732"
+   "src/engine/game.js:734"
   ],
   "args": [
    "who",
@@ -10043,8 +10048,8 @@
  },
  "Premier contact avec {0}.": {
   "at": [
-   "src/engine/game.js:749",
-   "src/engine/game.js:750"
+   "src/engine/game.js:751",
+   "src/engine/game.js:752"
   ],
   "args": [
    "pb.name"
@@ -10052,7 +10057,7 @@
  },
  "{0} flotte dans les airs : seules des unités volantes peuvent l'attaquer.": {
   "at": [
-   "src/engine/game.js:787"
+   "src/engine/game.js:789"
   ],
   "args": [
    "city.name"
@@ -10060,7 +10065,7 @@
  },
  "L'Égide arcanique de {0} interdit l'entrée aux créatures {1}.": {
   "at": [
-   "src/engine/game.js:789"
+   "src/engine/game.js:791"
   ],
   "args": [
    "city.name",
@@ -10069,42 +10074,42 @@
  },
  "de la vie": {
   "at": [
-   "src/engine/game.js:789",
+   "src/engine/game.js:791",
    "src/ui/combatview.js:1617"
   ]
  },
  "de la mort": {
   "at": [
-   "src/engine/game.js:789",
+   "src/engine/game.js:791",
    "src/ui/combatview.js:1617"
   ]
  },
  "du chaos": {
   "at": [
-   "src/engine/game.js:789",
+   "src/engine/game.js:791",
    "src/ui/combatview.js:1617"
   ]
  },
  "de la nature": {
   "at": [
-   "src/engine/game.js:789",
+   "src/engine/game.js:791",
    "src/ui/combatview.js:1617"
   ]
  },
  "de la sorcellerie": {
   "at": [
-   "src/engine/game.js:789",
+   "src/engine/game.js:791",
    "src/ui/combatview.js:1617"
   ]
  },
  "Plus de mouvement.": {
   "at": [
-   "src/engine/game.js:794"
+   "src/engine/game.js:796"
   ]
  },
  "Vos troupes s'égarent dans le Labyrinthe de {0} : elles arrivent à l'assaut affaiblies.": {
   "at": [
-   "src/engine/game.js:830"
+   "src/engine/game.js:832"
   ],
   "args": [
    "city.name"
@@ -10112,7 +10117,7 @@
  },
  "Le héros {0} est tombé au combat.": {
   "at": [
-   "src/engine/game.js:863"
+   "src/engine/game.js:865"
   ],
   "args": [
    "u.hero.name"
@@ -10120,7 +10125,7 @@
  },
  "{0} n'a pu être rappelé : plus de place autour de la forteresse.": {
   "at": [
-   "src/engine/game.js:875"
+   "src/engine/game.js:877"
   ],
   "args": [
    "Units.label(u)"
@@ -10128,7 +10133,7 @@
  },
  "Le héros {0} est tombé dans la retraite.": {
   "at": [
-   "src/engine/game.js:893"
+   "src/engine/game.js:895"
   ],
   "args": [
    "u.hero.name"
@@ -10136,7 +10141,7 @@
  },
  "Le Puits des Âmes boit les morts de la bataille : +{0} mana.": {
   "at": [
-   "src/engine/game.js:907"
+   "src/engine/game.js:909"
   ],
   "args": [
    "mana"
@@ -10144,7 +10149,7 @@
  },
  "Le héros {0} est tombé avec {1}.": {
   "at": [
-   "src/engine/game.js:944"
+   "src/engine/game.js:946"
   ],
   "args": [
    "u.hero.name",
@@ -10153,7 +10158,7 @@
  },
  "{0} en mort-vivant à votre service.": {
   "at": [
-   "src/engine/game.js:975"
+   "src/engine/game.js:977"
   ],
   "args": [
    "made > 1 ? made + ' ennemis se relèvent' : 'Un ennemi se relève'"
@@ -10161,7 +10166,7 @@
  },
  "{0} ennemis se relèvent": {
   "at": [
-   "src/engine/game.js:975"
+   "src/engine/game.js:977"
   ],
   "args": [
    "made"
@@ -10169,12 +10174,12 @@
  },
  "Un ennemi se relève": {
   "at": [
-   "src/engine/game.js:975"
+   "src/engine/game.js:977"
   ]
  },
  "{0} en zombie à votre service.": {
   "at": [
-   "src/engine/game.js:988"
+   "src/engine/game.js:990"
   ],
   "args": [
    "U.n(n, 'ennemi tombé se relève', 'ennemis tombés se relèvent')"
@@ -10182,89 +10187,89 @@
  },
  "ennemi tombé se relève": {
   "at": [
-   "src/engine/game.js:988"
+   "src/engine/game.js:990"
   ]
  },
  "ennemis tombés se relèvent": {
   "at": [
-   "src/engine/game.js:988",
-   "src/engine/game.js:988"
+   "src/engine/game.js:990",
+   "src/engine/game.js:990"
   ],
   "hint": "pluriel de « ennemi tombé se relève »"
  },
  "les ennemis": {
   "at": [
-   "src/engine/game.js:1006"
+   "src/engine/game.js:1008"
   ]
  },
  " Sans issue, les fuyards périssent tous.": {
   "at": [
-   "src/engine/game.js:1007"
+   "src/engine/game.js:1009"
   ]
  },
  " Les survivants s'enfuient.": {
   "at": [
-   "src/engine/game.js:1007"
+   "src/engine/game.js:1009"
   ]
  },
  "Victoire contre ": {
   "at": [
-   "src/engine/game.js:1009"
+   "src/engine/game.js:1011"
   ]
  },
  "Défaite contre ": {
   "at": [
-   "src/engine/game.js:1009"
+   "src/engine/game.js:1011"
   ]
  },
  "ennemi tué": {
   "at": [
-   "src/engine/game.js:1009"
+   "src/engine/game.js:1011"
   ]
  },
  "ennemis tués": {
   "at": [
-   "src/engine/game.js:1009",
-   "src/engine/game.js:1009"
+   "src/engine/game.js:1011",
+   "src/engine/game.js:1011"
   ],
   "hint": "pluriel de « ennemi tué »"
  },
  "perte": {
   "at": [
-   "src/engine/game.js:1009"
+   "src/engine/game.js:1011"
   ]
  },
  "pertes": {
   "at": [
-   "src/engine/game.js:1009"
+   "src/engine/game.js:1011"
   ],
   "hint": "pluriel de « perte »"
  },
  "monstres": {
   "at": [
-   "src/engine/game.js:1010",
-   "src/engine/game.js:1104"
+   "src/engine/game.js:1012",
+   "src/engine/game.js:1106"
   ]
  },
  "pillards": {
   "at": [
-   "src/engine/game.js:1010",
-   "src/engine/game.js:1104"
+   "src/engine/game.js:1012",
+   "src/engine/game.js:1106"
   ]
  },
  "Nos troupes ont été défaites par ": {
   "at": [
-   "src/engine/game.js:1011"
+   "src/engine/game.js:1013"
   ]
  },
  "Nous avons repoussé ": {
   "at": [
-   "src/engine/game.js:1011"
+   "src/engine/game.js:1013"
   ]
  },
  " à {0}": {
   "at": [
-   "src/engine/game.js:1011",
+   "src/engine/game.js:1013",
    "src/engine/spells.js:332",
    "src/engine/chronicle.js:120"
   ],
@@ -10274,7 +10279,7 @@
  },
  "{0} en mer, faute de navire pour les porter.": {
   "at": [
-   "src/engine/game.js:1028"
+   "src/engine/game.js:1030"
   ],
   "args": [
    "extra.length === 1 ? Units.subj(extra[0], 'périt') : U.tally(extra.map(u => Units.label(u)"
@@ -10282,12 +10287,12 @@
  },
  "périt": {
   "at": [
-   "src/engine/game.js:1028"
+   "src/engine/game.js:1030"
   ]
  },
  "{0} périssent": {
   "at": [
-   "src/engine/game.js:1028"
+   "src/engine/game.js:1030"
   ],
   "args": [
    "U.tally(extra.map(u => Units.label(u)))"
@@ -10295,7 +10300,7 @@
  },
  "t{0} {1} (joueur {2}, dégâts {3} / {4}) {5},{6},{7}": {
   "at": [
-   "src/engine/game.js:1039"
+   "src/engine/game.js:1041"
   ],
   "args": [
    "game.turn",
@@ -10310,7 +10315,7 @@
  },
  "{0} la côte.": {
   "at": [
-   "src/engine/game.js:1068"
+   "src/engine/game.js:1070"
   ],
   "args": [
    "landers.length === 1 ? Units.subj(landers[0], 'regagne') : U.tally(landers.map(u => Units."
@@ -10318,18 +10323,18 @@
  },
  "regagne": {
   "at": [
-   "src/engine/game.js:1068"
+   "src/engine/game.js:1070"
   ]
  },
  "regagnent": {
   "at": [
-   "src/engine/game.js:1068"
+   "src/engine/game.js:1070"
   ],
   "hint": "pluriel de « regagne » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} regagnent": {
   "at": [
-   "src/engine/game.js:1068"
+   "src/engine/game.js:1070"
   ],
   "args": [
    "U.tally(landers.map(u => Units.label(u)))"
@@ -10337,7 +10342,7 @@
  },
  "{0} est rasée. Butin : {1} or.": {
   "at": [
-   "src/engine/game.js:1086"
+   "src/engine/game.js:1088"
   ],
   "args": [
    "city.name",
@@ -10346,7 +10351,7 @@
  },
  "{0} a été rasée par {1}.": {
   "at": [
-   "src/engine/game.js:1087"
+   "src/engine/game.js:1089"
   ],
   "args": [
    "city.name",
@@ -10355,7 +10360,7 @@
  },
  "{0} est conquise ! Butin : {1} or{2}.": {
   "at": [
-   "src/engine/game.js:1103"
+   "src/engine/game.js:1105"
   ],
   "args": [
    "city.name",
@@ -10365,7 +10370,7 @@
  },
  "{0} est tombée aux mains {1}{2}.": {
   "at": [
-   "src/engine/game.js:1105"
+   "src/engine/game.js:1107"
   ],
   "args": [
    "city.name",
@@ -10375,7 +10380,7 @@
  },
  "{0} vous est cédée par traité.": {
   "at": [
-   "src/engine/game.js:1143"
+   "src/engine/game.js:1145"
   ],
   "args": [
    "city.name"
@@ -10383,7 +10388,7 @@
  },
  "{0} est cédée à {1}.": {
   "at": [
-   "src/engine/game.js:1144"
+   "src/engine/game.js:1146"
   ],
   "args": [
    "city.name",
@@ -10392,13 +10397,13 @@
  },
  "les pillards": {
   "at": [
-   "src/engine/game.js:1161",
+   "src/engine/game.js:1163",
    "src/ui/combatview.js:127"
   ]
  },
  "Votre forteresse de {0} est tombée : vous êtes banni ! Les troupes de {1} s'attellent à la démanteler, ce qui leur prendra {2} tours. Plus vous reprendrez {3} vite, plus votre retour sera rapide.": {
   "at": [
-   "src/engine/game.js:1163"
+   "src/engine/game.js:1165"
   ],
   "args": [
    "city.name",
@@ -10409,7 +10414,7 @@
  },
  "La forteresse de {0} à {1} est à vous et {2} est banni dans le néant ! Vos troupes s'attellent à la démanteler ({3} tours) : s'il la reprend avant, son retour sera d'autant plus rapide.": {
   "at": [
-   "src/engine/game.js:1164"
+   "src/engine/game.js:1166"
   ],
   "args": [
    "loser.name",
@@ -10420,7 +10425,7 @@
  },
  "{0}Le Sort de Retour ({1} mana) se lance de lui-même ; votre forteresse renaîtra {2}.": {
   "at": [
-   "src/engine/game.js:1167"
+   "src/engine/game.js:1169"
   ],
   "args": [
    "why === 'avatar' ? 'Vous êtes banni ! ' : 'Votre forteresse est tombée et a été détruite :",
@@ -10430,17 +10435,17 @@
  },
  "Vous êtes banni ! ": {
   "at": [
-   "src/engine/game.js:1167"
+   "src/engine/game.js:1169"
   ]
  },
  "Votre forteresse est tombée et a été détruite : vous êtes banni ! ": {
   "at": [
-   "src/engine/game.js:1167"
+   "src/engine/game.js:1169"
   ]
  },
  "à {0}": {
   "at": [
-   "src/engine/game.js:1167",
+   "src/engine/game.js:1169",
    "src/engine/events.js:1153",
    "src/ui/magicui.js:353",
    "src/ui/magicui.js:379"
@@ -10451,12 +10456,12 @@
  },
  "dans votre plus grande cité": {
   "at": [
-   "src/engine/game.js:1167"
+   "src/engine/game.js:1169"
   ]
  },
  "{0} est banni dans le néant !": {
   "at": [
-   "src/engine/game.js:1168"
+   "src/engine/game.js:1170"
   ],
   "args": [
    "loser.name"
@@ -10464,7 +10469,7 @@
  },
  "Vous reprenez {0} avant que vos ennemis aient pu toucher à la forteresse : vous revenez aussitôt !": {
   "at": [
-   "src/engine/game.js:1193"
+   "src/engine/game.js:1195"
   ],
   "args": [
    "city.name"
@@ -10472,7 +10477,7 @@
  },
  "Vous reprenez {0} alors que la forteresse était démantelée à {1} %. Votre Sort de Retour est accompli à {2} % et vous reviendrez ici dans {3} au plus tôt.": {
   "at": [
-   "src/engine/game.js:1197"
+   "src/engine/game.js:1199"
   ],
   "args": [
    "city.name",
@@ -10483,7 +10488,7 @@
  },
  "tour": {
   "at": [
-   "src/engine/game.js:1197",
+   "src/engine/game.js:1199",
    "src/engine/events.js:28",
    "src/engine/events.js:30",
    "src/engine/events.js:30"
@@ -10491,7 +10496,7 @@
  },
  "tours": {
   "at": [
-   "src/engine/game.js:1197",
+   "src/engine/game.js:1199",
    "src/engine/events.js:28",
    "src/engine/events.js:30",
    "src/engine/events.js:30"
@@ -10500,7 +10505,7 @@
  },
  "La forteresse de {0} est entièrement démantelée : la reprendre ne hâtera plus votre retour.": {
   "at": [
-   "src/engine/game.js:1207"
+   "src/engine/game.js:1209"
   ],
   "args": [
    "c.name"
@@ -10508,7 +10513,7 @@
  },
  "Vos troupes ont fini de démanteler la forteresse de {0} à {1}.": {
   "at": [
-   "src/engine/game.js:1208"
+   "src/engine/game.js:1210"
   ],
   "args": [
    "pl.name",
@@ -10517,7 +10522,7 @@
  },
  "{0} a été vaincu et disparaît de ce monde.": {
   "at": [
-   "src/engine/game.js:1224"
+   "src/engine/game.js:1226"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pl.id))"
@@ -10525,12 +10530,12 @@
  },
  "Défaite. Votre règne s'achève.": {
   "at": [
-   "src/engine/game.js:1229"
+   "src/engine/game.js:1231"
   ]
  },
  "{0} règne désormais sans partage sur les deux plans !": {
   "at": [
-   "src/engine/game.js:1230"
+   "src/engine/game.js:1232"
   ],
   "args": [
    "alive[0].name"
@@ -10538,7 +10543,7 @@
  },
  "Le {0} s'éveille (éveil {1}/3) : puissance {2}{3}.": {
   "at": [
-   "src/engine/game.js:1289"
+   "src/engine/game.js:1291"
   ],
   "args": [
    "Game.siteName(s)",
@@ -10549,12 +10554,12 @@
  },
  ", et il engendrera désormais ses propres gardiens": {
   "at": [
-   "src/engine/game.js:1289"
+   "src/engine/game.js:1291"
   ]
  },
  "Le {0} engendre un gardien : {1} (sans entretien, il ne s'éloigne pas à plus de 2 cases du nœud).": {
   "at": [
-   "src/engine/game.js:1301"
+   "src/engine/game.js:1303"
   ],
   "args": [
    "Game.siteName(s)",
@@ -10563,17 +10568,17 @@
  },
  "Unité disparue.": {
   "at": [
-   "src/engine/game.js:1325"
+   "src/engine/game.js:1327"
   ]
  },
  "Promotion impossible ici.": {
   "at": [
-   "src/engine/game.js:1327"
+   "src/engine/game.js:1329"
   ]
  },
  "Or insuffisant ({0} requis).": {
   "at": [
-   "src/engine/game.js:1329"
+   "src/engine/game.js:1331"
   ],
   "args": [
    "opt.cost"
@@ -10581,7 +10586,7 @@
  },
  "{0} promus : {1}, grade conservé ({2}).": {
   "at": [
-   "src/engine/game.js:1335"
+   "src/engine/game.js:1337"
   ],
   "args": [
    "old",
@@ -10591,17 +10596,17 @@
  },
  "Seul un héros peut gouverner.": {
   "at": [
-   "src/engine/game.js:1341"
+   "src/engine/game.js:1343"
   ]
  },
  "Le héros doit se trouver dans une de vos cités.": {
   "at": [
-   "src/engine/game.js:1343"
+   "src/engine/game.js:1345"
   ]
  },
  "{0} gouverne désormais {1}.": {
   "at": [
-   "src/engine/game.js:1347"
+   "src/engine/game.js:1349"
   ],
   "args": [
    "u.hero.name",
@@ -10610,33 +10615,33 @@
  },
  "Vous êtes déjà sur la carte.": {
   "at": [
-   "src/engine/game.js:1360",
+   "src/engine/game.js:1362",
    "src/engine/spells.js:275"
   ]
  },
  "Il faut votre forteresse.": {
   "at": [
-   "src/engine/game.js:1361",
+   "src/engine/game.js:1363",
    "src/engine/spells.js:276"
   ]
  },
  "Aucune place près de la forteresse.": {
   "at": [
-   "src/engine/game.js:1362",
+   "src/engine/game.js:1364",
    "src/engine/spells.js:652"
   ]
  },
  "Sorcier": {
   "at": [
-   "src/engine/game.js:1365",
-   "src/engine/game.js:1369",
+   "src/engine/game.js:1367",
+   "src/engine/game.js:1371",
    "src/ui/panels.js:665",
    "src/ui/main.js:1709"
   ]
  },
  "{0} descend en personne sur la carte. Votre compétence de lancement est réduite de moitié tant que vous y restez, et si vous tombez, vous serez banni.": {
   "at": [
-   "src/engine/game.js:1371"
+   "src/engine/game.js:1373"
   ],
   "args": [
    "pl.name"
@@ -10644,12 +10649,12 @@
  },
  "Votre avatar est tombé au combat : vous perdez votre forteresse.": {
   "at": [
-   "src/engine/game.js:1379"
+   "src/engine/game.js:1381"
   ]
  },
  "{0} est tombé au combat, en personne !": {
   "at": [
-   "src/engine/game.js:1379"
+   "src/engine/game.js:1381"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pl.id))"
@@ -10657,7 +10662,7 @@
  },
  "Le {0} se dresse là où régnait {1} : ses sorts y reposent, sous bonne garde.": {
   "at": [
-   "src/engine/game.js:1407"
+   "src/engine/game.js:1409"
   ],
   "args": [
    "Game.siteName(s)",
@@ -10666,7 +10671,7 @@
  },
  "Le {0} est libéré de ses gardiens. Faites-y fusionner un esprit magique pour en capter la puissance.": {
   "at": [
-   "src/engine/game.js:1418"
+   "src/engine/game.js:1420"
   ],
   "args": [
    "Game.siteName(site)"
@@ -10674,8 +10679,8 @@
  },
  "le sort {0}": {
   "at": [
-   "src/engine/game.js:1432",
-   "src/engine/game.js:1452",
+   "src/engine/game.js:1434",
+   "src/engine/game.js:1454",
    "src/engine/veil.js:263",
    "src/engine/diplo.js:222"
   ],
@@ -10685,8 +10690,8 @@
  },
  "{0} (au coffre)": {
   "at": [
-   "src/engine/game.js:1433",
-   "src/engine/game.js:1448",
+   "src/engine/game.js:1435",
+   "src/engine/game.js:1450",
    "src/engine/veil.js:616",
    "src/engine/finale.js:529"
   ],
@@ -10696,8 +10701,8 @@
  },
  "{0} pièces d'or": {
   "at": [
-   "src/engine/game.js:1434",
-   "src/engine/game.js:1446",
+   "src/engine/game.js:1436",
+   "src/engine/game.js:1448",
    "src/engine/veil.js:205",
    "src/engine/diplo.js:222"
   ],
@@ -10707,13 +10712,13 @@
  },
  "150 cristaux de mana (aucun sort nouveau pour vous)": {
   "at": [
-   "src/engine/game.js:1435"
+   "src/engine/game.js:1437"
   ]
  },
  "{0} pillé : {1}.": {
   "at": [
-   "src/engine/game.js:1436",
-   "src/engine/game.js:1461"
+   "src/engine/game.js:1438",
+   "src/engine/game.js:1463"
   ],
   "args": [
    "Game.siteName(site)",
@@ -10722,7 +10727,7 @@
  },
  "{0} (équipé par {1})": {
   "at": [
-   "src/engine/game.js:1448",
+   "src/engine/game.js:1450",
    "src/engine/veil.js:616",
    "src/engine/finale.js:529"
   ],
@@ -10733,12 +10738,12 @@
  },
  "100 cristaux de mana": {
   "at": [
-   "src/engine/game.js:1452"
+   "src/engine/game.js:1454"
   ]
  },
  "le héros prisonnier {0}": {
   "at": [
-   "src/engine/game.js:1454"
+   "src/engine/game.js:1456"
   ],
   "args": [
    "u.hero.name"
@@ -10746,12 +10751,12 @@
  },
  "100 pièces d'or": {
   "at": [
-   "src/engine/game.js:1454"
+   "src/engine/game.js:1456"
   ]
  },
  "un livre de magie {0}": {
   "at": [
-   "src/engine/game.js:1457"
+   "src/engine/game.js:1459"
   ],
   "args": [
    "REALM_NAMES[realm].toLowerCase()"
@@ -10759,17 +10764,17 @@
  },
  "200 cristaux de mana": {
   "at": [
-   "src/engine/game.js:1458"
+   "src/engine/game.js:1460"
   ]
  },
  "Seuls les colons fondent des cités.": {
   "at": [
-   "src/engine/game.js:1468"
+   "src/engine/game.js:1470"
   ]
  },
  "Fondation de {0}.": {
   "at": [
-   "src/engine/game.js:1476"
+   "src/engine/game.js:1478"
   ],
   "args": [
    "c.name"
@@ -10777,27 +10782,27 @@
  },
  "Cette unité ne peut pas fusionner.": {
   "at": [
-   "src/engine/game.js:1482"
+   "src/engine/game.js:1484"
   ]
  },
  "Il faut se trouver sur un nœud.": {
   "at": [
-   "src/engine/game.js:1484"
+   "src/engine/game.js:1486"
   ]
  },
  "Ce nœud a été dévoré : il n'y reste rien à lier.": {
   "at": [
-   "src/engine/game.js:1485"
+   "src/engine/game.js:1487"
   ]
  },
  "Le nœud est encore gardé.": {
   "at": [
-   "src/engine/game.js:1486"
+   "src/engine/game.js:1488"
   ]
  },
  "Ce nœud appartient à {0}, avec qui vous êtes {1} : rompez d'abord le traité.": {
   "at": [
-   "src/engine/game.js:1489"
+   "src/engine/game.js:1491"
   ],
   "args": [
    "Players.nameFor(game, u.owner, op.id)",
@@ -10806,17 +10811,17 @@
  },
  "en paix": {
   "at": [
-   "src/engine/game.js:1489"
+   "src/engine/game.js:1491"
   ]
  },
  "allié": {
   "at": [
-   "src/engine/game.js:1489"
+   "src/engine/game.js:1491"
   ]
  },
  "Ce nœud vous appartient déjà{0}": {
   "at": [
-   "src/engine/game.js:1491"
+   "src/engine/game.js:1493"
   ],
   "args": [
    "heldByGuardian ? ', et un esprit gardien le garde.' : '.'"
@@ -10824,17 +10829,17 @@
  },
  ", et un esprit gardien le garde.": {
   "at": [
-   "src/engine/game.js:1491"
+   "src/engine/game.js:1493"
   ]
  },
  "Relever la garde de votre nœud : un esprit gardien le défend bien mieux contre les esprits rivaux.": {
   "at": [
-   "src/engine/game.js:1491"
+   "src/engine/game.js:1493"
   ]
  },
  "Lier ce nœud à votre puissance (l'esprit est consommé){0}": {
   "at": [
-   "src/engine/game.js:1493"
+   "src/engine/game.js:1495"
   ],
   "args": [
    "fail ? ' ; ' + Math.round(fail * 100) + ' % de risque d\\'échec contre l\\'esprit qui le tie"
@@ -10842,7 +10847,7 @@
  },
  " ; {0} % de risque d'échec contre l'esprit qui le tient.": {
   "at": [
-   "src/engine/game.js:1493"
+   "src/engine/game.js:1495"
   ],
   "args": [
    "Math.round(fail * 100)"
@@ -10850,12 +10855,12 @@
  },
  "Ce nœud vous appartient déjà.": {
   "at": [
-   "src/engine/game.js:1504"
+   "src/engine/game.js:1506"
   ]
  },
  "Un esprit gardien relève la garde du {0} : les esprits rivaux auront bien du mal à vous le prendre.": {
   "at": [
-   "src/engine/game.js:1506"
+   "src/engine/game.js:1508"
   ],
   "args": [
    "Game.siteName(s)"
@@ -10863,17 +10868,17 @@
  },
  "L'esprit gardien du nœud repousse le vôtre, qui se dissipe.": {
   "at": [
-   "src/engine/game.js:1510"
+   "src/engine/game.js:1512"
   ]
  },
  "L'esprit échoue à arracher le nœud et se dissipe.": {
   "at": [
-   "src/engine/game.js:1510"
+   "src/engine/game.js:1512"
   ]
  },
  "Le {0} est désormais lié à votre puissance : son aura de {1} cases s'illumine à vos couleurs (+{2} de magie par tour).": {
   "at": [
-   "src/engine/game.js:1514"
+   "src/engine/game.js:1516"
   ],
   "args": [
    "Game.siteName(s)",
@@ -10883,54 +10888,54 @@
  },
  "Un rival s'est emparé de l'un de vos nœuds magiques.": {
   "at": [
-   "src/engine/game.js:1515"
+   "src/engine/game.js:1517"
   ]
  },
  "Il faut un ingénieur.": {
   "at": [
-   "src/engine/game.js:1521",
-   "src/engine/game.js:1532"
+   "src/engine/game.js:1523",
+   "src/engine/game.js:1534"
   ]
  },
  "Il y a déjà une route ici.": {
   "at": [
-   "src/engine/game.js:1523",
+   "src/engine/game.js:1525",
    "src/ui/main.js:543"
   ]
  },
  "Impossible d'empierrer ce terrain.": {
   "at": [
-   "src/engine/game.js:1524"
+   "src/engine/game.js:1526"
   ]
  },
  "Choisissez une autre case que celle des ingénieurs.": {
   "at": [
-   "src/engine/game.js:1535"
+   "src/engine/game.js:1537"
   ]
  },
  "Aucun chemin jusque-là.": {
   "at": [
-   "src/engine/game.js:1538"
+   "src/engine/game.js:1540"
   ]
  },
  "Il faut se tenir dans une cité dotée d'une porte tellurique.": {
   "at": [
-   "src/engine/game.js:1583"
+   "src/engine/game.js:1585"
   ]
  },
  "Il faut une autre de vos cités dotée d'une porte tellurique, sur le même plan.": {
   "at": [
-   "src/engine/game.js:1584"
+   "src/engine/game.js:1586"
   ]
  },
  "Il faut un point de mouvement à chaque unité.": {
   "at": [
-   "src/engine/game.js:1585"
+   "src/engine/game.js:1587"
   ]
  },
  "{0} ne peut accueillir autant d'unités (9 au plus).": {
   "at": [
-   "src/engine/game.js:1586"
+   "src/engine/game.js:1588"
   ],
   "args": [
    "to.name"
@@ -10938,62 +10943,62 @@
  },
  "Hors d'une tour, d'une faille ou d'une porte astrale, toutes les unités de la pile doivent savoir sauter de plan.": {
   "at": [
-   "src/engine/game.js:1600"
+   "src/engine/game.js:1602"
   ]
  },
  "Il faut une tour de sorcellerie, une faille, une porte astrale ou la capacité de saut de plan.": {
   "at": [
-   "src/engine/game.js:1600"
+   "src/engine/game.js:1602"
   ]
  },
  "Le Sceau planaire bloque tout passage.": {
   "at": [
-   "src/engine/game.js:1601",
+   "src/engine/game.js:1603",
    "src/engine/spells.js:348"
   ]
  },
  "Il faut encore du mouvement pour passer dans l'autre plan.": {
   "at": [
-   "src/engine/game.js:1603"
+   "src/engine/game.js:1605"
   ]
  },
  "Une unité figée dans la stase ne peut pas passer.": {
   "at": [
-   "src/engine/game.js:1604"
+   "src/engine/game.js:1606"
   ]
  },
  "Le terrain de l'autre plan est impraticable.": {
   "at": [
-   "src/engine/game.js:1606",
+   "src/engine/game.js:1608",
    "src/engine/spells.js:349"
   ]
  },
  "Une force ennemie occupe la case de l'autre plan.": {
   "at": [
-   "src/engine/game.js:1607"
+   "src/engine/game.js:1609"
   ]
  },
  "Trop d'unités vous attendent déjà de l'autre côté (9 au plus par case).": {
   "at": [
-   "src/engine/game.js:1608"
+   "src/engine/game.js:1610"
   ]
  },
  "Des gardiens occupent la case de l'autre plan.": {
   "at": [
-   "src/engine/game.js:1610",
+   "src/engine/game.js:1612",
    "src/engine/spells.js:352"
   ]
  },
  "Or insuffisant.": {
   "at": [
-   "src/engine/game.js:1630",
-   "src/engine/turn.js:645",
-   "src/engine/turn.js:661"
+   "src/engine/game.js:1632",
+   "src/engine/turn.js:646",
+   "src/engine/turn.js:662"
   ]
  },
  "{0} en dépend.": {
   "at": [
-   "src/engine/game.js:1637"
+   "src/engine/game.js:1639"
   ],
   "args": [
    "DATA.buildings[o].name"
@@ -11001,7 +11006,7 @@
  },
  "{0}, en cours, en dépend.": {
   "at": [
-   "src/engine/game.js:1640"
+   "src/engine/game.js:1642"
   ],
   "args": [
    "name(c.prod)"
@@ -11009,7 +11014,7 @@
  },
  "{0}, dans la file, en dépend.": {
   "at": [
-   "src/engine/game.js:1641"
+   "src/engine/game.js:1643"
   ],
   "args": [
    "name(q)"
@@ -11017,12 +11022,12 @@
  },
  "Vente impossible ce tour-ci.": {
   "at": [
-   "src/engine/game.js:1646"
+   "src/engine/game.js:1648"
   ]
  },
  "{0} : « {1} » Quête : {2}.": {
   "at": [
-   "src/engine/game.js:1708"
+   "src/engine/game.js:1710"
   ],
   "args": [
    "u.hero.name",
@@ -11032,7 +11037,7 @@
  },
  "Vous avez désormais six héros : {0} échouera si aucun ne vous quitte d'ici là (vous ne récupéreriez que la moitié du mana).": {
   "at": [
-   "src/engine/game.js:1712"
+   "src/engine/game.js:1714"
   ],
   "args": [
    "DATA.spells[cs].name"
@@ -11040,7 +11045,7 @@
  },
  "Super {0}{1}": {
   "at": [
-   "src/engine/game.js:1743"
+   "src/engine/game.js:1745"
   ],
   "args": [
    "t.name.charAt(0).toLowerCase()",
@@ -11049,7 +11054,7 @@
  },
  "{0} : sa puissance arcanique, sans effet faute de tir magique, devient {1}.": {
   "at": [
-   "src/engine/game.js:1756"
+   "src/engine/game.js:1758"
   ],
   "args": [
    "u.hero.name",
@@ -11058,7 +11063,7 @@
  },
  "Super {0}": {
   "at": [
-   "src/engine/game.js:1756"
+   "src/engine/game.js:1758"
   ],
   "args": [
    "t.name.toLowerCase()"
@@ -11066,7 +11071,7 @@
  },
  "{0} passe au niveau {1} : un talent à choisir.": {
   "at": [
-   "src/engine/game.js:1781"
+   "src/engine/game.js:1783"
   ],
   "args": [
    "u.hero.name",
@@ -11075,7 +11080,7 @@
  },
  "{0} apprend : {1}.": {
   "at": [
-   "src/engine/game.js:1793"
+   "src/engine/game.js:1795"
   ],
   "args": [
    "u.hero.name",
@@ -11084,62 +11089,62 @@
  },
  "au cœur d'une forêt": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "au pied des montagnes": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "parmi les collines": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "dans les montagnes": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "dans le désert": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "au fond des marais": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "dans les terres gelées": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "dans les plaines": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "au bord d'un fleuve": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  "dans des terres sauvages": {
   "at": [
-   "src/engine/game.js:1807"
+   "src/engine/game.js:1809"
   ]
  },
  ", non loin de la mer": {
   "at": [
-   "src/engine/game.js:1808"
+   "src/engine/game.js:1810"
   ]
  },
  "{0}, sur {1}": {
   "at": [
-   "src/engine/game.js:1809"
+   "src/engine/game.js:1811"
   ],
   "args": [
    "w",
@@ -11148,7 +11153,7 @@
  },
  "le Miroir": {
   "at": [
-   "src/engine/game.js:1809",
+   "src/engine/game.js:1811",
    "src/engine/veil.js:568",
    "src/engine/finale.js:388",
    "src/ui/main.js:478"
@@ -11156,7 +11161,7 @@
  },
  "de {0}": {
   "at": [
-   "src/engine/game.js:1861",
+   "src/engine/game.js:1863",
    "src/engine/events.js:6"
   ],
   "args": [
@@ -11165,7 +11170,7 @@
  },
  "Quête accomplie : {0}": {
   "at": [
-   "src/engine/game.js:1873"
+   "src/engine/game.js:1875"
   ],
   "args": [
    "q.reward || ''"
@@ -11173,7 +11178,7 @@
  },
  "{0} : la piste est perdue.": {
   "at": [
-   "src/engine/game.js:1876"
+   "src/engine/game.js:1878"
   ],
   "args": [
    "place"
@@ -11181,7 +11186,7 @@
  },
  "Nul ne sait encore où se trouve {0}.": {
   "at": [
-   "src/engine/game.js:1876"
+   "src/engine/game.js:1878"
   ],
   "args": [
    "q.place"
@@ -11189,7 +11194,7 @@
  },
  "Vaincre les gardiens {0} ({1}, {2}{3}), avec {4} dans l'armée qui attaque": {
   "at": [
-   "src/engine/game.js:1877"
+   "src/engine/game.js:1879"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11201,13 +11206,13 @@
  },
  ", sur le Miroir": {
   "at": [
-   "src/engine/game.js:1877",
-   "src/engine/game.js:1879"
+   "src/engine/game.js:1879",
+   "src/engine/game.js:1881"
   ]
  },
  "{0} se cache dans la région cerclée d'or, autour de ({1}, {2}{3}). {4}": {
   "at": [
-   "src/engine/game.js:1879"
+   "src/engine/game.js:1881"
   ],
   "args": [
    "place",
@@ -11219,8 +11224,8 @@
  },
  "{0} guette les rumeurs.": {
   "at": [
-   "src/engine/game.js:1879",
-   "src/engine/game.js:1880"
+   "src/engine/game.js:1881",
+   "src/engine/game.js:1882"
   ],
   "args": [
    "u.hero.name"
@@ -11228,7 +11233,7 @@
  },
  "Explorez-la. Repaires pillés avec {0} : {1}/4": {
   "at": [
-   "src/engine/game.js:1879"
+   "src/engine/game.js:1881"
   ],
   "args": [
    "u.hero.name",
@@ -11237,7 +11242,7 @@
  },
  "Selon la légende, {0} se trouve {1}. {2}": {
   "at": [
-   "src/engine/game.js:1880"
+   "src/engine/game.js:1882"
   ],
   "args": [
    "q.place",
@@ -11247,7 +11252,7 @@
  },
  "Repaires pillés avec {0} : {1}/2": {
   "at": [
-   "src/engine/game.js:1880"
+   "src/engine/game.js:1882"
   ],
   "args": [
    "u.hero.name",
@@ -11256,7 +11261,7 @@
  },
  "La légende se dévoile : {0} est là, en ({1}, {2}). Ses gardiens sont parmi les plus redoutables du monde. Pour accomplir sa quête, {3} doit être dans l'armée qui les vaincra.": {
   "at": [
-   "src/engine/game.js:1894"
+   "src/engine/game.js:1896"
   ],
   "args": [
    "q.place",
@@ -11267,7 +11272,7 @@
  },
  "Une rumeur parvient à {0} : {1} se cacherait dans la région autour de ({2}, {3}), cerclée d'or sur la carte.": {
   "at": [
-   "src/engine/game.js:1906"
+   "src/engine/game.js:1908"
   ],
   "args": [
    "u.hero.name",
@@ -11278,7 +11283,7 @@
  },
  "Une nouvelle rumeur resserre la piste {0} : autour de ({1}, {2}).": {
   "at": [
-   "src/engine/game.js:1912"
+   "src/engine/game.js:1914"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11288,7 +11293,7 @@
  },
  "La piste {0} est perdue : {1} n'en entendra plus parler.": {
   "at": [
-   "src/engine/game.js:1928"
+   "src/engine/game.js:1930"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11297,7 +11302,7 @@
  },
  "Pendant l'absence de {0}, le gardien {1} a emporté la relique ailleurs. ": {
   "at": [
-   "src/engine/game.js:1932"
+   "src/engine/game.js:1934"
   ],
   "args": [
    "u.hero.name",
@@ -11306,7 +11311,7 @@
  },
  "Le repaire {0} a été pillé sans {1}, mais la relique n'y était plus : son gardien l'a emportée ailleurs. ": {
   "at": [
-   "src/engine/game.js:1932"
+   "src/engine/game.js:1934"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11315,47 +11320,47 @@
  },
  "Une nouvelle région est cerclée d'or sur la carte.": {
   "at": [
-   "src/engine/game.js:1932"
+   "src/engine/game.js:1934"
   ]
  },
  "La piste repart de zéro.": {
   "at": [
-   "src/engine/game.js:1932"
+   "src/engine/game.js:1934"
   ]
  },
  "Arc": {
   "at": [
-   "src/engine/game.js:1969",
-   "src/engine/game.js:2010"
+   "src/engine/game.js:1971",
+   "src/engine/game.js:2012"
   ]
  },
  "Bâton": {
   "at": [
-   "src/engine/game.js:1969",
-   "src/engine/game.js:2011"
+   "src/engine/game.js:1971",
+   "src/engine/game.js:2013"
   ]
  },
  "Lame": {
   "at": [
-   "src/engine/game.js:1969",
-   "src/engine/game.js:2007"
+   "src/engine/game.js:1971",
+   "src/engine/game.js:2009"
   ]
  },
  "Marteau": {
   "at": [
-   "src/engine/game.js:1969",
-   "src/engine/game.js:2008"
+   "src/engine/game.js:1971",
+   "src/engine/game.js:2010"
   ]
  },
  "Hache": {
   "at": [
-   "src/engine/game.js:1969",
-   "src/engine/game.js:2009"
+   "src/engine/game.js:1971",
+   "src/engine/game.js:2011"
   ]
  },
  "{0} de {1}": {
   "at": [
-   "src/engine/game.js:1970",
+   "src/engine/game.js:1972",
    "src/ui/city.js:48"
   ],
   "args": [
@@ -11365,7 +11370,7 @@
  },
  "Légende accomplie, au prix de sa vie : {0} est tombé en triomphant {1}. {2} ({3}) rejoint le coffre de votre forteresse ; {4} pièces d'or, +{5} de renommée, et {6} XP pour chaque survivant de son armée.": {
   "at": [
-   "src/engine/game.js:1984"
+   "src/engine/game.js:1986"
   ],
   "args": [
    "u.hero.name",
@@ -11379,7 +11384,7 @@
  },
  "Légende accomplie ! {0} triomphe {1} et reçoit {2} ({3}), {4} XP ; {5} pièces d'or, +{6} de renommée, et {7} XP pour chaque unité de son armée.": {
   "at": [
-   "src/engine/game.js:1985"
+   "src/engine/game.js:1987"
   ],
   "args": [
    "u.hero.name",
@@ -11394,7 +11399,7 @@
  },
  "Les bardes chantent la légende {0} : {1}, au service de {2}, l'a accomplie.": {
   "at": [
-   "src/engine/game.js:1987"
+   "src/engine/game.js:1989"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11404,7 +11409,7 @@
  },
  "{0} légendaire": {
   "at": [
-   "src/engine/game.js:1995"
+   "src/engine/game.js:1997"
   ],
   "args": [
    "(def.relic || 'une relique à son nom') + (slot === 'ranged' ? ', un arc' : slot === 'magic"
@@ -11412,228 +11417,228 @@
  },
  "une relique à son nom": {
   "at": [
-   "src/engine/game.js:1995"
+   "src/engine/game.js:1997"
   ]
  },
  ", un arc": {
   "at": [
-   "src/engine/game.js:1995"
+   "src/engine/game.js:1997"
   ]
  },
  ", un bâton": {
   "at": [
-   "src/engine/game.js:1995"
+   "src/engine/game.js:1997"
   ]
  },
  ", une arme": {
   "at": [
-   "src/engine/game.js:1995"
+   "src/engine/game.js:1997"
   ]
  },
  "Épée": {
   "at": [
-   "src/engine/game.js:2007"
+   "src/engine/game.js:2009"
   ]
  },
  "Glaive": {
   "at": [
-   "src/engine/game.js:2007"
+   "src/engine/game.js:2009"
   ]
  },
  "Masse": {
   "at": [
-   "src/engine/game.js:2008"
+   "src/engine/game.js:2010"
   ]
  },
  "Fléau": {
   "at": [
-   "src/engine/game.js:2008"
+   "src/engine/game.js:2010"
   ]
  },
  "Francisque": {
   "at": [
-   "src/engine/game.js:2009"
+   "src/engine/game.js:2011"
   ]
  },
  "Arc long": {
   "at": [
-   "src/engine/game.js:2010"
+   "src/engine/game.js:2012"
   ]
  },
  "Sceptre": {
   "at": [
-   "src/engine/game.js:2011"
+   "src/engine/game.js:2013"
   ]
  },
  "Baguette": {
   "at": [
-   "src/engine/game.js:2012"
+   "src/engine/game.js:2014"
   ]
  },
  "Bouclier": {
   "at": [
-   "src/engine/game.js:2013"
+   "src/engine/game.js:2015"
   ]
  },
  "Pavois": {
   "at": [
-   "src/engine/game.js:2013"
+   "src/engine/game.js:2015"
   ]
  },
  "Cotte de mailles": {
   "at": [
-   "src/engine/game.js:2014"
+   "src/engine/game.js:2016"
   ]
  },
  "Haubert": {
   "at": [
-   "src/engine/game.js:2014"
+   "src/engine/game.js:2016"
   ]
  },
  "Armure de plates": {
   "at": [
-   "src/engine/game.js:2015"
+   "src/engine/game.js:2017"
   ]
  },
  "Cuirasse": {
   "at": [
-   "src/engine/game.js:2015"
+   "src/engine/game.js:2017"
   ]
  },
  "Amulette": {
   "at": [
-   "src/engine/game.js:2016"
+   "src/engine/game.js:2018"
   ]
  },
  "Pendentif": {
   "at": [
-   "src/engine/game.js:2016"
+   "src/engine/game.js:2018"
   ]
  },
  "Anneau": {
   "at": [
-   "src/engine/game.js:2017"
+   "src/engine/game.js:2019"
   ]
  },
  "Bague": {
   "at": [
-   "src/engine/game.js:2017"
+   "src/engine/game.js:2019"
   ]
  },
  "Cape": {
   "at": [
-   "src/engine/game.js:2018"
+   "src/engine/game.js:2020"
   ]
  },
  "Manteau": {
   "at": [
-   "src/engine/game.js:2018"
+   "src/engine/game.js:2020"
   ]
  },
  "Heaume": {
   "at": [
-   "src/engine/game.js:2019"
+   "src/engine/game.js:2021"
   ]
  },
  "Casque": {
   "at": [
-   "src/engine/game.js:2019"
+   "src/engine/game.js:2021"
   ]
  },
  "Gantelets": {
   "at": [
-   "src/engine/game.js:2020"
+   "src/engine/game.js:2022"
   ]
  },
  "Orbe": {
   "at": [
-   "src/engine/game.js:2021"
+   "src/engine/game.js:2023"
   ]
  },
  "Bottes": {
   "at": [
-   "src/engine/game.js:2022"
+   "src/engine/game.js:2024"
   ]
  },
  "du Dragon": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "de l'Aube": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "des Ombres": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "de Feu": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "du Givre": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "des Anciens": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "de Lumière": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "du Vide": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "des Rois": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "de la Tempête": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "du Serment": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "de Vigilance": {
   "at": [
-   "src/engine/game.js:2024"
+   "src/engine/game.js:2026"
   ]
  },
  "défense": {
   "at": [
-   "src/engine/game.js:2044",
+   "src/engine/game.js:2046",
    "src/engine/aistrat.js:7"
   ]
  },
  "résistance": {
   "at": [
-   "src/engine/game.js:2044"
+   "src/engine/game.js:2046"
   ]
  },
  "précision": {
   "at": [
-   "src/engine/game.js:2044"
+   "src/engine/game.js:2046"
   ]
  },
  " (+{0} attaque)": {
   "at": [
-   "src/engine/game.js:2046"
+   "src/engine/game.js:2048"
   ],
   "args": [
    "ITEM_POWERS[p].melee"
@@ -11647,7 +11652,7 @@
  "Des pillards": {
   "at": [
    "src/engine/turn.js:84",
-   "src/engine/turn.js:738"
+   "src/engine/turn.js:739"
   ]
  },
  "Des troupes {0}": {
@@ -11699,7 +11704,7 @@
  "unité": {
   "at": [
    "src/engine/turn.js:89",
-   "src/engine/turn.js:639",
+   "src/engine/turn.js:640",
    "src/engine/spells.js:31",
    "src/engine/ai.js:1260"
   ]
@@ -11707,7 +11712,7 @@
  "unités": {
   "at": [
    "src/engine/turn.js:89",
-   "src/engine/turn.js:639",
+   "src/engine/turn.js:640",
    "src/engine/spells.js:31",
    "src/engine/spells.js:31"
   ],
@@ -11716,7 +11721,7 @@
  "Mana épuisé : {0} se dissipe.": {
   "at": [
    "src/engine/turn.js:107",
-   "src/engine/turn.js:424"
+   "src/engine/turn.js:425"
   ],
   "args": [
    "DATA.spells.time_stop.name"
@@ -11724,7 +11729,7 @@
  },
  "Recherche achevée : {0}.": {
   "at": [
-   "src/engine/turn.js:131"
+   "src/engine/turn.js:132"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -11732,12 +11737,12 @@
  },
  "Vous pouvez désormais lancer le Sort de Maîtrise !": {
   "at": [
-   "src/engine/turn.js:133"
+   "src/engine/turn.js:134"
   ]
  },
  "{0} a été abandonnée par ses habitants.": {
   "at": [
-   "src/engine/turn.js:151"
+   "src/engine/turn.js:152"
   ],
   "args": [
    "c.name"
@@ -11745,7 +11750,7 @@
  },
  "{0} grandit : {1} citoyens.": {
   "at": [
-   "src/engine/turn.js:154"
+   "src/engine/turn.js:155"
   ],
   "args": [
    "c.name",
@@ -11754,7 +11759,7 @@
  },
  "{0} a atteint sa population maximale : les logements laissent place au commerce.": {
   "at": [
-   "src/engine/turn.js:161"
+   "src/engine/turn.js:162"
   ],
   "args": [
    "c.name"
@@ -11762,7 +11767,7 @@
  },
  "{0} : {1} n'est plus possible (un prérequis manque){2} ; {3}.": {
   "at": [
-   "src/engine/turn.js:178"
+   "src/engine/turn.js:179"
   ],
   "args": [
    "c.name",
@@ -11773,17 +11778,17 @@
  },
  ", il attend en file": {
   "at": [
-   "src/engine/turn.js:178"
+   "src/engine/turn.js:179"
   ]
  },
  ", son avancement passe à la suite": {
   "at": [
-   "src/engine/turn.js:178"
+   "src/engine/turn.js:179"
   ]
  },
  "la cité passe à {0}": {
   "at": [
-   "src/engine/turn.js:178"
+   "src/engine/turn.js:179"
   ],
   "args": [
    "Cities.prodName(c)"
@@ -11791,12 +11796,12 @@
  },
  "à vous de choisir la suite": {
   "at": [
-   "src/engine/turn.js:178"
+   "src/engine/turn.js:179"
   ]
  },
  "{0} achève un grand ouvrage : {1}.": {
   "at": [
-   "src/engine/turn.js:195"
+   "src/engine/turn.js:196"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, c.owner))",
@@ -11805,7 +11810,7 @@
  },
  "{0} a construit : {1}.": {
   "at": [
-   "src/engine/turn.js:198"
+   "src/engine/turn.js:199"
   ],
   "args": [
    "c.name",
@@ -11814,7 +11819,7 @@
  },
  "{0}, gouverneur de {1}, lance : {2}.": {
   "at": [
-   "src/engine/turn.js:207"
+   "src/engine/turn.js:208"
   ],
   "args": [
    "gov.hero.name",
@@ -11824,7 +11829,7 @@
  },
  "{0} ({1}) lance : {2}.": {
   "at": [
-   "src/engine/turn.js:208"
+   "src/engine/turn.js:209"
   ],
   "args": [
    "c.name",
@@ -11834,7 +11839,7 @@
  },
  "{0} (garnison)": {
   "at": [
-   "src/engine/turn.js:232"
+   "src/engine/turn.js:233"
   ],
   "args": [
    "dead.join(', ')"
@@ -11842,7 +11847,7 @@
  },
  "La Faille du chaos ronge {0} : {1}.": {
   "at": [
-   "src/engine/turn.js:233"
+   "src/engine/turn.js:234"
   ],
   "args": [
    "c.name",
@@ -11851,7 +11856,7 @@
  },
  "{0} : {1} des armes {2}.": {
   "at": [
-   "src/engine/turn.js:255"
+   "src/engine/turn.js:256"
   ],
   "args": [
    "c.name",
@@ -11861,19 +11866,19 @@
  },
  "unité reçoit": {
   "at": [
-   "src/engine/turn.js:255"
+   "src/engine/turn.js:256"
   ]
  },
  "unités reçoivent": {
   "at": [
-   "src/engine/turn.js:255",
-   "src/engine/turn.js:255"
+   "src/engine/turn.js:256",
+   "src/engine/turn.js:256"
   ],
   "hint": "pluriel de « unité reçoit »"
  },
  "{0} : plus aucune unité à équiper d'armes magiques.": {
   "at": [
-   "src/engine/turn.js:256"
+   "src/engine/turn.js:257"
   ],
   "args": [
    "c.name"
@@ -11881,7 +11886,7 @@
  },
  "{0} : la garnison est pleine ({1} unités) et aucune case voisine n'est libre : l'unité ({2}) attend qu'une place se libère.": {
   "at": [
-   "src/engine/turn.js:272"
+   "src/engine/turn.js:273"
   ],
   "args": [
    "c.name",
@@ -11891,7 +11896,7 @@
  },
  "{0} a recruté : {1}{2}. La garnison étant pleine ({3} unités), la nouvelle unité attend hors les murs, en ({4}, {5}).": {
   "at": [
-   "src/engine/turn.js:293"
+   "src/engine/turn.js:294"
   ],
   "args": [
    "c.name",
@@ -11904,8 +11909,8 @@
  },
  ", avec {0}": {
   "at": [
-   "src/engine/turn.js:293",
-   "src/engine/turn.js:294"
+   "src/engine/turn.js:294",
+   "src/engine/turn.js:295"
   ],
   "args": [
    "Spells.CHANNEL_NAMES[u.chaosChannel]"
@@ -11913,7 +11918,7 @@
  },
  "{0} a recruté : {1}{2}.": {
   "at": [
-   "src/engine/turn.js:294"
+   "src/engine/turn.js:295"
   ],
   "args": [
    "c.name",
@@ -11923,7 +11928,7 @@
  },
  "{0} : soins terminés, en attente d'ordres.": {
   "at": [
-   "src/engine/turn.js:319"
+   "src/engine/turn.js:320"
   ],
   "args": [
    "U.cap(Units.label(u))"
@@ -11931,17 +11936,17 @@
  },
  "Une terre corrompue a été purifiée.": {
   "at": [
-   "src/engine/turn.js:332"
+   "src/engine/turn.js:333"
   ]
  },
  "Route achevée.": {
   "at": [
-   "src/engine/turn.js:351"
+   "src/engine/turn.js:352"
   ]
  },
  "Trésor à sec : vente {0} à {1} ({2} or).": {
   "at": [
-   "src/engine/turn.js:363"
+   "src/engine/turn.js:364"
   ],
   "args": [
    "U.de(DATA.buildings[b].name)",
@@ -11951,7 +11956,7 @@
  },
  "Faute de solde, désertion de {0}.": {
   "at": [
-   "src/engine/turn.js:370"
+   "src/engine/turn.js:371"
   ],
   "args": [
    "Units.label(unit)"
@@ -11959,7 +11964,7 @@
  },
  "{0} sur {1}": {
   "at": [
-   "src/engine/turn.js:390"
+   "src/engine/turn.js:391"
   ],
   "args": [
    "DATA.spells[e].name",
@@ -11968,7 +11973,7 @@
  },
  "{0} à {1}": {
   "at": [
-   "src/engine/turn.js:396"
+   "src/engine/turn.js:397"
   ],
   "args": [
    "DATA.spells[e.spell].name",
@@ -11977,7 +11982,7 @@
  },
  "Famine : dissolution de {0}, faute de vivres.": {
   "at": [
-   "src/engine/turn.js:410"
+   "src/engine/turn.js:411"
   ],
   "args": [
    "Units.label(u)"
@@ -11985,7 +11990,7 @@
  },
  "Mana épuisé : {0} se dissipe sur {1}.": {
   "at": [
-   "src/engine/turn.js:419"
+   "src/engine/turn.js:420"
   ],
   "args": [
    "DATA.spells[e].name",
@@ -11994,7 +11999,7 @@
  },
  "Mana épuisé : retour de {0} dans le néant.": {
   "at": [
-   "src/engine/turn.js:421"
+   "src/engine/turn.js:422"
   ],
   "args": [
    "Units.label(u)"
@@ -12002,7 +12007,7 @@
  },
  "Mana épuisé : {0} se dissipe à {1}.": {
   "at": [
-   "src/engine/turn.js:423"
+   "src/engine/turn.js:424"
   ],
   "args": [
    "DATA.spells[e.spell].name",
@@ -12011,31 +12016,31 @@
  },
  "volcan surgit": {
   "at": [
-   "src/engine/turn.js:457"
+   "src/engine/turn.js:458"
   ]
  },
  "volcans surgissent": {
   "at": [
-   "src/engine/turn.js:457",
-   "src/engine/turn.js:457"
+   "src/engine/turn.js:458",
+   "src/engine/turn.js:458"
   ],
   "hint": "pluriel de « volcan surgit »"
  },
  "terre est corrompue": {
   "at": [
-   "src/engine/turn.js:457"
+   "src/engine/turn.js:458"
   ]
  },
  "terres sont corrompues": {
   "at": [
-   "src/engine/turn.js:457",
-   "src/engine/turn.js:457"
+   "src/engine/turn.js:458",
+   "src/engine/turn.js:458"
   ],
   "hint": "pluriel de « terre est corrompue »"
  },
  "{0} {1} : {2} près de {3}.": {
   "at": [
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459"
   ],
   "args": [
    "volc.length ? 'Armageddon' : 'Grande Dévastation'",
@@ -12046,17 +12051,17 @@
  },
  "Votre pluie de météores a détruit vos propres troupes : ": {
   "at": [
-   "src/engine/turn.js:497"
+   "src/engine/turn.js:498"
   ]
  },
  "La pluie de météores a détruit ": {
   "at": [
-   "src/engine/turn.js:497"
+   "src/engine/turn.js:498"
   ]
  },
  "Pluie de météores sur {0} : {1}.": {
   "at": [
-   "src/engine/turn.js:499"
+   "src/engine/turn.js:500"
   ],
   "args": [
    "c.name",
@@ -12065,17 +12070,17 @@
  },
  "La lune bienveillante décline.": {
   "at": [
-   "src/engine/turn.js:508"
+   "src/engine/turn.js:509"
   ]
  },
  "La lune maléfique décline.": {
   "at": [
-   "src/engine/turn.js:508"
+   "src/engine/turn.js:509"
   ]
  },
  "Un filon d'or est découvert : +{0} or.": {
   "at": [
-   "src/engine/turn.js:520"
+   "src/engine/turn.js:521"
   ],
   "args": [
    "g"
@@ -12083,7 +12088,7 @@
  },
  "Des cristaux de mana affleurent : +{0} mana.": {
   "at": [
-   "src/engine/turn.js:521"
+   "src/engine/turn.js:522"
   ],
   "args": [
    "m"
@@ -12091,7 +12096,7 @@
  },
  "Un riche marchand fait don de {0} or à votre cause.": {
   "at": [
-   "src/engine/turn.js:522"
+   "src/engine/turn.js:523"
   ],
   "args": [
    "g"
@@ -12099,7 +12104,7 @@
  },
  "La peste frappe {0}{1}": {
   "at": [
-   "src/engine/turn.js:523"
+   "src/engine/turn.js:524"
   ],
   "args": [
    "c.name",
@@ -12108,7 +12113,7 @@
  },
  " : {0} habitants en moins.": {
   "at": [
-   "src/engine/turn.js:523"
+   "src/engine/turn.js:524"
   ],
   "args": [
    "U.fmt(before - c.pop)"
@@ -12116,7 +12121,7 @@
  },
  "Explosion démographique à {0} : la croissance double pendant 10 tours.": {
   "at": [
-   "src/engine/turn.js:524"
+   "src/engine/turn.js:525"
   ],
   "args": [
    "c.name"
@@ -12124,17 +12129,17 @@
  },
  "Une lune bienveillante se lève : la magie de Vie s'intensifie, celle de Mort faiblit.": {
   "at": [
-   "src/engine/turn.js:525"
+   "src/engine/turn.js:526"
   ]
  },
  "Une lune maléfique se lève : la magie de Mort s'intensifie, celle de Vie faiblit.": {
   "at": [
-   "src/engine/turn.js:526"
+   "src/engine/turn.js:527"
   ]
  },
  "Un tremblement de terre ravage {0}{1}.": {
   "at": [
-   "src/engine/turn.js:527"
+   "src/engine/turn.js:528"
   ],
   "args": [
    "c.name",
@@ -12143,7 +12148,7 @@
  },
  "Des prospecteurs découvrent un gisement près de {0}.": {
   "at": [
-   "src/engine/turn.js:531"
+   "src/engine/turn.js:532"
   ],
   "args": [
    "c.name"
@@ -12151,7 +12156,7 @@
  },
  "Un gisement s'épuise près de {0}.": {
   "at": [
-   "src/engine/turn.js:536"
+   "src/engine/turn.js:537"
   ],
   "args": [
    "c.name"
@@ -12159,7 +12164,7 @@
  },
  "{0} se révolte et proclame son indépendance !": {
   "at": [
-   "src/engine/turn.js:541"
+   "src/engine/turn.js:542"
   ],
   "args": [
    "c.name"
@@ -12167,8 +12172,8 @@
  },
  "{0} ({1}) propose ses services pour {2} or.": {
   "at": [
-   "src/engine/turn.js:585",
-   "src/engine/turn.js:604"
+   "src/engine/turn.js:586",
+   "src/engine/turn.js:605"
   ],
   "args": [
    "h.name",
@@ -12178,7 +12183,7 @@
  },
  "{0} de mercenaires ({1}) proposent leurs services pour {2} or.": {
   "at": [
-   "src/engine/turn.js:639"
+   "src/engine/turn.js:640"
   ],
   "args": [
    "U.n(count, 'unité')",
@@ -12188,13 +12193,13 @@
  },
  "Aucune forteresse.": {
   "at": [
-   "src/engine/turn.js:644",
-   "src/engine/turn.js:665"
+   "src/engine/turn.js:645",
+   "src/engine/turn.js:666"
   ]
  },
  "Plus de place autour de {0}.": {
   "at": [
-   "src/engine/turn.js:652"
+   "src/engine/turn.js:653"
   ],
   "args": [
    "fc.name"
@@ -12202,7 +12207,7 @@
  },
  "Les mercenaires ({0}) rejoignent vos rangs à {1}.": {
   "at": [
-   "src/engine/turn.js:654"
+   "src/engine/turn.js:655"
   ],
   "args": [
    "DATA.units[off.type].name",
@@ -12211,7 +12216,7 @@
  },
  "Vous avez déjà six héros.": {
   "at": [
-   "src/engine/turn.js:662",
+   "src/engine/turn.js:663",
    "src/engine/spells.js:266",
    "src/engine/spells.js:589",
    "src/engine/spells.js:604"
@@ -12219,7 +12224,7 @@
  },
  "{0} sert déjà un autre sorcier.": {
   "at": [
-   "src/engine/turn.js:663"
+   "src/engine/turn.js:664"
   ],
   "args": [
    "h.name"
@@ -12227,7 +12232,7 @@
  },
  "Aucune place près de {0} pour accueillir le héros.": {
   "at": [
-   "src/engine/turn.js:667"
+   "src/engine/turn.js:668"
   ],
   "args": [
    "fc.name"
@@ -12235,7 +12240,7 @@
  },
  "{0} rejoint vos rangs à {1}.": {
   "at": [
-   "src/engine/turn.js:670"
+   "src/engine/turn.js:671"
   ],
   "args": [
    "h.name",
@@ -12244,7 +12249,7 @@
  },
  "{0} marchent sur {1} !": {
   "at": [
-   "src/engine/turn.js:738"
+   "src/engine/turn.js:739"
   ],
   "args": [
    "u0.rampage ? 'Des monstres en maraude' : 'Des pillards'",
@@ -12253,7 +12258,7 @@
  },
  "Des monstres en maraude": {
   "at": [
-   "src/engine/turn.js:738"
+   "src/engine/turn.js:739"
   ]
  },
  "peau de démon (+3 en défense)": {
