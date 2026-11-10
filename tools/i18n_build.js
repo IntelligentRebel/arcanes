@@ -16,7 +16,7 @@ const FR = new Set(('de du des la le les un une et ou en à au aux pour par sur 
 // propriétés dont la valeur est une clé, jamais un texte affiché
 const KEY_PROPS = new Set(['en', 'id', 'key', 'icon', 'sprite', 'img', 'type', 'kind', 'realm', 'race', 'color', 'cls', 'class', 'className', 'style', 'anim', 'sfx', 'sound', 'tag', 'cmd', 'k', 'ref', 'file', 'src', 'font', 'family', 'align', 'dir', 'side', 'action', 'mode', 'status', 'state', 'value', 'target', 'effect', 'fx', 'unit', 'spell', 'building', 'terrain', 'mineral', 'shape', 'pose', 'act', 'lineCap', 'lineJoin', 'textAlign', 'textBaseline', 'cursor', 'display', 'position', 'event', 'Accept']);
 // zones où tout texte est affiché, même un mot seul en minuscules (fonctions, méthodes ou propriétés de ce nom)
-const FORCE_NAMES = new Set(['PLAN_NAMES', 'GOV_WORDS', 'RARITY_WORDS', 'raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
+const FORCE_NAMES = new Set(['AUTO_SPEED_WORDS', 'PLAN_NAMES', 'GOV_WORDS', 'RARITY_WORDS', 'raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
 const DISPLAY_PROPS = new Set(['name', 'label', 'title', 'text', 'desc', 'tip', 'msg', 'why', 'hint', 'note', 'sub', 'body', 'kicker', 'lore', 'story', 'epithet', 'quote', 'help', 'caption', 'short', 'long', 'verb', 'one', 'many', 'plural', 'singular', 'placeholder']);
 
 // identifiants du jeu (types d'unités, sorts, bâtiments…) et noms anglais d'origine : des clés, même s'ils ressemblent à des mots

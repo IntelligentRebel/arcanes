@@ -311,7 +311,7 @@ Object.assign(AI, {
 Object.assign(AI, {
   CRUSADE_COOL: 8, _crus: new WeakMap(),
   crusadeTarget(game, pl) {
-    if (!AI.feat(pl, 'crusade', 2) || !AI.feat(pl, 'planes', 2) || game.turn < 60 || pl.banished) return null;
+    if (!AI.feat(pl, 'crusade', 2) || !AI.feat(pl, 'planes', 2) || game.turn < 60 * Game.pace(game) || pl.banished) return null;
     const memo = AI._crus.get(pl); if (memo && memo.turn === game.turn) return memo.t;   // (hors sauvegarde)
     const alive = game.players.filter(p => p.alive && !p.banished);
     const sc = new Map(alive.map(p => [p, Crisis.score(game, p)]));

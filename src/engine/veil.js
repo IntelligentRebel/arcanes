@@ -490,7 +490,7 @@ const Crisis = {
   init(game, mode) {
     if (game.crisis) return;
     mode = mode || 'normal';
-    game.crisis = { mode, at: CRISIS_AT[mode] || null, state: mode === 'off' ? 'off' : 'pending', site: null, start: 0, waves: 0, next: 0 };
+    game.crisis = { mode, at: CRISIS_AT[mode] ? Math.round(CRISIS_AT[mode] * Game.pace(game)) : null, state: mode === 'off' ? 'off' : 'pending', site: null, start: 0, waves: 0, next: 0 };
   },
   active(game) { return game.crisis && game.crisis.state === 'active'; },
   site(game) { return game.crisis && game.crisis.site != null ? game.sites[game.crisis.site] : null; },

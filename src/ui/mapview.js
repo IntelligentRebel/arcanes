@@ -667,16 +667,19 @@ const MapView = {
       const walking = MapView.anim && MapView.anim.ids.includes(u0.id) && now - MapView.anim.t0 < MapView.anim.dur + 60;
       MapView.drawUnit(ctx, u0, units.length, P.x, P.y, ts, !!city, MapView.sel && MapView.sel.tileKey === p + ':' + k, walking ? now - MapView.anim.walk0 : null, units.some(x => x.stasis));
     }
-    // brouillard : une petite image (un pixel par case) agrandie avec lissage, pour des bords doux
+    // brouillard : une petite image (un pixel par case) de la fenêtre visible, agrandie avec lissage, pour des bords doux.
+    // Tracée d'un seul tenant, sans découpe : découpée à la couture est-ouest du monde, elle y laissait une arête nette
+    // (le lissage ne franchit pas le bord d'une découpe sur certaines cartes graphiques).
     {
-      const key = MapView.visTurn + ':' + p + ':' + MapView.exploredCount(ex);
+      const fx0 = x0 - 1, fy0 = Math.floor(top) - 2, fw = x1 - x0 + 3, fh = Math.ceil(H / ts) + 5;
+      const key = [MapView.visTurn, p, MapView.exploredCount(ex), fx0, fy0, fw, fh].join(':');
       if (MapView._fogKey !== key) {
-        const W = world.w, H = world.h;
+        const Ww = world.w, Hh = world.h;
         const fc = MapView._fogC || (MapView._fogC = document.createElement('canvas'));
-        fc.width = W + 2; fc.height = H + 2;
-        const fctx = fc.getContext('2d'), img = fctx.createImageData(W + 2, H + 2);
-        for (let y = -1; y <= H; y++) for (let x = -1; x <= W; x++) {
-          const yy = Math.max(0, Math.min(H - 1, y)), i = yy * W + ((x + W) % W), o = ((y + 1) * (W + 2) + x + 1) * 4;
+        fc.width = fw; fc.height = fh;
+        const fctx = fc.getContext('2d'), img = fctx.createImageData(fw, fh);
+        for (let j = 0; j < fh; j++) for (let k = 0; k < fw; k++) {
+          const yy = Math.max(0, Math.min(Hh - 1, fy0 + j)), i = yy * Ww + World.wx(world, fx0 + k), o = (j * fw + k) * 4;
           img.data[o] = 5; img.data[o + 1] = 7; img.data[o + 2] = 12;
           img.data[o + 3] = !ex[i] ? 255 : !vis[i] ? 112 : 0;
         }
@@ -684,13 +687,7 @@ const MapView = {
         MapView._fogKey = key;
       }
       ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-      for (let k = -1; k <= 1; k++) {
-        const ox = (k * world.w - 1 - left) * ts, oy = (-1 - top) * ts;
-        if (ox + (world.w + 2) * ts < 0 || ox > W) continue;
-        ctx.save(); ctx.beginPath(); ctx.rect(ox + ts, 0, world.w * ts, H); ctx.clip();
-        ctx.drawImage(MapView._fogC, ox, oy, (world.w + 2) * ts, (world.h + 2) * ts);
-        ctx.restore();
-      }
+      ctx.drawImage(MapView._fogC, (fx0 - left) * ts, (fy0 - top) * ts, fw * ts, fh * ts);
       ctx.imageSmoothingEnabled = false;
       // cases inexplorées : noyau noir plein (rien ne transparaît au-delà de la frange)
       ctx.fillStyle = '#05070a';

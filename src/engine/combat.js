@@ -2077,7 +2077,7 @@ Object.assign(CombatSpells, {
     const locked = t.u.ench.includes('spell_lock') || t.tempEnch.includes('spell_lock');   // le Sceau protège aussi le lien d'une créature invoquée
     if (!mine) {
       // un Sceau de sort protège tout le reste : il faut d'abord le faire tomber
-      const pid = ownerOf(t.side), cost = e => (DATA.spells[e] || {}).cost || 20;
+      const pid = ownerOf(t.side), cost = e => (DATA.spells[e] || {}).cost0 || (DATA.spells[e] || {}).cost || 20;
       if (t.u.ench.includes('spell_lock') || t.tempEnch.includes('spell_lock')) {
         if (roll('spell_lock', cost('spell_lock'), pid)) { t.u.ench = t.u.ench.filter(e => e !== 'spell_lock'); t.tempEnch = t.tempEnch.filter(e => e !== 'spell_lock'); }
       } else { t.tempEnch = t.tempEnch.filter(e => !roll(e, cost(e), pid)); t.u.ench = t.u.ench.filter(e => !roll(e, cost(e), pid)); }
@@ -2108,7 +2108,7 @@ Object.assign(CombatSpells, {
     const mine = t.side === side || (t.possessed && t.origSide === side);
     const ench = t.u.ench.concat(t.tempEnch), locked = ench.includes('spell_lock');
     if (!mine) {
-      const pid = bt.owner(t.side), cost = e => (DATA.spells[e] || {}).cost || 20;
+      const pid = bt.owner(t.side), cost = e => (DATA.spells[e] || {}).cost0 || (DATA.spells[e] || {}).cost || 20;
       if (locked) out.push({ name: nm('spell_lock'), p: ch('spell_lock', cost('spell_lock'), pid) });
       else for (const e of ench) out.push({ name: nm(e), p: ch(e, cost(e), pid) });
       if (Units.isFantastic(t.u) && t.u.summoned && t.u.combatOnly && !locked) { const c = DATA.units[t.u.type].castCost || 50; out.push({ name: Units.label(t.u) + ' (renvoi)', p: strength / (strength + c) }); }
@@ -2126,7 +2126,7 @@ Object.assign(CombatSpells, {
   disenchantAll(bt, side, strength) {
     let n = 0;
     for (const b of bt.alive()) n += CombatSpells.dispelUnit(bt, side, b, strength);
-    const foe = bt.owner(1 - side), ch = e => bt.rng.chance(strength / (strength + ((DATA.spells[e] || {}).combatCost || (DATA.spells[e] || {}).cost || 20) * Magic.dispelResist(bt.game, foe, e)));
+    const foe = bt.owner(1 - side), ch = e => bt.rng.chance(strength / (strength + ((DATA.spells[e] || {}).combatCost || (DATA.spells[e] || {}).cost0 || (DATA.spells[e] || {}).cost || 20) * Magic.dispelResist(bt.game, foe, e)));
     const gone = [];
     bt.ench[1 - side] = bt.ench[1 - side].filter(e => { const g = ch(e); if (g) gone.push(e); return !g; });
     // effets globaux posés par l'ennemi pendant ce combat (Lumière vraie, Ténèbres…)
@@ -2671,13 +2671,13 @@ const CombatAI = {
         else if (o.id === 'call_chaos') score = foes.length * 1.8;
         else if (o.id === 'dispel_magic' || o.id === 'dispel_magic_true') {
           const str = ((sp.combatCost || sp.cost || 10)) * (o.id === 'dispel_magic_true' ? 3 : 1), pr = c => str / (str + c);
-          const v = f => f.side !== side ? U.sum(f.u.ench.concat(f.tempEnch), e => { const c = (DATA.spells[e] || {}).cost || 20; return c / 12 * pr(c); }) + (f.u.combatOnly && f.u.summoned && Units.isFantastic(f.u) ? Units.strength(bt.game, f.u) / 10 * pr(DATA.units[f.u.type].castCost || 50) : 0)
+          const v = f => f.side !== side ? U.sum(f.u.ench.concat(f.tempEnch), e => { const c = (DATA.spells[e] || {}).cost0 || (DATA.spells[e] || {}).cost || 20; return c / 12 * pr(c); }) + (f.u.combatOnly && f.u.summoned && Units.isFantastic(f.u) ? Units.strength(bt.game, f.u) / 10 * pr(DATA.units[f.u.type].castCost || 50) : 0)
             : (f.curses.length * 3 + (f.asleep || f.confused ? 5 : 0) + (f.web > 0 ? 3 : 0) + (f.possessed && f.origSide === side ? Units.strength(bt.game, f.u) / 10 : 0)) * pr(20);
           const t = U.max(CombatSpells.validTargets(bt, side, o.id), v); if (t && v(t) > 0) { target = t; score = v(t); }
         }
         else if (o.id === 'disenchant_area' || o.id === 'disenchant_true') {
           const str = (o.id === 'disenchant_true' ? 150 : 50), pr = c => str / (str + c);
-          score = U.sum(foes, f => U.sum(f.u.ench.concat(f.tempEnch), e => { const c = (DATA.spells[e] || {}).cost || 20; return c / 12 * pr(c); })) + U.sum(friends, f => (f.curses.length * 3 + (f.asleep || f.confused ? 5 : 0)) * pr(20));
+          score = U.sum(foes, f => U.sum(f.u.ench.concat(f.tempEnch), e => { const c = (DATA.spells[e] || {}).cost0 || (DATA.spells[e] || {}).cost || 20; return c / 12 * pr(c); })) + U.sum(friends, f => (f.curses.length * 3 + (f.asleep || f.confused ? 5 : 0)) * pr(20));
         }
         else if (o.id === 'wall_of_fire' && !CombatSpells.uselessWhy(bt, side, o.id)) score = foes.filter(f => !bt.stats(f).flying && bt.stats(f).melee > 0).length * 1.3;
         else if (o.id === 'wall_of_darkness' && !CombatSpells.uselessWhy(bt, side, o.id)) score = foes.filter(f => bt.stats(f).ranged > 0).length * 1.6;

@@ -133,7 +133,7 @@ const Setup = {
   newGame() {
     const st = {
       mode: 'preset', preset: 0, name: 'Morwen', portrait: 0, books: { life: 0, death: 0, chaos: 0, nature: 0, sorcery: 0 }, retorts: [], race: 'highmen',
-      difficulty: 'normal', landSize: 'medium', mapSize: 'normal', opponents: 3, seed: '', color: 0, mountainsBlock: true, crisis: 'normal', finale: 'random',
+      difficulty: 'normal', landSize: 'medium', mapSize: 'normal', opponents: 3, seed: '', color: 0, mountainsBlock: true, crisis: 'normal', finale: 'random', pace: 'normal',
     };
     Setup.applyPreset(st, 0);
     const body = h('div');
@@ -187,6 +187,7 @@ const Setup = {
               (() => { const l = sel('Difficulté', 'difficulty', AI.LEVELS.map(k => [k, AI.LEVEL_NAMES[k]])); UI.tipOn(l, () => Setup.difficultyTip(st.difficulty)); return l; })(),
               sel('Taille de la carte', 'mapSize', Object.entries(MAP_SIZES).map(([k, v]) => [k, v.name + ' · ' + v.w + '×' + v.h])),
               sel('Terres émergées', 'landSize', [['small', 'Peu'], ['medium', 'Moyennes'], ['large', 'Beaucoup']]),
+              (() => { const l = sel('Rythme', 'pace', [['fast', 'Rapide'], ['normal', 'Normal'], ['epic', 'Épique']]); UI.tipOn(l, () => '<b>Rapide</b> : bâtiments, unités, recherche et sorts lancés sur la carte coûtent un tiers de moins, et les cités grandissent plus vite.<br><b>Épique</b> : ils coûtent moitié plus, et les cités grandissent moins vite.<br>Les revenus, l\'entretien, les déplacements et les sorts de combat ne changent pas. La Crise et les crises de fin suivent le rythme.'); return l; })(),
               sel('Adversaires sur votre plan', 'opponents', [[1, '1'], [2, '2'], [3, '3'], [4, '4']]),
               sel('La Crise', 'crisis', [['normal', 'Vers le tour 150'], ['early', 'Précoce : tour 100'], ['late', 'Tardive : tour 200'], ['off', 'Désactivée']]),
               (() => { const l = sel('Crise de fin', 'finale', [['random', 'Contre le meneur'], ['off', 'Désactivée']]); UI.tipOn(l, () => 'Après le tour 200, si un sorcier écrase la partie, une crise tirée au sort se lève contre lui.'); return l; })(),
@@ -280,7 +281,7 @@ const Setup = {
     setTimeout(() => {
       try {
         const ms = MAP_SIZES[st.mapSize] || MAP_SIZES.normal;
-        const game = Game.newGame({ seed, mapW: ms.w, mapH: ms.h, landSize: st.landSize, opponents: st.opponents, difficulty: st.difficulty, mountainsBlock: st.mountainsBlock, crisis: st.crisis, finale: st.finale,
+        const game = Game.newGame({ seed, mapW: ms.w, mapH: ms.h, landSize: st.landSize, opponents: st.opponents, difficulty: st.difficulty, mountainsBlock: st.mountainsBlock, crisis: st.crisis, finale: st.finale, pace: st.pace,
           human: { name: st.name.trim(), portrait: st.portrait, books: st.books, retorts: st.retorts, race: st.race } });
         // couleur choisie
         const human = game.players[0];
@@ -299,6 +300,6 @@ const Setup = {
     // seuls les rivaux de son propre plan sont annoncés : ceux de l'autre plan sont une surprise
     const n = game.players.filter(o => o !== pl && o.plane === pl.plane).length;
     const rivals = n === 1 ? 'Un sorcier rival convoite' : (['', '', 'Deux', 'Trois', 'Quatre', 'Cinq'][n] || n) + ' sorciers rivaux convoitent';
-    return UI.choice('Bienvenue, ' + pl.name, '<p class="serif" style="font-size:16px">Votre forteresse de <b>' + U.esc(fc.name) + '</b> se dresse sur le plan ' + (fc.plane ? 'du Miroir' : 'd\'Arcane') + '. ' + rivals + ' la maîtrise des deux mondes.</p><p>Explorez, fondez des cités, liez les nœuds magiques et étudiez la magie. On l\'emporte en éliminant tous ses rivaux ou en lançant le <b>Sort de Maîtrise</b>.</p><p class="muted">Clic : sélectionner une pile · double-clic sur une destination : l\'y envoyer · clic droit : désélectionner. Un colon sélectionné affiche les meilleurs sites (★). <b>Entrée</b> termine le tour. Menu ▸ Aide pour les raccourcis.</p>', [{ label: 'Commencer', value: true, primary: true }]);
+    return UI.choice('Bienvenue, ' + pl.name, '<p class="serif" style="font-size:16px">Votre forteresse de <b>' + U.esc(fc.name) + '</b> se dresse sur le plan ' + (fc.plane ? 'du Miroir' : 'd\'Arcane') + '. ' + rivals + ' la maîtrise des deux mondes.</p><p>Explorez, fondez des cités, liez les nœuds magiques et étudiez la magie. On l\'emporte en éliminant tous ses rivaux ou en lançant le <b>Sort de Maîtrise</b>.</p><div class="box"><b class="gold">Commandes</b><div><b>Clic</b> : sélectionner une pile. <b>Double-clic</b> sur une case : l\'y envoyer. <b>Clic droit</b> : désélectionner. <b>Entrée</b> : finir le tour.</div><div class="muted">Un colon sélectionné affiche les meilleurs sites (★). Les autres raccourcis : Menu ▸ Aide.</div></div>', [{ label: 'Commencer', value: true, primary: true }]);
   },
 };

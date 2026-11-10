@@ -7,7 +7,7 @@ const Sprites = {
     return new Promise(res => { if (!src) return res(null); const img = new Image(); img.onload = () => res(img); img.onerror = () => { console.warn('Image introuvable : ' + String(src).slice(0, 60)); res(null); }; img.src = src; });
   },
   // (0.31.38) les grandes planches (plus de 120 Mo en tout) : téléchargées en flux, pour dire où l'on en est, et réessayées
-  // jusqu'à trois fois. Hors http (la copie locale), l'image se charge directement.
+  // jusqu'à trois fois ; si l'une manque encore, le jeu ne démarre pas (0.31.39 : plus de graphismes de secours). Hors http (la copie locale), l'image se charge directement.
   prog: { got: 0, total: 0, cb: null },
   async fetchImg(src) {
     if (!src) return null;
@@ -59,21 +59,29 @@ const Sprites = {
     if (typeof App !== 'undefined') App.dirty = true;
     if (typeof MapView !== 'undefined' && MapView.invalidate && MapView.cv) MapView.invalidate();
   },
-  // planches haute définition restées introuvables : le jeu tourne avec les graphismes de secours, et le dit
-  gfxWarn() {
-    if (!Sprites.failed.length || typeof document === 'undefined' || document.getElementById('gfxwarn')) return;
-    const el = h('div', { id: 'gfxwarn' }, h('span', null, 'Les graphismes haute définition n\'ont pas pu être téléchargés : le jeu s\'affiche avec des graphismes de secours.'),
-      h('button', { class: 'abtn primary', onclick: () => location.reload() }, 'Recharger'), h('button', { class: 'abtn', title: 'Fermer', onclick: () => el.remove() }, '×'));
-    document.body.append(el);
+  // planches introuvables après trois essais : pas de jeu sans elles (plus de graphismes de secours) ; on le dit, et on réessaie
+  bootRetry(boot) {
+    return new Promise(res => {
+      const txt = boot.querySelector ? boot.querySelector('.boot-txt') : null; if (!txt) return res();
+      txt.textContent = 'Le téléchargement des graphismes a échoué.';
+      const b = h('button', { class: 'btn primary', style: 'margin-top:14px', onclick: () => { b.remove(); txt.textContent = 'Chargement des graphismes…'; res(); } }, 'Réessayer');
+      txt.parentNode.append(b);
+    });
   },
   failed: [],
   async load() {
     Sprites.map = window.ATLAS_JSON || {};
     Sprites.hdMap = window.HD_JSON || {};
     const boot = Sprites.bootScreen();
-    const [img, hd, title, hd2, wpn, fx] = await Promise.all([Sprites.fetchImg(window.ATLAS_PNG), Sprites.fetchImg(window.HD_PNG), Sprites.fetchImg(window.TITLE_IMG), Sprites.fetchImg(window.HD2_PNG), Sprites.fetchImg(window.WEAPONS_PNG), Sprites.fetchImg(window.FX_PNG)]);
+    let img, hd, title, hd2, wpn, fx;
+    for (;;) {
+      [img, hd, title, hd2, wpn, fx] = await Promise.all([img || Sprites.fetchImg(window.ATLAS_PNG), hd || Sprites.fetchImg(window.HD_PNG), title || Sprites.fetchImg(window.TITLE_IMG), hd2 || Sprites.fetchImg(window.HD2_PNG), wpn || Sprites.fetchImg(window.WEAPONS_PNG), fx || Sprites.fetchImg(window.FX_PNG)]);
+      Sprites.failed = [!img && window.ATLAS_PNG ? 'atlas' : null, !hd && window.HD_PNG ? 'hd' : null, !hd2 && window.HD2_PNG ? 'hd2' : null].filter(Boolean);
+      if (!Sprites.failed.length || !boot.querySelector) break;
+      Sprites.prog.got = 0; Sprites.prog.total = 0;
+      await Sprites.bootRetry(boot);
+    }
     const anim = null;
-    Sprites.failed = [!hd && window.HD_PNG ? 'hd' : null, !hd2 && window.HD2_PNG ? 'hd2' : null].filter(Boolean);
     Weapons.img = wpn; Weapons.meta = wpn ? Object.assign({ s: {}, a: {} }, window.WEAPONS_JSON || {}) : { s: {}, a: {} };
     Fx.img = fx; Fx.meta = fx ? (window.FX_JSON || {}) : {};
     Sprites.img = img; Sprites.hd = hd; Sprites.title = title;
@@ -115,7 +123,6 @@ const Sprites = {
     if (hd) Sprites.buildVirtual();
     Sprites.ready = true;
     Sprites.prog.cb = null; boot.remove();
-    Sprites.gfxWarn();
     Sprites.loadAnim();   // sans attendre
   },
   // sprites composés à la volée et rangés comme des sprites HD : icônes des sorts d'invocation (la créature sur une vignette du royaume)

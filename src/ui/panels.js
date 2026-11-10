@@ -242,7 +242,7 @@ const Panels = {
     const body = h('div', { class: 'herosheet' });
     const m = UI.modal({ title: u0.hero.name, width: 1020, body });
     const SLOT = { melee: 'Arme', ranged: 'Arme à distance', magic: 'Arme magique', anyWeapon: 'Arme', armor: 'Armure', jewelry: 'Bijou' };
-    const itemTip = it => '<h4>' + U.esc(it.name) + '</h4><div>' + U.esc(Items.describe(it)) + '</div>' + it.powers.map(p => '<div class="gold">' + U.esc(ITEM_POWERS[p].name) + (ITEM_POWERS[p].ability && ABILITY_NAMES[ITEM_POWERS[p].ability] ? ' : ' + U.esc(ABILITY_NAMES[ITEM_POWERS[p].ability]) : '') + '</div>').join('') + (it.bookArtifact ? '<div class="dim">Artefact du Livre de légende, unique au monde.</div>' : it.legendary ? '<div class="dim">Objet légendaire, gagné en accomplissant une quête.</div>' : '') + '<div class="dim">Valeur ' + (it.value || 100) + ' or</div>';
+    const itemTip = it => '<h4>' + U.esc(it.name) + '</h4><div>' + U.esc(Items.describe(it)) + '</div>' + it.powers.map(p => '<div class="gold">' + U.esc(ITEM_POWERS[p].name) + (ITEM_POWERS[p].ability && ABILITY_NAMES[ITEM_POWERS[p].ability] && ABILITY_NAMES[ITEM_POWERS[p].ability] !== ITEM_POWERS[p].name ? ' : ' + U.esc(ABILITY_NAMES[ITEM_POWERS[p].ability]) : '') + '</div>').join('') + (it.bookArtifact ? '<div class="dim">Artefact du Livre de légende, unique au monde.</div>' : it.legendary ? '<div class="dim">Objet légendaire, gagné en accomplissant une quête.</div>' : '') + '<div class="dim">Valeur ' + (it.value || 100) + ' or</div>';
     const render = () => {
       const u = game.units[u0.id]; if (!u) { m.close(); return; }
       body.innerHTML = '';
@@ -747,6 +747,9 @@ const Panels = {
     const vol = h('input', { type: 'range', min: 0, max: 100, step: 5, value: Math.round(Sfx.mvol * 100), style: 'width:100%', onclick: e => e.stopPropagation(), oninput: e => { Sfx.setMusicVolume(e.target.value / 100); vlab.textContent = e.target.value + ' %'; } });
     const vlab = h('span', { class: 'dim' }, Math.round(Sfx.mvol * 100) + ' %');
     body.append(h('div', { class: 'row' }, h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Volume de la musique ', vlab), h('div', { class: 't2' }, vol))));
+    { const AUTO_SPEED_WORDS = { fast: 'rapide', medium: 'moyenne', slow: 'lente' }, cur = App.prefs.autoSpeed || 'fast';
+      row('Batailles automatiques : ' + AUTO_SPEED_WORDS[cur], 'Le rythme des batailles résolues automatiquement sous vos yeux', () => { const L = CombatView.AUTO_SPEEDS; App.setPref('autoSpeed', L[(L.indexOf(cur) + 1) % L.length]); again(); }); }
+    row('Journal : ' + (App.prefs.logReverse ? 'le plus récent en haut' : 'le plus récent en bas'), 'L\'ordre des lignes du journal', () => { App.setLogOrder(!App.prefs.logReverse); again(); });
     row('Unité suivante automatique : ' + (App.prefs.autoNext ? 'activée' : 'coupée'), 'Quand une unité a épuisé ses mouvements, la sélection passe d\'elle-même à la prochaine unité qui attend des ordres', () => { App.setPref('autoNext', !App.prefs.autoNext); again(); });
     row('Ronde des éclaireurs : ' + (App.prefs.scoutRevisit !== false ? 'activée' : 'coupée'), 'Quand il n\'y a plus rien à explorer, les éclaireurs en exploration automatique revisitent les antres qu\'on croit gardés, pour vérifier que leurs gardiens y sont toujours', () => { App.setPref('scoutRevisit', App.prefs.scoutRevisit === false); again(); });
     row('Journal', 'Afficher ou masquer le journal des événements (L)', () => { $('#logbox').classList.toggle('hidden'); m.close(); });

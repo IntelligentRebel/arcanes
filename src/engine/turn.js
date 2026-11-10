@@ -438,7 +438,7 @@ const Turn = {
       const garrison = Units.at(game, c.plane, c.x, c.y).filter(u => u.owner === -1).length;
       if (game.turn > 15 && garrison < 6 && game.rng.chance(0.04 + Cities.citizens(c) * 0.004)) {
         const race = DATA.races[c.race];
-        const opts = race.units.filter(t => { const d = DATA.units[t]; return !d.abilities.createOutpost && !d.abilities.construction && !d.abilities.scout && !d.abilities.siegeOnly && !d.sailing && d.cost <= 40 + game.turn; });
+        const opts = race.units.filter(t => { const d = DATA.units[t]; return !d.abilities.createOutpost && !d.abilities.construction && !d.abilities.scout && !d.abilities.siegeOnly && !d.sailing && (d.cost0 ?? d.cost) <= 40 + game.turn / Game.pace(game); });
         if (opts.length) Units.create(game, game.rng.pick(opts), -1, c.plane, c.x, c.y);
       }
     }

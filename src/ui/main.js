@@ -10,7 +10,7 @@ const App = {
     await Sprites.load();
     MapView.init($('#map'));
     window.addEventListener('resize', () => { MapView.resize(); App.redraw(); if (CombatView.active) { CombatView.layout(); } });
-    App.bindInput();
+    App.bindInput(); App.bindLog();
     Game.hooks.notify = (game, pid, e) => App.onLog(e);
     Game.hooks.update = (ev) => { if (ev && ev.type === 'move') MapView.bumpVis(); App.dirty = true; };
     Game.hooks.battle = (game, battle, info) => CombatView.run(game, battle, info);
@@ -96,14 +96,40 @@ const App = {
   },
 
   // ---------- journal ----------
+  setLogOrder(rev) {
+    App.setPref('logReverse', !!rev);
+    const box = $('#logbox'); for (const el of [...box.children].reverse()) box.append(el);
+    box.scrollTop = rev ? 0 : box.scrollHeight;
+  },
+  // le journal se déplace (poignée) et se redimensionne (coin) ; sa place est retenue, un double-clic sur la poignée la rend
+  logPlace() {
+    const w = $('#logwrap'), p = App.prefs.logPos; if (!w) return;
+    if (!p) { w.style.cssText = ''; return; }
+    const W = innerWidth, H = innerHeight, ww = U.clamp(p.w, 220, W - 16), hh = U.clamp(p.h, 80, H - 70);
+    w.style.left = U.clamp(p.l, 0, W - ww) + 'px'; w.style.top = U.clamp(p.t, 56, H - hh) + 'px'; w.style.bottom = 'auto'; w.style.width = ww + 'px'; w.style.height = hh + 'px'; w.style.maxHeight = 'none';
+  },
+  bindLog() {
+    const w = $('#logwrap'), grip = $('#log-grip'), size = $('#log-size'); if (!w || !grip) return;
+    const drag = (el, fn) => el.addEventListener('pointerdown', e => {
+      e.preventDefault(); const r = w.getBoundingClientRect(), x0 = e.clientX, y0 = e.clientY;
+      const mv = ev => { App.prefs.logPos = fn(r, ev.clientX - x0, ev.clientY - y0); App.logPlace(); };
+      const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); App.setPref('logPos', App.prefs.logPos); const box = $('#logbox'); if (!App.prefs.logReverse) box.scrollTop = box.scrollHeight; };
+      window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+    });
+    drag(grip, (r, dx, dy) => ({ l: r.left + dx, t: r.top + dy, w: r.width, h: r.height }));
+    drag(size, (r, dx, dy) => ({ l: r.left, t: r.top + dy, w: r.width + dx, h: r.height - dy }));
+    grip.addEventListener('dblclick', () => { App.setPref('logPos', null); App.logPlace(); });
+    window.addEventListener('resize', () => App.logPlace());
+    App.logPlace();
+  },
   onLog(e, silent) {
     if (!App.game) return;
     if (e.pid !== App.pid && e.pid !== -1) return;
     const box = $('#logbox');
     const div = h('div', { class: 'e' + (e.ref && e.ref.alert ? ' alert' : '') }, h('span', { class: 't' }, 'T' + e.turn), App.linkify(e));
-    box.append(div);
-    while (box.children.length > 120) box.firstChild.remove();
-    box.scrollTop = box.scrollHeight;
+    // l'ordre au choix (menu) : le plus récent en bas (par défaut) ou en haut
+    if (App.prefs.logReverse) { box.prepend(div); while (box.children.length > 120) box.lastChild.remove(); box.scrollTop = 0; }
+    else { box.append(div); while (box.children.length > 120) box.firstChild.remove(); box.scrollTop = box.scrollHeight; }
     if (!silent) Sfx.forLog(e, UI.busyLog);
     if (!silent && e.ref && e.ref.cache) {
       MapView.flash(e.ref.plane, e.ref.x, e.ref.y, CACHE_COLORS[e.ref.cache], 900);
@@ -2058,7 +2084,7 @@ const App = {
     if (dbl && App.prevSel && App.prevSel.key === key && now - App.prevSel.t < 400) { App.sel = App.prevSel.sel; MapView.sel = { tileKey: App.sel.plane + ':' + App.sel.x + ',' + App.sel.y, ids: App.sel.ids }; App.prevSel = null; await App.moveSelected(x, y); return; }
     App.prevSel = null;
     if (App.sel && App.sel.plane === p && !(App.sel.x === x && App.sel.y === y)) {
-      if (dbl) { clearTimeout(App._cityT); await App.moveSelected(x, y); return; }
+      if (dbl) { clearTimeout(App._cityT); if (!App.prefs.movedOnce) App.setPref('movedOnce', true); await App.moveSelected(x, y); return; }
       if (onUnits) { App.prevSel = { sel: App.sel, key, t: now }; App.selectTile(p, x, y); return; }
       // simple clic ailleurs : on vise (l'itinéraire s'affiche), sans rien ordonner
       MapView.hover = { x, y }; App.updatePathPreview(); App.renderSide();
@@ -2068,7 +2094,8 @@ const App = {
         App._cityT = setTimeout(() => { if (App.lastTile === key && App.lastClick === now && !UI.busy && App.game === game) CityUI.open(city.id); }, 360);
         return;
       }
-      if (!App.hintShown) { App.hintShown = true; UI.toast('Double-clic pour y envoyer les unités · clic droit pour désélectionner'); }
+      // tant que le joueur n'a jamais déplacé d'unité, le rappel revient à chaque clic ; ensuite, une fois par session
+      if (!App.prefs.movedOnce || !App.hintShown) { App.hintShown = true; UI.toast('<b>Double-clic</b> sur la case pour y envoyer les unités · clic droit pour désélectionner', '', 'movehint'); }
       return;
     }
     if (dbl && city && city.owner === App.pid) { CityUI.open(city.id); return; }

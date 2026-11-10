@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.38';
+const GAME_VERSION = '0.31.39';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -12,6 +12,36 @@ const Game = {
     choose: null,          // async (game, pid, question) -> réponse
     update: () => {},
     fx: null,              // (évènement visible : une faille se referme…) -> void
+  },
+
+  // ---------- rythme de la partie (0.31.39) ----------
+  // Rapide, Normal, Épique : le coût en production des bâtiments et des unités, la recherche et le lancement des sorts sur la carte,
+  // la croissance des cités et les grandes échéances (la Crise, les crises de fin) sont multipliés par ce facteur. Les revenus,
+  // l'entretien, les déplacements et les sorts de combat ne changent pas. Les coûts sont ceux des données du jeu, remis à
+  // l'échelle à chaque partie ouverte : tout le code (jeu, IA, écrans) lit les mêmes chiffres.
+  PACES: { fast: 0.67, normal: 1, epic: 1.5 }, PACE: 1, _paceBase: null,
+  pace(game) { return Game.PACES[(game && game.opts && game.opts.pace) || 'normal'] || 1; },
+  applyPace(game) {
+    const f = Game.pace(game);
+    if (f === Game.PACE) return;
+    if (!Game._paceBase) {
+      const B = Game._paceBase = { b: {}, u: {}, s: {} };
+      for (const k in DATA.buildings) B.b[k] = DATA.buildings[k].cost;
+      // cost0 : le coût d'origine, pour ce qui s'en sert comme d'une mesure (le rang d'une troupe, la tenue d'un enchantement en combat)
+      for (const k in DATA.units) B.u[k] = DATA.units[k].cost0 = DATA.units[k].cost;
+      for (const k in DATA.spells) { B.s[k] = { cost: DATA.spells[k].cost, research: DATA.spells[k].research, combatCost: DATA.spells[k].combatCost }; DATA.spells[k].cost0 = DATA.spells[k].cost; }
+    }
+    const B = Game._paceBase, sc = v => typeof v === 'number' && v > 0 ? Math.max(1, Math.round(v * f)) : v;
+    for (const k in B.b) DATA.buildings[k].cost = sc(B.b[k]);
+    for (const k in B.u) DATA.units[k].cost = sc(B.u[k]);
+    for (const k in B.s) {
+      const sp = DATA.spells[k], o = B.s[k];
+      sp.research = sc(o.research);
+      // le lancement sur la carte suit le rythme ; en combat, le coût d'origine
+      sp.cost = sp.overland === false ? o.cost : sc(o.cost);
+      sp.combatCost = f !== 1 && o.combatCost == null && sp.combat && sp.overland !== false ? o.cost : o.combatCost;
+    }
+    Game.PACE = f;
   },
 
   newGame(opts) {
@@ -25,6 +55,7 @@ const Game = {
     };
     // montagnes infranchissables sans route : activé par défaut pour les nouvelles parties (les anciennes sauvegardes gardent l'ancienne règle)
     game.opts = Object.assign({}, opts, { mountainsBlock: opts.mountainsBlock !== false });
+    Game.applyPace(game);
     MapGen.generate(game, opts);
     // joueurs
     const human = Object.assign({}, opts.human);
@@ -108,6 +139,7 @@ const Game = {
   },
   // parties sauvegardées avec une version antérieure : ajouts sans risque (nouveaux sorts arcaniques, trouvailles)
   upgrade(game) {
+    Game.applyPace(game);
     if (!game.caches) game.caches = [];
     // v0.31.18 : plus de palais du gouverneur (seconde capitale retirée du jeu)
     for (const c of Object.values(game.cities || {})) if (c) {
@@ -446,7 +478,7 @@ const Game = {
           if (pop >= 7000 && rng.chance(0.5)) blds.push('cityWalls');
           if (blds.includes('cityWalls') && (x * 7 + y * 3) % 3 === 0) blds.push('defenseTowers');
           const c = Cities.create(game, -1, race.id, p, x, y, { pop, buildings: blds });
-          const units = race.units.filter(t => !DATA.units[t].abilities.createOutpost && !DATA.units[t].abilities.construction && !DATA.units[t].abilities.scout && !DATA.units[t].abilities.siegeOnly && !DATA.units[t].sailing && DATA.units[t].cost <= 60);
+          const units = race.units.filter(t => !DATA.units[t].abilities.createOutpost && !DATA.units[t].abilities.construction && !DATA.units[t].abilities.scout && !DATA.units[t].abilities.siegeOnly && !DATA.units[t].sailing && (DATA.units[t].cost0 ?? DATA.units[t].cost) <= 60);
           const ng = 1 + Math.floor(pop / 2500) + rng.int(2);
           for (let j = 0; j < ng; j++) Units.create(game, rng.pick(units), -1, p, x, y);
           break;

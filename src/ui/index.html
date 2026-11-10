@@ -36,7 +36,7 @@
     <div id="tileinfo" class="card"></div>
   </aside>
   <div id="minimap-wrap" class="card"><div class="mm-top"><span class="plane" id="mm-plane">Arcane</span><button class="abtn" onclick="App.togglePlane(); this.blur()">Changer de plan</button></div><div class="mm-tools"><button class="abtn" id="mm-lairs" onclick="App.toggleLairs(); this.blur()">Repaires <span class="k">V</span></button><button class="abtn" id="mm-nodes" onclick="App.toggleNodes(); this.blur()" title="Les nœuds à prendre : libres en vert, gardés ou pas encore visités en jaune, tenus par des rivaux en rouge">Nœuds à prendre <span class="k">O</span></button></div><canvas id="minimap" width="240" height="160" style="width:240px;height:160px"></canvas></div>
-  <div id="logbox" class="card"></div>
+  <div id="logwrap" class="card"><div id="logbar"><span id="log-grip" title="Déplacer le journal (double-clic : le remettre à sa place)">⠿</span><span id="log-size" title="Redimensionner le journal">◥</span></div><div id="logbox"></div></div>
   <div id="toasts"></div>
   <div id="modal-root"></div>
   <div id="combat-root" hidden></div>

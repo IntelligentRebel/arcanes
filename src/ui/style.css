@@ -135,7 +135,12 @@ a:hover, .link:hover { color: #ffd27a; }
 #minimap-wrap .mm-tools .abtn { flex: 1; justify-content: center; height: 24px; }
 
 /* ------------ journal ------------ */
-#logbox { position: absolute; left: 8px; bottom: 254px; width: 360px; max-height: 210px; overflow: auto; padding: 6px 8px; z-index: 8; font-size: 12px; display: flex; flex-direction: column; gap: 2px; }
+#logwrap { position: absolute; left: 8px; bottom: 254px; width: 360px; max-height: 210px; z-index: 8; display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+#logwrap:has(#logbox.hidden) { display: none; }
+#logbar { display: flex; justify-content: space-between; align-items: center; height: 14px; padding: 0 4px; font-size: 10px; line-height: 14px; color: var(--dim); opacity: .35; flex: none; }
+#logwrap:hover #logbar { opacity: 1; }
+#log-grip { cursor: move; flex: 1; } #log-size { cursor: nesw-resize; padding-left: 8px; }
+#logbox { flex: 1; min-height: 0; overflow: auto; padding: 2px 8px 6px; font-size: 12px; display: flex; flex-direction: column; gap: 2px; }
 #logbox .e { padding: 2px 4px; border-radius: 4px; }
 #logbox .e .t { color: var(--dim); font-size: 10px; margin-right: 5px; }
 #logbox .e:hover { background: rgba(255,255,255,.04); }
@@ -314,7 +319,7 @@ table.t tr.on td { background: rgba(230,190,90,.07); }
 .kv svg, .stat svg, .t2 svg, .muted svg { width: 14px; height: 14px; vertical-align: -2px; }
 .kv .k { display: inline-flex; align-items: center; gap: 5px; }
 .pop .c svg { width: 13px; height: 13px; }
-#logbox { bottom: 254px; }
+#logwrap { bottom: 254px; }
 @media (max-width: 1700px) { .tbtn .lbl { display: none; } .tbtn { padding: 0 9px; } }
 @media (max-width: 1250px) { .res .p { display: none; } #topbar .wiz .d { display: none; } }
 .res { padding: 4px 7px; }
@@ -607,7 +612,6 @@ table.t th .sortmark { font-size: 10px; }
 #boot .boot-bar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .2s; }
 #boot .boot-txt { margin-top: 10px; color: #b9b2a2; font-size: 13px; }
 #bgload { position: fixed; left: 10px; bottom: 8px; z-index: 2500; font-size: 11.5px; color: #8f98a8; pointer-events: none; text-shadow: 0 1px 2px #000; }
-#gfxwarn { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 2600; display: flex; gap: 10px; align-items: center; max-width: min(760px, 92vw); padding: 8px 12px; border-radius: 10px; background: #2a1d14; border: 1px solid #c98a4a; color: #f1dcc0; font-size: 13px; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
 /* thèmes à contraste élevé (Windows, Android) : le jeu garde ses propres couleurs, déjà claires sur fond sombre, au lieu d'un
    mélange où les choix cochés ne se voient plus ; les états actifs y gagnent un trait net */
 html { forced-color-adjust: none; }

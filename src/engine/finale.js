@@ -77,7 +77,7 @@ const Finale = {
   // le meneur doit peser LEAD fois le deuxième, STREAK tours d'affilée
   watch(game) {
     const f = game.finale;
-    if (game.turn < Finale.cfg(game, 'MIN_TURN')) return;
+    if (game.turn < Finale.cfg(game, 'MIN_TURN') * Game.pace(game)) return;
     const r = Finale.ranked(game); if (r.length < 2) { f.streak = 0; return; }
     const slain = Finale.demonSlain(game);
     const lead = Finale.cfg(game, slain ? 'LEAD_SLAIN' : 'LEAD'), need = Finale.cfg(game, slain ? 'STREAK_SLAIN' : 'STREAK');
@@ -469,11 +469,11 @@ const Finale = {
   rebels(game, race, budget, max) {
     const r = DATA.races[race]; if (!r) return [];
     const ok = (r.units || []).filter(t => { const d = DATA.units[t]; return d && d.cost > 0 && !d.sailing && !d.abilities.createOutpost && !d.abilities.construction && (d.melee > 0 || d.ranged > 0); })
-      .sort((a, b) => DATA.units[b].cost - DATA.units[a].cost);
+      .sort((a, b) => (DATA.units[b].cost0 ?? DATA.units[b].cost) - (DATA.units[a].cost0 ?? DATA.units[a].cost));
     const out = []; let left = budget;
     while (out.length < max) {
-      const can = ok.filter(t => DATA.units[t].cost <= left); if (!can.length) break;
-      const t = game.rng.pick(can.slice(0, 3)); out.push(t); left -= DATA.units[t].cost;
+      const can = ok.filter(t => (DATA.units[t].cost0 ?? DATA.units[t].cost) <= left); if (!can.length) break;
+      const t = game.rng.pick(can.slice(0, 3)); out.push(t); left -= (DATA.units[t].cost0 ?? DATA.units[t].cost);
     }
     if (!out.length && ok.length) out.push(ok[ok.length - 1]);
     return out;

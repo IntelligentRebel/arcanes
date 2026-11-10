@@ -54,7 +54,7 @@ const Magic = {
     for (const s of Magic.spellsOf('arcane')) if (!(s.params && s.params.gate) && !pl.known.includes(s.id) && !pl.researchPool.includes(s.id)) pl.researchPool.push(s.id);
     pl.researchOptions = [];
     pl.researching = null; pl.researchProgress = 0;
-    pl.somCost = 60000 - (Math.max(...Object.values(pl.books)) >= 11 ? 3000 : 0);
+    pl.somCost = Math.round((60000 - (Math.max(...Object.values(pl.books)) >= 11 ? 3000 : 0)) * Game.PACE);
     Magic.refreshResearchOptions(game, pl);
     // compétence initiale : 2 par livre
     const s0 = Math.max(1, Magic.totalBooks(pl) * 2);
@@ -65,7 +65,7 @@ const Magic = {
   // le sort s'ajouter à leurs recherches (en plus des huit), et le gardent ensuite. Le meneur et son plan ne l'ont jamais.
   GATE_LEAD: 1.5, GATE_TURN: 60, _gate: new WeakMap(),
   gateOpen(game, pl) {
-    if (!pl.alive || pl.banished || game.turn < Magic.GATE_TURN) return false;
+    if (!pl.alive || pl.banished || game.turn < Magic.GATE_TURN * Game.pace(game)) return false;
     let g = Magic._gate.get(game);
     if (!g || g.turn !== game.turn) {
       const al = game.players.filter(p => p.alive && !p.banished), sc = new Map(al.map(p => [p, Crisis.score(game, p)]));

@@ -25,11 +25,30 @@ const CityUI = {
       // résout « map » quand on quitte la cité pour la carte (une unité de la garnison sélectionnée) : l'écran d'origine ne se rouvre pas
       const m = UI.modal({ title: c.name, width: 1080, cls: 'citymodal', onClose: () => { const toMap = CityUI.toMap; CityUI.cur = null; CityUI.queueDone = false; CityUI.toMap = false; MapView.invalidate(); res(toMap ? 'map' : undefined); } });
       CityUI.modalApi = m;
-      const head = m.el.querySelector('header'), x = head.querySelector('.x');
-      head.insertBefore(h('button', { class: 'abtn', title: 'Voir où se trouve la cité (Échap pour revenir)', onclick: () => UI.peek(c.x, c.y, c.plane, c.name) }, 'Voir sur la carte'), x);
-      if (c.owner === App.pid) head.insertBefore(h('button', { class: 'abtn', title: 'Donner un autre nom à la cité', onclick: () => CityUI.rename(c) }, 'Renommer'), x);
+      CityUI.headButtons();
       CityUI.render();
     });
+  },
+  // les boutons de l'en-tête, pour la cité affichée : cité précédente et suivante (sans repasser par la carte), voir, renommer
+  headButtons() {
+    const m = CityUI.modalApi, c = App.game.cities[CityUI.cur]; if (!m || !c) return;
+    const head = m.el.querySelector('header'), x = head.querySelector('.x');
+    for (const b of head.querySelectorAll('.cityhead')) b.remove();
+    const mine = c.owner === App.pid ? Cities.ofPlayer(App.game, App.pid) : [];
+    if (mine.length > 1) {
+      const i = mine.findIndex(o => o.id === c.id), go = d => CityUI.switchTo(mine[(i + d + mine.length) % mine.length].id);
+      head.insertBefore(h('button', { class: 'abtn cityhead', title: 'Cité précédente', onclick: () => go(-1) }, '‹'), x);
+      head.insertBefore(h('button', { class: 'abtn cityhead', title: 'Cité suivante', onclick: () => go(1) }, '›'), x);
+    }
+    head.insertBefore(h('button', { class: 'abtn cityhead', title: 'Voir où se trouve la cité (Échap pour revenir)', onclick: () => UI.peek(c.x, c.y, c.plane, c.name) }, 'Voir sur la carte'), x);
+    if (c.owner === App.pid) head.insertBefore(h('button', { class: 'abtn cityhead', title: 'Donner un autre nom à la cité', onclick: () => CityUI.rename(c) }, 'Renommer'), x);
+  },
+  // d'une cité à l'autre dans la même fenêtre
+  switchTo(cid) {
+    const c = App.game.cities[cid]; if (!c || !CityUI.modalApi) return;
+    CityUI.cur = cid; CityUI.queueDone = false;
+    MapView.centerOn(c.x, c.y, c.plane);
+    CityUI.headButtons(); CityUI.render();
   },
   render() {
     const game = App.game, c = game.cities[CityUI.cur]; if (!c || !CityUI.modalApi) return;

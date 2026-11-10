@@ -826,7 +826,7 @@ const CombatView = {
   // le rayon de la tour du sorcier : un trait de lumière, du sommet de la tour à la cible
   beam(pa, pd, color) {
     return new Promise(res => {
-      const dur = CombatView.auto ? 120 : 380;
+      const dur = CombatView.auto ? CombatView.af(120, 380) : 380;
       CombatView.anims.push({ t0: performance.now(), dur, draw: (ctx, t) => {
         const TW = CombatView.TW, A = CombatView.iso(pa.c, pa.r), D = CombatView.stand(pd.c, pd.r); D.y -= CombatView.TH * .5;
         const ay = A.y - TW * 1.05, k = Math.min(1, t * 3), x = A.x + (D.x - A.x) * k, y = ay + (D.y - ay) * k;
@@ -956,7 +956,10 @@ const CombatView = {
   },
 
   // ---------- animations ----------
-  sleep(ms) { return new Promise(r => setTimeout(r, CombatView.auto ? Math.min(ms, 60) : ms)); },
+  // vitesse des batailles automatiques (menu) : rapide (comme avant), moyenne, lente (le rythme d'une bataille commandée)
+  AUTO_SPEEDS: ['fast', 'medium', 'slow'],
+  af(fast, normal) { const k = { fast: 0, medium: .45, slow: 1 }[(typeof App !== 'undefined' && App.prefs && App.prefs.autoSpeed) || 'fast'] || 0; return fast + (normal - fast) * k; },
+  sleep(ms) { return new Promise(r => setTimeout(r, CombatView.auto ? CombatView.af(Math.min(ms, 60), ms) : ms)); },
   async playEvents() {
     const bt = CombatView.bt;
     while (CombatView.evIdx < bt.events.length) {
@@ -1051,7 +1054,7 @@ const CombatView = {
   },
   tween(p, c, r, ms) {
     return new Promise(res => {
-      const c0 = p.c, r0 = p.r, t0 = performance.now(), dur = CombatView.auto ? ms / 4 : ms;
+      const c0 = p.c, r0 = p.r, t0 = performance.now(), dur = CombatView.auto ? CombatView.af(ms / 4, ms) : ms;
       const f = () => { const t = Math.min(1, (performance.now() - t0) / dur); p.c = c0 + (c - c0) * t; p.r = r0 + (r - r0) * t; if (t < 1) requestAnimationFrame(f); else res(); };
       f();
     });
@@ -1089,8 +1092,8 @@ const CombatView = {
     style = style || (kind === 'magic' ? 'bolt' : kind === 'boulder' ? 'boulder' : 'arrow'); n = n || 1;
     const TW = CombatView.TW, TH = CombatView.TH;
     const arc = { arrow: 46, javelin: 38, stone: 34, boulder: 70, cannon: 26, bolt: 18 }[style];
-    const dur = CombatView.auto ? 90 : { boulder: 520, cannon: 300, bolt: 360 }[style] || 380;
-    const gap = CombatView.auto ? 0 : 45;
+    const full = { boulder: 520, cannon: 300, bolt: 360 }[style] || 380, dur = CombatView.auto ? CombatView.af(90, full) : full;
+    const gap = CombatView.auto ? CombatView.af(0, 45) : 45;
     // boulet : fumée à la bouche du canon
     if (style === 'cannon') CombatView.burst(pa.c, pa.r, ['#cfcac2', '#8d8a84', '#5a5550'], 10, 'smoke');
     for (let i = 0; i < n; i++) {
@@ -1151,7 +1154,7 @@ const CombatView = {
     }, dur + (n - 1) * gap));
   },
   flash(c, r, color, dur) {
-    CombatView.anims.push({ t0: performance.now(), dur: CombatView.auto ? dur / 3 : dur, draw: (ctx, t) => {
+    CombatView.anims.push({ t0: performance.now(), dur: CombatView.auto ? CombatView.af(dur / 3, dur) : dur, draw: (ctx, t) => {
       const P = CombatView.iso(c, r); const TW = CombatView.TW;
       const g = ctx.createRadialGradient(P.x, P.y - CombatView.TH * .5, 2, P.x, P.y - CombatView.TH * .5, TW * (.3 + t * .4));
       g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -1190,7 +1193,7 @@ const CombatView = {
   },
   float(c, r, text, color) { CombatView.floats.push({ c, r, text, color, t0: performance.now() }); },
   banner(text, color) {
-    CombatView.anims.push({ t0: performance.now(), dur: CombatView.auto ? 300 : 1100, draw: (ctx, t) => {
+    CombatView.anims.push({ t0: performance.now(), dur: CombatView.auto ? CombatView.af(300, 1100) : 1100, draw: (ctx, t) => {
       ctx.globalAlpha = t < .15 ? t / .15 : 1 - Math.max(0, (t - .7) / .3);
       ctx.font = '600 ' + Math.round(CombatView.TW * .32) + 'px Palatino Linotype, Georgia, serif'; ctx.textAlign = 'center';
       ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillText(text, innerWidth / 2 + 2, 122); ctx.fillStyle = color; ctx.fillText(text, innerWidth / 2, 120); ctx.globalAlpha = 1;

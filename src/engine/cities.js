@@ -54,7 +54,7 @@ const Wonders = {
     return Cities.ofPlayer(game, pid).find(o => (!c || o.id !== c.id) && (o.buildings[b] || (o.prod && o.prod.type === 'building' && o.prod.id === b) || (o.queue || []).some(q => q.type === 'building' && q.id === b))) || null;
   },
   // mana du Puits des Âmes pour une unité tuée
-  soulMana(u) { const d = DATA.units[u.type]; if (!d) return 0; if (u.hero) return 25; return Math.max(2, Math.round(d.cost ? d.cost / 4 : (d.upkeep.mana || 1) * 2)); },
+  soulMana(u) { const d = DATA.units[u.type]; if (!d) return 0; if (u.hero) return 25; return Math.max(2, Math.round(d.cost ? (d.cost0 ?? d.cost) / 4 : (d.upkeep.mana || 1) * 2)); },
 };
 
 const Cities = {
@@ -446,6 +446,8 @@ const Cities = {
     if (out.foodSurplus < 0) { growth = 50 * out.foodSurplus; gw.push(['Disette : il manque ' + (-out.foodSurplus) + ' nourriture', growth]); }
     if (growth > 0 && N >= maxPop) { growth = 0; gw.push(['Population maximale atteinte', 0]); }
     if (ench('pestilence')) { growth = Math.min(growth, -Math.min(50, Math.max(0, c.pop - 1000))); gw.push([DATA.spells.pestilence.name, growth]); }   // la peste ne vide pas une cité d'un habitant
+    // le rythme de la partie : la croissance suit les coûts
+    if (growth > 0 && Game.PACE !== 1) { const g0 = growth; growth = Math.max(1, Math.round(growth / Game.PACE)); gw.push(['Rythme de la partie', growth - g0]); }
     out.growth = growth; out.growthWhy = gw;
 
     // --- coût des unités (fer et charbon) ---
