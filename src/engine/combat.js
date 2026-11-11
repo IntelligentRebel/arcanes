@@ -2237,6 +2237,9 @@ const CombatAI = {
   hopeless(bt, side) {
     if (bt.round < 2) return false;
     if (!bt.canEscape(side)) return false;   // garnison d'une cité ou pile encerclée : fuir, c'est mourir ; autant vendre chèrement sa peau
+    // (0.31.41) les créatures neutres ne fuient jamais : gardiens d'un nœud ou d'un repaire, monstres en maraude, vagues de la
+    // Brèche, crise de fin. Elles n'ont pas de vie à sauver, elles sont là pour garder ce qu'elles gardent, et se battent jusqu'au bout.
+    if (bt.owner(side) < 0) return false;
     const mine = U.sum(bt.alive(side), b => Units.strength(bt.game, b.u)), theirs = U.sum(bt.alive(1 - side), b => Units.strength(bt.game, b.u));
     if (mine >= theirs * 0.15) return false;
     // (0.31.34) on ne fuit que si la fuite sauve au moins la moitié de ce qui reste : poursuivis par plus rapides qu'eux (des volants

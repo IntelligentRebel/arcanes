@@ -45,7 +45,7 @@ Il faut Python 3 et Node.js : `python3 tools/build.py` produit `dist/arcanes/ind
 
 - Conception et direction : **Olivier Roland**. Code écrit avec **Claude** (Anthropic).
 - Règles inspirées de *Master of Magic* (Simtex, 1994). Arcanes est un projet de fan, sans lien avec les détenteurs de *Master of Magic*. Données de règles en partie tirées de [kazzmir/master-of-magic](https://github.com/kazzmir/master-of-magic) (BSD-3-Clause).
-- Graphismes générés pour Arcanes avec la génération d'images d'OpenAI ; icônes de sorts et quelques sprites tirés des tuiles CC0 de [Dungeon Crawl Stone Soup](https://github.com/crawl/tiles).
+- Graphismes générés pour Arcanes avec la génération d'images d'OpenAI.
 - Musique composée pour Arcanes, jouée avec la SoundFont GeneralUser GS de S. Christian Collins.
 - Police de titres : Cinzel (SIL Open Font License). Analyseur : acorn (MIT).
 

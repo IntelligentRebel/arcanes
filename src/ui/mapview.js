@@ -286,13 +286,6 @@ const MapView = {
     const L = MapView.LT, W = world.w, H = world.h;
     const c = document.createElement('canvas'); c.width = W * L; c.height = H * L;
     const ctx = c.getContext('2d'); ctx.imageSmoothingEnabled = false;
-    if (!Tex.get('grass')) { // pas d'atlas HD : ancien rendu agrandi
-      const old = document.createElement('canvas'); old.width = W * 32; old.height = H * 32;
-      const octx = old.getContext('2d'); octx.imageSmoothingEnabled = false;
-      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) MapView.drawTileLegacy(octx, world, p, x, y);
-      ctx.drawImage(old, 0, 0, c.width, c.height);
-      return c;
-    }
     const R = Math.max(16, Math.round(L / 2));
     const F = MapView.terrainFields(world, p, R);
     const K = L / R, MW = F.MW;
@@ -470,21 +463,7 @@ const MapView = {
     const m = MIN_KEYS[World.get(world, p, 'mineral', x, y)];
     if (m && !Sprites.hasHD('min:' + m)) MapView.drawMineral(ctx, m, X + 4, Y + L - 22);
   },
-  // ancien rendu (sans atlas HD)
-  drawTileLegacy(ctx, world, p, x, y) {
-    const t = World.terr(world, p, x, y);
-    const h = Tiles.hash(x, y, p);
-    const X = x * 32, Y = y * 32;
-    if (World.isWater(t)) { ctx.drawImage(Tiles.base(World.isShore(world, p, x, y) || t === T.LAKE ? 'shore' : 'ocean', h % 12), X, Y); return; }
-    let base = 'grass';
-    if (t === T.DESERT) base = 'desert'; else if (t === T.TUNDRA) base = 'tundra'; else if (t === T.SWAMP) base = 'swamp';
-    else if (t === T.MOUNTAIN || t === T.VOLCANO || t === T.CNODE) base = 'dirt';
-    ctx.drawImage(Tiles.base(base, h % 9), X, Y);
-    if (t === T.RIVER) MapView.drawRiver(ctx, world, p, x, y, X, Y, 1);
-    if (t === T.HILLS) ctx.drawImage(Tiles.hill(h % 6), X, Y);
-    if (t === T.MOUNTAIN) ctx.drawImage(Tiles.mountain(h % 8, true), X, Y);
-    if (t === T.VOLCANO || t === T.CNODE) ctx.drawImage(Tiles.mountain(h % 8, false), X, Y);
-  },
+
   drawRiver(ctx, world, p, x, y, X, Y, k) {
     let mask = world.planes[p].river ? world.planes[p].river[y * world.w + x] : 0;
     if (!mask) { // anciennes parties : relier aux voisins
@@ -1378,7 +1357,7 @@ const MapView = {
     const frac = (c.pop % 1000) / 1000, g = e.growth;
     const toGrow = g > 0 ? Math.ceil((1000 - c.pop % 1000) / g) : g < 0 ? Math.ceil((c.pop % 1000 + 1) / -g) : null;
     const info = { t: now, pop: c.pop, prog: c.progress, prod: c.prod, growth: g, frac, toGrow, max: g === 0 && Cities.citizens(c) >= e.maxPop, starving: e.foodSurplus < 0, cost, turns, name: Cities.prodName(c),
-      icon: c.prod.type === 'rearm' ? 'item:sword:1' : c.prod.type === 'unit' ? 'unit:' + c.prod.id : c.prod.type === 'building' ? (Sprites.hasHD(Sprites.resolve('bld:' + c.prod.id) || '') ? 'bld:' + c.prod.id : (typeof BUILDING_ICON !== 'undefined' && BUILDING_ICON[c.prod.id]) || 'item:misc') : null };
+      icon: c.prod.type === 'rearm' ? 'item:sword:1' : c.prod.type === 'unit' ? 'unit:' + c.prod.id : c.prod.type === 'building' ? bldIcon(c.prod.id) : null };
     cache.set(c.id, info);
     return info;
   },

@@ -10,7 +10,7 @@ JS = [
   'src/engine/combat.js', 'src/engine/game.js', 'src/engine/turn.js', 'src/engine/spells.js', 'src/engine/veil.js', 'src/engine/aiintel.js', 'src/engine/ai.js', 'src/engine/aiplus.js', 'src/engine/aistrat.js', 'src/engine/diplo.js', 'src/engine/events.js', 'src/engine/chronicle.js', 'src/engine/finale.js',
   'src/ui/assets.js', 'src/ui/sound.js', 'src/ui/ui.js', 'src/ui/mapview.js', 'src/ui/city.js', 'src/ui/magicui.js', 'src/ui/combatview.js', 'src/ui/panels.js', 'src/ui/update.js', 'src/ui/savedir.js', 'src/ui/setup.js', 'src/ui/main.js',
 ]
-ASSETS = ['atlas.png', 'hd.png', 'hd2.png', 'title.jpg', 'anim.png', 'weapons.png', 'fx.png']
+ASSETS = ['hd.png', 'hd2.png', 'title.jpg', 'anim.png', 'weapons.png', 'fx.png']
 # pages de l'atlas d'animation (tools/build_anim.py) : anim.png, anim1.png, ...
 ANIM_PAGES = ['anim.png'] + sorted((f for f in os.listdir(os.path.join(ROOT, 'assets')) if re.match(r'^anim\d+\.png$', f)), key=lambda f: int(f[4:-4]))
 ASSETS += ANIM_PAGES[1:]
@@ -50,7 +50,6 @@ def main():
     meta = {k: json.loads(read(v)) for k, v in EXTRA_META.items() if os.path.exists(os.path.join(ROOT, v))}
     js = 'window.EXTRA_SPRITES = ' + json.dumps(extra) + ';\nwindow.EXTRA_META = ' + json.dumps(meta, separators=(',', ':')) + ';\n' + js
     js = js.replace('</script>', '<\\/script>')
-    atlas_json = json.dumps(json.loads(read('assets/atlas.json')), separators=(',', ':'))
     hd_json = json.dumps(json.loads(read('assets/hd.json')), separators=(',', ':')) if os.path.exists(os.path.join(ROOT, 'assets/hd.json')) else '{}'
     # atlas complémentaire (tools/hd_supplement.py) : les sprites ajoutés depuis la dernière livraison complète
     hd2_json = json.dumps(json.loads(read('assets/hd2.json')), separators=(',', ':')) if os.path.exists(os.path.join(ROOT, 'assets/hd2.json')) else '{}'
@@ -61,10 +60,10 @@ def main():
     fx_json = json.dumps(json.loads(read('assets/fx.json')), separators=(',', ':')) if os.path.exists(os.path.join(ROOT, 'assets/fx.json')) else '{}'
     music_json = json.dumps(json.loads(read('assets/music.json')), ensure_ascii=False, separators=(',', ':')) if os.path.exists(os.path.join(ROOT, 'assets/music.json')) else '{}'
     # taille des grandes images, pour la barre de chargement
-    big = ['atlas.png', 'hd.png', 'hd2.png', 'title.jpg', 'weapons.png', 'fx.png'] + ANIM_PAGES
+    big = ['hd.png', 'hd2.png', 'title.jpg', 'weapons.png', 'fx.png'] + ANIM_PAGES
     sizes = {'assets/' + f: os.path.getsize(os.path.join(ROOT, 'assets', f)) for f in big if os.path.exists(os.path.join(ROOT, 'assets', f))}
     html = html.replace('/*__ASSET_SIZES__*/{}', json.dumps(sizes, separators=(',', ':')))
-    html = (html.replace('/*__CSS__*/', css).replace('/*__MUSIC_JSON__*/', music_json).replace('/*__ATLAS_JSON__*/', atlas_json).replace('/*__ATLAS_PNG__*/', 'assets/atlas.png')
+    html = (html.replace('/*__CSS__*/', css).replace('/*__MUSIC_JSON__*/', music_json)
             .replace('/*__WEAPONS_JSON__*/', weapons_json).replace('/*__WEAPONS_PNG__*/', 'assets/weapons.png' if weapons_json != '{}' else '')
             .replace('/*__FX_JSON__*/', fx_json).replace('/*__FX_PNG__*/', 'assets/fx.png' if fx_json != '{}' else '')
             .replace('/*__ANIM_JSON__*/', anim_json).replace('/*__ANIM_PNG__*/', ','.join(['assets/' + a for a in ANIM_PAGES]) if anim_json != '{}' else '')

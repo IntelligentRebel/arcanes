@@ -62,3 +62,24 @@ ok(fly > 0, 'des cavaliers (plus rapides que leurs poursuivants) fuient encore (
   ok(fast.worst <= CombatAI.WIPE_MAX + 1e-9 && solo.worst <= CombatAI.WIPE_MAX + 1e-9 && duo.worst <= CombatAI.WIPE_MAX + 1e-9,
     'aucune fuite décidée au-delà du seuil (' + CombatAI.WIPE_MAX + ') : pire vu ' + fast.worst.toFixed(2));
 }
+
+// ---------- v0.31.41 : les créatures neutres ne fuient jamais ----------
+// Gardiens d'un nœud ou d'un repaire, monstres en maraude, vagues de la Brèche : elles sont là pour garder ce qu'elles gardent.
+{
+  const node = g.sites.find(s => s.type === 'node');
+  function neutre(def, opts, n) {
+    let fled = 0;
+    for (let i = 0; i < n; i++) {
+      const A = Array(9).fill('Pegasai').map(t => Units.create(g, t, 0, node.plane, node.x + 1, node.y));
+      const D = def.map(t => { const u = Units.create(g, t, -1, node.plane, node.x, node.y); Object.assign(u, opts); return u; });
+      const bt = new Battle(g, { attackers: A, defenders: D, attackerPid: 0, defenderPid: -1, plane: node.plane, x: node.x, y: node.y, rng: new RNG(5200 + i) });
+      CombatAI.autoResolve(bt);
+      if (bt.fled === 1) fled++;
+      for (const u of A.concat(D)) if (g.units[u.id]) Units.remove(g, u);
+    }
+    return fled;
+  }
+  ok(neutre(['Nagas', 'Nagas'], { guardian: node.id }, 15) === 0, 'les gardiens d\'un nœud se battent jusqu\'à la mort');
+  ok(neutre(['WolfRiders', 'WolfRiders'], { rampage: true }, 15) === 0, 'des monstres en maraude non plus ne fuient pas');
+  ok(neutre(['HellHounds', 'HellHounds', 'HellHounds'], { riftSpawn: true }, 15) === 0, 'les créatures sorties de la Brèche non plus');
+}

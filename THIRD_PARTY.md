@@ -29,11 +29,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWIS
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
 
-## Dungeon Crawl Stone Soup tiles
-
-Some sprites and the spell icons come from https://github.com/crawl/tiles (releases/Nov-2015), under CC0 1.0 Universal.
-Details in `assets/credits.txt`.
-
 ## Cinzel font
 
 `src/ui/fonts/`, SIL Open Font License 1.1 (full text in `src/ui/fonts/OFL-Cinzel.txt`).

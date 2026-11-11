@@ -316,9 +316,6 @@ const CombatView = {
       // une seule texture HD, échantillonnée en continu sous tout le plateau
       const pat = CombatView.ctx.createPattern(hdTex, 'repeat');
       CombatView.patterns = [pat, pat, pat, pat]; CombatView.patScale = 1 / 2.4;
-    } else {
-      CombatView.patterns = [0, 1, 2, 3].map(v => CombatView.ctx.createPattern(Tiles.base(kind, v * 2 + 1), 'repeat'));
-      CombatView.patScale = null;
     }
   },
 

@@ -51,7 +51,7 @@ The source code is written in French (variables, comments, texts); `tools/i18n_b
 
 - Game design and direction: **Olivier Roland**. Code written with **Claude** (Anthropic).
 - Rules inspired by *Master of Magic* (Simtex, 1994). Arcanes is a fan project, not affiliated with or endorsed by the owners of *Master of Magic*. Rules data partly derived from [kazzmir/master-of-magic](https://github.com/kazzmir/master-of-magic) (BSD-3-Clause).
-- Graphics generated for Arcanes with OpenAI image generation; spell icons and some sprites from the CC0 tiles of [Dungeon Crawl Stone Soup](https://github.com/crawl/tiles).
+- Graphics generated for Arcanes with OpenAI image generation.
 - Music composed for Arcanes, played with the GeneralUser GS SoundFont by S. Christian Collins.
 - Title font: Cinzel (SIL Open Font License). Parser: acorn (MIT).
 

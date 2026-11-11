@@ -70,13 +70,12 @@ const Sprites = {
   },
   failed: [],
   async load() {
-    Sprites.map = window.ATLAS_JSON || {};
     Sprites.hdMap = window.HD_JSON || {};
     const boot = Sprites.bootScreen();
-    let img, hd, title, hd2, wpn, fx;
+    let hd, title, hd2, wpn, fx;
     for (;;) {
-      [img, hd, title, hd2, wpn, fx] = await Promise.all([img || Sprites.fetchImg(window.ATLAS_PNG), hd || Sprites.fetchImg(window.HD_PNG), title || Sprites.fetchImg(window.TITLE_IMG), hd2 || Sprites.fetchImg(window.HD2_PNG), wpn || Sprites.fetchImg(window.WEAPONS_PNG), fx || Sprites.fetchImg(window.FX_PNG)]);
-      Sprites.failed = [!img && window.ATLAS_PNG ? 'atlas' : null, !hd && window.HD_PNG ? 'hd' : null, !hd2 && window.HD2_PNG ? 'hd2' : null].filter(Boolean);
+      [hd, title, hd2, wpn, fx] = await Promise.all([hd || Sprites.fetchImg(window.HD_PNG), title || Sprites.fetchImg(window.TITLE_IMG), hd2 || Sprites.fetchImg(window.HD2_PNG), wpn || Sprites.fetchImg(window.WEAPONS_PNG), fx || Sprites.fetchImg(window.FX_PNG)]);
+      Sprites.failed = [!hd && window.HD_PNG ? 'hd' : null, !hd2 && window.HD2_PNG ? 'hd2' : null].filter(Boolean);
       if (!Sprites.failed.length || !boot.querySelector) break;
       Sprites.prog.got = 0; Sprites.prog.total = 0;
       await Sprites.bootRetry(boot);
@@ -84,7 +83,7 @@ const Sprites = {
     const anim = null;
     Weapons.img = wpn; Weapons.meta = wpn ? Object.assign({ s: {}, a: {} }, window.WEAPONS_JSON || {}) : { s: {}, a: {} };
     Fx.img = fx; Fx.meta = fx ? (window.FX_JSON || {}) : {};
-    Sprites.img = img; Sprites.hd = hd; Sprites.title = title;
+    Sprites.hd = hd; Sprites.title = title;
     Anim.img = anim; Anim.meta = anim ? (window.ANIM_JSON || {}) : {};
     if (!hd) Sprites.hdMap = {};
     Sprites.virt = {};
@@ -164,7 +163,7 @@ const Sprites = {
   // le décor du Miroir (arbres, reliefs, détails) : clé '~m' quand elle existe
   planeKey(key, plane) { return plane === 1 && Sprites.hasHD(key + '~m') ? key + '~m' : key; },
   hasMirror() { return Sprites.hasHD('tex:grass~m'); },
-  has(key) { return Sprites.hasHD(key) || !!(Sprites.map && Sprites.map[key]); },
+  has(key) { return Sprites.hasHD(key); },
   // figurines provisoires des héros, en attendant leurs propres images (lot 2)
   alias: {
     'spell:jericho_trumpets': 'spell:high_prayer', 'spell:haunted_ramparts': 'spell:terror', 'spell:flux_rupture': 'spell:dispel_magic',
@@ -204,10 +203,7 @@ const Sprites = {
       ctx.imageSmoothingEnabled = prev;
       return true;
     }
-    if (!Sprites.img) return false;
-    const r = Sprites.map[k];
-    ctx.drawImage(Sprites.img, r[0], r[1], r[2], r[3], x, y, w || r[2], h || r[3]);
-    return true;
+    return false;
   },
   // carré d'un sprite posé par le bas : (cx, bottom) = milieu du pied
   drawFoot(ctx, key, cx, bottom, size, glow) {
@@ -403,68 +399,7 @@ const Tiles = {
   cache: {},
   hash(x, y, s) { let h = (x * 374761393 + y * 668265263 + (s || 0) * 2147483647) | 0; h = (h ^ (h >>> 13)) * 1274126177 | 0; return (h ^ (h >>> 16)) >>> 0; },
   mk(fn) { const c = document.createElement('canvas'); c.width = 32; c.height = 32; const ctx = c.getContext('2d'); ctx.imageSmoothingEnabled = false; fn(ctx); return c; },
-  variants(prefix) { let n = 0; while (Sprites.has(prefix + ':' + n)) n++; return Math.max(1, n); },
-  base(kind, v) {
-    const id = 'b:' + kind + ':' + v;
-    if (Tiles.cache[id]) return Tiles.cache[id];
-    const src = { grass: 'ter:grass', desert: 'ter:sand', tundra: 'ter:snow', swamp: 'ter:swamp', ocean: 'ter:water', shore: 'ter:shallow', lava: 'ter:lava', rock: 'ter:rock', hills: 'ter:hills', dirt: 'ter:dirt' }[kind] || 'ter:grass';
-    const n = Tiles.variants(src);
-    const c = Tiles.mk(ctx => { if (!Sprites.draw(ctx, src + ':' + (v % n), 0, 0, 32, 32)) { ctx.fillStyle = '#3a6b2c'; ctx.fillRect(0, 0, 32, 32); } });
-    Tiles.cache[id] = c;
-    return c;
-  },
-  // montagne pixel-art générée : deux sommets ombrés avec neige
-  mountain(v, snow) {
-    const id = 'mt:' + v + ':' + snow;
-    if (Tiles.cache[id]) return Tiles.cache[id];
-    const c = Tiles.mk(ctx => {
-      const rnd = (k) => (Tiles.hash(v, k, 7) % 1000) / 1000;
-      const peaks = [{ x: 9 + rnd(1) * 6, h: 18 + rnd(2) * 6, w: 11 }, { x: 19 + rnd(3) * 6, h: 22 + rnd(4) * 7, w: 13 }];
-      if (rnd(5) > 0.5) peaks.push({ x: 4 + rnd(6) * 24, h: 12 + rnd(7) * 5, w: 8 });
-      peaks.sort((a, b) => a.h - b.h);
-      for (const pk of peaks) {
-        const top = 30 - pk.h;
-        for (let y = top; y < 31; y++) {
-          const t = (y - top) / pk.h;
-          const half = Math.round(pk.w * t);
-          for (let x = Math.round(pk.x - half); x <= Math.round(pk.x + half); x++) {
-            if (x < 0 || x > 31) continue;
-            const left = x < pk.x;
-            let col = left ? [148, 140, 128] : [96, 90, 84];
-            const snowLine = top + pk.h * (snow ? 0.38 : 0.22);
-            if (y < snowLine) col = left ? [240, 242, 246] : [196, 204, 216];
-            const n = (Tiles.hash(x, y, v) % 16) - 8;
-            ctx.fillStyle = `rgb(${col[0] + n},${col[1] + n},${col[2] + n})`;
-            ctx.fillRect(x, y, 1, 1);
-          }
-        }
-        // arête
-        ctx.fillStyle = 'rgba(40,36,34,.55)';
-        for (let y = top; y < 31; y++) { const t = (y - top) / pk.h; ctx.fillRect(Math.round(pk.x - pk.w * t) - 1, y, 1, 1); ctx.fillRect(Math.round(pk.x + pk.w * t) + 1, y, 1, 1); }
-      }
-    });
-    Tiles.cache[id] = c;
-    return c;
-  },
-  hill(v) {
-    const id = 'hl:' + v;
-    if (Tiles.cache[id]) return Tiles.cache[id];
-    const c = Tiles.mk(ctx => {
-      const rnd = (k) => (Tiles.hash(v, k, 11) % 1000) / 1000;
-      const mounds = [{ x: 9 + rnd(1) * 5, y: 22, rx: 9, ry: 6 }, { x: 21 + rnd(2) * 4, y: 18 + rnd(3) * 4, rx: 10, ry: 7 }];
-      for (const m of mounds) for (let y = m.y - m.ry; y <= m.y + 2; y++) for (let x = m.x - m.rx; x <= m.x + m.rx; x++) {
-        const dx = (x - m.x) / m.rx, dy = (y - m.y) / m.ry;
-        if (dx * dx + dy * dy > 1 || x < 0 || x > 31 || y < 0 || y > 31) continue;
-        const lit = dx < -0.1 ? 1 : dx > 0.3 ? -1 : 0;
-        const n = (Tiles.hash(x, y, v + 3) % 12) - 6;
-        const col = lit > 0 ? [128, 140, 76] : lit < 0 ? [74, 82, 46] : [104, 114, 60];
-        ctx.fillStyle = `rgb(${col[0] + n},${col[1] + n},${col[2] + n})`;
-        ctx.fillRect(x, y, 1, 1);
-      }
-    });
-    Tiles.cache[id] = c;
-    return c;
-  },
+
 };
 
 // ---------- icônes vectorielles ----------

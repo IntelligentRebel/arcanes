@@ -1,17 +1,11 @@
 'use strict';
 // Écran de cité : population, ressources, bâtiments, production, garnison, enchantements.
 
-const BUILDING_ICON = {
-  barracks: 'item:shield', armory: 'item:sword:1', fightersGuild: 'item:sword:2', armorersGuild: 'item:plate', warCollege: 'item:helm:1', smithy: 'item:mace', stables: 'unit:HighMenCavalry',
-  animistsGuild: 'unit:WarBear', fantasticStable: 'unit:Griffin', shipwrightsGuild: 'unit:Trireme', shipYard: 'unit:Galley', maritimeGuild: 'unit:Warship', sawmill: 'item:axe', library: 'spell:earth_lore',
-  sagesGuild: 'spell:detect_magic', oracle: 'spell:awareness', alchemistsGuild: 'spell:transmute', university: 'spell:spell_blast', wizardsGuild: 'wizard:3', shrine: 'feat:altar', temple: 'feat:temple',
-  parthenon: 'spell:prayer', cathedral: 'spell:high_prayer', marketplace: 'item:misc', bank: 'item:ring', merchantsGuild: 'item:amulet', granary: 'spell:gaias_blessing', farmersMarket: 'spell:herb_mastery',
-  forestersGuild: 'tree:3', buildersHall: 'item:mace:1', mechaniciansGuild: 'unit:Catapult', minersGuild: 'item:axe:1', cityWalls: 'spell:wall_of_stone', defenseTowers: 'cwall:tower', fortress: 'feat:keep', summoningCircle: 'spell:summoning_circle', magicRelay: 'spell:spell_ward',
-  housing: 'feat:statue', tradeGoods: 'item:misc:1',
-};
 
-// icône d'un bâtiment : son illustration (lot 2) ou, à défaut, l'ancienne icône de dépannage
-function bldIcon(id) { return Sprites.hasHD(Sprites.resolve('bld:' + id) || '') ? 'bld:' + id : BUILDING_ICON[id] || (DATA.buildings[id] && DATA.buildings[id].icon) || 'item:misc'; }
+// icône d'un bâtiment : son illustration bld:<id>, sauf les deux qui n'en ont pas et empruntent celle de l'ouvrage
+// qu'ils figurent. tools/atlas_keys.js vérifie qu'aucune image ne manque.
+const BLD_BORROWED = { defenseTowers: 'cwall:tower', fortress: 'feat:keep' };
+function bldIcon(id) { return BLD_BORROWED[id] || 'bld:' + id; }
 
 const CityUI = {
   cur: null,

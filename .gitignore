@@ -10,7 +10,6 @@ tests/robot/*.png
 # fichiers de travail
 *.orig
 /*.png
-assets/contact-sheet.png
 i18n/work/chunk*.json
 i18n/work/todo_*.json
 i18n/work/few_*.json
