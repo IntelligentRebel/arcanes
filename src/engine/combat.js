@@ -2243,8 +2243,15 @@ const CombatAI = {
     // contre des fantassins), les fuyards seraient presque tous rattrapés ; autant vendre chèrement sa peau
     const plan = bt.fleePlan(side);
     const saved = U.sum(bt.alive(side), b => Units.strength(bt.game, b.u) * (1 - ((plan.get(b) || {}).risk || 0)));
-    return saved >= mine * 0.5;
+    if (saved < mine * 0.5) return false;
+    // (0.31.41) la moyenne ne suffit pas : poursuivis par aussi rapides qu'eux, un fuyard isolé est rattrapé une fois sur deux
+    // et deux fuyards une fois sur quatre. La retraite tournait alors au massacre, sous les yeux de l'assaillant. On ne fuit
+    // plus au-delà d'une chance sur cinq d'y rester tous : on vend chèrement sa peau. Ceux qui courent plus vite que leurs
+    // poursuivants (un cavalier devant des fantassins : une chance sur cinq d'être rattrapé) s'en vont toujours, et un héros,
+    // qui s'en tire à coup sûr, met ce risque à zéro.
+    return bt.alive(side).reduce((a, b) => a * ((plan.get(b) || {}).risk || 0), 1) <= CombatAI.WIPE_MAX;
   },
+  WIPE_MAX: 0.2,
   // joue tout le tour du camp courant
   playSide(bt) {
     const side = bt.side;

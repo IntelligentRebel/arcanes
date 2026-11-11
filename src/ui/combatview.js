@@ -602,7 +602,7 @@ const CombatView = {
       // arbre translucide s'il cache une unité juste derrière
       const behind = CombatView.bt.units.some(b => { const q = CombatView.pos[b.id]; return q && !b.dead && q.c <= c + .5 && q.r <= r + .5 && (c - q.c) + (r - q.r) > 0 && (c - q.c) + (r - q.r) <= 2.5; });
       ctx.globalAlpha = behind ? .45 : 1;
-      Sprites.draw(ctx, 'tree:' + (pr.v % 9), p.x - TW * .3, p.y - TW * .52, TW * .6, TW * .6);
+      Sprites.draw(ctx, 'tree:' + (pr.v % 8), p.x - TW * .3, p.y - TW * .52, TW * .6, TW * .6);
       ctx.globalAlpha = 1;
     }
     else if (pr.kind === 'rock') { ctx.fillStyle = '#6d6a64'; ctx.beginPath(); ctx.ellipse(p.x, p.y - 4, TW * .26, TW * .15, 0, 0, 7); ctx.fill(); ctx.fillStyle = '#8c8880'; ctx.beginPath(); ctx.ellipse(p.x - 4, p.y - 10, TW * .16, TW * .1, 0, 0, 7); ctx.fill(); }

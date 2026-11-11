@@ -29,3 +29,36 @@ ok(slow === 0, 'des lanciers poursuivis par des volants ne fuient pas : ils sera
 const fly = run(['HighMenPikemen', 'HighMenPikemen', 'HighMenPikemen', 'HighMenPikemen', 'HighMenPikemen', 'HighMenPikemen', 'HighMenPikemen', 'HighMenPikemen'], ['HighMenCavalry', 'HighMenSpearmen'], 10);
 console.log('      des cavaliers contre huit piquiers : fuites', fly, 'sur 10');
 ok(fly > 0, 'des cavaliers (plus rapides que leurs poursuivants) fuient encore (' + fly + ' sur 10)');
+
+// ---------- v0.31.41 : une fuite ne doit jamais risquer de les coûter tous ----------
+// Poursuivi par aussi rapide que lui, un fuyard est rattrapé une fois sur deux : seul, il y laisse tout le camp une fois sur
+// deux ; à deux, une fois sur quatre. Les défenseurs d'un nœud en faisaient les frais : sur 600 batailles, 56 des 175 retraites
+// tuaient tout le monde. Au-delà d'une chance sur cinq d'y rester tous, ils se battent.
+{
+  const node = g.sites.find(s => s.type === 'node');
+  const nat = [node.x, node.y], np = node.plane;
+  function atNode(att, def, n) {
+    let fled = 0, wiped = 0, worst = 0;
+    const realFlee = Battle.prototype.flee;
+    Battle.prototype.flee = function (side) { const pl = this.fleePlan(side); worst = Math.max(worst, [...pl.values()].reduce((a, v) => a * (v.risk || 0), 1)); return realFlee.apply(this, arguments); };
+    for (let i = 0; i < n; i++) {
+      const A = att.map(t => Units.create(g, t, 0, np, nat[0] + 1, nat[1]));
+      const D = def.map(t => Units.create(g, t, 1, np, nat[0], nat[1]));
+      const bt = new Battle(g, { attackers: A, defenders: D, attackerPid: 0, defenderPid: 1, plane: np, x: nat[0], y: nat[1], rng: new RNG(4100 + i) });
+      CombatAI.autoResolve(bt);
+      if (bt.fled === 1) { fled++; if (!bt.units.some(x => x.side === 1 && !x.dead)) wiped++; }
+      for (const u of A.concat(D)) if (g.units[u.id]) Units.remove(g, u);
+    }
+    Battle.prototype.flee = realFlee;
+    return { fled, wiped, worst };
+  }
+  const solo = atNode(Array(7).fill('KlackonSpearmen'), ['DarkElfSpearmen'], 20);
+  ok(solo.fled === 0, 'un défenseur isolé, poursuivi par aussi rapide que lui, ne fuit pas (fuites ' + solo.fled + '/20)');
+  const duo = atNode(Array(9).fill('HighMenSwordsmen'), ['OrcBowmen', 'OrcBowmen'], 20);
+  ok(duo.fled === 0, 'deux défenseurs à pied non plus (fuites ' + duo.fled + '/20)');
+  // des fuyards plus rapides que leurs poursuivants s'en vont encore
+  const fast = atNode(Array(9).fill('TrollSwordsmen'), ['HighElfCavalry', 'HighElfCavalry'], 20);
+  ok(fast.fled >= 15, 'de la cavalerie poursuivie par des fantassins fuit encore (fuites ' + fast.fled + '/20)');
+  ok(fast.worst <= CombatAI.WIPE_MAX + 1e-9 && solo.worst <= CombatAI.WIPE_MAX + 1e-9 && duo.worst <= CombatAI.WIPE_MAX + 1e-9,
+    'aucune fuite décidée au-delà du seuil (' + CombatAI.WIPE_MAX + ') : pire vu ' + fast.worst.toFixed(2));
+}
