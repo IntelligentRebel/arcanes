@@ -1,6 +1,6 @@
 """v0.31.22 : la copie locale cherche les nouvelles versions sur GitHub (réponse simulée), l'écran titre et le menu les
 proposent ; le jeu en ligne ne demande rien ; au tour 10, la copie de sauvegarde tous les 10 tours est proposée une fois."""
-import asyncio, json, os, sys
+import asyncio, json, os, re, sys
 from playwright.async_api import async_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = os.path.join(ROOT, 'tests', 'shots')
@@ -12,11 +12,14 @@ def ok(c, what):
 
 BODY = ("**Play in your browser:** https://intelligentrebel.github.io/arcanes/\n\n### New in this version\n\n- **Faster** turns.\n- A <script>x</script> line.\n\n"
         "<details><summary>En français</summary>\n\n### Nouveau dans cette version\n\n- Des tours **plus rapides**.\n\n</details>\n")
+# les versions simulées suivent la version du jeu : la prochaine (NEXT), la suivante en préversion, et celle d'avant
+CUR = re.search(r"GAME_VERSION = '([\d.]+)'", open(os.path.join(ROOT, 'src', 'engine', 'game.js')).read()).group(1)
+_m = CUR.split('.'); NEXT = '.'.join(_m[:-1] + [str(int(_m[-1]) + 1)]); PRE = '.'.join(_m[:-1] + [str(int(_m[-1]) + 2)])
 RELEASES = [
-    {'tag_name': 'v0.31.24', 'draft': False, 'prerelease': True, 'body': '', 'assets': []},
-    {'tag_name': 'v0.31.23', 'draft': False, 'prerelease': False, 'published_at': '2026-11-20T10:00:00Z', 'body': BODY, 'html_url': 'https://github.com/IntelligentRebel/arcanes/releases/tag/v0.31.23',
-     'assets': [{'name': 'arcanes-0.31.23.zip', 'browser_download_url': 'https://github.com/IntelligentRebel/arcanes/releases/download/v0.31.23/arcanes-0.31.23.zip', 'size': 200458251}]},
-    {'tag_name': 'v0.31.22', 'draft': False, 'prerelease': False, 'published_at': '2026-11-05T10:00:00Z', 'body': 'x', 'assets': []},
+    {'tag_name': 'v' + PRE, 'draft': False, 'prerelease': True, 'body': '', 'assets': []},
+    {'tag_name': 'v' + NEXT, 'draft': False, 'prerelease': False, 'published_at': '2026-11-20T10:00:00Z', 'body': BODY, 'html_url': 'https://github.com/IntelligentRebel/arcanes/releases/tag/v' + NEXT,
+     'assets': [{'name': 'arcanes-' + NEXT + '.zip', 'browser_download_url': 'https://github.com/IntelligentRebel/arcanes/releases/download/v' + NEXT + '/arcanes-' + NEXT + '.zip', 'size': 200458251}]},
+    {'tag_name': 'v' + CUR, 'draft': False, 'prerelease': False, 'published_at': '2026-11-05T10:00:00Z', 'body': 'x', 'assets': []},
 ]
 
 
@@ -29,7 +32,11 @@ async def page(b, locale, url, releases):
         pg.calls.append(route.request.url)
         await route.fulfill(status=200, content_type='application/json', headers={'Access-Control-Allow-Origin': '*'}, body=json.dumps(releases))
     await ctx.route('https://api.github.com/**', api)
-    await pg.goto(url); await pg.wait_for_timeout(2600)
+    await pg.goto(url)
+    # (0.31.38) l'écran titre n'arrive qu'une fois les planches chargées : on l'attend au lieu d'un délai fixe
+    try: await pg.wait_for_selector('.title-screen', timeout=40000)
+    except Exception: pass
+    await pg.wait_for_timeout(1200)
     return ctx, pg
 
 
@@ -44,18 +51,18 @@ async def main():
         cmp = await pg.evaluate("[Update.cmp('0.31.22b','0.31.22'), Update.cmp('0.31.9','0.31.22'), Update.cmp('v0.31.22','0.31.22'), Update.cmp('0.32','0.31.99')]")
         ok(cmp[0] > 0 and cmp[1] < 0 and cmp[2] == 0 and cmp[3] > 0, 'comparaison des versions %s' % cmp)
         btn = await pg.evaluate("(document.querySelector('.title-screen .update-btn') || {}).innerText || ''")
-        ok('0.31.23' in btn and 'Nouvelle version' in btn, 'bouton de l\'écran titre : %r' % btn)
-        ok(await pg.evaluate("Update.newer.map(r => r.version).join(',')") == '0.31.23', 'versions plus récentes (sans la préversion)')
+        ok(NEXT in btn and 'Nouvelle version' in btn, 'bouton de l\'écran titre : %r' % btn)
+        ok(await pg.evaluate("Update.newer.map(r => r.version).join(',')") == NEXT, 'versions plus récentes (sans la préversion)')
         await pg.click('.title-screen .update-btn'); await pg.wait_for_timeout(400)
         info = await pg.evaluate("""() => { const m = document.querySelector('.update-modal'); return m ? { title: m.querySelector('h2').innerText, text: m.innerText, href: m.querySelector('.update-get a').href, scripts: m.querySelectorAll('script').length, bold: [...m.querySelectorAll('.release-notes b')].map(b => b.innerText) } : null; }""")
-        ok(info and info['title'] == 'Nouvelle version : 0.31.23', 'titre de la fenêtre : %r' % (info and info['title']))
+        ok(info and info['title'] == 'Nouvelle version : ' + NEXT, 'titre de la fenêtre : %r' % (info and info['title']))
         ok(info and 'plus rapides' in info['text'] and 'Faster' not in info['text'], 'notes en français')
-        ok(info and info['href'].endswith('arcanes-0.31.23.zip') and '200 Mo' in info['text'], 'lien du zip et taille')
+        ok(info and info['href'].endswith('arcanes-' + NEXT + '.zip') and '200 Mo' in info['text'], 'lien du zip et taille')
         ok(info and info['scripts'] == 0, 'aucun HTML venu de GitHub inséré')
         await pg.screenshot(path=os.path.join(SHOTS, 'v03122_maj_fr.png'))
         # 2. relancée dans la journée : le cache sert, pas de nouvelle demande
         await pg.reload(); await pg.wait_for_timeout(2600)
-        ok(len(pg.calls) == 1 and '0.31.23' in await pg.evaluate("(document.querySelector('.title-screen .update-btn') || {}).innerText || ''"), 'cache de 12 h (demandes : %d)' % len(pg.calls))
+        ok(len(pg.calls) == 1 and NEXT in await pg.evaluate("(document.querySelector('.title-screen .update-btn') || {}).innerText || ''"), 'cache de 12 h (demandes : %d)' % len(pg.calls))
         # 3. le menu en partie : la ligne de la version, la recherche coupée puis rallumée
         await pg.evaluate("""() => { document.querySelector('.title-screen').remove(); Sfx.play = () => {}; if (window.Music) Music.jingle = () => true;
           const g = Game.newGame({ seed: 31, opponents: 2, difficulty: 'normal', crisis: 'off', human: { name: 'Éloïne', portrait: 0, books: { nature: 6, life: 5 }, retorts: [], race: 'highelf' } });
@@ -63,7 +70,7 @@ async def main():
         await pg.wait_for_timeout(2000); await pg.evaluate("UI.closeAll()"); await pg.wait_for_timeout(300); await pg.evaluate("UI.closeAll()")
         await pg.evaluate("Panels.menu()"); await pg.wait_for_timeout(300)
         rows = await pg.evaluate("() => [...document.querySelectorAll('.modal .row .t1')].map(r => r.innerText)")
-        ok(any('Nouvelle version disponible : 0.31.23' in r for r in rows), 'ligne du menu (version)')
+        ok(any('Nouvelle version disponible : ' + NEXT in r for r in rows), 'ligne du menu (version)')
         ok(any(r == 'Recherche des nouvelles versions : activée' for r in rows), 'ligne du menu (recherche)')
         await pg.evaluate("() => [...document.querySelectorAll('.modal .row')].find(r => /Recherche des nouvelles/.test(r.innerText)).click()"); await pg.wait_for_timeout(400)
         ok(await pg.evaluate("App.prefs.checkUpdates") is False, 'recherche coupée')
@@ -82,7 +89,7 @@ async def main():
             await pg.evaluate("() => { const m = [...document.querySelectorAll('.modal')].pop(); if (m && !/Copies de sauvegarde/.test(m.innerText)) { const b = m.querySelector('footer .btn.primary, footer .btn'); if (b) b.click(); else UI.closeTop(); } }")
         ok(asked, 'question posée au tour 10')
         await pg.screenshot(path=os.path.join(SHOTS, 'v03122_copie.png'))
-        await pg.evaluate("() => [...document.querySelectorAll('.modal footer .btn')].find(b => b.innerText === 'Oui').click()"); await pg.wait_for_timeout(1200)
+        await pg.evaluate("() => [...document.querySelectorAll('.modal footer .btn')].find(b => /Télécharger|Oui/.test(b.innerText)).click()"); await pg.wait_for_timeout(1200)
         ok(await pg.evaluate("App.prefs.autoExport") == 10 and await pg.evaluate("App.prefs.autoExportAsked") is True, 'oui : tous les 10 tours')
         ok(len(downloads) == 1, 'copie téléchargée tout de suite (%d)' % len(downloads))
         ok(not pg.errors, 'aucune erreur (fr)')
@@ -96,7 +103,7 @@ async def main():
         ctx, pg = await page(b, 'en-US', local, RELEASES)
         await pg.click('.title-screen .update-btn'); await pg.wait_for_timeout(400)
         t = await pg.evaluate("document.querySelector('.update-modal').innerText")
-        ok('Faster' in t and 'plus rapides' not in t and 'New version: 0.31.23' in t and 'Play in your browser' not in t, 'notes en anglais')
+        ok('Faster' in t and 'plus rapides' not in t and ('New version: ' + NEXT) in t and 'Play in your browser' not in t, 'notes en anglais')
         await pg.screenshot(path=os.path.join(SHOTS, 'v03122_maj_en.png'))
         ok(not pg.errors, 'aucune erreur (en)')
         await ctx.close()

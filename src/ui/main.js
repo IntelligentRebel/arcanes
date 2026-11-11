@@ -1128,12 +1128,18 @@ const App = {
     if ((App.pendingScouts || []).length) await App.flushScouts();
     Sfx.afterTurn();
     App.save('auto');
-    if (App.prefs.autoExport > 0 && game.turn % App.prefs.autoExport === 0 && !game.over) { App.exportSave(); UI.toast('Sauvegarde du tour ' + game.turn + ' téléchargée.'); }
+    if (App.prefs.autoExport > 0 && game.turn % App.prefs.autoExport === 0 && !game.over) await App.autoExport();
     // 0.31.22 : au tour 10, une seule fois, la copie téléchargée tous les 10 tours est proposée (coupée tant qu'on n'a pas dit oui)
     else if (!(App.prefs.autoExport > 0) && !App.prefs.autoExportAsked && game.turn >= 10 && !game.over) {
       App.setPref('autoExportAsked', true);
       const n = App.prefs.autoExportN || 10;
-      if (await UI.confirm('Copies de sauvegarde', 'Vos parties sont gardées dans ce navigateur : effacer ses données les efface aussi. Télécharger une copie de la partie tous les ' + n + ' tours ?', 'Oui', 'Non merci')) { App.setPref('autoExport', n); App.exportSave(); UI.toast('Sauvegarde du tour ' + game.turn + ' téléchargée.'); }
+      const txt = 'Vos parties sont gardées dans ce navigateur : effacer ses données les efface aussi. Garder une copie de la partie tous les ' + n + ' tours ?';
+      const opts = SaveDir.supported()
+        ? [{ value: 'dir', label: 'Choisir un dossier', primary: true }, { value: 'dl', label: 'Télécharger' }, { value: 0, label: 'Non merci' }]
+        : [{ value: 'dl', label: 'Télécharger', primary: true }, { value: 0, label: 'Non merci' }];
+      const c = await UI.choice('Copies de sauvegarde', txt + (SaveDir.supported() ? '<p class="muted">Dans un dossier, elles s\'écrivent sans rien vous demander. Sinon, elles arrivent dans vos téléchargements.</p>' : ''), opts);
+      if (c === 'dir') { const p = await SaveDir.pick(); if (p.ok) App.setPref('saveDir', p.name); }
+      if (c) { App.setPref('autoExport', n); await App.autoExport(); }
     }
     App.refresh();
     if (game.over) return App.gameOver();
@@ -1871,11 +1877,39 @@ const App = {
     }
   },
   saveMeta(slot) { try { return JSON.parse(localStorage.getItem('arcanes:' + slot + ':meta')); } catch (e) { return null; } },
-  // un fichier de sauvegarde téléchargé (menu, ou tous les N tours si l'option est active)
-  exportSave() {
+  // un fichier de sauvegarde : dans le dossier choisi (Chrome, Edge) s'il y en a un, sinon dans les téléchargements
+  // ask : le joueur vient de cliquer, on peut lui demander l'autorisation d'écrire dans son dossier
+  async exportSave(ask) {
     const name = (App.me().name || 'sorcier').normalize('NFKD').replace(/[^\w-]+/g, '').toLowerCase() || 'sorcier';
-    const a = h('a', { href: URL.createObjectURL(new Blob([App.serialize()], { type: 'application/json' })), download: 'arcanes-' + name + '-tour' + App.game.turn + '.json' });
+    const file = 'arcanes-' + name + '-tour' + App.game.turn + '.json', text = App.serialize();
+    if (App.prefs.saveDir && SaveDir.supported()) {
+      const r = await SaveDir.write(file, text, ask);
+      if (r.ok) return { ok: true, file, dir: r.dir };
+      if (r.why === 'ask') return { ok: false, file, why: 'ask', dir: r.dir };
+      // le dossier a disparu, ou l'autorisation a été retirée : on retombe sur le téléchargement, une fois dit
+      App.dirWarn(r);
+    }
+    App.download(file, text);
+    return { ok: true, file };
+  },
+  download(file, text) {
+    const a = h('a', { href: URL.createObjectURL(new Blob([text], { type: 'application/json' })), download: file });
     document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+  },
+  dirWarn(r) {
+    console.warn('dossier de sauvegarde : ' + (r && r.why));
+    if (App._dirWarned) return; App._dirWarned = true;
+    UI.toast('Impossible d\'écrire dans le dossier de sauvegarde : la copie part dans vos téléchargements.', 'warn', 'savedir');
+  },
+  // la copie du tour : écrite dans le dossier, ou téléchargée ; si le navigateur attend un clic, on le demande une fois
+  async autoExport() {
+    const r = await App.exportSave(false);
+    if (r.ok) { UI.toast(r.dir ? 'Sauvegarde du tour ' + App.game.turn + ' écrite dans ' + U.esc(r.dir) + '.' : 'Sauvegarde du tour ' + App.game.turn + ' téléchargée.'); return; }
+    // Chrome oublie l'autorisation au lancement : un clic la rend, pour toute la session
+    const ok = await UI.confirm('Dossier de sauvegarde', 'Le navigateur demande de confirmer l\'accès au dossier <b>' + U.esc(r.dir || '') + '</b> pour y déposer les copies de la partie. Sans cela, elles iront dans vos téléchargements.', 'Autoriser', 'Télécharger');
+    if (!ok) { App.download(r.file, App.serialize()); UI.toast('Sauvegarde du tour ' + App.game.turn + ' téléchargée.'); return; }
+    const r2 = await App.exportSave(true);
+    if (r2.ok) UI.toast(r2.dir ? 'Sauvegarde du tour ' + App.game.turn + ' écrite dans ' + U.esc(r2.dir) + '.' : 'Sauvegarde du tour ' + App.game.turn + ' téléchargée.');
   },
   load(slot) {
     const s = localStorage.getItem('arcanes:' + slot); if (!s) return false;

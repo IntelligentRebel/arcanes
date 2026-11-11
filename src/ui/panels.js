@@ -726,8 +726,15 @@ const Panels = {
         onchange: e => { const v = Math.max(1, Math.min(200, Math.round(+e.target.value) || 10)); e.target.value = v; App.setPref('autoExportN', v); if (App.prefs.autoExport > 0) App.setPref('autoExport', v); lab.textContent = App.prefs.autoExport > 0 ? 'tous les ' + v + ' tours' : 'coupée'; } });
       const lab = h('span', null, on ? 'tous les ' + n + ' tours' : 'coupée');
       body.append(h('div', { class: 'row', onclick: () => { App.setPref('autoExport', App.prefs.autoExport > 0 ? 0 : (App.prefs.autoExportN || 10)); again(); } },
-        h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Sauvegarde téléchargée automatiquement : ', lab),
-          h('div', { class: 't2' }, 'Un fichier de sauvegarde arrive dans vos téléchargements à la fin du tour, tous les ', num, ' tours.')))); }
+        h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Copie de sauvegarde automatique : ', lab),
+          h('div', { class: 't2' }, 'Un fichier de sauvegarde est écrit à la fin du tour, tous les ', num, ' tours.')))); }
+    // le dossier de sauvegarde : une fois choisi, les copies s'y écrivent sans rien demander (Chrome et Edge)
+    { const dir = App.prefs.saveDir;
+      if (SaveDir.supported()) row('Dossier de sauvegarde : ' + (dir || 'aucun'),
+        dir ? 'Les copies s\'y écrivent sans rien vous demander. Cliquez pour en choisir un autre ; le bouton à droite l\'oublie.' : 'Choisissez un dossier : les copies s\'y écriront sans rien vous demander, au lieu d\'aller dans vos téléchargements.',
+        async () => { const r = await SaveDir.pick(); if (r.ok) { App.setPref('saveDir', r.name); App._dirWarned = false; again(); } else if (r.why !== 'cancel') UI.toast('Dossier non retenu : le navigateur n\'a pas donné l\'accès.', 'warn'); });
+      else row('Dossier de sauvegarde : indisponible', 'Ce navigateur ne sait pas écrire dans un dossier choisi (Chrome et Edge le savent) : les copies vont dans vos téléchargements.', () => {});
+      if (dir && SaveDir.supported()) body.lastChild.append(h('button', { class: 'abtn', title: 'Oublier ce dossier', onclick: async e => { e.stopPropagation(); await SaveDir.forget(); App.setPref('saveDir', null); again(); } }, 'Oublier')); }
     // la copie locale : les nouvelles versions publiées sur GitHub (src/ui/update.js)
     if (Update.isLocalCopy()) {
       if (Update.newer.length) row('Nouvelle version disponible : ' + Update.newer[0].version, 'Notes de version et téléchargement', () => { m.close(); Update.dialog(); });

@@ -8,7 +8,7 @@ JS = [
   'src/core/rng.js', 'src/core/util.js',
   'src/engine/world.js', 'src/engine/units.js', 'src/engine/cities.js', 'src/engine/magic.js', 'src/engine/move.js',
   'src/engine/combat.js', 'src/engine/game.js', 'src/engine/turn.js', 'src/engine/spells.js', 'src/engine/veil.js', 'src/engine/aiintel.js', 'src/engine/ai.js', 'src/engine/aiplus.js', 'src/engine/aistrat.js', 'src/engine/diplo.js', 'src/engine/events.js', 'src/engine/chronicle.js', 'src/engine/finale.js',
-  'src/ui/assets.js', 'src/ui/sound.js', 'src/ui/ui.js', 'src/ui/mapview.js', 'src/ui/city.js', 'src/ui/magicui.js', 'src/ui/combatview.js', 'src/ui/panels.js', 'src/ui/update.js', 'src/ui/setup.js', 'src/ui/main.js',
+  'src/ui/assets.js', 'src/ui/sound.js', 'src/ui/ui.js', 'src/ui/mapview.js', 'src/ui/city.js', 'src/ui/magicui.js', 'src/ui/combatview.js', 'src/ui/panels.js', 'src/ui/update.js', 'src/ui/savedir.js', 'src/ui/setup.js', 'src/ui/main.js',
 ]
 ASSETS = ['atlas.png', 'hd.png', 'hd2.png', 'title.jpg', 'anim.png', 'weapons.png', 'fx.png']
 # pages de l'atlas d'animation (tools/build_anim.py) : anim.png, anim1.png, ...
