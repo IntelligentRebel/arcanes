@@ -1,12 +1,11 @@
 // Contrôle : toutes les clés d'images que le code peut demander ont-elles une planche HD ?
 // Les clés littérales du code et des données, plus celles construites par préfixe (unit:<type>, bld:<id>, spell:<id>...).
-// node tools/atlas_keys.js   → liste ce qui ne tiendrait que sur l'atlas de dépannage.
+// node tools/atlas_keys.js   → liste les clés qu'aucune planche ne sert.
 const fs = require('fs'), path = require('path');
 const ROOT = path.dirname(__dirname);
 const read = p => fs.readFileSync(path.join(ROOT, p), 'utf8');
 const J = p => JSON.parse(read(p));
 const hd = new Set([...Object.keys(J('assets/hd.json')), ...Object.keys(J('assets/hd2.json'))]);
-const atlas = new Set(Object.keys(J('assets/atlas.json')));
 const files = [];
 (function walk(d) { for (const f of fs.readdirSync(path.join(ROOT, d))) { const p = d + '/' + f; if (f.endsWith('.orig')) continue; if (fs.statSync(path.join(ROOT, p)).isDirectory()) walk(p); else if (f.endsWith('.js')) files.push(p); } })('src');
 for (const f of fs.readdirSync(path.join(ROOT, 'data'))) if (f.endsWith('.js')) files.push('data/' + f);
@@ -36,7 +35,5 @@ for (const id in DATA.buildings) if (hd.has('bld:' + id)) virt.add('bld:' + id);
 for (const m of read('src/ui/city.js').matchAll(/BLD_BORROWED = \{([^}]*)\}/g)) for (const b of m[1].matchAll(/(\w+):\s*'([^']+)'/g)) { virt.add('bld:' + b[1]); want.add(b[2]); }
 const BLD_FALLBACK = new Set(Object.keys(DATA.buildings).filter(id => hd.has('bld:' + id)));
 const miss = [...want].filter(k => !virt.has(k)).filter(k => !hd.has(k) && !hd.has(k.replace(/:\d+$/, '')));
-const onlyAtlas = miss.filter(k => atlas.has(k));
-console.log('clés examinées :', want.size, '| sans HD :', miss.length, '| dont servies par l\'atlas :', onlyAtlas.length);
-for (const k of onlyAtlas.sort()) console.log('  atlas :', k);
-for (const k of miss.filter(k => !atlas.has(k)).sort().slice(0, 40)) console.log('  nulle part :', k);
+console.log('clés examinées :', want.size, '| sans planche :', miss.length);
+for (const k of miss.sort().slice(0, 40)) console.log('  nulle part :', k);

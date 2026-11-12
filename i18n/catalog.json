@@ -11779,7 +11779,7 @@
    "src/engine/turn.js:89",
    "src/engine/turn.js:640",
    "src/engine/spells.js:31",
-   "src/engine/ai.js:1260"
+   "src/engine/ai.js:1248"
   ]
  },
  "unités": {
@@ -14836,29 +14836,29 @@
  },
  "Aucun traité": {
   "at": [
-   "src/engine/ai.js:1177"
+   "src/engine/ai.js:1165"
   ]
  },
  "Pacte de paix": {
   "at": [
-   "src/engine/ai.js:1177"
+   "src/engine/ai.js:1165"
   ]
  },
  "Alliance": {
   "at": [
-   "src/engine/ai.js:1177",
+   "src/engine/ai.js:1165",
    "src/ui/panels.js:405"
   ]
  },
  "Guerre": {
   "at": [
-   "src/engine/ai.js:1177",
+   "src/engine/ai.js:1165",
    "src/ui/panels.js:419"
   ]
  },
  "{0} a rompu son traité et vous attaque !": {
   "at": [
-   "src/engine/ai.js:1195"
+   "src/engine/ai.js:1183"
   ],
   "args": [
    "pa.name"
@@ -14866,7 +14866,7 @@
  },
  "Vous êtes en guerre contre {0}.": {
   "at": [
-   "src/engine/ai.js:1199"
+   "src/engine/ai.js:1187"
   ],
   "args": [
    "pb.name"
@@ -14874,7 +14874,7 @@
  },
  "{0} vous déclare la guerre.": {
   "at": [
-   "src/engine/ai.js:1199"
+   "src/engine/ai.js:1187"
   ],
   "args": [
    "pa.name"
@@ -14882,12 +14882,12 @@
  },
  "Seulement avec un sorcier en paix ou allié.": {
   "at": [
-   "src/engine/ai.js:1214"
+   "src/engine/ai.js:1202"
   ]
  },
  "{0} rouvre son territoire à vos troupes.": {
   "at": [
-   "src/engine/ai.js:1216"
+   "src/engine/ai.js:1204"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))"
@@ -14895,7 +14895,7 @@
  },
  "{0} vous interdit son territoire{1}": {
   "at": [
-   "src/engine/ai.js:1220"
+   "src/engine/ai.js:1208"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))",
@@ -14904,7 +14904,7 @@
  },
  " : {0} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1220",
+   "src/engine/ai.js:1208",
    "src/ui/panels.js:407"
   ],
   "args": [
@@ -14913,22 +14913,22 @@
  },
  "unité est reconduite": {
   "at": [
-   "src/engine/ai.js:1220",
-   "src/engine/ai.js:1259"
+   "src/engine/ai.js:1208",
+   "src/engine/ai.js:1247"
   ]
  },
  "unités sont reconduites": {
   "at": [
-   "src/engine/ai.js:1220",
-   "src/engine/ai.js:1220",
-   "src/engine/ai.js:1259",
-   "src/engine/ai.js:1259"
+   "src/engine/ai.js:1208",
+   "src/engine/ai.js:1208",
+   "src/engine/ai.js:1247",
+   "src/engine/ai.js:1247"
   ],
   "hint": "pluriel de « unité est reconduite »"
  },
  "{0} étend son territoire, qu'il vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1259"
+   "src/engine/ai.js:1247"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -14937,7 +14937,7 @@
  },
  "{0} {1}{2} sur votre territoire, qui lui est interdit : {3} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1260"
+   "src/engine/ai.js:1248"
   ],
   "args": [
    "U.n(n, 'unité', 'unités')",
@@ -14948,27 +14948,27 @@
  },
  " se trouvaient": {
   "at": [
-   "src/engine/ai.js:1260"
+   "src/engine/ai.js:1248"
   ]
  },
  " se trouvait": {
   "at": [
-   "src/engine/ai.js:1260"
+   "src/engine/ai.js:1248"
   ]
  },
  "elles sont reconduites": {
   "at": [
-   "src/engine/ai.js:1260"
+   "src/engine/ai.js:1248"
   ]
  },
  "elle est reconduite": {
   "at": [
-   "src/engine/ai.js:1260"
+   "src/engine/ai.js:1248"
   ]
  },
  "{0} accepte : faisons front ensemble contre {1}.": {
   "at": [
-   "src/engine/ai.js:1285"
+   "src/engine/ai.js:1273"
   ],
   "args": [
    "pb.name",
@@ -14977,7 +14977,7 @@
  },
  "{0} accepte votre présent.": {
   "at": [
-   "src/engine/ai.js:1287"
+   "src/engine/ai.js:1275"
   ],
   "args": [
    "pb.name"
@@ -14985,7 +14985,7 @@
  },
  "La guerre est déclarée.{0}": {
   "at": [
-   "src/engine/ai.js:1288"
+   "src/engine/ai.js:1276"
   ],
   "args": [
    "broke ? ' Rompre un traité vous coûte l\\'estime de tous les sorciers.' : ''"
@@ -14993,12 +14993,12 @@
  },
  " Rompre un traité vous coûte l'estime de tous les sorciers.": {
   "at": [
-   "src/engine/ai.js:1288"
+   "src/engine/ai.js:1276"
   ]
  },
  "{0} vous a déjà répondu ce tour-ci.": {
   "at": [
-   "src/engine/ai.js:1292"
+   "src/engine/ai.js:1280"
   ],
   "args": [
    "pb.name"
@@ -15006,7 +15006,7 @@
  },
  "{0} accepte : {1}.": {
   "at": [
-   "src/engine/ai.js:1295"
+   "src/engine/ai.js:1283"
   ],
   "args": [
    "pb.name",
@@ -15015,7 +15015,7 @@
  },
  "{0} refuse.": {
   "at": [
-   "src/engine/ai.js:1297"
+   "src/engine/ai.js:1285"
   ],
   "args": [
    "pb.name"
@@ -15023,7 +15023,7 @@
  },
  "{0} vous propose la paix{1}.": {
   "at": [
-   "src/engine/ai.js:1376"
+   "src/engine/ai.js:1364"
   ],
   "args": [
    "a.name",
@@ -15032,12 +15032,12 @@
  },
  ", avec des concessions": {
   "at": [
-   "src/engine/ai.js:1376"
+   "src/engine/ai.js:1364"
   ]
  },
  "{0} et {1} signent la paix.": {
   "at": [
-   "src/engine/ai.js:1378"
+   "src/engine/ai.js:1366"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, a.id))",
@@ -15046,8 +15046,8 @@
  },
  "{0} vous déclare la guerre !": {
   "at": [
-   "src/engine/ai.js:1395",
-   "src/engine/ai.js:1402"
+   "src/engine/ai.js:1383",
+   "src/engine/ai.js:1390"
   ],
   "args": [
    "a.name"
@@ -15055,8 +15055,8 @@
  },
  "Guerre déclarée à {0}.": {
   "at": [
-   "src/engine/ai.js:1396",
-   "src/engine/ai.js:1403",
+   "src/engine/ai.js:1384",
+   "src/engine/ai.js:1391",
    "src/engine/diplo.js:123"
   ],
   "args": [
@@ -15065,7 +15065,7 @@
  },
  "{0} vous propose un pacte de paix.": {
   "at": [
-   "src/engine/ai.js:1415"
+   "src/engine/ai.js:1403"
   ],
   "args": [
    "a.name"
