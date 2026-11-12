@@ -421,10 +421,11 @@ const Panels = {
         }
         return box;
       };
-      // les inconnus en dernier, pour ne rien laisser deviner de l'ordre des joueurs
+      // soi d'abord, puis les sorciers connus encore en lice, les inconnus (rien à deviner de l'ordre des joueurs), et les vaincus tout en bas
+      const rank = o => o === pl ? 0 : !Players.knows(game, pl.id, o.id) ? 2 : o.alive ? 1 : 3;
       // les sorciers nés sur l'autre plan n'apparaissent qu'une fois rencontrés
       const order = game.players.filter(o => o === pl || Players.knows(game, pl.id, o.id) || o.plane === pl.plane)
-        .sort((a, b) => (Players.knows(game, pl.id, b.id) - Players.knows(game, pl.id, a.id)));
+        .sort((a, b) => rank(a) - rank(b));
       const list = h('div', { class: 'list' }, ...order.map(card));
       body.append(Panels.forces(game, pl), list);
     };

@@ -83,6 +83,7 @@ const App = {
       await App.heroArrivalPrompt(); if (App.game !== game) return;
       await App.fallPrompt(); if (App.game !== game) return;
       await App.demonPrompt(); if (App.game !== game) return;
+      await App.wizardFallPrompts(); if (App.game !== game) return;
       await App.nodeLostPrompts(); if (App.game !== game) return;
       await App.finalePrompts(); if (App.game !== game) return;
       await App.landmarkPrompts(); if (App.game !== game) return;
@@ -271,6 +272,7 @@ const App = {
   me() { return App.game.players[App.pid]; },
   refresh() {
     const game = App.game; if (!game) return;
+    App.pokeFalls();
     const pl = App.me();
     const set = (id, v, p) => { const el = $('#' + id); if (!el) return; el.querySelector('.v').textContent = v; el.querySelector('.p').textContent = p || ''; };
     const gp = Players.goldPerTurn(game, pl);
@@ -1486,6 +1488,52 @@ const App = {
       if (App.game !== game) return;
     }
   },
+  // (0.31.45) la chute d'un rival, au centre de l'écran : banni quand sa forteresse tombe, vaincu quand il perd sa dernière cité.
+  // Une illustration par sorcier et par chute (assets/falls) ; un sorcier jamais rencontré reste anonyme, sans image.
+  FALL_IDS: ['aldoran', 'isvaran', 'malivra', 'tsevan', 'azhemir', 'thalgren', 'vorgath', 'zirrakh', 'brakkon', 'sylvaine', 'solenkh', 'celestine', 'itzanor', 'nerissa'],
+  pokeFalls() {
+    const game = App.game; if (!game || !game.falls || App._fallOpen || !game.falls.some(f => !f.seen)) return;
+    setTimeout(() => App.wizardFallPrompts(), 350);
+  },
+  async wizardFallPrompts() {
+    const game = App.game, pl = App.me(); if (!game || !pl || !game.falls || App._fallOpen) return;
+    if (UI.busy || CombatView.active || App.moving) return;
+    App._fallOpen = true;
+    try {
+      for (const f of game.falls) {
+        if (f.seen) continue;
+        f.seen = true;
+        const o = game.players[f.who];
+        if (!o || o === pl || f.turn < game.turn - 1) continue;
+        // sa forteresse était sa dernière cité : on n'annonce que la défaite
+        if (f.kind === 'banished' && game.falls.some(g => g.kind === 'defeated' && g.who === f.who && g.turn === f.turn)) continue;
+        const known = Players.knows(game, pl.id, o.id), mine = f.by === pl.id, name = U.cap(Players.nameFor(game, pl.id, o.id));
+        const by = !mine && f.by >= 0 && game.players[f.by] ? U.cap(Players.nameFor(game, pl.id, f.by)) : null;
+        const key = known && !window.AUTO_CHOICE ? App.FALL_IDS[o.portrait] : null;
+        const img = key ? await App.eventArt(f.kind + '_' + key, 'falls') : null; if (App.game !== game) return;
+        const art = h('div', { class: 'lm-art' + (img ? '' : ' none') });
+        if (img) { img.alt = ''; art.append(img); } else art.append(h('div', { class: 'lm-halo' }));
+        let text;
+        if (f.kind === 'banished') {
+          const how = f.why === 'avatar' ? 'Son avatar a péri au combat.' : mine ? (f.city ? 'Sa forteresse de ' + f.city + ' est à vous.' : 'Sa forteresse est tombée entre vos mains.') : by ? by + ' a pris sa forteresse.' : 'Sa forteresse est tombée.';
+          text = how + ' Le néant se referme sur ' + Players.nameFor(game, pl.id, o.id) + ', mais son retour se prépare déjà.';
+        } else {
+          const how = mine ? 'Sa dernière cité est tombée entre vos mains.' : by ? by + ' a pris sa dernière cité.' : 'Sa dernière cité est tombée.';
+          text = how + ' ' + name + ' disparaît de ce monde.';
+        }
+        const body = h('div', { class: 'lm', style: '--lc:' + (known ? o.color : '#c9a24a') }, art,
+          h('div', { class: 'lm-kicker' }, f.kind === 'banished' ? 'Forteresse tombée' : 'Chute d\'un sorcier'),
+          h('div', { class: 'lm-name' }, name),
+          h('div', { class: 'lm-text' }, text));
+        Sfx.play(mine ? 'victory' : 'notify');
+        await new Promise(res => {
+          const m = UI.modal({ title: '', body, width: 760, cls: 'landmark-modal', onClose: res,
+            footer: [h('button', { class: 'btn primary', onclick: () => m.close() }, 'Continuer')] });
+        });
+        if (App.game !== game) return;
+      }
+    } finally { App._fallOpen = false; }
+  },
   // capitale perdue : le grand message, une fois
   // 0.31.29 : un nœud volé par un rival, au centre de l'écran (illustration selon le royaume du nœud)
   async nodeLostPrompts() {
@@ -1595,6 +1643,7 @@ const App = {
     await App.heroArrivalPrompt();
     await App.fallPrompt();
     await App.demonPrompt();
+    await App.wizardFallPrompts();
     await App.nodeLostPrompts();
     await App.finalePrompts();
     await App.landmarkPrompts();

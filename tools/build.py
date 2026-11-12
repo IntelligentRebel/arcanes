@@ -91,7 +91,7 @@ def main():
         if os.path.exists(src):
             shutil.copyfile(src, os.path.join(out_dir, 'assets', a)); size += os.path.getsize(src)
     # illustrations des grands ouvrages et des événements (chargées à la demande)
-    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame'):
+    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame', 'falls'):
         ldir = os.path.join(ROOT, 'assets', sub)
         if os.path.isdir(ldir):
             os.makedirs(os.path.join(out_dir, 'assets', sub), exist_ok=True)

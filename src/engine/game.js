@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.44';
+const GAME_VERSION = '0.31.45';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -1115,6 +1115,7 @@ const Game = {
     const plunder = oldPl ? Math.floor(oldPl.gold * Cities.citizens(city) / Math.max(1, U.sum(Cities.ofPlayer(game, old), c => Cities.citizens(c)))) : Cities.citizens(city) * 10;
     if (pl) pl.gold += plunder;
     if (oldPl) oldPl.gold = Math.max(0, oldPl.gold - plunder);
+    if (oldPl) oldPl.lastLostTo = pl ? pid : -1;   // qui lui a pris sa dernière cité, pour l'annonce de sa chute
     if (raze) {
       if (typeof Chronicle !== 'undefined') Chronicle.note(game, 'city_razed', { a: pid, d: old, c: city.name, plane: city.plane, x: city.x, y: city.y, fort: !!city.fortress });
       Game.log(game, pid, city.name + ' est rasée. Butin : ' + plunder + ' or.');
@@ -1189,6 +1190,7 @@ const Game = {
     const fc = game.cities[loser.fortress];
     if (fc) loser.lastFortress = { plane: fc.plane, x: fc.x, y: fc.y };
     if (typeof Chronicle !== 'undefined') Chronicle.note(game, 'banished', { a: loser.id, by: winner ? winner.id : -1, why: why || null, pub: true });
+    Game.noteFall(game, { kind: 'banished', who: loser.id, by: winner ? winner.id : -1, why: why || null, city: city ? city.name : fc ? fc.name : null });
     loser.fortress = null; loser.summonCity = null; loser.banished = true; loser.casting = null;
     loser.globals = [];
     loser.fallen = city && game.cities[city.id] ? { city: city.id, turn: game.turn, by: winner ? winner.id : null, seen: false } : null;
@@ -1243,6 +1245,12 @@ const Game = {
       }
     }
   },
+  // (0.31.45) la chute d'un sorcier (banni, ou vaincu pour de bon) : l'écran l'annonce au joueur, au centre, avec son illustration
+  noteFall(game, f) {
+    f.turn = game.turn;
+    (game.falls = game.falls || []).push(f);
+    if (game.falls.length > 24) game.falls.splice(0, game.falls.length - 24);
+  },
   checkElimination(game) {
     for (const pl of game.players) {
       if (!pl.alive) continue;
@@ -1250,6 +1258,7 @@ const Game = {
       if (!cities && (pl.banished || !game.cities[pl.fortress])) {
         pl.alive = false;
         if (typeof Chronicle !== 'undefined') Chronicle.note(game, 'eliminated', { a: pl.id, pub: true });
+        Game.noteFall(game, { kind: 'defeated', who: pl.id, by: pl.lastLostTo != null ? pl.lastLostTo : -1 });
         Game.raiseTomb(game, pl);
         for (const u of Object.values(game.units)) if (u.owner === pl.id) Units.remove(game, u);
         for (const c of Object.values(game.cities)) c.ench = c.ench.filter(e => e.owner !== pl.id);
