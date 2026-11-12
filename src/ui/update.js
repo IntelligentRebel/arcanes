@@ -32,8 +32,11 @@ const Update = {
   parse(list) {
     if (!Array.isArray(list)) return [];
     return list.filter(r => r && !r.draft && !r.prerelease && /^v?\d+(\.\d+)*[a-z]?$/i.test(r.tag_name || '')).map(r => {
-      const zip = (Array.isArray(r.assets) ? r.assets : []).find(a => /\.zip$/i.test(a.name || ''));
-      return { version: String(r.tag_name).replace(/^v/, ''), date: String(r.published_at || ''), body: String(r.body || ''), page: String(r.html_url || Update.RELEASES_URL), zip: zip ? zip.browser_download_url : null, size: zip ? zip.size : 0 };
+      // deux archives par version : le jeu entier, et la mise à jour depuis la version d'avant (arcanes-update-<avant>-to-<version>.zip)
+      const zips = (Array.isArray(r.assets) ? r.assets : []).filter(a => /\.zip$/i.test(a.name || '')), isUpd = a => /^arcanes-update-/i.test(a.name);
+      const zip = zips.find(a => !isUpd(a)), up = zips.find(isUpd), from = up ? (up.name.match(/^arcanes-update-(.+)-to-/i) || [])[1] : null;
+      return { version: String(r.tag_name).replace(/^v/, ''), date: String(r.published_at || ''), body: String(r.body || ''), page: String(r.html_url || Update.RELEASES_URL), zip: zip ? zip.browser_download_url : null, size: zip ? zip.size : 0,
+        upd: up && from ? { from, url: up.browser_download_url, size: up.size || 0 } : null };
     }).sort((a, b) => Update.cmp(b.version, a.version));
   },
 
@@ -101,12 +104,17 @@ const Update = {
     const mb = latest.size ? Math.round(latest.size / 1e6) : 0;
     const date = d => { const t = Date.parse(d); return isNaN(t) ? '' : new Date(t).toLocaleDateString(I18N.locale); };
     const ext = { target: '_blank', rel: 'noopener noreferrer' };
+    // la mise à jour seule ne vaut que depuis la version juste avant
+    const upd = latest.upd && latest.upd.from === GAME_VERSION ? latest.upd : null;
+    const umb = upd ? (upd.size >= 1e6 ? Math.round(upd.size / 1e6) : Math.max(0.1, Math.round(upd.size / 1e5) / 10).toLocaleString(I18N.locale)) : 0;
     const body = h('div', null,
       h('p', null, list.length > 1 ? 'Vous jouez la version ' + GAME_VERSION + ' : ' + list.length + ' versions sont parues depuis.' : 'Vous jouez la version ' + GAME_VERSION + '.'),
       h('div', { class: 'update-get' },
-        h('a', Object.assign({ class: 'btn primary', href: latest.zip || latest.page }, ext), latest.zip ? (mb ? 'Télécharger le jeu (.zip, ' + mb + ' Mo)' : 'Télécharger le jeu (.zip)') : 'Page de la version'),
+        upd ? h('a', Object.assign({ class: 'btn primary', href: upd.url }, ext), 'Mise à jour seule (.zip, ' + umb + ' Mo)') : null,
+        h('a', Object.assign({ class: upd ? 'btn' : 'btn primary', href: latest.zip || latest.page }, ext), latest.zip ? (mb ? 'Télécharger le jeu (.zip, ' + mb + ' Mo)' : 'Télécharger le jeu (.zip)') : 'Page de la version'),
         h('a', Object.assign({ class: 'btn', href: Update.ONLINE_URL }, ext), 'Jouer en ligne')),
-      h('p', { class: 'dim', style: 'font-size:12px' }, 'Décompressez l\'archive à la place de l\'ancien dossier, sous le même nom : vos parties restent dans ce navigateur. Par précaution, exportez d\'abord celles qui comptent.'),
+      upd ? h('p', { class: 'dim', style: 'font-size:12px' }, 'La mise à jour seule ne contient que les fichiers modifiés : décompressez-la à côté de votre dossier arcanes, en acceptant de remplacer les fichiers.') : null,
+      h('p', { class: 'dim', style: 'font-size:12px' }, upd ? 'Le jeu entier se décompresse à la place de l\'ancien dossier, sous le même nom. Dans les deux cas, vos parties restent dans ce navigateur ; par précaution, exportez d\'abord celles qui comptent.' : 'Décompressez l\'archive à la place de l\'ancien dossier, sous le même nom : vos parties restent dans ce navigateur. Par précaution, exportez d\'abord celles qui comptent.'),
       ...list.map(r => h('section', { class: 'release' }, h('h4', null, 'Version ' + r.version, ' ', h('small', { class: 'dim' }, date(r.date))), Update.render(Update.notes(r.body)))),
       h('p', { style: 'font-size:12px;margin-top:12px' }, h('a', Object.assign({ href: Update.RELEASES_URL }, ext), 'Toutes les versions sur GitHub')));
     const m = UI.modal({ title: 'Nouvelle version : ' + latest.version, width: 680, body, cls: 'update-modal', footer: h('button', { class: 'btn', onclick: () => m.close() }, 'Plus tard') });

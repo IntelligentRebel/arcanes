@@ -60,6 +60,15 @@ async def main():
         ok(info and info['href'].endswith('arcanes-' + NEXT + '.zip') and '200 Mo' in info['text'], 'lien du zip et taille')
         ok(info and info['scripts'] == 0, 'aucun HTML venu de GitHub inséré')
         await pg.screenshot(path=os.path.join(SHOTS, 'v03122_maj_fr.png'))
+        # (0.31.44) la mise à jour seule : proposée depuis la version juste avant, jamais prise pour le jeu entier
+        up = await pg.evaluate("""() => { const rel = from => [{ tag_name: 'v99.0.1', body: 'x', published_at: '2026-11-12T10:00:00Z', assets: [
+            { name: 'arcanes-update-' + from + '-to-99.0.1.zip', browser_download_url: 'https://e.x/u.zip', size: 2200000 },
+            { name: 'arcanes-99.0.1.zip', browser_download_url: 'https://e.x/full.zip', size: 200458251 }] }];
+          const show = from => { UI.closeAll(); Update.newer = Update.parse(rel(from)); Update.dialog(); const a = [...document.querySelectorAll('.update-modal .update-get a')].map(x => x.innerText + ' -> ' + x.href); UI.closeAll(); return a; };
+          return { p: Update.parse(rel(GAME_VERSION))[0], same: show(GAME_VERSION), other: show('0.1.0') }; }""")
+        ok(up['p']['zip'].endswith('full.zip') and up['p']['upd']['from'] == CUR and up['p']['size'] == 200458251, 'le jeu entier reste le jeu entier, la mise à jour à part')
+        ok(len(up['same']) == 3 and 'u.zip' in up['same'][0] and '2 Mo' in up['same'][0] and 'full.zip' in up['same'][1], 'depuis la version d\'avant : mise à jour seule d\'abord (%r)' % up['same'][:2])
+        ok(len(up['other']) == 2 and 'full.zip' in up['other'][0], 'depuis plus ancien : le jeu entier seulement (%r)' % up['other'][:1])
         # 2. relancée dans la journée : le cache sert, pas de nouvelle demande
         await pg.reload(); await pg.wait_for_timeout(2600)
         ok(len(pg.calls) == 1 and NEXT in await pg.evaluate("(document.querySelector('.title-screen .update-btn') || {}).innerText || ''"), 'cache de 12 h (demandes : %d)' % len(pg.calls))

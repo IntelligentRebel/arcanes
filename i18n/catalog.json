@@ -24999,7 +24999,7 @@
  "Nouvelle version disponible : {0}": {
   "at": [
    "src/ui/panels.js:740",
-   "src/ui/update.js:121"
+   "src/ui/update.js:129"
   ],
   "args": [
    "Update.newer[0].version"
@@ -25034,7 +25034,7 @@
  "Vous avez la dernière version ({0}).": {
   "at": [
    "src/ui/panels.js:744",
-   "src/ui/update.js:100"
+   "src/ui/update.js:103"
   ],
   "args": [
    "GAME_VERSION"
@@ -25333,7 +25333,7 @@
  },
  "Vous jouez la version {0} : {1} versions sont parues depuis.": {
   "at": [
-   "src/ui/update.js:105"
+   "src/ui/update.js:111"
   ],
   "args": [
    "GAME_VERSION",
@@ -25342,15 +25342,23 @@
  },
  "Vous jouez la version {0}.": {
   "at": [
-   "src/ui/update.js:105"
+   "src/ui/update.js:111"
   ],
   "args": [
    "GAME_VERSION"
   ]
  },
+ "Mise à jour seule (.zip, {0} Mo)": {
+  "at": [
+   "src/ui/update.js:113"
+  ],
+  "args": [
+   "umb"
+  ]
+ },
  "Télécharger le jeu (.zip, {0} Mo)": {
   "at": [
-   "src/ui/update.js:107"
+   "src/ui/update.js:114"
   ],
   "args": [
    "mb"
@@ -25358,27 +25366,37 @@
  },
  "Télécharger le jeu (.zip)": {
   "at": [
-   "src/ui/update.js:107"
+   "src/ui/update.js:114"
   ]
  },
  "Page de la version": {
   "at": [
-   "src/ui/update.js:107"
+   "src/ui/update.js:114"
   ]
  },
  "Jouer en ligne": {
   "at": [
-   "src/ui/update.js:108"
+   "src/ui/update.js:115"
+  ]
+ },
+ "La mise à jour seule ne contient que les fichiers modifiés : décompressez-la à côté de votre dossier arcanes, en acceptant de remplacer les fichiers.": {
+  "at": [
+   "src/ui/update.js:116"
+  ]
+ },
+ "Le jeu entier se décompresse à la place de l'ancien dossier, sous le même nom. Dans les deux cas, vos parties restent dans ce navigateur ; par précaution, exportez d'abord celles qui comptent.": {
+  "at": [
+   "src/ui/update.js:117"
   ]
  },
  "Décompressez l'archive à la place de l'ancien dossier, sous le même nom : vos parties restent dans ce navigateur. Par précaution, exportez d'abord celles qui comptent.": {
   "at": [
-   "src/ui/update.js:109"
+   "src/ui/update.js:117"
   ]
  },
  "Version {0}": {
   "at": [
-   "src/ui/update.js:110"
+   "src/ui/update.js:118"
   ],
   "args": [
    "r.version"
@@ -25386,12 +25404,12 @@
  },
  "Toutes les versions sur GitHub": {
   "at": [
-   "src/ui/update.js:111"
+   "src/ui/update.js:119"
   ]
  },
  "Nouvelle version : {0}": {
   "at": [
-   "src/ui/update.js:112"
+   "src/ui/update.js:120"
   ],
   "args": [
    "latest.version"
@@ -25399,7 +25417,7 @@
  },
  "Plus tard": {
   "at": [
-   "src/ui/update.js:112"
+   "src/ui/update.js:120"
   ]
  },
  "{0}, tour {1}": {

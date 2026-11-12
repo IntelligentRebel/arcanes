@@ -1,7 +1,8 @@
 # Publishes a GitHub release for each version: when the version (GAME_VERSION in src/engine/game.js) or docs/releases/
 # changes on main, and that version has no release yet, it builds the game and creates the release v<version> with
 # arcanes-<version>.zip (the folder arcanes/, ready to play offline: the local copies offer it when they find a newer
-# version). Its notes are docs/releases/<version>.md (English), followed by docs/releases/<version>.fr.md in a
+# version), plus arcanes-update-<previous>-to-<version>.zip, the files that changed since the previous release.
+# Its notes are docs/releases/<version>.md (English), followed by docs/releases/<version>.fr.md in a
 # « En français » block when there is one (the game shows the French part to French players).
 name: Release
 on:
@@ -39,12 +40,29 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           V="${{ steps.v.outputs.version }}"
+          # the previous release's game, to publish a small update archive next to the full one
+          PREV="$(gh release view --json tagName -q .tagName 2>/dev/null || true)"; P="${PREV#v}"
+          if [ -n "$P" ] && gh release download "$PREV" -p "arcanes-$P.zip" -D /tmp/prev 2>/dev/null; then (cd /tmp/prev && unzip -q "arcanes-$P.zip"); fi
           python3 tools/build.py
           (cd dist && zip -qr "../arcanes-$V.zip" arcanes)
+          FILES="arcanes-$V.zip"; UPD=""
+          if [ -d /tmp/prev/arcanes ]; then
+            UPD="arcanes-update-$P-to-$V.zip"
+            python3 tools/update_zip.py /tmp/prev/arcanes dist/arcanes "$UPD"
+            FILES="$FILES $UPD"
+          fi
           if [ -f "docs/releases/$V.md" ]; then cp "docs/releases/$V.md" /tmp/notes.md; else echo "Arcanes $V." > /tmp/notes.md; fi
+          if [ -n "$UPD" ]; then
+            MB="$(python3 -c "import os,sys;print('%.1f' % (os.path.getsize(sys.argv[1]) / 1e6))" "$UPD")"
+            printf '\n\n**Already have %s?** `%s` (%s MB) holds only the files that changed: unzip it next to your `arcanes` folder and let it replace files. From an older version, take the full `arcanes-%s.zip`.\n' "$P" "$UPD" "$MB" "$V" >> /tmp/notes.md
+          fi
           if [ -f "docs/releases/$V.fr.md" ]; then
             printf '\n\n<details><summary>En français</summary>\n\n' >> /tmp/notes.md
             cat "docs/releases/$V.fr.md" >> /tmp/notes.md
+            if [ -n "$UPD" ]; then
+              printf '\n\n**Vous avez déjà la %s ?** `%s` (%s Mo) ne contient que les fichiers modifiés : décompressez-la à côté de votre dossier `arcanes` en acceptant de remplacer les fichiers. Depuis une version plus ancienne, prenez l%sarchive complète `arcanes-%s.zip`.\n' "$P" "$UPD" "$MB" "'" "$V" >> /tmp/notes.md
+            fi
             printf '\n\n</details>\n' >> /tmp/notes.md
           fi
-          gh release create "v$V" "arcanes-$V.zip" --title "Arcanes $V" --notes-file /tmp/notes.md --target "$GITHUB_SHA" --latest
+          # the full archive first: the game's update dialog reads the asset list
+          gh release create "v$V" $FILES --title "Arcanes $V" --notes-file /tmp/notes.md --target "$GITHUB_SHA" --latest
