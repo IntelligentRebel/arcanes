@@ -1,0 +1,217 @@
+{
+ "nom": "Entraînement 21 : moteur 0.31.44 ; murailles et tours de défense plus tôt ; le Prophète renforcé, sur assez de parties pour trancher ; les tireurs en garnison chez tous les sorciers",
+ "experiences": [
+  {
+   "id": "tours_defense",
+   "note": "Difficile, pour le sorcier observé seul. Ta demande d'origine avec les tireurs : que l'IA bâtisse murailles et tours de défense. Jamais mesuré. Ici : des murailles dès 5 habitants (à partir du tour 40), puis les tours de défense dès qu'il y a des murailles. Les tireurs en garnison (banc 20, validés) sont dans les deux variantes.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 600000,
+   "graines": 300,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "variantes": [
+    {
+     "nom": "défenses d'aujourd'hui",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "murailles et tours plus tôt",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "towers_more": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "prophete_dominant",
+   "note": "Difficile, 300 tours. Au banc 20, le Prophète renforcé (prêches sur tout l'empire, sécession dès 40 % de rebelles) doublait les sécessions (5,6 -> 10,0) mais ne freinait pas plus le meneur en moyenne (-0,08 contre -0,07 ± 0,02). Seul signe : face à un meneur dominant (×1,5 au t200), il restait 1er dans 71 % des cas au lieu de 79 %, sur 63 parties seulement, donc non concluant. Ici 450 cartes et les deux Prophètes face à face sur les mêmes cartes, pour trancher.",
+   "tours": 300,
+   "adversaires": "hard",
+   "graine": 610000,
+   "graines": 450,
+   "points": [
+    150,
+    200,
+    250
+   ],
+   "crise": true,
+   "variantes": [
+    {
+     "nom": "Prophète (jeu)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "crise": "prophet"
+    },
+    {
+     "nom": "Prophète renforcé",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "crise": "prophet",
+     "reglagesCrise": {
+      "PROPHET_PLUS": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "garnisons_tous",
+   "note": "Difficile, 250 tours, toutes les IA. Au banc 20, les tireurs en garnison face à la menace n'étaient donnés qu'au sorcier observé (survie 76 % -> 85 %, +76 ± 31). Depuis la 0.31.42, tous les sorciers en Difficile les ont. Ici, ce que ça change quand tout le monde défend mieux : survie, cités prises, et le meneur est-il plus dur à rattraper.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 620000,
+   "graines": 300,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "crise": true,
+   "meneur": true,
+   "variantes": [
+    {
+     "nom": "sans tireurs (avant 0.31.42)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "no_garrisonShooters": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "no_garrisonShooters": true
+     }
+    },
+    {
+     "nom": "tireurs chez tous (jeu)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}
