@@ -43,6 +43,9 @@ async def main():
             await pg.evaluate(START); await pg.wait_for_timeout(1800)
             await pg.evaluate("UI.closeAll()"); await pg.wait_for_timeout(200); await pg.evaluate("UI.closeAll()")
 
+            # le mot « tour » du nom de fichier suit la langue (@save_turn)
+            tw = await pg.evaluate("() => __k('@save_turn', 'tour')")
+
             # 1. choisir le dossier depuis le menu
             await pg.evaluate("() => { App.setPref('saveDir', null); App.setPref('autoExport', 0); Panels.menu(); }"); await pg.wait_for_timeout(300)
             txt = await pg.evaluate("() => [...document.querySelectorAll('.modal .row .t1')].map(e => e.innerText).find(t => /Dossier de sauvegarde|Save folder/.test(t)) || ''")
@@ -60,7 +63,7 @@ async def main():
             await pg.evaluate("() => { App.setPref('autoExport', 1); App.game.turn = 24; }")
             await pg.evaluate("() => App.autoExport()"); await pg.wait_for_timeout(600)
             st = await pg.evaluate("() => ({ names: Object.keys(window.__fs.files), len: Object.values(window.__fs.files).map(t => t.length)[0] || 0, modals: UI.modals.length, toast: [...document.querySelectorAll('.toast')].map(t => t.innerText).join(' | ') })")
-            ok(len(st['names']) == 1 and 'tour24' in st['names'][0] and st['len'] > 500 and st['modals'] == 0 and not dl, 'écrite dans le dossier, sans fenêtre ni téléchargement : %r' % st['names'])
+            ok(len(st['names']) == 1 and (tw + '24') in st['names'][0] and st['len'] > 500 and st['modals'] == 0 and not dl, 'écrite dans le dossier, sans fenêtre ni téléchargement : %r' % st['names'])
             ok(('Parties Arcanes' in st['toast']) and (('écrite dans' in st['toast']) if fr else ('written to' in st['toast'])), '%s : le jeu dit où (%r)' % (lang, st['toast'][:80]))
             # la sauvegarde est relisible
             good = await pg.evaluate("() => { try { const t = Object.values(window.__fs.files)[0]; const g = App.deserialize(t); return !!(g && g.turn === 24 && Object.keys(g.cities).length); } catch (e) { return String(e); } }")
@@ -75,7 +78,7 @@ async def main():
             await pg.evaluate("() => [...document.querySelectorAll('.modal .btn')].pop().click()")
             await t; await pg.wait_for_timeout(400)
             st = await pg.evaluate("() => ({ names: Object.keys(window.__fs.files), asked: window.__fs.asked, perm: window.__fs.perm })")
-            ok(st['asked'] == 1 and len(st['names']) == 1 and 'tour30' in st['names'][0] and not dl, 'autorisation redonnée, copie écrite (%r)' % st['names'])
+            ok(st['asked'] == 1 and len(st['names']) == 1 and (tw + '30') in st['names'][0] and not dl, 'autorisation redonnée, copie écrite (%r)' % st['names'])
             await pg.evaluate("() => { App.game.turn = 31; }"); await pg.evaluate("() => App.autoExport()"); await pg.wait_for_timeout(400)
             st = await pg.evaluate("() => ({ n: Object.keys(window.__fs.files).length, asked: window.__fs.asked, modals: UI.modals.length })")
             ok(st['n'] == 2 and st['asked'] == 1 and st['modals'] == 0, 'les tours suivants ne redemandent rien')
@@ -86,7 +89,7 @@ async def main():
             await pg.wait_for_timeout(500)
             await pg.evaluate("() => [...document.querySelectorAll('.modal .btn')][0].click()")
             await t; await pg.wait_for_timeout(600)
-            ok(len(dl) == 1 and 'tour40' in dl[0], 'refus du clic : téléchargement (%r)' % dl)
+            ok(len(dl) == 1 and (tw + '40') in dl[0], 'refus du clic : téléchargement (%r)' % dl)
 
             # 5. le dossier oublié, puis un navigateur sans l'API
             await pg.evaluate("() => { window.__fs.perm = 'granted'; Panels.menu(); }"); await pg.wait_for_timeout(300)
@@ -94,7 +97,7 @@ async def main():
             ok(await pg.evaluate("() => !App.prefs.saveDir"), 'le dossier s\'oublie')
             await pg.evaluate("UI.closeAll()")
             await pg.evaluate("() => { App.game.turn = 50; }"); await pg.evaluate("() => App.autoExport()"); await pg.wait_for_timeout(700)
-            ok(len(dl) == 2 and 'tour50' in dl[1], 'sans dossier : téléchargement (%r)' % dl[-1])
+            ok(len(dl) == 2 and (tw + '50') in dl[1], 'sans dossier : téléchargement (%r)' % dl[-1])
             await pg.evaluate(NOAPI)
             await pg.evaluate("Panels.menu()"); await pg.wait_for_timeout(300)
             txt = await pg.evaluate("() => [...document.querySelectorAll('.modal .row')].map(e => e.innerText).find(t => /Dossier de sauvegarde|Save folder/.test(t)) || ''")

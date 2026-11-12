@@ -16,6 +16,10 @@ const FR = new Set(('de du des la le les un une et ou en à au aux pour par sur 
 // propriétés dont la valeur est une clé, jamais un texte affiché
 const KEY_PROPS = new Set(['en', 'id', 'key', 'icon', 'sprite', 'img', 'type', 'kind', 'realm', 'race', 'color', 'cls', 'class', 'className', 'style', 'anim', 'sfx', 'sound', 'tag', 'cmd', 'k', 'ref', 'file', 'src', 'font', 'family', 'align', 'dir', 'side', 'action', 'mode', 'status', 'state', 'value', 'target', 'effect', 'fx', 'unit', 'spell', 'building', 'terrain', 'mineral', 'shape', 'pose', 'act', 'lineCap', 'lineJoin', 'textAlign', 'textBaseline', 'cursor', 'display', 'position', 'event', 'Accept']);
 // zones où tout texte est affiché, même un mot seul en minuscules (fonctions, méthodes ou propriétés de ce nom)
+// Machinerie grammaticale : du français qui n'est pas du texte affiché, mais une étape intermédiaire. Units.conj fabrique
+// le pluriel FRANÇAIS d'une phrase (« est pris » -> « sont pris ») que Units.subj traduit ensuite d'un bloc. Traduire les
+// morceaux à l'intérieur casse cette seconde étape et produit des phrases mi-françaises (« are pris »).
+const RAW_NAMES = new Set(['conj']);
 const FORCE_NAMES = new Set(['AUTO_SPEED_WORDS', 'PLAN_NAMES', 'GOV_WORDS', 'RARITY_WORDS', 'raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
 const DISPLAY_PROPS = new Set(['name', 'label', 'title', 'text', 'desc', 'tip', 'msg', 'why', 'hint', 'note', 'sub', 'body', 'kicker', 'lore', 'story', 'epithet', 'quote', 'help', 'caption', 'short', 'long', 'verb', 'one', 'many', 'plural', 'singular', 'placeholder']);
 
@@ -154,6 +158,7 @@ function transform(src, file) {
   function visit(n, parent, key, depth, ctx) {
     if (!n || typeof n.type !== 'string') return;
     const nm = n.type === 'Property' || n.type === 'MethodDefinition' ? (n.key && (n.key.name || n.key.value)) : n.type === 'FunctionDeclaration' ? n.id && n.id.name : n.type === 'VariableDeclarator' ? n.id && n.id.name : null;
+    if (nm && RAW_NAMES.has(nm)) return;   // rien à traduire là-dedans : c'est du français de travail
     if (nm && FORCE_NAMES.has(nm)) { forcing++; try { return visit2(n, parent, key, depth, ctx); } finally { forcing--; } }
     return visit2(n, parent, key, depth, ctx);
   }

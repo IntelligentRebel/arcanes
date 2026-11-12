@@ -1881,7 +1881,7 @@ const App = {
   // ask : le joueur vient de cliquer, on peut lui demander l'autorisation d'écrire dans son dossier
   async exportSave(ask) {
     const name = (App.me().name || 'sorcier').normalize('NFKD').replace(/[^\w-]+/g, '').toLowerCase() || 'sorcier';
-    const file = 'arcanes-' + name + '-tour' + App.game.turn + '.json', text = App.serialize();
+    const file = 'arcanes-' + name + '-' + __k('@save_turn', 'tour') + App.game.turn + '.json', text = App.serialize();
     if (App.prefs.saveDir && SaveDir.supported()) {
       const r = await SaveDir.write(file, text, ask);
       if (r.ok) return { ok: true, file, dir: r.dir };
@@ -2034,7 +2034,10 @@ const App = {
     window.addEventListener('mouseup', async e => {
       if (!App.game || !App.drag) return;
       const d = App.drag; App.drag = null; cv.style.cursor = '';
-      if (d.moved || e.target !== cv || UI.busy || App.peeking || document.body.classList.contains('peeking')) return;
+      // (0.31.43) « a bougé » restait vrai au moindre tremblement en cours d'appui, et le clic était perdu : ce qui compte
+      // est l'écart au relâchement. Un double-clic rapide tremble plus qu'un double-clic posé ; c'est lui qu'on perdait.
+      const far = Math.abs(e.clientX - d.x) + Math.abs(e.clientY - d.y) > 6;
+      if ((d.moved && far) || e.target !== cv || UI.busy || App.peeking || document.body.classList.contains('peeking')) return;
       const t = MapView.screenToTile(e.clientX, e.clientY);
       if (!World.inY(App.game.world, t.y)) return;
       // clic droit : annule le ciblage d'un sort, sinon désélectionne

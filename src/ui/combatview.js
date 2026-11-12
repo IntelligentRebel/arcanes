@@ -396,7 +396,9 @@ const CombatView = {
     }
     for (const t of bt.towers || []) items.push({ d: t.c + t.r + 0.75, f: () => CombatView.drawTower(t, now) });
     for (const b of bt.units) {
-      const p = CombatView.pos[b.id]; if (!p) continue;
+      // (0.31.43) une troupe sans position connue (arrivée pendant une animation) était purement et simplement sautée,
+      // donc invisible jusqu'à la fin de la salve d'événements. On la place sur sa case plutôt que de ne rien dessiner.
+      const p = CombatView.pos[b.id] || (CombatView.pos[b.id] = { c: b.c, r: b.r, alpha: 1 });
       if (b.dead && p.alpha <= 0) continue;
       items.push({ d: p.c + p.r + (bt.onRampart(Math.round(p.c), Math.round(p.r)) ? 0.55 : 0.5), f: () => CombatView.drawUnit(b, p) });
     }

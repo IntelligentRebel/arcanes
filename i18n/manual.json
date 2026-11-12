@@ -2,5 +2,9 @@
  "@unit_race": {
   "fr": "{0} {1}",
   "hint": "nom d'une troupe : {0} = l'unité (Lanciers), {1} = le peuple au pluriel (hauts-elfes) ; en anglais « High Elf Spearmen » : ordre et accord à adapter"
+ },
+ "@save_turn": {
+  "fr": "tour",
+  "hint": "nom du fichier de sauvegarde (arcanes-thalgren-tour134.json) : le mot « tour ». Lettres ASCII sans accent ni espace uniquement, minuscules ; si la langue ne s'écrit pas en alphabet latin, garder « turn »."
  }
 }
