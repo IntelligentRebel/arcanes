@@ -1571,7 +1571,9 @@ const App = {
     try {
       while (pl.finaleNews.length) {
         const e = pl.finaleNews.shift(), f = game.finale || {};
-        const img = window.AUTO_CHOICE ? null : await App.eventArt('finale_' + e.kind); if (App.game !== game) return;
+        // (0.31.52) une crise vaincue a sa propre illustration : le monstre abattu, pas celui qui se lève
+        const won = e.type === 'end' && !e.faded;
+        const img = window.AUTO_CHOICE ? null : (won && await App.eventArt('finale_' + e.kind + '_end')) || await App.eventArt('finale_' + e.kind); if (App.game !== game) return;
         const art = h('div', { class: 'lm-art' + (img ? '' : ' none') });
         if (img) { img.alt = ''; art.append(img); } else art.append(h('div', { class: 'lm-halo' }));
         const color = { lich: '#5ae68c', archmage: '#aa6eff', winter: '#aadcff', eater: '#c45adc', prophet: '#e8b04a' }[e.kind] || '#c9a24a';

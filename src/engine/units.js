@@ -190,13 +190,13 @@ const Units = {
     const pl = game.players[u.owner];
     let m = Units._memo.get(key);
     if (m && m.s && m.type === u.type && m.undead === u.undead && m.cc === u.chaosChannel && m.game === game && m.owner === u.owner && m.pl === pl
-      && m.xp === u.xp && m.weapon === u.weapon && m.nem === (u.nemesis && u.nemesis.lvl) && m.gr === u.grow && Units._sameEnch(m.ench, u.ench, extra) && Units._heroSame(m.hs, u)
+      && m.xp === u.xp && m.weapon === u.weapon && m.nem === (u.nemesis && u.nemesis.lvl) && m.gr === u.grow && m.mi === u.might && Units._sameEnch(m.ench, u.ench, extra) && Units._heroSame(m.hs, u)
       && Units._sameList(m.glob, pl ? pl.globals : null) && Units._sameList(m.ret, pl ? pl.retorts : null)
       && m.drac === !!(pl && pl.wonders && pl.wonders.draconian != null) && (m.chaos === null || m.chaos === Units._chaosSurge(game))) return m.s;
     const obj = extra && extra.length ? Object.assign({}, u, { ench: u.ench.concat(extra) }) : u;
     const s = Units._stats(game, obj);
     m = { type: obj.type, undead: obj.undead, cc: obj.chaosChannel, ench: obj.ench.slice(), hs: Units._heroSig(obj), ab: s.ab, s,
-      game, owner: obj.owner, pl, xp: obj.xp, weapon: obj.weapon, nem: obj.nemesis && obj.nemesis.lvl, gr: obj.grow,
+      game, owner: obj.owner, pl, xp: obj.xp, weapon: obj.weapon, nem: obj.nemesis && obj.nemesis.lvl, gr: obj.grow, mi: obj.might,
       glob: pl && pl.globals ? pl.globals.slice() : null, ret: pl && pl.retorts ? pl.retorts.slice() : null,
       drac: !!(pl && pl.wonders && pl.wonders.draconian != null), chaos: Units.realmOf(obj) === 'chaos' ? Units._chaosSurge(game) : null };
     Units._memo.set(key, m);
@@ -330,6 +330,7 @@ const Units = {
     if (s.flying) s.move = Math.max(s.move, d.flying ? d.move : s.move);
     if (u.nemesis) Nemesis.apply(u, s);
     if (u.grow && typeof Finale !== 'undefined') Finale.grow(u, s);   // le Dévoreur de nœuds, le Seigneur liche relevé
+    if (u.might && typeof Finale !== 'undefined') Finale.might(u, s);   // le monstre d'une crise, plus fort que le meilleur champion de sa proie
     s.maxHp = s.hp * s.figures;
     return s;
   },

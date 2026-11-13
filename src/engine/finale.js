@@ -62,6 +62,36 @@ const Finale = {
   title(kind) { return { lich: 'Le Seigneur liche', archmage: 'L\'Archimage oublié', winter: 'Le Grand Hiver', eater: 'Le Dévoreur de nœuds', prophet: 'Le Prophète' }[kind] || ''; },
   ranked(game) { return game.players.filter(p => p.alive && !p.banished).map(p => ({ p, v: Crisis.score(game, p) })).sort((a, b) => b.v - a.v); },
   demonSlain(game) { return !!(game.riteStats && game.riteStats.slain > 0); },
+  // le rapport de forces vrai d'un sorcier (celui de l'écran des sorciers : cités, magie, sorts, renommée et armée)
+  standing(game, p) { return typeof Intel !== 'undefined' ? Intel.standing(game, p, p.id) : Crisis.score(game, p); },
+  // (0.31.52) le monstre d'une crise est plus fort que le meilleur champion de sa proie : un héros seul, même le meilleur,
+  // ne l'abat pas ; il y faut une armée. Il gagne surtout en endurance : chaque cran, +60 % de vie, +1 défense et résistance,
+  // +15 % d'attaque. (Un essai à +30 % d'attaque et +10 % de précision par cran basculait d'un coup : au cran où le héros
+  // perdait, une armée de neuf perdait aussi contre le Prophète et sa suite, 10 % de victoires ; ainsi, elle en gagne 87 %.)
+  might(u, s) {
+    const b = u.might || 0; if (!b) return;
+    if (s.melee) s.melee = Math.round(s.melee * (1 + 0.15 * b)); if (s.ranged) s.ranged = Math.round(s.ranged * (1 + 0.15 * b));
+    s.def += b; s.res += b; s.hp = Math.round(s.hp * (1 + 0.6 * b));
+  },
+  MIGHT_MAX: 24, MIGHT_WIN: 0.15, MIGHT_SIMS: 8,
+  // le meilleur champion de la proie seul contre le monstre seul (tous deux indemnes) : son taux de victoire
+  duel(game, best, boss) {
+    const a = Object.assign({}, best, { dmg: 0 }), d = Object.assign({}, boss, { dmg: 0 });
+    return AI.simulate(game, [a], [d], { plane: boss.plane, x: boss.x, y: boss.y }, Finale.MIGHT_SIMS);
+  },
+  champion(game, pid) { return U.max(Object.values(game.units).filter(u => u.owner === pid && !u.riteDemon && !DATA.units[u.type].sailing), u => Units.strength(game, u)); },
+  // monte le monstre d'autant de crans qu'il faut (jamais il ne redescend)
+  matchBest(game, f) {
+    const boss = f.boss != null ? game.units[f.boss] : null; if (!boss || typeof AI === 'undefined') return;
+    const best = Finale.champion(game, f.target); if (!best) return;
+    const win = b => { boss.might = b; return Finale.duel(game, best, boss); };
+    let b = boss.might || 0;
+    if (win(b) <= Finale.MIGHT_WIN) { boss.might = b || undefined; return; }
+    let lo = b, hi = Math.min(Finale.MIGHT_MAX, Math.max(b + 1, 2 * b || 2));
+    while (hi < Finale.MIGHT_MAX && win(hi) > Finale.MIGHT_WIN) { lo = hi; hi = Math.min(Finale.MIGHT_MAX, hi * 2); }
+    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (win(m) > Finale.MIGHT_WIN) lo = m; else hi = m; }
+    boss.might = hi; f.might = hi;
+  },
   // le plan où la cible tient le plus de citoyens
   home(game, tp) {
     const n = [0, 0]; for (const c of Cities.ofPlayer(game, tp.id)) n[c.plane] += Cities.citizens(c);
@@ -73,6 +103,7 @@ const Finale = {
     if (f.state === 'watch') return Finale.watch(game);
     if (f.state === 'omen') { if (game.turn >= f.at) Finale.begin(game); return; }
     if (!Finale.retarget(game, f)) return;
+    if ((game.turn - f.start) % 5 === 0) Finale.matchBest(game, f);
     Finale.K[f.kind].tick(game, f);
   },
   // le meneur doit peser LEAD fois le deuxième, STREAK tours d'affilée
@@ -87,8 +118,14 @@ const Finale = {
     // (0.31.36) la crise à la mesure de l'avance : jusqu'à deux fois le deuxième, l'une des trois plus douces ; au-delà, l'une des
     // trois plus dures ; deux fois le deuxième et autant que tous les autres réunis, l'Archimage (aux bancs 18 et 19, le meneur
     // restait 1er : Prophète 69 %, Dévoreur 62 %, Hiver 47 %, Liche 38 %, Archimage 33 %, contre 79 % sans crise)
+    // (0.31.52) l'avance se mesure aussi au rapport de forces, armées comprises (Finale.standing) : un meneur cinq fois plus fort
+    // que le deuxième par les armes, mais à peine deux fois par les cités et la magie, tirait une crise douce (le Prophète)
+    const tierOf = (a, b, rest) => { const g = a / Math.max(1, b); return g >= 2 && a >= rest ? 3 : g >= 2 ? 2 : 1; };
     const gap = r[0].v / Math.max(1, r[1].v), rest = U.sum(r.slice(1), x => x.v);
-    f.tier = gap >= 2 && r[0].v >= rest ? 3 : gap >= 2 ? 2 : 1; f.leadAt = +gap.toFixed(2);
+    const top = game.players[f.leader];
+    const sLead = Finale.standing(game, top), others = game.players.filter(p => p.alive && !p.banished && p !== top).map(p => Finale.standing(game, p)).sort((a, b) => b - a);
+    f.tier = Math.max(tierOf(r[0].v, r[1].v, rest), others.length ? tierOf(sLead, others[0], U.sum(others, x => x)) : 1);
+    f.leadAt = +gap.toFixed(2); f.leadForce = others.length ? +(sLead / Math.max(1, others[0])).toFixed(2) : null;
     f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(Finale.TIERS[f.tier]);
     f.state = 'omen'; f.omen = game.turn; f.at = game.turn + Finale.cfg(game, 'OMEN'); f.target = f.leader;
     const txt = {
@@ -223,6 +260,7 @@ const Finale = {
     const boss = mk(type); boss.finaleBoss = true; boss.grow = Finale.growOf(f);
     for (const t of (escort || []).slice(0, MAX_STACK - 1)) mk(t);
     f.boss = boss.id;
+    Finale.matchBest(game, f);
     return boss;
   },
   addSite(game, f, type, p, at, guardians) {

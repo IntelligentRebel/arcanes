@@ -40,7 +40,7 @@ async def main():
             await pg.evaluate("() => { App.finalePrompts(); }"); await pg.wait_for_timeout(1500)
             info = await pg.evaluate(MODAL)
             ok(info and info['img'] == 'finale_winter.jpg' or (info and info['img'] is None), 'annonce au centre (%s)' % (info and info['img']))
-            ok(info and (('Grand Hiver' in info['text'] and 'Brisez-le' in info['text']) if fr else ('Great Winter' in info['text'] and 'Break it' in info['text'])), 'texte de l\'annonce')
+            ok(info and (('Grand Hiver' in info['text'] and 'Brisez-le' in info['text']) if fr else ('Great Winter' in info['text'] and 'Shatter it' in info['text'])), 'texte de l\'annonce')
             await pg.screenshot(path=os.path.join(SHOTS, 'v03130_hiver_%s.png' % lang[:2]))
             await pg.evaluate("() => [...document.querySelectorAll('.finale-modal .btn')].pop().click()"); await pg.wait_for_timeout(600)
             ok(not await pg.evaluate("!!document.querySelector('.finale-modal')") and await pg.evaluate("App.me().finaleNews.length") == 0, '« Voir » : fermé, file vidée')
