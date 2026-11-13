@@ -1760,6 +1760,8 @@ const CombatView = {
       const vt = CombatSpells.validTargets(bt, side, id);
       target = u && vt.includes(u) ? u : vt.find(x => x.tower && x.c === t.c && x.r === t.r) || null;
     }
+    // (0.31.47) une unité qui n'est pas une cible : on dit pourquoi, et le sort reste prêt (le clic ne devient pas un ordre de mouvement)
+    if (!target && u && tt !== 'combatTile' && tt !== 'deadUnit' && !(u.side !== side && bt.isInvisible(u))) { UI.toast(CombatSpells.whyNot(bt, side, id, u) || 'Ce sort ne peut pas viser cette unité.', 'warn', 'cast'); return true; }
     // pas une cible : le sort est annulé et le clic sert à commander normalement
     if (!target) { CombatView.mode = null; UI.toast('Sort annulé.', '', 'cast'); return false; }
     const extra = CombatView.mode.extra || 0;

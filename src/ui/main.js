@@ -1574,7 +1574,7 @@ const App = {
         if (img) { img.alt = ''; art.append(img); } else art.append(h('div', { class: 'lm-halo' }));
         const color = { lich: '#5ae68c', archmage: '#aa6eff', winter: '#aadcff', eater: '#c45adc', prophet: '#e8b04a' }[e.kind] || '#c9a24a';
         let kicker, text, extra = null;
-        if (e.type === 'begin') { kicker = 'Crise de fin'; text = Finale.beginText(game, pl.id); }
+        if (e.type === 'begin') { kicker = 'La fin des temps commence'; text = Finale.beginText(game, pl.id); }
         else if (e.type === 'reveal') { kicker = 'Le phylactère est découvert'; text = 'Détruisez-le, et le Seigneur liche ne se relèvera plus.'; }
         else if (e.faded) { kicker = 'Crise éteinte'; text = 'Sa proie à terre, elle s\'éteint d\'elle-même.'; }
         else {

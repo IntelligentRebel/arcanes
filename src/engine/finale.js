@@ -121,11 +121,17 @@ const Finale = {
     const f = game.finale, me = v === f.target, who = Players.nameFor(game, v, f.target), at = Finale.where(game, f) || {};
     const pos = at.x != null ? ' (' + at.x + ', ' + at.y + ')' : '';
     switch (f.kind) {
-      case 'lich': return me ? 'Un Seigneur liche s\'est relevé, et ses morts marchent sur vous. Tant que son phylactère tient, il revient.' : 'Un Seigneur liche s\'est relevé, et ses morts marchent sur ' + who + '. Tant que son phylactère tient, il revient.';
-      case 'archmage': return me ? 'Une citadelle a jailli du sol' + pos + '. L\'Archimage oublié qui l\'habite s\'en prend à vous : votre mana, vos cités, vos sorts. Prenez la citadelle.' : 'Une citadelle a jailli du sol' + pos + '. L\'Archimage oublié qui l\'habite s\'en prend à ' + who + '. Prenez la citadelle.';
-      case 'winter': return me ? 'Le Cœur de l\'Hiver bat' + pos + ' : le givre gagne vos terres et tue les récoltes. Brisez-le.' : 'Le Cœur de l\'Hiver bat' + pos + ' : le givre s\'étend, à commencer par les terres de ' + who + '. Brisez-le.';
-      case 'eater': return me ? 'Une chose venue d\'entre les plans dévore vos nœuds de magie, et chacun la rend plus forte. Puis elle viendra pour vos cités. Tuez-la.' : 'Une chose venue d\'entre les plans dévore les nœuds de magie de ' + who + ', et chacun la rend plus forte. Tuez-la.';
-      case 'prophet': return me ? 'Un prophète soulève vos cités contre vous. Tant qu\'il prêche, elles grondent, et certaines feront sécession. Faites-le taire.' : 'Un prophète soulève les cités de ' + who + ' contre leur maître. Faites-le taire.';
+      // (0.31.47) l'annonce doit glacer : c'est la fin du monde qui commence, pas un événement parmi d'autres
+      case 'lich': return me ? 'Les tombes s\'ouvrent. Un Seigneur liche s\'est relevé, et tous les morts de ce monde marchent sur vos cités. Abattez-le autant de fois qu\'il le faudra : tant que son phylactère tiendra, il reviendra.'
+        : 'Les tombes s\'ouvrent. Un Seigneur liche s\'est relevé, et une marée de morts déferle sur les terres de ' + who + '. Tant que son phylactère tiendra, rien ne l\'arrêtera.';
+      case 'archmage': return me ? 'Une citadelle a jailli des entrailles de la terre' + pos + '. L\'Archimage oublié qui l\'habite vous a choisi pour proie : il boira votre mana, maudira vos cités, brisera vos sorts. Prenez sa citadelle, ou il vous effacera de l\'histoire.'
+        : 'Une citadelle a jailli des entrailles de la terre' + pos + '. L\'Archimage oublié qui l\'habite a choisi sa proie : ' + who + '. Et nul n\'est à l\'abri de ce qui sortira de ces murs.';
+      case 'winter': return me ? 'Le Cœur de l\'Hiver s\'est mis à battre' + pos + '. Le givre dévore vos terres, les récoltes noircissent sur pied, vos peuples vont mourir de faim. Brisez-le avant que le monde entier ne gèle.'
+        : 'Le Cœur de l\'Hiver s\'est mis à battre' + pos + '. Le givre dévore déjà les terres de ' + who + ', et il ne s\'arrêtera pas là. Brisez-le avant que le monde entier ne gèle.';
+      case 'eater': return me ? 'Quelque chose a percé la paroi entre les plans. Il dévore vos nœuds de magie un à un, et chaque nœud le rend plus fort. Quand il n\'en restera plus, il viendra pour vos cités. Tuez-le tant qu\'il peut encore mourir.'
+        : 'Quelque chose a percé la paroi entre les plans. Il dévore les nœuds de magie de ' + who + ', et grossit à chaque bouchée. Tuez-le tant qu\'il peut encore mourir.';
+      case 'prophet': return me ? 'Un prophète s\'est levé, et ses prêches embrasent votre empire tout entier. Vos peuples vous maudissent, vos cités se soulèvent, et l\'une après l\'autre elles vous renieront. Faites-le taire, ou il ne vous restera rien à gouverner.'
+        : 'Un prophète s\'est levé, et ses prêches embrasent l\'empire de ' + who + '. Les cités grondent, les premières bannières tombent, et l\'incendie ne s\'arrêtera pas à ses frontières.';
     }
     return '';
   },

@@ -1663,6 +1663,50 @@ const CombatSpells = {
     if (id === 'healing' && Units.realmOf(b.u) === 'death') return false;
     return true;
   },
+  // (0.31.47) pourquoi une unité n'est pas une cible de ce sort : la vraie raison, dite au joueur au lieu d'un « Sort annulé » muet
+  whyNot(bt, side, id, b) {
+    const sp = DATA.spells[id]; if (!sp || !b) return null;
+    const s = bt.stats(b), p = sp.params || {}, tt = CombatSpells.targetType(id), on = b.u.ench.concat(b.tempEnch);
+    if (tt === 'enemyUnit' && b.side === side) return 'Ce sort vise une unité ennemie.';
+    if (tt === 'friendlyUnit' && b.side !== side) return 'Ce sort vise une de vos unités.';
+    if (sp.target === 'friendlyHero' && !b.u.hero) return 'Ce sort ne vise qu\'un héros.';
+    if (id === 'dispel_magic' || id === 'dispel_magic_true') return 'Rien à dissiper sur cette unité.';
+    if (p.normalOnly && !Units.isNormal(b.u)) return 'Ce sort ne touche que les unités normales.';
+    if (p.fantasticOnly && !Units.isFantastic(b.u)) return 'Ce sort ne touche que les créatures fantastiques.';
+    if (p.targets && !p.targets.some(k => k === 'fantastic' ? Units.isFantastic(b.u) : k === 'undead' ? Units.isUndead(b.u) : false))
+      return p.targets.includes('undead') && !p.targets.includes('fantastic') ? 'Ce sort ne touche que les morts-vivants.' : 'Ce sort ne touche que les créatures fantastiques.';
+    if (p.noHeroes && b.u.hero) return 'Sans effet sur un héros.';
+    if (sp.kind === 'unitEnchant') {
+      if (on.includes(id)) return 'Cette unité en bénéficie déjà.';
+      if ((p.exclusiveWith && on.includes(p.exclusiveWith)) || CombatSpells.exclusiveOf(id).some(o => on.includes(o.id))) return 'Un enchantement incompatible est déjà en place.';
+      return 'Cette unité n\'en tirerait rien.';
+    }
+    if (sp.kind === 'curse' && b.curses.includes(id)) return 'Cette unité subit déjà ce sort.';
+    if (s.ab.magicImmunity && ['curse', 'damage', 'resistOrDie', 'areaDamage'].includes(sp.kind) && id !== 'doom_bolt') return 'Cette unité est immunisée contre la magie.';
+    if (id === 'web' && s.ab.nonCorporeal) return 'Une unité incorporelle passe à travers la toile.';
+    if (id === 'web' && b.web > 0) return 'Cette unité est déjà prise dans une toile.';
+    if (id === 'cracks_call' && s.flying) return 'Une unité qui vole ne craint pas les failles du sol.';
+    if (id === 'cracks_call' && s.ab.nonCorporeal) return 'Une unité incorporelle ne craint pas les failles du sol.';
+    if (b.u.riteDemon && ['banish', 'confusion'].includes(id)) return 'Le Démon légendaire ne cède pas à ce sort.';
+    if ((id === 'word_of_recall' || id === 'recall_hero') && (b.temp || b.possessed)) return 'Une créature du combat ou prise à l\'ennemi ne peut pas être rappelée.';
+    if (id === 'warp_wood') return s.ab.magicImmunity || on.includes('righteousness') ? 'Cette unité est protégée contre ce sort.' : 'Cette unité n\'a pas de flèches à tordre.';
+    if ((id === 'berserk' || id === 'giant_strength') && !(s.melee > 0)) return 'Cette unité ne combat pas au corps à corps.';
+    if (id === 'spell_lock') return 'Aucun enchantement à protéger.';
+    if (id === 'warp_creature') return 'Plus rien à altérer chez cette créature.';
+    if (id === 'black_sleep' && b.asleep) return 'Cette unité dort déjà.';
+    if (id === 'confusion' && b.confused) return 'Cette unité est déjà confuse.';
+    if ((id === 'possession' || id === 'creature_binding') && b.possessed) return 'Cette unité est déjà sous une emprise.';
+    if (id === 'petrify' && s.ab.stoningImmunity) return 'Cette unité est immunisée contre la pétrification.';
+    if (id === 'mind_storm' && s.ab.illusionsImmunity) return 'Cette unité est immunisée contre les illusions.';
+    if (id === 'healing') return Units.realmOf(b.u) === 'death' ? 'Une créature de la Mort ne se soigne pas.' : 'Ces blessures ne se soignent pas.';
+    const hostile = ['curse', 'damage', 'resistOrDie', 'areaDamage'].includes(sp.kind);
+    if (hostile && sp.realm === 'death' && s.ab.deathImmunity) return 'Cette unité est immunisée contre la mort.';
+    if (hostile && (sp.realm === 'death' || sp.realm === 'chaos') && on.includes('righteousness')) return 'La Droiture la protège de ce sort.';
+    if (p.damage === 'fire' && s.ab.fireImmunity) return 'Cette unité est immunisée contre le feu.';
+    if (p.damage === 'cold' && s.ab.coldImmunity) return 'Cette unité est immunisée contre le froid.';
+    if (id === 'disintegrate' || (CombatSpells.RESIST_SPELLS[id] || id === 'life_drain')) return 'Sa résistance la rend insensible à ce sort.';
+    return 'Ce sort ne peut pas viser cette unité.';
+  },
 
   // lance un sort ; caster = null pour le sorcier, sinon unité lanceuse
   cast(bt, side, id, target, caster, extra) {
