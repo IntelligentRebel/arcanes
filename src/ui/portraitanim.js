@@ -58,7 +58,7 @@ const PortraitAnim = {
     const down = W < S; ctx.imageSmoothingEnabled = down; if (down) ctx.imageSmoothingQuality = 'high';
     ctx.clearRect(0, 0, W, H); ctx.drawImage(st.base, 0, 0);
     ctx.globalAlpha = g; ctx.drawImage(img, m.glow[0], m.glow[1], S, S, 0, 0, W, H);
-    if (b > 0) { ctx.globalAlpha = b; ctx.drawImage(img, m.blink[0], m.blink[1], S, S, 0, 0, W, H); }
+    if (b > 0 && m.blink) { ctx.globalAlpha = b; ctx.drawImage(img, m.blink[0], m.blink[1], S, S, 0, 0, W, H); }
     ctx.globalAlpha = 1; st.drawn = true;
   },
 };

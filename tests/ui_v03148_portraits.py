@@ -61,6 +61,8 @@ async def main():
         await pg.evaluate("App.setPref('animPortraits', false); Panels.wizards();"); await pg.wait_for_timeout(800)
         ok(await changes(pg, '.modal .list > .box:nth-child(2) canvas.portrait', 8) == 1, 'option coupée : portraits figés')
         await pg.evaluate("App.setPref('animPortraits', true); UI.closeAll();")
+        nb = await pg.evaluate("() => Object.keys(PortraitAnim.meta()).filter(k => !PortraitAnim.meta()[k].blink)")
+        ok(nb == ['vorgath'], 'seul le nécromancien ne cligne pas des yeux (%r)' % nb)
         ok(not errs, 'aucune erreur de page %r' % errs[:2])
         await b.close()
     print('ÉCHECS :', len(FAIL), FAIL); sys.exit(1 if FAIL else 0)

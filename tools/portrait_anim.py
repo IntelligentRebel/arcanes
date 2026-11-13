@@ -64,6 +64,7 @@ def eye_mask(base, ed):
 
 
 EYE_GLOW = {'azhemir', 'vorgath'}   # leur magie passe aussi par les yeux
+NO_BLINK = {'vorgath'}   # un mort ne cligne pas des yeux : chez lui, seule la lueur des orbites s'avive
 
 
 def build(wid):
@@ -104,12 +105,12 @@ def main():
             rgba = np.dstack([ed * (m[..., None] > 0.004), m])   # rien sous l'alpha nul : le PNG en est plus léger
             im = Image.fromarray((rgba * 255 + .5).astype(np.uint8), 'RGBA')
             sheet.paste(im, (col * S, row * S))
-            man[wid][kind] = [col * S, row * S]
+            if not (kind == 'blink' and wid in NO_BLINK): man[wid][kind] = [col * S, row * S]
             masks.append(Image.fromarray((m * 255).astype(np.uint8)).convert('RGB'))
         # aperçu : base, magie qui monte, clignement
         def comp(a_glow, a_blink):
             ed, m = layers['glow']; c = base * (1 - m[..., None] * a_glow) + ed * m[..., None] * a_glow
-            ed, m = layers['blink']; c = c * (1 - m[..., None] * a_blink) + ed * m[..., None] * a_blink
+            if wid not in NO_BLINK: ed, m = layers['blink']; c = c * (1 - m[..., None] * a_blink) + ed * m[..., None] * a_blink
             return Image.fromarray((np.clip(c, 0, 1) * 255).astype(np.uint8)).resize((320, 320), Image.LANCZOS)
         seq = [comp(0.5 - 0.5 * np.cos(t / 24 * 2 * np.pi), 1 if t in (14, 15) else 0.5 if t in (13, 16) else 0) for t in range(48)]
         seq[0].save(os.path.join(SRC, 'preview_%s.gif' % wid), save_all=True, append_images=seq[1:], duration=90, loop=0)
