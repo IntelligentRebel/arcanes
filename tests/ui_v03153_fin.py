@@ -28,7 +28,7 @@ async def main():
             await pg.wait_for_timeout(900)
             src = await pg.evaluate("() => { const i = document.querySelector('.end-art img'); return i && i.naturalWidth ? i.getAttribute('src') : null; }")
             ok(src and src.endswith(want), '%s, %s : %s' % (why, who, src))
-            if why == 'mastery' and who == 'me': await pg.screenshot(path=os.path.join(ROOT, 'tests', 'shots', 'v03153_maitrise.png'))
+            await pg.screenshot(path=os.path.join(ROOT, 'tests', 'shots', 'v03153_%s_%s.png' % (why, who or 'x')))
         # un sorcier sans illustration propre (portrait inconnu) : l'image commune
         await pg.evaluate("""() => { const g = App.game, me = App.me(); me.portrait = 99; g.overWhy = 'conquest'; g.winner = me.id; UI.closeAll(); App._overModal = null; App.gameOver(true); }""")
         await pg.wait_for_timeout(900)
