@@ -34,6 +34,8 @@ const App = {
     Setup.titleScreen();
     // la copie locale demande à GitHub s'il existe une version plus récente (src/ui/update.js)
     setTimeout(() => { Update.check(); }, 1500);
+    // et vérifie qu'aucun fichier ne manque (une mise à jour sautée)
+    setTimeout(() => { Update.verifyAndWarn(); }, 2500);
   },
 
   // erreur inattendue : notée dans la console, dite une fois au joueur (trois messages au plus par session)

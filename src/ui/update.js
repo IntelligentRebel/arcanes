@@ -120,6 +120,31 @@ const Update = {
     const m = UI.modal({ title: 'Nouvelle version : ' + latest.version, width: 680, body, cls: 'update-modal', footer: h('button', { class: 'btn', onclick: () => m.close() }, 'Plus tard') });
   },
 
+  // 0.31.50 : une copie locale à laquelle il manque une mise à jour se signale. Chaque image livrée doit exister et avoir
+  // la taille attendue, et le dictionnaire de la langue doit être celui de cette version (tools/build.py, ASSET_CHECK).
+  async verify(force) {
+    const want = typeof window !== 'undefined' && window.ASSET_CHECK;
+    if (!want || (!force && !Update.isLocalCopy())) return [];
+    const bad = [], sig = window.I18N_SIG || {}, ask = window.I18N_WANT;
+    for (const lg of ask && ask !== 'fr' ? (ask !== 'en' && want.lang.en ? [ask, 'en'] : [ask]) : [])
+      if (want.lang[lg] && sig[lg] !== want.lang[lg]) bad.push('lang/' + lg + '.js');
+    const probe = (p, wh) => new Promise(res => { const im = new Image();
+      im.onload = () => res(im.naturalWidth === wh[0] && im.naturalHeight === wh[1] ? null : p); im.onerror = () => res(p); im.src = p; });
+    const list = Object.entries(want.img);
+    for (let i = 0; i < list.length; i += 6) bad.push(...(await Promise.all(list.slice(i, i + 6).map(([p, wh]) => probe(p, wh)))).filter(Boolean));
+    return bad;
+  },
+  async verifyAndWarn() { const bad = await Update.verify(); if (bad.length) Update.incomplete(bad); },
+  incomplete(bad) {
+    const ext = { target: '_blank', rel: 'noopener noreferrer' };
+    const body = h('div', null,
+      h('p', null, bad.length === 1 ? 'Un fichier de votre copie manque ou date d\'une version antérieure :' : bad.length + ' fichiers de votre copie manquent ou datent d\'une version antérieure :'),
+      h('ul', { class: 'dim', style: 'font-size:12px' }, ...bad.slice(0, 8).map(p => h('li', null, p)), bad.length > 8 ? h('li', null, '…') : null),
+      h('p', null, 'Une mise à jour a sans doute été sautée. Le jeu entier remet tout en ordre, sans toucher à vos parties.'),
+      h('div', { class: 'update-get' }, h('a', Object.assign({ class: 'btn primary', href: Update.RELEASES_URL + '/latest' }, ext), 'Télécharger le jeu entier')));
+    const m = UI.modal({ title: 'Copie incomplète', width: 560, body, cls: 'update-modal', footer: h('button', { class: 'btn', onclick: () => m.close() }, 'Plus tard') });
+  },
+
   // l'écran titre : un bouton sous les autres quand une version plus récente est connue
   titleButton(scr) {
     const put = () => {

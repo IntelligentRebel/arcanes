@@ -1,21 +1,24 @@
 // Portraits animés des sorciers (0.31.48) : sur le portrait de l'atlas, deux calques tirés de retouches du même portrait
 // (tools/portrait_anim.py) : les paupières, pour un clignement de temps en temps, et la magie du sorcier, qui monte et
-// redescend lentement. Le portrait du bandeau en haut à gauche reste fixe : il est sous les yeux toute la partie.
+// redescend lentement. Le portrait du bandeau en haut à gauche reste fixe : il est sous les yeux toute la partie. Le choix du
+// menu prime ; sans choix, un système qui demande moins d'animations les coupe (0.31.50 : le menu le dit).
 const PortraitAnim = {
   img: null, loading: false, live: new Map(), raf: 0, last: 0,
   meta() { return (window.EXTRA_META || {}).portraits || {}; },
   // l'ordre des portraits de l'atlas (wizard:N), celui des sorciers prédéfinis
   IDS: ['aldoran', 'isvaran', 'malivra', 'tsevan', 'azhemir', 'thalgren', 'vorgath', 'zirrakh', 'brakkon', 'sylvaine', 'solenkh', 'celestine', 'itzanor', 'nerissa'],
-  enabled() {
-    if (typeof App !== 'undefined' && App.prefs && App.prefs.animPortraits === false) return false;
-    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches) return false; } catch (e) { /* rien */ }
-    return true;
-  },
+  failed: false,
+  // le choix du menu prime ; sans choix, on suit le système quand il demande moins d'animations (Windows : Effets d'animation)
+  pref() { return typeof App !== 'undefined' && App.prefs ? App.prefs.animPortraits : undefined; },
+  systemReduced() { try { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches); } catch (e) { return false; } },
+  enabled() { const p = PortraitAnim.pref(); return p === false ? false : p === true ? true : !PortraitAnim.systemReduced(); },
+  // pour le menu : on, off (coupés dans le menu), system (coupés par le système), missing (assets/portraits.png introuvable)
+  status() { return PortraitAnim.failed ? 'missing' : PortraitAnim.enabled() ? 'on' : PortraitAnim.pref() === false ? 'off' : 'system'; },
   load() {
     if (PortraitAnim.img || PortraitAnim.loading || typeof Image === 'undefined') return;
     PortraitAnim.loading = true;
     const tryLoad = n => { const im = new Image(); im.onload = () => { PortraitAnim.img = im; PortraitAnim.loading = false; PortraitAnim.kick(); };
-      im.onerror = () => { if (n < 2) setTimeout(() => tryLoad(n + 1), 1500); else PortraitAnim.loading = false; }; im.src = 'assets/portraits.png'; };
+      im.onerror = () => { if (n < 2) setTimeout(() => tryLoad(n + 1), 1500); else { PortraitAnim.loading = false; PortraitAnim.failed = true; } }; im.src = 'assets/portraits.png'; };
     tryLoad(0);
   },
   // anime ce canevas (déjà peint avec le portrait n) ; hover : seulement quand la souris est sur cet élément

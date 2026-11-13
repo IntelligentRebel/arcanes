@@ -17,7 +17,7 @@
   var nav = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
   for (var i = 0; i < nav.length && !id; i++) { var c = String(nav[i] || '').toLowerCase().split(/[-_]/)[0]; if (ok(c)) id = c; }
   if (!id) id = L.indexOf('en') >= 0 ? 'en' : 'fr';
-  window.I18N_DICT = {}; window.I18N_SHIPPED = L;
+  window.I18N_DICT = {}; window.I18N_SHIPPED = L; window.I18N_WANT = id;
   if (id !== 'fr') {
     if (id !== 'en' && L.indexOf('en') >= 0) document.write('<script src="lang/en.js"><\/script>');
     document.write('<script src="lang/' + id + '.js"><\/script>');

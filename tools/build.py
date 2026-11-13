@@ -20,6 +20,22 @@ def build_langs():
     """Les langues livrées : i18n/<langue>.json (hors catalogue)."""
     d = os.path.join(ROOT, 'i18n')
     return sorted(f[:-5] for f in os.listdir(d) if f.endswith('.json') and f not in ('catalog.json', 'manual.json') and not f.startswith('_')) if os.path.isdir(d) else []
+def img_size(fp):
+    """Largeur et hauteur d'un PNG ou d'un JPEG, lues dans l'en-tête (sans Pillow, absent des machines de GitHub)."""
+    import struct
+    with open(fp, 'rb') as f:
+        head = f.read(26)
+        if head[:8] == b'\x89PNG\r\n\x1a\n': return list(struct.unpack('>II', head[16:24]))
+        if head[:2] != b'\xff\xd8': return None
+        f.seek(2)
+        while True:
+            b = f.read(1)
+            while b and b != b'\xff': b = f.read(1)
+            while b == b'\xff': b = f.read(1)
+            if not b: return None
+            if b[0] in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                f.read(3); h, w = struct.unpack('>HH', f.read(4)); return [w, h]
+            ln = struct.unpack('>H', f.read(2))[0]; f.seek(ln - 2, 1)
 def read(p):
     with open(os.path.join(ROOT, p), encoding='utf-8') as f: return f.read()
 def main():
@@ -73,16 +89,32 @@ def main():
     out_dir = os.path.join(ROOT, 'dist', 'arcanes')
     # dictionnaires : dist/arcanes/lang/<langue>.js, limités aux textes du catalogue
     cat = json.load(open(os.path.join(ROOT, 'i18n', 'catalog.json'), encoding='utf-8'))
+    import hashlib
+    lang_sig = {}
     ldir = os.path.join(out_dir, 'lang')
     if os.path.isdir(ldir): shutil.rmtree(ldir)
     os.makedirs(ldir, exist_ok=True)
     for lg in langs:
         d = json.load(open(os.path.join(ROOT, 'i18n', lg + '.json'), encoding='utf-8'))
         d = {k: v for k, v in d.items() if k in cat and isinstance(v, str) and v}
+        body = json.dumps(d, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+        lang_sig[lg] = hashlib.sha1(body.encode('utf-8')).hexdigest()[:10]
         with open(os.path.join(ldir, lg + '.js'), 'w', encoding='utf-8') as f:
-            f.write('(window.I18N_DICT = window.I18N_DICT || {})[' + json.dumps(lg) + '] = ' + json.dumps(d, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/') + ';\n')
+            f.write('(window.I18N_DICT = window.I18N_DICT || {})[' + json.dumps(lg) + '] = ' + body + ';\n'
+                    + '(window.I18N_SIG = window.I18N_SIG || {})[' + json.dumps(lg) + '] = ' + json.dumps(lang_sig[lg]) + ';\n')
         miss = len([k for k in cat if k not in d])
         if miss: print('  langue %s : %d textes sans traduction (repli : anglais, sinon français)' % (lg, miss))
+    # ce que la copie hors ligne doit contenir (src/ui/update.js, Update.verify) : chaque image avec sa taille, la signature de chaque dictionnaire
+    imgs = {}
+    for a in ASSETS:
+        if os.path.exists(os.path.join(ROOT, 'assets', a)): imgs['assets/' + a] = img_size(os.path.join(ROOT, 'assets', a))
+    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame', 'falls'):
+        sdir = os.path.join(ROOT, 'assets', sub)
+        if os.path.isdir(sdir):
+            for f in sorted(os.listdir(sdir)):
+                if f.endswith(('.jpg', '.png')): imgs['assets/%s/%s' % (sub, f)] = img_size(os.path.join(sdir, f))
+    check = json.dumps({'img': {k: v for k, v in imgs.items() if v}, 'lang': lang_sig}, separators=(',', ':'))
+    html = html.replace('window.EXTRA_SPRITES = ', 'window.ASSET_CHECK = ' + check + ';\nwindow.EXTRA_SPRITES = ', 1)
     os.makedirs(os.path.join(out_dir, 'assets'), exist_ok=True)
     with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as f: f.write(html)
     size = len(html)

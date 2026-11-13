@@ -759,7 +759,10 @@ const Panels = {
     body.append(h('div', { class: 'row' }, h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Volume de la musique ', vlab), h('div', { class: 't2' }, vol))));
     { const AUTO_SPEED_WORDS = { fast: 'rapide', medium: 'moyenne', slow: 'lente' }, cur = App.prefs.autoSpeed || 'fast';
       row('Batailles automatiques : ' + AUTO_SPEED_WORDS[cur], 'Le rythme des batailles résolues automatiquement sous vos yeux', () => { const L = CombatView.AUTO_SPEEDS; App.setPref('autoSpeed', L[(L.indexOf(cur) + 1) % L.length]); again(); }); }
-    row('Portraits animés : ' + (App.prefs.animPortraits !== false ? 'activés' : 'coupés'), 'Les sorciers clignent des yeux et leur magie s\'anime, partout sauf dans le bandeau', () => { App.setPref('animPortraits', App.prefs.animPortraits === false); again(); });
+    { PortraitAnim.load(); const st = PortraitAnim.status();
+      row('Portraits animés : ' + (st === 'on' ? 'activés' : st === 'off' ? 'coupés' : st === 'system' ? 'coupés par votre système' : 'fichier manquant'),
+        st === 'system' ? 'Votre système demande moins d\'animations. Cliquez pour les activer quand même.' : st === 'missing' ? 'Le fichier assets/portraits.png est introuvable : installez le jeu entier.' : 'Les sorciers clignent des yeux et leur magie s\'anime, partout sauf dans le bandeau',
+        () => { App.setPref('animPortraits', !PortraitAnim.enabled()); again(); }); }
     row('Journal : ' + (App.prefs.logReverse ? 'le plus récent en haut' : 'le plus récent en bas'), 'L\'ordre des lignes du journal', () => { App.setLogOrder(!App.prefs.logReverse); again(); });
     row('Unité suivante automatique : ' + (App.prefs.autoNext ? 'activée' : 'coupée'), 'Quand une unité a épuisé ses mouvements, la sélection passe d\'elle-même à la prochaine unité qui attend des ordres', () => { App.setPref('autoNext', !App.prefs.autoNext); again(); });
     row('Ronde des éclaireurs : ' + (App.prefs.scoutRevisit !== false ? 'activée' : 'coupée'), 'Quand il n\'y a plus rien à explorer, les éclaireurs en exploration automatique revisitent les antres qu\'on croit gardés, pour vérifier que leurs gardiens y sont toujours', () => { App.setPref('scoutRevisit', App.prefs.scoutRevisit === false); again(); });
