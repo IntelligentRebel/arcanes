@@ -748,7 +748,7 @@
 "Appel du héros": "召唤英雄",
 "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).": "在你的召唤阵召来一名随机英雄,等级与当前时代相符,无需招募费用即可加入(需拥有少于6名英雄)。",
 "Clairvoyance": "洞察",
-"Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": "揭示两个位面上的所有城市,包括之后建立的城市。",
+"Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.": "揭示两个位面上的所有城市,包括之后建立的城市,并在每回合向你报告它们的驻军。",
 "Disjonction": "瓦解",
 "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).": "尝试驱散你选定的一个敌方全局附魔(力度200)。",
 "Création d'artefact": "制造神器",

@@ -452,7 +452,7 @@ add("Enchant Item", "Enchantement d'objet", "none", "special", {"item": True, "m
 add("Summon Hero", "Appel du héros", "none", "special", {"randomHero": True, "free": True, "maxHeroes": 6},
     "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).")
 add("Awareness", "Clairvoyance", "none", "global", {"revealCities": True},
-    "Révèle toutes les villes des deux plans, y compris celles fondées ensuite.")
+    "Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.")
 add("Disjunction", "Disjonction", "none", "dispel", {"strengthPerMana": 1, "targets": "globalEnchantment"},
     "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).")
 add("Create Artifact", "Création d'artefact", "none", "special", {"item": True},

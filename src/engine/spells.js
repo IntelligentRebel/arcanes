@@ -503,7 +503,7 @@ const Spells = {
       if (typeof Chronicle !== 'undefined') Chronicle.note(game, 'global', { a: pl.id, s: id, pub: true });
       msg = 'Enchantement global actif : ' + sp.name + '.';
       for (const o of game.players) if (o !== pl && o.alive) Game.log(game, o.id, U.cap(Players.nameFor(game, o.id, pl.id)) + ' a lancé ' + sp.name + '.', { spell: id, global: true, player: pl.id, minor: true });
-      if (id === 'natures_awareness' || id === 'awareness') { if (id === 'natures_awareness') for (const pp of [0, 1]) pl.explored[pp].fill(1); else for (const c of Object.values(game.cities)) Move.reveal(game, pl, c.plane, c.x, c.y, 1); }
+      if (id === 'natures_awareness' || id === 'awareness') { if (id === 'natures_awareness') for (const pp of [0, 1]) pl.explored[pp].fill(1); else { for (const c of Object.values(game.cities)) Move.reveal(game, pl, c.plane, c.x, c.y, 1); if (typeof Intel !== 'undefined') Intel.clairvoyance(game, pl); } }
     } else if (sp.kind === 'terrain') {
       const r = Spells.terrainSpell(game, pl, id, target, sp); if (r && r.ok === false) return r; msg = r && r.msg;
     }

@@ -55,4 +55,8 @@ The source code is written in French (variables, comments, texts); `tools/i18n_b
 - Music composed for Arcanes, played with the GeneralUser GS SoundFont by S. Christian Collins.
 - Title font: Cinzel (SIL Open Font License). Parser: acorn (MIT).
 
-© 2026 Olivier Roland. All rights reserved: the source is public so you can read it and play, but no license is granted to reuse it. Third-party components keep their own licenses, see [THIRD_PARTY.md](THIRD_PARTY.md).
+## License
+
+- **Code**: free software under the [GNU General Public License v3.0](LICENSE). Fork it, modify it, share it, as long as your version stays open under the same license.
+- **Graphics and music**: © 2026 Olivier Roland, all rights reserved, see [ASSETS.md](ASSETS.md). A fork brings its own; [docs/ART-RECIPE.md](docs/ART-RECIPE.md) explains how these were made.
+- Third-party components keep their own licenses, see [THIRD_PARTY.md](THIRD_PARTY.md).

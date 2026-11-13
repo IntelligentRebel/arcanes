@@ -3974,7 +3974,7 @@
    "data/spells.js:22"
   ]
  },
- "Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": {
+ "Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.": {
   "at": [
    "data/spells.js:22"
   ]
@@ -5083,7 +5083,7 @@
  "Grande Dévastation": {
   "at": [
    "data/spells.js:142",
-   "src/engine/turn.js:459"
+   "src/engine/turn.js:460"
   ]
  },
  "Corrompt chaque tour jusqu'à 6 cases sur les deux plans, en épargnant vos villes et leurs environs ; +1 d'agitation dans les villes rivales.": {
@@ -5139,7 +5139,7 @@
  "Armageddon": {
   "at": [
    "data/spells.js:148",
-   "src/engine/turn.js:459"
+   "src/engine/turn.js:460"
   ]
  },
  "Fait surgir des volcans à travers les deux plans (4 à 5 par tour) ; chacun vous rapporte 1 point de puissance magique par tour, et les villes rivales subissent +2 d'agitation.": {
@@ -6824,7 +6824,7 @@
  "Miroir": {
   "at": [
    "src/core/util.js:77",
-   "src/ui/panels.js:855",
+   "src/ui/panels.js:857",
    "src/ui/main.js:387"
   ]
  },
@@ -6864,7 +6864,7 @@
    "src/core/util.js:99",
    "src/ui/ui.js:223",
    "src/ui/panels.js:358",
-   "src/ui/panels.js:819"
+   "src/ui/panels.js:821"
   ]
  },
  "Myrmidon": {
@@ -11200,8 +11200,8 @@
  "Or insuffisant.": {
   "at": [
    "src/engine/game.js:1673",
-   "src/engine/turn.js:646",
-   "src/engine/turn.js:662"
+   "src/engine/turn.js:647",
+   "src/engine/turn.js:663"
   ]
  },
  "{0} en dépend.": {
@@ -11894,18 +11894,18 @@
  },
  "Des monstres": {
   "at": [
-   "src/engine/turn.js:84"
+   "src/engine/turn.js:85"
   ]
  },
  "Des pillards": {
   "at": [
-   "src/engine/turn.js:84",
-   "src/engine/turn.js:739"
+   "src/engine/turn.js:85",
+   "src/engine/turn.js:740"
   ]
  },
  "Des troupes {0}": {
   "at": [
-   "src/engine/turn.js:84"
+   "src/engine/turn.js:85"
   ],
   "args": [
    "U.de(nm)"
@@ -11913,7 +11913,7 @@
  },
  "{0} entrent sur votre territoire{1}.": {
   "at": [
-   "src/engine/turn.js:88"
+   "src/engine/turn.js:89"
   ],
   "args": [
    "(Units.isScout(u0) ? 'Des éclaireurs' : 'Des civils') + (u0.owner >= 0 ? ' ' + U.de(nm) : ",
@@ -11922,18 +11922,18 @@
  },
  "Des éclaireurs": {
   "at": [
-   "src/engine/turn.js:88"
+   "src/engine/turn.js:89"
   ]
  },
  "Des civils": {
   "at": [
-   "src/engine/turn.js:88"
+   "src/engine/turn.js:89"
   ]
  },
  ", près de {0}": {
   "at": [
-   "src/engine/turn.js:88",
-   "src/engine/turn.js:89"
+   "src/engine/turn.js:89",
+   "src/engine/turn.js:90"
   ],
   "args": [
    "near.name"
@@ -11941,7 +11941,7 @@
  },
  "{0} ({1}) entrent sur votre territoire{2} !": {
   "at": [
-   "src/engine/turn.js:89"
+   "src/engine/turn.js:90"
   ],
   "args": [
    "who",
@@ -11951,16 +11951,16 @@
  },
  "unité": {
   "at": [
-   "src/engine/turn.js:89",
-   "src/engine/turn.js:640",
+   "src/engine/turn.js:90",
+   "src/engine/turn.js:641",
    "src/engine/spells.js:31",
    "src/engine/ai.js:1243"
   ]
  },
  "unités": {
   "at": [
-   "src/engine/turn.js:89",
-   "src/engine/turn.js:640",
+   "src/engine/turn.js:90",
+   "src/engine/turn.js:641",
    "src/engine/spells.js:31",
    "src/engine/spells.js:31"
   ],
@@ -11968,8 +11968,8 @@
  },
  "Mana épuisé : {0} se dissipe.": {
   "at": [
-   "src/engine/turn.js:107",
-   "src/engine/turn.js:425"
+   "src/engine/turn.js:108",
+   "src/engine/turn.js:426"
   ],
   "args": [
    "DATA.spells.time_stop.name"
@@ -11977,7 +11977,7 @@
  },
  "Recherche achevée : {0}.": {
   "at": [
-   "src/engine/turn.js:132"
+   "src/engine/turn.js:133"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -11985,12 +11985,12 @@
  },
  "Vous pouvez désormais lancer le Sort de Maîtrise !": {
   "at": [
-   "src/engine/turn.js:134"
+   "src/engine/turn.js:135"
   ]
  },
  "{0} a été abandonnée par ses habitants.": {
   "at": [
-   "src/engine/turn.js:152"
+   "src/engine/turn.js:153"
   ],
   "args": [
    "c.name"
@@ -11998,7 +11998,7 @@
  },
  "{0} grandit : {1} citoyens.": {
   "at": [
-   "src/engine/turn.js:155"
+   "src/engine/turn.js:156"
   ],
   "args": [
    "c.name",
@@ -12007,7 +12007,7 @@
  },
  "{0} a atteint sa population maximale : les logements laissent place au commerce.": {
   "at": [
-   "src/engine/turn.js:162"
+   "src/engine/turn.js:163"
   ],
   "args": [
    "c.name"
@@ -12015,7 +12015,7 @@
  },
  "{0} : {1} n'est plus possible (un prérequis manque){2} ; {3}.": {
   "at": [
-   "src/engine/turn.js:179"
+   "src/engine/turn.js:180"
   ],
   "args": [
    "c.name",
@@ -12026,17 +12026,17 @@
  },
  ", il attend en file": {
   "at": [
-   "src/engine/turn.js:179"
+   "src/engine/turn.js:180"
   ]
  },
  ", son avancement passe à la suite": {
   "at": [
-   "src/engine/turn.js:179"
+   "src/engine/turn.js:180"
   ]
  },
  "la cité passe à {0}": {
   "at": [
-   "src/engine/turn.js:179"
+   "src/engine/turn.js:180"
   ],
   "args": [
    "Cities.prodName(c)"
@@ -12044,12 +12044,12 @@
  },
  "à vous de choisir la suite": {
   "at": [
-   "src/engine/turn.js:179"
+   "src/engine/turn.js:180"
   ]
  },
  "{0} achève un grand ouvrage : {1}.": {
   "at": [
-   "src/engine/turn.js:196"
+   "src/engine/turn.js:197"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, c.owner))",
@@ -12058,7 +12058,7 @@
  },
  "{0} a construit : {1}.": {
   "at": [
-   "src/engine/turn.js:199"
+   "src/engine/turn.js:200"
   ],
   "args": [
    "c.name",
@@ -12067,7 +12067,7 @@
  },
  "{0}, gouverneur de {1}, lance : {2}.": {
   "at": [
-   "src/engine/turn.js:208"
+   "src/engine/turn.js:209"
   ],
   "args": [
    "gov.hero.name",
@@ -12077,7 +12077,7 @@
  },
  "{0} ({1}) lance : {2}.": {
   "at": [
-   "src/engine/turn.js:209"
+   "src/engine/turn.js:210"
   ],
   "args": [
    "c.name",
@@ -12087,7 +12087,7 @@
  },
  "{0} (garnison)": {
   "at": [
-   "src/engine/turn.js:233"
+   "src/engine/turn.js:234"
   ],
   "args": [
    "dead.join(', ')"
@@ -12095,7 +12095,7 @@
  },
  "La Faille du chaos ronge {0} : {1}.": {
   "at": [
-   "src/engine/turn.js:234"
+   "src/engine/turn.js:235"
   ],
   "args": [
    "c.name",
@@ -12104,7 +12104,7 @@
  },
  "{0} : {1} des armes {2}.": {
   "at": [
-   "src/engine/turn.js:256"
+   "src/engine/turn.js:257"
   ],
   "args": [
    "c.name",
@@ -12114,19 +12114,19 @@
  },
  "unité reçoit": {
   "at": [
-   "src/engine/turn.js:256"
+   "src/engine/turn.js:257"
   ]
  },
  "unités reçoivent": {
   "at": [
-   "src/engine/turn.js:256",
-   "src/engine/turn.js:256"
+   "src/engine/turn.js:257",
+   "src/engine/turn.js:257"
   ],
   "hint": "pluriel de « unité reçoit »"
  },
  "{0} : plus aucune unité à équiper d'armes magiques.": {
   "at": [
-   "src/engine/turn.js:257"
+   "src/engine/turn.js:258"
   ],
   "args": [
    "c.name"
@@ -12134,7 +12134,7 @@
  },
  "{0} : la garnison est pleine ({1} unités) et aucune case voisine n'est libre : l'unité ({2}) attend qu'une place se libère.": {
   "at": [
-   "src/engine/turn.js:273"
+   "src/engine/turn.js:274"
   ],
   "args": [
    "c.name",
@@ -12144,7 +12144,7 @@
  },
  "{0} a recruté : {1}{2}. La garnison étant pleine ({3} unités), la nouvelle unité attend hors les murs, en ({4}, {5}).": {
   "at": [
-   "src/engine/turn.js:294"
+   "src/engine/turn.js:295"
   ],
   "args": [
    "c.name",
@@ -12157,8 +12157,8 @@
  },
  ", avec {0}": {
   "at": [
-   "src/engine/turn.js:294",
-   "src/engine/turn.js:295"
+   "src/engine/turn.js:295",
+   "src/engine/turn.js:296"
   ],
   "args": [
    "Spells.CHANNEL_NAMES[u.chaosChannel]"
@@ -12166,7 +12166,7 @@
  },
  "{0} a recruté : {1}{2}.": {
   "at": [
-   "src/engine/turn.js:295"
+   "src/engine/turn.js:296"
   ],
   "args": [
    "c.name",
@@ -12176,7 +12176,7 @@
  },
  "{0} : soins terminés, en attente d'ordres.": {
   "at": [
-   "src/engine/turn.js:320"
+   "src/engine/turn.js:321"
   ],
   "args": [
    "U.cap(Units.label(u))"
@@ -12184,17 +12184,17 @@
  },
  "Une terre corrompue a été purifiée.": {
   "at": [
-   "src/engine/turn.js:333"
+   "src/engine/turn.js:334"
   ]
  },
  "Route achevée.": {
   "at": [
-   "src/engine/turn.js:352"
+   "src/engine/turn.js:353"
   ]
  },
  "Trésor à sec : vente {0} à {1} ({2} or).": {
   "at": [
-   "src/engine/turn.js:364"
+   "src/engine/turn.js:365"
   ],
   "args": [
    "U.de(DATA.buildings[b].name)",
@@ -12204,7 +12204,7 @@
  },
  "Faute de solde, désertion de {0}.": {
   "at": [
-   "src/engine/turn.js:371"
+   "src/engine/turn.js:372"
   ],
   "args": [
    "Units.label(unit)"
@@ -12212,7 +12212,7 @@
  },
  "{0} sur {1}": {
   "at": [
-   "src/engine/turn.js:391"
+   "src/engine/turn.js:392"
   ],
   "args": [
    "DATA.spells[e].name",
@@ -12221,7 +12221,7 @@
  },
  "{0} à {1}": {
   "at": [
-   "src/engine/turn.js:397"
+   "src/engine/turn.js:398"
   ],
   "args": [
    "DATA.spells[e.spell].name",
@@ -12230,7 +12230,7 @@
  },
  "Famine : dissolution de {0}, faute de vivres.": {
   "at": [
-   "src/engine/turn.js:411"
+   "src/engine/turn.js:412"
   ],
   "args": [
    "Units.label(u)"
@@ -12238,7 +12238,7 @@
  },
  "Mana épuisé : {0} se dissipe sur {1}.": {
   "at": [
-   "src/engine/turn.js:420"
+   "src/engine/turn.js:421"
   ],
   "args": [
    "DATA.spells[e].name",
@@ -12247,7 +12247,7 @@
  },
  "Mana épuisé : retour de {0} dans le néant.": {
   "at": [
-   "src/engine/turn.js:422"
+   "src/engine/turn.js:423"
   ],
   "args": [
    "Units.label(u)"
@@ -12255,7 +12255,7 @@
  },
  "Mana épuisé : {0} se dissipe à {1}.": {
   "at": [
-   "src/engine/turn.js:424"
+   "src/engine/turn.js:425"
   ],
   "args": [
    "DATA.spells[e.spell].name",
@@ -12264,31 +12264,31 @@
  },
  "volcan surgit": {
   "at": [
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459"
   ]
  },
  "volcans surgissent": {
   "at": [
-   "src/engine/turn.js:458",
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459",
+   "src/engine/turn.js:459"
   ],
   "hint": "pluriel de « volcan surgit »"
  },
  "terre est corrompue": {
   "at": [
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459"
   ]
  },
  "terres sont corrompues": {
   "at": [
-   "src/engine/turn.js:458",
-   "src/engine/turn.js:458"
+   "src/engine/turn.js:459",
+   "src/engine/turn.js:459"
   ],
   "hint": "pluriel de « terre est corrompue »"
  },
  "{0} {1} : {2} près de {3}.": {
   "at": [
-   "src/engine/turn.js:459"
+   "src/engine/turn.js:460"
   ],
   "args": [
    "volc.length ? 'Armageddon' : 'Grande Dévastation'",
@@ -12299,17 +12299,17 @@
  },
  "Votre pluie de météores a détruit vos propres troupes : ": {
   "at": [
-   "src/engine/turn.js:498"
+   "src/engine/turn.js:499"
   ]
  },
  "La pluie de météores a détruit ": {
   "at": [
-   "src/engine/turn.js:498"
+   "src/engine/turn.js:499"
   ]
  },
  "Pluie de météores sur {0} : {1}.": {
   "at": [
-   "src/engine/turn.js:500"
+   "src/engine/turn.js:501"
   ],
   "args": [
    "c.name",
@@ -12318,17 +12318,17 @@
  },
  "La lune bienveillante décline.": {
   "at": [
-   "src/engine/turn.js:509"
+   "src/engine/turn.js:510"
   ]
  },
  "La lune maléfique décline.": {
   "at": [
-   "src/engine/turn.js:509"
+   "src/engine/turn.js:510"
   ]
  },
  "Un filon d'or est découvert : +{0} or.": {
   "at": [
-   "src/engine/turn.js:521"
+   "src/engine/turn.js:522"
   ],
   "args": [
    "g"
@@ -12336,7 +12336,7 @@
  },
  "Des cristaux de mana affleurent : +{0} mana.": {
   "at": [
-   "src/engine/turn.js:522"
+   "src/engine/turn.js:523"
   ],
   "args": [
    "m"
@@ -12344,7 +12344,7 @@
  },
  "Un riche marchand fait don de {0} or à votre cause.": {
   "at": [
-   "src/engine/turn.js:523"
+   "src/engine/turn.js:524"
   ],
   "args": [
    "g"
@@ -12352,7 +12352,7 @@
  },
  "La peste frappe {0}{1}": {
   "at": [
-   "src/engine/turn.js:524"
+   "src/engine/turn.js:525"
   ],
   "args": [
    "c.name",
@@ -12361,7 +12361,7 @@
  },
  " : {0} habitants en moins.": {
   "at": [
-   "src/engine/turn.js:524"
+   "src/engine/turn.js:525"
   ],
   "args": [
    "U.fmt(before - c.pop)"
@@ -12369,7 +12369,7 @@
  },
  "Explosion démographique à {0} : la croissance double pendant 10 tours.": {
   "at": [
-   "src/engine/turn.js:525"
+   "src/engine/turn.js:526"
   ],
   "args": [
    "c.name"
@@ -12377,17 +12377,17 @@
  },
  "Une lune bienveillante se lève : la magie de Vie s'intensifie, celle de Mort faiblit.": {
   "at": [
-   "src/engine/turn.js:526"
+   "src/engine/turn.js:527"
   ]
  },
  "Une lune maléfique se lève : la magie de Mort s'intensifie, celle de Vie faiblit.": {
   "at": [
-   "src/engine/turn.js:527"
+   "src/engine/turn.js:528"
   ]
  },
  "Un tremblement de terre ravage {0}{1}.": {
   "at": [
-   "src/engine/turn.js:528"
+   "src/engine/turn.js:529"
   ],
   "args": [
    "c.name",
@@ -12396,7 +12396,7 @@
  },
  "Des prospecteurs découvrent un gisement près de {0}.": {
   "at": [
-   "src/engine/turn.js:532"
+   "src/engine/turn.js:533"
   ],
   "args": [
    "c.name"
@@ -12404,7 +12404,7 @@
  },
  "Un gisement s'épuise près de {0}.": {
   "at": [
-   "src/engine/turn.js:537"
+   "src/engine/turn.js:538"
   ],
   "args": [
    "c.name"
@@ -12412,7 +12412,7 @@
  },
  "{0} se révolte et proclame son indépendance !": {
   "at": [
-   "src/engine/turn.js:542"
+   "src/engine/turn.js:543"
   ],
   "args": [
    "c.name"
@@ -12420,8 +12420,8 @@
  },
  "{0} ({1}) propose ses services pour {2} or.": {
   "at": [
-   "src/engine/turn.js:586",
-   "src/engine/turn.js:605"
+   "src/engine/turn.js:587",
+   "src/engine/turn.js:606"
   ],
   "args": [
    "h.name",
@@ -12431,7 +12431,7 @@
  },
  "{0} de mercenaires ({1}) proposent leurs services pour {2} or.": {
   "at": [
-   "src/engine/turn.js:640"
+   "src/engine/turn.js:641"
   ],
   "args": [
    "U.n(count, 'unité')",
@@ -12441,13 +12441,13 @@
  },
  "Aucune forteresse.": {
   "at": [
-   "src/engine/turn.js:645",
-   "src/engine/turn.js:666"
+   "src/engine/turn.js:646",
+   "src/engine/turn.js:667"
   ]
  },
  "Plus de place autour de {0}.": {
   "at": [
-   "src/engine/turn.js:653"
+   "src/engine/turn.js:654"
   ],
   "args": [
    "fc.name"
@@ -12455,7 +12455,7 @@
  },
  "Les mercenaires ({0}) rejoignent vos rangs à {1}.": {
   "at": [
-   "src/engine/turn.js:655"
+   "src/engine/turn.js:656"
   ],
   "args": [
    "DATA.units[off.type].name",
@@ -12464,7 +12464,7 @@
  },
  "Vous avez déjà six héros.": {
   "at": [
-   "src/engine/turn.js:663",
+   "src/engine/turn.js:664",
    "src/engine/spells.js:266",
    "src/engine/spells.js:589",
    "src/engine/spells.js:604"
@@ -12472,7 +12472,7 @@
  },
  "{0} sert déjà un autre sorcier.": {
   "at": [
-   "src/engine/turn.js:664"
+   "src/engine/turn.js:665"
   ],
   "args": [
    "h.name"
@@ -12480,7 +12480,7 @@
  },
  "Aucune place près de {0} pour accueillir le héros.": {
   "at": [
-   "src/engine/turn.js:668"
+   "src/engine/turn.js:669"
   ],
   "args": [
    "fc.name"
@@ -12488,7 +12488,7 @@
  },
  "{0} rejoint vos rangs à {1}.": {
   "at": [
-   "src/engine/turn.js:671"
+   "src/engine/turn.js:672"
   ],
   "args": [
    "h.name",
@@ -12497,7 +12497,7 @@
  },
  "{0} marchent sur {1} !": {
   "at": [
-   "src/engine/turn.js:739"
+   "src/engine/turn.js:740"
   ],
   "args": [
    "u0.rampage ? 'Des monstres en maraude' : 'Des pillards'",
@@ -12506,7 +12506,7 @@
  },
  "Des monstres en maraude": {
   "at": [
-   "src/engine/turn.js:739"
+   "src/engine/turn.js:740"
   ]
  },
  "peau de démon (+3 en défense)": {
@@ -14966,27 +14966,27 @@
  },
  "très faible": {
   "at": [
-   "src/engine/aiintel.js:197"
+   "src/engine/aiintel.js:207"
   ]
  },
  "faible": {
   "at": [
-   "src/engine/aiintel.js:197"
+   "src/engine/aiintel.js:207"
   ]
  },
  "moyen": {
   "at": [
-   "src/engine/aiintel.js:197"
+   "src/engine/aiintel.js:207"
   ]
  },
  "bon": {
   "at": [
-   "src/engine/aiintel.js:197"
+   "src/engine/aiintel.js:207"
   ]
  },
  "excellent": {
   "at": [
-   "src/engine/aiintel.js:197"
+   "src/engine/aiintel.js:207"
   ]
  },
  "Facile": {
@@ -17449,7 +17449,7 @@
    "src/engine/chronicle.js:9",
    "src/ui/city.js:665",
    "src/ui/panels.js:159",
-   "src/ui/panels.js:819"
+   "src/ui/panels.js:821"
   ]
  },
  "entrent en guerre": {
@@ -19332,7 +19332,7 @@
    "src/ui/city.js:134",
    "src/ui/city.js:687",
    "src/ui/panels.js:160",
-   "src/ui/panels.js:819"
+   "src/ui/panels.js:821"
   ]
  },
  "Entretien {0} or": {
@@ -19388,7 +19388,7 @@
  "<div class=\"danger\">Lancée par {0}</div>": {
   "at": [
    "src/ui/city.js:159",
-   "src/ui/panels.js:709"
+   "src/ui/panels.js:711"
   ],
   "args": [
    "U.esc(Players.nameFor(game, App.pid, en.owner))"
@@ -19476,7 +19476,7 @@
    "src/ui/city.js:195",
    "src/ui/city.js:672",
    "src/ui/panels.js:324",
-   "src/ui/panels.js:736"
+   "src/ui/panels.js:738"
   ]
  },
  "Choisir sur la carte": {
@@ -23356,7 +23356,7 @@
    "src/ui/combatview.js:1924",
    "src/ui/panels.js:322",
    "src/ui/panels.js:412",
-   "src/ui/panels.js:819"
+   "src/ui/panels.js:821"
   ]
  },
  "Attendre": {
@@ -24952,7 +24952,7 @@
  },
  "Diplomatie avec {0}": {
   "at": [
-   "src/ui/panels.js:695"
+   "src/ui/panels.js:697"
   ],
   "args": [
    "owner.name"
@@ -24960,7 +24960,7 @@
  },
  "Traité : {0} · cliquez pour lui parler": {
   "at": [
-   "src/ui/panels.js:696"
+   "src/ui/panels.js:698"
   ],
   "args": [
    "Diplomacy.stateName(st)"
@@ -24968,12 +24968,12 @@
  },
  "Un sorcier que vous n'avez jamais rencontré": {
   "at": [
-   "src/ui/panels.js:697"
+   "src/ui/panels.js:699"
   ]
  },
  "{0} de {1} · {2} habitants · ": {
   "at": [
-   "src/ui/panels.js:701"
+   "src/ui/panels.js:703"
   ],
   "args": [
    "Cities.sizeName(c)",
@@ -24983,7 +24983,7 @@
  },
  "Cité de {0} (hors de vue) · ": {
   "at": [
-   "src/ui/panels.js:701"
+   "src/ui/panels.js:703"
   ],
   "args": [
    "DATA.races[c.race].name"
@@ -24991,7 +24991,7 @@
  },
  "cité {0}": {
   "at": [
-   "src/ui/panels.js:701"
+   "src/ui/panels.js:703"
   ],
   "args": [
    "App.de(Players.nameFor(game, App.pid, owner.id))"
@@ -24999,22 +24999,22 @@
  },
  "cité indépendante": {
   "at": [
-   "src/ui/panels.js:701"
+   "src/ui/panels.js:703"
   ]
  },
  "Protégée par des murailles et des tours de défense.": {
   "at": [
-   "src/ui/panels.js:702"
+   "src/ui/panels.js:704"
   ]
  },
  "Protégée par des murailles.": {
   "at": [
-   "src/ui/panels.js:702"
+   "src/ui/panels.js:704"
   ]
  },
  "Dernier rapport {0} : {1}.": {
   "at": [
-   "src/ui/panels.js:705"
+   "src/ui/panels.js:707"
   ],
   "args": [
    "UI.ago(game.turn - rep.t)",
@@ -25023,49 +25023,49 @@
  },
  "défenseur": {
   "at": [
-   "src/ui/panels.js:705"
+   "src/ui/panels.js:707"
   ]
  },
  "défenseurs": {
   "at": [
-   "src/ui/panels.js:705"
+   "src/ui/panels.js:707"
   ],
   "hint": "pluriel de « défenseur »"
  },
  "aucun défenseur": {
   "at": [
-   "src/ui/panels.js:705"
+   "src/ui/panels.js:707"
   ]
  },
  "Hors de vue : garnison inconnue.": {
   "at": [
-   "src/ui/panels.js:705"
+   "src/ui/panels.js:707"
   ]
  },
  "Garnison invisible : envoyez une unité à proximité.": {
   "at": [
-   "src/ui/panels.js:706"
+   "src/ui/panels.js:708"
   ]
  },
  "Menu": {
   "at": [
-   "src/ui/panels.js:717"
+   "src/ui/panels.js:719"
   ]
  },
  "Sauvegarder": {
   "at": [
-   "src/ui/panels.js:720",
-   "src/ui/panels.js:722"
+   "src/ui/panels.js:722",
+   "src/ui/panels.js:724"
   ]
  },
  "Enregistrer dans le navigateur": {
   "at": [
-   "src/ui/panels.js:720"
+   "src/ui/panels.js:722"
   ]
  },
  "Remplacer la sauvegarde manuelle d'une autre partie ({0}, tour {1}) ?": {
   "at": [
-   "src/ui/panels.js:722"
+   "src/ui/panels.js:724"
   ],
   "args": [
    "U.esc(old.name || '?')",
@@ -25074,44 +25074,44 @@
  },
  "Remplacer": {
   "at": [
-   "src/ui/panels.js:722"
+   "src/ui/panels.js:724"
   ]
  },
  "Partie sauvegardée.": {
   "at": [
-   "src/ui/panels.js:723"
+   "src/ui/panels.js:725"
   ]
  },
  "Échec de la sauvegarde.": {
   "at": [
-   "src/ui/panels.js:723"
+   "src/ui/panels.js:725"
   ]
  },
  "Charger": {
   "at": [
-   "src/ui/panels.js:724",
+   "src/ui/panels.js:726",
    "src/ui/setup.js:129"
   ]
  },
  "Reprendre la dernière sauvegarde manuelle ou automatique": {
   "at": [
-   "src/ui/panels.js:724"
+   "src/ui/panels.js:726"
   ]
  },
  "Exporter la partie": {
   "at": [
-   "src/ui/panels.js:725"
+   "src/ui/panels.js:727"
   ]
  },
  "Télécharger un fichier de sauvegarde": {
   "at": [
-   "src/ui/panels.js:725"
+   "src/ui/panels.js:727"
   ]
  },
  "tous les {0} tours": {
   "at": [
-   "src/ui/panels.js:729",
-   "src/ui/panels.js:730"
+   "src/ui/panels.js:731",
+   "src/ui/panels.js:732"
   ],
   "args": [
    "v"
@@ -25119,30 +25119,30 @@
  },
  "coupée": {
   "at": [
-   "src/ui/panels.js:729",
-   "src/ui/panels.js:730",
-   "src/ui/panels.js:745",
-   "src/ui/panels.js:756"
+   "src/ui/panels.js:731",
+   "src/ui/panels.js:732",
+   "src/ui/panels.js:747",
+   "src/ui/panels.js:758"
   ]
  },
  "Copie de sauvegarde automatique : ": {
   "at": [
-   "src/ui/panels.js:732"
+   "src/ui/panels.js:734"
   ]
  },
  "Un fichier de sauvegarde est écrit à la fin du tour, tous les ": {
   "at": [
-   "src/ui/panels.js:733"
+   "src/ui/panels.js:735"
   ]
  },
  " tours.": {
   "at": [
-   "src/ui/panels.js:733"
+   "src/ui/panels.js:735"
   ]
  },
  "Dossier de sauvegarde : {0}": {
   "at": [
-   "src/ui/panels.js:736"
+   "src/ui/panels.js:738"
   ],
   "args": [
    "dir || 'aucun'"
@@ -25150,42 +25150,42 @@
  },
  "Les copies s'y écrivent sans rien vous demander. Cliquez pour en choisir un autre ; le bouton à droite l'oublie.": {
   "at": [
-   "src/ui/panels.js:737"
+   "src/ui/panels.js:739"
   ]
  },
  "Choisissez un dossier : les copies s'y écriront sans rien vous demander, au lieu d'aller dans vos téléchargements.": {
   "at": [
-   "src/ui/panels.js:737"
+   "src/ui/panels.js:739"
   ]
  },
  "Dossier non retenu : le navigateur n'a pas donné l'accès.": {
   "at": [
-   "src/ui/panels.js:738"
+   "src/ui/panels.js:740"
   ]
  },
  "Dossier de sauvegarde : indisponible": {
   "at": [
-   "src/ui/panels.js:739"
+   "src/ui/panels.js:741"
   ]
  },
  "Ce navigateur ne sait pas écrire dans un dossier choisi (Chrome et Edge le savent) : les copies vont dans vos téléchargements.": {
   "at": [
-   "src/ui/panels.js:739"
+   "src/ui/panels.js:741"
   ]
  },
  "Oublier ce dossier": {
   "at": [
-   "src/ui/panels.js:740"
+   "src/ui/panels.js:742"
   ]
  },
  "Oublier": {
   "at": [
-   "src/ui/panels.js:740"
+   "src/ui/panels.js:742"
   ]
  },
  "Nouvelle version disponible : {0}": {
   "at": [
-   "src/ui/panels.js:743",
+   "src/ui/panels.js:745",
    "src/ui/update.js:154"
   ],
   "args": [
@@ -25194,12 +25194,12 @@
  },
  "Notes de version et téléchargement": {
   "at": [
-   "src/ui/panels.js:743"
+   "src/ui/panels.js:745"
   ]
  },
  "Recherche des nouvelles versions : {0}": {
   "at": [
-   "src/ui/panels.js:745"
+   "src/ui/panels.js:747"
   ],
   "args": [
    "on ? 'activée' : 'coupée'"
@@ -25207,20 +25207,20 @@
  },
  "activée": {
   "at": [
-   "src/ui/panels.js:745",
-   "src/ui/panels.js:756",
-   "src/ui/panels.js:767",
-   "src/ui/panels.js:768"
+   "src/ui/panels.js:747",
+   "src/ui/panels.js:758",
+   "src/ui/panels.js:769",
+   "src/ui/panels.js:770"
   ]
  },
  "Au lancement, le jeu demande à GitHub si une version plus récente est parue": {
   "at": [
-   "src/ui/panels.js:745"
+   "src/ui/panels.js:747"
   ]
  },
  "Vous avez la dernière version ({0}).": {
   "at": [
-   "src/ui/panels.js:747",
+   "src/ui/panels.js:749",
    "src/ui/update.js:103"
   ],
   "args": [
@@ -25229,18 +25229,18 @@
  },
  "Encyclopédie": {
   "at": [
-   "src/ui/panels.js:750",
-   "src/ui/panels.js:816"
+   "src/ui/panels.js:752",
+   "src/ui/panels.js:818"
   ]
  },
  "Unités, sorts, bâtiments et races": {
   "at": [
-   "src/ui/panels.js:750"
+   "src/ui/panels.js:752"
   ]
  },
  "Langue : {0}": {
   "at": [
-   "src/ui/panels.js:751"
+   "src/ui/panels.js:753"
   ],
   "args": [
    "(I18N.LANGS.find(l => l.id === I18N.lang) || {}).name"
@@ -25248,28 +25248,28 @@
  },
  "Le jeu se recharge dans la langue choisie ; la partie en cours est sauvegardée": {
   "at": [
-   "src/ui/panels.js:751"
+   "src/ui/panels.js:753"
   ]
  },
  "Langue": {
   "at": [
-   "src/ui/panels.js:752",
+   "src/ui/panels.js:754",
    "src/ui/setup.js:27"
   ]
  },
  "Aide et raccourcis": {
   "at": [
-   "src/ui/panels.js:754"
+   "src/ui/panels.js:756"
   ]
  },
  "Contrôles du jeu": {
   "at": [
-   "src/ui/panels.js:754"
+   "src/ui/panels.js:756"
   ]
  },
  "Son : {0}": {
   "at": [
-   "src/ui/panels.js:755"
+   "src/ui/panels.js:757"
   ],
   "args": [
    "Sfx.on ? 'activé' : 'coupé'"
@@ -25277,22 +25277,22 @@
  },
  "activé": {
   "at": [
-   "src/ui/panels.js:755"
+   "src/ui/panels.js:757"
   ]
  },
  "coupé": {
   "at": [
-   "src/ui/panels.js:755"
+   "src/ui/panels.js:757"
   ]
  },
  "Effets de combat, de magie et d'interface, synthétisés dans le navigateur (coupe aussi la musique)": {
   "at": [
-   "src/ui/panels.js:755"
+   "src/ui/panels.js:757"
   ]
  },
  "Musique : {0}": {
   "at": [
-   "src/ui/panels.js:756"
+   "src/ui/panels.js:758"
   ],
   "args": [
    "Sfx.music ? 'activée' : 'coupée'"
@@ -25300,7 +25300,7 @@
  },
  "Bande originale orchestrale : titre, Arcane, Miroir, combats, victoire et défaite{0}": {
   "at": [
-   "src/ui/panels.js:756"
+   "src/ui/panels.js:758"
   ],
   "args": [
    "Music.nowPlaying() ? ' (en cours : ' + Music.nowPlaying() + ')' : ''"
@@ -25308,7 +25308,7 @@
  },
  " (en cours : {0})": {
   "at": [
-   "src/ui/panels.js:756"
+   "src/ui/panels.js:758"
   ],
   "args": [
    "Music.nowPlaying()"
@@ -25316,33 +25316,33 @@
  },
  "Nappes génératives discrètes (jamais la même boucle)": {
   "at": [
-   "src/ui/panels.js:756"
+   "src/ui/panels.js:758"
   ]
  },
  "Volume de la musique ": {
   "at": [
-   "src/ui/panels.js:759"
+   "src/ui/panels.js:761"
   ]
  },
  "rapide": {
   "at": [
-   "src/ui/panels.js:760"
+   "src/ui/panels.js:762"
   ]
  },
  "moyenne": {
   "at": [
-   "src/ui/panels.js:760",
+   "src/ui/panels.js:762",
    "src/ui/main.js:338"
   ]
  },
  "lente": {
   "at": [
-   "src/ui/panels.js:760"
+   "src/ui/panels.js:762"
   ]
  },
  "Batailles automatiques : {0}": {
   "at": [
-   "src/ui/panels.js:761"
+   "src/ui/panels.js:763"
   ],
   "args": [
    "AUTO_SPEED_WORDS[cur]"
@@ -25350,12 +25350,12 @@
  },
  "Le rythme des batailles résolues automatiquement sous vos yeux": {
   "at": [
-   "src/ui/panels.js:761"
+   "src/ui/panels.js:763"
   ]
  },
  "Portraits animés : {0}": {
   "at": [
-   "src/ui/panels.js:763"
+   "src/ui/panels.js:765"
   ],
   "args": [
    "st === 'on' ? 'activés' : st === 'off' ? 'coupés' : st === 'system' ? 'coupés par votre sy"
@@ -25363,42 +25363,42 @@
  },
  "activés": {
   "at": [
-   "src/ui/panels.js:763"
+   "src/ui/panels.js:765"
   ]
  },
  "coupés": {
   "at": [
-   "src/ui/panels.js:763"
+   "src/ui/panels.js:765"
   ]
  },
  "coupés par votre système": {
   "at": [
-   "src/ui/panels.js:763"
+   "src/ui/panels.js:765"
   ]
  },
  "fichier manquant": {
   "at": [
-   "src/ui/panels.js:763"
+   "src/ui/panels.js:765"
   ]
  },
  "Votre système demande moins d'animations. Cliquez pour les activer quand même.": {
   "at": [
-   "src/ui/panels.js:764"
+   "src/ui/panels.js:766"
   ]
  },
  "Le fichier assets/portraits.png est introuvable : installez le jeu entier.": {
   "at": [
-   "src/ui/panels.js:764"
+   "src/ui/panels.js:766"
   ]
  },
  "Les sorciers clignent des yeux et leur magie s'anime, partout sauf dans le bandeau": {
   "at": [
-   "src/ui/panels.js:764"
+   "src/ui/panels.js:766"
   ]
  },
  "Journal : {0}": {
   "at": [
-   "src/ui/panels.js:766"
+   "src/ui/panels.js:768"
   ],
   "args": [
    "App.prefs.logReverse ? 'le plus récent en haut' : 'le plus récent en bas'"
@@ -25406,22 +25406,22 @@
  },
  "le plus récent en haut": {
   "at": [
-   "src/ui/panels.js:766"
+   "src/ui/panels.js:768"
   ]
  },
  "le plus récent en bas": {
   "at": [
-   "src/ui/panels.js:766"
+   "src/ui/panels.js:768"
   ]
  },
  "L'ordre des lignes du journal": {
   "at": [
-   "src/ui/panels.js:766"
+   "src/ui/panels.js:768"
   ]
  },
  "Unité suivante automatique : {0}": {
   "at": [
-   "src/ui/panels.js:767"
+   "src/ui/panels.js:769"
   ],
   "args": [
    "App.prefs.autoNext ? 'activée' : 'coupée'"
@@ -25429,12 +25429,12 @@
  },
  "Quand une unité a épuisé ses mouvements, la sélection passe d'elle-même à la prochaine unité qui attend des ordres": {
   "at": [
-   "src/ui/panels.js:767"
+   "src/ui/panels.js:769"
   ]
  },
  "Ronde des éclaireurs : {0}": {
   "at": [
-   "src/ui/panels.js:768"
+   "src/ui/panels.js:770"
   ],
   "args": [
    "App.prefs.scoutRevisit !== false ? 'activée' : 'coupée'"
@@ -25442,72 +25442,72 @@
  },
  "Quand il n'y a plus rien à explorer, les éclaireurs en exploration automatique revisitent les antres qu'on croit gardés, pour vérifier que leurs gardiens y sont toujours": {
   "at": [
-   "src/ui/panels.js:768"
+   "src/ui/panels.js:770"
   ]
  },
  "Journal": {
   "at": [
-   "src/ui/panels.js:769"
+   "src/ui/panels.js:771"
   ]
  },
  "Afficher ou masquer le journal des événements (L)": {
   "at": [
-   "src/ui/panels.js:769"
+   "src/ui/panels.js:771"
   ]
  },
  "Nouvelle partie": {
   "at": [
-   "src/ui/panels.js:770",
-   "src/ui/panels.js:770",
+   "src/ui/panels.js:772",
+   "src/ui/panels.js:772",
    "src/ui/setup.js:16",
    "src/ui/setup.js:140"
   ]
  },
  "Abandonner et revenir à l'écran titre": {
   "at": [
-   "src/ui/panels.js:770"
+   "src/ui/panels.js:772"
   ]
  },
  "Quitter la partie en cours ? Sa sauvegarde automatique restera disponible : « Continuer » tant que vous ne jouez pas de tour, puis « Partie précédente ».": {
   "at": [
-   "src/ui/panels.js:770"
+   "src/ui/panels.js:772"
   ]
  },
  "<div class=\"grid2\"><div>\n      <h4 class=\"gold\" style=\"margin-bottom:6px\">Carte</h4>\n      <div class=\"kv\"><span>Sélectionner une pile</span><span>clic gauche</span></div>\n      <div class=\"kv\"><span>Déplacer / attaquer</span><span>double-clic sur la destination</span></div>\n      <div class=\"kv\"><span>Ordre à plusieurs tours</span><span>double-clic, même sans mouvement restant</span></div>\n      <div class=\"kv\"><span>Désélectionner</span><span>clic droit ou <span class=\"kbd\">Échap</span></span></div>\n      <div class=\"kv\"><span>Faire défiler</span><span>glisser, flèches, mini-carte</span></div>\n      <div class=\"kv\"><span>Zoom</span><span>molette, + / -</span></div>\n      <div class=\"kv\"><span>Unité suivante</span><span class=\"kbd\">Espace</span></div>\n      <div class=\"kv\"><span>Centrer sur la sélection</span><span class=\"kbd\">C</span></div>\n      <div class=\"kv\"><span>Attendre / Sentinelle</span><span><span class=\"kbd\">W</span> <span class=\"kbd\">S</span></span></div>\n      <div class=\"kv\"><span>Exploration automatique</span><span class=\"kbd\">X</span></div>\n      <div class=\"kv\"><span>Fonder une cité</span><span class=\"kbd\">B</span></div>\n      <div class=\"kv\"><span>Route (ingénieurs)</span><span class=\"kbd\">R</span></div>\n      <div class=\"kv\"><span>Changer de plan</span><span class=\"kbd\">P</span></div>\n      <div class=\"kv\"><span>Fin du tour</span><span class=\"kbd\">Entrée</span></div>\n      </div><div>\n      <h4 class=\"gold\" style=\"margin-bottom:6px\">Écrans</h4>\n      <div class=\"kv\"><span>Grimoire</span><span class=\"kbd\">G</span></div><div class=\"kv\"><span>Magie</span><span class=\"kbd\">M</span></div><div class=\"kv\"><span>Recherche</span><span class=\"kbd\">R</span></div>\n      <div class=\"kv\"><span>Cités / Armées / Sorciers</span><span><span class=\"kbd\">Maj+C</span> <span class=\"kbd\">A</span> <span class=\"kbd\">D</span></span></div><div class=\"kv\"><span>Journal</span><span class=\"kbd\">L</span></div>\n      <div class=\"kv\"><span>Menaces sur vos cités</span><span class=\"kbd\">T</span></div><div class=\"kv\"><span>Lieux inexplorés</span><span class=\"kbd\">V</span></div><div class=\"kv\"><span>Nœuds à prendre</span><span class=\"kbd\">O</span></div><div class=\"kv\"><span>Annuler le dernier déplacement</span><span class=\"kbd\">U</span></div>\n      <h4 class=\"gold\" style=\"margin:10px 0 6px\">Combat</h4>\n      <div class=\"kv\"><span>Attaquer</span><span>clic sur un ennemi encerclé</span></div><div class=\"kv\"><span>Sorts</span><span class=\"kbd\">S</span></div><div class=\"kv\"><span>Automatique</span><span class=\"kbd\">A</span></div><div class=\"kv\"><span>Fin du tour</span><span class=\"kbd\">Entrée</span></div>\n      </div></div>\n      <p class=\"muted\" style=\"margin-top:10px\">Nouveautés par rapport à l'original : frontières culturelles (impossible de fonder une cité en territoire étranger, 4 cases minimum entre cités ; l'espace entre des cités voisines d'un même sorcier, jusqu'à 10 cases, est à lui), répartition automatique des fermiers pour nourrir les armées, liste des cités qui revient après consultation, combats automatiques à tout moment.</p>\n      <p class=\"muted\"><b>Le voile</b> (indicateur en haut) s'use avec le temps, les passages entre les plans et les grands sorts ; à chaque seuil, des failles s'ouvrent : elles servent de passage entre Arcane et le Miroir, mais des créatures en sortent. <b>Les sanctuaires</b> (deux sur Arcane, quatre sur le Miroir) offrent un pacte : un don tout de suite, une dette plus tard. <b>La Crise</b> (réglable à la création de la partie) ouvre la Brèche, qui envoie des vagues sur le plus puissant des sorciers jusqu'à ce qu'on la referme.</p>\n      <p class=\"muted\"><b>Terrain de combat</b> (survolez une case pour ses effets) : les arbres couvrent des tirs (+2 défense) mais brûlent et le feu se propage ; une colline donne +10 % pour toucher à distance et +1 défense en mêlée ; les rochers bloquent le passage ; l'eau profonde d'une rivière ne se franchit qu'à la nage, en volant ou par l'un des deux gués, qui coûtent tout le mouvement et exposent (-1 défense) ; les fondrières des marais engluent.</p>\n      <p class=\"muted\"><b>Précision</b> : à 100 %, chaque coup porte ; au-delà, chaque tranche de 10 % ignore 1 point de défense de la cible (pas celle de la muraille).</p>\n      <p class=\"muted\"><b>Dilemmes</b> : tous les 8 à 12 tours, une situation à trancher, deux issues dont les conséquences sont écrites. <b>Némésis</b> : qui abat un de vos héros reçoit un nom, se renforce (+1 par rang en attaque, défense et résistance) et peut revenir vous chercher ; l'abattre à votre tour rapporte or, renommée et expérience.</p>\n      <p class=\"muted\"><b>Diplomatie</b> : l'écran des sorciers détaille ce qui fait l'attitude de chacun envers vous (traités, attaques, frontières, voies de magie, ennemi commun…). Un sorcier bien plus fort peut exiger de l'or ou un sort ; s'il pose un ultimatum, refuser, c'est la guerre. Les sorts s'échangent entre sorciers qui peuvent les apprendre. Un sorcier d'honneur dénonce un traité six tours avant de pouvoir attaquer ; seul un fourbe le rompt sans prévenir. Une guerre qui coûte trop rend la paix plus facile à obtenir.</p>\n      <p class=\"muted\"><b>Course à la Maîtrise</b> : qui étudie ou lance le Sort de Maîtrise, et dans combien de tours, est connu de tous (indicateur en haut). Celui qui le lance s'attire la guerre de tous les sorciers ; prendre sa forteresse l'arrête. <b>Empire étendu</b> : une cité à plus de 20 cases de la forteresse, ou sur l'autre plan, compte un rebelle de plus ; à partir de 20 cités, toutes (sauf la forteresse) en comptent un de plus.</p>\n      <p class=\"muted\"><b>Flanc et dos</b> : le chevron au sol montre où regarde l'unité (son dernier pas, sa dernière cible ; frappée, elle se retourne). Frapper de flanc donne +1 en attaque ; dans le dos, +1 et la défense de la cible divisée par deux. Une unité en garde n'a ni flanc ni dos. En cliquant sur un ennemi hors de portée, votre unité choisit d'elle-même la meilleure case.</p>\n      <p class=\"muted\"><b>Les nœuds</b> (comme dans l'original) : chaque nœud rayonne sur une aura d'autant de cases que sa puissance. Un Esprit magique ou gardien qui fusionne avec lui le lie à votre magie : son aura scintille alors à vos couleurs et vous rapporte sa puissance chaque tour (doublée par la Maîtrise des nœuds, et encore par la maîtrise de son royaume). Un combat livré sur le nœud donne +2 en attaque, défense et résistance aux créatures de son royaume, et dissipe souvent les sorts des autres royaumes (force 50 : un sort de 10 mana n'a que 17 % de chances de passer) ; la Maîtrise des nœuds en protège.</p>": {
   "at": [
-   "src/ui/panels.js:776"
+   "src/ui/panels.js:778"
   ]
  },
  "Aide": {
   "at": [
-   "src/ui/panels.js:809"
+   "src/ui/panels.js:811"
   ]
  },
  "Créatures": {
   "at": [
-   "src/ui/panels.js:819"
+   "src/ui/panels.js:821"
   ]
  },
  "Races": {
   "at": [
-   "src/ui/panels.js:819"
+   "src/ui/panels.js:821"
   ]
  },
  "Dons": {
   "at": [
-   "src/ui/panels.js:819",
+   "src/ui/panels.js:821",
    "src/ui/setup.js:186"
   ]
  },
  "Filtrer…": {
   "at": [
-   "src/ui/panels.js:820"
+   "src/ui/panels.js:822"
   ]
  },
  "Coût {0}": {
   "at": [
-   "src/ui/panels.js:834",
-   "src/ui/panels.js:850"
+   "src/ui/panels.js:836",
+   "src/ui/panels.js:852"
   ],
   "args": [
    "d.cost"
@@ -25515,7 +25515,7 @@
  },
  "Invocation {0}": {
   "at": [
-   "src/ui/panels.js:834"
+   "src/ui/panels.js:836"
   ],
   "args": [
    "d.castCost"
@@ -25523,7 +25523,7 @@
  },
  " · requiert {0}": {
   "at": [
-   "src/ui/panels.js:850"
+   "src/ui/panels.js:852"
   ],
   "args": [
    "b.requires.map(r => DATA.buildings[r].name).join(', ')"
@@ -25531,7 +25531,7 @@
  },
  "Entretien {0}": {
   "at": [
-   "src/ui/panels.js:850"
+   "src/ui/panels.js:852"
   ],
   "args": [
    "b.upkeep"
@@ -25539,7 +25539,7 @@
  },
  "Unités : {0}": {
   "at": [
-   "src/ui/panels.js:855"
+   "src/ui/panels.js:857"
   ],
   "args": [
    "r.units.map(t => DATA.units[t].name).join(', ')"
@@ -25547,7 +25547,7 @@
  },
  "Ne peut construire : {0}": {
   "at": [
-   "src/ui/panels.js:855"
+   "src/ui/panels.js:857"
   ],
   "args": [
    "r.cannotBuild.map(b => DATA.buildings[b] ? DATA.buildings[b].name : b).join(', ')"
@@ -25555,7 +25555,7 @@
  },
  " · {0} choix": {
   "at": [
-   "src/ui/panels.js:858"
+   "src/ui/panels.js:860"
   ],
   "args": [
    "r.cost"

@@ -39,6 +39,7 @@ const Turn = {
     game.turn++;
     for (const pl of game.players) if (pl.alive) {
       Game.startTurnFor(game, pl);
+      Intel.clairvoyance(game, pl);
       pl.stats.push({ t: game.turn, power: Magic.power(game, pl), cities: Cities.ofPlayer(game, pl.id).length, army: U.sum(Object.values(game.units).filter(u => u.owner === pl.id && !u.riteDemon), u => Units.strength(game, u)) });
       if (pl.stats.length > 300) pl.stats.shift();
       if (pl.human) Intel.recordHistory(game, pl);   // le rapport de forces tel que le joueur le perçoit, pour son graphique

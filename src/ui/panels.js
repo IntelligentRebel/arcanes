@@ -683,7 +683,9 @@ const Panels = {
     const game = App.game;
     const owner = game.players[c.owner];
     const vis = MapView.vis && MapView.vis[c.plane][c.y * game.world.w + c.x];
-    const garrison = vis ? Units.at(game, c.plane, c.x, c.y).filter(u => !Intel.hiddenFrom(game, App.pid, u)) : [];
+    // hors de vue, un rapport du tour (Clairvoyance) montre la garnison comme si on la voyait
+    const fresh = !vis && (() => { const r = App.intelAt(c.plane, c.x, c.y); return r && r.t === game.turn ? r : null; })();
+    const garrison = vis ? Units.at(game, c.plane, c.x, c.y).filter(u => !Intel.hiddenFrom(game, App.pid, u)) : fresh ? fresh.units : [];
     // le sorcier qui la tient : son portrait, et un clic mène à la diplomatie (inconnu : ni portrait ni nom)
     let wiz = null, m = null;
     if (owner) {
@@ -703,7 +705,7 @@ const Panels = {
       App.fallNote(c),
       App.bookNote(c),
       !vis ? (() => { const rep = App.intelAt(c.plane, c.x, c.y); return h('div', { class: 'muted', style: 'margin-top:6px' }, rep ? 'Dernier rapport ' + UI.ago(game.turn - rep.t) + ' : ' + (rep.units.length ? U.n(rep.units.length, 'défenseur') + ' (' + U.uniq(rep.units.map(u => DATA.units[u.type].name)).join(', ') + ')' : 'aucun défenseur') + '.' : 'Hors de vue : garnison inconnue.'); })() : null,
-      vis ? h('div', { class: 'ucards', style: 'grid-template-columns:repeat(6,1fr);margin-top:8px' }, ...garrison.map(u => { const el = h('div', { class: 'ucard' }, UI.glowCanvas(spriteCanvas(Sprites.unitKey(u), 32), game, u), h('div', { class: 'nm' }, Units.label(u))); UI.tipOn(el, () => UI.unitTip(u, game)); return el; })) : h('div', { class: 'dim', style: 'margin-top:6px' }, 'Garnison invisible : envoyez une unité à proximité.'),
+      vis || (fresh && garrison.length) ? h('div', { class: 'ucards', style: 'grid-template-columns:repeat(6,1fr);margin-top:8px' }, ...garrison.map(u => { const el = h('div', { class: 'ucard' }, UI.glowCanvas(spriteCanvas(Sprites.unitKey(u), 32), game, u), h('div', { class: 'nm' }, Units.label(u))); UI.tipOn(el, () => UI.unitTip(u, game)); return el; })) : fresh ? null : h('div', { class: 'dim', style: 'margin-top:6px' }, 'Garnison invisible : envoyez une unité à proximité.'),
       vis && c.ench.length ? h('div', { style: 'margin-top:6px' }, ...c.ench.filter(e => DATA.spells[e.spell]).map(e => { const sp = DATA.spells[e.spell], curse = sp.kind === 'cityCurse';
         const el = h('span', { class: 'abl ' + (curse ? '' : 'e'), style: curse ? 'border-color:#7a2a2a;color:#ffb0b0' : '' }, sp.name + (e.realm && REALM_NAMES[e.realm] ? ' (' + REALM_NAMES[e.realm] + ')' : ''));
         UI.tipOn(el, () => UI.spellTip(e.spell, game.players[e.owner], game) + (e.owner !== c.owner && game.players[e.owner] ? '<div class="danger">Lancée par ' + U.esc(Players.nameFor(game, App.pid, e.owner)) + '</div>' : '')); return el; })) : null);

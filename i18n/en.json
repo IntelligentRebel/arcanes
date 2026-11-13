@@ -748,7 +748,7 @@
 "Appel du héros": "Summon Hero",
 "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).": "Brings a random hero to your summoning circle, at the level of the era, who joins you with no hiring fee (fewer than 6 heroes required).",
 "Clairvoyance": "Awareness",
-"Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": "Reveals all cities on both planes, including those founded afterwards.",
+"Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.": "Reveals all cities on both planes, including those founded afterwards, and reports their garrisons to you every turn.",
 "Disjonction": "Disjunction",
 "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).": "Attempts to dispel the enemy global enchantment of your choice (strength 200).",
 "Création d'artefact": "Create Artifact",

@@ -748,7 +748,7 @@
 "Appel du héros": "Призыв героя",
 "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).": "Призывает в ваш круг призыва случайного героя уровня текущей эпохи, который присоединяется к вам без платы за найм (требуется менее 6 героев).",
 "Clairvoyance": "Ясновидение",
-"Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": "Открывает все города обоих планов, включая основанные позже.",
+"Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.": "Открывает все города обоих планов, включая основанные позже, и каждый ход сообщает вам об их гарнизонах.",
 "Disjonction": "Разрыв чар",
 "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).": "Пытается рассеять любые вражеские глобальные чары по вашему выбору (сила 200).",
 "Création d'artefact": "Создание артефакта",

@@ -748,7 +748,7 @@
 "Appel du héros": "Heldenruf",
 "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).": "Bringt einen zufälligen Helden der aktuellen Zeitstufe zu eurem Beschwörungskreis, der sich euch ohne Anwerbeprämie anschließt (weniger als 6 Helden erforderlich).",
 "Clairvoyance": "Hellsicht",
-"Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": "Enthüllt alle Städte beider Ebenen, auch die später gegründeten.",
+"Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.": "Enthüllt alle Städte beider Ebenen, auch die später gegründeten, und meldet euch jede Runde ihre Garnisonen.",
 "Disjonction": "Aufspaltung",
 "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).": "Versucht, die globale feindliche Verzauberung eurer Wahl aufzulösen (Stärke 200).",
 "Création d'artefact": "Artefakt erschaffen",

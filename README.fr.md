@@ -49,4 +49,8 @@ Il faut Python 3 et Node.js : `python3 tools/build.py` produit `dist/arcanes/ind
 - Musique composée pour Arcanes, jouée avec la SoundFont GeneralUser GS de S. Christian Collins.
 - Police de titres : Cinzel (SIL Open Font License). Analyseur : acorn (MIT).
 
-© 2026 Olivier Roland. Tous droits réservés : le code est public pour qu'on puisse le lire et jouer, mais aucune licence n'autorise sa réutilisation. Les composants tiers gardent leur licence, voir [THIRD_PARTY.md](THIRD_PARTY.md).
+## Licence
+
+- **Code** : logiciel libre sous [GNU General Public License v3.0](LICENSE). Reprenez-le, modifiez-le, partagez-le, à condition que votre version reste ouverte sous la même licence.
+- **Graphismes et musique** : © 2026 Olivier Roland, tous droits réservés, voir [ASSETS.md](ASSETS.md). Un dérivé apporte les siens ; [docs/ART-RECIPE.fr.md](docs/ART-RECIPE.fr.md) explique comment ceux-ci ont été faits.
+- Les composants tiers gardent leur licence, voir [THIRD_PARTY.md](THIRD_PARTY.md).

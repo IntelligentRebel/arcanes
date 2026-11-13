@@ -137,6 +137,9 @@ def main():
         for f in sorted(os.listdir(mdir)):
             if f.endswith('.ogg'):
                 shutil.copyfile(os.path.join(mdir, f), os.path.join(out_dir, 'assets', 'music', f)); size += os.path.getsize(os.path.join(mdir, f))
+    # licences : le code sous GPL-3.0 (LICENSE), les graphismes et la musique réservés (ASSETS.md), les composants tiers
+    for src, dst in (('LICENSE', 'LICENSE.txt'), ('ASSETS.md', 'ASSETS.txt'), ('THIRD_PARTY.md', 'THIRD_PARTY.txt')):
+        if os.path.exists(os.path.join(ROOT, src)): shutil.copyfile(os.path.join(ROOT, src), os.path.join(out_dir, dst))
     with open(os.path.join(ROOT, 'dist', 'bundle.js'), 'w', encoding='utf-8') as f: f.write(js)
     old = os.path.join(ROOT, 'dist', 'arcanes.html')
     if os.path.exists(old): os.remove(old)

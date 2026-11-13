@@ -748,7 +748,7 @@
 "Appel du héros": "英雄招来",
 "Fait venir à votre cercle d'invocation un héros au hasard, au niveau de l'époque, qui vous rejoint sans prime d'embauche (moins de 6 héros requis).": "その時代のレベルの英雄を1人ランダムに召喚の円環へ呼び寄せる。雇用金なしで仲間になる(英雄が6人未満であること)。",
 "Clairvoyance": "千里眼",
-"Révèle toutes les villes des deux plans, y compris celles fondées ensuite.": "両プレーンのすべての都市を明らかにする。後から建設された都市も含む。",
+"Révèle toutes les villes des deux plans, y compris celles fondées ensuite, et vous rapporte leurs garnisons à chaque tour.": "両プレーンのすべての都市を明らかにする。後から建設された都市も含む。さらに毎ターン、それらの守備隊を報告する。",
 "Disjonction": "大解呪",
 "Tente de dissiper l'enchantement global ennemi de votre choix (force 200).": "選んだ敵のグローバル付呪の解除を試みる(威力200)。",
 "Création d'artefact": "アーティファクト創造",

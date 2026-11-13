@@ -54,6 +54,15 @@ const Intel = {
       const [p, x, y] = k.split(',').map(Number); if (!Cities.at(game, p, x, y)) delete pl.intel[k];
     }
   },
+  // Clairvoyance (0.31.51) : chaque tour, la garnison de chaque cité étrangère est rapportée au sorcier qui l'entretient
+  // (un rapport, pas une vue : la carte reste dans le brouillard). Les unités invisibles y échappent.
+  clairvoyance(game, pl) {
+    if (!pl || !pl.globals || !pl.globals.includes('awareness')) return 0;
+    const w = game.world, mask = [new Uint8Array(w.w * w.h), new Uint8Array(w.w * w.h)]; let n = 0;
+    for (const c of Object.values(game.cities)) if (c.owner !== pl.id) { mask[c.plane][c.y * w.w + c.x] = 1; n++; }
+    if (n) Intel.record(game, pl, mask);
+    return n;
+  },
   // après un déplacement : regarder de nouveau (la cible est peut-être en vue)
   touch(game, pl) { game._intelStamp = (game._intelStamp || 0) + 1; Intel.record(game, pl, Intel.vis(game, pl)); },
   sees(game, pl, plane, x, y) { const w = game.world; return !!Intel.vis(game, pl)[plane][y * w.w + World.wx(w, x)]; },
@@ -134,7 +143,8 @@ const Intel = {
   // la fourchette contient le vrai nombre dans 77 % des cas
   cityEstimate(game, pl, other) {
     const L = Intel.locatedOf(game, pl, other);
-    if (pl.id === other) return { located: L, est: L, lo: L, hi: L, unknown: 0 };
+    // sous Clairvoyance, toutes les cités sont connues : leur nombre est exact
+    if (pl.id === other || (pl.globals && pl.globals.includes('awareness'))) return { located: L, est: L, lo: L, hi: L, unknown: 0 };
     const f = Intel.landSeen(game, pl), land = Intel._land.land;
     const g = Intel.citiesByTurn(game.turn) * (land[0].length + land[1].length) / Math.max(1, game.players.length) / 265;
     const P = pl.contact && pl.contact[other] ? Magic.power(game, game.players[other]) : 0;
