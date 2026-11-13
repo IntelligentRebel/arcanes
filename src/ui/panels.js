@@ -375,6 +375,7 @@ const Panels = {
             h('div', null, h('div', { class: 'serif', style: 'font-size:17px' }, 'Sorcier inconnu'), h('div', { class: 'dim' }, 'Jamais rencontré')));
         }
         const portrait = spriteCanvas('wizard:' + o.portrait, 32); portrait.className = 'portrait'; portrait.style.cssText = 'width:64px;height:64px;cursor:pointer;--pc:' + o.color;
+        if (o.alive && !o.banished) PortraitAnim.attach(portrait, o.portrait);   // (0.31.48) vaincus et bannis restent figés
         // un clic : sa capitale si on la connaît, sinon la plus grande de ses cités repérées
         const goal = Panels.wizardGoal(game, pl, o);
         portrait.title = goal ? (goal.fortress ? 'Aller à sa capitale, ' : 'Aller à sa plus grande cité connue, ') + goal.name : 'Aucune cité connue';
@@ -689,6 +690,7 @@ const Panels = {
       const known = !!App.me().contact[owner.id];
       if (known) {
         const pic = spriteCanvas('wizard:' + owner.portrait, 32); pic.className = 'portrait'; pic.style.cssText = 'width:64px;height:64px;cursor:pointer;--pc:' + owner.color;
+        PortraitAnim.attach(pic, owner.portrait);
         const st = App.me().diplo[owner.id] || 'none';
         wiz = h('div', { style: 'display:flex;gap:12px;align-items:center;margin-bottom:10px;cursor:pointer', title: 'Diplomatie avec ' + owner.name, onclick: () => { if (m) m.close(); Panels.wizards(owner.id); } }, pic,
           h('div', null, h('div', { class: 'serif', style: 'font-size:17px;color:' + owner.color }, owner.name), h('div', { class: 'muted', style: 'font-size:12px' }, 'Traité : ' + Diplomacy.stateName(st) + ' · cliquez pour lui parler')));
@@ -757,6 +759,7 @@ const Panels = {
     body.append(h('div', { class: 'row' }, h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Volume de la musique ', vlab), h('div', { class: 't2' }, vol))));
     { const AUTO_SPEED_WORDS = { fast: 'rapide', medium: 'moyenne', slow: 'lente' }, cur = App.prefs.autoSpeed || 'fast';
       row('Batailles automatiques : ' + AUTO_SPEED_WORDS[cur], 'Le rythme des batailles résolues automatiquement sous vos yeux', () => { const L = CombatView.AUTO_SPEEDS; App.setPref('autoSpeed', L[(L.indexOf(cur) + 1) % L.length]); again(); }); }
+    row('Portraits animés : ' + (App.prefs.animPortraits !== false ? 'activés' : 'coupés'), 'Les sorciers clignent des yeux et leur magie s\'anime, partout sauf dans le bandeau', () => { App.setPref('animPortraits', App.prefs.animPortraits === false); again(); });
     row('Journal : ' + (App.prefs.logReverse ? 'le plus récent en haut' : 'le plus récent en bas'), 'L\'ordre des lignes du journal', () => { App.setLogOrder(!App.prefs.logReverse); again(); });
     row('Unité suivante automatique : ' + (App.prefs.autoNext ? 'activée' : 'coupée'), 'Quand une unité a épuisé ses mouvements, la sélection passe d\'elle-même à la prochaine unité qui attend des ordres', () => { App.setPref('autoNext', !App.prefs.autoNext); again(); });
     row('Ronde des éclaireurs : ' + (App.prefs.scoutRevisit !== false ? 'activée' : 'coupée'), 'Quand il n\'y a plus rien à explorer, les éclaireurs en exploration automatique revisitent les antres qu\'on croit gardés, pour vérifier que leurs gardiens y sont toujours', () => { App.setPref('scoutRevisit', App.prefs.scoutRevisit === false); again(); });

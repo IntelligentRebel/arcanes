@@ -239,7 +239,7 @@ const MagicUI = {
   // ---------- recherche ----------
   eureka(game, pl, id) {
     const s = DATA.spells[id], col = REALM_COLORS[s.realm];
-    const pic = spriteCanvas('wizard:' + pl.portrait, 96); pic.className = 'eureka-wiz';
+    const pic = spriteCanvas('wizard:' + pl.portrait, 96); pic.className = 'eureka-wiz'; PortraitAnim.attach(pic, pl.portrait);
     const icon = spriteCanvas('spell:' + id, 56); icon.className = 'eureka-icon';
     return h('div', { class: 'eureka', style: '--rc:' + col },
       pic,

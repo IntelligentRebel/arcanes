@@ -144,14 +144,16 @@ const Setup = {
       // sorciers prédéfinis
       const pick = h('div', { class: 'wizpick' });
       DATA.wizards.forEach((w, i) => {
-        const el = h('div', { class: 'w' + (st.mode === 'preset' && st.preset === i ? ' on' : '') }, spriteCanvas('wizard:' + w.portrait, 32), h('div', { style: 'font-size:12px' }, w.name), h('div', { class: 'wbooks', style: 'display:flex;gap:1px;justify-content:center;margin-top:2px' }, ...REALMS5.flatMap(r => Array.from({ length: w.books[r] || 0 }, () => h('span', { class: r, style: 'width:4px;height:8px;background:' + REALM_COLORS[r] + ';' + UI.solid(REALM_COLORS[r]) + 'display:inline-block' })))));
+        const pc = spriteCanvas('wizard:' + w.portrait, 32), chosen = st.mode === 'preset' && st.preset === i;
+        const el = h('div', { class: 'w' + (chosen ? ' on' : '') }, pc, h('div', { style: 'font-size:12px' }, w.name), h('div', { class: 'wbooks', style: 'display:flex;gap:1px;justify-content:center;margin-top:2px' }, ...REALMS5.flatMap(r => Array.from({ length: w.books[r] || 0 }, () => h('span', { class: r, style: 'width:4px;height:8px;background:' + REALM_COLORS[r] + ';' + UI.solid(REALM_COLORS[r]) + 'display:inline-block' })))));
         el.onclick = () => { Setup.applyPreset(st, i); render(); };
+        PortraitAnim.attach(pc, w.portrait, chosen ? null : { hover: el });   // (0.31.48) le sorcier choisi s'anime, les autres au survol
         UI.tipOn(el, () => '<h4>' + w.name + '</h4>' + REALMS5.filter(r => w.books[r]).map(r => w.books[r] + ' ' + REALM_NAMES[r]).join(', ') + (w.retorts.length ? '<br>' + w.retorts.map(r => DATA.retorts[r].name).join(', ') : ''));
         pick.append(el);
       });
       // personnalisation
       const nameIn = h('input', { type: 'text', value: st.name, style: 'width:180px' }); nameIn.oninput = () => { st.name = nameIn.value; const go = $('#ng-go'); if (go) go.disabled = Setup.picks(st) !== 11 || !st.name.trim(); };
-      const portraits = h('div', { style: 'display:flex;gap:4px;flex-wrap:wrap' }, ...DATA.wizards.map((w, i) => { const c = spriteCanvas('wizard:' + i, 32); c.style.cssText = 'width:36px;height:36px;border-radius:5px;cursor:pointer;border:2px solid ' + (st.portrait === i ? 'var(--gold)' : 'transparent'); c.onclick = () => { st.portrait = i; render(); }; return c; }));
+      const portraits = h('div', { style: 'display:flex;gap:4px;flex-wrap:wrap' }, ...DATA.wizards.map((w, i) => { const c = spriteCanvas('wizard:' + i, 32); c.style.cssText = 'width:36px;height:36px;border-radius:5px;cursor:pointer;border:2px solid ' + (st.portrait === i ? 'var(--gold)' : 'transparent'); c.onclick = () => { st.portrait = i; render(); }; PortraitAnim.attach(c, i, st.portrait === i ? null : { hover: c }); return c; }));
       const colors = h('div', { style: 'display:flex;gap:5px' }, ...PLAYER_COLORS.slice(0, 6).map((c, i) => h('span', { style: 'width:22px;height:22px;border-radius:50%;cursor:pointer;background:' + c + ';border:2px solid ' + (st.color === i ? '#fff' : 'transparent'), onclick: () => { st.color = i; render(); } })));
       const books = h('div', { class: 'books' });
       for (const r of REALMS5) {

@@ -8,14 +8,14 @@ JS = [
   'src/core/rng.js', 'src/core/util.js',
   'src/engine/world.js', 'src/engine/units.js', 'src/engine/cities.js', 'src/engine/magic.js', 'src/engine/move.js',
   'src/engine/combat.js', 'src/engine/game.js', 'src/engine/turn.js', 'src/engine/spells.js', 'src/engine/veil.js', 'src/engine/aiintel.js', 'src/engine/ai.js', 'src/engine/aiplus.js', 'src/engine/aistrat.js', 'src/engine/diplo.js', 'src/engine/events.js', 'src/engine/chronicle.js', 'src/engine/finale.js',
-  'src/ui/assets.js', 'src/ui/sound.js', 'src/ui/ui.js', 'src/ui/mapview.js', 'src/ui/city.js', 'src/ui/magicui.js', 'src/ui/combatview.js', 'src/ui/panels.js', 'src/ui/update.js', 'src/ui/savedir.js', 'src/ui/setup.js', 'src/ui/main.js',
+  'src/ui/assets.js', 'src/ui/sound.js', 'src/ui/ui.js', 'src/ui/mapview.js', 'src/ui/city.js', 'src/ui/magicui.js', 'src/ui/combatview.js', 'src/ui/panels.js', 'src/ui/update.js', 'src/ui/savedir.js', 'src/ui/portraitanim.js', 'src/ui/setup.js', 'src/ui/main.js',
 ]
-ASSETS = ['hd.png', 'hd2.png', 'title.jpg', 'anim.png', 'weapons.png', 'fx.png']
+ASSETS = ['hd.png', 'hd2.png', 'title.jpg', 'anim.png', 'weapons.png', 'fx.png', 'portraits.png']
 # pages de l'atlas d'animation (tools/build_anim.py) : anim.png, anim1.png, ...
 ANIM_PAGES = ['anim.png'] + sorted((f for f in os.listdir(os.path.join(ROOT, 'assets')) if re.match(r'^anim\d+\.png$', f)), key=lambda f: int(f[4:-4]))
 ASSETS += ANIM_PAGES[1:]
 EXTRA = {'unit:BatteringRam': 'assets/extra/ram.png', 'rift:base': 'assets/extra/rift_base.png', 'rift:rocks': 'assets/extra/rift_rocks.png'}
-EXTRA_META = {'rift': 'assets/extra/rift.json'}
+EXTRA_META = {'rift': 'assets/extra/rift.json', 'portraits': 'assets/portraits.json'}   # portraits : calques des portraits animés (tools/portrait_anim.py)
 def build_langs():
     """Les langues livrées : i18n/<langue>.json (hors catalogue)."""
     d = os.path.join(ROOT, 'i18n')

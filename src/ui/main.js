@@ -160,7 +160,7 @@ const App = {
             + '<div class="muted">' + U.esc(sp.desc || '') + '</div></div></div>';
           Sfx.play('legend');
           const pr = UI.choice('Enchantement global', html, [{ label: 'Continuer', value: true, primary: true }], { width: 620, cls: 'contact-modal' });
-          setTimeout(() => { const c = $('#global-pic'); if (c) Sprites.paint(c, known ? 'wizard:' + o.portrait : 'spell:' + ref.spell); }, 10);
+          setTimeout(() => { const c = $('#global-pic'); if (c) { Sprites.paint(c, known ? 'wizard:' + o.portrait : 'spell:' + ref.spell); if (known) PortraitAnim.attach(c, o.portrait); } }, 10);
           await pr; continue;
         }
         if (ref.x != null) MapView.centerOn(ref.x, ref.y, ref.plane);
@@ -180,7 +180,7 @@ const App = {
         const pr = UI.choice('Premier contact', html, opts, { width: 620, cls: 'contact-modal' });
         setTimeout(() => {
           const c = $('#contact-pic'); if (!c) return;
-          Sprites.paint(c, 'wizard:' + o.portrait);
+          Sprites.paint(c, 'wizard:' + o.portrait); PortraitAnim.attach(c, o.portrait);
           if (ref.x != null) c.addEventListener('click', () => { const b = [...document.querySelectorAll('.contact-modal footer button')].find(x => x.textContent === 'Voir le lieu'); if (b) b.click(); });
         }, 10);
         const v = await pr;
@@ -1749,11 +1749,11 @@ const App = {
         const pr = UI.choice((kind === 'demand' ? (off.ultimatum ? 'Ultimatum de ' : 'Exigence de ') : kind === 'trade' ? 'Échange proposé par ' : 'Proposition de ') + o.name, html, choices, { width: T ? 660 : 620, cls: 'contact-modal' });
         setTimeout(() => {
           const c = $('#offer-pic'); if (!c) return;
-          Sprites.paint(c, 'wizard:' + o.portrait);
+          Sprites.paint(c, 'wizard:' + o.portrait); PortraitAnim.attach(c, o.portrait);
           const box = $('#offer-intel'); if (box) box.append(...Panels.wizardFacts(game, pl, o, { capital: true }).slice(), ...[Panels.forceLine(game, pl, o)].filter(Boolean), ...Panels.wizardSignals(game, pl, o));
           if (T) {
             const tc = $('#offer-tpic');
-            if (tc && tKnown) Sprites.paint(tc, 'wizard:' + T.portrait);
+            if (tc && tKnown) { Sprites.paint(tc, 'wizard:' + T.portrait); PortraitAnim.attach(tc, T.portrait); }
             else if (tc) { const x = tc.getContext('2d'); x.fillStyle = '#9a948a'; x.font = 'bold 96px serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('?', 80, 86); }
             const tb = $('#offer-tintel'); if (tb) tb.append(...Panels.wizardFacts(game, pl, T, { capital: true }).slice(), ...[Panels.forceLine(game, pl, T)].filter(Boolean), ...Panels.wizardSignals(game, pl, T));
             const hid = [...document.querySelectorAll('.contact-modal footer button')].find(x => x.textContent === TGO);
