@@ -108,7 +108,7 @@ def main():
     imgs = {}
     for a in ASSETS:
         if os.path.exists(os.path.join(ROOT, 'assets', a)): imgs['assets/' + a] = img_size(os.path.join(ROOT, 'assets', a))
-    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame', 'falls'):
+    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame', 'falls', 'victory'):
         sdir = os.path.join(ROOT, 'assets', sub)
         if os.path.isdir(sdir):
             for f in sorted(os.listdir(sdir)):
@@ -123,7 +123,7 @@ def main():
         if os.path.exists(src):
             shutil.copyfile(src, os.path.join(out_dir, 'assets', a)); size += os.path.getsize(src)
     # illustrations des grands ouvrages et des événements (chargées à la demande)
-    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame', 'falls'):
+    for sub in ('landmarks', 'events', 'dilemmas', 'pacts', 'endgame', 'falls', 'victory'):
         ldir = os.path.join(ROOT, 'assets', sub)
         if os.path.isdir(ldir):
             os.makedirs(os.path.join(out_dir, 'assets', sub), exist_ok=True)

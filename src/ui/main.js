@@ -1801,8 +1801,20 @@ const App = {
       : game.overWhy === 'conquest' ? (win ? 'Vos rivaux sont tous tombés : vous régnez sans partage sur les deux plans.' : U.esc(w ? w.name : '?') + ' règne sans partage sur les deux plans.')
       : 'Votre règne s\'achève : vous avez perdu votre dernière cité' + (ban && ban.by >= 0 && game.players[ban.by] ? ', après la chute de votre forteresse face à ' + U.esc(game.players[ban.by].name) : '') + '.';
     const body = h('div');
+    // (0.31.53) l'illustration du sorcier concerné : sa victoire (conquête ou Maîtrise, assets/victory), celle du rival qui accomplit
+    // la Maîtrise, ou la chute définitive du joueur (assets/falls) ; à défaut, l'image commune d'avant
     const artId = game.overWhy === 'mastery' ? (win ? 'win_mastery' : 'lose_mastery') : game.overWhy === 'conquest' && win ? 'win_conquest' : 'defeat';
-    if (!window.AUTO_CHOICE) { const img = h('img', { src: 'assets/endgame/' + artId + '.jpg', alt: '' }), band = h('div', { class: 'end-art' }, img); img.onerror = () => band.remove(); body.append(band); }
+    const wid = p => p ? App.FALL_IDS[p.portrait] : null, mine = wid(me), theirs = wid(w);
+    const arts = [];
+    if (win && mine && (game.overWhy === 'mastery' || game.overWhy === 'conquest')) arts.push('victory/' + game.overWhy + '_' + mine);
+    else if (!win && game.overWhy === 'mastery' && theirs) arts.push('victory/mastery_' + theirs);
+    else if (!win && mine) arts.push('falls/defeated_' + mine);
+    arts.push('endgame/' + artId);
+    if (!window.AUTO_CHOICE) {
+      const img = h('img', { src: 'assets/' + arts[0] + '.jpg', alt: '' }), band = h('div', { class: 'end-art' }, img); let i = 0;
+      img.onerror = () => { if (++i < arts.length) img.src = 'assets/' + arts[i] + '.jpg'; else band.remove(); };
+      body.append(band);
+    }
     body.append(h('p', { class: 'serif', style: 'font-size:18px;margin:0 0 4px', html: why }), h('div', { class: 'dim', style: 'margin-bottom:10px' }, 'Partie achevée au tour ' + game.turn + '.'));
     // classement : la dernière ligne de chaque sorcier dans la chronique
     const last = new Map(); for (const row of ch.rows) for (const r of row.r) last.set(r[0], { t: row.t, r });
