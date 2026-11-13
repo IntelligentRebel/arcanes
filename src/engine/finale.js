@@ -44,9 +44,10 @@ const Finale = {
   // (0.31.35, d'après le banc 19) le Dévoreur ciblé, les cités du Prophète tenues, l'Archimage adouci : le meneur y perd autant la
   // tête (Archimage : 33 % encore 1er au lieu de 36 %) mais n'est plus éliminé que dans 19 % des crises au lieu de 29 % ; le Dévoreur
   // le freine enfin (62 % encore 1er contre 79 % sans crise) sans plus ruiner les autres
-  //   PROPHET_PLUS (à l'essai au banc 20) : ses prêches portent sur tout l'empire de la cible (3 rebelles près de lui, 2 ailleurs sur son
-  //   plan, 1 sur l'autre plan) et une cité fait sécession dès que 40 % de ses habitants se révoltent
-  EATER_TARGET_ONLY: 1, PROPHET_HOLD: 1, ARCH_WAVE: 10, ARCH_CURSE: 6, PROPHET_PLUS: 0,
+  //   PROPHET_PLUS (0.31.46, bancs 20 et 21) : ses prêches portent sur tout l'empire de la cible (3 rebelles près de lui, 2 ailleurs sur son
+  //   plan, 1 sur l'autre plan) et une cité fait sécession dès que 40 % de ses habitants se révoltent. Deux bancs de suite : face à un
+  //   meneur dominant (×1,5 au t200) il reste 1er dans 70-71 % des cas au lieu de 79 % ; sur 450 cartes appariées, -0,04 ± 0,02.
+  EATER_TARGET_ONLY: 1, PROPHET_HOLD: 1, ARCH_WAVE: 10, ARCH_CURSE: 6, PROPHET_PLUS: 1,
   KINDS: FINALE_KINDS,
   TIERS: { 1: ['prophet', 'eater', 'winter'], 2: ['winter', 'lich', 'archmage'], 3: ['archmage'] },
   SITES: ['phylactery', 'citadel', 'winterheart'],
@@ -345,7 +346,7 @@ const Finale = {
           const c = U.max(near(true), c => Cities.econ(game, c).unrest / Math.max(1, Cities.citizens(c)));
           if (c) Finale.wave(game, f, Finale.rebels(game, c.race, Finale.budget(game, f) / 1.5, 6), c.plane, c.x, c.y, 'À l\'appel du Prophète, les habitants de ' + c.name + ' prennent les armes');
         }
-        // une cité dont la moitié des habitants se révolte fait sécession
+        // une cité dont 40 % des habitants se révoltent fait sécession (la moitié avant la 0.31.46)
         if (game.turn >= f.secAt) {
           const hold = Finale.cfg(game, 'PROPHET_HOLD');
           f.secAt = game.turn + (hold ? 2 : 3);

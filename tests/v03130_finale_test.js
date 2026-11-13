@@ -188,11 +188,11 @@ async function start(seed, kind) {
 (async () => {
   await new Promise(r => setTimeout(r, 100));
   for (const plus of [0, 1]) {
-    const g = mk(15, 'prophet', plus ? { PROPHET_PLUS: 1 } : null); g.turn = 200;
+    const g = mk(15, 'prophet', { PROPHET_PLUS: plus }); g.turn = 200;
     const f = g.finale; f.kind = 'prophet'; f.target = 0; f.state = 'omen'; f.at = 200; Finale.begin(g);
     const u = g.units[f.boss], fc = g.cities[g.players[0].fortress];
     const near = Finale.unrest(g, fc);
     const other = Object.assign({}, fc, { plane: 1 - u.plane });
-    ok(plus ? near === 3 && Finale.unrest(g, other) === 1 : near === 2 && Finale.unrest(g, other) === 0, (plus ? 'essai renforcé' : 'jeu') + ' : prêches ' + near + ' près de lui, ' + Finale.unrest(g, other) + ' sur l\'autre plan');
+    ok(plus ? near === 3 && Finale.unrest(g, other) === 1 : near === 2 && Finale.unrest(g, other) === 0, (plus ? 'jeu (renforcé)' : 'ancien Prophète') + ' : prêches ' + near + ' près de lui, ' + Finale.unrest(g, other) + ' sur l\'autre plan');
   }
 })();

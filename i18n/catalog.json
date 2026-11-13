@@ -10714,7 +10714,7 @@
    "src/engine/game.js:1476",
    "src/engine/game.js:1491",
    "src/engine/veil.js:616",
-   "src/engine/finale.js:529"
+   "src/engine/finale.js:530"
   ],
   "args": [
    "it.name"
@@ -10750,7 +10750,7 @@
   "at": [
    "src/engine/game.js:1491",
    "src/engine/veil.js:616",
-   "src/engine/finale.js:529"
+   "src/engine/finale.js:530"
   ],
   "args": [
    "it.name",
@@ -11176,7 +11176,7 @@
   "at": [
    "src/engine/game.js:1852",
    "src/engine/veil.js:568",
-   "src/engine/finale.js:388",
+   "src/engine/finale.js:389",
    "src/ui/main.js:521"
   ]
  },
@@ -11767,7 +11767,7 @@
    "src/engine/turn.js:89",
    "src/engine/turn.js:640",
    "src/engine/spells.js:31",
-   "src/engine/ai.js:1248"
+   "src/engine/ai.js:1243"
   ]
  },
  "unités": {
@@ -14824,29 +14824,29 @@
  },
  "Aucun traité": {
   "at": [
-   "src/engine/ai.js:1165"
+   "src/engine/ai.js:1160"
   ]
  },
  "Pacte de paix": {
   "at": [
-   "src/engine/ai.js:1165"
+   "src/engine/ai.js:1160"
   ]
  },
  "Alliance": {
   "at": [
-   "src/engine/ai.js:1165",
+   "src/engine/ai.js:1160",
    "src/ui/panels.js:405"
   ]
  },
  "Guerre": {
   "at": [
-   "src/engine/ai.js:1165",
+   "src/engine/ai.js:1160",
    "src/ui/panels.js:419"
   ]
  },
  "{0} a rompu son traité et vous attaque !": {
   "at": [
-   "src/engine/ai.js:1183"
+   "src/engine/ai.js:1178"
   ],
   "args": [
    "pa.name"
@@ -14854,7 +14854,7 @@
  },
  "Vous êtes en guerre contre {0}.": {
   "at": [
-   "src/engine/ai.js:1187"
+   "src/engine/ai.js:1182"
   ],
   "args": [
    "pb.name"
@@ -14862,7 +14862,7 @@
  },
  "{0} vous déclare la guerre.": {
   "at": [
-   "src/engine/ai.js:1187"
+   "src/engine/ai.js:1182"
   ],
   "args": [
    "pa.name"
@@ -14870,12 +14870,12 @@
  },
  "Seulement avec un sorcier en paix ou allié.": {
   "at": [
-   "src/engine/ai.js:1202"
+   "src/engine/ai.js:1197"
   ]
  },
  "{0} rouvre son territoire à vos troupes.": {
   "at": [
-   "src/engine/ai.js:1204"
+   "src/engine/ai.js:1199"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))"
@@ -14883,7 +14883,7 @@
  },
  "{0} vous interdit son territoire{1}": {
   "at": [
-   "src/engine/ai.js:1208"
+   "src/engine/ai.js:1203"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))",
@@ -14892,7 +14892,7 @@
  },
  " : {0} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1208",
+   "src/engine/ai.js:1203",
    "src/ui/panels.js:407"
   ],
   "args": [
@@ -14901,22 +14901,22 @@
  },
  "unité est reconduite": {
   "at": [
-   "src/engine/ai.js:1208",
-   "src/engine/ai.js:1247"
+   "src/engine/ai.js:1203",
+   "src/engine/ai.js:1242"
   ]
  },
  "unités sont reconduites": {
   "at": [
-   "src/engine/ai.js:1208",
-   "src/engine/ai.js:1208",
-   "src/engine/ai.js:1247",
-   "src/engine/ai.js:1247"
+   "src/engine/ai.js:1203",
+   "src/engine/ai.js:1203",
+   "src/engine/ai.js:1242",
+   "src/engine/ai.js:1242"
   ],
   "hint": "pluriel de « unité est reconduite »"
  },
  "{0} étend son territoire, qu'il vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1247"
+   "src/engine/ai.js:1242"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -14925,7 +14925,7 @@
  },
  "{0} {1}{2} sur votre territoire, qui lui est interdit : {3} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1248"
+   "src/engine/ai.js:1243"
   ],
   "args": [
    "U.n(n, 'unité', 'unités')",
@@ -14936,27 +14936,27 @@
  },
  " se trouvaient": {
   "at": [
-   "src/engine/ai.js:1248"
+   "src/engine/ai.js:1243"
   ]
  },
  " se trouvait": {
   "at": [
-   "src/engine/ai.js:1248"
+   "src/engine/ai.js:1243"
   ]
  },
  "elles sont reconduites": {
   "at": [
-   "src/engine/ai.js:1248"
+   "src/engine/ai.js:1243"
   ]
  },
  "elle est reconduite": {
   "at": [
-   "src/engine/ai.js:1248"
+   "src/engine/ai.js:1243"
   ]
  },
  "{0} accepte : faisons front ensemble contre {1}.": {
   "at": [
-   "src/engine/ai.js:1273"
+   "src/engine/ai.js:1268"
   ],
   "args": [
    "pb.name",
@@ -14965,7 +14965,7 @@
  },
  "{0} accepte votre présent.": {
   "at": [
-   "src/engine/ai.js:1275"
+   "src/engine/ai.js:1270"
   ],
   "args": [
    "pb.name"
@@ -14973,7 +14973,7 @@
  },
  "La guerre est déclarée.{0}": {
   "at": [
-   "src/engine/ai.js:1276"
+   "src/engine/ai.js:1271"
   ],
   "args": [
    "broke ? ' Rompre un traité vous coûte l\\'estime de tous les sorciers.' : ''"
@@ -14981,12 +14981,12 @@
  },
  " Rompre un traité vous coûte l'estime de tous les sorciers.": {
   "at": [
-   "src/engine/ai.js:1276"
+   "src/engine/ai.js:1271"
   ]
  },
  "{0} vous a déjà répondu ce tour-ci.": {
   "at": [
-   "src/engine/ai.js:1280"
+   "src/engine/ai.js:1275"
   ],
   "args": [
    "pb.name"
@@ -14994,7 +14994,7 @@
  },
  "{0} accepte : {1}.": {
   "at": [
-   "src/engine/ai.js:1283"
+   "src/engine/ai.js:1278"
   ],
   "args": [
    "pb.name",
@@ -15003,7 +15003,7 @@
  },
  "{0} refuse.": {
   "at": [
-   "src/engine/ai.js:1285"
+   "src/engine/ai.js:1280"
   ],
   "args": [
    "pb.name"
@@ -15011,7 +15011,7 @@
  },
  "{0} vous propose la paix{1}.": {
   "at": [
-   "src/engine/ai.js:1364"
+   "src/engine/ai.js:1359"
   ],
   "args": [
    "a.name",
@@ -15020,12 +15020,12 @@
  },
  ", avec des concessions": {
   "at": [
-   "src/engine/ai.js:1364"
+   "src/engine/ai.js:1359"
   ]
  },
  "{0} et {1} signent la paix.": {
   "at": [
-   "src/engine/ai.js:1366"
+   "src/engine/ai.js:1361"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, a.id))",
@@ -15034,8 +15034,8 @@
  },
  "{0} vous déclare la guerre !": {
   "at": [
-   "src/engine/ai.js:1383",
-   "src/engine/ai.js:1390"
+   "src/engine/ai.js:1378",
+   "src/engine/ai.js:1385"
   ],
   "args": [
    "a.name"
@@ -15043,8 +15043,8 @@
  },
  "Guerre déclarée à {0}.": {
   "at": [
-   "src/engine/ai.js:1384",
-   "src/engine/ai.js:1391",
+   "src/engine/ai.js:1379",
+   "src/engine/ai.js:1386",
    "src/engine/diplo.js:123"
   ],
   "args": [
@@ -15053,7 +15053,7 @@
  },
  "{0} vous propose un pacte de paix.": {
   "at": [
-   "src/engine/ai.js:1403"
+   "src/engine/ai.js:1398"
   ],
   "args": [
    "a.name"
@@ -17786,62 +17786,62 @@
  },
  "Le Seigneur liche": {
   "at": [
-   "src/engine/finale.js:61"
+   "src/engine/finale.js:62"
   ]
  },
  "L'Archimage oublié": {
   "at": [
-   "src/engine/finale.js:61"
+   "src/engine/finale.js:62"
   ]
  },
  "Le Grand Hiver": {
   "at": [
-   "src/engine/finale.js:61"
+   "src/engine/finale.js:62"
   ]
  },
  "Le Dévoreur de nœuds": {
   "at": [
-   "src/engine/finale.js:61"
+   "src/engine/finale.js:62"
   ]
  },
  "Le Prophète": {
   "at": [
-   "src/engine/finale.js:61"
+   "src/engine/finale.js:62"
   ]
  },
  "Les tombes remuent sous la lune. Quelque part, quelque chose a cessé de mourir.": {
   "at": [
-   "src/engine/finale.js:94"
+   "src/engine/finale.js:95"
   ]
  },
  "Chaque nuit, la terre tremble au même endroit, un peu plus fort. Quelque chose d'ancien remonte.": {
   "at": [
-   "src/engine/finale.js:95"
+   "src/engine/finale.js:96"
   ]
  },
  "Le givre tient jusqu'à midi, puis jusqu'au soir. Les oiseaux partent et ne reviennent pas.": {
   "at": [
-   "src/engine/finale.js:96"
+   "src/engine/finale.js:97"
   ]
  },
  "Les nœuds de magie vacillent comme une flamme sous un souffle. Quelque chose a faim.": {
   "at": [
-   "src/engine/finale.js:97"
+   "src/engine/finale.js:98"
   ]
  },
  "Sur les marchés, un nom passe de bouche en bouche. Les gardes ne savent pas lequel.": {
   "at": [
-   "src/engine/finale.js:98"
+   "src/engine/finale.js:99"
   ]
  },
  "Un Seigneur liche s'est relevé, et ses morts marchent sur vous. Tant que son phylactère tient, il revient.": {
   "at": [
-   "src/engine/finale.js:123"
+   "src/engine/finale.js:124"
   ]
  },
  "Un Seigneur liche s'est relevé, et ses morts marchent sur {0}. Tant que son phylactère tient, il revient.": {
   "at": [
-   "src/engine/finale.js:123"
+   "src/engine/finale.js:124"
   ],
   "args": [
    "who"
@@ -17849,7 +17849,7 @@
  },
  "Une citadelle a jailli du sol{0}. L'Archimage oublié qui l'habite s'en prend à vous : votre mana, vos cités, vos sorts. Prenez la citadelle.": {
   "at": [
-   "src/engine/finale.js:124"
+   "src/engine/finale.js:125"
   ],
   "args": [
    "pos"
@@ -17857,7 +17857,7 @@
  },
  "Une citadelle a jailli du sol{0}. L'Archimage oublié qui l'habite s'en prend à {1}. Prenez la citadelle.": {
   "at": [
-   "src/engine/finale.js:124"
+   "src/engine/finale.js:125"
   ],
   "args": [
    "pos",
@@ -17866,7 +17866,7 @@
  },
  "Le Cœur de l'Hiver bat{0} : le givre gagne vos terres et tue les récoltes. Brisez-le.": {
   "at": [
-   "src/engine/finale.js:125"
+   "src/engine/finale.js:126"
   ],
   "args": [
    "pos"
@@ -17874,7 +17874,7 @@
  },
  "Le Cœur de l'Hiver bat{0} : le givre s'étend, à commencer par les terres de {1}. Brisez-le.": {
   "at": [
-   "src/engine/finale.js:125"
+   "src/engine/finale.js:126"
   ],
   "args": [
    "pos",
@@ -17883,12 +17883,12 @@
  },
  "Une chose venue d'entre les plans dévore vos nœuds de magie, et chacun la rend plus forte. Puis elle viendra pour vos cités. Tuez-la.": {
   "at": [
-   "src/engine/finale.js:126"
+   "src/engine/finale.js:127"
   ]
  },
  "Une chose venue d'entre les plans dévore les nœuds de magie de {0}, et chacun la rend plus forte. Tuez-la.": {
   "at": [
-   "src/engine/finale.js:126"
+   "src/engine/finale.js:127"
   ],
   "args": [
    "who"
@@ -17896,12 +17896,12 @@
  },
  "Un prophète soulève vos cités contre vous. Tant qu'il prêche, elles grondent, et certaines feront sécession. Faites-le taire.": {
   "at": [
-   "src/engine/finale.js:127"
+   "src/engine/finale.js:128"
   ]
  },
  "Un prophète soulève les cités de {0} contre leur maître. Faites-le taire.": {
   "at": [
-   "src/engine/finale.js:127"
+   "src/engine/finale.js:128"
   ],
   "args": [
    "who"
@@ -17909,7 +17909,7 @@
  },
  "Vous voilà à terre : la crise s'éteint ({0}).": {
   "at": [
-   "src/engine/finale.js:151"
+   "src/engine/finale.js:152"
   ],
   "args": [
    "T"
@@ -17917,7 +17917,7 @@
  },
  "Sa proie à terre, la crise s'éteint ({0}).": {
   "at": [
-   "src/engine/finale.js:151"
+   "src/engine/finale.js:152"
   ],
   "args": [
    "T"
@@ -17925,7 +17925,7 @@
  },
  "{0} et marchent sur vous : {1}.": {
   "at": [
-   "src/engine/finale.js:208"
+   "src/engine/finale.js:209"
   ],
   "args": [
    "verb",
@@ -17934,17 +17934,17 @@
  },
  "Le Seigneur liche relève les morts, qui se dressent": {
   "at": [
-   "src/engine/finale.js:251"
+   "src/engine/finale.js:252"
   ]
  },
  "Des créatures sortent de la citadelle de l'Archimage": {
   "at": [
-   "src/engine/finale.js:268"
+   "src/engine/finale.js:269"
   ]
  },
  "Le givre gagne les terres de {0} : les récoltes y gèlent.": {
   "at": [
-   "src/engine/finale.js:295"
+   "src/engine/finale.js:296"
   ],
   "args": [
    "c.name"
@@ -17952,12 +17952,12 @@
  },
  "Des géants du givre quittent le Cœur de l'Hiver": {
   "at": [
-   "src/engine/finale.js:301"
+   "src/engine/finale.js:302"
   ]
  },
  "À l'appel du Prophète, les habitants de {0} prennent les armes": {
   "at": [
-   "src/engine/finale.js:346"
+   "src/engine/finale.js:347"
   ],
   "args": [
    "c.name"
@@ -17965,7 +17965,7 @@
  },
  "{0} fait sécession et se range derrière le Prophète.": {
   "at": [
-   "src/engine/finale.js:359"
+   "src/engine/finale.js:360"
   ],
   "args": [
    "c.name"
@@ -17973,7 +17973,7 @@
  },
  "{0} fait sécession et quitte {1} pour le Prophète.": {
   "at": [
-   "src/engine/finale.js:359"
+   "src/engine/finale.js:360"
   ],
   "args": [
    "c.name",
@@ -17982,17 +17982,17 @@
  },
  "Le Seigneur liche s'est relevé, plus fort, et revient vers vous.": {
   "at": [
-   "src/engine/finale.js:381"
+   "src/engine/finale.js:382"
   ]
  },
  "Le Seigneur liche s'est relevé, plus fort.": {
   "at": [
-   "src/engine/finale.js:381"
+   "src/engine/finale.js:382"
   ]
  },
  "Un indice : le phylactère du Seigneur liche est caché sur {0}, à quelques cases de ({1}, {2}).": {
   "at": [
-   "src/engine/finale.js:391"
+   "src/engine/finale.js:392"
   ],
   "args": [
    "pn",
@@ -18002,7 +18002,7 @@
  },
  "Le phylactère du Seigneur liche est découvert sur {0} ({1}, {2}). Détruisez-le, et le liche ne se relèvera plus.": {
   "at": [
-   "src/engine/finale.js:398"
+   "src/engine/finale.js:399"
   ],
   "args": [
    "pn",
@@ -18012,7 +18012,7 @@
  },
  "L'Archimage oublié vous arrache {0} mana.": {
   "at": [
-   "src/engine/finale.js:408"
+   "src/engine/finale.js:409"
   ],
   "args": [
    "amt"
@@ -18020,7 +18020,7 @@
  },
  "L'Archimage oublié frappe {0} ({1}).": {
   "at": [
-   "src/engine/finale.js:414"
+   "src/engine/finale.js:415"
   ],
   "args": [
    "c.name",
@@ -18029,7 +18029,7 @@
  },
  "Le Dévoreur de nœuds a englouti votre {0} : le contrecoup vous coûte {1} mana, et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:444"
+   "src/engine/finale.js:445"
   ],
   "args": [
    "name",
@@ -18038,7 +18038,7 @@
  },
  "Le Dévoreur de nœuds a englouti votre {0}, et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:444"
+   "src/engine/finale.js:445"
   ],
   "args": [
    "name"
@@ -18046,7 +18046,7 @@
  },
  "Le Dévoreur de nœuds a englouti le {0} ({1}, {2}), et il grandit encore.": {
   "at": [
-   "src/engine/finale.js:444"
+   "src/engine/finale.js:445"
   ],
   "args": [
    "name",
@@ -18056,32 +18056,32 @@
  },
  "Le Seigneur liche tombe sous vos coups. Il se relèvera, tant que son phylactère tient.": {
   "at": [
-   "src/engine/finale.js:504"
+   "src/engine/finale.js:505"
   ]
  },
  "Le Seigneur liche est tombé. Il se relèvera, tant que son phylactère tient.": {
   "at": [
-   "src/engine/finale.js:504"
+   "src/engine/finale.js:505"
   ]
  },
  "600 pièces d'or": {
   "at": [
-   "src/engine/finale.js:525"
+   "src/engine/finale.js:526"
   ]
  },
  "600 cristaux de mana": {
   "at": [
-   "src/engine/finale.js:526"
+   "src/engine/finale.js:527"
   ]
  },
  "+15 de renommée": {
   "at": [
-   "src/engine/finale.js:530"
+   "src/engine/finale.js:531"
   ]
  },
  "Vous avez mis fin à la crise ({0}).": {
   "at": [
-   "src/engine/finale.js:535"
+   "src/engine/finale.js:536"
   ],
   "args": [
    "T"
@@ -18089,7 +18089,7 @@
  },
  "{0} a mis fin à la crise ({1}).": {
   "at": [
-   "src/engine/finale.js:535"
+   "src/engine/finale.js:536"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, pid))",
@@ -18098,7 +18098,7 @@
  },
  "La crise est finie ({0}).": {
   "at": [
-   "src/engine/finale.js:535"
+   "src/engine/finale.js:536"
   ],
   "args": [
    "T"
@@ -18106,7 +18106,7 @@
  },
  "Récompense : {0}.": {
   "at": [
-   "src/engine/finale.js:536",
+   "src/engine/finale.js:537",
    "src/ui/main.js:1583"
   ],
   "args": [

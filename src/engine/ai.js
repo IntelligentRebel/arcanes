@@ -172,11 +172,6 @@ const AI = {
       const bestRanged = shooters < 2 ? U.max(units.filter(t => AI.rangedDef(t)), t => AI.unitValue(game, c, t, e, 'defense')) : null;
       if (bestRanged) return { type: 'unit', id: bestRanged };
     }
-    // (à l'essai, towers_more) des murailles dès 5 habitants, puis les tours de défense
-    if (AI.opt(pl, 'towers_more') && game.turn >= 40 && (N >= 5 || c.fortress)) {
-      if (Cities.canBuild(game, c, 'cityWalls')) return { type: 'building', id: 'cityWalls' };
-      if (c.buildings.cityWalls && Cities.canBuild(game, c, 'defenseTowers')) return { type: 'building', id: 'defenseTowers' };
-    }
     if (garrison.filter(u => AI.isSoldier(game, u)).length < want && bestMil && (foodRoom > 0 || threat > 0)) return { type: 'unit', id: bestMil };
     // 1 bis. un colon attend une escorte ici : un soldat d'abord
     if (bestMil && garrison.some(u => Units.isSettler(u) && (u.aiWaitEscort || 0) > 0) && garrison.filter(u => AI.isSoldier(game, u)).length < 2) return { type: 'unit', id: bestMil };
@@ -236,9 +231,9 @@ const AI = {
     else for (const b of BUILD_ORDER) {
       if (!Cities.canBuild(game, c, b)) continue;
       const bd = DATA.buildings[b];
-      const towers = AI.opt(pl, 'towers_more');   // (à l'essai) murailles et tours plus tôt
-      if (b === 'cityWalls' && threat <= 0 && !c.fortress && N < (towers ? 5 : 8)) continue;
-      if (b === 'defenseTowers' && threat <= 0 && N < (towers ? 5 : 10)) continue;
+      // murailles et tours plus tôt (dès 5 habitants) : mesuré au banc 21, aucun gain et un début de partie plus lent (t100 -10 ± 5). Abandonné.
+      if (b === 'cityWalls' && threat <= 0 && !c.fortress && N < 8) continue;
+      if (b === 'defenseTowers' && threat <= 0 && N < 10) continue;
       if (bd.upkeep > 2 && Players.goldPerTurn(game, pl).gold < bd.upkeep + 2 && !['marketplace', 'bank', 'merchantsGuild'].includes(b)) continue;
       if (bd.cost > e.prod * 40 && N < 6) continue;
       return { type: 'building', id: b };
