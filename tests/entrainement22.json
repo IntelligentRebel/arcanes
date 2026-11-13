@@ -1,0 +1,106 @@
+{
+ "nom": "Entraînement 22 : moteur 0.31.52 ; les crises de fin revues (le palier pèse aussi les armées, le monstre est plus fort que le meilleur champion de sa proie)",
+ "experiences": [
+  {
+   "id": "crises_0_31_52",
+   "note": "Difficile, 300 tours, crises tirées comme en jeu. Trois variantes sur les mêmes cartes : les crises d'avant (palier par les cités et la magie seules, monstre non renforcé), le palier qui pèse aussi les armées (0.31.52) seul, puis la 0.31.52 complète (le Prophète, le Dévoreur et le Seigneur liche plus forts que le meilleur champion de leur proie). À lire : paliers 1/2/3, crises tirées, cran du monstre, crise vaincue ou non, meneur du t200 encore 1er.",
+   "tours": 300,
+   "adversaires": "hard",
+   "graine": 630000,
+   "graines": 500,
+   "points": [
+    150,
+    200,
+    250
+   ],
+   "crise": true,
+   "variantes": [
+    {
+     "nom": "crises d'avant (0.31.51)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "reglagesCrise": {
+      "TIER_FORCE": 0,
+      "MIGHT": 0
+     }
+    },
+    {
+     "nom": "palier par les forces seul",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "reglagesCrise": {
+      "MIGHT": 0
+     }
+    },
+    {
+     "nom": "crises 0.31.52 (jeu)",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}
