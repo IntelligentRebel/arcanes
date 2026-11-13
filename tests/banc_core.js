@@ -98,6 +98,8 @@ function bancReport(plan, all, total, errCount) {
           + (ex.crise && lab !== lab0 ? (() => { const bs = new Map(base.map(r => [r.seed, r])), pr = fn.filter(r => r.lead200Kept != null && bs.has(r.seed) && bs.get(r.seed).lead200Kept != null);
               return pr.length ? ', meneur du t200 encore 1er ' + Math.round(100 * bancMean(pr.map(r => r.lead200Kept))) + ' % (' + lab0 + ', mêmes cartes : ' + Math.round(100 * bancMean(pr.map(r => bs.get(r.seed).lead200Kept))) + ' %)' : ''; })() : '')
           + (fn.some(r => r.finale.tier) ? ', paliers 1/2/3 : ' + [1, 2, 3].map(t => Math.round(100 * bancMean(fn.map(r => r.finale.tier === t ? 1 : 0))) + ' %').join(' / ') : '')
+          + (fn.some(r => r.finale.might) ? ', cran médian du monstre ' + md(fn.filter(r => r.finale.might).map(r => r.finale.might)) : '')
+          + ', ' + ['prophet', 'eater', 'winter', 'lich', 'archmage'].map(k => k + ' ' + fn.filter(r => r.finale.kind === k).length).join(' ')
           + (fn.some(r => r.finale.eaten) ? ', nœuds dévorés ' + bancMean(fn.map(r => r.finale.eaten || 0)).toFixed(1) : '') + (fn.some(r => r.finale.seceded) ? ', sécessions ' + bancMean(fn.map(r => r.finale.seceded || 0)).toFixed(1) : '') + ')'; } }
       // (v0.31.32) le meneur du tour 200 : l'est-il encore à la fin, et de combien mène-t-il (parties où il menait de 1,5 fois et plus au tour 200)
       if (ex.crise) { const lk = a.filter(r => r.lead200Kept != null), big = lk.filter(r => r.gap200 >= 1.5);

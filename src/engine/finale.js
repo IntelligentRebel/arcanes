@@ -74,6 +74,8 @@ const Finale = {
     s.def += b; s.res += b; s.hp = Math.round(s.hp * (1 + 0.6 * b));
   },
   MIGHT_MAX: 24, MIGHT_WIN: 0.15, MIGHT_SIMS: 8,
+  // au banc (finaleCfg) : MIGHT 0 retire ce renfort, TIER_FORCE 0 rend le palier aux seules cités et à la magie (avant 0.31.52)
+  MIGHT: 1, TIER_FORCE: 1,
   // le meilleur champion de la proie seul contre le monstre seul (tous deux indemnes) : son taux de victoire
   duel(game, best, boss) {
     const a = Object.assign({}, best, { dmg: 0 }), d = Object.assign({}, boss, { dmg: 0 });
@@ -82,7 +84,7 @@ const Finale = {
   champion(game, pid) { return U.max(Object.values(game.units).filter(u => u.owner === pid && !u.riteDemon && !DATA.units[u.type].sailing), u => Units.strength(game, u)); },
   // monte le monstre d'autant de crans qu'il faut (jamais il ne redescend)
   matchBest(game, f) {
-    const boss = f.boss != null ? game.units[f.boss] : null; if (!boss || typeof AI === 'undefined') return;
+    const boss = f.boss != null ? game.units[f.boss] : null; if (!boss || typeof AI === 'undefined' || !Finale.cfg(game, 'MIGHT')) return;
     const best = Finale.champion(game, f.target); if (!best) return;
     const win = b => { boss.might = b; return Finale.duel(game, best, boss); };
     let b = boss.might || 0;
@@ -124,7 +126,7 @@ const Finale = {
     const gap = r[0].v / Math.max(1, r[1].v), rest = U.sum(r.slice(1), x => x.v);
     const top = game.players[f.leader];
     const sLead = Finale.standing(game, top), others = game.players.filter(p => p.alive && !p.banished && p !== top).map(p => Finale.standing(game, p)).sort((a, b) => b - a);
-    f.tier = Math.max(tierOf(r[0].v, r[1].v, rest), others.length ? tierOf(sLead, others[0], U.sum(others, x => x)) : 1);
+    f.tier = Math.max(tierOf(r[0].v, r[1].v, rest), others.length && Finale.cfg(game, 'TIER_FORCE') ? tierOf(sLead, others[0], U.sum(others, x => x)) : 1);
     f.leadAt = +gap.toFixed(2); f.leadForce = others.length ? +(sLead / Math.max(1, others[0])).toFixed(2) : null;
     f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(Finale.TIERS[f.tier]);
     f.state = 'omen'; f.omen = game.turn; f.at = game.turn + Finale.cfg(game, 'OMEN'); f.target = f.leader;
