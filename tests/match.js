@@ -106,6 +106,10 @@ async function playOne(E, job) {
   // boost : le sorcier observé part très en avance (pour vérifier que les autres se liguent contre le meneur)
   if (job.boost) { p0.gold += 1500; p0.mana += 500; const fc = game.cities[p0.fortress]; const race = E.DATA.races[fc.race];
     for (const t of race.units.filter(t => E.DATA.units[t].abilities.createOutpost).concat(race.units.filter(t => { const d = E.DATA.units[t]; return d.melee >= 3 && !d.sailing; }).slice(0, 1))) for (let k = 0; k < 3; k++) E.Units.create(game, t, 0, fc.plane, fc.x, fc.y); }
+  // (banc 23) les esprits du sujet : combien invoqués, combien liés à un nœud (crochets posés une seule fois par ouvrier)
+  if (!E._spirits) { E._spirits = { made: 0, melded: 0 }; const uc = E.Units.create; E.Units.create = function (g, t, o) { const u = uc.apply(this, arguments); if (o === 0 && (t === 'MagicSpirit' || t === 'GuardianSpirit')) E._spirits.made++; return u; };
+    const gm = E.Game.meld; E.Game.meld = function (g, id) { const u = g.units[id], own = u ? u.owner : null; const r = gm.apply(this, arguments); if (own === 0 && !g.units[id]) E._spirits.melded++; return r; }; }
+  E._spirits.made = 0; E._spirits.melded = 0;
   let caps = 0, lost = 0, deathTurn = null, book3 = null;
   const Bk = E.Book || (typeof Book !== 'undefined' ? Book : null);   // le Livre de légende : premier tour où un sorcier tient trois fragments
   // (v0.31.36) cités prises d'un plan à l'autre (le sorcier né sur l'autre plan que l'ancien maître), et parmi elles celles du meneur
@@ -148,6 +152,7 @@ async function playOne(E, job) {
   if (marks[100]) { const L = marks[100].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead100 = L; res.lead100Kept = sc.indexOf(Math.max(...sc)) === L; res.gap100 = +marks[100].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); }
   // (v0.31.32) de même au tour 200, quand les crises de fin peuvent commencer : le meneur l'est-il encore, et de combien
   if (marks[200] && marks[200].gap != null) { const L = marks[200].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead200 = L; res.lead200Kept = sc.indexOf(Math.max(...sc)) === L ? 1 : 0; res.gap200 = +marks[200].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); res.leadScore200 = sc[L] || 0; res.gapEndLn = +Math.log(Math.max(0.5, res.gapEnd)).toFixed(3); }
+  res.spirits = { made: E._spirits.made, melded: E._spirits.melded, nodes: game.sites.filter(s => s.type === 'node' && s.owner === 0).length };
   res.xcaps = xcaps; res.xcapsL = xcapsL; res.riftsCast = game.sites.filter(s => s.type === 'rift' && s.plane === 0 && s.by != null).length;
   integrity(E, game, inv);
   if (Object.keys(inv.n).length) { res.inv = inv.n; res.invEx = inv.ex; }

@@ -1,0 +1,74 @@
+{
+ "nom": "Entraînement 23 : moteur 0.31.55 ; des esprits magiques seulement pour les nœuds qu'ils peuvent atteindre",
+ "experiences": [
+  {
+   "id": "esprits",
+   "note": "Difficile, 250 tours, pour le sorcier observé seul. Remarque de Cor'e sur le forum : l'IA invoque trop d'esprits. Mesuré avant le banc sur 6 parties de 150 tours (toutes les IA) : 134 esprits invoqués pour 83 liés à un nœud, une IA à 28 esprits pour 7 nœuds ; avec la règle, 108 invoqués, 85 liés, et 58 nœuds tenus à la fin au lieu de 51. La variante ne compte que les nœuds à 15 cases d'une de ses cités, sur leur plan, sans ennemi posté dessus, et pas plus de deux esprits à la fois. À lire : score et rang (même carte), esprits invoqués, liés, nœuds tenus.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 640000,
+   "graines": 700,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "esprits": true,
+   "variantes": [
+    {
+     "nom": "esprits d'aujourd'hui",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    },
+    {
+     "nom": "esprits pour les nœuds à portée",
+     "niveau": "hard",
+     "exp": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true,
+      "spirit_cap": true
+     },
+     "expAdversaires": {
+      "no_vainstrike": true,
+      "no_firststrike": true,
+      "no_spells2": true,
+      "no_cspells2": true,
+      "no_purify": true,
+      "no_truestanding": true,
+      "no_civilians": true,
+      "no_stackspells": true,
+      "no_engineers": true
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -241,11 +241,20 @@ const Panels = {
     const game = App.game, pl = App.me();
     const body = h('div', { class: 'herosheet' });
     const m = UI.modal({ title: u0.hero.name, width: 1020, body });
+    // (0.31.55) d'un héros à l'autre sans fermer la fiche : pratique pour passer les objets par le coffre
+    let curId = u0.id;
+    const mine = () => Object.values(game.units).filter(x => x.hero && x.owner === pl.id);
+    const go = d => { const list = mine(), i = list.findIndex(x => x.id === curId); if (list.length < 2) return; curId = list[(i + d + list.length) % list.length].id; UI.hideTip(); render(); };
+    if (u0.owner === pl.id && mine().length > 1) {
+      const head = m.el.querySelector('header'), x = head.querySelector('.x');
+      head.insertBefore(h('button', { class: 'abtn herohead', title: 'Héros précédent', onclick: () => go(-1) }, '‹'), x);
+      head.insertBefore(h('button', { class: 'abtn herohead', title: 'Héros suivant', onclick: () => go(1) }, '›'), x);
+    }
     const SLOT = { melee: 'Arme', ranged: 'Arme à distance', magic: 'Arme magique', anyWeapon: 'Arme', armor: 'Armure', jewelry: 'Bijou' };
     const itemTip = it => '<h4>' + U.esc(it.name) + '</h4><div>' + U.esc(Items.describe(it)) + '</div>' + it.powers.map(p => '<div class="gold">' + U.esc(ITEM_POWERS[p].name) + (ITEM_POWERS[p].ability && ABILITY_NAMES[ITEM_POWERS[p].ability] && ABILITY_NAMES[ITEM_POWERS[p].ability] !== ITEM_POWERS[p].name ? ' : ' + U.esc(ABILITY_NAMES[ITEM_POWERS[p].ability]) : '') + '</div>').join('') + (it.bookArtifact ? '<div class="dim">Artefact du Livre de légende, unique au monde.</div>' : it.legendary ? '<div class="dim">Objet légendaire, gagné en accomplissant une quête.</div>' : '') + '<div class="dim">Valeur ' + (it.value || 100) + ' or</div>';
     const render = () => {
-      const u = game.units[u0.id]; if (!u) { m.close(); return; }
-      body.innerHTML = '';
+      const u = game.units[curId]; if (!u) { m.close(); return; }
+      body.innerHTML = ''; m.setTitle(u.hero.name);
       const s = Units.stats(game, u), bare = Units.stats(game, Object.assign({}, u, { items: [] }));
       const raw = Heroes.rawLevel(u), cur = HERO_LEVELS[raw], nxt = HERO_LEVELS[raw + 1];
       const lvName = (Units.levelInfo(game, u) || cur).name;
@@ -475,26 +484,40 @@ const Panels = {
     return box;
   },
   // échanger des sorts avec un sorcier : ce qu'il peut vous apprendre, ce que vous pouvez lui apprendre
+  // (0.31.55) plusieurs sorts de chaque côté, et de l'or pour équilibrer le marché
   spellTrade(o, after) {
     const game = App.game, pl = App.me();
     const theirs = Diplomacy.tradeable(game, o, pl), mine = Diplomacy.tradeable(game, pl, o);
-    let give = theirs[0] || null, get = null;
+    const give = new Set(theirs.length ? [theirs[0]] : []), get = new Set();
+    let pay = 0, recv = 0;   // l'or que vous lui versez, l'or qu'il vous verse
     const body = h('div');
-    const m = UI.modal({ title: 'Échange de sorts avec ' + o.name, width: 720, body });
+    const m = UI.modal({ title: 'Échange de sorts avec ' + o.name, width: 760, body });
     const sp = id => DATA.spells[id];
     const item = (id, on, pick) => { const e = h('div', { class: 'tradeitem' + (on ? ' on' : ''), onclick: pick }, h('b', { style: 'color:' + (REALM_COLORS[sp(id).realm] || '#ddd') }, sp(id).name), h('span', { class: 'dim' }, ' · ' + RARITY_NAMES[sp(id).rarity] + ' · ' + U.fmt(Diplomacy.spellValue(id)) + ' RP')); UI.tipOn(e, () => UI.spellTip(id, pl, game)); return e; };
+    const flip = (set, id) => { if (set.has(id)) set.delete(id); else set.add(id); draw(); };
+    const spare = () => Diplomacy.goldSpare(o);
     const draw = () => {
       body.innerHTML = '';
-      const left = h('div', { class: 'tradecol' }, h('h4', null, 'Il vous apprend'), ...(theirs.length ? theirs.map(id => item(id, give === id, () => { give = give === id ? null : id; draw(); })) : [h('div', { class: 'dim' }, 'Rien que vous puissiez apprendre.')]));
-      const right = h('div', { class: 'tradecol' }, h('h4', null, 'Vous lui apprenez'), ...(mine.length ? mine.map(id => item(id, get === id, () => { get = get === id ? null : id; draw(); })) : [h('div', { class: 'dim' }, 'Rien qu\'il puisse apprendre.')]));
+      const left = h('div', { class: 'tradecol' }, h('h4', null, 'Il vous apprend'), ...(theirs.length ? theirs.map(id => item(id, give.has(id), () => flip(give, id))) : [h('div', { class: 'dim' }, 'Rien que vous puissiez apprendre.')]));
+      const right = h('div', { class: 'tradecol' }, h('h4', null, 'Vous lui apprenez'), ...(mine.length ? mine.map(id => item(id, get.has(id), () => flip(get, id))) : [h('div', { class: 'dim' }, 'Rien qu\'il puisse apprendre.')]));
       body.append(h('div', { class: 'tradegrid' }, left, right));
-      const vg = give ? Diplomacy.spellValue(give) : 0, vr = get ? Diplomacy.spellValue(get) : 0;
-      const ans = get ? Diplomacy.tradeAnswer(game, pl, o, give, get) : null;
-      const verdict = !get ? 'Choisissez au moins un sort à lui apprendre.' : !give ? 'Un présent : il vous en saura gré.' : ans.ok ? 'Il acceptera ce marché.' : ans.why;
-      body.append(h('div', { class: ans && ans.ok ? 'ok' : 'dim', style: 'margin-top:8px' }, verdict + (give && get ? ' (vous recevez ' + U.fmt(vg) + ' RP, il reçoit ' + U.fmt(vr) + ' RP)' : '')),
+      const G = [...give], R = [...get], gold = pay - recv;
+      const num = (v, max, set) => h('input', { type: 'number', min: 0, max, step: 5, value: v, class: 'tradegold', onclick: e => e.stopPropagation(),
+        onchange: e => { set(Math.max(0, Math.min(max, Math.round((+e.target.value || 0) / 5) * 5))); draw(); } });
+      const fair = G.length || R.length ? Diplomacy.fairGold(game, pl, o, G, R) : 0;
+      const goldRow = h('div', { class: 'tradegrid', style: 'margin-top:8px' },
+        h('div', null, h('span', { class: 'dim' }, 'Il vous verse '), num(recv, spare(), v => { recv = v; if (v) pay = 0; }), h('span', { class: 'dim' }, ' or (au plus ' + spare() + ')')),
+        h('div', null, h('span', { class: 'dim' }, 'Vous lui versez '), num(pay, pl.gold, v => { pay = v; if (v) recv = 0; }), h('span', { class: 'dim' }, ' or (vous en avez ' + pl.gold + ')'),
+          (G.length || R.length) && fair !== gold && (fair <= 0 || fair <= pl.gold) ? h('button', { class: 'abtn', style: 'margin-left:6px', title: 'L\'or qui rend le marché juste à ses yeux', onclick: () => { if (fair > 0) { pay = fair; recv = 0; } else { recv = -fair; pay = 0; } draw(); } }, 'Équilibrer') : null));
+      body.append(goldRow);
+      const any = G.length || R.length, gift = !G.length && !recv;
+      const ans = any ? Diplomacy.tradeAnswer(game, pl, o, G, R, gold) : null;
+      const { vg, vr } = Diplomacy.dealValue(G, R, gold);
+      const verdict = !any ? 'Choisissez au moins un sort.' : gift && !R.length ? 'Choisissez au moins un sort à lui apprendre.' : gift ? 'Un présent : il vous en saura gré.' : ans.ok ? 'Il acceptera ce marché.' : ans.why;
+      body.append(h('div', { class: ans && ans.ok && !(gift && !R.length) ? 'ok' : 'dim', style: 'margin-top:8px' }, verdict + (!gift && any ? ' (vous recevez ' + U.fmt(Math.round(vg)) + ' RP, il reçoit ' + U.fmt(Math.round(vr)) + ' RP, or compris)' : '')),
         h('div', { style: 'display:flex;gap:6px;justify-content:flex-end;margin-top:8px' },
           h('button', { class: 'abtn', onclick: () => m.close() }, 'Fermer'),
-          h('button', { class: 'abtn primary', disabled: !get, onclick: () => { const r = Diplomacy.proposeTrade(game, pl.id, o.id, give, get); UI.toast(U.esc(r.text), r.ok ? '' : 'warn'); if (r.ok) { m.close(); App.refresh(); if (after) after(); } else draw(); } }, give ? 'Proposer l\'échange' : 'Offrir ce sort')));
+          h('button', { class: 'abtn primary', disabled: !any || (gift && !R.length), onclick: () => { const r = Diplomacy.proposeTrade(game, pl.id, o.id, G, R, gold); UI.toast(U.esc(r.text), r.ok ? '' : 'warn'); if (r.ok) { m.close(); App.refresh(); if (after) after(); } else draw(); } }, gift ? (R.length > 1 ? 'Offrir ces sorts' : 'Offrir ce sort') : 'Proposer l\'échange')));
     };
     draw();
   },
@@ -761,6 +784,8 @@ const Panels = {
     body.append(h('div', { class: 'row' }, h('div', { class: 'grow' }, h('div', { class: 't1' }, 'Volume de la musique ', vlab), h('div', { class: 't2' }, vol))));
     { const AUTO_SPEED_WORDS = { fast: 'rapide', medium: 'moyenne', slow: 'lente' }, cur = App.prefs.autoSpeed || 'fast';
       row('Batailles automatiques : ' + AUTO_SPEED_WORDS[cur], 'Le rythme des batailles résolues automatiquement sous vos yeux', () => { const L = CombatView.AUTO_SPEEDS; App.setPref('autoSpeed', L[(L.indexOf(cur) + 1) % L.length]); again(); }); }
+    { const BD = ['dim', 'light', 'blur'], BD_WORDS = { dim: 'net, assombri', light: 'net, à peine assombri', blur: 'flou, assombri' }, cur = BD.includes(App.prefs.backdrop) ? App.prefs.backdrop : 'dim';
+      row('Fond des fenêtres : ' + BD_WORDS[cur], 'Ce qu\'on voit de la carte derrière une fenêtre ouverte', () => { App.setPref('backdrop', BD[(BD.indexOf(cur) + 1) % BD.length]); again(); }); }
     { PortraitAnim.load(); const st = PortraitAnim.status();
       row('Portraits animés : ' + (st === 'on' ? 'activés' : st === 'off' ? 'coupés' : st === 'system' ? 'coupés par votre système' : 'fichier manquant'),
         st === 'system' ? 'Votre système demande moins d\'animations. Cliquez pour les activer quand même.' : st === 'missing' ? 'Le fichier assets/portraits.png est introuvable : installez le jeu entier.' : 'Les sorciers clignent des yeux et leur magie s\'anime, partout sauf dans le bandeau',

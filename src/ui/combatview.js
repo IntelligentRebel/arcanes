@@ -18,7 +18,7 @@ const CombatView = {
     return new Promise(res => {
       const done = v => { if (veil && UI.busy) veil.hidden = false; res(v); };
       CombatView.bt = bt; CombatView.info = info; CombatView.resolve = done; CombatView.active = true;
-      CombatView.auto = false; CombatView.mode = null; CombatView.sel = null; CombatView.reach = null; CombatView.hover = null; CombatView._fcKey = null; CombatView.anims = []; CombatView.floats = []; CombatView.parts = []; CombatView.vpos = {}; CombatView.evIdx = 0; CombatView.pos = {};
+      CombatView.auto = false; CombatView.semi = false; CombatView.mode = null; CombatView.sel = null; CombatView.reach = null; CombatView.hover = null; CombatView._fcKey = null; CombatView.anims = []; CombatView.floats = []; CombatView.parts = []; CombatView.vpos = {}; CombatView.evIdx = 0; CombatView.pos = {};
       CombatView.humanSide = game.players[bt.pids[ATT_SIDE]] && game.players[bt.pids[ATT_SIDE]].human ? ATT_SIDE : DEF_SIDE;
       // de quoi rejouer la bataille si la résolution automatique déplaît
       CombatView.snap = CombatView.snapshot(game, bt); CombatView.autoStart = false; CombatView.replayed = false;
@@ -32,6 +32,7 @@ const CombatView = {
       // demander si le joueur veut combattre lui-même
       CombatView.intro().then(choice => {
         if (choice === 'auto' || window.AUTO_COMBAT) { CombatView.auto = true; CombatView.autoStart = choice === 'auto'; }
+        if (choice === 'semi') CombatView.semi = true;
         CombatView.advance();
       });
     });
@@ -129,7 +130,7 @@ const CombatView = {
     const est = ratio > 3 ? 'écrasante' : ratio > 1.5 ? 'favorable' : ratio > .8 ? 'incertaine' : ratio > .4 ? 'défavorable' : 'désespérée';
     // la prévision (une douzaine de batailles simulées) se calcule une fois la fenêtre affichée ;
     // une bataille gagnée d'avance se résout alors d'un clic : la résolution automatique passe en premier
-    const pr = UI.choice(title, '<p>' + desc + '</p><p>Situation <b>' + est + '</b>.</p><p id="intro-fc" class="dim">Résolution automatique : estimation…</p>', [{ label: 'Résolution automatique', value: 'auto' }, { label: 'Commander la bataille', value: 'manual', primary: true }], { noClose: true });
+    const pr = UI.choice(title, '<p>' + desc + '</p><p>Situation <b>' + est + '</b>.</p><p id="intro-fc" class="dim">Résolution automatique : estimation…</p>', [{ label: 'Résolution automatique', value: 'auto' }, { label: 'Semi-automatique', value: 'semi' }, { label: 'Commander la bataille', value: 'manual', primary: true }], { noClose: true });
     setTimeout(() => {
       const el = document.getElementById('intro-fc'); if (!el) return;
       const f = CombatView.introForecast(12);
@@ -1284,8 +1285,16 @@ const CombatView = {
     // plus personne à bouger : le tour passe de lui-même (un sort se lance avant d'agir avec la dernière unité)
     if (!bt.alive(bt.side).some(b => b.moves > 0 && !b.autoCtl)) CombatView.endTurn();
   },
-  endTurn() {
+  async endTurn() {
     const bt = CombatView.bt; if (CombatView.busy || bt.over) return;
+    // (0.31.55) semi-automatique : vous avez lancé vos sorts (et commandé qui vous vouliez), vos troupes jouent le reste du tour
+    if (CombatView.semi && !CombatView.auto && bt.side === CombatView.humanSide) {
+      CombatView.sel = null; CombatView.reach = null; CombatView.mode = null;
+      await CombatView.playAutoUnits(true);
+      if (bt.over) return CombatView.finish();
+      CombatView.busy = false;
+      if (bt.side !== CombatView.humanSide) return;
+    }
     for (const b of bt.alive(bt.side)) b.waited = false;
     bt.endSide();
     CombatView.sel = null; CombatView.reach = null; CombatView.mode = null;
@@ -1572,14 +1581,15 @@ const CombatView = {
     CombatView.selectNext(); CombatView.renderBar(); CombatView.refreshPanels();
   },
   // les unités automatisées du joueur jouent leur tour (true si l'une a joué)
-  async playAutoUnits() {
+  // all : toutes les unités qui peuvent encore agir (semi-automatique), les tireurs d'abord comme l'IA
+  async playAutoUnits(all) {
     const bt = CombatView.bt, side = CombatView.humanSide;
-    const autos = bt.alive(side).filter(b => b.autoCtl && b.moves > 0);
+    const autos = bt.alive(side).filter(b => (all || b.autoCtl) && b.moves > 0).sort((a, b) => (bt.stats(b).ranged > 0) - (bt.stats(a).ranged > 0));
     if (!autos.length || bt.side !== side) return false;
     CombatView.busy = true; CombatView.renderBar();
     for (const b of autos) {
       let guard = 0;
-      while (!bt.over && !b.dead && b.autoCtl && b.moves > 0 && guard++ < 20) { if (!CombatAI.act(bt, b)) break; await CombatView.playEvents(); }
+      while (!bt.over && !b.dead && (all || b.autoCtl) && b.moves > 0 && guard++ < 20) { if (!CombatAI.act(bt, b)) break; await CombatView.playEvents(); }
       await CombatView.playEvents();
       if (bt.over) break;
     }
@@ -1959,9 +1969,10 @@ const CombatView = {
     else {
       b('Automatiser toute la bataille', () => CombatView.toggleAuto(), 'A', '', !mine, 'Vos troupes jouent seules ; « Reprendre la main » (A) à tout moment');
       b(sel && sel.autoCtl ? 'Reprendre cette unité' : 'Automatiser cette unité', () => CombatView.toggleUnitAuto(), 'U', sel && sel.autoCtl ? 'primary' : '', !mine || !sel, sel && sel.autoCtl ? 'Elle attendra de nouveau vos ordres' : 'Elle joue seule à chaque tour, les autres restent à vous');
+      b('Semi-automatique', () => { CombatView.semi = !CombatView.semi; UI.toast(CombatView.semi ? 'Semi-automatique : à la fin de chacun de vos tours, vos troupes jouent seules.' : 'Vos troupes attendent de nouveau vos ordres.', '', 'semi'); CombatView.renderBar(); }, null, CombatView.semi ? 'on' : '', false, 'Lancez vos sorts, commandez qui vous voulez, puis « Fin du tour » : vos troupes jouent le reste du tour');
     }
     b('Fuir', async () => { if (await UI.confirm('Fuir le combat', CombatView.fleeText(), 'Fuir')) { CombatView.bt.flee(CombatView.humanSide); await CombatView.playEvents(); CombatView.finish(); } }, null, 'danger', !mine);
-    b('Fin du tour', () => CombatView.endTurn(), '↵', 'primary', !mine);
+    b('Fin du tour', () => CombatView.endTurn(), '↵', 'primary', !mine, CombatView.semi && !CombatView.auto ? 'Vos troupes jouent le reste du tour, puis la main passe' : '');
     // le son, coupé ou rendu sans quitter la bataille (toujours actif, même pendant le tour adverse)
     const snd = h('button', { class: 'abtn', title: Sfx.on ? 'Couper le son' : 'Remettre le son', onclick: () => { Sfx.setOn(!Sfx.on); CombatView.renderBar(); } });
     snd.innerHTML = '<span style="display:inline-flex;width:16px;height:16px;vertical-align:middle">' + (ICONS[Sfx.on ? 'sound' : 'mute'] || '') + '</span>'; bar.append(snd);

@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.54';
+const GAME_VERSION = '0.31.55';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {

@@ -107,6 +107,7 @@ function bancReport(plan, all, total, errCount) {
         if (lk.length) line += '  meneur du t200 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead200Kept))) + ' % (avance médiane ×' + med(lk.map(r => r.gap200)).toFixed(2) + ' au t200, ×' + med(lk.map(r => r.gapEnd)).toFixed(2) + ' à la fin)'
           + (big.length ? ' ; s\'il menait de ×1,5 au t200 (' + big.length + ' parties) : encore 1er ' + Math.round(100 * bancMean(big.map(r => r.lead200Kept))) + ' %, avance finale médiane ×' + med(big.map(r => r.gapEnd)).toFixed(2) : ''); }
       const lk = a.filter(r => r.lead100Kept != null); if (lk.length && ex.meneur) line += '  meneur du t100 encore 1er : ' + Math.round(100 * bancMean(lk.map(r => r.lead100Kept ? 1 : 0))) + ' %, avance finale ×' + bancMean(lk.map(r => r.gapEnd)).toFixed(2);
+      if (ex.esprits && a.some(r => r.spirits)) { const sm = k => bancMean(a.map(r => (r.spirits && r.spirits[k]) || 0)); line += '  esprits invoqués ' + sm('made').toFixed(1) + ', liés à un nœud ' + sm('melded').toFixed(1) + ', nœuds tenus à la fin ' + sm('nodes').toFixed(1); }
       if (ex.croisade) line += '  croisade : failles ouvertes par sort ' + m('riftsCast').toFixed(2) + ' par partie, cités prises d\'un plan à l\'autre ' + m('xcaps').toFixed(2) + ' (au meneur du moment ' + m('xcapsL').toFixed(2) + ')';
       L.push(line);
       if (lab !== lab0) {

@@ -277,7 +277,7 @@ const AI = {
     // en attendant on met de côté (l'or en trop est changé en mana) et l'on ne dépense que pour l'urgent.
     // un nœud libre sans esprit pour le lier : priorité. L'or paie l'esprit au besoin ; sinon on garde de quoi l'invoquer.
     let spiritReserve = 0;
-    if (AI.feat(pl, 'nodes', 1) && opts.includes('magic_spirit') && AI.meldableNodes(game, pl).length > army.filter(u => Units.has(game, u, 'meld')).length) {
+    if (AI.feat(pl, 'nodes', 1) && opts.includes('magic_spirit') && AI.spiritRoom(game, pl, army)) {
       const c = Magic.spellCost(game, pl, 'magic_spirit', false), rate = pl.retorts.includes('alchemy') ? 1 : 2;
       if (pl.mana < c && pl.gold >= (c - pl.mana) * rate + 100) { pl.gold -= (c - pl.mana) * rate; pl.mana = c; }
       spiritReserve = c;
@@ -385,7 +385,7 @@ const AI = {
         const spirit = ['magic_spirit', 'guardian_spirit'].includes(id);
         // un esprit est un placement : le nœud qu'il liera rapporte bien plus que son entretien (sans quoi, à court de mana, on ne s'en sortirait jamais)
         if (!(spirit && AI.feat(pl, 'nodes', 1)) && (d.upkeep.mana > Math.max(2, manaIncome * AI.tune(pl, 'summonUpkeep')) || manaIncome - d.upkeep.mana < 0)) continue;   // jamais au prix d'un solde de mana négatif
-        if (spirit) { const freeNodes = AI.meldableNodes(game, pl).length; const spirits = army.filter(u => Units.has(game, u, 'meld')).length; sc = freeNodes > spirits ? (AI.feat(pl, 'nodes', 1) ? 60 : 40) : 0; }
+        if (spirit) sc = AI.spiritRoom(game, pl, army) ? (AI.feat(pl, 'nodes', 1) ? 60 : 40) : 0;
         else sc = (20 + Units.strength(game, { type: d.id, ench: [], xp: 0, owner: pl.id, dmg: 0 }) / Math.max(10, cost) * 30) * AI.tune(pl, 'summonVal');
       } else if (sp.kind === 'cityEnchant') {
         const wall = ['wall_of_fire', 'wall_of_stone', 'wall_of_darkness'].includes(id);
@@ -760,6 +760,17 @@ const AI = {
     const n = (c.fortress ? 3 : 1) + (Cities.citizens(c) >= 8 ? 1 : 0) + (threat > 0 ? 1 : 0) + (game.turn > 100 ? 1 : 0);
     const k = AI.tune(game.players[c.owner], 'garrison');
     return k === 1 ? n : Math.max(1, Math.round(n * k));
+  },
+  // de la place pour un esprit de plus : un nœud à lier pour chacun
+  // (en essai, banc 23, AI.opt spirit_cap) seuls comptent les nœuds à 15 cases d'une de ses cités, sur leur plan, sans ennemi posté
+  // dessus, et deux esprits au plus à la fois : sinon l'IA invoque des esprits pour des nœuds qu'ils n'atteindront jamais
+  spiritRoom(game, pl, army) {
+    const spirits = army.filter(u => Units.has(game, u, 'meld')).length;
+    let nodes = AI.meldableNodes(game, pl);
+    if (!AI.opt(pl, 'spirit_cap')) return nodes.length > spirits;
+    const cities = Cities.ofPlayer(game, pl.id);
+    nodes = nodes.filter(s => cities.some(c => c.plane === s.plane && World.dist(game.world, c.x, c.y, s.x, s.y) <= 15) && !(Intel.sees(game, pl, s.plane, s.x, s.y) && Units.at(game, s.plane, s.x, s.y).some(o => o.owner !== pl.id)));
+    return Math.min(nodes.length, 2) > spirits;
   },
   meldableNodes(game, pl) {
     return game.sites.filter(s => s.type === 'node' && !s.devoured && s.owner !== pl.id && Intel.knows(game, pl, s.plane, s.x, s.y) && !Game.siteHasGuardians(s) && (s.owner < 0 || pl.diplo[s.owner] === 'war'));

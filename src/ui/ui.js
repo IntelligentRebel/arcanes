@@ -59,6 +59,8 @@ const UI = {
   modal({ title, body, footer, width, onClose, cls, noClose }) {
     const root = $('#modal-root');
     const ov = h('div', { class: 'overlay' });
+    // (0.31.55) le fond derrière les fenêtres : net et assombri par défaut, à peine assombri, ou flou (réglage du menu)
+    document.body.dataset.bd = (typeof App !== 'undefined' && App.prefs && App.prefs.backdrop) || 'dim';
     const m = h('div', { class: 'modal ' + (cls || ''), style: width ? 'width:' + width + 'px' : '' });
     const close = () => { if (!ov.parentNode) return; ov.remove(); UI.modals = UI.modals.filter(x => x !== api); if (onClose) onClose(); UI.refresh(); };
     const head = h('header', null, h('h2', null, title || ''), noClose ? null : h('button', { class: 'x', title: 'Fermer (Échap)', onclick: close }, '×'));

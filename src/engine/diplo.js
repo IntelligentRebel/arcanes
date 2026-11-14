@@ -146,36 +146,68 @@ Object.assign(Diplomacy, {
     if (L && L.id === a.id) k *= 1.4;   // on n'arme pas celui qui écrase la partie
     return k;
   },
-  // l'IA b accepte-t-elle de donner give à a contre get ? (raison si refus)
-  tradeAnswer(game, a, b, give, get) {
+  // (0.31.55) un marché : plusieurs sorts de chaque côté, et de l'or pour équilibrer.
+  // L'or se compte en points de recherche au taux des événements (acheter du savoir coûte 1,2 or le point, en vendre en rapporte 0,8) :
+  // l'or reçu vaut 0,8 point la pièce, l'or donné 1,25 ; un sorcier ne cède pas plus de la moitié de son trésor.
+  GOLD_IN: 0.8, GOLD_OUT: 1.25,
+  list(x) { return x == null ? [] : (Array.isArray(x) ? x : [x]).filter(Boolean); },
+  goldSpare(pl) { return Math.max(0, Math.floor((pl.gold || 0) * 0.5 / 5) * 5); },
+  // ce que b donne (vg) et reçoit (vr), en points de recherche ; gold > 0 : a paie b, gold < 0 : b paie a
+  dealValue(give, get, gold) {
+    const sum = L => L.reduce((t, id) => t + Diplomacy.spellValue(id), 0);
+    return { vg: sum(Diplomacy.list(give)) + Math.max(0, -(gold || 0)) * Diplomacy.GOLD_OUT, vr: sum(Diplomacy.list(get)) + Math.max(0, gold || 0) * Diplomacy.GOLD_IN };
+  },
+  // l'IA b accepte-t-elle de donner give à a contre get (et l'or) ? (raison si refus)
+  tradeAnswer(game, a, b, give, get, gold) {
+    gold = Math.round(gold || 0);
+    const G = Diplomacy.list(give), R = Diplomacy.list(get);
     if (b.diplo[a.id] === 'war') return { ok: false, why: b.name + ' ne traite pas avec un ennemi.' };
     if ((b.relations[a.id] || 0) < -30) return { ok: false, why: b.name + ' se méfie trop de vous.' };
-    if (give && !b.known.includes(give)) return { ok: false, why: 'Il ne connaît pas ce sort.' };
-    if (get && !Diplomacy.canLearn(b, get)) return { ok: false, why: 'Ce sort ne lui sert à rien.' };
-    const vg = give ? Diplomacy.spellValue(give) : 0, vr = get ? Diplomacy.spellValue(get) : 0;
-    if (!give) return { ok: true };   // un cadeau s'accepte toujours
+    if (G.some(id => !b.known.includes(id))) return { ok: false, why: 'Il ne connaît pas ce sort.' };
+    if (R.some(id => !Diplomacy.canLearn(b, id))) return { ok: false, why: 'Ce sort ne lui sert à rien.' };
+    if (gold > 0 && gold > (a.gold || 0)) return { ok: false, why: 'Vous n\'avez pas autant d\'or.' };
+    if (gold < 0 && -gold > Diplomacy.goldSpare(b)) return { ok: false, why: b.name + ' ne peut pas verser autant d\'or.' };
+    const { vg, vr } = Diplomacy.dealValue(G, R, gold);
+    if (!vg) return { ok: true };   // un cadeau s'accepte toujours
     if (vr < vg * Diplomacy.tradeFactor(game, b, a)) return { ok: false, why: b.name + ' estime ce marché trop inégal.' };
     return { ok: true };
   },
-  // a propose à l'IA b : elle donne give, reçoit get (give nul : cadeau de get)
-  proposeTrade(game, a, b, give, get) {
-    const pa = game.players[a], pb = game.players[b];
+  // l'or qui rend le marché acceptable pour b : > 0, ce que a doit ajouter au minimum ; < 0, ce que b verserait au plus (par 5)
+  fairGold(game, a, b, give, get) {
+    const { vg, vr } = Diplomacy.dealValue(give, get, 0), k = Diplomacy.tradeFactor(game, b, a);
+    if (!vg && !vr) return 0;
+    if (vr < vg * k) return Math.ceil((vg * k - vr) / Diplomacy.GOLD_IN / 5) * 5;
+    return -Math.min(Diplomacy.goldSpare(b), Math.floor((vr / k - vg) / Diplomacy.GOLD_OUT / 5) * 5);
+  },
+  // a propose à l'IA b : elle donne give, reçoit get, et l'or (give vide, sans or de sa part : cadeau)
+  proposeTrade(game, a, b, give, get, gold) {
+    gold = Math.round(gold || 0);
+    const pa = game.players[a], pb = game.players[b], G = Diplomacy.list(give), R = Diplomacy.list(get);
     const asked = (pb.aiAsked = pb.aiAsked || {});
-    const key = a + ':trade:' + give + ':' + get;
+    const key = a + ':trade:' + G.slice().sort().join(',') + ':' + R.slice().sort().join(',') + ':' + gold;
     if (asked[key] === game.turn) return { ok: false, text: pb.name + ' vous a déjà répondu.' };
     asked[key] = game.turn;
-    const ans = Diplomacy.tradeAnswer(game, pa, pb, give, get);
+    const ans = Diplomacy.tradeAnswer(game, pa, pb, G, R, gold);
     if (!ans.ok) return { ok: false, text: ans.why };
-    Diplomacy.doTrade(game, pa, pb, give, get);
-    return { ok: true, text: give ? 'Marché conclu : vous apprenez ' + DATA.spells[give].name + ', ' + pb.name + ' apprend ' + DATA.spells[get].name + '.' : pb.name + ' accepte votre présent : ' + DATA.spells[get].name + '.' };
+    Diplomacy.doTrade(game, pa, pb, G, R, gold);
+    const names = L => L.map(id => DATA.spells[id].name).join(', ');
+    if (!G.length && gold >= 0) return { ok: true, text: pb.name + ' accepte votre présent : ' + [names(R), gold ? gold + ' or' : ''].filter(Boolean).join(', ') + '.' };
+    const you = [G.length ? 'vous apprenez ' + names(G) : '', gold < 0 ? 'vous recevez ' + (-gold) + ' or' : ''].filter(Boolean).join(' et ');
+    const him = pb.name + ' ' + [R.length ? 'apprend ' + names(R) : '', gold > 0 ? 'reçoit ' + gold + ' or' : ''].filter(Boolean).join(' et ');
+    return { ok: true, text: 'Marché conclu : ' + [you, R.length || gold > 0 ? him : ''].filter(Boolean).join(', ') + '.' };
   },
-  // l'échange : a reçoit give de b, b reçoit get de a
-  doTrade(game, pa, pb, give, get) {
-    if (give) Diplomacy.learnFrom(game, pa, give, pb);
-    if (get) Diplomacy.learnFrom(game, pb, get, pa);
-    const bonus = give ? 5 : Math.min(20, Math.round(Diplomacy.spellValue(get) / 40) + 3);
-    Diplomacy.adjust(game, pb.id, pa.id, bonus, give ? 'trade' : 'gift');
-    if (give) Diplomacy.adjust(game, pa.id, pb.id, bonus, 'trade');
+  // l'échange : a reçoit give de b, b reçoit get de a ; gold > 0 : a paie b, gold < 0 : b paie a
+  doTrade(game, pa, pb, give, get, gold) {
+    const G = Diplomacy.list(give), R = Diplomacy.list(get);
+    gold = Math.round(gold || 0);
+    for (const id of G) Diplomacy.learnFrom(game, pa, id, pb);
+    for (const id of R) Diplomacy.learnFrom(game, pb, id, pa);
+    if (gold > 0) { const g = Math.min(gold, pa.gold); pa.gold -= g; pb.gold += g; }
+    else if (gold < 0) { const g = Math.min(-gold, pb.gold); pb.gold -= g; pa.gold += g; }
+    const gift = !G.length && gold >= 0;
+    const bonus = !gift ? 5 : Math.min(20, (R.length ? Math.round(R.reduce((t, id) => t + Diplomacy.spellValue(id), 0) / 40) + 3 : 0) + Math.round(gold / 10));
+    Diplomacy.adjust(game, pb.id, pa.id, bonus, gift ? 'gift' : 'trade');
+    if (!gift) Diplomacy.adjust(game, pa.id, pb.id, bonus, 'trade');
   },
   // le meilleur échange équitable entre deux sorciers (pour l'IA) : ce que chacun gagne le plus, à valeur voisine
   bestSwap(game, a, b) {
