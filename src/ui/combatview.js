@@ -403,7 +403,8 @@ const CombatView = {
       items.push({ d: p.c + p.r + (bt.onRampart(Math.round(p.c), Math.round(p.r)) ? 0.55 : 0.5), f: () => CombatView.drawUnit(b, p) });
     }
     items.sort((a, b) => a.d - b.d);
-    for (const it of items) it.f();
+    // (0.31.54) une figurine qui ne se dessine pas n'emporte plus les suivantes : sans cela, toutes celles d'après restaient invisibles
+    for (const it of items) { try { it.f(); } catch (e) { ctx.globalAlpha = 1; ctx.shadowBlur = 0; ctx.filter = 'none'; if (typeof App !== 'undefined' && App.oops) App.oops(e); } }
     // ciblage d'un sort : chaque cible valable est cerclée d'or, pulsé, avec une flèche au-dessus
     if (CombatView.mode) {
       const pulse = .5 + .5 * Math.sin(now / 170);
@@ -959,96 +960,102 @@ const CombatView = {
   AUTO_SPEEDS: ['fast', 'medium', 'slow'],
   af(fast, normal) { const k = { fast: 0, medium: .45, slow: 1 }[(typeof App !== 'undefined' && App.prefs && App.prefs.autoSpeed) || 'fast'] || 0; return fast + (normal - fast) * k; },
   sleep(ms) { return new Promise(r => setTimeout(r, CombatView.auto ? CombatView.af(Math.min(ms, 60), ms) : ms)); },
+  async playOne(bt, e) {
+    if (e.type === 'move') {
+      const p = CombatView.pos[e.id]; if (!p) return;
+      p.act = { name: 'walk', t0: performance.now(), loop: true };
+      for (let i = 1; i < e.path.length; i++) { const [c, r] = e.path[i]; Sfx.play('step'); await CombatView.tween(p, c, r, 110); }
+      p.act = null;
+    } else if (e.type === 'melee') {
+      const a = bt.units.find(x => x.id === e.a), d = bt.units.find(x => x.id === e.d);
+      const pa = CombatView.pos[e.a], pd = CombatView.pos[e.d];
+      if (pa && pd) {
+        const oc = pa.c, or = pa.r;
+        if (e.charge) CombatView.float(pa.c, pa.r, 'Charge +' + e.charge, '#ffd66e');
+        if (e.flank) CombatView.float(pd.c, pd.r, e.flank === 2 ? 'Dans le dos !' : 'De flanc !', '#ffb36e');
+        // Effroi : les figurines paralysées de peur, au-dessus de qui les a perdues
+        if (e.fearA) CombatView.float(pa.c, pa.r - .35, 'Effroi −' + e.fearA, '#c9a0ff');
+        if (e.fearD) CombatView.float(pd.c, pd.r - .35, 'Effroi −' + e.fearD, '#c9a0ff');
+        // l'attaquant frappe (riposte du défenseur s'il rend des coups) ; l'impact tombe sur l'image du coup porté
+        const anim = a && Anim.has(Sprites.lookOf(a.u));
+        pa.act = { name: 'attack', t0: performance.now() };
+        if (e.received && d && Anim.has(Sprites.lookOf(d.u))) pd.act = { name: 'attack', t0: performance.now() + 90 };
+        await CombatView.tween(pa, oc + (pd.c - oc) * .35, or + (pd.r - or) * .35, anim ? 170 : 110);
+        if (anim) await CombatView.sleep(110);
+        pd.hit = performance.now(); if (e.received) pa.hit = performance.now() + 60;
+        CombatView.flash(pd.c, pd.r, '#ffffff', 220); Sfx.play('clash'); CombatView.burst(pd.c, pd.r, ['#ffffff', '#ffe9a8', '#c9d3e0'], 10, 'spark');
+        const onGate = String(e.d).startsWith('gate:');
+        if (onGate) CombatView.burst(pd.c, pd.r, ['#8a5a2a', '#c9a46a', '#5a3a1e'], 12, 'dust');
+        CombatView.float(pd.c, pd.r, (onGate ? 'porte -' : '-') + e.dealt, onGate ? '#e0b070' : '#ff7a6a'); if (e.received) CombatView.float(oc, or, '-' + e.received, '#ffb0a0');
+        if (CombatView.tview && CombatView.tview[e.d]) CombatView.tview[e.d].hp -= e.dealt;
+        await CombatView.tween(pa, oc, or, 120);
+      }
+    } else if (e.type === 'ranged') {
+      const pa = CombatView.pos[e.a], pd = CombatView.pos[e.d];
+      const sh = bt.units.find(x => x.id === e.a);
+      if (pa && sh && Anim.has(Sprites.lookOf(sh.u))) { pa.act = { name: 'attack', t0: performance.now() }; await CombatView.sleep(260); }
+      if (pa && pd) {
+        Sfx.play(e.kind === 'magic' ? 'zap' : e.kind === 'boulder' ? 'boulder' : 'arrow', { realm: e.realm });
+        if (e.a === 'spire') await CombatView.beam(pa, pd, REALM_COLORS[e.realm] || '#c9a0ff');
+        else {
+          // le projectile de cette unité (flèches, javelots, pierres de fronde, boulets, rochers, traits magiques), en volée d'une par figurine
+          const style = CombatView.projStyle(sh, e.kind), n = sh && !sh.dead && ['arrow', 'javelin', 'stone'].includes(style) ? Math.max(1, Math.min(6, bt.figures(sh))) : 1;
+          await CombatView.projectile(pa, pd, e.kind === 'magic' ? (REALM_COLORS[e.realm] || '#ff9a4a') : e.kind === 'boulder' ? '#8d8a84' : '#e8dcc0', e.kind, style, n, CombatView.projSprite(sh, e, style));
+        }
+        CombatView.float(pd.c, pd.r, '-' + e.dealt, '#ffb46a');
+      }
+      if (CombatView.tview && CombatView.tview[e.d]) CombatView.tview[e.d].hp -= e.dealt;
+    } else if (e.type === 'spell') {
+      const sp = DATA.spells[e.spell];
+      CombatView.banner((sp ? sp.name : e.spell), sp ? REALM_COLORS[sp.realm] : '#fff');
+      Sfx.play('spell', { realm: sp && sp.realm });
+      if (e.target) { CombatView.flash(e.target[0], e.target[1], sp ? REALM_COLORS[sp.realm] : '#fff', 500); CombatView.burst(e.target[0], e.target[1], [sp ? REALM_COLORS[sp.realm] : '#fff', '#ffffff'], 18, 'rise'); }
+      await CombatView.sleep(320);
+    } else if (e.type === 'fx') {
+      const col = { fire: '#ff6a2a', lightning: '#9fd8ff', cold: '#bfe8ff', magic: '#ff9aff', doom: '#d02a2a', death: '#9a5ac8', holy: '#fff6c0', heal: '#7fffa0', stone: '#b0a890', chaos: '#ff4a2a', sorcery: '#6aa7ff', wall: '#c0b090', fizzle: '#888' }[e.fx] || '#fff';
+      if (e.at) {
+        CombatView.flash(e.at[0], e.at[1], col, 420);
+        const kind = { fire: 'fire', chaos: 'fire', lightning: 'bolt', heal: 'rise', holy: 'rise', cold: 'snow', death: 'smoke', doom: 'smoke', stone: 'dust', wall: 'dust' }[e.fx] || 'spark';
+        CombatView.burst(e.at[0], e.at[1], [col, '#ffffff'], kind === 'bolt' ? 6 : 16, kind);
+      }
+      Sfx.play({ fire: 'fire', chaos: 'fire', lightning: 'lightning', heal: 'heal', holy: 'heal', fizzle: 'bad' }[e.fx] || 'zap', { realm: { death: 'death', doom: 'death', sorcery: 'sorcery', magic: 'chaos', cold: 'sorcery', stone: 'nature' }[e.fx] });
+      await CombatView.sleep(150);
+    } else if (e.type === 'death') {
+      const p = CombatView.pos[e.id]; Sfx.play('death');
+      const dead = bt.units.find(x => x.id === e.id);
+      if (p && dead && Anim.has(Sprites.lookOf(dead.u))) { p.act = { name: 'death', t0: performance.now() }; await CombatView.sleep(Anim.duration('death') + 250); }
+      if (p) { CombatView.burst(p.c, p.r, ['#5a4a44', '#8a7a70'], 10, 'smoke'); const t0 = performance.now(); await new Promise(res => { const f = () => { const t = (performance.now() - t0) / 380; p.alpha = Math.max(0, 1 - t); if (t < 1) requestAnimationFrame(f); else res(); }; f(); }); }
+    } else if (e.type === 'vanish') {
+      // rappelée : la figurine s'efface sans mourir
+      const p = CombatView.pos[e.id];
+      if (p) { const t0 = performance.now(); await new Promise(res => { const f = () => { const t = (performance.now() - t0) / 420; p.alpha = Math.max(0, 1 - t); if (t < 1) requestAnimationFrame(f); else res(); }; f(); }); }
+    } else if (e.type === 'towerFall') {
+      const tv = CombatView.tview && CombatView.tview[e.id], p = CombatView.pos[e.id];
+      if (tv) { tv.fallen = true; tv.hp = 0; }
+      if (p) { CombatView.flash(p.c, p.r, '#c0b090', 500); CombatView.burst(p.c, p.r, ['#8d8a84', '#c0b090', '#5a544c'], 28, 'dust'); }
+      Sfx.play('boulder');
+      await CombatView.sleep(420);
+    } else if (e.type === 'vortex') {
+      const vp = CombatView.vpos[e.id] || (CombatView.vpos[e.id] = { c: e.c, r: e.r });
+      Sfx.play('step');
+      await CombatView.tween(vp, e.c, e.r, 90);
+    } else if (e.type === 'summon') {
+      const b = bt.units.find(x => x.id === e.id); Sfx.play('summon'); if (b) { CombatView.pos[e.id] = { c: b.c, r: b.r, alpha: 1 }; CombatView.flash(b.c, b.r, '#d0b0ff', 500); CombatView.burst(b.c, b.r, ['#d0b0ff', '#ffffff'], 20, 'rise'); }
+      await CombatView.sleep(200);
+    }
+  },
   async playEvents() {
     const bt = CombatView.bt;
     while (CombatView.evIdx < bt.events.length) {
       const e = bt.events[CombatView.evIdx++];
-      if (e.type === 'move') {
-        const p = CombatView.pos[e.id]; if (!p) continue;
-        p.act = { name: 'walk', t0: performance.now(), loop: true };
-        for (let i = 1; i < e.path.length; i++) { const [c, r] = e.path[i]; Sfx.play('step'); await CombatView.tween(p, c, r, 110); }
-        p.act = null;
-      } else if (e.type === 'melee') {
-        const a = bt.units.find(x => x.id === e.a), d = bt.units.find(x => x.id === e.d);
-        const pa = CombatView.pos[e.a], pd = CombatView.pos[e.d];
-        if (pa && pd) {
-          const oc = pa.c, or = pa.r;
-          if (e.charge) CombatView.float(pa.c, pa.r, 'Charge +' + e.charge, '#ffd66e');
-          if (e.flank) CombatView.float(pd.c, pd.r, e.flank === 2 ? 'Dans le dos !' : 'De flanc !', '#ffb36e');
-          // Effroi : les figurines paralysées de peur, au-dessus de qui les a perdues
-          if (e.fearA) CombatView.float(pa.c, pa.r - .35, 'Effroi −' + e.fearA, '#c9a0ff');
-          if (e.fearD) CombatView.float(pd.c, pd.r - .35, 'Effroi −' + e.fearD, '#c9a0ff');
-          // l'attaquant frappe (riposte du défenseur s'il rend des coups) ; l'impact tombe sur l'image du coup porté
-          const anim = a && Anim.has(Sprites.lookOf(a.u));
-          pa.act = { name: 'attack', t0: performance.now() };
-          if (e.received && d && Anim.has(Sprites.lookOf(d.u))) pd.act = { name: 'attack', t0: performance.now() + 90 };
-          await CombatView.tween(pa, oc + (pd.c - oc) * .35, or + (pd.r - or) * .35, anim ? 170 : 110);
-          if (anim) await CombatView.sleep(110);
-          pd.hit = performance.now(); if (e.received) pa.hit = performance.now() + 60;
-          CombatView.flash(pd.c, pd.r, '#ffffff', 220); Sfx.play('clash'); CombatView.burst(pd.c, pd.r, ['#ffffff', '#ffe9a8', '#c9d3e0'], 10, 'spark');
-          const onGate = String(e.d).startsWith('gate:');
-          if (onGate) CombatView.burst(pd.c, pd.r, ['#8a5a2a', '#c9a46a', '#5a3a1e'], 12, 'dust');
-          CombatView.float(pd.c, pd.r, (onGate ? 'porte -' : '-') + e.dealt, onGate ? '#e0b070' : '#ff7a6a'); if (e.received) CombatView.float(oc, or, '-' + e.received, '#ffb0a0');
-          if (CombatView.tview && CombatView.tview[e.d]) CombatView.tview[e.d].hp -= e.dealt;
-          await CombatView.tween(pa, oc, or, 120);
-        }
-      } else if (e.type === 'ranged') {
-        const pa = CombatView.pos[e.a], pd = CombatView.pos[e.d];
-        const sh = bt.units.find(x => x.id === e.a);
-        if (pa && sh && Anim.has(Sprites.lookOf(sh.u))) { pa.act = { name: 'attack', t0: performance.now() }; await CombatView.sleep(260); }
-        if (pa && pd) {
-          Sfx.play(e.kind === 'magic' ? 'zap' : e.kind === 'boulder' ? 'boulder' : 'arrow', { realm: e.realm });
-          if (e.a === 'spire') await CombatView.beam(pa, pd, REALM_COLORS[e.realm] || '#c9a0ff');
-          else {
-            // le projectile de cette unité (flèches, javelots, pierres de fronde, boulets, rochers, traits magiques), en volée d'une par figurine
-            const style = CombatView.projStyle(sh, e.kind), n = sh && !sh.dead && ['arrow', 'javelin', 'stone'].includes(style) ? Math.max(1, Math.min(6, bt.figures(sh))) : 1;
-            await CombatView.projectile(pa, pd, e.kind === 'magic' ? (REALM_COLORS[e.realm] || '#ff9a4a') : e.kind === 'boulder' ? '#8d8a84' : '#e8dcc0', e.kind, style, n, CombatView.projSprite(sh, e, style));
-          }
-          CombatView.float(pd.c, pd.r, '-' + e.dealt, '#ffb46a');
-        }
-        if (CombatView.tview && CombatView.tview[e.d]) CombatView.tview[e.d].hp -= e.dealt;
-      } else if (e.type === 'spell') {
-        const sp = DATA.spells[e.spell];
-        CombatView.banner((sp ? sp.name : e.spell), sp ? REALM_COLORS[sp.realm] : '#fff');
-        Sfx.play('spell', { realm: sp && sp.realm });
-        if (e.target) { CombatView.flash(e.target[0], e.target[1], sp ? REALM_COLORS[sp.realm] : '#fff', 500); CombatView.burst(e.target[0], e.target[1], [sp ? REALM_COLORS[sp.realm] : '#fff', '#ffffff'], 18, 'rise'); }
-        await CombatView.sleep(320);
-      } else if (e.type === 'fx') {
-        const col = { fire: '#ff6a2a', lightning: '#9fd8ff', cold: '#bfe8ff', magic: '#ff9aff', doom: '#d02a2a', death: '#9a5ac8', holy: '#fff6c0', heal: '#7fffa0', stone: '#b0a890', chaos: '#ff4a2a', sorcery: '#6aa7ff', wall: '#c0b090', fizzle: '#888' }[e.fx] || '#fff';
-        if (e.at) {
-          CombatView.flash(e.at[0], e.at[1], col, 420);
-          const kind = { fire: 'fire', chaos: 'fire', lightning: 'bolt', heal: 'rise', holy: 'rise', cold: 'snow', death: 'smoke', doom: 'smoke', stone: 'dust', wall: 'dust' }[e.fx] || 'spark';
-          CombatView.burst(e.at[0], e.at[1], [col, '#ffffff'], kind === 'bolt' ? 6 : 16, kind);
-        }
-        Sfx.play({ fire: 'fire', chaos: 'fire', lightning: 'lightning', heal: 'heal', holy: 'heal', fizzle: 'bad' }[e.fx] || 'zap', { realm: { death: 'death', doom: 'death', sorcery: 'sorcery', magic: 'chaos', cold: 'sorcery', stone: 'nature' }[e.fx] });
-        await CombatView.sleep(150);
-      } else if (e.type === 'death') {
-        const p = CombatView.pos[e.id]; Sfx.play('death');
-        const dead = bt.units.find(x => x.id === e.id);
-        if (p && dead && Anim.has(Sprites.lookOf(dead.u))) { p.act = { name: 'death', t0: performance.now() }; await CombatView.sleep(Anim.duration('death') + 250); }
-        if (p) { CombatView.burst(p.c, p.r, ['#5a4a44', '#8a7a70'], 10, 'smoke'); const t0 = performance.now(); await new Promise(res => { const f = () => { const t = (performance.now() - t0) / 380; p.alpha = Math.max(0, 1 - t); if (t < 1) requestAnimationFrame(f); else res(); }; f(); }); }
-      } else if (e.type === 'vanish') {
-        // rappelée : la figurine s'efface sans mourir
-        const p = CombatView.pos[e.id];
-        if (p) { const t0 = performance.now(); await new Promise(res => { const f = () => { const t = (performance.now() - t0) / 420; p.alpha = Math.max(0, 1 - t); if (t < 1) requestAnimationFrame(f); else res(); }; f(); }); }
-      } else if (e.type === 'towerFall') {
-        const tv = CombatView.tview && CombatView.tview[e.id], p = CombatView.pos[e.id];
-        if (tv) { tv.fallen = true; tv.hp = 0; }
-        if (p) { CombatView.flash(p.c, p.r, '#c0b090', 500); CombatView.burst(p.c, p.r, ['#8d8a84', '#c0b090', '#5a544c'], 28, 'dust'); }
-        Sfx.play('boulder');
-        await CombatView.sleep(420);
-      } else if (e.type === 'vortex') {
-        const vp = CombatView.vpos[e.id] || (CombatView.vpos[e.id] = { c: e.c, r: e.r });
-        Sfx.play('step');
-        await CombatView.tween(vp, e.c, e.r, 90);
-      } else if (e.type === 'summon') {
-        const b = bt.units.find(x => x.id === e.id); Sfx.play('summon'); if (b) { CombatView.pos[e.id] = { c: b.c, r: b.r, alpha: 1 }; CombatView.flash(b.c, b.r, '#d0b0ff', 500); CombatView.burst(b.c, b.r, ['#d0b0ff', '#ffffff'], 20, 'rise'); }
-        await CombatView.sleep(200);
-      }
+      // (0.31.54) un événement qui plante ne fige plus la bataille : les figurines effacées (mort, rappel) ne restaient invisibles
+      // que parce que la remise en place des positions, plus bas, n'était jamais atteinte ; l'erreur s'affiche et reste lisible
+      try { await CombatView.playOne(bt, e); } catch (err) { if (typeof App !== 'undefined' && App.oops) App.oops(err); else console.error(err); }
+
     }
     for (const t of bt.towers || []) { const tv = CombatView.tview && CombatView.tview[t.id]; if (tv) { tv.hp = t.hp; if (t.dead) tv.fallen = true; } }
     // positions synchronisées
-    for (const b of bt.units) { const p = CombatView.pos[b.id] || (CombatView.pos[b.id] = { c: b.c, r: b.r, alpha: 1 }); if (!b.dead) { p.c = b.c; p.r = b.r; p.alpha = 1; } }
+    for (const b of bt.units) { const p = CombatView.pos[b.id] || (CombatView.pos[b.id] = { c: b.c, r: b.r, alpha: 1 }); if (!b.dead) { p.c = b.c; p.r = b.r; p.alpha = 1; if (p.act && p.act.name === 'death') p.act = null; } }
     CombatView.renderLog();
   },
   tween(p, c, r, ms) {
@@ -1311,10 +1318,21 @@ const CombatView = {
       const names = list => { if (!list.length) return ''; const n = new Map(); for (const b of list) { const k = Units.label(b.u); n.set(k, (n.get(k) || 0) + 1); } return ' <span class="dim">(' + [...n].map(([k, c]) => U.esc(k) + (c > 1 ? ' ×' + c : '')).join(', ') + ')</span>'; };
       if (!Music.jingle(won ? 'victory' : 'defeat')) Sfx.play(won ? 'victory' : 'defeat');
       const opts = canReplay ? [{ label: 'Rejouer manuellement', value: 'replay' }, { label: 'Accepter le résultat', value: true, primary: true }] : [{ label: 'Continuer', value: true, primary: true }];
-      UI.choice(won ? 'Victoire !' : 'Défaite', '<p class="serif" style="font-size:17px">' + (won ? (bt.fled === 1 - CombatView.humanSide ? 'L\'ennemi bat en retraite.' : 'Le champ de bataille vous appartient.') : bt.fled === CombatView.humanSide ? 'Vos troupes ont battu en retraite.' : 'Vos forces ont été repoussées.') + '</p><p>Ennemis ' + (taken.some(b => from(b) !== CombatView.humanSide) ? 'anéantis ou pris' : 'anéantis') + ' : <b>' + killed + '</b>' + names(killedB) + '<br>Pertes : <b>' + lost + '</b>' + names(lostB) + '</p>' + CombatView.xpReport(bt)
+      // (0.31.54) le résultat peut attendre : un coup d'œil au champ de bataille et à son journal, puis on y revient
+      opts.unshift({ label: 'Revoir le champ de bataille', value: 'look' });
+      const ask = () => UI.choice(won ? 'Victoire !' : 'Défaite', '<p class="serif" style="font-size:17px">' + (won ? (bt.fled === 1 - CombatView.humanSide ? 'L\'ennemi bat en retraite.' : 'Le champ de bataille vous appartient.') : bt.fled === CombatView.humanSide ? 'Vos troupes ont battu en retraite.' : 'Vos forces ont été repoussées.') + '</p><p>Ennemis ' + (taken.some(b => from(b) !== CombatView.humanSide) ? 'anéantis ou pris' : 'anéantis') + ' : <b>' + killed + '</b>' + names(killedB) + '<br>Pertes : <b>' + lost + '</b>' + names(lostB) + '</p>' + CombatView.xpReport(bt)
         + (canReplay ? '<p class="dim">Bataille résolue automatiquement : acceptez ce résultat, ou rejouez-la vous-même depuis le début, sur le même terrain, avec les mêmes troupes et le même mana. Le résultat rejoué sera définitif.</p>' : ''), opts, { noClose: true })
-        .then(v => v === 'replay' ? CombatView.replay() : CombatView.close());
+        .then(async v => { if (v === 'look') { await CombatView.lookBack(); return ask(); } return v === 'replay' ? CombatView.replay() : CombatView.close(); });
+      ask();
     }, 350);
+  },
+  lookBack() {
+    return new Promise(res => {
+      const done = () => { document.body.classList.remove('peeking'); bar.remove(); window.removeEventListener('keydown', onKey, true); res(); };
+      const onKey = e => { if (['Escape', 'Enter', ' '].includes(e.key)) { e.preventDefault(); e.stopPropagation(); done(); } };
+      const bar = h('div', { id: 'peekbar', class: 'card combat-look' }, 'Le champ de bataille', h('button', { class: 'btn primary', onclick: done }, 'Revenir au résultat'));
+      document.body.classList.add('peeking'); document.body.append(bar); window.addEventListener('keydown', onKey, true);
+    });
   },
   // l'expérience que la bataille va rapporter à vos survivants (Battle.xpGains, celle qu'applique Game.applyBattle) et les promotions
   xpReport(bt) {
@@ -1389,6 +1407,8 @@ const CombatView = {
     const game = App.game, old = CombatView.bt;
     CombatView.restore(game, CombatView.snap);
     const bt = new Battle(game, Object.assign({}, old.opts, { layout: CombatView.snap.layout }));
+    // le journal de la bataille automatique reste lisible au-dessus de la nouvelle (0.31.54)
+    if (old && old.log && bt.log) bt.log.unshift(...old.log, '— La bataille reprend depuis le début —');
     CombatView.bt = bt; CombatView.replayed = true; CombatView.autoStart = false; CombatView.finished = false;
     CombatView.auto = false; CombatView.mode = null; CombatView.sel = null; CombatView.reach = null; CombatView.busy = false;
     CombatView.anims = []; CombatView.floats = []; CombatView.parts = []; CombatView.vpos = {}; CombatView.evIdx = 0; CombatView.pos = {};
@@ -1811,6 +1831,11 @@ const CombatView = {
     const att = bt.player(ATT_SIDE), def = bt.player(DEF_SIDE);
     $('#c-title').textContent = (CombatView.info.city ? CombatView.info.city.name : CombatView.info.site ? Game.siteName(CombatView.info.site) : 'Bataille') + ' · tour ' + bt.round;
     $('#c-sub').innerHTML = '<span style="color:' + (att ? att.color : '#aaa') + '">' + U.esc(att ? att.name : 'Pillards') + '</span> contre <span style="color:' + (def ? def.color : '#aaa') + '">' + U.esc(def ? def.name : CombatView.info.site ? 'Gardiens' : 'Pillards') + '</span> · ' + (bt.side === CombatView.humanSide ? '<b class="gold">À vous de jouer</b>' : 'Tour adverse');
+    // (0.31.54) la magie du sorcier dans la bataille, toujours sous les yeux : compétence restante sur le total, et mana
+    { const side = CombatView.humanSide, me = bt.player(side);
+      if (me && !me.banished && me.alive) { const tot = Magic.totalSkill(game, me);
+        $('#c-sub').insertAdjacentHTML('beforeend', '<div class="c-magic">Compétence <b>' + bt.skillLeft[side] + '</b>/' + tot + ' · mana <b class="mana">' + U.fmt(me.mana) + '</b>'
+          + (bt.castThisRound && bt.castThisRound[side] ? ' <span class="dim">· sort déjà lancé ce tour</span>' : '') + '</div>'); } }
     const l = $('#c-left');
     l.innerHTML = CombatView.sel ? CombatView.unitPanel(CombatView.sel) + '<div class="dim" style="margin-top:6px">Mouvement restant : ' + (CombatView.sel.moves / 2) + '</div>' : '<span class="dim">Sélectionnez une unité.</span>';
     CombatView.renderBar();
@@ -1913,8 +1938,10 @@ const CombatView = {
   },
   renderLog() {
     const el = $('#c-log'); if (!el) return;
-    el.innerHTML = CombatView.bt.log.slice(-12).map(t => '<div>' + U.esc(t) + '</div>').join('');
-    el.scrollTop = el.scrollHeight;
+    // (0.31.54) tout le journal (les 300 dernières lignes), et on ne ramène pas en bas celui qui remonte le lire
+    const atEnd = el.scrollHeight - el.scrollTop - el.clientHeight < 24;
+    el.innerHTML = CombatView.bt.log.slice(-300).map(t => '<div>' + U.esc(t) + '</div>').join('');
+    if (atEnd) el.scrollTop = el.scrollHeight;
   },
   renderBar() {
     const bar = $('#c-bar'); if (!bar) return;

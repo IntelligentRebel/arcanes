@@ -3,6 +3,8 @@
 
 const App = {
   game: null, sel: null, drag: null, keys: {}, lastClick: 0,
+  // délai d'un double-clic : celui de Windows par défaut (0.31.54 ; 340 ms manquaient les doubles-clics un peu lents, sur une cité ou une pile)
+  DBL: 500,
 
   async boot() {
     I18N.page();
@@ -39,11 +41,23 @@ const App = {
   },
 
   // erreur inattendue : notée dans la console, dite une fois au joueur (trois messages au plus par session)
+  // une erreur imprévue : un encadré qui reste à l'écran jusqu'à ce qu'on le ferme (0.31.54 ; le message passait trop vite pour être lu,
+  // surtout en bataille), avec l'endroit du code et un bouton pour le copier et le signaler
   oops(e) {
     const msg = String(e && e.message || e || '').slice(0, 160); console.error(e);
     App._oops = App._oops || new Set(); if (!msg || App._oops.has(msg) || App._oops.size >= 3) return;
     App._oops.add(msg);
-    try { UI.toast('Erreur inattendue : ' + U.esc(msg), 'warn'); } catch (x) { /* rien */ }
+    try {
+      const where = String(e && e.stack || '').split('\n').map(l => l.trim()).filter(l => l.startsWith('at ') || l.includes('@')).slice(0, 3).map(l => l.replace(/\(?(file|https?):\/\/\S*\/index\.html/, '(index.html').replace(/^at /, '')).join(' · ');
+      const text = 'Arcanes ' + GAME_VERSION + (App.game ? ', tour ' + App.game.turn : '') + (CombatView.active ? ', en bataille' : '') + ' : ' + msg + (where ? '\n' + where : '');
+      let box = $('#oops'); if (!box) { box = h('div', { id: 'oops' }); document.body.append(box); }
+      const card = h('div', { class: 'oops-card' },
+        h('div', { class: 'oops-t' }, 'Erreur inattendue'), h('div', { class: 'oops-m' }, msg), where ? h('div', { class: 'oops-w' }, where) : null,
+        h('div', { class: 'oops-b' },
+          h('button', { class: 'btn', onclick: ev => { ev.stopPropagation(); try { navigator.clipboard.writeText(text); ev.target.textContent = 'Copié'; } catch (x) { /* rien */ } } }, 'Copier pour le signaler'),
+          h('button', { class: 'btn ghost', onclick: ev => { ev.stopPropagation(); card.remove(); } }, 'Fermer')));
+      box.append(card);
+    } catch (x) { try { UI.toast('Erreur inattendue : ' + U.esc(msg), 'warn'); } catch (y) { /* rien */ } }
   },
 
   start(game, opts = {}) {
@@ -694,6 +708,8 @@ const App = {
   selectNext(first, skipIds, other) {
     const game = App.game;
     if (skipIds) for (const id of skipIds) { const u = game.units[id]; if (u) u.waited = game.turn; }
+    // (0.31.54) « Suivante » remet à plus tard la pile qu'on quitte : sans cela, deux piles voisines se renvoyaient la main (A, B, A, B…)
+    if (other && App.sel) for (const id of App.sel.ids) { const u = game.units[id]; if (u && u.owner === App.pid) u.waited = game.turn; }
     const curIds = other && App.sel ? App.sel.ids : [];
     let cands = App.unitsWaiting().filter(u => u.waited !== game.turn && !curIds.includes(u.id));
     if (!cands.length) cands = App.unitsWaiting().filter(u => u.waited !== game.turn);
@@ -1746,6 +1762,8 @@ const App = {
       const tradeOk = kind !== 'trade' || (o.known.includes(off.give) && Diplomacy.canLearn(pl, off.give) && pl.known.includes(off.get) && Diplomacy.canLearn(o, off.get));
       const choices = [{ label: 'Refuser', value: false }, { label: kind === 'demand' ? 'Céder' : 'Accepter', value: true, primary: kind !== 'demand', disabled: (kind === 'demand' && off.gold > pl.gold) || !tradeOk }];
       if (goal) choices.unshift({ label: goLabel, value: 'capital' });
+      // (0.31.54) la cité qu'il offre : un coup d'œil avant d'accepter
+      if (cityOk && !(goal && goal.id === off.city)) choices.unshift({ label: 'Voir la cité offerte', value: 'offered' });
       const TGO = '\u200bcible';   // bouton du pied de fenêtre caché : la cible se regarde depuis son propre encadré
       if (tGoal) choices.push({ label: TGO, value: 'target' });
       let yes;
@@ -1766,6 +1784,10 @@ const App = {
           if (goal) { c.style.cursor = 'pointer'; c.title = isCap ? 'Voir sa capitale' : 'Voir sa plus grande cité repérée'; c.addEventListener('click', () => { const bt = [...document.querySelectorAll('.contact-modal footer button')].find(x => x.textContent === goLabel); if (bt) bt.click(); }); }
         }, 10);
         yes = await pr;
+        if (yes === 'offered' && App.game === game) {
+          const cc = game.cities[off.city]; MapView.centerOn(cc.x, cc.y, cc.plane); MapView.ping(cc.x, cc.y, cc.plane); App.refresh();
+          await App.peek(U.esc(cc.name) + ', la cité qu\'offre ' + U.esc(o.name), 'Revenir à la proposition'); continue;
+        }
         if ((yes !== 'capital' && yes !== 'target') || App.game !== game) break;
         const w = yes === 'target' ? T : o, gl = yes === 'target' ? tGoal : goal, cap = yes === 'target' ? tCap : isCap, wn = U.esc(Players.nameFor(game, pl.id, w.id));
         MapView.centerOn(gl.x, gl.y, gl.plane); MapView.ping(gl.x, gl.y, gl.plane); App.refresh();
@@ -1944,9 +1966,11 @@ const App = {
   saveMeta(slot) { try { return JSON.parse(localStorage.getItem('arcanes:' + slot + ':meta')); } catch (e) { return null; } },
   // un fichier de sauvegarde : dans le dossier choisi (Chrome, Edge) s'il y en a un, sinon dans les téléchargements
   // ask : le joueur vient de cliquer, on peut lui demander l'autorisation d'écrire dans son dossier
-  async exportSave(ask) {
+  // manual : un export demandé depuis le menu porte aussi l'heure (0.31.54) : il ne se confond plus avec la copie automatique du même tour
+  async exportSave(ask, manual) {
     const name = (App.me().name || 'sorcier').normalize('NFKD').replace(/[^\w-]+/g, '').toLowerCase() || 'sorcier';
-    const file = 'arcanes-' + name + '-' + __k('@save_turn', 'tour') + App.game.turn + '.json', text = App.serialize();
+    const d = new Date(), z = n => String(n).padStart(2, '0'), stamp = manual ? '-' + z(d.getHours()) + z(d.getMinutes()) + z(d.getSeconds()) : '';
+    const file = 'arcanes-' + name + '-' + __k('@save_turn', 'tour') + App.game.turn + stamp + '.json', text = App.serialize();
     if (App.prefs.saveDir && SaveDir.supported()) {
       const r = await SaveDir.write(file, text, ask);
       if (r.ok) return { ok: true, file, dir: r.dir };
@@ -2165,11 +2189,11 @@ const App = {
     // second clic d'un double-clic qui vient de fixer une route ou une cible de sort : ignoré, sinon il devient un ordre de marche
     if (App.swallow && App.swallow.key === key && now < App.swallow.until) { App.swallow = null; App.lastClick = 0; return; }
     App.swallow = null;
-    const dbl = now - (App.lastClick || 0) < 340 && App.lastTile === key; App.lastClick = dbl ? 0 : now; App.lastTile = key;
-    if (MagicUI.targeting) { App.swallow = { key, until: now + 450 }; MagicUI.pickTarget(p, x, y); return; }
-    if (App.tilePick) { App.swallow = { key, until: now + 450 }; const tp = App.tilePick; App.tilePick = null; tp.resolve({ plane: p, x, y }); return; }
+    const dbl = now - (App.lastClick || 0) < App.DBL && App.lastTile === key; App.lastClick = dbl ? 0 : now; App.lastTile = key;
+    if (MagicUI.targeting) { App.swallow = { key, until: now + App.DBL + 50 }; MagicUI.pickTarget(p, x, y); return; }
+    if (App.tilePick) { App.swallow = { key, until: now + App.DBL + 50 }; const tp = App.tilePick; App.tilePick = null; tp.resolve({ plane: p, x, y }); return; }
     if (App.roadMode) {
-      App.swallow = { key, until: now + 450 };
+      App.swallow = { key, until: now + App.DBL + 50 };
       const eng = game.units[App.roadMode.ids[0]];
       if (eng && eng.plane !== p) { UI.toast('Vos ingénieurs sont sur l\'autre plan : revenez-y (P) pour tracer la route.', 'warn', 'roadmode'); return; }
       const ids = App.roadMode.ids; App.roadMode = null; MapView.roadPreview = null;
@@ -2183,7 +2207,7 @@ const App = {
     // dans une cité, les unités ne se sélectionnent qu'en cliquant sur leur figurine ; le reste de la case, c'est la cité
     const onUnits = mine.length > 0 && (!city || !e || e.clientX == null || MapView.unitHitInCity(x, y, e.clientX, e.clientY));
     // double-clic sur une pile qu'on vient de sélectionner par erreur au premier clic : l'ordre vaut pour la sélection d'avant
-    if (dbl && App.prevSel && App.prevSel.key === key && now - App.prevSel.t < 400) { App.sel = App.prevSel.sel; MapView.sel = { tileKey: App.sel.plane + ':' + App.sel.x + ',' + App.sel.y, ids: App.sel.ids }; App.prevSel = null; await App.moveSelected(x, y); return; }
+    if (dbl && App.prevSel && App.prevSel.key === key && now - App.prevSel.t < App.DBL + 60) { App.sel = App.prevSel.sel; MapView.sel = { tileKey: App.sel.plane + ':' + App.sel.x + ',' + App.sel.y, ids: App.sel.ids }; App.prevSel = null; await App.moveSelected(x, y); return; }
     App.prevSel = null;
     if (App.sel && App.sel.plane === p && !(App.sel.x === x && App.sel.y === y)) {
       if (dbl) { clearTimeout(App._cityT); if (!App.prefs.movedOnce) App.setPref('movedOnce', true); await App.moveSelected(x, y); return; }
@@ -2193,7 +2217,7 @@ const App = {
       // sa propre cité : elle s'ouvre, sauf si un second clic arrive (double-clic = y envoyer les unités)
       if (city && city.owner === App.pid) {
         clearTimeout(App._cityT);
-        App._cityT = setTimeout(() => { if (App.lastTile === key && App.lastClick === now && !UI.busy && App.game === game) CityUI.open(city.id); }, 360);
+        App._cityT = setTimeout(() => { if (App.lastTile === key && App.lastClick === now && !UI.busy && App.game === game) CityUI.open(city.id); }, App.DBL + 20);
         return;
       }
       // tant que le joueur n'a jamais déplacé d'unité, le rappel revient à chaque clic ; ensuite, une fois par session

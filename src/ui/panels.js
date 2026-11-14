@@ -294,7 +294,7 @@ const Panels = {
         u.owner === pl.id ? h('h4', { style: 'margin-top:12px' }, 'Coffre de la forteresse') : null,
         u.owner === pl.id ? (pl.vault.length ? vault : h('div', { class: 'dim' }, 'Le coffre est vide. Les objets trouvés sans place libre y sont rangés.')) : null);
       // colonne 3 : caractéristiques détaillées
-      const row = (ic, label, v, b, extra) => h('div', { class: 'hs-stat' }, h('span', { class: 'ic', html: ICONS[ic] || '' }), h('span', { class: 'lab' }, label), h('b', null, v), v !== b ? h('span', { class: 'gold', title: 'Apport des objets' }, ' (' + (v - b > 0 ? '+' : '') + (v - b) + ' objets)') : null, extra ? h('span', { class: 'dim' }, ' ' + extra) : null);
+      const row = (ic, label, v, b, extra) => h('div', { class: 'hs-stat' }, h('span', { class: 'ic', html: ICONS[ic] || '' }), h('span', { class: 'lab' }, label), h('b', null, v), h('span', { class: 'ex' }, v !== b ? h('span', { class: 'gold', title: 'Apport des objets' }, ' (' + (v - b > 0 ? '+' : '') + (v - b) + ' objets)') : null, extra ? h('span', { class: 'dim' }, ' ' + extra) : null));
       const stats = h('div', { class: 'hs-stats' },
         s.melee ? row('melee', 'Attaque', s.melee, bare.melee) : null,
         s.ranged ? row(s.rangedType === 'magic' ? 'magic' : 'ranged', s.rangedType === 'magic' ? 'Tir magique' : 'Tir', s.ranged, bare.ranged, s.ammo ? '×' + s.ammo : '') : null,
@@ -303,8 +303,8 @@ const Panels = {
         row('res', 'Résistance', s.res, bare.res),
         row('hp', 'Points de vie', s.maxHp, bare.maxHp, Units.health(game, u) < s.maxHp ? '(' + Units.health(game, u) + ' restants)' : ''),
         row(s.flying ? 'fly' : 'move', 'Mouvement', s.move, bare.move, s.flying ? 'en volant' : ''),
-        h('div', { class: 'hs-stat' }, h('span', { class: 'ic' }), h('span', { class: 'lab' }, 'Précision'), h('b', null, s.toHit + ' %'), s.toHit !== bare.toHit ? h('span', { class: 'gold' }, ' (+' + (s.toHit - bare.toHit) + ' % objets)') : null,
-          Units.pierce(s.toHit) ? h('span', { class: 'dim', title: 'Au-delà de 100 %, chaque tranche de 10 % ignore 1 point de défense de la cible' }, ' · ignore ' + Units.pierce(s.toHit) + ' de défense') : null),
+        h('div', { class: 'hs-stat' }, h('span', { class: 'ic' }), h('span', { class: 'lab' }, 'Précision'), h('b', null, s.toHit + ' %'), h('span', { class: 'ex' }, s.toHit !== bare.toHit ? h('span', { class: 'gold' }, ' (+' + (s.toHit - bare.toHit) + ' % objets)') : null,
+          Units.pierce(s.toHit) ? h('span', { class: 'dim', title: 'Au-delà de 100 %, chaque tranche de 10 % ignore 1 point de défense de la cible' }, ' · ignore ' + Units.pierce(s.toHit) + ' de défense') : null)),
         s.caster ? row('mana', 'Mana de combat', s.caster, bare.caster) : null);
       const tal = new Set(u.hero.talents || []);
       const ab = Object.keys(s.ab).filter(k => ABILITY_NAMES[k]);
@@ -724,7 +724,7 @@ const Panels = {
       if (old && old.uid !== App.game.uid && !await UI.confirm('Sauvegarder', 'Remplacer la sauvegarde manuelle d\'une autre partie (' + U.esc(old.name || '?') + ', tour ' + old.turn + ') ?', 'Remplacer')) return;
       const ok = App.save('manual'); UI.toast(ok ? 'Partie sauvegardée.' : 'Échec de la sauvegarde.', ok ? '' : 'warn'); m.close(); });
     row('Charger', 'Reprendre la dernière sauvegarde manuelle ou automatique', () => { m.close(); Setup.loadMenu(); });
-    row('Exporter la partie', 'Télécharger un fichier de sauvegarde', () => App.exportSave());
+    row('Exporter la partie', 'Télécharger un fichier de sauvegarde', () => App.exportSave(true, true));
     // la sauvegarde téléchargée tous les N tours (10 par défaut)
     { const on = App.prefs.autoExport > 0, n = App.prefs.autoExportN || 10;
       const num = h('input', { type: 'number', min: 1, max: 200, step: 1, value: n, style: 'width:64px', onclick: e => e.stopPropagation(),

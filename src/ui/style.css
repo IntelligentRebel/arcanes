@@ -254,7 +254,7 @@ input[type=text], input[type=number], select { background: #0f141c; border: 1px 
 .cspell .t1 { font-size: 13px; font-weight: 600; }
 .cspell .t1 .dim { font-weight: 400; }
 .cspell .t2 { font-size: 11px; color: #aab3c2; line-height: 1.35; }
-.clog { position: absolute; left: 12px; bottom: 12px; width: 380px; max-height: 160px; overflow: auto; font-size: 12px; padding: 8px; z-index: 2; }
+.clog { position: absolute; left: 12px; bottom: 12px; width: 400px; max-height: min(34vh, 300px); overflow: auto; font-size: 12px; padding: 8px; z-index: 2; }
 .clog div { padding: 1px 0; color: #c9d0dc; }
 .ctitle { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); padding: 6px 16px; z-index: 2; text-align: center; }
 .ctitle h3 { font-size: 18px; }
@@ -498,7 +498,11 @@ body.peeking #modal-root * { pointer-events: none !important; }
 .hs-stat { display: flex; align-items: center; gap: 6px; font-size: 13px; }
 .hs-stat .ic { width: 16px; height: 16px; display: inline-flex; }
 .hs-stat .ic svg { width: 16px; height: 16px; }
-.hs-stat .lab { width: 110px; color: var(--muted); }
+.hs-stat .lab { width: 110px; color: var(--muted); flex: none; }
+/* 0.31.54 : la valeur ne se coupe jamais ; ce qui la précise (objets, perce-défense) s'enroule dans sa propre colonne */
+.hs-stat > b { white-space: nowrap; flex: none; }
+.hs-stat .ex { flex: 1 1 auto; min-width: 0; font-size: 12px; line-height: 1.25; }
+.hs-stat .ex .gold { white-space: nowrap; }
 .hs-abil { display: flex; flex-wrap: wrap; gap: 4px; }
 .abl.tal { border-color: #b98a2e; color: #f1dca4; }
 
@@ -520,6 +524,9 @@ body.peeking #modal-root * { pointer-events: none !important; }
 
 /* coup d'œil pendant une proposition : la carte seule répond */
 body.peek-offer #topbar, body.peek-offer #side, body.peek-offer #endturn, body.peek-offer #toasts { pointer-events: none; opacity: .55; }
+/* 0.31.54 : les fenêtres restées dessous (l'écran des sorciers…) s'effacent aussi le temps du coup d'œil */
+body.peek-offer #modal-root { opacity: 0; pointer-events: none !important; transition: opacity .2s; }
+body.peek-offer #modal-root * { pointer-events: none !important; }
 
 /* légende accomplie */
 .modal.legend-modal { border-color: #c9a24a; box-shadow: 0 0 0 1px rgba(230,180,80,.35), 0 0 46px rgba(230,180,80,.32), 0 24px 60px rgba(0,0,0,.8); background: radial-gradient(ellipse at 50% -10%, rgba(230,180,80,.2), transparent 62%), linear-gradient(180deg, #1b1a1c, #121218); animation: legendIn .7s cubic-bezier(.2,.9,.3,1.15); }
@@ -622,3 +629,13 @@ html { forced-color-adjust: none; }
   .retort.dis, .row.dis, .spell.dis { opacity: .45; text-decoration: line-through; }
   button:focus-visible, .row:focus-visible { outline: 2px solid #fff; }
 }
+
+/* 0.31.54 : les erreurs imprévues restent affichées (en bataille aussi) jusqu'à ce qu'on les ferme */
+#oops { position: fixed; left: 12px; bottom: 12px; z-index: 400; display: flex; flex-direction: column; gap: 8px; max-width: min(520px, calc(100vw - 24px)); }
+#oops .oops-card { background: rgba(28, 12, 12, .96); border: 1px solid #b04a3a; border-radius: 10px; padding: 10px 12px; box-shadow: 0 6px 24px rgba(0,0,0,.5); color: #f3e3d8; font-size: 13px; }
+#oops .oops-t { font-family: var(--display); font-weight: 700; color: #ff9a80; margin-bottom: 4px; }
+#oops .oops-m { font-family: ui-monospace, Consolas, monospace; font-size: 12px; word-break: break-word; }
+#oops .oops-w { font-family: ui-monospace, Consolas, monospace; font-size: 11px; color: #c9b8ae; margin-top: 4px; word-break: break-all; }
+#oops .oops-b { display: flex; gap: 8px; margin-top: 8px; justify-content: flex-end; }
+#c-sub .c-magic { margin-top: 3px; font-size: 12px; color: #c9d0dc; }
+#peekbar.combat-look { top: 112px; }

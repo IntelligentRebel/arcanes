@@ -519,7 +519,11 @@ const MapView = {
       const sx0 = Math.max(0, -ox / ts), sy0 = Math.max(0, -oy / ts);
       const sx1 = Math.min(world.w, (W - ox) / ts), sy1 = Math.min(world.h, (H - oy) / ts);
       if (sx1 <= sx0 || sy1 <= sy0) continue;
-      ctx.drawImage(layer, sx0 * LT, sy0 * LT, (sx1 - sx0) * LT, (sy1 - sy0) * LT, ox + sx0 * ts, oy + sy0 * ts, (sx1 - sx0) * ts, (sy1 - sy0) * ts);
+      // (0.31.54) bords calés sur les pixels de l'écran, et la copie de gauche déborde d'un pixel sous celle de droite : à la
+      // couture est-ouest, deux bords fractionnaires lissés laissaient voir le fond noir en un trait vertical sur certaines cartes graphiques
+      const snap = v => Math.round(v * dpr) / dpr;
+      const dx0 = snap(ox + sx0 * ts), dx1 = snap(ox + sx1 * ts) + (sx1 >= world.w - 1e-6 ? 1 / dpr : 0);
+      ctx.drawImage(layer, sx0 * LT, sy0 * LT, (sx1 - sx0) * LT, (sy1 - sy0) * LT, dx0, oy + sy0 * ts, dx1 - dx0, (sy1 - sy0) * ts);
     }
     ctx.imageSmoothingEnabled = false;
     // tuiles visibles
@@ -1167,7 +1171,14 @@ const MapView = {
   wrapNear(x) { const w = MapView.game.world.w; let d = x - MapView.camX; if (d > w / 2) return -w; if (d < -w / 2) return w; return 0; },
   isAdjacentToMine(u) { for (const o of Object.values(MapView.game.units)) if (o.owner === MapView.pid && o.plane === u.plane && World.dist(MapView.game.world, o.x, o.y, u.x, u.y) <= 1) return true; return false; },
   topUnit(units) {
-    return U.max(units, u => (u.riteDemon ? 3000 : 0) + (u.nemesis ? 2000 : 0) + (u.hero ? 1000 : 0) + Units.strength(MapView.game, u) * (Units.isSettler(u) ? 0.1 : 1));
+    const g = MapView.game, u0 = units[0];
+    // (0.31.54) en mer, hors d'une cité, une pile embarquée se montre par son navire : un héros dessiné debout sur l'océan
+    // laissait croire qu'il marchait sur l'eau
+    if (u0 && World.isWaterAt(g.world, u0.plane, u0.x, u0.y) && !Cities.at(g, u0.plane, u0.x, u0.y)) {
+      const ships = units.filter(u => Units.stats(g, u).sailing);
+      if (ships.length && units.some(u => { const s = Units.stats(g, u); return !s.sailing && !s.flying && !s.swimming && !s.ab.waterWalking; })) return U.max(ships, u => Units.strength(g, u));
+    }
+    return U.max(units, u => (u.riteDemon ? 3000 : 0) + (u.nemesis ? 2000 : 0) + (u.hero ? 1000 : 0) + Units.strength(g, u) * (Units.isSettler(u) ? 0.1 : 1));
   },
   drawUnit(ctx, u, n, x, y, ts, inCity, selected, walkT, frozen) {
     const game = MapView.game;

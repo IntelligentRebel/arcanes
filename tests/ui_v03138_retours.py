@@ -132,8 +132,9 @@ async def main():
 
         # ---------- 4. une erreur d'affichage n'arrête plus la boucle ----------
         r = await pg.evaluate("""async () => { const d = MapView.draw; let n = 0, boom = 0; MapView.draw = function () { n++; if (boom < 2) { boom++; throw new Error('essai'); } return d.apply(this, arguments); };
-          await new Promise(r => setTimeout(r, 600)); MapView.draw = d; return { n, toast: [...document.querySelectorAll('.toast')].map(t => t.innerText).join(' | ') }; }""")
-        ok(r['n'] > 5 and 'Unexpected error: essai' in r['toast'], 'la boucle continue après une erreur (%d images), dite au joueur' % r['n'])
+          await new Promise(r => setTimeout(r, 600)); MapView.draw = d; return { n, toast: [...document.querySelectorAll('#oops .oops-card')].map(t => t.innerText).join(' | ') }; }""")
+        # (0.31.54) l'erreur reste dans un encadré qu'on ferme soi-même, au lieu d'un message qui passe
+        ok(r['n'] > 5 and 'Unexpected error' in r['toast'] and 'essai' in r['toast'], 'la boucle continue après une erreur (%d images), dite au joueur : %r' % (r['n'], r['toast'][:80]))
         ok(not [e for e in errs if 'essai' not in e], 'aucune autre erreur %s' % errs[:2])
         await ctx.close()
 

@@ -31,11 +31,15 @@ const SaveDir = {
   // au clic du joueur : la fenêtre du navigateur, puis l'autorisation d'écriture
   async pick() {
     if (!SaveDir.supported()) return { ok: false, why: 'unsupported' };
-    let dir;
-    try { dir = await window.showDirectoryPicker({ id: 'arcanes-saves', mode: 'readwrite', startIn: 'documents' }); }
-    catch (e) { return { ok: false, why: e && e.name === 'AbortError' ? 'cancel' : (e && e.message) || 'denied' }; }
+    // (0.31.54) la fenêtre s'ouvre dans le dernier dossier choisi, même oublié depuis : le navigateur n'en donne jamais le chemin complet
+    let dir, last = null;
+    try { last = (await SaveDir.store('readonly', s => s.get('last'))) || null; } catch (e) { /* rien */ }
+    try { dir = await window.showDirectoryPicker({ id: 'arcanes-saves', mode: 'readwrite', startIn: last || 'documents' }); }
+    catch (e) { if (last && e && e.name === 'TypeError') { try { dir = await window.showDirectoryPicker({ id: 'arcanes-saves', mode: 'readwrite', startIn: 'documents' }); } catch (e2) { e = e2; } }
+      if (!dir) return { ok: false, why: e && e.name === 'AbortError' ? 'cancel' : (e && e.message) || 'denied' }; }
     if (await SaveDir.perm(dir, true) !== 'granted') return { ok: false, why: 'denied' };
     try { await SaveDir.keep(dir); } catch (e) { return { ok: false, why: (e && e.message) || 'store' }; }
+    try { await SaveDir.store('readwrite', s => s.put(dir, 'last')); } catch (e) { /* simple confort : la fenêtre s'ouvrira ailleurs */ }
     return { ok: true, name: dir.name };
   },
   async forget() { try { await SaveDir.store('readwrite', s => s.delete('saves')); } catch (e) { /* rien à oublier */ } },
