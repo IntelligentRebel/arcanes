@@ -1,0 +1,69 @@
+{
+ "nom": "Entraînement 24 : moteur 0.31.61 ; le boss du plan d'en face avec la Myrrien offerte, et seul plutôt qu'à deux",
+ "experiences": [
+  {
+   "id": "boss_myrrien",
+   "note": "Difficile, 250 tours. Le plan d'en face doit produire un boss final. La 0.31.60 offre la Myrrien aux rivaux envoyés sur Myrror (ils gardent leurs aptitudes) et y envoie presque toujours Zirrakh. Avant, la Myrrien remplaçait leurs aptitudes. À lire, pour le plan d'en face : part des cités du plus fort aux tours 150, 200 et 250, son armée face au sorcier observé, le Sort de Maîtrise, ses victoires ; et le score du sorcier observé. La 3e variante répond à la question en suspens : un seul sorcier en face au lieu de deux.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 660000,
+   "graines": 500,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "Myrrien offerte, deux en face (jeu)",
+     "niveau": "hard",
+     "autrePlan": 2
+    },
+    {
+     "nom": "Myrrien d'avant 0.31.60, deux en face",
+     "niveau": "hard",
+     "autrePlan": 2,
+     "myrrienAvant": true
+    },
+    {
+     "nom": "Myrrien offerte, un seul en face",
+     "niveau": "hard",
+     "autrePlan": 1
+    }
+   ]
+  },
+  {
+   "id": "boss_myrrien_hardcore",
+   "note": "La même chose en Hardcore, où le boss compte le plus.",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 670000,
+   "graines": 160,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "Myrrien offerte, deux en face (jeu)",
+     "niveau": "hardcore",
+     "autrePlan": 2
+    },
+    {
+     "nom": "Myrrien d'avant 0.31.60, deux en face",
+     "niveau": "hardcore",
+     "autrePlan": 2,
+     "myrrienAvant": true
+    },
+    {
+     "nom": "Myrrien offerte, un seul en face",
+     "niveau": "hardcore",
+     "autrePlan": 1
+    }
+   ]
+  }
+ ]
+}

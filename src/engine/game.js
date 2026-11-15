@@ -74,10 +74,12 @@ const Game = {
     // Le nombre de sorciers par plan ne change pas.
     const N = Math.min(presets.length, nOpp + nOther), pick = presets.slice(0, N);
     const nMyr = home === 1 ? Math.min(N, nOpp) : Math.max(0, N - nOpp);
-    const lean = pick.map(w => ({ w, s: Game.darkLean(w) + (game.rng.next() + game.rng.next() + game.rng.next() - 1.5) * 12 }));
+    // (banc 24) myrranOld : la règle d'avant 0.31.60, pour comparer (la Myrrien remplace ses aptitudes, le natif penche moins)
+    const old = !!opts.myrranOld;
+    const lean = pick.map(w => ({ w, s: Game.darkLean(w, old) + (game.rng.next() + game.rng.next() + game.rng.next() - 1.5) * 12 }));
     const toMyrror = new Set(lean.slice().sort((a, b) => b.s - a.s).slice(0, nMyr).map(o => o.w));
     for (let i = 0; i < N; i++) {
-      const w = Game.onPlane(pick[i], toMyrror.has(pick[i]) ? 1 : 0);
+      const w = Game.onPlane(pick[i], toMyrror.has(pick[i]) ? 1 : 0, old);
       const myrran = w.retorts.includes('myrran');
       const races = Object.values(DATA.races).filter(r => r.plane === (myrran ? 'myrror' : 'arcanus'));
       all.push({ name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: game.rng.weighted(races, r => Game.raceLean(w, r.id)).id, human: false, color: PLAYER_COLORS[i + 1], personality: game.rng.pick(['expansionist', 'militarist', 'perfectionist', 'maniac', 'balanced']) });
@@ -125,11 +127,11 @@ const Game = {
   raceLean(w, race) { const a = Game.RACE_REALMS[race] || {}, b = w.books || {}; let s = 1; for (const k in a) s += a[k] * (b[k] || 0) / 6; return s; },
   // ce qui fait pencher un sorcier vers Myrror : la Mort, un peu le Chaos, l'aptitude Myrrien ; la Vie le retient sur Arcanus
   // (0.31.60) un natif de Myrror (Zirrakh) y retourne presque toujours
-  darkLean(w) { const b = w.books || {}; return (b.death || 0) + 0.5 * (b.chaos || 0) - (b.life || 0) + ((w.retorts || []).includes('myrran') ? 16 : 0); },
+  darkLean(w, old) { const b = w.books || {}; return (b.death || 0) + 0.5 * (b.chaos || 0) - (b.life || 0) + ((w.retorts || []).includes('myrran') ? (old ? 4 : 16) : 0); },
   // un sorcier prédéfini placé sur un plan donné, ses choix ajustés pour rester à 11
-  onPlane(w, plane) {
+  onPlane(w, plane, old) {
     const my = w.retorts.includes('myrran');
-    if (plane === 1 && !my) return Game.asMyrran(w);
+    if (plane === 1 && !my) return old ? Game.asMyrranOld(w) : Game.asMyrran(w);
     if (plane === 0 && my) return Game.asArcanian(w);
     return w;
   },
@@ -149,6 +151,17 @@ const Game = {
   // infernale, sa Maîtrise du Chaos...), et les 5 de mana de la forteresse viennent avec le plan
   asMyrran(w) {
     return Object.assign({}, w, { books: Object.assign({}, w.books), retorts: w.retorts.includes('myrran') ? w.retorts.slice() : w.retorts.concat(['myrran']) });
+  },
+  // (banc 24) la règle d'avant 0.31.60 : la Myrrien remplace ses aptitudes, et il rend des livres pour rester à 11 choix
+  asMyrranOld(w) {
+    const c = Object.assign({}, w, { books: Object.assign({}, w.books), retorts: ['myrran'] });
+    const picks = () => U.sum(Object.values(c.books), n => n) + U.sum(c.retorts, r => DATA.retorts[r].cost);
+    while (picks() > 11) {
+      const realm = U.max(Object.keys(c.books).filter(k => c.books[k] > 1), k => c.books[k]);
+      if (!realm) break;
+      c.books[realm]--;
+    }
+    return c;
   },
   // parties sauvegardées avec une version antérieure : ajouts sans risque (nouveaux sorts arcaniques, trouvailles)
   upgrade(game) {
