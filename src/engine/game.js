@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.55';
+const GAME_VERSION = '0.31.56';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -449,9 +449,14 @@ const Game = {
       case 'recruits': {
         const race = DATA.races[home ? home.race : pl.race];
         const t = race && race.units.find(u => DATA.units[u].en === 'Spearmen');
-        if (!t || Move.stackCount(game, p, x, y, pl.id) >= MAX_STACK) { asGold(40, 'les volontaires repartent avec vos remerciements'); break; }
-        const u = Units.create(game, t, pl.id, p, x, y); u.moves = 0;
-        txt = 'des ' + DATA.units[t].name.toLowerCase() + ' se joignent à vous'; gain = '+1 unité';
+        // (0.31.56) une trouvaille ramassée en volant ou en bateau sur un îlot (moins de 40 cases) sans aucune de vos cités y laisserait les volontaires
+        // sans issue (vu par Cor'e : des lanciers klackons seuls sur une île) : ils se présentent alors à la cité la plus proche
+        let at = [p, x, y], where = '';
+        const land = Game.reachableLand(game, p, x, y, 60), cut = land.size < 40 && !Cities.ofPlayer(game, pl.id).some(c => c.plane === p && land.has(c.y * world.w + c.x));
+        if (cut && home) { at = Spells.spotNear(game, pl, home, t || 'HighMenSpearmen'); where = ' à ' + home.name; }
+        if (!t || !at || Move.stackCount(game, at[0], at[1], at[2], pl.id) >= MAX_STACK) { asGold(40, 'les volontaires repartent avec vos remerciements'); break; }
+        const u = Units.create(game, t, pl.id, at[0], at[1], at[2]); u.moves = 0;
+        txt = 'des ' + DATA.units[t].name.toLowerCase() + ' se joignent à vous' + where; gain = '+1 unité';
         break;
       }
     }
@@ -666,7 +671,10 @@ const Game = {
     let moved = 0;
     // le joueur : on retient qui marche avec qui ce tour-ci (les rapides d'un groupe arrêté par ses lents n'attendent pas d'ordre)
     if (pl && pl.human) { const g = units.length > 1 ? { turn: game.turn, ids: units.map(u => u.id) } : null; for (const u of units) u.groupMove = g; }
+    for (const u of units) delete u.halted;
     const stop = () => { for (const u of units) { u.path = null; u.status = ''; u.attackOrder = false; delete u.rallyHold; } };
+    // (0.31.56) arrêtées par une rencontre, les troupes gardent leur route (visible, et « Reprendre la route » la relance) : elles attendent un ordre
+    const halt = () => { for (const u of units) { u.status = ''; u.attackOrder = false; delete u.rallyHold; if (u.path && u.path.length) u.halted = true; } };
     // le joueur : une armée hostile qui apparaît à deux cases de la route arrête la marche (pas les éclaireurs en exploration)
     const watch = pl && pl.human && !opts.auto && !units.some(u => u.status === 'explore');
     const foesSeen = () => { const vis = Move.visibility(game, pid), out = new Map();
@@ -760,7 +768,7 @@ const Game = {
         const dest = units[0].attackOrder && units[0].dest;
         for (const [k, o] of seen) { if (known.has(k)) continue; known.add(k); if (dest && o.plane === plane && o.x === dest[0] && o.y === dest[1]) continue; if (o.plane === plane && World.dist(world, o.x, o.y, nx, ny) <= 2) found = found || o; }
         if (found) {
-          stop(); if (Game.hooks.update) Game.hooks.update({ type: 'move', ids: units.map(u => u.id) });
+          halt(); if (Game.hooks.update) Game.hooks.update({ type: 'move', ids: units.map(u => u.id) });
           const fc = Cities.at(game, found.plane, found.x, found.y);
           const who = found.owner < 0 ? (fc ? 'la garnison de ' + fc.name : 'des monstres') : 'des troupes de ' + Players.nameFor(game, pid, found.owner);
           return { ok: true, moved, blocked: true, why: 'Vos troupes aperçoivent ' + who + ' (' + Units.label(found) + ') et s\'arrêtent.' };
@@ -904,9 +912,9 @@ const Game = {
     // créatures asservies : elles disparaissent ; unités rappelées : elles rentrent à la forteresse de leur maître (ou juste à côté)
     for (const u of res.vanished || []) if (game.units[u.id]) Units.remove(game, u);
     for (const u of res.recalled || []) if (game.units[u.id]) {
-      const rp = game.players[u.owner], fc = rp && game.cities[rp.fortress], at = fc && Spells.spotNear(game, rp, fc, u.type);
+      const rp = game.players[u.owner], fc = rp && Spells.summonCity(game, rp), at = fc && Spells.spotNear(game, rp, fc, u.type);
       if (at) { u.plane = at[0]; u.x = at[1]; u.y = at[2]; u.path = null; u.dest = null; u.status = ''; }
-      else if (rp) Game.log(game, rp.id, Units.label(u) + ' n\'a pu être rappelé : plus de place autour de la forteresse.', { unit: u.id });
+      else if (rp) Game.log(game, rp.id, Units.label(u) + ' n\'a pu être rappelé : plus de place autour de ' + (fc ? fc.name : 'la forteresse') + '.', { unit: u.id });
     }
     // morts relevés en morts-vivants : ils changent de maître (la possession, elle, prend fin avec le combat)
     for (const a of res.animated || []) if (game.units[a.u.id]) a.u.owner = battle.owner(a.side);
@@ -1577,8 +1585,9 @@ const Game = {
     tx = World.wx(world, tx);
     if (tx === u0.x && ty === u0.y) return { ok: false, why: 'Choisissez une autre case que celle des ingénieurs.' };
     // le tracé le plus court et le plus vite empierré, pas le trajet le plus facile à pied
-    const path = Move.roadPath(game, units, plane, tx, ty, { omniscient: !pl });
-    if (!path) return { ok: false, why: 'Aucun chemin jusque-là.' };
+    // (0.31.56) par la terre seulement : des ingénieurs volants (draconiens) traçaient leur route au-dessus de la mer, où rien ne s'empierre
+    const path = Move.roadPath(game, units, plane, tx, ty, { omniscient: !pl, roadable: true });
+    if (!path) return { ok: false, why: 'Aucun tracé par la terre jusque-là.' };
     const tiles = [[u0.x, u0.y]].concat(path.map(p => [p.x, p.y]));
     const todo = tiles.filter(([x, y]) => !World.hasRoad(world, plane, x, y));
     const mult = U.sum(units, u => DATA.units[u.type].race === 'dwarf' ? 2 : 1);

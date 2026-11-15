@@ -2091,7 +2091,7 @@ const COMBAT_SPELL_HANDLERS = {
       else if (r === 7) { if (CombatSpells.canAffect(bt, t, 'disintegrate')) H.disintegrate(bt, side, t); else none('Désintégration, sans effet'); }
     }
   },
-  recall_hero(bt, side, t) { t.recalled = true; t.dead = true; bt.say(bt.subj(t, 'est rappelé') + ' à la forteresse.'); bt.ev({ type: 'fx', fx: 'sorcery', at: [t.c, t.r] }); bt.ev({ type: 'vanish', id: t.id }); },
+  recall_hero(bt, side, t) { t.recalled = true; t.dead = true; bt.say(bt.subj(t, 'est rappelé') + ' au cercle d\'invocation.'); bt.ev({ type: 'fx', fx: 'sorcery', at: [t.c, t.r] }); bt.ev({ type: 'vanish', id: t.id }); },
   word_of_recall(bt, side, t) { COMBAT_SPELL_HANDLERS.recall_hero(bt, side, t); },
 };
 COMBAT_SPELL_HANDLERS.revive = null;

@@ -747,7 +747,13 @@ const Panels = {
       if (old && old.uid !== App.game.uid && !await UI.confirm('Sauvegarder', 'Remplacer la sauvegarde manuelle d\'une autre partie (' + U.esc(old.name || '?') + ', tour ' + old.turn + ') ?', 'Remplacer')) return;
       const ok = App.save('manual'); UI.toast(ok ? 'Partie sauvegardée.' : 'Échec de la sauvegarde.', ok ? '' : 'warn'); m.close(); });
     row('Charger', 'Reprendre la dernière sauvegarde manuelle ou automatique', () => { m.close(); Setup.loadMenu(); });
-    row('Exporter la partie', 'Télécharger un fichier de sauvegarde', () => App.exportSave(true, true));
+    // (0.31.56) l'export dit ce qu'il a fait : sans retour, on clique deux fois
+    row('Exporter la partie', 'Télécharger un fichier de sauvegarde', async () => {
+      let r = await App.exportSave(true, true);
+      if (!r.ok) { App.download(r.file, App.serialize()); r = { ok: true, file: r.file }; }
+      Sfx.play('click');
+      UI.toast(r.dir ? 'Partie exportée dans ' + U.esc(r.dir) + ' : ' + U.esc(r.file) : 'Partie exportée dans vos téléchargements : ' + U.esc(r.file), '', 'export');
+    });
     // la sauvegarde téléchargée tous les N tours (10 par défaut)
     { const on = App.prefs.autoExport > 0, n = App.prefs.autoExportN || 10;
       const num = h('input', { type: 'number', min: 1, max: 200, step: 1, value: n, style: 'width:64px', onclick: e => e.stopPropagation(),

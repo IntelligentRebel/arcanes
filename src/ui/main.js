@@ -611,6 +611,7 @@ const App = {
     // seulement sur un nœud ; grisé, avec la raison, quand la fusion ne servirait à rien (nœud déjà à vous et bien gardé…)
     const mc = melder && Game.canMeld(game, melder);
     if (melder && !mc.off) b('Fusionner', null, () => { const r = Game.meld(game, melder.id); if (!r.ok || r.failed) UI.toast(r.why, 'warn'); MapView.invalidate(); App.afterAction(); }, mc.ok, mc.ok ? 'primary' : '', mc.ok ? mc.what : mc.why);
+    { const hu = sel.find(u => u.halted && u.path && u.path.length && u.dest); if (hu) b('Reprendre la route', null, () => App.moveSelected(hu.dest[0], hu.dest[1]), sel.some(u => u.moves > 0), 'primary', 'Repartir vers la destination d\'avant la rencontre (l\'itinéraire est recalculé)'); }
     if (sel.some(u => (u.path && u.path.length) || u.status === 'roadto')) b('Annuler l\'ordre', null, () => App.cancelOrders(sel), true, '', sel.some(u => u.status === 'roadto') ? 'Abandonner la route en cours' : 'Oublier l\'itinéraire en cours');
     b('Explorer', 'X', () => App.explore(sel), true, '', 'Exploration automatique : la pile part d\'elle-même vers les terres inconnues, tour après tour');
     b('Sentinelle', 'S', () => { for (const u of sel) { u.status = 'sentry'; u.path = null; } App.selectNext(); });
@@ -664,7 +665,7 @@ const App = {
     App._autoT = setTimeout(() => {
       if (!App.game || App.game !== game || App.sel !== sel || App.moving || UI.busy || CombatView.active) return;
       const units = (sel ? sel.ids : []).map(id => game.units[id]).filter(Boolean);
-      if (units.some(u => u.moves > 0 && !u.status && !(u.path && u.path.length))) return;
+      if (units.some(u => u.moves > 0 && !u.status && (!(u.path && u.path.length) || u.halted))) return;
       App.selectNext();
     }, delay);
   },
@@ -697,7 +698,7 @@ const App = {
     const game = App.game;
     // une unité rapide qui a marché ce tour avec des plus lentes, à bout de mouvement à ses côtés, s'arrête avec elles
     const tied = u => u.groupMove && u.groupMove.turn === game.turn && u.groupMove.ids.some(id => { const o = id !== u.id && game.units[id]; return o && o.plane === u.plane && o.x === u.x && o.y === u.y && o.moves <= 0; });
-    return Object.values(game.units).filter(u => u.owner === App.pid && u.moves > 0 && !u.status && !u.path && u.guardian == null && u.passed !== game.turn && !tied(u));
+    return Object.values(game.units).filter(u => u.owner === App.pid && u.moves > 0 && !u.status && (!u.path || u.halted) && u.guardian == null && u.passed !== game.turn && !tied(u));
   },
   // passer son tour : l'unité reste où elle est, sans ordre durable (contrairement à Sentinelle) ; elle reviendra au tour suivant
   passTurn(sel) {
@@ -840,7 +841,8 @@ const App = {
     // une sélection explore ensemble ; deux éclaireurs envoyés séparément restent séparés, même s'ils se croisent
     for (const u of sel) { u.status = 'explore'; u.path = null; u.exploreGroup = sel[0].id; u.exploreTarget = null; }
     const moved = await App.exploreStep(sel);
-    if (!moved) UI.toast('Aucune terre inconnue accessible depuis ici.', 'warn');
+    // (0.31.56) sans mouvement ce tour, l'exploration part au tour suivant : le dire, au lieu d'« aucune terre inconnue »
+    if (!moved) UI.toast(sel.some(u => u.moves <= 0) ? 'Plus de mouvement ce tour : l\'exploration reprend au tour suivant.' : 'Aucune terre inconnue accessible depuis ici.', 'warn');
     MapView.bumpVis(); MapView.invalidateVis();
     if ((App.pendingScouts || []).length) await App.flushScouts();
     App.selectNext();
@@ -1058,7 +1060,7 @@ const App = {
     const u0 = units[0];
     const path = Move.findPath(game, units, u0.plane, x, y, {});
     if (!path || !path.length) { UI.toast('Aucun chemin vers cette case.', 'warn'); return; }
-    for (const u of units) { delete u.rallyHold; u.path = path.map(s => [s.x, s.y]); u.dest = [World.wx(game.world, x), y]; u.status = 'goto'; u.attackOrder = attack ? Game.attackTarget(game, App.pid, u0.plane, World.wx(game.world, x), y) || false : false; }
+    for (const u of units) { delete u.rallyHold; delete u.halted; u.path = path.map(s => [s.x, s.y]); u.dest = [World.wx(game.world, x), y]; u.status = 'goto'; u.attackOrder = attack ? Game.attackTarget(game, App.pid, u0.plane, World.wx(game.world, x), y) || false : false; }
     const per = Math.max(1, Math.min(...Move.pacers(game, units).map(u => Units.maxMoves(game, u))));
     const turns = Move.stepTurns(0, per, path).pop() || 1;   // départ au prochain tour, avec le plein
     UI.toast(turns === 1 ? 'Ordre donné : les unités s\'y rendront au prochain tour.' : 'Ordre donné : départ au prochain tour, arrivée dans ' + U.n(turns, 'tour') + ' environ.');
@@ -1094,7 +1096,7 @@ const App = {
     UI.toast('Soins en cours : ' + (n.length > 1 ? n.length + ' unités restent' : 'l\'unité reste') + ' dans la cité et ' + (n.length > 1 ? 'vous attendront' : 'vous attendra') + ' une fois ' + (n.length > 1 ? 'guéries' : 'guérie') + '.');
     App.selectNext();
   },
-  cancelOrders(units) { for (const u of units) { u.path = null; u.dest = null; if (u.status === 'goto' || u.status === 'roadto') u.status = ''; u.roadPlan = null; } App.refresh(); },
+  cancelOrders(units) { for (const u of units) { u.path = null; u.dest = null; delete u.halted; if (u.status === 'goto' || u.status === 'roadto') u.status = ''; u.roadPlan = null; } App.refresh(); },
 
   // ---------- fin de tour ----------
   async endTurn(force) {
@@ -1132,7 +1134,7 @@ const App = {
     try {
     await App.advanceRoads();
     for (const u of Object.values(game.units)) {
-      if (u.owner !== App.pid || !u.path || !u.path.length || !game.units[u.id] || u.status === 'explore') continue;
+      if (u.owner !== App.pid || !u.path || !u.path.length || !game.units[u.id] || u.status === 'explore' || u.halted) continue;
       const group = Units.at(game, u.plane, u.x, u.y).filter(o => o.owner === App.pid && o.path && o.path.length && o.dest && u.dest && o.dest[0] === u.dest[0] && o.dest[1] === u.dest[1]);
       const r = await Game.continueMove(game, group.map(o => o.id), { noAttack: true });
       if (r && r.blocked && r.why && group[0] && game.units[group[0].id]) Game.log(game, App.pid, U.cap(Units.label(group[0])) + ' : ' + r.why.charAt(0).toLowerCase() + r.why.slice(1), { unit: group[0].id, x: group[0].x, y: group[0].y, plane: group[0].plane });
@@ -1746,7 +1748,7 @@ const App = {
         // ce que l'écran des sorciers sait de lui : dons, cités, puissance, armée estimée, raisons de son attitude, émissaires…
         + '<div id="offer-intel" class="offer-intel"></div>'
         + (kind === 'demand' ? '<p style="margin:10px 0 4px">Il exige : <b>' + U.esc(Diplomacy.demandText(game, pl.id, off)) + '</b>.</p><div class="' + (off.ultimatum ? 'danger' : 'gold') + '">Si vous refusez : ' + (off.ultimatum ? 'il vous déclarera la guerre.' : 'il vous en voudra (−15).') + '</div>' + (off.gold > pl.gold ? '<div class="dim">Vous n\'avez pas cette somme.</div>' : '')
-          : kind === 'trade' ? '<p style="margin:10px 0 4px">Il propose un échange : il vous apprend <b>' + U.esc(DATA.spells[off.give].name) + '</b> (' + U.fmt(Diplomacy.spellValue(off.give)) + ' RP) contre <b>' + U.esc(DATA.spells[off.get].name) + '</b> (' + U.fmt(Diplomacy.spellValue(off.get)) + ' RP).</p>'
+          : kind === 'trade' ? (() => { const dt = Diplomacy.dealText(game, off); return '<p style="margin:10px 0 4px">Il propose un marché : ' + U.esc(dt.you) + ', contre ' + U.esc(dt.him) + '.</p>' + ((off.tgold || 0) > pl.gold ? '<div class="dim">Vous n\'avez pas cette somme.</div>' : ''); })()
           : '<p style="margin:10px 0 4px">Sa proposition : <b>' + Diplomacy.stateName(kind).toLowerCase() + '</b>' + (off.against != null && game.players[off.against] ? ' contre <b>' + U.esc(Players.nameFor(game, pl.id, off.against)) + '</b>, qui écrase la partie' : '') + (gold || cityOk ? ', et pour l\'obtenir :' : '.') + '</p>')
         + (gold ? '<div class="gold">• ' + gold + ' pièces d\'or</div>' : '')
         + (cityOk ? (() => { const cc = game.cities[off.city]; return '<div class="gold">• la cité de ' + U.esc(cc.name) + ' (' + Cities.sizeName(cc).toLowerCase() + ', ' + U.fmt(cc.pop) + ' habitants)</div>'; })() : '')
@@ -1759,7 +1761,7 @@ const App = {
           + (tGoal ? '<button class="abtn" id="offer-tgo" style="margin-top:8px">' + tLabel + '</button>' : '') + '</div></div>' : '');
       // sa capitale si on l'a vue, sinon sa plus grande cité repérée : un coup d'œil sur la carte (le portrait ou le bouton), puis on revient à la proposition
       const goal = Panels.wizardGoal(game, pl, o), isCap = !!(goal && goal.fortress && goal.id === o.fortress), goLabel = isCap ? 'Voir la capitale' : 'Voir sa plus grande cité';
-      const tradeOk = kind !== 'trade' || (o.known.includes(off.give) && Diplomacy.canLearn(pl, off.give) && pl.known.includes(off.get) && Diplomacy.canLearn(o, off.get));
+      const tradeOk = kind !== 'trade' || (Diplomacy.list(off.give).every(id => o.known.includes(id) && Diplomacy.canLearn(pl, id)) && Diplomacy.list(off.get).every(id => pl.known.includes(id) && Diplomacy.canLearn(o, id)) && (off.tgold || 0) <= pl.gold);
       const choices = [{ label: 'Refuser', value: false }, { label: kind === 'demand' ? 'Céder' : 'Accepter', value: true, primary: kind !== 'demand', disabled: (kind === 'demand' && off.gold > pl.gold) || !tradeOk }];
       if (goal) choices.unshift({ label: goLabel, value: 'capital' });
       // (0.31.54) la cité qu'il offre : un coup d'œil avant d'accepter
@@ -1795,7 +1797,8 @@ const App = {
       }
       if (yes === null || App.game !== game) return;
       Diplomacy.dropOffer(pl, off);
-      if (yes) { Diplomacy.acceptOffer(game, pl, off); UI.toast(kind === 'demand' ? 'Vous cédez à ' + U.esc(o.name) + '.' : kind === 'trade' ? 'Vous apprenez ' + U.esc(DATA.spells[off.give].name) + '.' : 'Traité signé avec ' + U.esc(o.name) + '.'); MapView.invalidate(); MapView.bumpVis(); App.refresh(); }
+      if (yes && kind === 'trade' && (off.tgold || 0) > pl.gold) { UI.toast('Vous n\'avez pas cette somme : le marché ne se fait pas.', 'warn'); Diplomacy.refuseOffer(game, pl, off); return; }
+      if (yes) { Diplomacy.acceptOffer(game, pl, off); UI.toast(kind === 'demand' ? 'Vous cédez à ' + U.esc(o.name) + '.' : kind === 'trade' ? 'Marché conclu avec ' + U.esc(o.name) + '.' : 'Traité signé avec ' + U.esc(o.name) + '.'); MapView.invalidate(); MapView.bumpVis(); App.refresh(); }
       else Diplomacy.refuseOffer(game, pl, off);
     } finally { App._offerOpen = false; }
   },

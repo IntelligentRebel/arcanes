@@ -117,7 +117,7 @@ add("Confusion", "Confusion", "enemyUnit", "curse", {"resistMod": -4},
 add("Guises", "Déguisement", "friendlyUnit", "unitEnchant", {"cosmetic": True},
     "Donne à une unité normale l'apparence d'une créature fantastique au choix, sans changer ses caractéristiques. Inutilisable sur les héros.")
 add("Word of Recall", "Mot de rappel", "friendlyUnit", "special", {},
-    "Renvoie instantanément une unité amie dans la ville de votre forteresse (sur une case voisine si la place manque).")
+    "Renvoie instantanément une unité amie dans la cité de votre cercle d'invocation (sur une case voisine si la place manque).")
 add("Counter Magic", "Contre-magie", "none", "combatEnchant", {"dispelPerMana": 1, "drainPerSpell": 5},
     "Chaque sort ennemi lancé pendant le combat doit d'abord vaincre une dissipation de force égale au mana investi ; chaque tentative réduit cette réserve de 5.")
 add("Nagas", "Nagas", "none", "summon", {"unit": "Nagas"},
@@ -440,11 +440,11 @@ add("Magic Spirit", "Esprit magique", "none", "summon", {"unit": "MagicSpirit"},
 add("Dispel Magic", "Dissipation de la magie", "anyUnit", "dispel", {"strengthPerMana": 1},
     "Tente de retirer d'une unité en combat les enchantements qui vous nuisent, avec une force égale au mana investi.")
 add("Summoning Circle", "Cercle d'invocation", "friendlyCity", "special", {"building": "summoningCircle"},
-    "Déplace votre cercle d'invocation dans une autre ville amie.")
+    "Déplace dans une autre ville amie votre cercle d'invocation, où apparaissent vos invocations et vos unités rappelées.")
 add("Disenchant Area", "Désenchantement de zone", "tile", "dispel", {"strengthPerMana": 1, "combatArea": "battlefield"},
     "Tente de retirer tous les enchantements hostiles d'une case de carte (unités, ville, nœud perverti) ou, en combat, de tout le champ de bataille, avec une force égale au mana investi.")
 add("Recall Hero", "Rappel du héros", "friendlyHero", "special", {},
-    "Ramène instantanément un héros ami du champ de bataille à votre forteresse.")
+    "Ramène instantanément un héros ami à la cité de votre cercle d'invocation, depuis la carte ou du champ de bataille.")
 add("Detect Magic", "Détection de la magie", "none", "global", {"seeEnemyCasting": True},
     "Vous montre en permanence le sort que lance chaque sorcier rival, même ceux que vous n'avez pas encore rencontrés (anonymes).")
 add("Enchant Item", "Enchantement d'objet", "none", "special", {"item": True, "maxPowerCost": 200},

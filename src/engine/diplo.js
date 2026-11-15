@@ -173,8 +173,10 @@ Object.assign(Diplomacy, {
     return { ok: true };
   },
   // l'or qui rend le marché acceptable pour b : > 0, ce que a doit ajouter au minimum ; < 0, ce que b verserait au plus (par 5)
-  fairGold(game, a, b, give, get) {
-    const { vg, vr } = Diplomacy.dealValue(give, get, 0), k = Diplomacy.tradeFactor(game, b, a);
+  // k : l'exigence de b (par défaut celle qu'il oppose à a) ; 1 pour un marché que b propose lui-même, au prix juste
+  fairGold(game, a, b, give, get, k) {
+    const { vg, vr } = Diplomacy.dealValue(give, get, 0);
+    if (k == null) k = Diplomacy.tradeFactor(game, b, a);
     if (!vg && !vr) return 0;
     if (vr < vg * k) return Math.ceil((vg * k - vr) / Diplomacy.GOLD_IN / 5) * 5;
     return -Math.min(Diplomacy.goldSpare(b), Math.floor((vr / k - vg) / Diplomacy.GOLD_OUT / 5) * 5);
@@ -219,6 +221,36 @@ Object.assign(Diplomacy, {
       const v = Math.min(vx, vy); if (!best || v > best.v) best = { aGets: x, bGets: y, v };
     }
     return best;
+  },
+
+  // (0.31.56) un marché à proposer au joueur : l'échange équitable d'abord ; sinon un sort contre un sort, l'or comblant l'écart ;
+  // sinon acheter au joueur le sort qu'il veut le plus (85 % du juste prix), ou lui vendre le sien.
+  // L'IA propose au juste prix (sans la marge qu'elle exige quand c'est le joueur qui propose) ; tgold > 0 : le joueur paie ; < 0 : l'IA paie.
+  dealForHuman(game, a, b) {
+    const sw = Diplomacy.bestSwap(game, a, b);
+    if (sw) return { give: [sw.bGets], get: [sw.aGets], tgold: 0 };   // bestSwap : aGets va à l'IA, bGets au joueur
+    const sells = Diplomacy.tradeable(game, a, b), wants = Diplomacy.tradeable(game, b, a);
+    const V = Diplomacy.spellValue, spare = Diplomacy.goldSpare(a);
+    const ok = (G, R, g) => g <= 0 ? -g <= spare : g <= b.gold;
+    const fair = (G, R) => Diplomacy.fairGold(game, b, a, G, R, 1);
+    const want = wants.slice().sort((x, y) => V(y) - V(x))[0];
+    if (want && sells.length) {
+      const sell = U.min(sells, x => Math.abs(V(x) - V(want)));
+      const g = fair([sell], [want]);
+      if ((g <= 0 || g <= b.gold) && ok([sell], [want], g)) return { give: [sell], get: [want], tgold: g };
+    }
+    if (want) { const g = Math.round(fair([], [want]) * 0.85 / 5) * 5; if (g < 0 && ok([], [want], g)) return { give: [], get: [want], tgold: g }; }
+    const cheap = sells.slice().sort((x, y) => V(x) - V(y)).find(x => { const g = fair([x], []); return g > 0 && g <= b.gold * 0.6; });
+    if (cheap) return { give: [cheap], get: [], tgold: fair([cheap], []) };
+    return null;
+  },
+  // un marché proposé, en mots, pour celui qui le reçoit (b) : ce qu'il apprend et reçoit, ce qu'il donne
+  dealText(game, off) {
+    const nm = L => Diplomacy.list(L).map(id => DATA.spells[id].name + ' (' + U.fmt(Diplomacy.spellValue(id)) + ' RP)').join(', ');
+    const g = off.tgold || 0;
+    const you = [Diplomacy.list(off.give).length ? 'il vous apprend ' + nm(off.give) : '', g < 0 ? 'il vous verse ' + (-g) + ' or' : ''].filter(Boolean).join(' et ');
+    const him = [Diplomacy.list(off.get).length ? nm(off.get) : '', g > 0 ? g + ' or' : ''].filter(Boolean).join(' et ');
+    return { you, him };
   },
 
   // ---------- exigences et ultimatums ----------
@@ -298,12 +330,15 @@ Object.assign(Diplomacy, {
       const st = a.diplo[b.id] || 'none', r = a.relations[b.id] || 0;
       if (st === 'war' || r < (b.human ? 0 : 5) || !game.rng.chance(0.03)) continue;
       const L = AI.feat(a, 'coalition', 2) ? Diplomacy.leaderFor(game, a) : null; if (L && L.id === b.id) continue;
-      const sw = Diplomacy.bestSwap(game, a, b); if (!sw) continue;
       if (b.human) {
         if (Diplomacy.offerFrom(game, b, a.id)) continue;
-        Diplomacy.offer(game, b, { from: a.id, kind: 'trade', turn: game.turn, give: sw.bGets, get: sw.aGets });
+        const d = Diplomacy.dealForHuman(game, a, b); if (!d) continue;
+        Diplomacy.offer(game, b, { from: a.id, kind: 'trade', turn: game.turn, give: d.give, get: d.get, tgold: d.tgold });
         Game.log(game, b.id, a.name + ' vous propose un échange de sorts.', { diplo: a.id, offer: true });
-      } else if ((b.relations[a.id] || 0) >= 5 && Diplomacy.tradeAnswer(game, a, b, sw.aGets, sw.bGets).ok) {
+        continue;
+      }
+      const sw = Diplomacy.bestSwap(game, a, b); if (!sw) continue;
+      if ((b.relations[a.id] || 0) >= 5 && Diplomacy.tradeAnswer(game, a, b, sw.aGets, sw.bGets).ok) {
         Diplomacy.doTrade(game, a, b, sw.aGets, sw.bGets);
       }
     }

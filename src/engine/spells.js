@@ -207,7 +207,8 @@ const Spells = {
         if (id === 'water_walking' && (st.flying || st.swimming || st.ab.waterWalking)) return { ok: false, why: st.flying ? 'L\'unité vole déjà.' : 'L\'unité va déjà sur l\'eau.' };
       }
       if (sp.target === 'friendlyHero' && !u.hero) return { ok: false, why: 'Il faut viser un de vos héros.' };
-      if ((id === 'word_of_recall' || id === 'recall_hero') && game.cities[pl.fortress] && (() => { const f = game.cities[pl.fortress]; return u.plane === f.plane && u.x === f.x && u.y === f.y; })()) return { ok: false, why: 'L\'unité est déjà dans votre forteresse.' };
+      // (0.31.56) le rappel ramène au cercle d'invocation, comme dans Master of Magic (la forteresse tant qu'on ne l'a pas déplacé)
+      if ((id === 'word_of_recall' || id === 'recall_hero') && Spells.summonCity(game, pl) && (() => { const f = Spells.summonCity(game, pl); return u.plane === f.plane && u.x === f.x && u.y === f.y; })()) return { ok: false, why: 'L\'unité est déjà dans la cité de votre cercle d\'invocation.' };
       if (id === 'spell_lock' && !u.ench.some(e => e !== 'spell_lock')) return { ok: false, why: 'Aucun enchantement à protéger sur cette unité.' };
       // rappeler qui porte sa pile au-dessus de l'eau (Marche des vents, Navire volant) la laisserait se noyer
       if ((id === 'word_of_recall' || id === 'recall_hero') && World.isWaterAt(game.world, u.plane, u.x, u.y) && !Cities.at(game, u.plane, u.x, u.y)) {
@@ -647,10 +648,10 @@ const OVERLAND_HANDLERS = {
     Move.reveal(game, pl, np, t.x, t.y, 2); return { msg: 'Vos troupes basculent dans l\'autre plan.' };
   },
   word_of_recall(game, pl, t) {
-    const u = game.units[t.unit]; const c = game.cities[pl.fortress]; if (!c) return { ok: false, why: 'Pas de forteresse.' };
+    const u = game.units[t.unit]; const c = Spells.summonCity(game, pl); if (!c) return { ok: false, why: 'Pas de forteresse.' };
     if (DATA.units[u.type].sailing) return { ok: false, why: 'Un navire ne peut pas être rappelé.' };
-    const at = Spells.spotNear(game, pl, c, u.type); if (!at) return { ok: false, why: 'Aucune place près de la forteresse.' };
-    u.plane = at[0]; u.x = at[1]; u.y = at[2]; u.moves = 0; u.path = null; u.dest = null; if (u.status === 'goto') u.status = ''; return { msg: Units.label(u) + ' est rappelé à la forteresse.' }; },
+    const at = Spells.spotNear(game, pl, c, u.type); if (!at) return { ok: false, why: 'Aucune place près de ' + c.name + '.' };
+    u.plane = at[0]; u.x = at[1]; u.y = at[2]; u.moves = 0; u.path = null; u.dest = null; if (u.status === 'goto') u.status = ''; return { msg: Units.label(u) + ' est rappelé à ' + c.name + '.' }; },
   recall_hero(game, pl, t) { return OVERLAND_HANDLERS.word_of_recall(game, pl, t); },
   purify_land(game, pl, t) {
     const tiles = Spells.corruptAround(game, t.plane, t.x, t.y); if (!tiles.length) return { ok: false, why: 'Aucune terre corrompue ici ni autour.' };

@@ -198,6 +198,7 @@ const Move = {
     const bound = units.filter(u => u.nodeBound != null).map(u => game.sites[u.nodeBound]).filter(Boolean);
     const closed = Move.closedBy(game, pid), owner = world.planes[plane].owner;
     const canStandK = (k, x, y) => {
+      if (opts.roadable && !road[k] && !(DATA.terrain[T_KEYS[terr[k]]] || {}).roadTurns) return false;   // un tracé de route ne passe que par ce qui s'empierre (pas la mer)
       if (mtnBlock && terr[k] === T.MOUNTAIN && !road[k]) return false;
       if (closed.size && closed.has(owner[k])) return false;   // territoire interdit par un sorcier en paix
       for (const s of bound) if (World.dist(world, s.x, s.y, x, y) > 2) return false;
@@ -333,6 +334,7 @@ const Move = {
     const bound = units.filter(u => u.nodeBound != null).map(u => game.sites[u.nodeBound]).filter(Boolean);
     const closed = Move.closedBy(game, pid), owner = world.planes[plane].owner;
     const canStandK = (k, x, y) => {
+      if (opts.roadable && !road[k] && !(DATA.terrain[T_KEYS[terr[k]]] || {}).roadTurns) return false;   // un tracé de route ne passe que par ce qui s'empierre (pas la mer)
       if (mtnBlock && terr[k] === T.MOUNTAIN && !road[k]) return false;
       if (closed.size && closed.has(owner[k])) return false;   // territoire interdit par un sorcier en paix
       for (const s of bound) if (World.dist(world, s.x, s.y, x, y) > 2) return false;

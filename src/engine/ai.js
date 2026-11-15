@@ -1306,7 +1306,7 @@ const Diplomacy = {
   acceptOffer(game, b, off) {
     const a = game.players[off.from]; if (!a) return;
     if (off.kind === 'demand') return Diplomacy.settleDemand(game, b, off, true);
-    if (off.kind === 'trade') return Diplomacy.doTrade(game, b, a, off.give, off.get);   // b apprend ce que a lui donne
+    if (off.kind === 'trade') return Diplomacy.doTrade(game, b, a, off.give, off.get, off.tgold || 0);   // b apprend ce que a lui donne ; tgold > 0 : b paie a
     Diplomacy.setState(game, b.id, a.id, off.kind); Diplomacy.adjust(game, a.id, b.id, 10, 'treaty');
     if (a.peaceAsk && a.peaceAsk[b.id]) a.peaceAsk[b.id].refused = 0;
     if (off.gold) { const g = Math.min(off.gold, a.gold); a.gold -= g; b.gold += g; }
