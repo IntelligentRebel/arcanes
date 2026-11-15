@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.56';
+const GAME_VERSION = '0.31.57';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -69,8 +69,15 @@ const Game = {
     // le joueur choisit ses voisins de plan ; l'autre plan accueille toujours deux sorciers de plus (la surprise des premières parties)
     const nOther = opts.otherPlane != null ? opts.otherPlane : 2;
     const home = human.retorts.includes('myrran') ? 1 : 0;
-    for (let i = 0; i < Math.min(presets.length, nOpp + nOther); i++) {
-      const w = Game.onPlane(presets[i], i < nOpp ? home : 1 - home);
+    // (0.31.56) qui part sur Myrror : les sorciers de la Mort (un peu ceux du Chaos) y penchent, ceux de la Vie restent plutôt sur
+    // Arcanus, sans exclusive (un tirage bruité : un ange peut naître dans le monde d'en bas) ; l'aptitude Myrrien y pousse aussi.
+    // Le nombre de sorciers par plan ne change pas.
+    const N = Math.min(presets.length, nOpp + nOther), pick = presets.slice(0, N);
+    const nMyr = home === 1 ? Math.min(N, nOpp) : Math.max(0, N - nOpp);
+    const lean = pick.map(w => ({ w, s: Game.darkLean(w) + (game.rng.next() + game.rng.next() + game.rng.next() - 1.5) * 12 }));
+    const toMyrror = new Set(lean.slice().sort((a, b) => b.s - a.s).slice(0, nMyr).map(o => o.w));
+    for (let i = 0; i < N; i++) {
+      const w = Game.onPlane(pick[i], toMyrror.has(pick[i]) ? 1 : 0);
       const myrran = w.retorts.includes('myrran');
       const races = Object.values(DATA.races).filter(r => r.plane === (myrran ? 'myrror' : 'arcanus'));
       all.push({ name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: game.rng.pick(races).id, human: false, color: PLAYER_COLORS[i + 1], personality: game.rng.pick(['expansionist', 'militarist', 'perfectionist', 'maniac', 'balanced']) });
@@ -108,6 +115,8 @@ const Game = {
     return game;
   },
 
+  // ce qui fait pencher un sorcier vers Myrror : la Mort, un peu le Chaos, l'aptitude Myrrien ; la Vie le retient sur Arcanus
+  darkLean(w) { const b = w.books || {}; return (b.death || 0) + 0.5 * (b.chaos || 0) - (b.life || 0) + ((w.retorts || []).includes('myrran') ? 4 : 0); },
   // un sorcier prédéfini placé sur un plan donné, ses choix ajustés pour rester à 11
   onPlane(w, plane) {
     const my = w.retorts.includes('myrran');

@@ -3,7 +3,8 @@ const { loadEngine } = require('./load');
 (async () => {
   const E = loadEngine(); const { Game, Book, Cities, Units, World, DATA, AI, Spells } = E;
   const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) process.exitCode = 1; };
-  const g = Game.newGame({ seed: 11, mapW: 60, mapH: 40, opponents: 3, difficulty: 'hard', human: { name: 'X', portrait: 0, books: { life: 6 }, retorts: [], race: 'highmen' } });
+  // (0.31.57) graine 14 : la répartition des sorciers entre les plans a changé le tirage ; la 11 ne donnait plus ce scénario
+  const g = Game.newGame({ seed: +(process.env.S1 || 14), mapW: 60, mapH: 40, opponents: 3, difficulty: 'hard', human: { name: 'X', portrait: 0, books: { life: 6 }, retorts: [], race: 'highmen' } });
   for (const p of g.players) { p.human = false; p.aiLevel = 'hard'; }
   const b = g.book, p1 = g.players[1];
   // l'attrait d'une cité qui garde un fragment
