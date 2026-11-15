@@ -184,7 +184,7 @@ const Spells = {
       if (!Spells.stackUnits(game, pl, id, target).length) return { ok: false, why: Units.at(game, target.plane, World.wx(game.world, target.x), target.y).some(u => u.owner === pl.id) ? 'Aucune unité de la case à enchanter (elles ' + (sp.params.enchant === 'flight' ? 'volent déjà' : 'vont déjà sur l\'eau') + ').' : 'Aucune de vos unités sur cette case.' };
       return { ok: true };
     }
-    if (pl.banished && id !== 'spell_of_return') return { ok: false, why: 'Un sorcier banni ne peut lancer que le Sort de Retour.' };
+    if (pl.banished && id !== 'spell_of_return') return { ok: false, why: Players.female(pl) ? 'Une sorcière bannie ne peut lancer que le Sort de Retour.' : 'Un sorcier banni ne peut lancer que le Sort de Retour.' };
     { const bv = typeof Book !== 'undefined' && Book.validate(game, pl, id, target); if (bv) return bv; }
     if (tt === 'friendlyUnit' || tt === 'enemyUnit' || tt === 'anyUnit') {
       const u = target && game.units[target.unit];

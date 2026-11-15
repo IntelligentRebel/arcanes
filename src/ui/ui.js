@@ -195,7 +195,7 @@ const UI = {
     if (u.nemesis) html += UI.nemesisLine(u, game);
     // le Démon légendaire : qui il traque (il ne combat personne d'autre)
     if (u.riteDemon && typeof Rite !== 'undefined') { const ra = Rite.active(game); if (ra && ra.target != null) html += '<div class="' + (ra.target === App.pid ? 'danger' : 'gold') + '">Ne combat que ' + (ra.target === App.pid ? 'vous' : U.esc(Players.nameFor(game, App.pid, ra.target))) + ', la cible du pacte.</div>'; }
-    if (u.avatar) html += '<div class="gold">Vous, en personne : compétence de lancement divisée par deux tant que vous êtes ici ; si vous tombez, vous êtes banni</div>';
+    if (u.avatar) html += Heroes.female(game, u) ? '<div class="gold">Vous, en personne : compétence de lancement divisée par deux tant que vous êtes ici ; si vous tombez, vous êtes bannie</div>' : '<div class="gold">Vous, en personne : compétence de lancement divisée par deux tant que vous êtes ici ; si vous tombez, vous êtes banni</div>';
     if (u.hero && u.hero.quest) html += '<div style="margin-top:3px"><span class="gold">Quête</span> : ' + U.esc(Heroes.questText(game, u)) + (u.hero.story && !u.hero.quest.done ? '<div class="dim" style="font-style:italic">' + U.esc(u.hero.story) + '</div>' : '') + '</div>';
     if (u.hero && u.hero.pending && u.hero.pending.length) html += '<div class="ok">Talent à choisir</div>';
     if (u.status === 'governor' && game.cities[u.govCity]) html += '<div class="gold">Gouverneur de ' + U.esc(game.cities[u.govCity].name) + '</div>';

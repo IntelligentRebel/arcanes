@@ -1250,7 +1250,8 @@ const Diplomacy = {
         const b = +k, pb = game.players[b];
         if (!pa.closedTo[k] || !pb || !pb.alive || !['peace', 'alliance'].includes(pa.diplo[b])) continue;
         const n = Diplomacy.escort(game, pa.id, b); if (!n) continue;
-        Game.log(game, b, U.cap(Players.nameFor(game, b, pa.id)) + ' étend son territoire, qu\'il vous interdit : ' + U.n(n, 'unité est reconduite', 'unités sont reconduites') + ' à la frontière.', { player: pa.id });
+        Game.log(game, b, Players.femFor(game, b, pa.id) ? U.cap(Players.nameFor(game, b, pa.id)) + ' étend son territoire, qu\'elle vous interdit : ' + U.n(n, 'unité est reconduite', 'unités sont reconduites') + ' à la frontière.'
+          : U.cap(Players.nameFor(game, b, pa.id)) + ' étend son territoire, qu\'il vous interdit : ' + U.n(n, 'unité est reconduite', 'unités sont reconduites') + ' à la frontière.', { player: pa.id });
         Game.log(game, pa.id, U.n(n, 'unité', 'unités') + ' ' + U.de(Players.nameFor(game, pa.id, b)) + (n > 1 ? ' se trouvaient' : ' se trouvait') + ' sur votre territoire, qui lui est interdit : ' + (n > 1 ? 'elles sont reconduites' : 'elle est reconduite') + ' à la frontière.', { player: b, minor: !pa.human });
       }
     }

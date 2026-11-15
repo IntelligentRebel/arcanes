@@ -410,7 +410,8 @@ const MagicUI = {
     const sec = h('div', { class: 'sect' }, h('h4', null, 'Pacte contre ' + tname));
     // la coalition : les IA qui voient en lui le sorcier qui domine la partie
     { const co = typeof Rite.coalitionOf === 'function' && Rite.cfg(game, 'coalition') ? Rite.coalitionOf(game, r.target).map(p => p.id) : [];
-      sec.append(h('div', { class: 't2', style: 'margin-bottom:4px' }, co.length ? U.cap(Rite.names(game, pl.id, co)) + (co.filter(id => id !== pl.id).length > 1 ? ' voient en ' : ' voit en ') + (isTarget ? U.txt('vous') : tname) + ' le sorcier qui domine la partie.' : isTarget ? 'Vous dominez la partie.' : U.cap(tname) + ' domine la partie.')); }
+      sec.append(h('div', { class: 't2', style: 'margin-bottom:4px' }, co.length ? ((isTarget ? Players.female(pl) : Players.femFor(game, pl.id, r.target)) ? U.cap(Rite.names(game, pl.id, co)) + (co.filter(id => id !== pl.id).length > 1 ? ' voient en ' : ' voit en ') + (isTarget ? U.txt('vous') : tname) + ' la sorcière qui domine la partie.'
+        : U.cap(Rite.names(game, pl.id, co)) + (co.filter(id => id !== pl.id).length > 1 ? ' voient en ' : ' voit en ') + (isTarget ? U.txt('vous') : tname) + ' le sorcier qui domine la partie.') : isTarget ? 'Vous dominez la partie.' : U.cap(tname) + ' domine la partie.')); }
     if (r.phase === 'ritual') {
       const pct = Math.min(100, Math.floor(100 * r.progress / Math.max(1, r.cost))), left = Rite.turnsLeft(r);
       const ids = Rite.contributors(game, r).map(p => p.id);

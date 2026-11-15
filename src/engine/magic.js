@@ -287,6 +287,10 @@ const Players = {
     if (!o) return 'des pillards';
     return Players.knows(game, viewer, other) ? o.name : 'un sorcier inconnu';
   },
+  // (0.31.61) une sorcière : son portrait est celui de Malivra, Sylvaine, Célestine ou Nérissa (un sorcier personnalisé aussi)
+  female(pl) { return !!(pl && typeof DATA !== 'undefined' && DATA.wizards.some(w => w.female && w.portrait === pl.portrait)); },
+  // au féminin pour ce spectateur : une sorcière rencontrée (un inconnu reste « un sorcier »)
+  femFor(game, viewer, other) { return Players.knows(game, viewer, other) && Players.female(game.players[other]); },
   create(game, opts) {
     const pl = {
       id: game.players.length, name: opts.name, portrait: opts.portrait || 0, color: opts.color, human: !!opts.human, alive: true, banished: false,

@@ -1086,7 +1086,7 @@ const App = {
     const b = Cities.governorBonus(game, city);
     const parts = ['+' + b.prodPct + ' % de production', 'agitation -' + b.calm];
     if (b.gold) parts.push('+' + b.gold + ' or'); if (b.research) parts.push('+' + b.research + ' recherche'); if (b.growth) parts.push('+' + b.growth + ' croissance'); if (b.power) parts.push('+' + b.power + ' puissance');
-    UI.toast(U.esc(hero.hero.name) + ' gouverne ' + U.esc(city.name) + ' : ' + parts.join(', ') + '. Il choisira la production quand la file sera vide.');
+    UI.toast(Heroes.female(game, hero) ? U.esc(hero.hero.name) + ' gouverne ' + U.esc(city.name) + ' : ' + parts.join(', ') + '. Elle choisira la production quand la file sera vide.' : U.esc(hero.hero.name) + ' gouverne ' + U.esc(city.name) + ' : ' + parts.join(', ') + '. Il choisira la production quand la file sera vide.');
     App.selectNext();
   },
   healInCity(sel) {
@@ -1401,6 +1401,7 @@ const App = {
     const n = FORTRESS_DISMANTLE - (game.turn - p.fallen.turn), pct = Math.round(left * 100);
     const txt = p.id === App.pid
       ? 'Votre forteresse est en cours de démantèlement (encore ' + U.n(n, 'tour') + '). La reprendre maintenant accomplirait ' + pct + ' % de votre Sort de Retour.'
+      : Players.femFor(game, App.pid, p.id) ? 'Forteresse de ' + Players.nameFor(game, App.pid, p.id) + ' en cours de démantèlement (encore ' + U.n(n, 'tour') + '). Si elle la reprend d\'ici là, son retour sera hâté de ' + pct + ' %.'
       : 'Forteresse de ' + Players.nameFor(game, App.pid, p.id) + ' en cours de démantèlement (encore ' + U.n(n, 'tour') + '). S\'il la reprend d\'ici là, son retour sera hâté de ' + pct + ' %.';
     return h('div', { class: p.id === App.pid ? 'danger' : 'gold', style: 'margin-top:6px' }, txt);
   },
@@ -1542,7 +1543,7 @@ const App = {
           text = how + ' ' + name + ' disparaît de ce monde.';
         }
         const body = h('div', { class: 'lm', style: '--lc:' + (known ? o.color : '#c9a24a') }, art,
-          h('div', { class: 'lm-kicker' }, f.kind === 'banished' ? 'Forteresse tombée' : 'Chute d\'un sorcier'),
+          h('div', { class: 'lm-kicker' }, f.kind === 'banished' ? 'Forteresse tombée' : known && Players.female(o) ? 'Chute d\'une sorcière' : 'Chute d\'un sorcier'),
           h('div', { class: 'lm-name' }, name),
           h('div', { class: 'lm-text' }, text));
         Sfx.play(mine ? 'victory' : 'notify');
@@ -1637,9 +1638,13 @@ const App = {
     f.seen = true;
     const c = game.cities[f.city], by = f.by != null && game.players[f.by] ? App.de(U.esc(game.players[f.by].name)) : 'des pillards';
     const art = await App.artBanner('endgame', 'fortress_fallen'); if (App.game !== game) return;
-    const html = art + '<p>' + U.esc(c.name) + ' est tombée aux mains ' + by + '. Vous voilà <b class="danger">banni</b> : plus aucun sort, sinon le Sort de Retour, qui se lance de lui-même.</p>'
-      + '<p>Les troupes ennemies s\'attellent à démanteler votre forteresse, ce qui leur prendra <b>' + FORTRESS_DISMANTLE + ' tours</b>. Plus vous reprendrez la cité vite, plus votre retour sera rapide : au tour prochain, votre Sort de Retour sera accompli à 90&nbsp;% ; dans 5 tours, à 50&nbsp;% ; passé ' + FORTRESS_DISMANTLE + ' tours, la reprendre ne servira plus à rien.</p>'
-      + '<p class="muted">Sans reprise, votre forteresse renaîtra dans votre plus grande cité, une fois le sort payé (' + Magic.spellCost(game, pl, 'spell_of_return') + ' mana au rythme de votre compétence de lancement).</p>';
+    const html = Players.female(pl)
+      ? art + '<p>' + U.esc(c.name) + ' est tombée aux mains ' + by + '. Vous voilà <b class="danger">bannie</b> : plus aucun sort, sinon le Sort de Retour, qui se lance de lui-même.</p>'
+        + '<p>Les troupes ennemies s\'attellent à démanteler votre forteresse, ce qui leur prendra <b>' + FORTRESS_DISMANTLE + ' tours</b>. Plus vous reprendrez la cité vite, plus votre retour sera rapide : au tour prochain, votre Sort de Retour sera accompli à 90&nbsp;% ; dans 5 tours, à 50&nbsp;% ; passé ' + FORTRESS_DISMANTLE + ' tours, la reprendre ne servira plus à rien.</p>'
+        + '<p class="muted">Sans reprise, votre forteresse renaîtra dans votre plus grande cité, une fois le sort payé (' + Magic.spellCost(game, pl, 'spell_of_return') + ' mana au rythme de votre compétence de lancement).</p>'
+      : art + '<p>' + U.esc(c.name) + ' est tombée aux mains ' + by + '. Vous voilà <b class="danger">banni</b> : plus aucun sort, sinon le Sort de Retour, qui se lance de lui-même.</p>'
+        + '<p>Les troupes ennemies s\'attellent à démanteler votre forteresse, ce qui leur prendra <b>' + FORTRESS_DISMANTLE + ' tours</b>. Plus vous reprendrez la cité vite, plus votre retour sera rapide : au tour prochain, votre Sort de Retour sera accompli à 90&nbsp;% ; dans 5 tours, à 50&nbsp;% ; passé ' + FORTRESS_DISMANTLE + ' tours, la reprendre ne servira plus à rien.</p>'
+        + '<p class="muted">Sans reprise, votre forteresse renaîtra dans votre plus grande cité, une fois le sort payé (' + Magic.spellCost(game, pl, 'spell_of_return') + ' mana au rythme de votre compétence de lancement).</p>';
     const go = await UI.choice('Votre forteresse est tombée', html, [{ label: 'Compris', value: false }, { label: 'Voir ' + c.name, value: true, primary: true }]);
     if (go) { MapView.centerOn(c.x, c.y, c.plane); App.refresh(); }
   },
@@ -1700,7 +1705,8 @@ const App = {
       const html = '<div style="display:flex;gap:12px"><canvas id="hero-off" width="96" height="96" class="portrait" style="width:96px;height:96px;flex:none"></canvas><div><b>' + U.esc(hd.name) + '</b>, ' + U.esc(hd.title.toLowerCase()) + lvl + ', vous offre son épée pour <b class="gold">' + off.fee + ' or</b>.<div class="muted" style="margin-top:4px">' + U.esc(hd.desc || '') + '</div>' + UI.statLine(Units.stats(game, fake), null, game)
         // un sort d'appel en cours : ce héros-ci ne vient pas de lui, et prendre la sixième place le ferait échouer
         + (pl.casting && ['summon_hero', 'summon_champion', 'incarnation', 'resurrection'].includes(pl.casting.id) && Heroes.heroCount(game, pl) + 1 >= 6
-          ? '<div class="danger" style="margin-top:8px">Il vient de lui-même, pas de votre sort. S\'il vous rejoint, vous aurez six héros et ' + U.esc(DATA.spells[pl.casting.id].name) + ', en cours, échouera (vous ne récupéreriez que la moitié du mana).</div>' : '')
+          ? (hd.female ? '<div class="danger" style="margin-top:8px">Elle vient d\'elle-même, pas de votre sort. Si elle vous rejoint, vous aurez six héros et ' + U.esc(DATA.spells[pl.casting.id].name) + ', en cours, échouera (vous ne récupéreriez que la moitié du mana).</div>'
+            : '<div class="danger" style="margin-top:8px">Il vient de lui-même, pas de votre sort. S\'il vous rejoint, vous aurez six héros et ' + U.esc(DATA.spells[pl.casting.id].name) + ', en cours, échouera (vous ne récupéreriez que la moitié du mana).</div>') : '')
         + '</div></div>';
       const p = UI.choice('Un héros se présente', html, [{ label: 'Refuser', value: false }, { label: 'Engager (' + off.fee + ' or)', value: true, primary: true }], { noClose: true });
       setTimeout(() => { const c = $('#hero-off'); if (c) Sprites.paint(c, Sprites.heroPic(hd.unit)); }, 10);
@@ -1729,10 +1735,10 @@ const App = {
     try {
       const o = game.players[off.from], kind = off.kind;
       // le portrait et l'essentiel de la relation, pour se rappeler à qui l'on a affaire
-      const rel = o.relations[pl.id] || 0, relTxt = rel > 50 ? 'amical' : rel > 15 ? 'cordial' : rel > -15 ? 'neutre' : rel > -50 ? 'méfiant' : 'hostile';
+      const fem = Players.female(o), relName = (r, f) => f ? (r > 50 ? 'amicale' : r > 15 ? 'cordiale' : r > -15 ? 'neutre' : r > -50 ? 'méfiante' : 'hostile') : (r > 50 ? 'amical' : r > 15 ? 'cordial' : r > -15 ? 'neutre' : r > -50 ? 'méfiant' : 'hostile');
+      const rel = o.relations[pl.id] || 0, relTxt = relName(rel, fem);
       const books = REALMS5.flatMap(r => Array.from({ length: o.books[r] || 0 }, () => '<i style="display:inline-block;width:9px;height:15px;border-radius:2px;margin-right:2px;background:' + REALM_COLORS[r] + ';' + UI.solid(REALM_COLORS[r]) + '"></i>')).join('');
       const what = { peace: 'Un pacte de paix : aucun de vous deux ne peut plus attaquer l\'autre sans rompre le traité, ce que les autres sorciers ne pardonnent pas.', alliance: 'Une alliance : une entente plus étroite qu\'un pacte de paix ; la rompre en attaquant coûte cher en réputation.' }[kind] || '';
-      const relName = r => r > 50 ? 'amical' : r > 15 ? 'cordial' : r > -15 ? 'neutre' : r > -50 ? 'méfiant' : 'hostile';
       const booksOf = w => REALMS5.flatMap(r => Array.from({ length: w.books[r] || 0 }, () => '<i style="display:inline-block;width:9px;height:15px;border-radius:2px;margin-right:2px;background:' + REALM_COLORS[r] + ';' + UI.solid(REALM_COLORS[r]) + '"></i>')).join('');
       // l'adversaire visé par une alliance : connu ou non, sa capitale ou sa plus grande cité repérée
       const T = off.against != null && game.players[off.against] && off.against !== pl.id ? game.players[off.against] : null;
@@ -1747,8 +1753,10 @@ const App = {
         + '<div class="muted">Traité actuel : <b>' + Diplomacy.stateName(pl.diplo[o.id]).toLowerCase() + '</b> · attitude envers vous : <b class="' + (rel > 15 ? 'ok' : rel < -15 ? 'danger' : '') + '">' + relTxt + ' (' + Math.round(rel) + ')</b></div>'
         // ce que l'écran des sorciers sait de lui : dons, cités, puissance, armée estimée, raisons de son attitude, émissaires…
         + '<div id="offer-intel" class="offer-intel"></div>'
-        + (kind === 'demand' ? '<p style="margin:10px 0 4px">Il exige : <b>' + U.esc(Diplomacy.demandText(game, pl.id, off)) + '</b>.</p><div class="' + (off.ultimatum ? 'danger' : 'gold') + '">Si vous refusez : ' + (off.ultimatum ? 'il vous déclarera la guerre.' : 'il vous en voudra (−15).') + '</div>' + (off.gold > pl.gold ? '<div class="dim">Vous n\'avez pas cette somme.</div>' : '')
-          : kind === 'trade' ? (() => { const dt = Diplomacy.dealText(game, off); return '<p style="margin:10px 0 4px">Il propose un marché : ' + U.esc(dt.you) + ', contre ' + U.esc(dt.him) + '.</p>' + ((off.tgold || 0) > pl.gold ? '<div class="dim">Vous n\'avez pas cette somme.</div>' : ''); })()
+        + (kind === 'demand' ? (lack => fem ? '<p style="margin:10px 0 4px">Elle exige : <b>' + U.esc(Diplomacy.demandText(game, pl.id, off)) + '</b>.</p><div class="' + (off.ultimatum ? 'danger' : 'gold') + '">Si vous refusez : ' + (off.ultimatum ? 'elle vous déclarera la guerre.' : 'elle vous en voudra (−15).') + '</div>' + lack
+            : '<p style="margin:10px 0 4px">Il exige : <b>' + U.esc(Diplomacy.demandText(game, pl.id, off)) + '</b>.</p><div class="' + (off.ultimatum ? 'danger' : 'gold') + '">Si vous refusez : ' + (off.ultimatum ? 'il vous déclarera la guerre.' : 'il vous en voudra (−15).') + '</div>' + lack)(off.gold > pl.gold ? '<div class="dim">Vous n\'avez pas cette somme.</div>' : '')
+          : kind === 'trade' ? (() => { const dt = Diplomacy.dealText(game, off); const lack = (off.tgold || 0) > pl.gold ? '<div class="dim">Vous n\'avez pas cette somme.</div>' : '';
+            return fem ? '<p style="margin:10px 0 4px">Elle propose un marché : ' + U.esc(dt.you) + ', contre ' + U.esc(dt.him) + '.</p>' + lack : '<p style="margin:10px 0 4px">Il propose un marché : ' + U.esc(dt.you) + ', contre ' + U.esc(dt.him) + '.</p>' + lack; })()
           : '<p style="margin:10px 0 4px">Sa proposition : <b>' + Diplomacy.stateName(kind).toLowerCase() + '</b>' + (off.against != null && game.players[off.against] ? ' contre <b>' + U.esc(Players.nameFor(game, pl.id, off.against)) + '</b>, qui écrase la partie' : '') + (gold || cityOk ? ', et pour l\'obtenir :' : '.') + '</p>')
         + (gold ? '<div class="gold">• ' + gold + ' pièces d\'or</div>' : '')
         + (cityOk ? (() => { const cc = game.cities[off.city]; return '<div class="gold">• la cité de ' + U.esc(cc.name) + ' (' + Cities.sizeName(cc).toLowerCase() + ', ' + U.fmt(cc.pop) + ' habitants)</div>'; })() : '')
@@ -1756,7 +1764,7 @@ const App = {
         // celui contre qui il propose de s'allier : ce qu'on en sait, et un coup d'œil sur sa capitale (ou sa plus grande cité repérée)
         + (T ? '<div class="offer-target" style="--pc:' + (tKnown ? T.color : '#9a948a') + '"><canvas id="offer-tpic" width="160" height="160"></canvas><div class="contact-info">'
           + '<div class="contact-kicker">Contre</div><div class="offer-tname" style="color:' + (tKnown ? T.color : '#9a948a') + '">' + U.esc(U.cap(Players.nameFor(game, pl.id, T.id))) + '</div>'
-          + (tKnown ? '<div class="contact-books">' + booksOf(T) + '</div><div class="muted">Traité : <b>' + Diplomacy.stateName(pl.diplo[T.id]).toLowerCase() + '</b> · attitude envers vous : <b class="' + (tRel > 15 ? 'ok' : tRel < -15 ? 'danger' : '') + '">' + relName(tRel) + ' (' + Math.round(tRel) + ')</b></div><div id="offer-tintel" class="offer-intel"></div>'
+          + (tKnown ? '<div class="contact-books">' + booksOf(T) + '</div><div class="muted">Traité : <b>' + Diplomacy.stateName(pl.diplo[T.id]).toLowerCase() + '</b> · attitude envers vous : <b class="' + (tRel > 15 ? 'ok' : tRel < -15 ? 'danger' : '') + '">' + relName(tRel, Players.female(T)) + ' (' + Math.round(tRel) + ')</b></div><div id="offer-tintel" class="offer-intel"></div>'
             : '<div class="dim">Vous ne l\'avez pas encore rencontré : vous ne savez rien de lui.</div>')
           + (tGoal ? '<button class="abtn" id="offer-tgo" style="margin-top:8px">' + tLabel + '</button>' : '') + '</div></div>' : '');
       // sa capitale si on l'a vue, sinon sa plus grande cité repérée : un coup d'œil sur la carte (le portrait ou le bouton), puis on revient à la proposition
@@ -1847,7 +1855,7 @@ const App = {
     const rank = game.players.map(p => ({ p, l: last.get(p.id) })).filter(x => x.l).sort((a, b) => (b.p.id === game.winner) - (a.p.id === game.winner) || b.p.alive - a.p.alive || b.l.r[1] - a.l.r[1]);
     const tbl = h('table', { class: 't', style: 'margin-bottom:8px' }, h('tr', null, ...['Sorcier', 'Score', 'Cités', 'Armée', 'Sorts', ''].map(t => h('th', { style: 'text-align:left' }, t))));
     for (const { p, l } of rank) tbl.append(h('tr', null, h('td', null, h('span', { class: 'realmdot', style: 'color:' + p.color }), p.name + (p.id === me.id ? ' (vous)' : '')), h('td', null, U.fmt(l.r[1])), h('td', null, l.r[3]), h('td', null, U.fmt(l.r[2])), h('td', null, l.r[6]),
-      h('td', { class: p.id === game.winner ? 'gold' : p.alive ? 'dim' : 'danger' }, p.id === game.winner ? 'vainqueur' : p.alive ? (p.banished ? 'banni' : 'en vie') : 'vaincu' + (elim.has(p.id) ? ' au tour ' + elim.get(p.id) : ''))));
+      h('td', { class: p.id === game.winner ? 'gold' : p.alive ? 'dim' : 'danger' }, p.id === game.winner ? 'vainqueur' : p.alive ? (p.banished ? (Players.female(p) ? 'bannie' : 'banni') : 'en vie') : (Players.female(p) ? 'vaincue' : 'vaincu') + (elim.has(p.id) ? ' au tour ' + elim.get(p.id) : ''))));
     body.append(tbl);
     const marks = ch.ev.filter(e => (Chronicle.KINDS[Chronicle.kindOf(e)] || {}).major).map(e => ({ t: e.t, text: Chronicle.text(game, e, me.id, true), icon: (Chronicle.KINDS[Chronicle.kindOf(e)] || {}).icon || '•', color: game.players[e.a] ? game.players[e.a].color : '#d9b25a' }));
     body.append(Panels.lineChart(game, Chronicle.series(game, me.id, 'score', true), { me: me.id, who: id => U.cap(Chronicle.who(game, me.id, id, true)), marks, fallen: new Set(elim.keys()), W: 760, H: 230, legend: false }));

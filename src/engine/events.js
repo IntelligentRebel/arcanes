@@ -240,13 +240,14 @@ const Dilemmas = {
       },
       text: (game, pl, d) => { const h = game.units[d.hero]; return 'Un champion errant, ' + DATA.units[d.champ].name + ', défie ' + (h ? U.esc(h.hero.name) : 'votre héros') + ' en combat singulier.'; },
       opts(game, pl, d) {
-        const h = game.units[d.hero], hn = h ? h.hero.name : 'votre héros';
+        const h = game.units[d.hero], hn = h ? h.hero.name : 'votre héros', hf = !!(h && Heroes.female(game, h));
         return [
-          { label: 'Relever le défi', text: 'Chances de vaincre ' + Game.chanceWord(d.odds) + '. Victoire : +' + d.xp + ' XP, +3 renommée. Défaite : ' + hn + ' est blessé (la moitié de ses PV), sans en mourir.', can: !!(h && h.owner === pl.id), why: 'Le héros n\'est plus là.', apply() {
+          { label: 'Relever le défi', text: hf ? 'Chances de vaincre ' + Game.chanceWord(d.odds) + '. Victoire : +' + d.xp + ' XP, +3 renommée. Défaite : ' + hn + ' est blessée (la moitié de ses PV), sans en mourir.'
+            : 'Chances de vaincre ' + Game.chanceWord(d.odds) + '. Victoire : +' + d.xp + ' XP, +3 renommée. Défaite : ' + hn + ' est blessé (la moitié de ses PV), sans en mourir.', can: !!(h && h.owner === pl.id), why: 'Le héros n\'est plus là.', apply() {
             if (!h || !game.units[h.id]) return;
             const r = Dilemmas.duelOnce(game, h, d.champ, new RNG(game.rng.int(1e9)), d.dmg || 0);
             if (r.won) { Units.addXp(game, h, d.xp); Dilemmas.fame(pl, 3); Game.log(game, pl.id, hn + ' terrasse son adversaire : +' + d.xp + ' XP, +3 renommée.', { unit: h.id }); }
-            else { h.dmg = Math.max(h.dmg, Math.floor(Units.stats(game, h).maxHp / 2)); Game.log(game, pl.id, hn + ' perd le duel et rentre blessé.', { unit: h.id }); }
+            else { h.dmg = Math.max(h.dmg, Math.floor(Units.stats(game, h).maxHp / 2)); Game.log(game, pl.id, hf ? hn + ' perd le duel et rentre blessée.' : hn + ' perd le duel et rentre blessé.', { unit: h.id }); }
           } },
           { label: 'Décliner', text: '−1 renommée.', apply() { Dilemmas.fame(pl, -1); } },
         ];
@@ -358,9 +359,10 @@ const Nemesis = {
     // il traque le dernier qu'il a blessé ; tous ceux qui ont perdu un héros peuvent le venger
     if (game.players[foePid]) { n.foe = foePid; if (!n.foes.includes(foePid)) n.foes.push(foePid); }
     const what = DATA.units[killer.type].name + (killer.owner >= 0 && game.players[killer.owner] ? ', ' + Players.nameFor(game, foePid, killer.owner) : '');
+    const vf = !!(victim.hero && Heroes.female(game, victim));
     if (game.players[foePid]) Game.log(game, foePid, fresh
-      ? vname + ' est tombé. Son meurtrier a désormais un nom : ' + n.name + ' (' + what + '). Il ne l\'oubliera pas, vous non plus.'
-      : n.name + ' (' + what + ') a encore frappé : ' + vname + ' est tombé. Il gagne en puissance (rang ' + n.lvl + ').', { x: killer.x, y: killer.y, plane: killer.plane, alert: true });   // le lieu du combat, pas l'unité (qu'on ne suivrait pas sous le brouillard)
+      ? (vf ? vname + ' est tombée. Son meurtrier a désormais un nom : ' + n.name + ' (' + what + '). Il ne l\'oubliera pas, vous non plus.' : vname + ' est tombé. Son meurtrier a désormais un nom : ' + n.name + ' (' + what + '). Il ne l\'oubliera pas, vous non plus.')
+      : (vf ? n.name + ' (' + what + ') a encore frappé : ' + vname + ' est tombée. Il gagne en puissance (rang ' + n.lvl + ').' : n.name + ' (' + what + ') a encore frappé : ' + vname + ' est tombé. Il gagne en puissance (rang ' + n.lvl + ').'), { x: killer.x, y: killer.y, plane: killer.plane, alert: true });   // le lieu du combat, pas l'unité (qu'on ne suivrait pas sous le brouillard)
     if (killer.owner >= 0 && game.players[killer.owner] && killer.owner !== foePid) Game.log(game, killer.owner, U.cap(Units.label(killer)) + ' a abattu ' + vname + ' : ' + (fresh ? 'on l\'appelle désormais ' + n.name + '.' : 'son renom grandit (rang ' + n.lvl + ').'), { unit: killer.id, minor: true });
   },
   // fin de combat : héros tombés, némésis abattues
@@ -595,7 +597,7 @@ const Rite = {
         const w = who(v), sc = U.txt(w.pl ? 'scellent' : 'scelle'), inv = U.txt(w.pl ? 'invoquent' : 'invoque');
         if (v === L.id) return w.n + ' ' + sc + ' un pacte contre vous : le rituel d\'Invocation du Démon légendaire commence.';
         const p = game.players[v]; if (!p.contact[L.id] && !ms.includes(p)) return null;
-        return w.n + ' ' + sc + ' un pacte contre ' + Players.nameFor(game, v, L.id) + ', qui domine la partie, et ' + inv + ' le Démon légendaire.' + (p.human && ms.includes(p) ? ' Vous n\'y êtes pas engagé : vous pouvez y contribuer depuis l\'écran Magie (M).' : '');
+        return w.n + ' ' + sc + ' un pacte contre ' + Players.nameFor(game, v, L.id) + ', qui domine la partie, et ' + inv + ' le Démon légendaire.' + (p.human && ms.includes(p) ? (Players.female(p) ? ' Vous n\'y êtes pas engagée : vous pouvez y contribuer depuis l\'écran Magie (M).' : ' Vous n\'y êtes pas engagé : vous pouvez y contribuer depuis l\'écran Magie (M).') : '');
       }, {});
     }
     if (r.phase === 'ritual') Rite.advance(game, r);
@@ -1019,7 +1021,7 @@ const Book = {
     if (b.city == null) { b.ground = { plane: at.plane, x: at.x, y: at.y }; return; }
     const c = game.cities[b.city], pl = game.players[pid];
     Game.logEach(game, v => v === pid ? 'Le Livre de légende est à vous ! Il rejoint ' + Book.where(game, b.city) + '. Ses sorts s\'ouvrent dans votre grimoire.'
-      : game.players[v].contact[pid] || Book.readBy(game, v).length ? U.cap(Players.nameFor(game, v, pid)) + ' s\'est emparé du Livre de légende.' : null, { book: true, city: b.city });
+      : game.players[v].contact[pid] || Book.readBy(game, v).length ? (Players.femFor(game, v, pid) ? U.cap(Players.nameFor(game, v, pid)) + ' s\'est emparée du Livre de légende.' : U.cap(Players.nameFor(game, v, pid)) + ' s\'est emparé du Livre de légende.') : null, { book: true, city: b.city });
     if (pl && pl.human && Game.hooks.fx) Game.hooks.fx({ type: 'rite', player: pid, title: 'Le Livre de légende', msg: 'Il rejoint ' + Book.where(game, b.city) + '. Ses sept sorts s\'ouvrent dans votre grimoire.', target: { city: b.city }, book: true, icon: 'item:book' });
     void c; void found;
   },

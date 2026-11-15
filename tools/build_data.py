@@ -383,6 +383,9 @@ def build_buildings():
 # ---------------------------------------------------------------------------
 # Terrain, mineraux, retorts, sorciers
 # ---------------------------------------------------------------------------
+FEMALE_WIZARDS = {"malivra", "sylvaine", "celestine", "nerissa"}
+
+
 def build_terrain(report):
     terrain = {}
     for tid, (name, move, food, prod, gold, road, water, desc) in GT.TERRAIN.items():
@@ -402,8 +405,10 @@ def build_terrain(report):
         retorts[rid] = {"name": name, "cost": cost, "req": req, "effects": effects, "desc": desc}
     wizards = []
     for (wid, name, portrait, books, rets, color) in GT.WIZARDS:
-        wizards.append({"id": wid, "name": name, "portrait": portrait, "books": books, "retorts": rets,
-                        "color": color})
+        w = {"id": wid, "name": name, "portrait": portrait, "books": books, "retorts": rets, "color": color}
+        if wid in FEMALE_WIZARDS:
+            w["female"] = True   # (0.31.61) les textes qui parlent d'elles s'accordent au féminin
+        wizards.append(w)
     report.append("")
     report.append("== Terrain / retorts / sorciers ==")
     for tid, man in GT.MANUAL_TERRAIN.items():

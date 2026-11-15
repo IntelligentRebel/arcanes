@@ -42,8 +42,9 @@ Object.assign(AI, {
       const nm = U.cap(Players.nameFor(game, v.id, pl.id));
       let t = null;
       if (next.kind === 'war') t = next.target === v.id ? 'Les émissaires de ' + nm + ' ne s\'en cachent plus : ses armées se rassemblent contre vous.' : 'Selon ses émissaires, ' + nm + ' porte la guerre chez ' + Players.nameFor(game, v.id, next.target) + '.';
-      else if (next.kind === 'defend') t = 'Les émissaires de ' + nm + ' parlent de remparts et de levées : il se retranche face à ' + (next.target === v.id ? 'vous' : Players.nameFor(game, v.id, next.target)) + '.';
-      else if (next.kind === 'expand') t = 'Les émissaires de ' + nm + ' vantent les terres libres : il fonde de nouvelles cités.';
+      else if (next.kind === 'defend') { const tg = next.target === v.id ? U.txt('vous') : Players.nameFor(game, v.id, next.target);
+        t = Players.femFor(game, v.id, pl.id) ? 'Les émissaires de ' + nm + ' parlent de remparts et de levées : elle se retranche face à ' + tg + '.' : 'Les émissaires de ' + nm + ' parlent de remparts et de levées : il se retranche face à ' + tg + '.'; }
+      else if (next.kind === 'expand') t = Players.femFor(game, v.id, pl.id) ? 'Les émissaires de ' + nm + ' vantent les terres libres : elle fonde de nouvelles cités.' : 'Les émissaires de ' + nm + ' vantent les terres libres : il fonde de nouvelles cités.';
       if (t) pl.aiPlanSaid = Object.assign(pl.aiPlanSaid || {}, { [v.id]: { kind: next.kind, target: next.target, turn: game.turn } });
       if (t) Game.log(game, v.id, t, { diplo: pl.id, minor: next.kind !== 'war' || next.target !== v.id, alert: next.kind === 'war' && next.target === v.id });
     }

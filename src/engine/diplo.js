@@ -16,6 +16,8 @@ Object.assign(Diplomacy, {
     toll: 'Votre péage sur ses caravanes', escort: 'Vous avez escorté ses caravanes', denounced: 'Le traité dénoncé',
     mutual_neg: 'Rancœur réciproque', mutual_pos: 'Sympathie réciproque', other: 'Souvenirs anciens',
   },
+  // (0.31.61) les mêmes, quand c'est une sorcière qui juge
+  WHY_F: { treaty_broken: 'Vous avez rompu un traité avec elle', attacked: 'Vous l\'avez attaquée', hostile_spell: 'Vos sorts contre elle' },
   why(game, a, b, key, n) {
     const pa = game.players[a]; if (!pa || !n) return;
     const w = (pa.relWhy = pa.relWhy || {}), r = (w[b] = w[b] || {});
@@ -36,7 +38,8 @@ Object.assign(Diplomacy, {
   reasons(game, a, b) {
     const pa = game.players[a]; if (!pa) return [];
     const r = ((pa.relWhy || {})[b]) || {}, total = pa.relations[b] || 0;
-    const out = Object.entries(r).map(([k, v]) => ({ key: k, label: Diplomacy.WHY[k] || k, v }));
+    const fem = Players.female(pa);
+    const out = Object.entries(r).map(([k, v]) => ({ key: k, label: (fem && Diplomacy.WHY_F[k]) || Diplomacy.WHY[k] || k, v }));
     const rest = total - U.sum(out, x => x.v);
     if (Math.abs(rest) >= 1) out.push({ key: 'other', label: Diplomacy.WHY.other, v: rest });
     return out.filter(x => Math.abs(x.v) >= 1).sort((x, y) => Math.abs(y.v) - Math.abs(x.v));
@@ -163,7 +166,7 @@ Object.assign(Diplomacy, {
     const G = Diplomacy.list(give), R = Diplomacy.list(get);
     if (b.diplo[a.id] === 'war') return { ok: false, why: b.name + ' ne traite pas avec un ennemi.' };
     if ((b.relations[a.id] || 0) < -30) return { ok: false, why: b.name + ' se méfie trop de vous.' };
-    if (G.some(id => !b.known.includes(id))) return { ok: false, why: 'Il ne connaît pas ce sort.' };
+    if (G.some(id => !b.known.includes(id))) return { ok: false, why: Players.female(b) ? 'Elle ne connaît pas ce sort.' : 'Il ne connaît pas ce sort.' };
     if (R.some(id => !Diplomacy.canLearn(b, id))) return { ok: false, why: 'Ce sort ne lui sert à rien.' };
     if (gold > 0 && gold > (a.gold || 0)) return { ok: false, why: 'Vous n\'avez pas autant d\'or.' };
     if (gold < 0 && -gold > Diplomacy.goldSpare(b)) return { ok: false, why: b.name + ' ne peut pas verser autant d\'or.' };
@@ -249,7 +252,8 @@ Object.assign(Diplomacy, {
   dealText(game, off) {
     const nm = L => Diplomacy.list(L).map(id => DATA.spells[id].name + ' (' + U.fmt(Diplomacy.spellValue(id)) + ' RP)').join(', ');
     const g = off.tgold || 0;
-    const you = [Diplomacy.list(off.give).length ? 'il vous apprend ' + nm(off.give) : '', g < 0 ? 'il vous verse ' + (-g) + ' or' : ''].filter(Boolean).join(' et ');
+    const f = Players.female(game.players[off.from]);
+    const you = [Diplomacy.list(off.give).length ? (f ? 'elle vous apprend ' + nm(off.give) : 'il vous apprend ' + nm(off.give)) : '', g < 0 ? (f ? 'elle vous verse ' + (-g) + ' or' : 'il vous verse ' + (-g) + ' or') : ''].filter(Boolean).join(' et ');
     const him = [Diplomacy.list(off.get).length ? nm(off.get) : '', g > 0 ? g + ' or' : ''].filter(Boolean).join(' et ');
     return { you, him };
   },

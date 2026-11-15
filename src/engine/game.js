@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.60';
+const GAME_VERSION = '0.31.61';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -915,7 +915,7 @@ const Game = {
     let demonDown = false;
     for (const side of [0, 1]) for (const u of res.killed[side]) {
       if (game.units[u.id]) {
-        if (u.hero && game.players[u.owner]) Game.log(game, u.owner, 'Le héros ' + u.hero.name + ' est tombé au combat.', { x: tx, y: ty, plane });
+        if (u.hero && game.players[u.owner]) Game.log(game, u.owner, Heroes.female(game, u) ? 'L\'héroïne ' + u.hero.name + ' est tombée au combat.' : 'Le héros ' + u.hero.name + ' est tombé au combat.', { x: tx, y: ty, plane });
         if (u.riteDemon) demonDown = true;
         Units.remove(game, u);
       }
@@ -945,7 +945,7 @@ const Game = {
         for (const u of runners) { u.x = spot[0]; u.y = spot[1]; u.path = null; u.dest = null; u.moves = 0; if (u.status === 'goto' || u.status === 'explore') u.status = ''; }
         if (game.players[defenderPid]) Game.collectCache(game, game.players[defenderPid], runners, plane, spot[0], spot[1]);
       } else {
-        for (const u of runners) { if (u.hero && game.players[u.owner]) Game.log(game, u.owner, 'Le héros ' + u.hero.name + ' est tombé dans la retraite.', { x: tx, y: ty, plane }); Units.remove(game, u); }
+        for (const u of runners) { if (u.hero && game.players[u.owner]) Game.log(game, u.owner, Heroes.female(game, u) ? 'L\'héroïne ' + u.hero.name + ' est tombée dans la retraite.' : 'Le héros ' + u.hero.name + ' est tombé dans la retraite.', { x: tx, y: ty, plane }); Units.remove(game, u); }
         res.killed[DEF_SIDE] = res.killed[DEF_SIDE].concat(runners);
         info.trapped = runners.length;
       }
@@ -996,7 +996,7 @@ const Game = {
       }
       if (city && city.owner !== pid) {
         // les défenseurs restants (non combattants) sont détruits
-        for (const u of Units.at(game, plane, tx, ty)) if (u.owner !== pid) { if (u.hero && game.players[u.owner]) Game.log(game, u.owner, 'Le héros ' + u.hero.name + ' est tombé avec ' + city.name + '.', { city: city.id }); Units.remove(game, u); }
+        for (const u of Units.at(game, plane, tx, ty)) if (u.owner !== pid) { if (u.hero && game.players[u.owner]) Game.log(game, u.owner, Heroes.female(game, u) ? 'L\'héroïne ' + u.hero.name + ' est tombée avec ' + city.name + '.' : 'Le héros ' + u.hero.name + ' est tombé avec ' + city.name + '.', { city: city.id }); Units.remove(game, u); }
         const cr = ridersFor(surv);   // qui les portait sur l'eau ne les y abandonne pas
         for (const u of surv.concat(cr)) { u.x = tx; u.y = ty; u.path = null; if (cr.includes(u)) u.moves = 0; }
         summary.captured = await Game.captureCity(game, city, pid);
@@ -1217,12 +1217,14 @@ const Game = {
     loser.fallen = city && game.cities[city.id] ? { city: city.id, turn: game.turn, by: winner ? winner.id : null, seen: false } : null;
     const who = winner ? winner.name : 'les pillards';
     if (loser.fallen) {
-      Game.log(game, loser.id, 'Votre forteresse de ' + city.name + ' est tombée : vous êtes banni ! Les troupes de ' + who + ' s\'attellent à la démanteler, ce qui leur prendra ' + FORTRESS_DISMANTLE + ' tours. Plus vous reprendrez ' + city.name + ' vite, plus votre retour sera rapide.', { city: city.id, x: city.x, y: city.y, plane: city.plane });
-      if (winner) Game.log(game, winner.id, 'La forteresse de ' + loser.name + ' à ' + city.name + ' est à vous et ' + loser.name + ' est banni dans le néant ! Vos troupes s\'attellent à la démanteler (' + FORTRESS_DISMANTLE + ' tours) : s\'il la reprend avant, son retour sera d\'autant plus rapide.', { city: city.id });
+      Game.log(game, loser.id, (Players.female(loser) ? 'Votre forteresse de ' + city.name + ' est tombée : vous êtes bannie ! Les troupes de ' + who + ' s\'attellent à la démanteler, ce qui leur prendra ' + FORTRESS_DISMANTLE + ' tours. Plus vous reprendrez ' + city.name + ' vite, plus votre retour sera rapide.'
+        : 'Votre forteresse de ' + city.name + ' est tombée : vous êtes banni ! Les troupes de ' + who + ' s\'attellent à la démanteler, ce qui leur prendra ' + FORTRESS_DISMANTLE + ' tours. Plus vous reprendrez ' + city.name + ' vite, plus votre retour sera rapide.'), { city: city.id, x: city.x, y: city.y, plane: city.plane });
+      if (winner) Game.log(game, winner.id, (Players.female(loser) ? 'La forteresse de ' + loser.name + ' à ' + city.name + ' est à vous et ' + loser.name + ' est bannie dans le néant ! Vos troupes s\'attellent à la démanteler (' + FORTRESS_DISMANTLE + ' tours) : si elle la reprend avant, son retour sera d\'autant plus rapide.'
+        : 'La forteresse de ' + loser.name + ' à ' + city.name + ' est à vous et ' + loser.name + ' est banni dans le néant ! Vos troupes s\'attellent à la démanteler (' + FORTRESS_DISMANTLE + ' tours) : s\'il la reprend avant, son retour sera d\'autant plus rapide.'), { city: city.id });
     } else {
       const back = Spells.returnCity ? Spells.returnCity(game, loser) : null;
-      Game.log(game, loser.id, (why === 'avatar' ? 'Vous êtes banni ! ' : 'Votre forteresse est tombée et a été détruite : vous êtes banni ! ') + 'Le Sort de Retour (' + Magic.spellCost(game, loser, 'spell_of_return') + ' mana) se lance de lui-même ; votre forteresse renaîtra ' + (back ? 'à ' + back.name : 'dans votre plus grande cité') + '.');
-      if (winner) Game.log(game, winner.id, loser.name + ' est banni dans le néant !');
+      Game.log(game, loser.id, (Players.female(loser) ? (why === 'avatar' ? 'Vous êtes bannie ! ' : 'Votre forteresse est tombée et a été détruite : vous êtes bannie ! ') : (why === 'avatar' ? 'Vous êtes banni ! ' : 'Votre forteresse est tombée et a été détruite : vous êtes banni ! ')) + 'Le Sort de Retour (' + Magic.spellCost(game, loser, 'spell_of_return') + ' mana) se lance de lui-même ; votre forteresse renaîtra ' + (back ? 'à ' + back.name : 'dans votre plus grande cité') + '.');
+      if (winner) Game.log(game, winner.id, Players.female(loser) ? loser.name + ' est bannie dans le néant !' : loser.name + ' est banni dans le néant !');
     }
     if (winner) winner.fame += 5;
     // le sorcier banni prépare son retour
@@ -1285,7 +1287,7 @@ const Game = {
         for (const c of Object.values(game.cities)) c.ench = c.ench.filter(e => e.owner !== pl.id);
         // ses nœuds se délient
         for (const st of game.sites) if (st.type === 'node' && st.owner === pl.id) { st.owner = -1; st.meldBy = null; }
-        Game.logEach(game, v => U.cap(Players.nameFor(game, v, pl.id)) + ' a été vaincu et disparaît de ce monde.');
+        Game.logEach(game, v => Players.femFor(game, v, pl.id) ? U.cap(Players.nameFor(game, v, pl.id)) + ' a été vaincue et disparaît de ce monde.' : U.cap(Players.nameFor(game, v, pl.id)) + ' a été vaincu et disparaît de ce monde.');
       }
     }
     const alive = game.players.filter(p => p.alive);
@@ -1432,7 +1434,8 @@ const Game = {
     const sv = pl.avatarSave;
     if (sv) { u.xp = sv.xp || 0; Object.assign(u.hero, sv.hero || {}, { name: pl.name, title: 'Sorcier', slots: ['anyWeapon', 'armor', 'jewelry'] }); if (sv.items) u.items = sv.items.slice(0, 3); delete pl.avatarSave; }
     u.moves = 0;
-    Game.log(game, pl.id, pl.name + ' descend en personne sur la carte. Votre compétence de lancement est réduite de moitié tant que vous y restez, et si vous tombez, vous serez banni.', { unit: u.id, x: c.x, y: c.y, plane: c.plane });
+    Game.log(game, pl.id, Players.female(pl) ? pl.name + ' descend en personne sur la carte. Votre compétence de lancement est réduite de moitié tant que vous y restez, et si vous tombez, vous serez bannie.'
+      : pl.name + ' descend en personne sur la carte. Votre compétence de lancement est réduite de moitié tant que vous y restez, et si vous tombez, vous serez banni.', { unit: u.id, x: c.x, y: c.y, plane: c.plane });
     return { ok: true, unit: u };
   },
   // l'avatar meurt : le sorcier perd sa forteresse et doit lancer le Sort de Retour
@@ -1440,7 +1443,7 @@ const Game = {
     const pl = game.players[u.owner]; if (!pl || !pl.alive || pl.banished) return;
     const c = game.cities[pl.fortress];
     if (c) { c.fortress = false; delete c.buildings.fortress; delete c.buildings.magicRelay; }
-    Game.logEach(game, v => v === pl.id ? 'Votre avatar est tombé au combat : vous perdez votre forteresse.' : U.cap(Players.nameFor(game, v, pl.id)) + ' est tombé au combat, en personne !');
+    Game.logEach(game, v => v === pl.id ? 'Votre avatar est tombé au combat : vous perdez votre forteresse.' : Players.femFor(game, v, pl.id) ? U.cap(Players.nameFor(game, v, pl.id)) + ' est tombée au combat, en personne !' : U.cap(Players.nameFor(game, v, pl.id)) + ' est tombé au combat, en personne !');
     Game.banish(game, pl, null, null, 'avatar');
   },
 
@@ -1725,6 +1728,13 @@ const HERO_ABILITY_POOLS = {
   any: ['agility', 'armsmaster', 'blademaster', 'constitution', 'leadership', 'legendary', 'might', 'arcanePower', 'sage', 'prayermaster', 'lucky', 'noble'],
 };
 const Heroes = {
+  // (0.31.61) une héroïne (Nyssandre, Kastra, Liselle, Séraphine), ou l'avatar d'une sorcière ; name : retrouvée par son nom
+  female(game, u) {
+    if (typeof u === 'string') return Object.values(DATA.heroes).some(d => d.female && d.name === u);
+    if (!u) return false;
+    if (u.avatar) return Players.female(game.players[u.owner]);
+    return !!(DATA.heroes[u.type] && DATA.heroes[u.type].female);
+  },
   // les six héros d'un sorcier (son avatar n'en est pas un)
   heroCount(game, pl) { return Object.values(game.units).filter(u => u.owner === pl.id && u.hero && !u.avatar).length; },
   // héros déjà engagés, tombés, partis pour toujours, ou dont l'offre attend la réponse d'un sorcier
@@ -2046,7 +2056,8 @@ const Heroes = {
     if (pl) { pl.fame = (pl.fame || 0) + R.fame; pl.gold += R.gold; }
     if (s) s.legend = null;
     q.done = true; q.reward = it.name + ' (' + Items.describe(it) + ')';
-    if (pl && dead) Game.log(game, u.owner, 'Légende accomplie, au prix de sa vie : ' + u.hero.name + ' est tombé en triomphant ' + Heroes.dePlace(q.place) + '. ' + it.name + ' (' + Items.describe(it) + ') rejoint le coffre de votre forteresse ; ' + R.gold + ' pièces d\'or, +' + R.fame + ' de renommée, et ' + R.troopXp + ' XP pour chaque survivant de son armée.', { x: u.x, y: u.y, plane: u.plane, quest: true, modal: !!pl.human });
+    if (pl && dead) Game.log(game, u.owner, Heroes.female(game, u) ? 'Légende accomplie, au prix de sa vie : ' + u.hero.name + ' est tombée en triomphant ' + Heroes.dePlace(q.place) + '. ' + it.name + ' (' + Items.describe(it) + ') rejoint le coffre de votre forteresse ; ' + R.gold + ' pièces d\'or, +' + R.fame + ' de renommée, et ' + R.troopXp + ' XP pour chaque survivant de son armée.'
+      : 'Légende accomplie, au prix de sa vie : ' + u.hero.name + ' est tombé en triomphant ' + Heroes.dePlace(q.place) + '. ' + it.name + ' (' + Items.describe(it) + ') rejoint le coffre de votre forteresse ; ' + R.gold + ' pièces d\'or, +' + R.fame + ' de renommée, et ' + R.troopXp + ' XP pour chaque survivant de son armée.', { x: u.x, y: u.y, plane: u.plane, quest: true, modal: !!pl.human });
     else if (pl) Game.log(game, u.owner, 'Légende accomplie ! ' + u.hero.name + ' triomphe ' + Heroes.dePlace(q.place) + ' et reçoit ' + it.name + ' (' + Items.describe(it) + '), ' + R.xp + ' XP ; ' + R.gold + ' pièces d\'or, +' + R.fame + ' de renommée, et ' + R.troopXp + ' XP pour chaque unité de son armée.', { unit: u.id, x: u.x, y: u.y, plane: u.plane, quest: true, modal: !!pl.human });
     // les autres sorciers qui le connaissent en entendent parler
     if (pl) for (const o of game.players) if (o !== pl && o.alive && o.human && o.contact && o.contact[pl.id]) Game.log(game, o.id, 'Les bardes chantent la légende ' + Heroes.dePlace(q.place) + ' : ' + u.hero.name + ', au service de ' + pl.name + ', l\'a accomplie.', { quest: true });

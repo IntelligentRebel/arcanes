@@ -396,14 +396,14 @@ const Panels = {
         const books = h('div', { class: 'wbooks', style: 'display:flex;gap:2px;flex-wrap:wrap;margin:3px 0' });
         for (const r of REALMS5) for (let i = 0; i < (o.books[r] || 0); i++) books.append(h('span', { class: r, style: 'width:7px;height:12px;border-radius:1px;background:' + REALM_COLORS[r] + ';' + UI.solid(REALM_COLORS[r]) + 'display:inline-block' }));
         const info = h('div', { style: 'flex:1;min-width:0' },
-          h('div', { class: 'serif', style: 'font-size:17px;color:' + o.color }, o.name, !o.alive ? h('span', { class: 'dim' }, ' (vaincu)') : o.banished ? h('span', { class: 'danger' }, ' (banni)') : null),
+          h('div', { class: 'serif', style: 'font-size:17px;color:' + o.color }, o.name, !o.alive ? h('span', { class: 'dim' }, Players.female(o) ? ' (vaincue)' : ' (vaincu)') : o.banished ? h('span', { class: 'danger' }, Players.female(o) ? ' (bannie)' : ' (banni)') : null),
           known ? books : h('div', { class: 'dim' }, 'Jamais rencontré'),
           ...(known ? Panels.wizardFacts(game, pl, o) : []));
         const box = h('div', { class: 'box' + (focus === o.id ? ' focus' : ''), style: 'display:flex;gap:12px;align-items:flex-start' }, portrait, info);
         if (focus === o.id) setTimeout(() => box.scrollIntoView({ block: 'nearest' }), 30);
         if (o !== pl && known && o.alive) {
           const rel = o.relations[pl.id] || 0;
-          const relTxt = rel > 50 ? 'Amical' : rel > 15 ? 'Cordial' : rel > -15 ? 'Neutre' : rel > -50 ? 'Méfiant' : 'Hostile';
+          const relTxt = Players.female(o) ? (rel > 50 ? 'Amicale' : rel > 15 ? 'Cordiale' : rel > -15 ? 'Neutre' : rel > -50 ? 'Méfiante' : 'Hostile') : (rel > 50 ? 'Amical' : rel > 15 ? 'Cordial' : rel > -15 ? 'Neutre' : rel > -50 ? 'Méfiant' : 'Hostile');
           const st = pl.diplo[o.id] || 'none';
           const act = h('div', { style: 'display:flex;flex-direction:column;gap:5px;width:220px' },
             h('div', null, 'Traité : ', h('b', null, Diplomacy.stateName(st)), pl.closedTo && pl.closedTo[o.id] && (st === 'peace' || st === 'alliance') ? h('span', { class: 'gold' }, ' · territoire interdit') : null),
@@ -415,14 +415,14 @@ const Panels = {
               st === 'peace' && !(pl.denounced && pl.denounced[o.id] != null) ? h('button', { class: 'abtn', onclick: () => { const r = Diplomacy.propose(game, pl.id, o.id, 'alliance'); UI.toast(U.esc(r.text)); render(); } }, 'Alliance') : null,
               (st === 'peace' || st === 'alliance') ? (() => { const shut = !!(pl.closedTo && pl.closedTo[o.id]);
                 const bt = h('button', { class: 'abtn', onclick: () => { const r = Diplomacy.closeBorders(game, pl.id, o.id, !shut); if (r.ok) { UI.toast(shut ? 'Votre territoire est rouvert à ' + U.esc(o.name) + '.' : 'Territoire interdit à ' + U.esc(o.name) + (r.moved ? ' : ' + U.n(r.moved, 'unité reconduite', 'unités reconduites') + ' à la frontière.' : '.')); MapView.bumpVis(); App.refresh(); } else UI.toast(U.esc(r.why), 'warn'); render(); } }, shut ? 'Rouvrir le territoire' : 'Interdire le territoire');
-                UI.tipOn(bt, shut ? 'Ses troupes pourront de nouveau traverser votre territoire.' : 'Ses troupes, éclaireurs compris, n\'entrent plus sur votre territoire ; celles qui s\'y trouvent sont reconduites à la frontière. Il ne l\'apprécie guère.');
+                UI.tipOn(bt, shut ? 'Ses troupes pourront de nouveau traverser votre territoire.' : (Players.female(o) ? 'Ses troupes, éclaireurs compris, n\'entrent plus sur votre territoire ; celles qui s\'y trouvent sont reconduites à la frontière. Elle ne l\'apprécie guère.' : 'Ses troupes, éclaireurs compris, n\'entrent plus sur votre territoire ; celles qui s\'y trouvent sont reconduites à la frontière. Il ne l\'apprécie guère.'));
                 return bt; })() : null,
               h('button', { class: 'abtn', disabled: pl.gold < 50, onclick: () => { const r = Diplomacy.propose(game, pl.id, o.id, 'tribute', 50); UI.toast(U.esc(r.text)); render(); App.refresh(); } }, 'Offrir 50 or'),
               st !== 'war' && !o.human ? h('button', { class: 'abtn', onclick: () => Panels.spellTrade(o, render) }, 'Sorts') : null,
               // un traité se dénonce : il prend fin quelques tours plus tard, et la guerre qui suit ne coûte pas l'estime des autres sorciers
               (st === 'peace' || st === 'alliance') && !(pl.denounced && pl.denounced[o.id] != null) ? (() => {
-                const bt = h('button', { class: 'abtn', onclick: async () => { if (await UI.confirm('Dénoncer le traité', 'Dénoncer votre ' + Diplomacy.stateName(st).toLowerCase() + ' avec ' + U.esc(o.name) + ' ? Il prendra fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours, et ' + U.esc(o.name) + ' en sera averti.', 'Dénoncer')) { Diplomacy.denounce(game, pl.id, o.id); UI.toast('Traité dénoncé : il prendra fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours.'); render(); App.refresh(); } } }, 'Dénoncer');
-                UI.tipOn(bt, 'Le traité prend fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours. Une guerre déclarée ensuite ne ternit pas votre réputation, mais il le prend mal.');
+                const bt = h('button', { class: 'abtn', onclick: async () => { if (await UI.confirm('Dénoncer le traité', Players.female(o) ? 'Dénoncer votre ' + Diplomacy.stateName(st).toLowerCase() + ' avec ' + U.esc(o.name) + ' ? Il prendra fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours, et ' + U.esc(o.name) + ' en sera avertie.' : 'Dénoncer votre ' + Diplomacy.stateName(st).toLowerCase() + ' avec ' + U.esc(o.name) + ' ? Il prendra fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours, et ' + U.esc(o.name) + ' en sera averti.', 'Dénoncer')) { Diplomacy.denounce(game, pl.id, o.id); UI.toast('Traité dénoncé : il prendra fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours.'); render(); App.refresh(); } } }, 'Dénoncer');
+                UI.tipOn(bt, Players.female(o) ? 'Le traité prend fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours. Une guerre déclarée ensuite ne ternit pas votre réputation, mais elle le prend mal.' : 'Le traité prend fin dans ' + Diplomacy.DENOUNCE_TURNS + ' tours. Une guerre déclarée ensuite ne ternit pas votre réputation, mais il le prend mal.');
                 return bt; })() : null,
               st !== 'war' ? h('button', { class: 'abtn danger', onclick: async () => { const pend = pl.denounced && pl.denounced[o.id] != null; if (await UI.confirm('Déclarer la guerre', 'Déclarer la guerre à ' + U.esc(o.name) + ' ?' + (st === 'peace' || st === 'alliance'
                 ? (pend ? ' Votre traité court encore ' + U.n(Math.max(1, pl.denounced[o.id] - game.turn), 'tour') + ' : le rompre maintenant ternira votre réputation auprès de tous les sorciers.'
@@ -457,22 +457,22 @@ const Panels = {
   },
   // ce qui pèse sur ses décisions envers vous : raisons de son attitude, traité dénoncé, ce que disent ses émissaires, guerre qui lui coûte, meneur à abattre
   wizardSignals(game, pl, o) {
-    const st = pl.diplo[o.id] || 'none';
+    const st = pl.diplo[o.id] || 'none', f = Players.female(o);
     const rite = typeof Rite !== 'undefined' && Rite.active(game);
     return [
       // Hardcore : le pacte contre celui qui domine la partie
-      rite && rite.target === o.id ? h('div', { class: 'gold', style: 'font-size:12px' }, rite.phase === 'ritual' ? 'Visé par un pacte : le Démon légendaire est en invocation (' + rite.progress + ' / ' + rite.cost + ' mana).' : 'Visé par un pacte : le Démon légendaire marche contre lui.') : null,
+      rite && rite.target === o.id ? h('div', { class: 'gold', style: 'font-size:12px' }, rite.phase === 'ritual' ? 'Visé par un pacte : le Démon légendaire est en invocation (' + rite.progress + ' / ' + rite.cost + ' mana).' : (f ? 'Visé par un pacte : le Démon légendaire marche contre elle.' : 'Visé par un pacte : le Démon légendaire marche contre lui.')) : null,
       Panels.reasonsBox(game, o, pl),
       o.denounced && o.denounced[pl.id] != null ? h('div', { class: 'danger', style: 'font-size:12px' }, 'A dénoncé votre traité : il prend fin dans ' + U.n(Math.max(1, o.denounced[pl.id] - game.turn), 'tour') + '.') : null,
       pl.denounced && pl.denounced[o.id] != null ? h('div', { class: 'gold', style: 'font-size:12px' }, 'Vous avez dénoncé ce traité : fin dans ' + U.n(Math.max(1, pl.denounced[o.id] - game.turn), 'tour') + '.') : null,
       (() => { const said = o.aiPlanSaid && o.aiPlanSaid[pl.id]; if (!said || game.turn - said.turn > 30) return null;
         const tg = said.target === pl.id ? U.txt('vous') : said.target != null ? Players.nameFor(game, pl.id, said.target) : '';
-        const txt = said.kind === 'war' ? 'Ses émissaires : une campagne contre ' + tg + '.' : said.kind === 'defend' ? 'Ses émissaires : il se retranche face à ' + tg + '.' : said.kind === 'expand' ? 'Ses émissaires : il fonde de nouvelles cités.' : null;
+        const txt = said.kind === 'war' ? 'Ses émissaires : une campagne contre ' + tg + '.' : said.kind === 'defend' ? (f ? 'Ses émissaires : elle se retranche face à ' + tg + '.' : 'Ses émissaires : il se retranche face à ' + tg + '.') : said.kind === 'expand' ? (f ? 'Ses émissaires : elle fonde de nouvelles cités.' : 'Ses émissaires : il fonde de nouvelles cités.') : null;
         return txt ? h('div', { class: said.kind === 'war' && said.target === pl.id ? 'danger' : 'muted', style: 'font-size:12px' }, txt + ' (tour ' + said.turn + ')') : null; })(),
-      st === 'war' && !o.human && Diplomacy.weariness(game, o, pl) > 0.3 ? h('div', { class: 'ok', style: 'font-size:12px' }, 'Cette guerre lui coûte cher : il est prêt à la paix.') : null,
+      st === 'war' && !o.human && Diplomacy.weariness(game, o, pl) > 0.3 ? h('div', { class: 'ok', style: 'font-size:12px' }, f ? 'Cette guerre lui coûte cher : elle est prête à la paix.' : 'Cette guerre lui coûte cher : il est prêt à la paix.') : null,
       // dès Difficile : ce sorcier voit-il un meneur à abattre ?
       (() => { if (o.human || !AI.feat(o, 'coalition', 2)) return null; const L = Diplomacy.leaderFor(game, o); if (!L || L.id === o.id) return null;
-        return h('div', { class: L.id === pl.id ? 'danger' : 'gold', style: 'font-size:12px' }, L.id === pl.id ? 'Votre avance l\'inquiète : il cherche à se liguer contre vous.' : 'Voit en ' + Players.nameFor(game, pl.id, L.id) + ' la menace commune.'); })(),
+        return h('div', { class: L.id === pl.id ? 'danger' : 'gold', style: 'font-size:12px' }, L.id === pl.id ? (f ? 'Votre avance l\'inquiète : elle cherche à se liguer contre vous.' : 'Votre avance l\'inquiète : il cherche à se liguer contre vous.') : 'Voit en ' + Players.nameFor(game, pl.id, L.id) + ' la menace commune.'); })(),
     ].filter(Boolean);
   },
   // pourquoi il vous aime ou vous déteste : les principales raisons, la liste complète au survol
@@ -487,7 +487,7 @@ const Panels = {
   // (0.31.55) plusieurs sorts de chaque côté, et de l'or pour équilibrer le marché
   spellTrade(o, after) {
     const game = App.game, pl = App.me();
-    const theirs = Diplomacy.tradeable(game, o, pl), mine = Diplomacy.tradeable(game, pl, o);
+    const theirs = Diplomacy.tradeable(game, o, pl), mine = Diplomacy.tradeable(game, pl, o), f = Players.female(o);
     const give = new Set(theirs.length ? [theirs[0]] : []), get = new Set();
     let pay = 0, recv = 0;   // l'or que vous lui versez, l'or qu'il vous verse
     const body = h('div');
@@ -498,23 +498,23 @@ const Panels = {
     const spare = () => Diplomacy.goldSpare(o);
     const draw = () => {
       body.innerHTML = '';
-      const left = h('div', { class: 'tradecol' }, h('h4', null, 'Il vous apprend'), ...(theirs.length ? theirs.map(id => item(id, give.has(id), () => flip(give, id))) : [h('div', { class: 'dim' }, 'Rien que vous puissiez apprendre.')]));
-      const right = h('div', { class: 'tradecol' }, h('h4', null, 'Vous lui apprenez'), ...(mine.length ? mine.map(id => item(id, get.has(id), () => flip(get, id))) : [h('div', { class: 'dim' }, 'Rien qu\'il puisse apprendre.')]));
+      const left = h('div', { class: 'tradecol' }, h('h4', null, f ? 'Elle vous apprend' : 'Il vous apprend'), ...(theirs.length ? theirs.map(id => item(id, give.has(id), () => flip(give, id))) : [h('div', { class: 'dim' }, 'Rien que vous puissiez apprendre.')]));
+      const right = h('div', { class: 'tradecol' }, h('h4', null, 'Vous lui apprenez'), ...(mine.length ? mine.map(id => item(id, get.has(id), () => flip(get, id))) : [h('div', { class: 'dim' }, f ? 'Rien qu\'elle puisse apprendre.' : 'Rien qu\'il puisse apprendre.')]));
       body.append(h('div', { class: 'tradegrid' }, left, right));
       const G = [...give], R = [...get], gold = pay - recv;
       const num = (v, max, set) => h('input', { type: 'number', min: 0, max, step: 5, value: v, class: 'tradegold', onclick: e => e.stopPropagation(),
         onchange: e => { set(Math.max(0, Math.min(max, Math.round((+e.target.value || 0) / 5) * 5))); draw(); } });
       const fair = G.length || R.length ? Diplomacy.fairGold(game, pl, o, G, R) : 0;
       const goldRow = h('div', { class: 'tradegrid', style: 'margin-top:8px' },
-        h('div', null, h('span', { class: 'dim' }, 'Il vous verse '), num(recv, spare(), v => { recv = v; if (v) pay = 0; }), h('span', { class: 'dim' }, ' or (au plus ' + spare() + ')')),
+        h('div', null, h('span', { class: 'dim' }, f ? 'Elle vous verse ' : 'Il vous verse '), num(recv, spare(), v => { recv = v; if (v) pay = 0; }), h('span', { class: 'dim' }, ' or (au plus ' + spare() + ')')),
         h('div', null, h('span', { class: 'dim' }, 'Vous lui versez '), num(pay, pl.gold, v => { pay = v; if (v) recv = 0; }), h('span', { class: 'dim' }, ' or (vous en avez ' + pl.gold + ')'),
           (G.length || R.length) && fair !== gold && (fair <= 0 || fair <= pl.gold) ? h('button', { class: 'abtn', style: 'margin-left:6px', title: 'L\'or qui rend le marché juste à ses yeux', onclick: () => { if (fair > 0) { pay = fair; recv = 0; } else { recv = -fair; pay = 0; } draw(); } }, 'Équilibrer') : null));
       body.append(goldRow);
       const any = G.length || R.length, gift = !G.length && !recv;
       const ans = any ? Diplomacy.tradeAnswer(game, pl, o, G, R, gold) : null;
       const { vg, vr } = Diplomacy.dealValue(G, R, gold);
-      const verdict = !any ? 'Choisissez au moins un sort.' : gift && !R.length ? 'Choisissez au moins un sort à lui apprendre.' : gift ? 'Un présent : il vous en saura gré.' : ans.ok ? 'Il acceptera ce marché.' : ans.why;
-      body.append(h('div', { class: ans && ans.ok && !(gift && !R.length) ? 'ok' : 'dim', style: 'margin-top:8px' }, verdict + (!gift && any ? ' (vous recevez ' + U.fmt(Math.round(vg)) + ' RP, il reçoit ' + U.fmt(Math.round(vr)) + ' RP, or compris)' : '')),
+      const verdict = !any ? 'Choisissez au moins un sort.' : gift && !R.length ? 'Choisissez au moins un sort à lui apprendre.' : gift ? (f ? 'Un présent : elle vous en saura gré.' : 'Un présent : il vous en saura gré.') : ans.ok ? (f ? 'Elle acceptera ce marché.' : 'Il acceptera ce marché.') : ans.why;
+      body.append(h('div', { class: ans && ans.ok && !(gift && !R.length) ? 'ok' : 'dim', style: 'margin-top:8px' }, verdict + (!gift && any ? (f ? ' (vous recevez ' + U.fmt(Math.round(vg)) + ' RP, elle reçoit ' + U.fmt(Math.round(vr)) + ' RP, or compris)' : ' (vous recevez ' + U.fmt(Math.round(vg)) + ' RP, il reçoit ' + U.fmt(Math.round(vr)) + ' RP, or compris)') : '')),
         h('div', { style: 'display:flex;gap:6px;justify-content:flex-end;margin-top:8px' },
           h('button', { class: 'abtn', onclick: () => m.close() }, 'Fermer'),
           h('button', { class: 'abtn primary', disabled: !any || (gift && !R.length), onclick: () => { const r = Diplomacy.proposeTrade(game, pl.id, o.id, G, R, gold); UI.toast(U.esc(r.text), r.ok ? '' : 'warn'); if (r.ok) { m.close(); App.refresh(); if (after) after(); } else draw(); } }, gift ? (R.length > 1 ? 'Offrir ces sorts' : 'Offrir ce sort') : 'Proposer l\'échange')));

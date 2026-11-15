@@ -108,6 +108,8 @@ const Chronicle = {
   kindOf(e) { return e.k === 'diplo' ? e.st === 'war' ? 'war' : e.st : e.k; },
   text(game, e, viewer, reveal) {
     const W = id => Chronicle.who(game, viewer, id, reveal), C = s => U.cap(s);
+    // (0.31.61) une sorcière, pour ce spectateur : elle-même, ou rencontrée (révélée à la fin)
+    const F = id => id != null && id >= 0 && Players.female(game.players[id]) && (reveal || viewer == null || viewer === id || Players.knows(game, viewer, id));
     const sp = id => DATA.spells[id] ? DATA.spells[id].name : id;
     switch (e.k) {
       case 'met': return e.a === viewer || e.b === viewer ? 'Vous rencontrez ' + W(e.a === viewer ? e.b : e.a) + '.' : C(W(e.a)) + ' et ' + W(e.b) + ' se rencontrent.';
@@ -124,11 +126,12 @@ const Chronicle = {
       case 'mastery_study': return C(W(e.a)) + (e.a === viewer ? ' étudiez' : ' étudie') + ' le Sort de Maîtrise.';
       case 'mastery_cast': return C(W(e.a)) + (e.a === viewer ? ' commencez' : ' commence') + ' à lancer le Sort de Maîtrise.';
       case 'mastery': return C(W(e.a)) + (e.a === viewer ? ' accomplissez' : ' accomplit') + ' le Sort de Maîtrise.';
-      case 'banished': return e.why === 'avatar' ? C(W(e.a)) + (e.a === viewer ? ' tombez au combat, en personne : vous êtes banni.' : ' tombe au combat, en personne : il est banni.') : C(W(e.a)) + (e.a === viewer ? ' êtes banni' : ' est banni') + (e.by != null && e.by >= 0 ? ' par ' + W(e.by) : '') + ' : ' + (e.a === viewer ? 'votre' : 'sa') + ' forteresse est tombée.';
+      case 'banished': { const f = F(e.a); return e.why === 'avatar' ? C(W(e.a)) + (e.a === viewer ? (f ? ' tombez au combat, en personne : vous êtes bannie.' : ' tombez au combat, en personne : vous êtes banni.') : (f ? ' tombe au combat, en personne : elle est bannie.' : ' tombe au combat, en personne : il est banni.'))
+        : C(W(e.a)) + (e.a === viewer ? (f ? ' êtes bannie' : ' êtes banni') : (f ? ' est bannie' : ' est banni')) + (e.by != null && e.by >= 0 ? ' par ' + W(e.by) : '') + ' : ' + (e.a === viewer ? 'votre' : 'sa') + ' forteresse est tombée.'; }
       case 'avatar_fall': return C(W(e.a)) + (e.a === viewer ? ' tombez' : ' tombe') + ' au combat, en personne.';
       case 'eliminated': return C(W(e.a)) + (e.a === viewer ? ' disparaissez' : ' disparaît') + ' de ce monde.';
       case 'hero_join': return e.h + (e.a === viewer ? ' vous rejoint.' : ' rejoint ' + W(e.a) + '.');
-      case 'hero_fall': return (e.a === viewer ? 'Votre héros ' + e.h : e.h + ', héros ' + U.de(W(e.a)) + ',') + ' tombe' + (e.lv ? ' (' + e.lv + ')' : '') + '.';
+      case 'hero_fall': return (Heroes.female(game, e.h) ? (e.a === viewer ? 'Votre héroïne ' + e.h : e.h + ', héroïne ' + U.de(W(e.a)) + ',') : (e.a === viewer ? 'Votre héros ' + e.h : e.h + ', héros ' + U.de(W(e.a)) + ',')) + ' tombe' + (e.lv ? ' (' + e.lv + ')' : '') + '.';
       case 'legend': return e.h + ' accomplit sa légende' + (e.place ? ' ' + e.place : '') + (e.item ? ' : ' + e.item : '') + '.';
       case 'crisis': return 'La Brèche s\'ouvre : la Crise commence.';
       case 'finale': return (typeof Finale !== 'undefined' ? Finale.title(e.kind) : '') + ' : la crise de fin commence, contre ' + W(e.d) + '.';

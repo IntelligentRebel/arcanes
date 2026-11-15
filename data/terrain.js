@@ -74,16 +74,16 @@ portrait = index 0..13 (ordre kazz DefaultWizardSlots). */
 DATA.wizards = [
   {"id": "aldoran", "name": "Aldoran", "portrait": 0, "books": {"life": 5, "nature": 5}, "retorts": ["sageMaster"], "color": "#9ccf8a"},
   {"id": "isvaran", "name": "Isvaran", "portrait": 1, "books": {"nature": 5, "sorcery": 6}, "retorts": [], "color": "#4f8fc9"},
-  {"id": "malivra", "name": "Malivra", "portrait": 2, "books": {"chaos": 5, "death": 5}, "retorts": ["conjurer"], "color": "#8a3a5c"},
+  {"id": "malivra", "name": "Malivra", "portrait": 2, "books": {"chaos": 5, "death": 5}, "retorts": ["conjurer"], "color": "#8a3a5c", "female": true},
   {"id": "tsevan", "name": "Tsevan", "portrait": 3, "books": {"chaos": 5, "sorcery": 5}, "retorts": ["channeler"], "color": "#7a5cc9"},
   {"id": "azhemir", "name": "Azhemir", "portrait": 4, "books": {"sorcery": 10}, "retorts": ["alchemy"], "color": "#2f6fbf"},
   {"id": "thalgren", "name": "Thalgren", "portrait": 5, "books": {"chaos": 5, "nature": 5}, "retorts": ["manaFocusing"], "color": "#b8742c"},
   {"id": "vorgath", "name": "Vorgath", "portrait": 6, "books": {"death": 9}, "retorts": ["infernalPower"], "color": "#5a3a7a"},
   {"id": "zirrakh", "name": "Zirrakh", "portrait": 7, "books": {"chaos": 4, "life": 5}, "retorts": ["myrran"], "color": "#d08a3a"},
   {"id": "brakkon", "name": "Brakkon", "portrait": 8, "books": {"chaos": 10}, "retorts": ["chaosMastery"], "color": "#c8402c"},
-  {"id": "sylvaine", "name": "Sylvaine", "portrait": 9, "books": {"nature": 10}, "retorts": ["natureMastery"], "color": "#3f8f3a"},
+  {"id": "sylvaine", "name": "Sylvaine", "portrait": 9, "books": {"nature": 10}, "retorts": ["natureMastery"], "color": "#3f8f3a", "female": true},
   {"id": "solenkh", "name": "Solenkh", "portrait": 10, "books": {"life": 5, "sorcery": 5}, "retorts": ["archmage"], "color": "#c9b85a"},
-  {"id": "celestine", "name": "Célestine", "portrait": 11, "books": {"life": 10}, "retorts": ["charismatic"], "color": "#e8e2c4"},
+  {"id": "celestine", "name": "Célestine", "portrait": 11, "books": {"life": 10}, "retorts": ["charismatic"], "color": "#e8e2c4", "female": true},
   {"id": "itzanor", "name": "Itzanor", "portrait": 12, "books": {"nature": 4, "death": 5}, "retorts": ["warlord"], "color": "#4a6b3a"},
-  {"id": "nerissa", "name": "Nérissa", "portrait": 13, "books": {"death": 5, "sorcery": 5}, "retorts": ["artificer"], "color": "#3a4a7a"}
+  {"id": "nerissa", "name": "Nérissa", "portrait": 13, "books": {"death": 5, "sorcery": 5}, "retorts": ["artificer"], "color": "#3a4a7a", "female": true}
 ];
