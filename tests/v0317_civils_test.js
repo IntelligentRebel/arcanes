@@ -4,6 +4,7 @@ const { loadEngine } = require('./load');
 const E = loadEngine(); E.AI.LAB = false; const { Game, Units, World, Cities, Battle, RNG, CombatAI } = E;
 const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) process.exitCode = 1; };
 const g = Game.newGame({ seed: 5, mapW: 60, mapH: 40, opponents: 2, difficulty: 'normal', crisis: 'off', human: { name: 'X', portrait: 0, books: { nature: 6 }, retorts: [], race: 'highelf' } });
+g.players[1].retorts = g.players[1].retorts.filter(r => r === 'myrran');   // (0.31.60) un adversaire sans aptitude de combat : le tirage des sorciers ne change pas la mesure
 const f = g.cities[g.players[0].fortress];
 const [x, y] = World.neighbors(g.world, f.x, f.y).find(([x, y]) => !World.isWaterAt(g.world, f.plane, x, y) && !Cities.at(g, f.plane, x, y));
 function run(n, attackerHuman) {

@@ -1,3 +1,4 @@
+// v0.31.60 : envoyé sur Myrror, un rival reçoit la Myrrien en plus de ses aptitudes, sans rendre de livres ; Zirrakh, natif, y va presque toujours.
 // v0.31.57 (idée de Cor'e) : les sorciers de la Mort, un peu ceux du Chaos, penchent vers Myrror ; ceux de la Vie restent plutôt
 // sur Arcanus ; sans exclusive. Le nombre de sorciers par plan ne change pas.
 const { loadEngine } = require('./load');
@@ -13,7 +14,10 @@ for (let seed = 1; seed <= 300; seed++) {
 const pct = n => Math.round(100 * (on[n] || 0) / seen[n]);
 ok(counts, 'toujours deux sorciers sur l\'autre plan');
 ok(pct('Vorgath') >= 65, 'Vorgath (Mort 9) sur Myrror : ' + pct('Vorgath') + ' % (au hasard : 40 %)');
-ok(pct('Célestine') <= 8 && pct('Célestine') > 0, 'Célestine (Vie 10) sur Myrror : ' + pct('Célestine') + ' % : rare, pas impossible');
+ok(pct('Célestine') <= 5, 'Célestine (Vie 10) sur Myrror : ' + pct('Célestine') + ' % : rare (1 % sur 600 parties)');
+ok(pct('Zirrakh') >= 75, 'Zirrakh, natif de Myrror, y démarre : ' + pct('Zirrakh') + ' %');
+{ const v = Game.asMyrran(DATA.wizards.find(w => w.name === 'Vorgath'));
+  ok(v.retorts.includes('infernalPower') && v.retorts.includes('myrran') && v.books.death === 9, 'Vorgath sur Myrror : Mort ' + v.books.death + ', ' + v.retorts.join(' + ')); }
 ok(pct('Malivra') > pct('Azhemir') && pct('Azhemir') > pct('Solenkh'), 'Malivra ' + pct('Malivra') + ' % > Azhemir ' + pct('Azhemir') + ' % > Solenkh ' + pct('Solenkh') + ' %');
 // joueur sur Myrror : ses voisins de plan sont plutôt les sorciers sombres
 let dark = 0, n = 0;

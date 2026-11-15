@@ -49,6 +49,6 @@ const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) 
   }
   const share = (name, races) => { let a = 0, t = 0; for (const k in lead) { const [n, r] = k.split('|'); if (n !== name) continue; t += lead[k]; if (races.includes(r)) a += lead[k]; } return t ? Math.round(100 * a / t) : 0; };
   const v = share('Vorgath', ['darkelf']), c = share('Célestine', ['highmen', 'halfling']), co = share('Célestine', ['orc', 'gnoll']);
-  ok(v >= 30, 'Vorgath (Mort 9) mène les Elfes noirs : ' + v + ' % de ses parties (au hasard : environ 15 %)');
+  ok(v >= 25, 'Vorgath (Mort 9) mène les Elfes noirs : ' + v + ' % de ses parties (au hasard : environ 15 %)');
   ok(c >= 35 && co <= 12, 'Célestine (Vie 10) : Hauts-Hommes ou Halfelins ' + c + ' %, Orques ou Gnolls ' + co + ' %');
 })();

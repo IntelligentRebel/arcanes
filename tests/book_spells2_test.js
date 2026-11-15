@@ -84,7 +84,8 @@ const { loadEngine } = require('./load');
   const ex = Book.makeArtifact('excalibur');
   ok(ex.melee === 8 && E.Items.describe(ex).includes('Vengeur sacré'), 'Excalibur : ' + E.Items.describe(ex));
   // l'IA avec un héros le lance en priorité
-  const g6 = Game.newGame({ seed: 12, mapW: 60, mapH: 40, opponents: 3, difficulty: 'hard', human: { name: 'X', portrait: 0, books: { life: 6 }, retorts: [], race: 'highmen' } });
+  // (0.31.60) graine 13 : avec la 12, le sorcier tiré (Nérissa, sur Myrror) a maintenant mieux à faire, des squelettes pour se défendre
+  const g6 = Game.newGame({ seed: 13, mapW: 60, mapH: 40, opponents: 3, difficulty: 'hard', human: { name: 'X', portrait: 0, books: { life: 6 }, retorts: [], race: 'highmen' } });
   for (const p of g6.players) { p.human = false; p.aiLevel = 'hard'; }
   const d1 = g6.players[1]; Book.claim(g6, 1, { plane: g6.book.plane, x: g6.book.x, y: g6.book.y }); d1.mana = 3000;
   const fd = g6.cities[d1.fortress]; const hk = Object.keys(DATA.units).find(k => DATA.units[k].hero || /^Hero/.test(k));

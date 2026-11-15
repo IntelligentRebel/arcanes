@@ -231,7 +231,8 @@ Object.assign(Diplomacy, {
     if (sw) return { give: [sw.bGets], get: [sw.aGets], tgold: 0 };   // bestSwap : aGets va à l'IA, bGets au joueur
     const sells = Diplomacy.tradeable(game, a, b), wants = Diplomacy.tradeable(game, b, a);
     const V = Diplomacy.spellValue, spare = Diplomacy.goldSpare(a);
-    const ok = (G, R, g) => g <= 0 ? -g <= spare : g <= b.gold;
+    // payable par chacun, et vraiment au juste prix : si l'or que l'IA peut verser ne suffit pas à combler l'écart, pas d'offre
+    const ok = (G, R, g) => { if (g > 0 ? g > b.gold : -g > spare) return false; const { vg, vr } = Diplomacy.dealValue(G, R, g); return vr <= vg * 1.25 && vr >= vg * 0.8; };
     const fair = (G, R) => Diplomacy.fairGold(game, b, a, G, R, 1);
     const want = wants.slice().sort((x, y) => V(y) - V(x))[0];
     if (want && sells.length) {

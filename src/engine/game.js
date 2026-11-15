@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.59';
+const GAME_VERSION = '0.31.60';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -124,7 +124,8 @@ const Game = {
   },
   raceLean(w, race) { const a = Game.RACE_REALMS[race] || {}, b = w.books || {}; let s = 1; for (const k in a) s += a[k] * (b[k] || 0) / 6; return s; },
   // ce qui fait pencher un sorcier vers Myrror : la Mort, un peu le Chaos, l'aptitude Myrrien ; la Vie le retient sur Arcanus
-  darkLean(w) { const b = w.books || {}; return (b.death || 0) + 0.5 * (b.chaos || 0) - (b.life || 0) + ((w.retorts || []).includes('myrran') ? 4 : 0); },
+  // (0.31.60) un natif de Myrror (Zirrakh) y retourne presque toujours
+  darkLean(w) { const b = w.books || {}; return (b.death || 0) + 0.5 * (b.chaos || 0) - (b.life || 0) + ((w.retorts || []).includes('myrran') ? 16 : 0); },
   // un sorcier prédéfini placé sur un plan donné, ses choix ajustés pour rester à 11
   onPlane(w, plane) {
     const my = w.retorts.includes('myrran');
@@ -143,16 +144,11 @@ const Game = {
     }
     return c;
   },
-  // un sorcier prédéfini qui naît sur Myrror : l'aptitude Myrrien remplace ses aptitudes, et il rend des livres pour rester à 11 choix
+  // un sorcier prédéfini qui naît sur Myrror reçoit l'aptitude Myrrien en plus des siennes, sans rien rendre (0.31.60) : les
+  // sorciers de l'autre plan doivent être plus forts (l'un d'eux finit souvent en boss) ; il garde sa personnalité (sa Puissance
+  // infernale, sa Maîtrise du Chaos...), et les 5 de mana de la forteresse viennent avec le plan
   asMyrran(w) {
-    const c = Object.assign({}, w, { books: Object.assign({}, w.books), retorts: ['myrran'] });
-    const picks = () => U.sum(Object.values(c.books), n => n) + U.sum(c.retorts, r => DATA.retorts[r].cost);
-    while (picks() > 11) {
-      const realm = U.max(Object.keys(c.books).filter(k => c.books[k] > 1), k => c.books[k]);
-      if (!realm) break;
-      c.books[realm]--;
-    }
-    return c;
+    return Object.assign({}, w, { books: Object.assign({}, w.books), retorts: w.retorts.includes('myrran') ? w.retorts.slice() : w.retorts.concat(['myrran']) });
   },
   // parties sauvegardées avec une version antérieure : ajouts sans risque (nouveaux sorts arcaniques, trouvailles)
   upgrade(game) {
