@@ -311,7 +311,7 @@ const Panels = {
         row('def', 'Défense', s.def, bare.def),
         row('res', 'Résistance', s.res, bare.res),
         row('hp', 'Points de vie', s.maxHp, bare.maxHp, Units.health(game, u) < s.maxHp ? '(' + Units.health(game, u) + ' restants)' : ''),
-        row(s.flying ? 'fly' : 'move', 'Mouvement', s.move, bare.move, s.flying ? 'en volant' : ''),
+        row(s.flying ? 'fly' : 'move', 'Mouvement', s.move, bare.move, s.flying ? 'en volant, à pied sur les routes' : ''),
         h('div', { class: 'hs-stat' }, h('span', { class: 'ic' }), h('span', { class: 'lab' }, 'Précision'), h('b', null, s.toHit + ' %'), h('span', { class: 'ex' }, s.toHit !== bare.toHit ? h('span', { class: 'gold' }, ' (+' + (s.toHit - bare.toHit) + ' % objets)') : null,
           Units.pierce(s.toHit) ? h('span', { class: 'dim', title: 'Au-delà de 100 %, chaque tranche de 10 % ignore 1 point de défense de la cible' }, ' · ignore ' + Units.pierce(s.toHit) + ' de défense') : null)),
         s.caster ? row('mana', 'Mana de combat', s.caster, bare.caster) : null);

@@ -1,3 +1,4 @@
+// v0.31.59 : qui vole se pose et suit la route quand c'est plus rapide (des pégases ne ralentissent plus des cavaliers).
 // v0.31.58 : une route enchantée (et toute route de Myrror) coûte un quart de point de mouvement par case, la moitié d'une route
 // ordinaire, au lieu de rien (on traversait tout un réseau d'un coup) ; le peuple d'un sorcier rival penche vers sa magie.
 const { loadEngine } = require('./load');
@@ -28,6 +29,18 @@ const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) 
   ok(Move.stepCost(g, u, gi, p, x0, y, x0 + 1, y) === 0.5, 'route enchantée : un quart de point par case (' + Move.stepCost(g, u, gi, p, x0, y, x0 + 1, y) + ' demi-point)');
   ok(d1 === 2 && d2 === 4, 'lanciers (1 point) : ' + d1 + ' cases sur une route, ' + d2 + ' sur une route enchantée');
   ok(/deux fois plus vite/.test(DATA.spells.enchant_road.desc), 'le sort le dit : ' + DATA.spells.enchant_road.desc);
+  // les pégases (3 points, en volant) : à pied sur la route quand c'est plus rapide
+  const go = async (types, roadKind) => {
+    for (let k = 0; k < 14; k++) World.set(w, p, 'road', x0 + k, y, roadKind);
+    const us = types.map(t => { const v = Units.create(g, t, pl.id, p, x0, y); v.moves = Units.maxMoves(g, v); return v; });
+    await Game.moveGroup(g, us.map(v => v.id), x0 + 13, y, { auto: true });
+    const d = us[0].x - x0; for (const v of us) delete g.units[v.id]; return d;
+  };
+  const pegNone = await go(['Pegasai'], 0), pegRoad = await go(['Pegasai'], 1), pegEnch = await go(['Pegasai'], 2);
+  ok(pegNone === 3 && pegRoad === 6 && pegEnch === 12, 'pégases : ' + pegNone + ' cases hors route, ' + pegRoad + ' sur une route, ' + pegEnch + ' sur une route enchantée');
+  const cavRoad = await go(['HighMenCavalry'], 1), mixRoad = await go(['HighMenCavalry', 'Pegasai'], 1), mixEnch = await go(['HighMenCavalry', 'Pegasai'], 2);
+  ok(cavRoad === 4 && mixRoad === 4 && mixEnch === 8, 'cavaliers et pégases ensemble : ' + mixRoad + ' cases sur la route (cavaliers seuls : ' + cavRoad + '), ' + mixEnch + ' sur une route enchantée');
+  for (let k = 0; k < 14; k++) World.set(w, p, 'road', x0 + k, y, 2);
   // le peuple selon la magie
   const lead = {};
   for (let seed = 1; seed <= 300; seed++) {
