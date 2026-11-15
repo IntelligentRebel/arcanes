@@ -133,7 +133,7 @@ add("Vertigo", "Vertige", "enemyUnit", "curse", {"resistMod": 0, "toHitPct": -20
 add("Spell Lock", "Sceau des sorts", "friendlyUnit", "unitEnchant", {"protectsEnchantments": True},
     "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.")
 add("Enchant Road", "Routes enchantées", "tile", "terrain", {"radius": 2},
-    "Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.")
+    "Toutes les routes dans un rayon de 2 cases autour de la case visée deviennent enchantées : les unités terrestres y vont deux fois plus vite que sur une route ordinaire.")
 add("Flight", "Vol", "friendlyUnit", "unitEnchant", {"ability": "flying", "move": 3},
     "L'unité vole, avec une vitesse d'au moins 3.")
 add("Wind Mastery", "Maîtrise des vents", "none", "global", {"friendlyShipSpeedPct": 50, "enemyShipSpeedPct": -50},

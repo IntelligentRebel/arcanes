@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.57';
+const GAME_VERSION = '0.31.58';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -80,7 +80,7 @@ const Game = {
       const w = Game.onPlane(pick[i], toMyrror.has(pick[i]) ? 1 : 0);
       const myrran = w.retorts.includes('myrran');
       const races = Object.values(DATA.races).filter(r => r.plane === (myrran ? 'myrror' : 'arcanus'));
-      all.push({ name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: game.rng.pick(races).id, human: false, color: PLAYER_COLORS[i + 1], personality: game.rng.pick(['expansionist', 'militarist', 'perfectionist', 'maniac', 'balanced']) });
+      all.push({ name: w.name, portrait: w.portrait, books: w.books, retorts: w.retorts, race: game.rng.weighted(races, r => Game.raceLean(w, r.id)).id, human: false, color: PLAYER_COLORS[i + 1], personality: game.rng.pick(['expansionist', 'militarist', 'perfectionist', 'maniac', 'balanced']) });
     }
     // la difficulté ne donne aucun avantage à l'IA : elle joue plus ou moins bien. En Facile seulement, le joueur part plus riche.
     if (game.difficulty === 'impossible') game.difficulty = 'hardcore';
@@ -115,6 +115,14 @@ const Game = {
     return game;
   },
 
+  // (0.31.58) le peuple d'un sorcier rival penche vers sa magie : la Vie vers les Hauts-Hommes et les Halfelins, la Mort vers les
+  // Elfes noirs, le Chaos vers les Orques et les Draconiens... Un poids, pas une règle : 1 + somme(affinité × livres / 6)
+  RACE_REALMS: {
+    highmen: { life: 2, sorcery: 1 }, halfling: { life: 2, nature: 1 }, highelf: { nature: 2, life: 1, sorcery: 1 }, nomad: { sorcery: 1, life: 1, nature: 1 },
+    barbarian: { chaos: 1, nature: 1 }, gnoll: { death: 1, chaos: 1 }, orc: { chaos: 2, death: 1 }, lizardman: { nature: 1, death: 1 }, klackon: { nature: 1, chaos: 1 },
+    darkelf: { death: 2, sorcery: 1, chaos: 1 }, beastmen: { nature: 1, chaos: 1, death: 1 }, draconian: { chaos: 2, sorcery: 1 }, dwarf: { life: 1, nature: 1 }, troll: { nature: 2, death: 1 },
+  },
+  raceLean(w, race) { const a = Game.RACE_REALMS[race] || {}, b = w.books || {}; let s = 1; for (const k in a) s += a[k] * (b[k] || 0) / 6; return s; },
   // ce qui fait pencher un sorcier vers Myrror : la Mort, un peu le Chaos, l'aptitude Myrrien ; la Vie le retient sur Arcanus
   darkLean(w) { const b = w.books || {}; return (b.death || 0) + 0.5 * (b.chaos || 0) - (b.life || 0) + ((w.retorts || []).includes('myrran') ? 4 : 0); },
   // un sorcier prédéfini placé sur un plan donné, ses choix ajustés pour rester à 11

@@ -1081,7 +1081,7 @@
 "Sceau des sorts": "Печать заклинаний",
 "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.": "Мешает рассеять благотворные чары отряда (и связь призванного существа), пока сама печать не будет снята.",
 "Routes enchantées": "Зачарованные дороги",
-"Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.": "Все дороги в радиусе 2 клеток вокруг выбранной клетки больше не требуют движения у наземных отрядов.",
+"Toutes les routes dans un rayon de 2 cases autour de la case visée deviennent enchantées : les unités terrestres y vont deux fois plus vite que sur une route ordinaire.": "Все дороги в радиусе 2 клеток от выбранной клетки становятся зачарованными: наземные отряды движутся по ним вдвое быстрее, чем по обычной дороге.",
 "Vol mineur": "Малый полёт",
 "L'unité vole, avec une vitesse d'au moins 3.": "Отряд летает со скоростью не менее 3.",
 "Vol majeur": "Массовый полёт",

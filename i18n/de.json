@@ -1081,7 +1081,7 @@
 "Sceau des sorts": "Zaubersiegel",
 "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.": "Verhindert die Auflösung der vorteilhaften Verzauberungen der Einheit (und der Bindung einer beschworenen Kreatur), solange dieses Siegel nicht selbst aufgehoben wurde.",
 "Routes enchantées": "Verzauberte Straßen",
-"Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.": "Alle Straßen im Umkreis von 2 Feldern um das anvisierte Feld kosten Landeinheiten keine Bewegung mehr.",
+"Toutes les routes dans un rayon de 2 cases autour de la case visée deviennent enchantées : les unités terrestres y vont deux fois plus vite que sur une route ordinaire.": "Alle Straßen im Umkreis von 2 Feldern um das Zielfeld werden verzaubert: Landeinheiten kommen dort doppelt so schnell voran wie auf einer gewöhnlichen Straße.",
 "Vol mineur": "Geringer Flug",
 "L'unité vole, avec une vitesse d'au moins 3.": "Die Einheit fliegt, mit einer Geschwindigkeit von mindestens 3.",
 "Vol majeur": "Großer Flug",

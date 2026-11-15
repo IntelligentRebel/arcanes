@@ -1081,7 +1081,7 @@
 "Sceau des sorts": "Spell Lock",
 "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.": "Prevents the dispelling of the unit's beneficial enchantments (and of a summoned creature's bond) until this lock has itself been lifted.",
 "Routes enchantées": "Enchant Road",
-"Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.": "All roads within 2 tiles of the targeted tile no longer cost any movement to land units.",
+"Toutes les routes dans un rayon de 2 cases autour de la case visée deviennent enchantées : les unités terrestres y vont deux fois plus vite que sur une route ordinaire.": "All roads within 2 tiles of the target tile become enchanted: land units travel twice as fast on them as on an ordinary road.",
 "Vol mineur": "Flight",
 "L'unité vole, avec une vitesse d'au moins 3.": "The unit flies, with a speed of at least 3.",
 "Vol majeur": "Mass Flight",

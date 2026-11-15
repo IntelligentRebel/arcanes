@@ -1081,7 +1081,7 @@
 "Sceau des sorts": "주문 봉인",
 "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.": "이 봉인이 해제되기 전까지 유닛의 이로운 마법(및 소환 생물의 결속) 해제를 막는다.",
 "Routes enchantées": "마법의 도로",
-"Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.": "대상 칸 주변 반경 2칸 안의 모든 도로가 지상 유닛에게 이동력을 소모하지 않게 된다.",
+"Toutes les routes dans un rayon de 2 cases autour de la case visée deviennent enchantées : les unités terrestres y vont deux fois plus vite que sur une route ordinaire.": "대상 칸 주변 2칸 이내의 모든 도로가 마법 도로가 된다. 지상 유닛은 그 위에서 일반 도로보다 두 배 빠르게 이동한다.",
 "Vol mineur": "비행(소)",
 "L'unité vole, avec une vitesse d'au moins 3.": "유닛이 비행하며 속도가 최소 3이 된다.",
 "Vol majeur": "비행(대)",

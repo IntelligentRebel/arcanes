@@ -78,7 +78,9 @@ const Move = {
     if (gi.windWalking || s.flying) return 2;
     if (water) return gi.tidal ? 1 : 2;
     const roadFrom = World.hasRoad(world, plane, fx, fy), roadTo = World.hasRoad(world, plane, tx, ty);
-    if (roadFrom && roadTo) return World.get(world, plane, 'road', tx, ty) === 2 ? 0 : 1;
+    // (0.31.58) route : un demi-point ; route enchantée (et toutes celles de Myrror) : un quart de point, plus rien comme dans
+    // Master of Magic, où l'on traversait tout un réseau d'un coup (on ne pouvait plus se défendre en se plaçant)
+    if (roadFrom && roadTo) return World.get(world, plane, 'road', tx, ty) === 2 ? 0.5 : 1;
     const t = World.terr(world, plane, tx, ty);
     if (gi.pathfinding) return 2;
     if (gi.forester && (t === T.FOREST || t === T.NNODE)) return 2;
@@ -217,7 +219,7 @@ const Move = {
     const stepCostK = (fk, k) => {
       if (allFly) return 2;
       if (isWater(k)) return gi.tidal ? 1 : 2;
-      if (road[fk] && road[k]) return road[k] === 2 ? 0 : 1;
+      if (road[fk] && road[k]) return road[k] === 2 ? 0.5 : 1;
       const t = terr[k];
       if (gi.pathfinding) return 2;
       if (gi.forester && (t === T.FOREST || t === T.NNODE)) return 2;
@@ -353,7 +355,7 @@ const Move = {
     const stepCostK = (fk, k) => {
       if (allFly) return 2;
       if (isWater(k)) return gi.tidal ? 1 : 2;
-      if (road[fk] && road[k]) return road[k] === 2 ? 0 : 1;
+      if (road[fk] && road[k]) return road[k] === 2 ? 0.5 : 1;
       const t = terr[k];
       if (gi.pathfinding) return 2;
       if (gi.forester && (t === T.FOREST || t === T.NNODE)) return 2;

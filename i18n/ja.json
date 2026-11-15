@@ -1081,7 +1081,7 @@
 "Sceau des sorts": "呪文施錠",
 "Empêche la dissipation des enchantements bénéfiques de l'unité (et du lien d'une créature invoquée) tant que ce sceau n'a pas lui-même été levé.": "この施錠自体が解かれない限り、ユニットの有益な付呪(と召喚された生物との結びつき)が解呪されなくなる。",
 "Routes enchantées": "街道付呪",
-"Toutes les routes dans un rayon de 2 cases autour de la case visée ne coûtent plus aucun mouvement aux unités terrestres.": "対象マスの周囲2マス以内のすべての街道が、地上ユニットにとって移動力を消費しなくなる。",
+"Toutes les routes dans un rayon de 2 cases autour de la case visée deviennent enchantées : les unités terrestres y vont deux fois plus vite que sur une route ordinaire.": "対象マスから2マス以内の道路がすべて魔法の道になる。陸上ユニットはそこを通常の道路の2倍の速さで進む。",
 "Vol mineur": "飛行(小)",
 "L'unité vole, avec une vitesse d'au moins 3.": "ユニットが速度3以上で飛行する。",
 "Vol majeur": "飛行(大)",
