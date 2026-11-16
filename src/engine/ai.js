@@ -487,7 +487,8 @@ const AI = {
       // bloqué deux tours de suite au même endroit (une unité étrangère sur la case visée…) : on choisit un autre site
       if (game.units[u.id] && u.aiTarget && u.x === bx && u.y === by && u.plane === bp) { if ((u.aiStuck = (u.aiStuck || 0) + 1) >= 2) { bad(); continue; } }
       else u.aiStuck = 0;
-      if (game.units[u.id] && u.aiTarget && u.x === u.aiTarget[0] && u.y === u.aiTarget[1] && Cities.canFoundAt(game, pl.id, u.plane, u.x, u.y).ok) Game.foundCity(game, u.id);
+      // arrivé à bout de mouvement : il fondera au tour suivant (0.31.67)
+      if (game.units[u.id] && u.aiTarget && u.x === u.aiTarget[0] && u.y === u.aiTarget[1] && u.moves > 0 && Cities.canFoundAt(game, pl.id, u.plane, u.x, u.y).ok) Game.foundCity(game, u.id);
     }
     // 2. esprits magiques : nœuds
     for (const u of mine().filter(u => Units.has(game, u, 'meld'))) {

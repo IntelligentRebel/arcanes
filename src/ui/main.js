@@ -596,7 +596,7 @@ const App = {
     const box = h('div', { class: 'actions' });
     const b = (label, key, fn, enabled = true, cls = '', tip) => { const e = h('button', { class: 'abtn ' + cls, onclick: fn, disabled: !enabled }, label, key ? h('span', { class: 'k' }, key) : null); if (tip) UI.tipOn(e, tip); box.append(e); };
     const settler = sel.find(u => Units.isSettler(u));
-    if (settler) { const chk = Cities.canFoundAt(game, App.pid, settler.plane, settler.x, settler.y); b('Fonder', 'B', () => App.found(settler), chk.ok, 'primary', chk.ok ? 'Fonder une nouvelle cité ici' : chk.why); }
+    if (settler) { const chk = settler.moves > 0 ? Cities.canFoundAt(game, App.pid, settler.plane, settler.x, settler.y) : { ok: false, why: 'Il faut du mouvement restant pour fonder.' }; b('Fonder', 'B', () => App.found(settler), chk.ok, 'primary', chk.ok ? 'Fonder une nouvelle cité ici' : chk.why); }
     if (sel.some(u => Units.isEngineer(u))) {
       { const has = World.hasRoad(game.world, sel[0].plane, sel[0].x, sel[0].y), tt = DATA.terrain && DATA.terrain[T_KEYS[World.terr(game.world, sel[0].plane, sel[0].x, sel[0].y)]], noRoad = tt && !tt.roadTurns;
         b('Route', 'R', () => { const r = Game.buildRoad(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); App.afterAction(); }, !has && !noRoad, '', has ? 'Il y a déjà une route ici.' : noRoad ? 'On ne bâtit pas de route sur ce terrain.' : 'Construire une route sur cette case' + (tt ? ' (' + U.n(tt.roadTurns, 'tour') + ')' : '')); }

@@ -372,6 +372,7 @@ const CombatView = {
       if (bt.inCity(c, r)) { ctx.fillStyle = 'rgba(120,100,80,.28)'; ctx.fill(); }
       if (bt.mud[c + ',' + r]) { ctx.fillStyle = 'rgba(70,50,20,.6)'; ctx.fill(); }
       if (bt.inRiver && bt.inRiver(c, r)) CombatView.drawWater(p, c, r, now);
+      else if (bt.isBridge && bt.isBridge(c, r)) { CombatView.drawWater(p, c, r, now); CombatView.drawBridge(p); }
       ctx.beginPath(); ctx.moveTo(p.x, p.y - TH / 2); ctx.lineTo(p.x + TW / 2, p.y); ctx.lineTo(p.x, p.y + TH / 2); ctx.lineTo(p.x - TW / 2, p.y); ctx.closePath();
       ctx.strokeStyle = 'rgba(0,0,0,.18)'; ctx.lineWidth = 1; ctx.stroke();
       const k = c + ',' + r;
@@ -656,7 +657,7 @@ const CombatView = {
     const mir = bt.plane === 1 && Sprites.hasMirror();
     ctx.lineCap = 'round';
     for (const [nc, nr, a, b] of [[c, r - 1, T, R], [c + 1, r, R, B], [c, r + 1, B, L], [c - 1, r, L, T]]) {
-      if (nc < 0 || nr < 0 || nc >= CW || nr >= CH || bt.inRiver(nc, nr)) continue;
+      if (nc < 0 || nr < 0 || nc >= CW || nr >= CH || bt.inRiver(nc, nr) || (bt.isBridge && bt.isBridge(nc, nr))) continue;
       // ombre de la berge, dégradée vers le milieu de l'eau
       for (const [w, al] of [[.3, .1], [.17, .14], [.07, .22]]) {
         ctx.strokeStyle = mir ? 'rgba(22,10,40,' + al + ')' : 'rgba(46,34,16,' + al + ')'; ctx.lineWidth = TW * w;
@@ -667,6 +668,31 @@ const CombatView = {
       ctx.strokeStyle = mir ? 'rgba(200,230,255,.2)' : 'rgba(235,245,240,.22)'; ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(a[0] + sx, a[1] + sy); ctx.lineTo(b[0] + sx, b[1] + sy); ctx.stroke();
     }
+    ctx.restore();
+  },
+  // (0.31.67) un tronçon de pont, posé dans l'axe des lignes r (il traverse la rivière d'une berge à l'autre) : tablier de
+  // planches un peu surélevé, son flanc côté spectateur, deux garde-corps. Bois sur Arcanus, ardoise sur le Miroir.
+  drawBridge(p) {
+    const ctx = CombatView.ctx, TW = CombatView.TW, TH = CombatView.TH, h = TH * .14, rh = TH * .3, w = .3;
+    const mir = CombatView.bt.plane === 1 && Sprites.hasMirror();
+    const C = mir ? { deck: '#5d5874', side: '#3b3650', plank: 'rgba(20,14,36,.45)', rail: '#7a74a0', post: '#4b4566' }
+      : { deck: '#8d6a40', side: '#5a3e22', plank: 'rgba(48,30,14,.5)', rail: '#a07a4a', post: '#5e4226' };
+    // a : le long de c (en travers du pont), b : le long de r (dans le sens du pont), z : hauteur
+    const P = (a, b, z = 0) => [p.x + (a - b) * TW / 2, p.y + (a + b) * TH / 2 - z];
+    const poly = (pts, fill) => { ctx.beginPath(); ctx.moveTo(...pts[0]); for (const q of pts.slice(1)) ctx.lineTo(...q); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); };
+    const line = (a0, b0, z0, a1, b1, z1, col, lw) => { ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath(); ctx.moveTo(...P(a0, b0, z0)); ctx.lineTo(...P(a1, b1, z1)); ctx.stroke(); };
+    ctx.save(); ctx.lineCap = 'round';
+    // ombre portée sur l'eau
+    poly([P(-w, -.5), P(w + .08, -.5), P(w + .08, .5), P(-w, .5)], 'rgba(0,0,0,.22)');
+    // garde-corps du fond, puis le tablier et son flanc
+    for (const b of [-.42, 0, .42]) line(-w, b, h, -w, b, h + rh, C.post, 2);
+    line(-w, -.5, h + rh, -w, .5, h + rh, C.rail, 1.6);
+    poly([P(w, -.5, h), P(w, .5, h), P(w, .5), P(w, -.5)], C.side);
+    poly([P(-w, -.5, h), P(w, -.5, h), P(w, .5, h), P(-w, .5, h)], C.deck);
+    for (let i = 1; i < 6; i++) { const b = -.5 + i / 6; line(-w, b, h, w, b, h, C.plank, 1); }
+    // garde-corps de devant
+    for (const b of [-.42, 0, .42]) line(w, b, h, w, b, h + rh, C.post, 2);
+    line(w, -.5, h + rh, w, .5, h + rh, C.rail, 1.6);
     ctx.restore();
   },
   // colline : un plateau surélevé, ses deux flancs de terre, le même sol au sommet
@@ -1435,7 +1461,7 @@ const CombatView = {
       units: bt.units.map(b => ({ obj: b.u, data: JSON.stringify(b.u) })),
       ids: new Set(Object.keys(game.units)),
       players: bt.pids.map(pid => game.players[pid]).filter(Boolean).map(pl => ({ pl, mana: pl.mana, spent: pl.manaSpentCombat || 0 })),
-      layout: JSON.parse(JSON.stringify({ props: bt.props, hills: bt.hills, river: bt.river, ford: bt.ford, mud: bt.mud })),
+      layout: JSON.parse(JSON.stringify({ props: bt.props, hills: bt.hills, river: bt.river, ford: bt.ford, bridge: bt.bridge, mud: bt.mud })),
     };
   },
   restore(game, s) {

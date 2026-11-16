@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.66';
+const GAME_VERSION = '0.31.67';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -1546,6 +1546,8 @@ const Game = {
   // ---------- actions d'unités ----------
   foundCity(game, uid) {
     const u = game.units[uid]; if (!u || !Units.isSettler(u)) return { ok: false, why: 'Seuls les colons fondent des cités.' };
+    // (0.31.67) comme dans MoM et Civilization : fonder demande du mouvement restant ce tour
+    if (!(u.moves > 0)) return { ok: false, why: 'Il faut du mouvement restant pour fonder.' };
     const chk = Cities.canFoundAt(game, u.owner, u.plane, u.x, u.y);
     if (!chk.ok) return chk;
     const race = DATA.units[u.type].race;

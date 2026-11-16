@@ -1,4 +1,4 @@
-"""v0.31.66 : la rivière du champ de bataille a ses textures (eau profonde qui coule, gué à galets), une par plan ; Sarrek a son
+"""v0.31.66 (et 0.31.67, ponts) : la rivière du champ de bataille a ses textures (eau profonde qui coule, gué à galets), une par plan ; Sarrek a son
 nouveau portrait (atlas complémentaire) ; les colons à 0 mouvement ne restent plus dans les unités en attente."""
 import asyncio, os, http.server, threading, functools
 from playwright.async_api import async_playwright
@@ -39,7 +39,7 @@ async def battle(pg, plane):
       return at;
     }""", plane)
     await pg.wait_for_timeout(2200); await pg.evaluate("UI.closeAll()"); await pg.wait_for_timeout(300)
-    return at, await pg.evaluate("""() => { const bt = CombatView.bt; return bt ? { river: Object.keys(bt.river).length, ford: Object.keys(bt.ford).length, plane: bt.plane,
+    return at, await pg.evaluate("""() => { const bt = CombatView.bt; return bt ? { river: Object.keys(bt.river).length, ford: Object.keys(bt.ford).length, bridge: Object.keys(bt.bridge || {}).length, plane: bt.plane,
       pat: !!CombatView.waterPat, deep: !!Tex.get('criver', bt.plane), mirror: bt.plane === 1 ? Sprites.hasHD('tex:criver~m') : null } : null; }""")
 
 
@@ -53,13 +53,18 @@ async def main():
         await pg.goto('http://127.0.0.1:%d/index.html' % port); await pg.wait_for_timeout(2500)
         for plane in (0, 1):
             at, st = await battle(pg, plane)
-            ok(at is not None and st and st['river'] > 0 and st['ford'] > 0, 'plan %d : combat sur une rivière avec gués (%r)' % (plane, st))
+            ok(at is not None and st and st['river'] > 0 and st['ford'] + st['bridge'] == 4, 'plan %d : combat sur une rivière, deux passages (%r)' % (plane, st))
             ok(st and st['pat'] and st['deep'], 'plan %d : textures de la rivière chargées' % plane)
             if plane: ok(st and st['mirror'], 'Miroir : sa propre texture de rivière')
             await pg.screenshot(path=os.path.join(SHOTS, '03166-riviere-%d.png' % plane))
             # le dessin continue d'une image à l'autre (l'eau coule) sans planter
             await pg.wait_for_timeout(500)
             ok(await pg.evaluate("CombatView.active"), 'plan %d : le combat se dessine toujours' % plane)
+            # (0.31.67) un pont : les gués deviennent des ponts, le dessin suit
+            await pg.evaluate("(() => { const bt = CombatView.bt; for (const k of Object.keys(bt.ford)) { delete bt.ford[k]; delete bt.river[k]; bt.bridge[k] = true; } })()")
+            await pg.wait_for_timeout(400)
+            await pg.screenshot(path=os.path.join(SHOTS, '03167-pont-%d.png' % plane))
+            ok(await pg.evaluate("CombatView.active && Object.keys(CombatView.bt.bridge).length === 4"), 'plan %d : deux ponts dessinés' % plane)
             await pg.evaluate("(() => { if (CombatView.bt && !CombatView.auto) CombatView.toggleAuto(); })()")
             for _ in range(80):
                 await pg.wait_for_timeout(250)

@@ -60,7 +60,7 @@ class Battle {
     if (NODE_REALM[t]) this.nodeRealm = NODE_REALM[t];
     if (this.site && this.site.weakGuard && !this.site.cleared) this.nodeRealm = null; // nœud assoupi près d'une capitale : pas de bonus pour ses gardiens
     // terrain : tiré au sort, ou repris tel quel (bataille rejouée)
-    if (o.layout) { const L = JSON.parse(JSON.stringify(o.layout)); this.props = L.props; this.hills = L.hills; this.river = L.river; this.ford = L.ford; this.mud = L.mud || {}; this.fire = {}; }
+    if (o.layout) { const L = JSON.parse(JSON.stringify(o.layout)); this.props = L.props; this.hills = L.hills; this.river = L.river; this.ford = L.ford; this.bridge = L.bridge || {}; this.mud = L.mud || {}; this.fire = {}; }
     else this.props = this.makeProps();
     if (this.city) this.setupCity();
     this.sim = !!o.sim;
@@ -85,33 +85,45 @@ class Battle {
 
   // terrain tactique (ajout d'Arcanes) : le décor du champ de bataille dépend de la case et de ses voisines.
   // forêt : couvert contre les tirs, ralentit, brûle ; colline : position dominante ; rochers : infranchissables ;
-  // rivière : eau profonde infranchissable (sauf nageurs, volants, marche sur l'eau), deux gués qui coûtent tout le mouvement et exposent ; marais : fondrières.
+  // rivière : eau profonde infranchissable (sauf nageurs, volants, marche sur l'eau), deux passages, pont ou gué (qui coûte tout le mouvement et expose) ; marais : fondrières.
   makeProps() {
     const props = {}, world = this.game.world, rng = this.rng;
-    this.hills = {}; this.river = {}; this.ford = {}; this.fire = {};
+    this.hills = {}; this.river = {}; this.ford = {}; this.bridge = {}; this.fire = {};
     const t = World.terr(world, this.plane, this.x, this.y);
     const near = {};
     for (const [nx, ny] of World.neighbors(world, this.x, this.y)) { const k = World.terr(world, this.plane, nx, ny); near[k] = (near[k] || 0) + 1; }
     const forest = t === T.FOREST || t === T.NNODE, hilly = t === T.HILLS || t === T.MOUNTAIN || t === T.VOLCANO;
     const deployLine = (c, r) => (c + r >= 6 && c + r <= 8 || c + r >= 16 && c + r <= 21) && Math.abs(c - r) <= 6;
-    const free = (c, r) => c >= 0 && r >= 0 && c < CW && r < CH && !props[c + ',' + r] && !this.hills[c + ',' + r] && !this.river[c + ',' + r] && !(this.city && c >= CITY_MIN - 1 && c <= CITY_MAX + 1 && r >= CITY_MIN - 1 && r <= CITY_MAX + 1);
+    const free = (c, r) => c >= 0 && r >= 0 && c < CW && r < CH && !props[c + ',' + r] && !this.hills[c + ',' + r] && !this.river[c + ',' + r] && !this.bridge[c + ',' + r] && !(this.city && c >= CITY_MIN - 1 && c <= CITY_MAX + 1 && r >= CITY_MIN - 1 && r <= CITY_MAX + 1);
     const spot = (avoidDeploy = true) => { for (let k = 0; k < 40; k++) { const c = rng.int(CW), r = rng.int(CH); if (free(c, r) && !(avoidDeploy && deployLine(c, r))) return [c, r]; } return null; };
-    // rivière : une bande en travers du champ, entre les deux armées
+    // rivière (0.31.67) : une bande continue en travers du champ, entre les deux armées, large de deux cases, qui serpente.
+    // On la franchit à deux endroits, l'un de chaque côté du centre, par un pont ou par un gué : là, la rivière court le long
+    // de l'axe c, et le passage (le long de l'axe r) la traverse d'équerre, d'une berge à l'autre.
     if (t === T.RIVER && !this.city) {
-      let r0 = 12 - rng.int(2);
+      // S[c] : la ligne c+r du bord amont de la bande dans la colonne c (10 à 13) ; l'eau occupe les lignes S[c] et S[c]+1.
+      // D'une colonne à l'autre, S change d'au plus 1 : +1, la bande descend le long de l'axe c ; 0, elle court en travers de
+      // l'écran ; -1, elle remonte, et la colonne d'arrivée prend une case de plus pour que l'eau reste d'un seul tenant.
+      const LO = 10, HI = 13, S = new Array(CW).fill(null);
+      const cA = 3 + rng.int(2), cB = 8 + rng.int(2), a = 11 + rng.int(2), gap = cB - cA - 2;
+      const b = Math.max(11 + rng.int(2), a + 2 - gap);
+      for (const [c, v] of [[cA - 1, a - 1], [cA, a], [cA + 1, a + 1], [cB - 1, b - 1], [cB, b], [cB + 1, b + 1]]) S[c] = v;
+      const pick = ds => ds.length ? (ds.includes(0) && rng.chance(0.4) ? 0 : rng.pick(ds)) : 0;
+      // entre les deux passages : un chemin qui rejoint le second
+      for (let c = cA + 2; c < cB - 1; c++) S[c] = S[c - 1] + pick([-1, 0, 1].filter(d => { const v = S[c - 1] + d; return v >= LO && v <= HI && Math.abs(S[cB - 1] - v) <= cB - 1 - c; }));
+      // avant le premier et après le second : au hasard
+      for (let c = cA - 2; c >= 0; c--) S[c] = S[c + 1] + pick([-1, 0, 1].filter(d => S[c + 1] + d >= LO && S[c + 1] + d <= HI));
+      for (let c = cB + 2; c < CW; c++) S[c] = S[c - 1] + pick([-1, 0, 1].filter(d => S[c - 1] + d >= LO && S[c - 1] + d <= HI));
+      const add = (c, r) => { if (c >= 0 && r >= 0 && c < CW && r < CH) this.river[c + ',' + r] = true; };
       for (let c = 0; c < CW; c++) {
-        const r = r0 - c; if (r >= 0 && r < CH) this.river[c + ',' + r] = true;
-        const prev = r0;
-        if (rng.chance(0.35)) r0 += rng.chance(0.5) ? 1 : -1; r0 = U.clamp(r0, 11, 13);
-        // la bande recule d'un cran : une case de plus bouche le passage qui s'ouvrirait entre les deux colonnes
-        if (r0 < prev && c + 1 < CW) { const r2 = prev - (c + 1); if (r2 >= 0 && r2 < CH) this.river[(c + 1) + ',' + r2] = true; }
+        add(c, S[c] - c); add(c, S[c] + 1 - c);
+        if (c > 0 && S[c] < S[c - 1]) add(c, S[c - 1] + 1 - c);
       }
-      // deux gués, l'un de chaque côté du centre (dans une colonne où l'eau n'a qu'une case, pour qu'on y passe vraiment)
-      const perCol = {}; for (const k of Object.keys(this.river)) { const c = +k.split(',')[0]; perCol[c] = (perCol[c] || 0) + 1; }
-      const cells = Object.keys(this.river).map(k => k.split(',').map(Number)).filter(([c]) => perCol[c] === 1);
-      for (const want of [3 + rng.int(2), 8 + rng.int(2)]) {
-        const cell = U.min(cells.filter(x => !this.ford[x.join(',')]), ([c]) => Math.abs(c - want));
-        if (cell) this.ford[cell[0] + ',' + cell[1]] = true;
+      for (const c of [cA, cB]) {
+        const bridge = rng.chance(0.5);
+        for (const r of [S[c] - c, S[c] + 1 - c]) {
+          const k = c + ',' + r;
+          if (bridge) { delete this.river[k]; this.bridge[k] = true; } else this.ford[k] = true;
+        }
       }
     }
     // collines : un ou deux tertres
@@ -153,6 +165,8 @@ class Battle {
   hill(c, r) { return !!this.hills && !!this.hills[c + ',' + r]; }
   inRiver(c, r) { return !!this.river && !!this.river[c + ',' + r]; }
   isFord(c, r) { return !!this.ford && !!this.ford[c + ',' + r]; }
+  // un pont (0.31.67) : de la terre ferme au-dessus de l'eau, pour le jeu comme pour les nageurs
+  isBridge(c, r) { return !!this.bridge && !!this.bridge[c + ',' + r]; }
   deep(c, r) { return this.inRiver(c, r) && !this.isFord(c, r); }
   // un pas en diagonale entre deux cases d'eau profonde : on ne passe pas la rivière par le coin
   cutsDeep(c, r, dc, dr) { return !!(dc && dr) && this.deep(c + dc, r) && this.deep(c, r + dr); }
@@ -168,6 +182,7 @@ class Battle {
     if (this.rock(c, r)) out.push('Rochers : infranchissables');
     if (this.deep(c, r)) out.push('Eau profonde : infranchissable, sauf pour les unités qui volent, nagent ou marchent sur l\'eau');
     else if (this.inRiver(c, r)) out.push('Gué : y entrer coûte tout le mouvement (pas aux nageurs), -1 défense dans l\'eau');
+    if (this.isBridge(c, r)) out.push('Pont');
     if (this.mud[k]) out.push('Fondrière : y entrer coûte tout le mouvement');
     if (this.onRampart(c, r)) out.push(this.walls[k].gate ? 'Porte : fermée à l\'assaillant' : 'Chemin de ronde : les tireurs y visent mieux et plus loin ; les créneaux protègent des tirs (+2 en défense)');
     if (this.wallOfFire && this.walls[k]) out.push('Mur de feu : un assaillant qui le franchit subit une attaque de feu de force 5 (pas les volants ; les défenseurs passent librement)');
