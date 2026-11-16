@@ -533,18 +533,20 @@ const Rite = {
       const c = al.map(p => ({ p, n: Rite.coalitionOf(game, p.id).length, v: Rite.standing(game, p) })).filter(x => x.n >= 2).sort((a, b) => b.n - a.n || b.v - a.v);
       return c.length ? c[0].p : null;
     }
-    const s = al.map(p => ({ p, v: Rite.standing(game, p) })).sort((a, b) => b.v - a.v);
+    const s = al.filter(p => !Finale.exempt(game, p)).map(p => ({ p, v: Rite.standing(game, p) })).sort((a, b) => b.v - a.v);
+    if (s.length < 3) return null;
     const rest = s.slice(1), avg = U.sum(rest, x => x.v) / rest.length;
     return s[0].v > s[1].v * Rite.cfg(game, 'lead') && s[0].v > avg * Rite.cfg(game, 'avg') ? s[0].p : null;
   },
   // la coalition contre tid : les IA qui le connaissent, ne sont pas ses alliées, et voient en lui le meneur
+  // (0.31.63) le boss (né sur le plan opposé au joueur) n'en est jamais : il chasse le joueur de son côté, et son poids dissoudrait le pacte
   coalitionOf(game, tid) {
-    return game.players.filter(p => p.alive && !p.banished && !p.human && p.id !== tid && p.contact[tid] && p.diplo[tid] !== 'alliance'
+    return game.players.filter(p => p.alive && !p.banished && !p.human && p.id !== tid && p.contact[tid] && p.diplo[tid] !== 'alliance' && !Finale.exempt(game, p)
       && (Diplomacy.leaderFor(game, p, Rite.cfg(game, 'lead'), Rite.cfg(game, 'avg')) || {}).id === tid);
   },
   // les membres : la coalition, et le joueur qui le connaît sans être son allié (il y contribue s'il le décide)
   members(game, tid) {
-    const all = game.players.filter(p => p.alive && !p.banished && p.id !== tid && p.contact[tid] && p.diplo[tid] !== 'alliance');
+    const all = game.players.filter(p => p.alive && !p.banished && p.id !== tid && p.contact[tid] && p.diplo[tid] !== 'alliance' && !Finale.exempt(game, p));
     if (!Rite.cfg(game, 'coalition')) return all;
     const co = Rite.coalitionOf(game, tid);
     return all.filter(p => p.human || co.includes(p));

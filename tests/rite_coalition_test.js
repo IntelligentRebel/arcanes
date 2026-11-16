@@ -3,7 +3,8 @@ const { loadEngine } = require('./load');
 const E = loadEngine(); E.AI.LAB = false;   // le jeu livré
 const { Game, Units, Diplomacy, Rite, AI, DATA } = E;
 const ok = (c, m) => { console.log((c ? 'OK   ' : 'ÉCHEC') + ' ' + m); if (!c) process.exitCode = 1; };
-const g = Game.newGame({ seed: 5, mapW: 60, mapH: 40, opponents: 3, difficulty: 'hardcore', crisis: 'off', aiLevels: ['hardcore', 'hardcore', 'hardcore'], human: { name: 'X', portrait: 0, books: { nature: 6 }, retorts: [], race: 'highmen' } });
+const g = Game.newGame({ seed: 5, mapW: 60, mapH: 40, opponents: 3, otherPlane: 0, difficulty: 'hardcore', crisis: 'off', aiLevels: ['hardcore', 'hardcore', 'hardcore'], human: { name: 'X', portrait: 0, books: { nature: 6 }, retorts: [], race: 'highmen' } });
+// (0.31.63) tous sur le même plan : les sorciers d'en face n'entrent plus dans la coalition
 const P = g.players.filter(p => p.alive);
 for (const a of P) for (const b of P) if (a !== b) { a.contact[b.id] = true; a.diplo[b.id] = a.diplo[b.id] || 'none'; }
 g.turn = 80;

@@ -67,7 +67,9 @@ Object.assign(Diplomacy, {
   leaderFor(game, a, lead = 1.4, avg = 1.8) {
     let c0 = Diplomacy._leaders.get(a); if (!c0 || c0.turn !== game.turn) { c0 = { turn: game.turn }; Diplomacy._leaders.set(a, c0); }
     const key = lead + '|' + avg; if (key in c0) return c0[key];
-    const known = game.players.filter(o => o.alive && (o.id === a.id || a.contact[o.id]));
+    // (0.31.63) les sorciers nés sur le plan opposé au joueur (le boss) n'entrent pas dans ce classement : la coalition, et le
+    // Démon légendaire qu'elle invoque, se mesurent sur le plan du joueur et ne visent jamais le boss
+    const known = game.players.filter(o => o.alive && (o.id === a.id || a.contact[o.id]) && !Finale.exempt(game, o));
     const exact = AI.feat(a, 'truestanding', 2) && typeof Rite !== 'undefined';
     let res = null;
     if (known.length >= 3) {

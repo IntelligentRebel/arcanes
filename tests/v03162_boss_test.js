@@ -70,3 +70,22 @@ ok(myr.every(p => Finale.exempt(g, p)) && !Finale.exempt(g, H) && arc.every(p =>
   AI.EXP = {};
   ok(b4.some(p => AI.bossPrey(g4, p) === g4.players[0]), 'tour 200 : le plus fort des deux chasse');
 }
+
+// 4. (0.31.63) la coalition et le Démon légendaire ne visent jamais le boss, et il n'en est pas
+{
+  const g5 = mk('hard', 9), H5 = g5.players[0], m5 = g5.players.filter(p => p.plane === 1), a5 = g5.players.filter(p => p.plane === 0 && !p.human);
+  for (const p of g5.players) for (const q of g5.players) if (p !== q) p.contact[q.id] = true;
+  g5.turn = 150;
+  const S0 = E.Intel.standing, R0 = E.Rite.standing, val = new Map([[m5[0], 5000], [m5[1], 300], [H5, 300], [a5[0], 300], [a5[1], 280], [a5[2], 260]]);
+  E.Intel.standing = (game, a, id) => val.get(game.players[id]); E.Rite.standing = (game, p) => val.get(p);
+  E.Diplomacy._leaders = new WeakMap();
+  ok(a5.every(p => { const L = Diplomacy.leaderFor(g5, p); return !L || L.id !== m5[0].id; }), 'le boss écrase tout : la coalition ne le vise pas');
+  ok(E.Rite.leader(g5) === null, 'ni le Démon légendaire');
+  val.set(H5, 2000); g5.turn = 151; E.Diplomacy._leaders = new WeakMap();
+  ok(a5.every(p => (Diplomacy.leaderFor(g5, p) || {}).id === H5.id), 'le joueur loin devant les sorciers de son plan : la coalition le vise');
+  ok(E.Rite.leader(g5) === H5, 'le Démon aussi');
+  ok(!E.Rite.coalitionOf(g5, H5.id).some(p => p.plane === 1) && !E.Rite.members(g5, H5.id).some(p => p.plane === 1), 'les sorciers d\'en face n\'en sont pas');
+  g5.opts.finaleCfg = { EXEMPT_BOSS: 0 }; g5.turn = 152; E.Diplomacy._leaders = new WeakMap(); val.set(H5, 300);
+  ok(a5.some(p => (Diplomacy.leaderFor(g5, p) || {}).id === m5[0].id), 'réglage de banc : la coalition d\'avant vise le boss');
+  E.Intel.standing = S0; E.Rite.standing = R0; g5.opts.finaleCfg = null;
+}
