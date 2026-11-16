@@ -161,7 +161,7 @@ const ABILITY_DESC = {
   planeShift: 'Passe d\'Arcane au Miroir, et retour, de n\'importe où, sans tour ni faille.',
   poisonImmunity: 'Le poison ne lui fait rien.',
   poisonTouch: 'En mêlée (et avec ses jets), la cible fait N jets de résistance : chaque échec lui coûte 1 point de vie. Sans effet sur les immunisés au poison.',
-  caster: 'Lance des sorts de combat en puisant dans sa propre réserve de mana (montant indiqué dans ses caractéristiques).',
+  caster: 'Lance ses propres sorts et les sorts de combat que vous connaissez, en puisant dans sa propre réserve de mana (montant indiqué dans ses caractéristiques).',
   scouting: 'Voit plus loin sur la carte : jusqu\'à N cases, ou une case de plus que sa vue normale.',
   purify: 'Purifie la terre corrompue où il se tient, en 3 tours (boutons Purifier et Purifier tout).',
   regeneration: 'Regagne 1 point de vie par tour de combat ; si son camp gagne, se relève guéri même s\'il est tombé (sauf dégâts irréversibles).',

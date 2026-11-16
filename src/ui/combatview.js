@@ -332,6 +332,7 @@ const CombatView = {
     const ctx = CombatView.ctx, bt = CombatView.bt, game = App.game; const dpr = CombatView.dpr;
     const TW = CombatView.TW, TH = CombatView.TH, now = performance.now();
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = false;
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;   // (0.31.65) un dessin interrompu ne laisse plus son mode derrière lui
     const sky = ctx.createLinearGradient(0, 0, 0, innerHeight);
     sky.addColorStop(0, bt.plane ? '#140c1e' : '#0b1018'); sky.addColorStop(1, '#05070a');
     ctx.fillStyle = sky; ctx.fillRect(0, 0, innerWidth, innerHeight);
@@ -386,7 +387,7 @@ const CombatView = {
     // objets triés par profondeur
     const items = [];
     for (const k in bt.props) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r, f: () => CombatView.drawProp(bt.props[k], c, r, bt.fire && bt.fire[k]) }); }
-    for (const k in bt.fire || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.8, f: () => CombatView.drawFlames(c, r, now) }); }
+    for (const k in bt.fire || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.8, f: () => CombatView.drawGroveFire(c, r, now) }); }
     if (bt.buildings) for (const b of bt.buildings) items.push({ d: b.c + b.r, f: () => CombatView.drawHouse(b) });
     if (bt.hasWalls || bt.wallOfFire || bt.wallOfDarkness) for (const k in bt.walls) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.3, f: () => CombatView.drawWall(c, r, bt.walls[k], 'back') }, { d: c + r + 0.6, f: () => CombatView.drawWall(c, r, bt.walls[k], 'front') }); }
     if (bt.hasWalls && Sprites.hasHD('cwall:tower')) {
@@ -693,7 +694,9 @@ const CombatView = {
     ctx.stroke(); ctx.restore();
   },
   // flammes d'un bosquet en feu
-  drawFlames(c, r, now) {
+  // (0.31.65) un bosquet en feu ; il portait le même nom que les flammes du Mur de feu, qui l'écrasaient : appelées avec deux
+  // nombres au lieu de deux points, elles plantaient le dessin, en laissant le contexte en mode additif (l'écran tournait au blanc)
+  drawGroveFire(c, r, now) {
     const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW;
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
     const g = ctx.createRadialGradient(p.x, p.y - TW * .2, 0, p.x, p.y - TW * .2, TW * .45);

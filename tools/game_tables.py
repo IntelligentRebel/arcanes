@@ -262,7 +262,7 @@ RACE_TEXT = {
         "Chaque ouvrier produit 3 au lieu de 2 (+50 %).",
         "Bonus des gisements doublés.",
         "Figurines à 3 points de vie, capacité Montagnard, +4 en résistance.",
-        "Croissance très lente ; ni écuries ni chantier naval.",
+        "Croissance très lente ; ni écuries ni chantier naval (des trirèmes, pas plus).",
     ]),
     "troll": ("Trolls", "Géants massifs qui se régénèrent de presque toutes les blessures.", [
         "Toutes les troupes se régénèrent.",

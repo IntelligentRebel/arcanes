@@ -698,7 +698,9 @@ const App = {
     const game = App.game;
     // une unité rapide qui a marché ce tour avec des plus lentes, à bout de mouvement à ses côtés, s'arrête avec elles
     const tied = u => u.groupMove && u.groupMove.turn === game.turn && u.groupMove.ids.some(id => { const o = id !== u.id && game.units[id]; return o && o.plane === u.plane && o.x === u.x && o.y === u.y && o.moves <= 0; });
-    return Object.values(game.units).filter(u => u.owner === App.pid && u.moves > 0 && !u.status && (!u.path || u.halted) && u.guardian == null && u.passed !== game.turn && !tied(u));
+    // (0.31.65) des colons à bout de mouvement sur une case où fonder : ils le peuvent encore ce tour, on ne les laisse pas passer
+    const canFound = u => u.moves <= 0 && Units.isSettler(u) && Cities.canFoundAt(game, u.owner, u.plane, u.x, u.y).ok;
+    return Object.values(game.units).filter(u => u.owner === App.pid && (u.moves > 0 || canFound(u)) && !u.status && (!u.path || u.halted) && u.guardian == null && u.passed !== game.turn && (u.moves <= 0 || !tied(u)));
   },
   // passer son tour : l'unité reste où elle est, sans ordre durable (contrairement à Sentinelle) ; elle reviendra au tour suivant
   passTurn(sel) {

@@ -399,7 +399,7 @@ const CityUI = {
   itemTip(c, it) {
     const game = App.game, e = Cities.econ(game, c);
     if (it.type === 'building' && DATA.buildings[it.id]) { const bd = DATA.buildings[it.id]; return '<h4>' + bd.name + '</h4>' + U.esc(bd.desc || '') + CityUI.effectsHtml(bd, c) + '<div class="dim" style="margin-top:4px">Coût ' + bd.cost + ' · entretien ' + bd.upkeep + ' or/tour</div>' + CityUI.unlocksHtml(it.id, c); }
-    if (it.type === 'unit' && DATA.units[it.id]) return UI.unitTip(CityUI.fakeUnit(c, it.id, e), game);   // (l'entretien y figure)
+    if (it.type === 'unit' && DATA.units[it.id]) return UI.unitTip(CityUI.fakeUnit(c, it.id, e), game) + '<div class="dim" style="margin-top:4px">Coût de production : ' + Cities.unitCost(game, c, it.id, e) + '</div>';   // (l'entretien y figure ; le coût, comme pour un bâtiment)
     if (it.type === 'rearm') return CityUI.rearmTip(c);
     return null;
   },
