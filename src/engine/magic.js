@@ -78,7 +78,9 @@ const Magic = {
   },
   gateOptions(game, pl) {
     const id = 'open_rift';
-    if (!DATA.spells[id] || !pl.researchOptions || pl.known.includes(id) || pl.researchPool.includes(id) || !Magic.gateOpen(game, pl)) return;
+    // (0.31.62) le boss en chasse du joueur l'apprend aussi
+    const hunt = !pl.human && typeof AI !== 'undefined' && AI.bossPrey && AI.bossPrey(game, pl);
+    if (!DATA.spells[id] || !pl.researchOptions || pl.known.includes(id) || pl.researchPool.includes(id) || !(Magic.gateOpen(game, pl) || hunt)) return;
     pl.researchPool.push(id); pl.researchOptions.push(id);
     if (pl.human) Game.log(game, pl.id, 'Le voile cède entre les plans : Ouvrir une faille s\'offre à vos recherches.');
   },

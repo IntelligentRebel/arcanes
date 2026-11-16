@@ -100,6 +100,8 @@ Object.assign(AI, {
   counterResearch(game, pl, id) {
     if (!AI.feat(pl, 'counters', 1) || !/^disjunction/.test(id)) return 0;
     const bad = game.players.some(o => o.alive && o.id !== pl.id && pl.contact[o.id] && pl.diplo[o.id] !== 'alliance' && (o.globals || []).some(g => AI.HOSTILE_GLOBALS.includes(g)));
+    // (0.31.62) un Sceau planaire, d'où qu'il vienne, quand il bloque sa croisade (ou la chasse du boss)
+    if (AI.sealed(game) && AI.crusadeTarget(game, pl)) return 90;
     return bad ? 60 : 0;
   },
 });

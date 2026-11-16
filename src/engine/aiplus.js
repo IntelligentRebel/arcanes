@@ -272,12 +272,18 @@ Object.assign(AI, {
     const world = game.world, home = pl.plane;
     if (AI.sealed(game)) { if (pl.aiTrip) { pl.aiTrip = null; pl.aiTripCool = game.turn + 5; } return new Set(); }
     const mineOn = p => Cities.ofPlayer(game, pl.id).some(c => c.plane === p);
+    // (0.31.62) le boss en chasse : une menace sur sa forteresse ne compte que si elle pèse la moitié de sa garnison (au banc, trois
+    // pillards plantés à trois cases de la forteresse de Zirrakh retenaient ses 3 000 points de troupes pendant cinquante tours)
+    const guard = c => U.sum(Units.at(game, c.plane, c.x, c.y).filter(u => u.owner === pl.id), u => Units.strength(game, u)) + Battle.towerStrength(game, c);
+    const hunting = !!AI.bossPrey(game, pl);
+    const fortThreat = c => hunting ? AI.threatNear(game, pl, c) > 0.5 * guard(c) : AI.threatNear(game, pl, c) > 0;
     let T = pl.aiTrip;
+    // (le boss : 35 tours pour rallier une tour lointaine, 15 pour les autres)
     if (T) {
       const s = game.sites[T.site];
       const members = T.members.map(id => game.units[id]).filter(u => u && u.owner === pl.id && u.plane === home);
       const fort = game.cities[pl.fortress];
-      if (!s || !s.cleared || s.closed || members.length < 3 || game.turn - T.since > 15 || (fort && AI.threatNear(game, pl, fort) > 0)) { pl.aiTrip = null; pl.aiTripCool = game.turn + 15; return new Set(); }
+      if (!s || !s.cleared || s.closed || members.length < 3 || game.turn - T.since > (hunting ? 35 : 15) || (fort && fortThreat(fort))) { pl.aiTrip = null; pl.aiTripCool = game.turn + 15; return new Set(); }
       for (const u of members) if (u.moves > 0 && (u.x !== s.x || u.y !== s.y)) await Game.moveGroup(game, [u.id], s.x, s.y, { noAttack: true });
       const here = members.filter(u => game.units[u.id] && u.x === s.x && u.y === s.y);
       if (here.length === members.filter(u => game.units[u.id]).length && Game.planeShift(game, here.map(u => u.id)).ok) {
@@ -290,7 +296,9 @@ Object.assign(AI, {
     // une seule expédition à la fois : des soldats déjà sur un plan sans cité à soi (en croisade, les renforts suivent)
     const crus = AI.crusadeTarget(game, pl);
     if (!crus && Object.values(game.units).some(u => u.owner === pl.id && u.plane !== home && AI.isSoldier(game, u) && !mineOn(u.plane))) return new Set();
-    if (Cities.ofPlayer(game, pl.id).some(c => AI.threatNear(game, pl, c) > 0)) return new Set();
+    // (0.31.62) le boss en chasse : seule une menace sur sa forteresse retient l'expédition (une escarmouche aux marches ne l'arrête plus)
+    const fort0 = game.cities[pl.fortress];
+    if (hunting ? fort0 && fortThreat(fort0) : Cities.ofPlayer(game, pl.id).some(c => AI.threatNear(game, pl, c) > 0)) return new Set();
     const cities = Cities.ofPlayer(game, pl.id).filter(c => c.plane === home);
     const near = s => Math.min(...cities.map(c => World.dist(world, c.x, c.y, s.x, s.y)));
     // une tour dégagée ; en croisade, une faille aussi
@@ -317,10 +325,34 @@ Object.assign(AI, {
     const sc = new Map(alive.map(p => [p, Crisis.score(game, p)]));
     const L = U.max(alive, p => sc.get(p));
     let t = null;
-    if (L && L !== pl && L.plane !== pl.plane && sc.get(pl) <= 0.8 * sc.get(L) && !['peace', 'alliance'].includes(pl.diplo[L.id])) t = L;
+    const prey = AI.bossPrey(game, pl);   // (0.31.62) le boss chasse le joueur, même s'il le dépasse
+    if (prey && !['peace', 'alliance'].includes(pl.diplo[prey.id])) t = prey;
+    else if (L && L !== pl && L.plane !== pl.plane && sc.get(pl) <= 0.8 * sc.get(L) && !['peace', 'alliance'].includes(pl.diplo[L.id])) t = L;
     AI._crus.set(pl, { turn: game.turn, t });
     return t;
   },
+  // (0.31.62, bosshunt) Difficile et Hardcore : le boss, le plus fort des sorciers nés sur le plan opposé au joueur, part en chasse du
+  // joueur dès que celui-ci a posé le pied sur son plan, ou au tour 120 : la croisade (expéditions vers ses cités, failles, renforts),
+  // pas de paix avec lui, et un Sceau planaire à briser. Au banc 24, sans cela, le boss menait (1er au score 60 à 68 % des parties)
+  // et ne venait pas : la croisade ne poussait que les sorciers à la traîne vers le meneur.
+  BOSS_HUNT_TURN: 120, _prey: new WeakMap(),
+  bossPrey(game, pl) {
+    if (!pl || pl.human || pl.benchHuman || pl.banished || !pl.alive || !AI.feat(pl, 'bosshunt', 2) || !AI.feat(pl, 'planes', 2)) return null;
+    const memo = AI._prey.get(pl); if (memo && memo.turn === game.turn) return memo.t;
+    let t = null;
+    const H = game.players.find(p => (p.human || p.benchHuman) && p.alive && !p.banished);
+    if (H && H.plane !== pl.plane) {
+      const mates = game.players.filter(p => p.alive && !p.banished && !p.human && !p.benchHuman && p.plane === pl.plane);
+      if (U.max(mates, p => Crisis.score(game, p)) === pl) {
+        const came = Cities.ofPlayer(game, H.id).some(c => c.plane === pl.plane) || Object.values(game.units).some(u => u.owner === H.id && u.plane === pl.plane);
+        if (came) pl.aiHuntFrom = pl.aiHuntFrom || game.turn;   // il l'a vu venir : la chasse ne s'arrête plus
+        if (pl.aiHuntFrom || game.turn >= AI.BOSS_HUNT_TURN * Game.pace(game)) t = H;
+      }
+    }
+    AI._prey.set(pl, { turn: game.turn, t });
+    return t;
+  },
+  hunts(game, a, b) { return !!a && !!b && AI.bossPrey(game, a) === b; },
   // un passage vers l'autre plan (tour dégagée, faille) à 25 cases au plus de ses cités, qui débouche à 20 cases au plus d'une cité du meneur
   crossingNear(game, pl) {
     const T = AI.crusadeTarget(game, pl); if (!T) return false;

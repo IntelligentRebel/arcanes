@@ -1119,7 +1119,9 @@ const AI = {
     }
     // armées ennemies vues en ce moment
     for (const u of Object.values(game.units)) {
-      if (u.owner === pl.id || u.plane !== u0.plane || u.owner < 0 && !u.rampage) continue;
+      // (en essai, raiders) des pillards plantés sur ses terres : une cible aussi (sinon ils y restent, et la menace qu'ils font
+      // peser sur ses cités retient ses expéditions)
+      if (u.owner === pl.id || u.plane !== u0.plane || u.owner < 0 && !u.rampage && !(AI.opt(pl, 'raiders') && World.get(game.world, u.plane, 'owner', u.x, u.y) === pl.id)) continue;
       if (u.owner >= 0 && pl.diplo[u.owner] !== 'war') continue;
       if (Cities.at(game, u.plane, u.x, u.y) || u.guardian) continue;
       if (!Intel.sees(game, pl, u.plane, u.x, u.y) || Intel.hiddenFrom(game, pl.id, u)) continue;
@@ -1277,6 +1279,7 @@ const Diplomacy = {
     const weary = !pb.human && AI.feat(pb, 'weariness', 1) && Diplomacy.weariness ? Diplomacy.weariness(game, pb, pa) : 0;
     if (kind === 'peace') accept = rel + fear * 10 + weary * 60 + (pb.diplo[from] === 'war' ? -10 : 10) + game.rng.int(20) + (coal && coal.id !== from && coal.id !== pb.id ? 20 * coal.t : 0) > 15 && !(coal && coal.id === from && fear < 2.5);
     if (kind === 'peace' && !pb.human && Rite.binds(game, from, to)) accept = false;   // le maître du démon ne traite pas avec la cible
+    if ((kind === 'peace' || kind === 'alliance') && !pb.human && AI.hunts(game, pb, pa)) accept = false;   // (0.31.62) le boss ne traite pas avec sa proie
     if (kind === 'alliance' && coal && coal.id !== from && coal.id !== pb.id && rel > 10 && pb.diplo[from] !== 'war') { Diplomacy.setState(game, from, to, 'alliance'); Diplomacy.adjust(game, to, from, 10, 'treaty'); return { ok: true, text: pb.name + ' accepte : faisons front ensemble contre ' + Players.nameFor(game, from, coal.id) + '.' }; }
     if (kind === 'alliance') accept = rel > 40 && pb.diplo[from] === 'peace' && game.rng.chance(0.6);
     if (kind === 'tribute') { Diplomacy.adjust(game, to, from, Math.round(gold / 10), 'gift'); pa.gold -= gold; pb.gold += gold; return { ok: true, text: pb.name + ' accepte votre présent.' }; }
@@ -1362,7 +1365,16 @@ const Diplomacy = {
         const vsLeader = coal && coal.id === b.id && myPow > hisPow * 0.4;
         // dès Normale : une guerre qui coûte plus qu'elle ne rapporte se termine
         const weary = AI.feat(a, 'weariness', 1) ? Diplomacy.weariness(game, a, b) : 0;
-        if (st === 'war' && !vsLeader && !Rite.binds(game, a.id, b.id) && (myPow < hisPow * 0.7 || r > 10 || weary > 0.3) && game.turn - ask.turn >= (ask.refused ? 6 : 1) && game.rng.chance(ask.refused || weary > 0.3 ? 0.2 : 0.08)) {
+        // (0.31.62) le boss en chasse : pas de paix avec sa proie ; un traité se dénonce, faute de traité la guerre se déclare
+        const hunt = AI.hunts(game, a, b);
+        if (hunt && (st === 'peace' || st === 'alliance') && !(a.denounced && a.denounced[b.id] != null)) Diplomacy.breakOrDenounce(game, a, b);
+        if (hunt && st === 'none') {
+          Diplomacy.declareWar(game, a.id, b.id, -20);
+          Game.log(game, b.id, a.name + ' vous déclare la guerre !', { diplo: a.id, alert: true });
+          Game.log(game, a.id, 'Guerre déclarée à ' + b.name + '.');
+          continue;
+        }
+        if (st === 'war' && !hunt && !vsLeader && !Rite.binds(game, a.id, b.id) && (myPow < hisPow * 0.7 || r > 10 || weary > 0.3) && game.turn - ask.turn >= (ask.refused ? 6 : 1) && game.rng.chance(ask.refused || weary > 0.3 ? 0.2 : 0.08)) {
           if (b.human) {
             // chaque refus fait monter les enchères quand la situation est désespérée : de l'or, puis une cité
             const off = Object.assign({ from: a.id, kind: 'peace', turn: game.turn }, Diplomacy.sweeteners(game, a, b, ask.refused, hisPow / Math.max(1, myPow)));
@@ -1406,7 +1418,7 @@ const Diplomacy = {
         const pkey = !b.human && AI.feat(a, 'peace', 3), phalf = !b.human && !pkey && AI.feat(a, 'peace', 2);
         const pRel = b.human ? 15 : AI.tune(a, 'peaceRel') != null ? AI.tune(a, 'peaceRel') : pkey || phalf ? -10 : 15;
         const pChance = b.human ? 0.05 : AI.tune(a, 'peaceChance') != null ? AI.tune(a, 'peaceChance') : pkey ? 0.15 : phalf ? 0.06 : 0.05;
-        if ((a.diplo[b.id] || 'none') === 'none' && r > pRel && game.rng.chance(pChance)) {   // (l'état a pu changer plus haut : pas de paix offerte juste après une déclaration de guerre)
+        if ((a.diplo[b.id] || 'none') === 'none' && !hunt && r > pRel && game.rng.chance(pChance)) {   // (l'état a pu changer plus haut : pas de paix offerte juste après une déclaration de guerre)
           if (b.human) { Diplomacy.offer(game, b, { from: a.id, kind: 'peace', turn: game.turn }); Game.log(game, b.id, a.name + ' vous propose un pacte de paix.', { diplo: a.id, offer: true }); }
           else Diplomacy.propose(game, a.id, b.id, 'peace');
         }
@@ -1490,10 +1502,13 @@ Object.assign(AI, {
   },
   disjSpell(game, pl, id, mult) {
     const str = (DATA.spells[id].cost || 200) * mult;
-    const t = U.max(Spells.disjTargets(game, pl).filter(x => pl.diplo[x.o.id] === 'war' || AI.HOSTILE_GLOBALS.includes(x.g)), x => (AI.HOSTILE_GLOBALS.includes(x.g) ? 2 : 1) * Spells.dispelChance(game, str, x.g, x.o.id));
+    // (0.31.62) un Sceau planaire qui bloque sa croisade (ou la chasse du boss) passe avant tout, même à une chance sur quatre
+    const blocked = AI.sealed(game) && AI.crusadeTarget(game, pl);
+    const w = x => (blocked && x.g === 'planar_seal' ? 4 : AI.HOSTILE_GLOBALS.includes(x.g) ? 2 : 1);
+    const t = U.max(Spells.disjTargets(game, pl).filter(x => pl.diplo[x.o.id] === 'war' || AI.HOSTILE_GLOBALS.includes(x.g)), x => w(x) * Spells.dispelChance(game, str, x.g, x.o.id));
     if (!t) return null;
-    const p = Spells.dispelChance(game, str, t.g, t.o.id);
-    return p >= 0.3 ? { sc: (AI.HOSTILE_GLOBALS.includes(t.g) ? 50 : 20) * p, target: { player: t.o.id, spell: t.g } } : null;
+    const p = Spells.dispelChance(game, str, t.g, t.o.id), seal = blocked && t.g === 'planar_seal';
+    return p >= (seal ? 0.2 : 0.3) ? { sc: (seal ? 90 : AI.HOSTILE_GLOBALS.includes(t.g) ? 50 : 20) * p, target: { player: t.o.id, spell: t.g } } : null;
   },
   // une case des terres d'une cité ennemie (vue, à minerai ou fertile) : Corruption, Éruption
   foeTileSpell(game, pl, id, sc) {

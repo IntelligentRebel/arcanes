@@ -53,6 +53,14 @@ const Finale = {
   SITES: ['phylactery', 'citadel', 'winterheart'],
   // réglages : ceux du jeu, sauf essai (game.opts.finaleCfg)
   cfg(game, k) { const o = game.opts && game.opts.finaleCfg; return o && o[k] != null ? o[k] : Finale[k]; },
+  // (0.31.62) le boss : un sorcier né sur le plan opposé au joueur n'est jamais la proie d'une crise de fin ; s'il mène, pas de
+  // crise (au banc 24, la crise le visait dans 59 à 82 % des cas et lui reprenait 8 à 18 points de son plan en 50 tours)
+  EXEMPT_BOSS: 1,
+  exempt(game, p) {
+    if (!p || !Finale.cfg(game, 'EXEMPT_BOSS')) return false;
+    const H = game.players.find(q => q.human || q.benchHuman);
+    return !!H && p !== H && p.plane !== H.plane;
+  },
   init(game, mode) {
     if (game.finale) return;
     mode = mode || 'random';
@@ -112,7 +120,7 @@ const Finale = {
   watch(game) {
     const f = game.finale;
     if (game.turn < Finale.cfg(game, 'MIN_TURN') * Game.pace(game)) return;
-    const r = Finale.ranked(game); if (r.length < 2) { f.streak = 0; return; }
+    const r = Finale.ranked(game); if (r.length < 2 || Finale.exempt(game, r[0].p)) { f.streak = 0; return; }
     const slain = Finale.demonSlain(game);
     const lead = Finale.cfg(game, slain ? 'LEAD_SLAIN' : 'LEAD'), need = Finale.cfg(game, slain ? 'STREAK_SLAIN' : 'STREAK');
     if (r[0].v >= lead * r[1].v) { if (f.leader !== r[0].p.id) { f.leader = r[0].p.id; f.streak = 0; } f.streak++; } else f.streak = 0;
@@ -143,7 +151,7 @@ const Finale = {
     const f = game.finale;
     if (!Finale.K[f.kind]) f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(FINALE_KINDS);
     let tp = game.players[f.target];
-    if (!tp || !tp.alive || tp.banished) { const r = Finale.ranked(game)[0]; tp = r ? r.p : null; }
+    if (!tp || !tp.alive || tp.banished) { const r = Finale.ranked(game).find(x => !Finale.exempt(game, x.p)); tp = r ? r.p : null; }
     if (!tp) { f.state = 'off'; return; }
     f.target = tp.id; f.start = game.turn; f.waves = 0; f.souls = 0; f.next = game.turn + 4;
     f.force = Math.round(Crisis.score(game, tp));
