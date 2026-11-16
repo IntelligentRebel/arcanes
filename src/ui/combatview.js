@@ -318,6 +318,9 @@ const CombatView = {
       const pat = CombatView.ctx.createPattern(hdTex, 'repeat');
       CombatView.patterns = [pat, pat, pat, pat]; CombatView.patScale = 1 / 2.4;
     }
+    // (0.31.66) la rivière et ses gués : leurs propres textures, une par plan
+    const deep = Tex.get('criver', bt.plane), ford = Tex.get('cford', bt.plane);
+    CombatView.waterPat = hdTex && deep && ford ? [CombatView.ctx.createPattern(deep, 'repeat'), CombatView.ctx.createPattern(ford, 'repeat')] : null;
   },
 
   // ---------- boucle ----------
@@ -613,8 +616,9 @@ const CombatView = {
   // rivière : eau profonde (rides animées) ou gué (galets)
   drawWater(p, c, r, now) {
     const ctx = CombatView.ctx, TW = CombatView.TW, TH = CombatView.TH;
-    const g = ctx.createLinearGradient(p.x - TW / 2, p.y - TH / 2, p.x + TW / 2, p.y + TH / 2);
     const ford = CombatView.bt.isFord && CombatView.bt.isFord(c, r);
+    if (CombatView.waterPat) return CombatView.drawWaterHD(p, c, r, now, ford);
+    const g = ctx.createLinearGradient(p.x - TW / 2, p.y - TH / 2, p.x + TW / 2, p.y + TH / 2);
     // gué : eau claire peu profonde sur un lit de galets ; ailleurs, eau profonde
     if (ford) { g.addColorStop(0, 'rgba(112,160,168,.86)'); g.addColorStop(1, 'rgba(92,138,146,.9)'); }
     else { g.addColorStop(0, 'rgba(36,86,136,.92)'); g.addColorStop(1, 'rgba(22,58,100,.95)'); }
@@ -633,6 +637,35 @@ const CombatView = {
       const ph = ((now / 1400 + i / 3 + (c * 7 + r * 3) % 5 / 5) % 1);
       const y = p.y - TH / 2 + ph * TH;
       ctx.beginPath(); ctx.moveTo(p.x - TW * .3, y); ctx.quadraticCurveTo(p.x, y - 3, p.x + TW * .3, y); ctx.stroke();
+    }
+    ctx.restore();
+  },
+  // (0.31.66) rivière texturée, échantillonnée en continu comme le sol : l'eau profonde coule (son motif glisse lentement),
+  // le gué montre ses galets sous un voile d'eau qui coule ; une berge sombre et un liseré d'écume là où l'eau touche la terre
+  drawWaterHD(p, c, r, now, ford) {
+    const ctx = CombatView.ctx, TW = CombatView.TW, TH = CombatView.TH, bt = CombatView.bt, k = TW / 110;
+    const drift = (now / 70) % (384 * k);
+    const layer = (pat, dx, alpha) => {
+      ctx.save(); ctx.globalAlpha = alpha; ctx.translate(CombatView.ox + dx, CombatView.oy); ctx.scale(k, k); ctx.imageSmoothingEnabled = true;
+      ctx.fillStyle = pat; ctx.fill(); ctx.restore();
+    };
+    if (ford) { layer(CombatView.waterPat[1], 0, 1); layer(CombatView.waterPat[0], drift, .12); }
+    else layer(CombatView.waterPat[0], drift, 1);
+    ctx.save(); ctx.clip();
+    const T = [p.x, p.y - TH / 2], R = [p.x + TW / 2, p.y], B = [p.x, p.y + TH / 2], L = [p.x - TW / 2, p.y];
+    const mir = bt.plane === 1 && Sprites.hasMirror();
+    ctx.lineCap = 'round';
+    for (const [nc, nr, a, b] of [[c, r - 1, T, R], [c + 1, r, R, B], [c, r + 1, B, L], [c - 1, r, L, T]]) {
+      if (nc < 0 || nr < 0 || nc >= CW || nr >= CH || bt.inRiver(nc, nr)) continue;
+      // ombre de la berge, dégradée vers le milieu de l'eau
+      for (const [w, al] of [[.3, .1], [.17, .14], [.07, .22]]) {
+        ctx.strokeStyle = mir ? 'rgba(22,10,40,' + al + ')' : 'rgba(46,34,16,' + al + ')'; ctx.lineWidth = TW * w;
+        ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+      }
+      // l'écume, un peu en retrait de la berge
+      const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, sx = (p.x - mx) * .09, sy = (p.y - my) * .09;
+      ctx.strokeStyle = mir ? 'rgba(200,230,255,.2)' : 'rgba(235,245,240,.22)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(a[0] + sx, a[1] + sy); ctx.lineTo(b[0] + sx, b[1] + sy); ctx.stroke();
     }
     ctx.restore();
   },

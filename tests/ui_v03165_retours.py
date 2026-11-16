@@ -1,6 +1,7 @@
 """v0.31.65 (remarques de Cor'e) : un bosquet en feu ne fait plus planter le dessin du combat (il appelait les flammes du Mur de
-feu, qui l'écrasaient) ; des colons à bout de mouvement sur une case où fonder restent dans les unités en attente ; le coût d'une
-unité dans l'infobulle de la file ; le marché de sorts dit « l'équivalent de N RP »."""
+feu, qui l'écrasaient) ; le coût d'une
+unité dans l'infobulle de la file ; le marché de sorts dit « l'équivalent de N RP ».
+(0.31.66 : l'ajout des colons à 0 mouvement dans les unités en attente est retiré ; le test vérifie qu'ils n'y sont plus.)"""
 import asyncio, os, sys, http.server, threading, functools
 from playwright.async_api import async_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +34,7 @@ async def main():
           const a = App.unitsWaiting().includes(s);
           const s2 = Units.create(g, 'HighMenSpearmen', me.id, 0, spot[0], spot[1]); s2.moves = 0;
           return { a, b: App.unitsWaiting().includes(s2) }; }""")
-        ok(r['a'] and not r['b'], 'colons à 0 mouvement sur une case où fonder : en attente ; un lancier à 0 : non (%r)' % r)
+        ok(not r['a'] and not r['b'], 'colons ou lancier à 0 mouvement : plus dans les unités en attente (%r)' % r)
         # coût d'une unité dans l'infobulle de la file
         t = await pg.evaluate("""() => { const c = App.game.cities[App.me().fortress]; return CityUI.itemTip(c, { type: 'unit', id: 'HighMenSpearmen' }); }""")
         ok('Coût de production' in t, "infobulle d'une unité en file : son coût")
