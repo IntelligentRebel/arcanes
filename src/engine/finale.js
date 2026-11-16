@@ -61,6 +61,9 @@ const Finale = {
     const H = game.players.find(q => q.human || q.benchHuman);
     return !!H && p !== H && p.plane !== H.plane;
   },
+  // (0.31.64) Hardcore : la crise ne regarde que les sorciers du plan du joueur, comme la coalition ; s'il écrase son plan, elle
+  // le frappe même quand le boss d'en face est plus fort. Aux autres niveaux : si le boss mène, pas de crise.
+  pool(game) { return game.difficulty === 'hardcore' ? p => !Finale.exempt(game, p) : () => true; },
   init(game, mode) {
     if (game.finale) return;
     mode = mode || 'random';
@@ -120,7 +123,7 @@ const Finale = {
   watch(game) {
     const f = game.finale;
     if (game.turn < Finale.cfg(game, 'MIN_TURN') * Game.pace(game)) return;
-    const r = Finale.ranked(game); if (r.length < 2 || Finale.exempt(game, r[0].p)) { f.streak = 0; return; }
+    const inPool = Finale.pool(game), r = Finale.ranked(game).filter(x => inPool(x.p)); if (r.length < 2 || Finale.exempt(game, r[0].p)) { f.streak = 0; return; }
     const slain = Finale.demonSlain(game);
     const lead = Finale.cfg(game, slain ? 'LEAD_SLAIN' : 'LEAD'), need = Finale.cfg(game, slain ? 'STREAK_SLAIN' : 'STREAK');
     if (r[0].v >= lead * r[1].v) { if (f.leader !== r[0].p.id) { f.leader = r[0].p.id; f.streak = 0; } f.streak++; } else f.streak = 0;
@@ -133,7 +136,7 @@ const Finale = {
     const tierOf = (a, b, rest) => { const g = a / Math.max(1, b); return g >= 2 && a >= rest ? 3 : g >= 2 ? 2 : 1; };
     const gap = r[0].v / Math.max(1, r[1].v), rest = U.sum(r.slice(1), x => x.v);
     const top = game.players[f.leader];
-    const sLead = Finale.standing(game, top), others = game.players.filter(p => p.alive && !p.banished && p !== top).map(p => Finale.standing(game, p)).sort((a, b) => b - a);
+    const sLead = Finale.standing(game, top), others = game.players.filter(p => p.alive && !p.banished && p !== top && inPool(p)).map(p => Finale.standing(game, p)).sort((a, b) => b - a);
     f.tier = Math.max(tierOf(r[0].v, r[1].v, rest), others.length && Finale.cfg(game, 'TIER_FORCE') ? tierOf(sLead, others[0], U.sum(others, x => x)) : 1);
     f.leadAt = +gap.toFixed(2); f.leadForce = others.length ? +(sLead / Math.max(1, others[0])).toFixed(2) : null;
     f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(Finale.TIERS[f.tier]);

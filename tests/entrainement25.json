@@ -1,9 +1,9 @@
 {
- "nom": "Entraînement 25 : moteur 0.31.63 ; la chasse du boss, et la crise, la coalition et le Démon qui l'épargnent ; les pillards",
+ "nom": "Entraînement 25 : moteur 0.31.64 ; la chasse du boss, et la crise, la coalition et le Démon qui l'épargnent ; les pillards",
  "experiences": [
   {
    "id": "boss_chasse",
-   "note": "Difficile, 250 tours. 0.31.62-63 : le boss (le plus fort des sorciers nés sur le plan opposé au joueur ; ici, au sorcier observé) chasse le joueur dès que celui-ci a posé le pied sur son plan, ou au tour 120 : expéditions vers ses cités, Ouvrir une faille, pas de paix, Sceau planaire à briser. La crise de fin ne vise plus le boss (s'il mène, pas de crise) ; la coalition et le Démon légendaire ne le visent jamais et il n'en est pas. À lire : la chasse (début, passages, failles, cités perdues par le sorcier observé), la part et l'armée du boss, le score et la survie du sorcier observé. Le jeu contre la chasse coupée, contre l'avant (crise, coalition et Démon pouvant viser le boss), et un essai : les IA chassent les pillards plantés sur leurs terres (ils retenaient les expéditions).",
+   "note": "Difficile, 250 tours. 0.31.62-64 : le boss (le plus fort des sorciers nés sur le plan opposé au joueur ; ici, au sorcier observé) chasse le joueur dès que celui-ci a posé le pied sur son plan, ou au tour 120 : expéditions vers ses cités, Ouvrir une faille, pas de paix, Sceau planaire à briser. La crise de fin ne vise plus le boss (Difficile : s'il mène, pas de crise ; Hardcore : elle ne regarde que le plan du joueur) ; la coalition et le Démon légendaire ne le visent jamais et il n'en est pas. À lire : la chasse (début, passages, failles, cités perdues par le sorcier observé), la part et l'armée du boss, le score et la survie du sorcier observé. Le jeu contre la chasse coupée, contre l'avant (crise, coalition et Démon pouvant viser le boss), et un essai : les IA chassent les pillards plantés sur leurs terres (ils retenaient les expéditions).",
    "tours": 250,
    "adversaires": "hard",
    "graine": 680000,
@@ -16,7 +16,7 @@
    "boss": true,
    "variantes": [
     {
-     "nom": "jeu 0.31.63",
+     "nom": "jeu 0.31.64",
      "niveau": "hard",
      "autrePlan": 2
     },
@@ -67,7 +67,7 @@
    "boss": true,
    "variantes": [
     {
-     "nom": "jeu 0.31.63",
+     "nom": "jeu 0.31.64",
      "niveau": "hardcore",
      "autrePlan": 2
     },

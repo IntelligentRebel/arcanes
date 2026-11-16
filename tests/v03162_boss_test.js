@@ -89,3 +89,14 @@ ok(myr.every(p => Finale.exempt(g, p)) && !Finale.exempt(g, H) && arc.every(p =>
   ok(a5.some(p => (Diplomacy.leaderFor(g5, p) || {}).id === m5[0].id), 'réglage de banc : la coalition d\'avant vise le boss');
   E.Intel.standing = S0; E.Rite.standing = R0; g5.opts.finaleCfg = null;
 }
+
+// 5. (0.31.64) Hardcore : la crise ne regarde que le plan du joueur ; en Difficile, si le boss mène, pas de crise
+for (const [lvl, want] of [['hardcore', 'omen'], ['hard', 'watch']]) {
+  const g6 = mk(lvl, 11), H6 = g6.players[0], m6 = g6.players.filter(p => p.plane === 1), a6 = g6.players.filter(p => p.plane === 0 && !p.human);
+  const f = g6.finale; f.state = 'watch'; f.streak = 0; g6.turn = 260;
+  const R0 = Finale.ranked;
+  Finale.ranked = () => [{ p: m6[0], v: 3000 }, { p: H6, v: 1000 }, { p: m6[1], v: 400 }, { p: a6[0], v: 300 }, { p: a6[1], v: 250 }];
+  for (let i = 0; i < 12; i++) Finale.watch(g6);
+  Finale.ranked = R0;
+  ok(f.state === want && (want === 'watch' || f.target === H6.id), lvl + ' : le boss mène, le joueur écrase son plan : ' + (want === 'omen' ? 'la crise vise le joueur' : 'pas de crise') + ' (' + f.state + ')');
+}
