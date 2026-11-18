@@ -355,6 +355,8 @@ Object.assign(AI, {
     return t;
   },
   hunts(game, a, b) { return !!a && !!b && AI.bossPrey(game, a) === b; },
+  // le boss en guerre qui chasse ce sorcier, s'il y en a un
+  huntedBy(game, pl) { return game.players.find(b => b && b !== pl && b.alive && pl.diplo[b.id] === 'war' && AI.hunts(game, b, pl)) || null; },
   // un passage vers l'autre plan (tour dégagée, faille) à 25 cases au plus de ses cités, qui débouche à 20 cases au plus d'une cité du meneur
   crossingNear(game, pl) {
     const T = AI.crusadeTarget(game, pl); if (!T) return false;

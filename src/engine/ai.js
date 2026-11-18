@@ -99,6 +99,8 @@ const AI = {
       if (id === 'purify_land') sc += AI.feat(pl, 'purify', 1) && U.sum(Cities.ofPlayer(game, pl.id), c => World.catchment(game.world, c.x, c.y).filter(([x, y]) => World.get(game.world, c.plane, 'corrupt', x, y)).length) >= 3 ? 25 : -60;
       if (id === 'spell_of_mastery') sc = pl.known.length > 35 ? 500 : -100;
       if (id === 'open_rift') sc += AI.crusadeTarget(game, pl) && !AI.crossingNear(game, pl) ? 70 : -30;
+      // (essai « seal », banc 26) traqué par le boss : le Sceau planaire avant le reste
+      if (id === 'planar_seal' && AI.opt(pl, 'seal') && AI.huntedBy(game, pl)) sc += 80;
       sc += AI.counterResearch(game, pl, id);
       sc += game.rng.next() * 15;
       if (sc > bs) { bs = sc; best = id; }
@@ -1120,9 +1122,9 @@ const AI = {
     }
     // armées ennemies vues en ce moment
     for (const u of Object.values(game.units)) {
-      // (en essai, raiders) des pillards plantés sur ses terres : une cible aussi (sinon ils y restent, et la menace qu'ils font
-      // peser sur ses cités retient ses expéditions)
-      if (u.owner === pl.id || u.plane !== u0.plane || u.owner < 0 && !u.rampage && !(AI.opt(pl, 'raiders') && World.get(game.world, u.plane, 'owner', u.x, u.y) === pl.id)) continue;
+      // (essai « raiders », banc 25 : chasser les pillards plantés sur ses terres coûtait 40 ± 26 points sans rien changer aux
+      // expéditions ; retiré en 0.31.68)
+      if (u.owner === pl.id || u.plane !== u0.plane || u.owner < 0 && !u.rampage) continue;
       if (u.owner >= 0 && pl.diplo[u.owner] !== 'war') continue;
       if (Cities.at(game, u.plane, u.x, u.y) || u.guardian) continue;
       if (!Intel.sees(game, pl, u.plane, u.x, u.y) || Intel.hiddenFrom(game, pl.id, u)) continue;

@@ -62,8 +62,14 @@ const Finale = {
     return !!H && p !== H && p.plane !== H.plane;
   },
   // (0.31.64) Hardcore : la crise ne regarde que les sorciers du plan du joueur, comme la coalition ; s'il écrase son plan, elle
-  // le frappe même quand le boss d'en face est plus fort. Aux autres niveaux : si le boss mène, pas de crise.
-  pool(game) { return game.difficulty === 'hardcore' ? p => !Finale.exempt(game, p) : () => true; },
+  // le frappe même quand le boss d'en face est plus fort. (0.31.68) De même en Difficile : au banc 25, « si le boss mène, pas de
+  // crise » la faisait tomber de 48 % à 7 % des parties (le boss menait dans 61 %). Aux niveaux plus doux : si le boss mène, pas
+  // de crise. Au banc, POOL_HARD 0 rend au Difficile la règle d'avant.
+  POOL_HARD: 1,
+  pool(game) {
+    const d = game.difficulty, all = d === 'hardcore' || (d === 'hard' && Finale.cfg(game, 'POOL_HARD'));
+    return all ? p => !Finale.exempt(game, p) : () => true;
+  },
   init(game, mode) {
     if (game.finale) return;
     mode = mode || 'random';

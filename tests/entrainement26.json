@@ -1,0 +1,71 @@
+{
+ "nom": "Entraînement 26 : moteur 0.31.68 ; la crise du Hardcore en Difficile ; l'IA traquée pose le Sceau planaire",
+ "experiences": [
+  {
+   "id": "crise_sceau",
+   "note": "Difficile, 250 tours, moteur 0.31.68. La crise de fin ne regarde plus que les sorciers du plan du joueur, comme en Hardcore (au banc 25, « si le boss mène, pas de crise » la faisait tomber de 48 % à 7 % des parties). À lire : la fréquence de la crise, qui elle vise (le sorcier observé ?), son score et sa survie. Le jeu contre la règle d'avant, et un essai : traqué par le boss, le sorcier observé étudie et lance le Sceau planaire (aucune IA ne le lançait au banc 25) ; à lire : qui le pose, combien de temps il tient avant que le boss le brise, les cités perdues à l'autre plan avant et après.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 700000,
+   "graines": 500,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "jeu 0.31.68",
+     "niveau": "hard",
+     "autrePlan": 2
+    },
+    {
+     "nom": "avant : pas de crise si le boss mène",
+     "niveau": "hard",
+     "autrePlan": 2,
+     "reglagesCrise": {
+      "POOL_HARD": 0
+     }
+    },
+    {
+     "nom": "essai : l'IA traquée scelle",
+     "niveau": "hard",
+     "autrePlan": 2,
+     "exp": {
+      "seal": true
+     }
+    }
+   ]
+  },
+  {
+   "id": "crise_sceau_hardcore",
+   "note": "En Hardcore (la crise y regardait déjà le seul plan du joueur) : l'essai du Sceau seul.",
+   "tours": 250,
+   "adversaires": "hardcore",
+   "graine": 710000,
+   "graines": 200,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "jeu 0.31.68",
+     "niveau": "hardcore",
+     "autrePlan": 2
+    },
+    {
+     "nom": "essai : l'IA traquée scelle",
+     "niveau": "hardcore",
+     "autrePlan": 2,
+     "exp": {
+      "seal": true
+     }
+    }
+   ]
+  }
+ ]
+}

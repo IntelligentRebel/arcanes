@@ -115,10 +115,11 @@ async function playOne(E, job) {
   // (v0.31.36) cités prises d'un plan à l'autre (le sorcier né sur l'autre plan que l'ancien maître), et parmi elles celles du meneur
   let xcaps = 0, xcapsL = 0;
   // (banc 25) la chasse du boss : cités que le sorcier observé perd aux sorciers nés sur l'autre plan, leurs passages vers son plan
-  const hunt = { lostX: 0, trips: 0, from: null, seal: null };
+  // (banc 26) le Sceau planaire : qui le pose, combien de tours il tient, s'il est brisé ; ce que le sorcier observé perd encore ensuite
+  const hunt = { lostX: 0, trips: 0, from: null, seal: null, sealBy: null, sealTurns: 0, sealEnd: null, lostAfter: 0 };
   const oc = E.Game.captureCity; E.Game.captureCity = async function (g, city, pid) { if (pid === 0) caps++; else if (city.owner === 0) lost++;
     const a = g.players[pid], b = g.players[city.owner];
-    if (city.owner === 0 && a && a.plane !== g.players[0].plane) hunt.lostX++;
+    if (city.owner === 0 && a && a.plane !== g.players[0].plane) { hunt.lostX++; if (hunt.seal != null) hunt.lostAfter++; }
     if (a && b && a.plane !== b.plane) { xcaps++; const al = g.players.filter(p => p.alive && !p.banished); if (E.U.max(al, p => E.Crisis.score(g, p)) === b) xcapsL++; }
     return oc.apply(this, arguments); };
   const marks = {}, cps = job.checkpoints || [150], inv = { n: {}, ex: {} };
@@ -130,7 +131,9 @@ async function playOne(E, job) {
   for (let t = 0; t < job.turns && !game.over; t++) {
     await E.Turn.endTurn(game);
     if (hunt.from == null && E.AI.bossPrey && game.players.some(p => !p.human && p.id !== 0 && E.AI.bossPrey(game, p) === p0)) hunt.from = game.turn;
-    if (hunt.seal == null && game.players.some(p => p.alive && p.globals.includes('planar_seal'))) hunt.seal = game.turn;
+    { const sp = game.players.find(p => p.alive && p.globals.includes('planar_seal'));
+      if (sp) { if (hunt.seal == null) { hunt.seal = game.turn; hunt.sealBy = sp.id; } hunt.sealTurns++; }
+      else if (hunt.seal != null && hunt.sealEnd == null) hunt.sealEnd = game.turn; }
     if (deathTurn == null && !p0.alive) deathTurn = game.turn;
     if (wonder.lore == null && (p0.lore || []).length) { wonder.lore = game.turn; const sp = E.DATA.spells[p0.lore[0]]; wonder.loreRace = sp && sp.params ? sp.params.race : null; }
     if (wonder.built == null && p0.wonders && Object.keys(p0.wonders).length) wonder.built = game.turn;
@@ -162,7 +165,7 @@ async function playOne(E, job) {
   // (v0.31.32) de même au tour 200, quand les crises de fin peuvent commencer : le meneur l'est-il encore, et de combien
   if (marks[200] && marks[200].gap != null) { const L = marks[200].lead, s2 = sc.slice().sort((a, b) => b - a); res.lead200 = L; res.lead200Kept = sc.indexOf(Math.max(...sc)) === L ? 1 : 0; res.gap200 = +marks[200].gap.toFixed(2); res.gapEnd = +(s2[0] / Math.max(1, s2[1])).toFixed(2); res.leadScore200 = sc[L] || 0; res.gapEndLn = +Math.log(Math.max(0.5, res.gapEnd)).toFixed(3); }
   res.spirits = { made: E._spirits.made, melded: E._spirits.melded, nodes: game.sites.filter(s => s.type === 'node' && s.owner === 0).length };
-  res.xcaps = xcaps; res.xcapsL = xcapsL; res.hunt = hunt;
+  res.xcaps = xcaps; res.xcapsL = xcapsL; res.hunt = hunt; hunt.knows = p0.known.includes('planar_seal'); hunt.life = (p0.books && p0.books.life) || 0;
   res.hunt.rifts = game.sites.filter(s => s.type === 'rift' && s.by != null && game.players[s.by] && game.players[s.by].plane !== p0.plane).length; res.riftsCast = game.sites.filter(s => s.type === 'rift' && s.plane === 0 && s.by != null).length;
   integrity(E, game, inv);
   if (Object.keys(inv.n).length) { res.inv = inv.n; res.invEx = inv.ex; }

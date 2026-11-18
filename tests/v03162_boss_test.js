@@ -17,7 +17,7 @@ ok(myr.every(p => Finale.exempt(g, p)) && !Finale.exempt(g, H) && arc.every(p =>
   const R0 = Finale.ranked; g.turn = 260;
   Finale.ranked = () => [{ p: myr[0], v: 1000 }, { p: H, v: 100 }, { p: arc[0], v: 90 }];
   for (let i = 0; i < 12; i++) Finale.watch(g);
-  ok(f.state === 'watch' && f.streak === 0, 'le boss mène de loin : pas de crise');
+  ok(f.state === 'watch' && f.streak === 0, 'le boss mène de loin, le joueur ne domine pas son plan : pas de crise');
   Finale.ranked = () => [{ p: H, v: 1000 }, { p: myr[0], v: 100 }, { p: arc[0], v: 90 }];
   for (let i = 0; i < 12; i++) Finale.watch(g);
   ok(f.state === 'omen' && f.target === H.id, 'le joueur mène de loin : la crise le vise (' + f.state + ')');
@@ -90,8 +90,8 @@ ok(myr.every(p => Finale.exempt(g, p)) && !Finale.exempt(g, H) && arc.every(p =>
   E.Intel.standing = S0; E.Rite.standing = R0; g5.opts.finaleCfg = null;
 }
 
-// 5. (0.31.64) Hardcore : la crise ne regarde que le plan du joueur ; en Difficile, si le boss mène, pas de crise
-for (const [lvl, want] of [['hardcore', 'omen'], ['hard', 'watch']]) {
+// 5. (0.31.64) Hardcore : la crise ne regarde que le plan du joueur ; (0.31.68) de même en Difficile ; en Normal, si le boss mène, pas de crise
+for (const [lvl, want] of [['hardcore', 'omen'], ['hard', 'omen'], ['normal', 'watch']]) {
   const g6 = mk(lvl, 11), H6 = g6.players[0], m6 = g6.players.filter(p => p.plane === 1), a6 = g6.players.filter(p => p.plane === 0 && !p.human);
   const f = g6.finale; f.state = 'watch'; f.streak = 0; g6.turn = 260;
   const R0 = Finale.ranked;

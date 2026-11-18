@@ -13,7 +13,7 @@ function mk(seed, opts = {}) {
 
 // ---------- 1. paliers ----------
 {
-  const g = mk(1, { finale: 'random' }), f = g.finale;
+  const g = mk(1, { finale: 'random', difficulty: 'normal' }), f = g.finale;   // (0.31.68) en Difficile, les paliers ne comptent plus que le plan du joueur ; ici, tous
   const fake = vals => { Crisis.score = (game, p) => vals[p.id] || 0; };
   const keep = Crisis.score;
   const run = vals => { fake(vals); f.state = 'watch'; f.kind = null; f.streak = 0; f.tier = null; g.turn = 210; for (let i = 0; i < 6 && f.state === 'watch'; i++) { Finale.watch(g); } return f; };
