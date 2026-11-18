@@ -6052,7 +6052,7 @@
  "du {0}": {
   "at": [
    "src/core/util.js:9",
-   "src/engine/game.js:1951",
+   "src/engine/game.js:1954",
    "src/ui/main.js:1341"
   ],
   "args": [
@@ -6063,7 +6063,7 @@
   "at": [
    "src/core/util.js:9",
    "src/engine/cities.js:266",
-   "src/engine/game.js:1951",
+   "src/engine/game.js:1954",
    "src/ui/main.js:1341"
   ],
   "args": [
@@ -6736,7 +6736,7 @@
   "at": [
    "src/core/util.js:70",
    "src/core/util.js:77",
-   "src/engine/game.js:1899",
+   "src/engine/game.js:1902",
    "src/engine/veil.js:568"
   ]
  },
@@ -9884,7 +9884,7 @@
   "at": [
    "src/engine/game.js:433",
    "src/engine/game.js:457",
-   "src/engine/game.js:2136",
+   "src/engine/game.js:2139",
    "src/ui/combatview.js:1762"
   ],
   "args": [
@@ -10146,7 +10146,7 @@
  "Aucune unité.": {
   "at": [
    "src/engine/game.js:666",
-   "src/engine/game.js:1664"
+   "src/engine/game.js:1667"
   ]
  },
  "Montagne infranchissable sans route : seuls les volants, les montagnards et les ingénieurs y vont.": {
@@ -11134,9 +11134,14 @@
    "src/engine/game.js:1571"
   ]
  },
+ "Il faut du mouvement restant pour fusionner.": {
+  "at": [
+   "src/engine/game.js:1574"
+  ]
+ },
  "Ce nœud vous appartient déjà{0}": {
   "at": [
-   "src/engine/game.js:1573"
+   "src/engine/game.js:1575"
   ],
   "args": [
    "heldByGuardian ? ', et un esprit gardien le garde.' : '.'"
@@ -11144,17 +11149,17 @@
  },
  ", et un esprit gardien le garde.": {
   "at": [
-   "src/engine/game.js:1573"
+   "src/engine/game.js:1575"
   ]
  },
  "Relever la garde de votre nœud : un esprit gardien le défend bien mieux contre les esprits rivaux.": {
   "at": [
-   "src/engine/game.js:1573"
+   "src/engine/game.js:1575"
   ]
  },
  "Lier ce nœud à votre puissance (l'esprit est consommé){0}": {
   "at": [
-   "src/engine/game.js:1575"
+   "src/engine/game.js:1578"
   ],
   "args": [
    "fail ? ' ; ' + Math.round(fail * 100) + ' % de risque d\\'échec contre l\\'esprit qui le tie"
@@ -11162,7 +11167,7 @@
  },
  " ; {0} % de risque d'échec contre l'esprit qui le tient.": {
   "at": [
-   "src/engine/game.js:1575"
+   "src/engine/game.js:1578"
   ],
   "args": [
    "Math.round(fail * 100)"
@@ -11170,12 +11175,12 @@
  },
  "Ce nœud vous appartient déjà.": {
   "at": [
-   "src/engine/game.js:1586"
+   "src/engine/game.js:1589"
   ]
  },
  "Un esprit gardien relève la garde du {0} : les esprits rivaux auront bien du mal à vous le prendre.": {
   "at": [
-   "src/engine/game.js:1588"
+   "src/engine/game.js:1591"
   ],
   "args": [
    "Game.siteName(s)"
@@ -11183,17 +11188,17 @@
  },
  "L'esprit gardien du nœud repousse le vôtre, qui se dissipe.": {
   "at": [
-   "src/engine/game.js:1592"
+   "src/engine/game.js:1595"
   ]
  },
  "L'esprit échoue à arracher le nœud et se dissipe.": {
   "at": [
-   "src/engine/game.js:1592"
+   "src/engine/game.js:1595"
   ]
  },
  "Le {0} est désormais lié à votre puissance : son aura de {1} cases s'illumine à vos couleurs (+{2} de magie par tour).": {
   "at": [
-   "src/engine/game.js:1596"
+   "src/engine/game.js:1599"
   ],
   "args": [
    "Game.siteName(s)",
@@ -11203,54 +11208,54 @@
  },
  "Un rival s'est emparé de l'un de vos nœuds magiques.": {
   "at": [
-   "src/engine/game.js:1597"
+   "src/engine/game.js:1600"
   ]
  },
  "Il faut un ingénieur.": {
   "at": [
-   "src/engine/game.js:1603",
-   "src/engine/game.js:1614"
+   "src/engine/game.js:1606",
+   "src/engine/game.js:1617"
   ]
  },
  "Il y a déjà une route ici.": {
   "at": [
-   "src/engine/game.js:1605",
+   "src/engine/game.js:1608",
    "src/ui/main.js:602"
   ]
  },
  "Impossible d'empierrer ce terrain.": {
   "at": [
-   "src/engine/game.js:1606"
+   "src/engine/game.js:1609"
   ]
  },
  "Choisissez une autre case que celle des ingénieurs.": {
   "at": [
-   "src/engine/game.js:1617"
+   "src/engine/game.js:1620"
   ]
  },
  "Aucun tracé par la terre jusque-là.": {
   "at": [
-   "src/engine/game.js:1621"
+   "src/engine/game.js:1624"
   ]
  },
  "Il faut se tenir dans une cité dotée d'une porte tellurique.": {
   "at": [
-   "src/engine/game.js:1666"
+   "src/engine/game.js:1669"
   ]
  },
  "Il faut une autre de vos cités dotée d'une porte tellurique, sur le même plan.": {
   "at": [
-   "src/engine/game.js:1667"
+   "src/engine/game.js:1670"
   ]
  },
  "Il faut un point de mouvement à chaque unité.": {
   "at": [
-   "src/engine/game.js:1668"
+   "src/engine/game.js:1671"
   ]
  },
  "{0} ne peut accueillir autant d'unités (9 au plus).": {
   "at": [
-   "src/engine/game.js:1669"
+   "src/engine/game.js:1672"
   ],
   "args": [
    "to.name"
@@ -11258,62 +11263,62 @@
  },
  "Hors d'une tour, d'une faille ou d'une porte astrale, toutes les unités de la pile doivent savoir sauter de plan.": {
   "at": [
-   "src/engine/game.js:1683"
+   "src/engine/game.js:1686"
   ]
  },
  "Il faut une tour de sorcellerie, une faille, une porte astrale ou la capacité de saut de plan.": {
   "at": [
-   "src/engine/game.js:1683"
+   "src/engine/game.js:1686"
   ]
  },
  "Le Sceau planaire bloque tout passage.": {
   "at": [
-   "src/engine/game.js:1684",
+   "src/engine/game.js:1687",
    "src/engine/spells.js:349"
   ]
  },
  "Il faut encore du mouvement pour passer dans l'autre plan.": {
   "at": [
-   "src/engine/game.js:1686"
+   "src/engine/game.js:1689"
   ]
  },
  "Une unité figée dans la stase ne peut pas passer.": {
   "at": [
-   "src/engine/game.js:1687"
+   "src/engine/game.js:1690"
   ]
  },
  "Le terrain de l'autre plan est impraticable.": {
   "at": [
-   "src/engine/game.js:1689",
+   "src/engine/game.js:1692",
    "src/engine/spells.js:350"
   ]
  },
  "Une force ennemie occupe la case de l'autre plan.": {
   "at": [
-   "src/engine/game.js:1690"
+   "src/engine/game.js:1693"
   ]
  },
  "Trop d'unités vous attendent déjà de l'autre côté (9 au plus par case).": {
   "at": [
-   "src/engine/game.js:1691"
+   "src/engine/game.js:1694"
   ]
  },
  "Des gardiens occupent la case de l'autre plan.": {
   "at": [
-   "src/engine/game.js:1693",
+   "src/engine/game.js:1696",
    "src/engine/spells.js:353"
   ]
  },
  "Or insuffisant.": {
   "at": [
-   "src/engine/game.js:1713",
+   "src/engine/game.js:1716",
    "src/engine/turn.js:647",
    "src/engine/turn.js:663"
   ]
  },
  "{0} en dépend.": {
   "at": [
-   "src/engine/game.js:1720"
+   "src/engine/game.js:1723"
   ],
   "args": [
    "DATA.buildings[o].name"
@@ -11321,7 +11326,7 @@
  },
  "{0}, en cours, en dépend.": {
   "at": [
-   "src/engine/game.js:1723"
+   "src/engine/game.js:1726"
   ],
   "args": [
    "name(c.prod)"
@@ -11329,7 +11334,7 @@
  },
  "{0}, dans la file, en dépend.": {
   "at": [
-   "src/engine/game.js:1724"
+   "src/engine/game.js:1727"
   ],
   "args": [
    "name(q)"
@@ -11337,12 +11342,12 @@
  },
  "Vente impossible ce tour-ci.": {
   "at": [
-   "src/engine/game.js:1729"
+   "src/engine/game.js:1732"
   ]
  },
  "{0} : « {1} » Quête : {2}.": {
   "at": [
-   "src/engine/game.js:1798"
+   "src/engine/game.js:1801"
   ],
   "args": [
    "u.hero.name",
@@ -11352,7 +11357,7 @@
  },
  "Vous avez désormais six héros : {0} échouera si aucun ne vous quitte d'ici là (vous ne récupéreriez que la moitié du mana).": {
   "at": [
-   "src/engine/game.js:1802"
+   "src/engine/game.js:1805"
   ],
   "args": [
    "DATA.spells[cs].name"
@@ -11360,7 +11365,7 @@
  },
  "Super {0}{1}": {
   "at": [
-   "src/engine/game.js:1833"
+   "src/engine/game.js:1836"
   ],
   "args": [
    "t.name.charAt(0).toLowerCase()",
@@ -11369,7 +11374,7 @@
  },
  "{0} : sa puissance arcanique, sans effet faute de tir magique, devient {1}.": {
   "at": [
-   "src/engine/game.js:1846"
+   "src/engine/game.js:1849"
   ],
   "args": [
    "u.hero.name",
@@ -11378,7 +11383,7 @@
  },
  "Super {0}": {
   "at": [
-   "src/engine/game.js:1846"
+   "src/engine/game.js:1849"
   ],
   "args": [
    "t.name.toLowerCase()"
@@ -11386,7 +11391,7 @@
  },
  "{0} passe au niveau {1} : un talent à choisir.": {
   "at": [
-   "src/engine/game.js:1871"
+   "src/engine/game.js:1874"
   ],
   "args": [
    "u.hero.name",
@@ -11395,7 +11400,7 @@
  },
  "{0} apprend : {1}.": {
   "at": [
-   "src/engine/game.js:1883"
+   "src/engine/game.js:1886"
   ],
   "args": [
    "u.hero.name",
@@ -11404,62 +11409,62 @@
  },
  "au cœur d'une forêt": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "au pied des montagnes": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "parmi les collines": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "dans les montagnes": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "dans le désert": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "au fond des marais": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "dans les terres gelées": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "dans les plaines": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "au bord d'un fleuve": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  "dans des terres sauvages": {
   "at": [
-   "src/engine/game.js:1897"
+   "src/engine/game.js:1900"
   ]
  },
  ", non loin de la mer": {
   "at": [
-   "src/engine/game.js:1898"
+   "src/engine/game.js:1901"
   ]
  },
  "{0}, sur {1}": {
   "at": [
-   "src/engine/game.js:1899"
+   "src/engine/game.js:1902"
   ],
   "args": [
    "w",
@@ -11468,7 +11473,7 @@
  },
  "le Miroir": {
   "at": [
-   "src/engine/game.js:1899",
+   "src/engine/game.js:1902",
    "src/engine/veil.js:568",
    "src/engine/finale.js:452",
    "src/ui/main.js:537"
@@ -11476,7 +11481,7 @@
  },
  "de {0}": {
   "at": [
-   "src/engine/game.js:1951",
+   "src/engine/game.js:1954",
    "src/engine/events.js:6"
   ],
   "args": [
@@ -11485,7 +11490,7 @@
  },
  "Quête accomplie : {0}": {
   "at": [
-   "src/engine/game.js:1963"
+   "src/engine/game.js:1966"
   ],
   "args": [
    "q.reward || ''"
@@ -11493,7 +11498,7 @@
  },
  "{0} : la piste est perdue.": {
   "at": [
-   "src/engine/game.js:1966"
+   "src/engine/game.js:1969"
   ],
   "args": [
    "place"
@@ -11501,7 +11506,7 @@
  },
  "Nul ne sait encore où se trouve {0}.": {
   "at": [
-   "src/engine/game.js:1966"
+   "src/engine/game.js:1969"
   ],
   "args": [
    "q.place"
@@ -11509,7 +11514,7 @@
  },
  "Vaincre les gardiens {0} ({1}, {2}{3}), avec {4} dans l'armée qui attaque": {
   "at": [
-   "src/engine/game.js:1967"
+   "src/engine/game.js:1970"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11521,13 +11526,13 @@
  },
  ", sur le Miroir": {
   "at": [
-   "src/engine/game.js:1967",
-   "src/engine/game.js:1969"
+   "src/engine/game.js:1970",
+   "src/engine/game.js:1972"
   ]
  },
  "{0} se cache dans la région cerclée d'or, autour de ({1}, {2}{3}). {4}": {
   "at": [
-   "src/engine/game.js:1969"
+   "src/engine/game.js:1972"
   ],
   "args": [
    "place",
@@ -11539,8 +11544,8 @@
  },
  "{0} guette les rumeurs.": {
   "at": [
-   "src/engine/game.js:1969",
-   "src/engine/game.js:1970"
+   "src/engine/game.js:1972",
+   "src/engine/game.js:1973"
   ],
   "args": [
    "u.hero.name"
@@ -11548,7 +11553,7 @@
  },
  "Explorez-la. Repaires pillés avec {0} : {1}/4": {
   "at": [
-   "src/engine/game.js:1969"
+   "src/engine/game.js:1972"
   ],
   "args": [
    "u.hero.name",
@@ -11557,7 +11562,7 @@
  },
  "Selon la légende, {0} se trouve {1}. {2}": {
   "at": [
-   "src/engine/game.js:1970"
+   "src/engine/game.js:1973"
   ],
   "args": [
    "q.place",
@@ -11567,7 +11572,7 @@
  },
  "Repaires pillés avec {0} : {1}/2": {
   "at": [
-   "src/engine/game.js:1970"
+   "src/engine/game.js:1973"
   ],
   "args": [
    "u.hero.name",
@@ -11576,7 +11581,7 @@
  },
  "La légende se dévoile : {0} est là, en ({1}, {2}). Ses gardiens sont parmi les plus redoutables du monde. Pour accomplir sa quête, {3} doit être dans l'armée qui les vaincra.": {
   "at": [
-   "src/engine/game.js:1984"
+   "src/engine/game.js:1987"
   ],
   "args": [
    "q.place",
@@ -11587,7 +11592,7 @@
  },
  "Une rumeur parvient à {0} : {1} se cacherait dans la région autour de ({2}, {3}), cerclée d'or sur la carte.": {
   "at": [
-   "src/engine/game.js:1996"
+   "src/engine/game.js:1999"
   ],
   "args": [
    "u.hero.name",
@@ -11598,7 +11603,7 @@
  },
  "Une nouvelle rumeur resserre la piste {0} : autour de ({1}, {2}).": {
   "at": [
-   "src/engine/game.js:2002"
+   "src/engine/game.js:2005"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11608,7 +11613,7 @@
  },
  "La piste {0} est perdue : {1} n'en entendra plus parler.": {
   "at": [
-   "src/engine/game.js:2018"
+   "src/engine/game.js:2021"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11617,7 +11622,7 @@
  },
  "Pendant l'absence de {0}, le gardien {1} a emporté la relique ailleurs. ": {
   "at": [
-   "src/engine/game.js:2022"
+   "src/engine/game.js:2025"
   ],
   "args": [
    "u.hero.name",
@@ -11626,7 +11631,7 @@
  },
  "Le repaire {0} a été pillé sans {1}, mais la relique n'y était plus : son gardien l'a emportée ailleurs. ": {
   "at": [
-   "src/engine/game.js:2022"
+   "src/engine/game.js:2025"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11635,47 +11640,47 @@
  },
  "Une nouvelle région est cerclée d'or sur la carte.": {
   "at": [
-   "src/engine/game.js:2022"
+   "src/engine/game.js:2025"
   ]
  },
  "La piste repart de zéro.": {
   "at": [
-   "src/engine/game.js:2022"
+   "src/engine/game.js:2025"
   ]
  },
  "Arc": {
   "at": [
-   "src/engine/game.js:2059",
-   "src/engine/game.js:2101"
+   "src/engine/game.js:2062",
+   "src/engine/game.js:2104"
   ]
  },
  "Bâton": {
   "at": [
-   "src/engine/game.js:2059",
-   "src/engine/game.js:2102"
+   "src/engine/game.js:2062",
+   "src/engine/game.js:2105"
   ]
  },
  "Lame": {
   "at": [
-   "src/engine/game.js:2059",
-   "src/engine/game.js:2098"
+   "src/engine/game.js:2062",
+   "src/engine/game.js:2101"
   ]
  },
  "Marteau": {
   "at": [
-   "src/engine/game.js:2059",
-   "src/engine/game.js:2099"
+   "src/engine/game.js:2062",
+   "src/engine/game.js:2102"
   ]
  },
  "Hache": {
   "at": [
-   "src/engine/game.js:2059",
-   "src/engine/game.js:2100"
+   "src/engine/game.js:2062",
+   "src/engine/game.js:2103"
   ]
  },
  "{0} de {1}": {
   "at": [
-   "src/engine/game.js:2060",
+   "src/engine/game.js:2063",
    "src/ui/city.js:61"
   ],
   "args": [
@@ -11685,7 +11690,7 @@
  },
  "Légende accomplie, au prix de sa vie : {0} est tombée en triomphant {1}. {2} ({3}) rejoint le coffre de votre forteresse ; {4} pièces d'or, +{5} de renommée, et {6} XP pour chaque survivant de son armée.": {
   "at": [
-   "src/engine/game.js:2074"
+   "src/engine/game.js:2077"
   ],
   "args": [
    "u.hero.name",
@@ -11699,7 +11704,7 @@
  },
  "Légende accomplie, au prix de sa vie : {0} est tombé en triomphant {1}. {2} ({3}) rejoint le coffre de votre forteresse ; {4} pièces d'or, +{5} de renommée, et {6} XP pour chaque survivant de son armée.": {
   "at": [
-   "src/engine/game.js:2075"
+   "src/engine/game.js:2078"
   ],
   "args": [
    "u.hero.name",
@@ -11713,7 +11718,7 @@
  },
  "Légende accomplie ! {0} triomphe {1} et reçoit {2} ({3}), {4} XP ; {5} pièces d'or, +{6} de renommée, et {7} XP pour chaque unité de son armée.": {
   "at": [
-   "src/engine/game.js:2076"
+   "src/engine/game.js:2079"
   ],
   "args": [
    "u.hero.name",
@@ -11728,7 +11733,7 @@
  },
  "Les bardes chantent la légende {0} : {1}, au service de {2}, l'a accomplie.": {
   "at": [
-   "src/engine/game.js:2078"
+   "src/engine/game.js:2081"
   ],
   "args": [
    "Heroes.dePlace(q.place)",
@@ -11738,7 +11743,7 @@
  },
  "{0} légendaire": {
   "at": [
-   "src/engine/game.js:2086"
+   "src/engine/game.js:2089"
   ],
   "args": [
    "(def.relic || 'une relique à son nom') + (slot === 'ranged' ? ', un arc' : slot === 'magic"
@@ -11746,212 +11751,212 @@
  },
  "une relique à son nom": {
   "at": [
-   "src/engine/game.js:2086"
+   "src/engine/game.js:2089"
   ]
  },
  ", un arc": {
   "at": [
-   "src/engine/game.js:2086"
+   "src/engine/game.js:2089"
   ]
  },
  ", un bâton": {
   "at": [
-   "src/engine/game.js:2086"
+   "src/engine/game.js:2089"
   ]
  },
  ", une arme": {
   "at": [
-   "src/engine/game.js:2086"
+   "src/engine/game.js:2089"
   ]
  },
  "Épée": {
   "at": [
-   "src/engine/game.js:2098"
+   "src/engine/game.js:2101"
   ]
  },
  "Glaive": {
   "at": [
-   "src/engine/game.js:2098"
+   "src/engine/game.js:2101"
   ]
  },
  "Masse": {
   "at": [
-   "src/engine/game.js:2099"
+   "src/engine/game.js:2102"
   ]
  },
  "Fléau": {
   "at": [
-   "src/engine/game.js:2099"
+   "src/engine/game.js:2102"
   ]
  },
  "Francisque": {
   "at": [
-   "src/engine/game.js:2100"
+   "src/engine/game.js:2103"
   ]
  },
  "Arc long": {
   "at": [
-   "src/engine/game.js:2101"
+   "src/engine/game.js:2104"
   ]
  },
  "Sceptre": {
   "at": [
-   "src/engine/game.js:2102"
+   "src/engine/game.js:2105"
   ]
  },
  "Baguette": {
   "at": [
-   "src/engine/game.js:2103"
+   "src/engine/game.js:2106"
   ]
  },
  "Bouclier": {
   "at": [
-   "src/engine/game.js:2104"
+   "src/engine/game.js:2107"
   ]
  },
  "Pavois": {
   "at": [
-   "src/engine/game.js:2104"
+   "src/engine/game.js:2107"
   ]
  },
  "Cotte de mailles": {
   "at": [
-   "src/engine/game.js:2105"
+   "src/engine/game.js:2108"
   ]
  },
  "Haubert": {
   "at": [
-   "src/engine/game.js:2105"
+   "src/engine/game.js:2108"
   ]
  },
  "Armure de plates": {
   "at": [
-   "src/engine/game.js:2106"
+   "src/engine/game.js:2109"
   ]
  },
  "Cuirasse": {
   "at": [
-   "src/engine/game.js:2106"
+   "src/engine/game.js:2109"
   ]
  },
  "Amulette": {
   "at": [
-   "src/engine/game.js:2107"
+   "src/engine/game.js:2110"
   ]
  },
  "Pendentif": {
   "at": [
-   "src/engine/game.js:2107"
+   "src/engine/game.js:2110"
   ]
  },
  "Anneau": {
   "at": [
-   "src/engine/game.js:2108"
+   "src/engine/game.js:2111"
   ]
  },
  "Bague": {
   "at": [
-   "src/engine/game.js:2108"
+   "src/engine/game.js:2111"
   ]
  },
  "Cape": {
   "at": [
-   "src/engine/game.js:2109"
+   "src/engine/game.js:2112"
   ]
  },
  "Manteau": {
   "at": [
-   "src/engine/game.js:2109"
+   "src/engine/game.js:2112"
   ]
  },
  "Heaume": {
   "at": [
-   "src/engine/game.js:2110"
+   "src/engine/game.js:2113"
   ]
  },
  "Casque": {
   "at": [
-   "src/engine/game.js:2110"
+   "src/engine/game.js:2113"
   ]
  },
  "Gantelets": {
   "at": [
-   "src/engine/game.js:2111"
+   "src/engine/game.js:2114"
   ]
  },
  "Orbe": {
   "at": [
-   "src/engine/game.js:2112"
+   "src/engine/game.js:2115"
   ]
  },
  "Bottes": {
   "at": [
-   "src/engine/game.js:2113"
+   "src/engine/game.js:2116"
   ]
  },
  "du Dragon": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "de l'Aube": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "des Ombres": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "de Feu": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "du Givre": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "des Anciens": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "de Lumière": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "du Vide": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "des Rois": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "de la Tempête": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "du Serment": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "de Vigilance": {
   "at": [
-   "src/engine/game.js:2115"
+   "src/engine/game.js:2118"
   ]
  },
  "+{0} attaque": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v"
@@ -11959,7 +11964,7 @@
  },
  "+{0} tir": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v"
@@ -11967,7 +11972,7 @@
  },
  "+{0} défense": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v"
@@ -11975,7 +11980,7 @@
  },
  "+{0} résistance": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v"
@@ -11983,7 +11988,7 @@
  },
  "+{0} mouvement": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v"
@@ -11991,7 +11996,7 @@
  },
  "+{0}% précision": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v * 10"
@@ -11999,7 +12004,7 @@
  },
  "+{0} PV": {
   "at": [
-   "src/engine/game.js:2136"
+   "src/engine/game.js:2139"
   ],
   "args": [
    "v"
@@ -12007,7 +12012,7 @@
  },
  " (+{0} attaque)": {
   "at": [
-   "src/engine/game.js:2138"
+   "src/engine/game.js:2141"
   ],
   "args": [
    "ITEM_POWERS[p].melee"

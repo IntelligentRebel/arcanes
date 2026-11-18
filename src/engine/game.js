@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.68';
+const GAME_VERSION = '0.31.69';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -1570,7 +1570,10 @@ const Game = {
     const op = s.owner >= 0 && s.owner !== u.owner ? game.players[s.owner] : null, st = op ? (game.players[u.owner].diplo || {})[op.id] : null;
     if (op && (st === 'peace' || st === 'alliance')) return { ok: false, why: 'Ce nœud appartient à ' + Players.nameFor(game, u.owner, op.id) + ', avec qui vous êtes ' + (st === 'peace' ? 'en paix' : 'allié') + ' : rompez d\'abord le traité.' };
     const guardian = u.type === 'GuardianSpirit', heldByGuardian = s.meldBy === 'GuardianSpirit';
-    if (s.owner === u.owner) return !guardian || heldByGuardian ? { ok: false, why: 'Ce nœud vous appartient déjà' + (heldByGuardian ? ', et un esprit gardien le garde.' : '.') } : { ok: true, what: 'Relever la garde de votre nœud : un esprit gardien le défend bien mieux contre les esprits rivaux.' };
+    // (0.31.69) comme dans MoM : fusionner demande du mouvement restant ce tour (un esprit arrivé à bout de mouvement fusionne au tour suivant)
+    const tired = !(u.moves > 0) ? { ok: false, why: 'Il faut du mouvement restant pour fusionner.' } : null;
+    if (s.owner === u.owner) return !guardian || heldByGuardian ? { ok: false, why: 'Ce nœud vous appartient déjà' + (heldByGuardian ? ', et un esprit gardien le garde.' : '.') } : tired || { ok: true, what: 'Relever la garde de votre nœud : un esprit gardien le défend bien mieux contre les esprits rivaux.' };
+    if (tired) return tired;
     const fail = s.owner < 0 ? 0 : heldByGuardian ? (guardian ? 0.25 : 0.75) : (guardian ? 0 : 0.25);
     return { ok: true, what: 'Lier ce nœud à votre puissance (l\'esprit est consommé)' + (fail ? ' ; ' + Math.round(fail * 100) + ' % de risque d\'échec contre l\'esprit qui le tient.' : '.') };
   },

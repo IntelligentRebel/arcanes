@@ -121,7 +121,8 @@ const MapGen = {
     const rng = game.rng;
     const w = opts.mapW || 60, h = opts.mapH || 40;
     const world = World.create(w, h);
-    const landPct = { small: 0.28, medium: 0.36, large: 0.45 }[opts.landSize || 'medium'];
+    // (0.31.69) l'écart élargi (avant : 28, 36 et 45 %), pour qu'on voie la différence
+    const landPct = { small: 0.22, medium: 0.36, large: 0.55 }[opts.landSize || 'medium'];
     for (const pl of world.planes) MapGen.planeTerrain(world, pl.p, rng, landPct);
     game.world = world;
     game.sites = [];

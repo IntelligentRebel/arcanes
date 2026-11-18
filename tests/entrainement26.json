@@ -1,9 +1,9 @@
 {
- "nom": "Entraînement 26 : moteur 0.31.68 ; la crise du Hardcore en Difficile ; l'IA traquée pose le Sceau planaire",
+ "nom": "Entraînement 26 : moteur 0.31.69 ; la crise du Hardcore en Difficile ; l'IA traquée pose le Sceau planaire",
  "experiences": [
   {
    "id": "crise_sceau",
-   "note": "Difficile, 250 tours, moteur 0.31.68. La crise de fin ne regarde plus que les sorciers du plan du joueur, comme en Hardcore (au banc 25, « si le boss mène, pas de crise » la faisait tomber de 48 % à 7 % des parties). À lire : la fréquence de la crise, qui elle vise (le sorcier observé ?), son score et sa survie. Le jeu contre la règle d'avant, et un essai : traqué par le boss, le sorcier observé étudie et lance le Sceau planaire (aucune IA ne le lançait au banc 25) ; à lire : qui le pose, combien de temps il tient avant que le boss le brise, les cités perdues à l'autre plan avant et après.",
+   "note": "Difficile, 250 tours, moteur 0.31.69. La crise de fin ne regarde plus que les sorciers du plan du joueur, comme en Hardcore (au banc 25, « si le boss mène, pas de crise » la faisait tomber de 48 % à 7 % des parties). À lire : la fréquence de la crise, qui elle vise (le sorcier observé ?), son score et sa survie. Le jeu contre la règle d'avant, et un essai : traqué par le boss, le sorcier observé étudie et lance le Sceau planaire (aucune IA ne le lançait au banc 25) ; à lire : qui le pose, combien de temps il tient avant que le boss le brise, les cités perdues à l'autre plan avant et après.",
    "tours": 250,
    "adversaires": "hard",
    "graine": 700000,
@@ -16,7 +16,7 @@
    "boss": true,
    "variantes": [
     {
-     "nom": "jeu 0.31.68",
+     "nom": "jeu 0.31.69",
      "niveau": "hard",
      "autrePlan": 2
     },
@@ -53,7 +53,7 @@
    "boss": true,
    "variantes": [
     {
-     "nom": "jeu 0.31.68",
+     "nom": "jeu 0.31.69",
      "niveau": "hardcore",
      "autrePlan": 2
     },

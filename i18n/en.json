@@ -2003,6 +2003,7 @@
 "Ce nœud appartient à {0}, avec qui vous êtes {1} : rompez d'abord le traité.": "This node belongs to {0}, with whom you are {1}: break the treaty first.",
 "en paix": "at peace",
 "allié": "allied",
+"Il faut du mouvement restant pour fusionner.": "Melding needs movement left.",
 "Ce nœud vous appartient déjà{0}": "This node already belongs to you{0}",
 ", et un esprit gardien le garde.": ", and a Guardian Spirit guards it.",
 "Relever la garde de votre nœud : un esprit gardien le défend bien mieux contre les esprits rivaux.": "Relieve the guard of your node: a Guardian Spirit defends it far better against rival spirits.",
