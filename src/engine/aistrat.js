@@ -269,8 +269,8 @@ Object.assign(AI, {
       case 'great_wasting': return atWar ? 35 : 0;
       case 'armageddon': return atWar ? 45 : 0;
       case 'time_stop': return atWar ? 45 : 0;
-      // (essai « seal », banc 26) traqué par le boss d'en face : le Sceau planaire coupe ses expéditions de leurs renforts
-      case 'planar_seal': return AI.opt(pl, 'seal') && AI.huntedBy(game, pl) ? 60 : 0;
+      // (essai « seal », banc 26 : lancé dans 2 parties sur 500, -8 ± 4 points ; retiré en 0.31.70) le Sceau reste au joueur
+      case 'planar_seal': return 0;
       default: return 20;
     }
   },

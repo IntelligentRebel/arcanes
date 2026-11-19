@@ -65,7 +65,7 @@ const Finale = {
   // le frappe même quand le boss d'en face est plus fort. (0.31.68) De même en Difficile : au banc 25, « si le boss mène, pas de
   // crise » la faisait tomber de 48 % à 7 % des parties (le boss menait dans 61 %). Aux niveaux plus doux : si le boss mène, pas
   // de crise. Au banc, POOL_HARD 0 rend au Difficile la règle d'avant.
-  POOL_HARD: 1,
+  POOL_HARD: 1, ARCH_WIDE: 1,
   pool(game) {
     const d = game.difficulty, all = d === 'hardcore' || (d === 'hard' && Finale.cfg(game, 'POOL_HARD'));
     return all ? p => !Finale.exempt(game, p) : () => true;
@@ -139,11 +139,17 @@ const Finale = {
     // restait 1er : Prophète 69 %, Dévoreur 62 %, Hiver 47 %, Liche 38 %, Archimage 33 %, contre 79 % sans crise)
     // (0.31.52) l'avance se mesure aussi au rapport de forces, armées comprises (Finale.standing) : un meneur cinq fois plus fort
     // que le deuxième par les armes, mais à peine deux fois par les cités et la magie, tirait une crise douce (le Prophète)
+    // (0.31.70) « autant que tous les autres réunis » : en Difficile, tous les sorciers des deux plans (au banc 26, mesuré sur le
+    // seul plan du joueur, souvent un seul rival, l'Archimage tombait dans 48 % des crises et le palier du milieu disparaissait) ;
+    // en Hardcore, le seul plan du joueur : l'Archimage y vient dès qu'on écrase son plan. Au banc, ARCH_WIDE 0 rend au Difficile
+    // la mesure d'avant.
+    const wide = game.difficulty !== 'hardcore' && Finale.cfg(game, 'ARCH_WIDE');
     const tierOf = (a, b, rest) => { const g = a / Math.max(1, b); return g >= 2 && a >= rest ? 3 : g >= 2 ? 2 : 1; };
-    const gap = r[0].v / Math.max(1, r[1].v), rest = U.sum(r.slice(1), x => x.v);
+    const gap = r[0].v / Math.max(1, r[1].v), rest = U.sum(wide ? Finale.ranked(game).filter(x => x.p !== r[0].p) : r.slice(1), x => x.v);
     const top = game.players[f.leader];
-    const sLead = Finale.standing(game, top), others = game.players.filter(p => p.alive && !p.banished && p !== top && inPool(p)).map(p => Finale.standing(game, p)).sort((a, b) => b - a);
-    f.tier = Math.max(tierOf(r[0].v, r[1].v, rest), others.length && Finale.cfg(game, 'TIER_FORCE') ? tierOf(sLead, others[0], U.sum(others, x => x)) : 1);
+    const rivals = inP => game.players.filter(p => p.alive && !p.banished && p !== top && inP(p)).map(p => Finale.standing(game, p)).sort((a, b) => b - a);
+    const sLead = Finale.standing(game, top), others = rivals(inPool), restForce = wide ? rivals(() => true) : others;
+    f.tier = Math.max(tierOf(r[0].v, r[1].v, rest), others.length && Finale.cfg(game, 'TIER_FORCE') ? tierOf(sLead, others[0], U.sum(restForce, x => x)) : 1);
     f.leadAt = +gap.toFixed(2); f.leadForce = others.length ? +(sLead / Math.max(1, others[0])).toFixed(2) : null;
     f.kind = FINALE_KINDS.includes(f.mode) ? f.mode : game.rng.pick(Finale.TIERS[f.tier]);
     f.state = 'omen'; f.omen = game.turn; f.at = game.turn + Finale.cfg(game, 'OMEN'); f.target = f.leader;

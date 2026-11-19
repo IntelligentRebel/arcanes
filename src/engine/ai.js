@@ -99,8 +99,6 @@ const AI = {
       if (id === 'purify_land') sc += AI.feat(pl, 'purify', 1) && U.sum(Cities.ofPlayer(game, pl.id), c => World.catchment(game.world, c.x, c.y).filter(([x, y]) => World.get(game.world, c.plane, 'corrupt', x, y)).length) >= 3 ? 25 : -60;
       if (id === 'spell_of_mastery') sc = pl.known.length > 35 ? 500 : -100;
       if (id === 'open_rift') sc += AI.crusadeTarget(game, pl) && !AI.crossingNear(game, pl) ? 70 : -30;
-      // (essai « seal », banc 26) traqué par le boss : le Sceau planaire avant le reste
-      if (id === 'planar_seal' && AI.opt(pl, 'seal') && AI.huntedBy(game, pl)) sc += 80;
       sc += AI.counterResearch(game, pl, id);
       sc += game.rng.next() * 15;
       if (sc > bs) { bs = sc; best = id; }

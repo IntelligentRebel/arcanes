@@ -1,0 +1,34 @@
+{
+ "nom": "Entraînement 27 : moteur 0.31.70 ; en Difficile, le palier de l'Archimage mesuré sur les deux plans",
+ "experiences": [
+  {
+   "id": "archimage",
+   "note": "Difficile, 250 tours, moteur 0.31.70. La crise ne vise que le plan du joueur (0.31.68), mais le palier de l'Archimage (deux fois le deuxième et autant que tous les autres réunis) se mesure contre tous les sorciers des deux plans : au banc 26, mesuré sur le seul plan du joueur, il tombait dans 48 % des crises (paliers 49 / 3 / 48 %). À lire : les paliers et les monstres, la fréquence de la crise, ce qu'elle fait au meneur, le score et la survie du sorcier observé. Le jeu contre la mesure d'avant.",
+   "tours": 250,
+   "adversaires": "hard",
+   "graine": 720000,
+   "graines": 1200,
+   "points": [
+    100,
+    150,
+    200
+   ],
+   "boss": true,
+   "variantes": [
+    {
+     "nom": "jeu 0.31.70",
+     "niveau": "hard",
+     "autrePlan": 2
+    },
+    {
+     "nom": "avant : Archimage sur le seul plan",
+     "niveau": "hard",
+     "autrePlan": 2,
+     "reglagesCrise": {
+      "ARCH_WIDE": 0
+     }
+    }
+   ]
+  }
+ ]
+}
