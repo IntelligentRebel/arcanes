@@ -29,6 +29,11 @@ const Spells = {
     } else if (DATA.spells[id] && DATA.spells[id].kind === 'stackEnchant') {
       tiles = [[World.wx(w, x), y]]; const t = { plane: p, x: World.wx(w, x), y }, n = pl ? Spells.stackUnits(game, pl, id, t).length : 0;
       hot = n ? tiles : []; what = () => n ? U.n(n, 'unité', 'unités') + ' à enchanter · ' + Spells.castCost(game, pl, id, t) + ' mana' : 'aucune unité à enchanter';
+    } else if (id === 'great_inversion' && typeof Novel !== 'undefined') {
+      tiles = Novel.invTiles(game, World.wx(w, x), y); const why = Novel.invWhy(game, pl, { plane: p, x, y }), ct = Novel.invContents(game, World.wx(w, x), y);
+      const known = ct.cities.filter(c => pl && Intel.knows(game, pl, c.plane, c.x, c.y));
+      hot = why ? [] : tiles; warn = !!why;
+      what = () => why || ('7 × 7 cases changeront de monde' + (known.length ? ', avec ' + U.n(known.length, 'cité') + ' : ' + known.map(c => c.name).join(', ') : ''));
     } else return null;
     return { tiles, hot, label: what(hot.length), warn };
   },
@@ -50,7 +55,8 @@ const Spells = {
     if (sp.target === 'friendlyStack') return 'friendlyStack';
     if (id === 'resurrection') return 'deadHero';
     if (['drain_power', 'subversion', 'cruel_unminding', 'spell_blast', 'spell_binding', 'palimpsest', 'erasure', 'annals'].includes(id)) return 'enemyWizard';
-    if (id === 'warp_node') return 'node';
+    if (id === 'warp_node' || id === 'node_trap') return 'node';
+    if (id === 'sworn_enemy') return 'heroPair';
     if (id === 'dispel_magic' || id === 'dispel_magic_true') return 'anyUnit';
     if (sp.target === 'friendlyUnit' || sp.target === 'friendlyHero') return 'friendlyUnit';
     if (sp.target === 'enemyUnit') return 'enemyUnit';
@@ -260,6 +266,12 @@ const Spells = {
       if (holder && holder !== pl) return { ok: false, why: U.cap(Players.nameFor(game, pl.id, holder.id)) + ' entretient déjà cet enchantement.' };
     }
     if (tt === 'deadHero' && !(pl.deadHeroes || []).length) return { ok: false, why: 'Aucun héros à ressusciter.' };
+    // (0.31.73) sorts inédits
+    if (tt === 'heroPair') {
+      if (!target) { const hs = Novel.swornHeroes(game, pl); if (!hs.length) return { ok: false, why: 'Aucun de vos héros n\'est libre de jurer.' }; if (!hs.some(h => Novel.swornFoes(game, pl, h).length)) return { ok: false, why: 'Aucun héros rival en vue ni déjà combattu.' }; }
+      else { const why = Novel.swornWhy(game, pl, target); if (why) return { ok: false, why }; }
+    }
+    if (id === 'blood_debt' && pl.debt) return { ok: false, why: 'Vous devez encore ' + pl.debt.left + ' mana au prêteur.' };
     if (tt === 'deadHero' && target && target.hero && !(pl.deadHeroes || []).some(d => d.type === target.hero)) return { ok: false, why: 'Ce héros n\'est plus parmi les morts.' };
     if ((id === 'disjunction' || id === 'disjunction_true') && !Spells.disjTargets(game, pl).length) return { ok: false, why: 'Aucun enchantement global adverse.' };
     if ((id === 'disjunction' || id === 'disjunction_true') && target && target.spell && !Spells.disjTargets(game, pl).some(x => x.o.id === target.player && x.g === target.spell)) return { ok: false, why: (DATA.spells[target.spell] ? DATA.spells[target.spell].name : 'Cet enchantement') + ' n\'est plus à portée : dissipé, ou un traité vous lie désormais à son maître.' };
@@ -436,6 +448,10 @@ const Spells = {
     if (id === 'plane_shift') { const why = Spells.planeShiftWhy(game, pl, { plane: p, x, y }); if (why) return why; }
     if (id === 'floating_island') { if (!World.isWater(ter)) return 'Il faut une case d\'océan.'; if (foes().length) return 'Des unités étrangères occupent cette case.'; }
     if (id === 'enchant_road' && Spells.areaOf && !(Spells.areaOf(game, pl, id, p, x, y) || { hot: [] }).hot.length) return 'Aucune route à enchanter ici.';
+    if (id === 'charnel_rising') { const why = Novel.charnelWhy(game, pl, t); if (why) return why; }
+    if (id === 'unleashed_beast') { const why = Novel.beastWhy(game, pl, t); if (why) return why; }
+    if (id === 'great_inversion') { const why = Novel.invWhy(game, pl, t); if (why) return why; }
+    if (id === 'node_trap') { const why = Novel.trapWhy(game, pl, t); if (why) return why; }
     if (id === 'warp_node') {
       const si = World.get(w, p, 'site', x, y), s = si >= 0 ? game.sites[si] : null;
       if (!s || s.type !== 'node') return 'Il faut viser un nœud.';

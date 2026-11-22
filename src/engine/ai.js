@@ -99,7 +99,8 @@ const AI = {
       if (id === 'purify_land') sc += AI.feat(pl, 'purify', 1) && U.sum(Cities.ofPlayer(game, pl.id), c => World.catchment(game.world, c.x, c.y).filter(([x, y]) => World.get(game.world, c.plane, 'corrupt', x, y)).length) >= 3 ? 25 : -60;
       if (id === 'spell_of_mastery') sc = pl.known.length > 35 ? 500 : -100;
       if (id === 'open_rift') sc += AI.crusadeTarget(game, pl) && !AI.crossingNear(game, pl) ? 70 : -30;
-      if ((id === 'dimension_door' || id === 'town_portal') && !AI.feat(pl, 'jumps', 0)) sc -= 60;   // sorts dont elle ne se servirait pas
+      if ((id === 'dimension_door' || id === 'town_portal') && !AI.feat(pl, 'jumps', 0)) sc -= 60;
+      if (DATA.spells[id] && DATA.spells[id].novel && !AI.feat(pl, 'novel', 0)) sc -= 60;   // sorts dont elle ne se servirait pas
       sc += AI.counterResearch(game, pl, id);
       sc += game.rng.next() * 15;
       if (sc > bs) { bs = sc; best = id; }
@@ -380,6 +381,12 @@ const AI = {
         // (0.31.71) une pile qui saute ou rentre par un portail : au secours d'une cité menacée, ou (la Porte) au pied de la cité visée
         if (!AI.feat(pl, 'jumps', 0)) continue;
         const r = AI.jumpPlan(game, pl, id, cost); if (!r) continue;
+        target = r.target; sc = r.sc;
+      }
+      else if (DATA.spells[id] && DATA.spells[id].novel) {
+        // (0.31.73) sorts inédits : leur propre plan (désactivable au banc : no_novel)
+        if (!AI.feat(pl, 'novel', 0)) continue;
+        const r = AI.novelPlan(game, pl, id, { cost, manaIncome, army }); if (!r) continue;
         target = r.target; sc = r.sc;
       }
       else if (AI.feat(pl, 'spells2') && AI.SPELLS2[id]) {

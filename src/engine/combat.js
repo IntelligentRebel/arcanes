@@ -56,6 +56,7 @@ class Battle {
     // mines de feu { case: camp du poseur } (invisibles pour l'autre camp), brume { case: true }
     this.field = {}; this.flames = {}; this.mines = {}; this.mist = {};
     this.plague = {};   // (0.31.72) Nuée pestilentielle : { case: { n, side } }
+    this.knells = [null, null]; this.madness = [null, null];   // (0.31.73) le Glas de chaque camp { tiles, at } ; le porteur de la Démence contagieuse
     this.terrainKey = World.terrainKey(game.world, o.plane, o.x, o.y);
     this.counterMagic = [0, 0];
     this.rng = o.rng || game.rng;
@@ -84,6 +85,7 @@ class Battle {
     }
     this.resetMoves(DEF_SIDE); this.resetMoves(ATT_SIDE);
     this.say('Le combat commence' + (this.city ? ' devant ' + this.city.name : '') + '.');
+    if (typeof Novel !== 'undefined') Novel.swornSetup(this);
     if (this.nodeRealm) { const rn = REALM_NAMES[this.nodeRealm].toLowerCase(); this.say('Flux d\'un nœud de ' + rn + ' : les créatures de ' + rn + ' y gagnent +2 en attaque, défense et résistance, et tout sort d\'un autre royaume risque de se dissiper (sauf pour un sorcier qui a la Maîtrise des nœuds).'); }
   }
 
@@ -193,6 +195,7 @@ class Battle {
     const out = [], k = c + ',' + r;
     if (this.fire && this.fire[k]) out.push('En flammes : 3 de dégâts de feu par round à qui s\'y tient');
     if (this.fieldAt(c, r)) out.push('Champ de force : infranchissable, même pour les volants (encore ' + U.n(this.field[k].n, 'round') + ')');
+    { const kn = typeof Novel !== 'undefined' && Novel.knellAt(this, c, r); if (kn) { const n = kn.at - this.round; out.push('Le Glas : la mort frappera ici ' + (n <= 0 ? 'au prochain tour de son lanceur' : 'dans ' + U.n(n, 'round')) + ', amis et ennemis'); } }
     { const f = this.flameAt(c, r); if (f) out.push((f.side === viewer ? 'Rideau de flammes (le vôtre)' : 'Rideau de flammes') + ' : feu de force 5 sur ' + (f.side === viewer ? 'l\'ennemi' : 'vos unités') + ' qui y entre, 3 à chaque round où il y reste ; pas sur les volants (encore ' + U.n(f.n, 'round') + ')'); }
     if (viewer != null && this.mines && this.mines[k] === viewer) out.push('Votre mine de feu : explose sous le premier ennemi qui y entre');
     if (this.mistAt(c, r)) out.push('Brume : les tirs qui en partent ou qui y visent perdent la moitié de leur force');
@@ -380,6 +383,8 @@ class Battle {
     const side = b.side, foe = 1 - side;
     const realm = Units.realmOf(b.u);
     const add = (m, d, r) => { if (s.melee > 0) s.melee += m; if (s.ranged > 0 && s.rangedType !== 'magic') s.ranged += m; s.def += d; s.res += r; };
+    // (0.31.73) Ennemi juré : face à face, chacun frappe plus fort
+    if (this.swornFoe) { const f = this.swornFoe.get(b); if (f && !f.dead) { const k = Novel.SWORN_BONUS; if (s.melee > 0) s.melee += k; if (s.ranged > 0) s.ranged += k; } }
     // (performance) aucun enchantement de combat d'un camp ni effet global : aucun des sorts ci-dessous ne joue (has serait toujours faux)
     const anyEnch = this.ench[side].length || this.ench[foe].length || this.globalEnch.length;
     const has = (sp, sd) => this.ench[sd].includes(sp) || this.globalEnch.includes(sp);
@@ -1468,6 +1473,7 @@ class Battle {
       if (--f.n <= 0) delete this.plague[k];
     }
     if (hit.length) this.say('Nuée pestilentielle : ' + hit.join(', ') + '.');
+    if (typeof Novel !== 'undefined') Novel.combatTick(this, side);
     this.checkEnd();
   }
   // vortex magique : 4 cases par tour, attiré par l'ennemi ; 5 dégâts sans défense à l'unité traversée,
@@ -1731,7 +1737,7 @@ const CombatSpells = {
     const sp = DATA.spells[id]; if (!sp) return 'none';
     if (sp.kind === 'summon') return 'none';
     if (['raise_dead', 'animate_dead', 'sacrifice'].includes(id)) return 'deadUnit';
-    if (['earth_to_mud', 'disrupt', 'magic_vortex', 'force_field', 'fire_curtain', 'fire_mines', 'mist', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn'].includes(id)) return 'combatTile';
+    if (['earth_to_mud', 'disrupt', 'magic_vortex', 'force_field', 'fire_curtain', 'fire_mines', 'mist', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn', 'knell'].includes(id)) return 'combatTile';
     if (sp.target === 'friendlyUnit' || sp.target === 'friendlyHero') return 'friendlyUnit';
     if (sp.target === 'enemyUnit') return 'enemyUnit';
     if (sp.target === 'anyUnit') return 'anyUnit';
@@ -1798,6 +1804,7 @@ const CombatSpells = {
     if (p.damage === 'cold' && s.ab.coldImmunity) return false;
     if (id === 'black_sleep' && b.asleep) return false;
     if (id === 'confusion' && b.confused) return false;
+    if (id === 'contagious_madness' && (b.confused || b.u.riteDemon || (bt.madness && bt.madness.some(m => m && !m.dead && m.confused)))) return false;
     if (id === 'web' && b.web > 0) return false;
     if ((id === 'possession' || id === 'creature_binding') && b.possessed) return false;
     if (id === 'petrify' && s.ab.stoningImmunity) return false;
@@ -1848,6 +1855,9 @@ const CombatSpells = {
     if (id === 'warp_creature') return 'Plus rien à altérer chez cette créature.';
     if (id === 'black_sleep' && b.asleep) return 'Cette unité dort déjà.';
     if (id === 'confusion' && b.confused) return 'Cette unité est déjà confuse.';
+    if (id === 'contagious_madness' && b.confused) return 'Cette unité a déjà perdu la raison.';
+    if (id === 'contagious_madness' && b.u.riteDemon) return 'Le Démon légendaire ne cède pas à ce sort.';
+    if (id === 'contagious_madness' && bt.madness && bt.madness.some(m => m && !m.dead && m.confused)) return 'Une démence court déjà sur le champ de bataille.';
     if ((id === 'possession' || id === 'creature_binding') && b.possessed) return 'Cette unité est déjà sous une emprise.';
     if (id === 'petrify' && s.ab.stoningImmunity) return 'Cette unité est immunisée contre la pétrification.';
     if (id === 'mind_storm' && s.ab.illusionsImmunity) return 'Cette unité est immunisée contre les illusions.';
@@ -1888,6 +1898,7 @@ const CombatSpells = {
     if (id === 'gust' && !CombatSpells.validTargets(bt, side, id).includes(target)) return false;
     if (CombatSpells.SECOND[id] && !CombatSpells.secondOk(bt, side, id, target, to)) return false;
     if (CombatSpells.ZONE_SPELLS.includes(id) && !CombatSpells.zonePlace(bt, side, id, target).length) return false;
+    if (id === 'knell' && bt.knells && bt.knells[side]) return false;
     // paiement (le mana ajouté à un sort à puissance variable se paie comme le reste, compétence comprise)
     extra = Math.max(0, Math.min(extra || 0, CombatSpells.MAX_EXTRA[id] || 0));
     if (!caster) {
@@ -1940,7 +1951,7 @@ const CombatSpells = {
 
   // chances qu'un sort ciblé réussisse sur une unité, d'après les mêmes jets que ses effets (affichées au survol de la cible) :
   // royaume de la résistance, malus imposé, et s'il frappe chaque figurine (résister ou périr) ou l'unité d'un seul jet
-  RESIST_SPELLS: { slow: ['nature', 2], shackles: ['death', 1], twilight: ['death', 1], dispel_evil: ['life', b => Units.isUndead(b.u) ? 9 : 4, true], word_of_death: ['death', 5, true], petrify: ['nature', 0, true], banish: ['sorcery', 3, true],
+  RESIST_SPELLS: { contagious_madness: ['chaos', 2], slow: ['nature', 2], shackles: ['death', 1], twilight: ['death', 1], dispel_evil: ['life', b => Units.isUndead(b.u) ? 9 : 4, true], word_of_death: ['death', 5, true], petrify: ['nature', 0, true], banish: ['sorcery', 3, true],
     weakness: ['death', 2], black_sleep: ['death', 2], confusion: ['sorcery', 4], vertigo: ['sorcery', 0], shatter: ['chaos', 0], warp_creature: ['chaos', 1], possession: ['death', 1], creature_binding: ['sorcery', 2] },
   odds(bt, side, id, t, extra) {
     if (!t || t.tower) return null;
@@ -2107,6 +2118,7 @@ const CombatSpells = {
   // un sort sur tout le champ de bataille qui ne changerait rien ici : la raison, sinon null
   uselessWhy(bt, side, id) {
     const mine = bt.alive(side), foes = bt.alive(1 - side), realm = b => Units.realmOf(b.u);
+    if (id === 'knell' && bt.knells && bt.knells[side]) return 'Votre glas n\'a pas encore sonné.';
     if (id === 'wall_of_fire' || id === 'wall_of_darkness') { if (!bt.city || side !== DEF_SIDE || bt.owner(side) !== bt.city.owner) return 'Ne se lance qu\'en défendant sa propre cité.'; if (id === 'wall_of_fire' ? bt.wallOfFire : bt.wallOfDarkness) return 'Ce mur entoure déjà la cité.'; }
     if (id === 'flame_strike' && !foes.some(b => CombatSpells.canAffect(bt, b, id))) return 'Vos ennemis sont tous insensibles au feu : sans effet ici.';
     if (DATA.spells[id] && DATA.spells[id].params && DATA.spells[id].params.siege && !CombatSpells.siegeUseful(bt, side, id)) return 'Aucune tour ennemie sur laquelle agir ici.';
@@ -2371,7 +2383,7 @@ Object.assign(CombatSpells, {
   MIRROR: 0.4,   // Miroir magique : chance de renvoi
   // sorts en deux temps : ce que vise le second choix
   SECOND: { teleport: 'tile', gust: 'tile', sacrifice: 'unit' },
-  ZONE_SPELLS: ['force_field', 'fire_curtain', 'fire_mines', 'mist', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn'],
+  ZONE_SPELLS: ['force_field', 'fire_curtain', 'fire_mines', 'mist', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn', 'knell'],
   // (0.31.72) les sorts de zone qui frappent tout ce qui s'y trouve : [type de dégâts, royaume]
   AREA: { fire_rain: ['fire', 'chaos'], frost_ring: ['cold', 'nature'], meteor_shower: ['fire', 'chaos'], plague_cloud: ['magic', 'death'] },
   // orientations d'une ligne de trois cases : en travers de l'écran, de haut en bas, le long de l'axe c, le long de l'axe r
@@ -2384,7 +2396,7 @@ Object.assign(CombatSpells, {
     const out = [];
     if (id === 'force_field' || id === 'fire_curtain') { const [dc, dr] = CombatSpells.ROTS[(rot || 0) & 3]; for (const k of [-1, 0, 1]) out.push([c + k * dc, r + k * dr]); }
     else if (id === 'fire_mines') out.push([c, r], [c + 1, r], [c - 1, r], [c, r + 1], [c, r - 1]);
-    else if (id === 'mist' || id === 'fire_rain' || id === 'meteor_shower' || id === 'plague_cloud' || id === 'holy_dawn') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) out.push([c + dc, r + dr]);
+    else if (id === 'mist' || id === 'fire_rain' || id === 'meteor_shower' || id === 'plague_cloud' || id === 'holy_dawn' || id === 'knell') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) out.push([c + dc, r + dr]);
     else if (id === 'frost_ring') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) if (dc || dr) out.push([c + dc, r + dr]);
     return out.filter(([x, y]) => x >= 0 && y >= 0 && x < CW && y < CH);
   },
@@ -2778,6 +2790,21 @@ const CombatAI = {
     }
     const s = bt.stats(b);
     if (b.confused) { b.moves = 0; return false; }
+    // (0.31.73) debout sur un glas : on s'en écarte, vers une case d'où frapper si possible
+    if ((bt.knells[0] || bt.knells[1]) && Novel.knellAt(bt, b.c, b.r) && s.move > 0 && b.moves > 0) {
+      const rch = bt.reachable(b);
+      const safe = [...rch.values()].filter(n => !Novel.knellAt(bt, n.c, n.r) && !(bt.fire && bt.fire[n.c + ',' + n.r]));
+      // personne hors d'atteinte ce tour : au moins vers le bord de la zone
+      const exit = n => { let d = 9; for (let dr = -3; dr <= 3; dr++) for (let dc = -3; dc <= 3; dc++) { const c = n.c + dc, r = n.r + dr; if (c >= 0 && r >= 0 && c < CW && r < CH && !Novel.knellAt(bt, c, r) && !bt.blocked(c, r)) d = Math.min(d, Math.max(Math.abs(dc), Math.abs(dr))); } return d; };
+      const n = safe.length ? U.max(safe, n => (s.melee > 0 && n.cost < b.moves && foes.some(f => bt.dist(n, f) === 1) ? 5 : 0) - n.cost * 0.5)
+        : U.min([...rch.values()].filter(n => exit(n) < exit(b)), n => exit(n) * 10 + n.cost);
+      if (n) {
+        bt.moveUnit(b, n.c, n.r, rch);
+        const adj = foes.filter(f => !f.dead && bt.canMelee(b, f));
+        if (adj.length && b.moves > 0 && s.melee > 0) return bt.melee(b, U.max(adj, f => CombatAI.value(bt, f)));
+        return false;
+      }
+    }
     // engin de siège : les tours, sinon rester en retrait
     // briseur de murs au pied d'un pan de muraille, sans tour ni porte à frapper d'ici : il ouvre une brèche
     if (s.ab.wallCrusher && bt.hasWalls && !towers.some(t => bt.canMeleeTower(b, t) || bt.canShootTower(b, t))) {
@@ -2952,6 +2979,7 @@ const CombatAI = {
       if (bt.hasWalls && !walled && bt.crossesWall(b.c, b.r, n.c, n.r)) sc -= 5;
       // terrain : fuir le feu, chercher le couvert face aux tireurs, la hauteur
       if (bt.fire && bt.fire[k] && !s.flying) sc -= 40;
+      if ((bt.knells[0] || bt.knells[1]) && Novel.knellAt(bt, n.c, n.r)) sc -= 40;
       if (foeShoots && bt.tree(n.c, n.r)) sc += 3;
       if (bt.hill(n.c, n.r)) sc += 2;
       if (bt.inRiver(n.c, n.r) && !s.flying) sc -= 2;
@@ -3027,8 +3055,8 @@ const CombatAI = {
       if (CombatAI.pointless(bt, b.side, id)) continue;
       const tt = CombatSpells.targetType(id);
       let target = null, sc = 0, to;
-      if (sp.homm) {
-        if (!CombatAI.tf(bt, b.side, 'homm', 0)) continue;
+      if (sp.homm || sp.novel) {
+        if (!CombatAI.tf(bt, b.side, sp.novel ? 'novel' : 'homm', 0)) continue;
         const P = CombatAI.hommPlan(bt, b.side, id, b);
         if (!P) continue;
         target = P.target; to = P.to; sc = 2 + P.score;
@@ -3119,15 +3147,15 @@ const CombatAI = {
     const allIn = side === DEF_SIDE && !!bt.city && bt.city.owner === pl.id && pl.fortress === bt.city.id && CombatAI.tf(bt, side, 'allin');
     let best = null, bestScore = 0;
     const extraOf = {}, toOf = {};
-    const homm = CombatAI.tf(bt, side, 'homm', 0);
+    const homm = CombatAI.tf(bt, side, 'homm', 0), novel = CombatAI.tf(bt, side, 'novel', 0);
     for (const o of opts) {
       const sp = DATA.spells[o.id]; const tt = CombatSpells.targetType(o.id);
       let score = 0, target = null;
       if (!allIn && o.cost > pl.mana * 0.6 && o.cost > 30) continue;
       if (CombatAI.pointless(bt, side, o.id)) continue;
       // (0.31.71) sorts venus de Heroes : leur propre plan (désactivable au banc : no_homm)
-      if (sp.homm) {
-        if (!homm) continue;
+      if (sp.homm || sp.novel) {
+        if (sp.novel ? !novel : !homm) continue;
         const P = CombatAI.hommPlan(bt, side, o.id, null);
         if (!P) continue;
         target = P.target; score = P.score; if (P.to) toOf[o.id] = P.to;
@@ -3262,8 +3290,8 @@ const CombatAI = {
   takes(bt, side, id, t) { const od = CombatSpells.odds(bt, side, id, t, 0); return od ? od.chance : 1 - CombatSpells.nodeFizzle(bt, side, id, 0); },
   // ce que vaut une attaque de zone sur ces cases : dégâts attendus sur chaque unité qu'on voit (comme applyArea), l'ennemi en positif,
   // les nôtres en négatif et plus lourdement ; la Nuée pestilentielle compte plusieurs rounds
-  areaValue(bt, side, id, tiles) {
-    const [kind, realm] = CombatSpells.AREA[id], str = ((DATA.spells[id] || {}).params || {}).strength || 10, mult = id === 'plague_cloud' ? 2.2 : 1;
+  areaValue(bt, side, id, tiles, o) {
+    const [kind, realm] = o && o.kind ? [o.kind, o.realm] : CombatSpells.AREA[id], str = ((DATA.spells[id] || {}).params || {}).strength || 10, mult = id === 'plague_cloud' ? 2.2 : 1;
     let v = 0;
     for (const b of CombatSpells.zoneVictims(bt, side, id, tiles)) {
       if (b.side !== side && bt.isInvisible(b)) continue;
@@ -3271,7 +3299,7 @@ const CombatAI = {
       if (s.ab.magicImmunity || (realm === 'death' && s.ab.deathImmunity) || ((realm === 'death' || realm === 'chaos') && on.includes('righteousness'))) continue;
       const def = bt.defFor(b, kind, realm, {}, s); if (def >= 50) continue;
       const hp = Math.max(1, bt.hp(b)), dmg = Math.min(hp, Math.min(s.hp, CombatAI.expPos(str, 30, def, bt.toDefend(b, {}, s))) * bt.figures(b) * mult), st = CombatAI.st(bt, b);
-      v += (b.side === side ? -1.3 : 1) * (st * Math.min(1, dmg / hp) + (dmg >= hp * 0.9 ? 0.3 * st : 0)) / 10;
+      v += (b.side === side ? -1.3 : 1) * (o && o.weight ? o.weight(b) : 1) * (st * Math.min(1, dmg / hp) + (dmg >= hp * 0.9 ? 0.3 * st : 0)) / 10;
     }
     return v;
   },
@@ -3478,6 +3506,25 @@ const CombatAI = {
           if (v > bv) { bv = v; best = [c, r]; }
         }
         return best && bv >= 3 ? { target: best, score: bv } : null;
+      }
+      // (0.31.73) le Glas : là où l'ennemi ne pourra pas fuir à temps (immobile, endormi, englué, confus) ; nos troupes, elles, s'écarteront
+      case 'knell': {
+        if (bt.knells[side]) return null;
+        const stuck = f => { const sf = bt.stats(f); return sf.move <= 0 || f.web > 0 || f.asleep || f.stasis || f.confused || f.curses.includes('slow'); };
+        // (au contact des nôtres, l'ennemi qui s'écarte lâche prise : il hésite davantage)
+        const weight = f => f.side === side ? (stuck(f) ? 1 : 0.15) : stuck(f) ? 1 : bt.enemyAdjacent(f) ? 0.7 : 0.45;
+        let best = null, bv = 0;
+        for (let r = 0; r < CH; r++) for (let c = 0; c < CW; c++) {
+          const v = CombatAI.areaValue(bt, side, id, CombatSpells.zonePlace(bt, side, id, [c, r]), { kind: 'magic', realm: 'death', weight });
+          if (v > bv) { bv = v; best = [c, r]; }
+        }
+        return best && bv >= 2.5 ? { target: best, score: bv } : null;
+      }
+      // la démence : une unité qui compte, au milieu des siens (et loin des nôtres)
+      case 'contagious_madness': {
+        const val = f => { let v = st(f) / 10 + 2; for (const o of bt.alive()) if (o !== f && bt.dist(o, f) <= 1) v += (o.side === side ? -0.7 : 0.5) * st(o) / 10; return v * CombatAI.takes(bt, side, id, f); };
+        const t = U.max(vt(), val);
+        return t && val(t) >= 3 ? { target: t, score: val(t) } : null;
       }
       case 'clone': {
         if (friends.length >= 8) return null;

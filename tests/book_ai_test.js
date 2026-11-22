@@ -37,6 +37,8 @@ const { loadEngine } = require('./load');
   // les sorts du Livre dans la magie de l'IA : la Rature d'abord sur le Sort de Maîtrise d'un rival
   const p2 = g.players[2]; p1.contact[2] = true; p2.contact[1] = true; p1.diplo[2] = 'war'; p2.diplo[1] = 'war';
   p2.known.push('spell_of_mastery'); p1.mana = 3000; p1.casting = null;
+  // (0.31.73) les trois artefacts légendaires ont déjà paru : la Rature ne se dispute plus, au hasard, avec l'Artefact (90 contre 80, à ±20 %)
+  g.book.artifacts = Object.keys(Book.ARTIFACTS).slice(0, Book.ARTIFACT_MAX);
   AI.manageMagic(g, p1);
   const c = p1.casting || {};
   ok(c.id === 'erasure' || !p2.known.includes('spell_of_mastery'), 'l\'IA lance la Rature contre le Sort de Maîtrise du joueur 2 (' + (c.id || 'aucun sort en cours') + ')');

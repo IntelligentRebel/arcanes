@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.72';
+const GAME_VERSION = '0.31.73';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -866,6 +866,8 @@ const Game = {
     const site = si >= 0 ? game.sites[si] : null;
     const refused = Game.attackRefusal(game, attackers, city);
     if (refused) return { ok: false, why: refused };
+    // (0.31.73) Trêve de Dieu : un tour sur deux, aucune bataille sur son plan
+    { const tr = typeof Novel !== 'undefined' && Novel.truceWhy(game, plane); if (tr) { for (const u of attackers) { u.path = null; u.attackOrder = false; } return { ok: false, why: tr, truce: true }; } }
     // le Démon légendaire ne combat que la cible du pacte ; attaqué par un autre, il s'écarte
     const onTile = Units.at(game, plane, tx, ty).find(u => u.owner !== pid);
     const riteNo = Rite.refusal(game, attackers, onTile ? onTile.owner : city ? city.owner : -1);
@@ -912,6 +914,12 @@ const Game = {
     const res = battle.results();
     const { pid, defenderPid, site, city, tx, ty, plane } = info;
     try { Nemesis.afterBattle(game, battle, info); } catch (e) { console.error('némésis', e); }
+    // (0.31.73) les morts restent sur la case (Réveil du charnier) ; un ennemi juré abattu ; les héros qu'on a combattus
+    if (typeof Novel !== 'undefined') try {
+      Novel.recordGraves(game, battle, res, info); Novel.swornAfter(game, battle, res);
+      for (const side of [0, 1]) { const o = game.players[battle.owner(side)]; if (!o) continue; const met = o.metHeroes || (o.metHeroes = {});
+        for (const b of battle.units) if (b.side !== side && b.u.hero && !b.temp) met[b.u.id] = game.turn; }
+    } catch (e) { console.error('sorts inédits', e); }
     try { Diplomacy.recordBattle(game, battle, info); } catch (e) { console.error('guerre', e); }
     const atkWon = res.winner === ATT_SIDE;
     const a0 = info.attackers[0], origin = a0 ? [a0.plane, a0.x, a0.y] : null;
@@ -1591,6 +1599,8 @@ const Game = {
       Game.log(game, s.owner, 'Un esprit gardien relève la garde du ' + Game.siteName(s) + ' : les esprits rivaux auront bien du mal à vous le prendre.', { x: s.x, y: s.y, plane: s.plane });
       return { ok: true };
     }
+    // (0.31.73) Nœud-piège : l'esprit rival est détruit
+    { const tr = typeof Novel !== 'undefined' && Novel.trapHit(game, u, s); if (tr) return tr; }
     const fail = s.owner < 0 ? 0 : heldByGuardian ? (guardian ? 0.25 : 0.75) : (guardian ? 0 : 0.25);
     if (fail && game.rng.chance(fail)) { Units.remove(game, u); return { ok: true, failed: true, why: heldByGuardian ? 'L\'esprit gardien du nœud repousse le vôtre, qui se dissipe.' : 'L\'esprit échoue à arracher le nœud et se dissipe.' }; }
     const prev = s.owner;

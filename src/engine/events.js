@@ -737,7 +737,7 @@ Object.assign(Rite, { binds(game, a, b) { const r = Rite.active(game); return !!
 // à qui tient la cité. L'énigme lue reste en mémoire. Le sceau ne cède qu'à qui détient trois fragments en entrant sur la case ;
 // des gardiens du niveau des pires repaires se dressent alors. Vaincus, ils livrent le Livre, rangé lui aussi dans une
 // bibliothèque : il change de mains avec sa cité, et ses trois sorts avec lui.
-const BOOK_SPELLS = ['palimpsest', 'erasure', 'oblivion', 'annals', 'deus_ex_machina', 'mise_en_abyme', 'legendary_artifact'];
+const BOOK_SPELLS = ['palimpsest', 'erasure', 'oblivion', 'annals', 'deus_ex_machina', 'mise_en_abyme', 'legendary_artifact', 'great_inversion'];
 if (typeof DATA !== 'undefined' && DATA.spells && !DATA.spells.palimpsest) {
   const base = { realm: 'arcane', rarity: 'legend', section: 'legend', combatCost: null, plus: false, overland: true, combat: false, upkeep: 0, research: 0, kind: 'special', book: true, params: {} };
   Object.assign(DATA.spells, {
@@ -755,6 +755,9 @@ if (typeof DATA !== 'undefined' && DATA.spells && !DATA.spells.palimpsest) {
       desc: 'Crée à ses côtés une copie exacte de l\'unité visée, expérience et enchantements compris. Pas sur un héros.' }),
     legendary_artifact: Object.assign({}, base, { id: 'legendary_artifact', en: 'Legendary Artifact', name: 'Artefact légendaire', cost: 1000, target: 'none',
       desc: 'Fait paraître dans votre coffre l\'un des cinq artefacts légendaires, au hasard. Il n\'en paraîtra que trois dans toute la partie.' }),
+    // (0.31.73)
+    great_inversion: Object.assign({}, base, { id: 'great_inversion', en: 'Great Inversion', name: 'Grande Inversion', cost: 1200, target: 'tile', novel: true,
+      desc: 'Annoncée à tous cinq tours à l\'avance, une région de 7 × 7 cases change de monde avec celle qui lui fait face sur l\'autre plan : terrain, cités, nœuds et armées. Aucune région où se dresse une forteresse.' }),
   });
 }
 const Book = {

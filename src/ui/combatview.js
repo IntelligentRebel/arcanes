@@ -374,6 +374,7 @@ const CombatView = {
       if (bt.inCity(c, r)) { ctx.fillStyle = 'rgba(120,100,80,.28)'; ctx.fill(); }
       if (bt.mud[c + ',' + r]) { ctx.fillStyle = 'rgba(70,50,20,.6)'; ctx.fill(); }
       if (bt.mistAt && bt.mistAt(c, r)) { ctx.fillStyle = 'rgba(212,222,238,' + (.34 + .08 * Math.sin(now / 900 + c * .7 + r * .5)).toFixed(3) + ')'; ctx.fill(); }
+      if (bt.knells && (bt.knells[0] || bt.knells[1]) && Novel.knellAt(bt, c, r)) { ctx.fillStyle = 'rgba(95,40,140,' + (.32 + .12 * Math.sin(now / 260)).toFixed(3) + ')'; ctx.fill(); }
       if (bt.plagueAt && bt.plagueAt(c, r)) { ctx.fillStyle = 'rgba(55,25,65,' + (.5 + .08 * Math.sin(now / 700 + c * .9 + r * .4)).toFixed(3) + ')'; ctx.fill(); }
       if (bt.inRiver && bt.inRiver(c, r)) CombatView.drawWater(p, c, r, now);
       else if (bt.isBridge && bt.isBridge(c, r)) { CombatView.drawWater(p, c, r, now); CombatView.drawBridge(p); }
@@ -401,6 +402,8 @@ const CombatView = {
     for (const k in bt.field || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.45, f: () => CombatView.drawField(c, r, now) }); }
     for (const k in bt.mist || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.95, f: () => CombatView.drawMist(c, r, now) }); }
     for (const k in bt.plague || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.95, f: () => CombatView.drawPlague(c, r, now) }); }
+    // (0.31.73) le Glas : la cloche et les rounds qui restent, au-dessus de la zone marquée
+    for (const k of bt.knells || []) if (k && k.tiles.length) { const c = Math.round(U.sum(k.tiles, t => t[0]) / k.tiles.length), r = Math.round(U.sum(k.tiles, t => t[1]) / k.tiles.length); items.push({ d: c + r + 3, f: () => CombatView.drawKnell(c, r, k.at - bt.round, now) }); }
     if (bt.buildings) for (const b of bt.buildings) items.push({ d: b.c + b.r, f: () => CombatView.drawHouse(b) });
     if (bt.hasWalls || bt.wallOfFire || bt.wallOfDarkness) for (const k in bt.walls) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.3, f: () => CombatView.drawWall(c, r, bt.walls[k], 'back') }, { d: c + r + 0.6, f: () => CombatView.drawWall(c, r, bt.walls[k], 'front') }); }
     if (bt.hasWalls && Sprites.hasHD('cwall:tower')) {
@@ -758,7 +761,9 @@ const CombatView = {
     // (0.31.72) sorts de zone : 3 × 3 cases (l'Anneau de givre : les huit autour du centre)
     fire_rain: { r: 1, fill: 'rgba(255,90,30,', edge: 'rgba(255,190,110,.95)' }, frost_ring: { ring: true, fill: 'rgba(150,210,255,', edge: 'rgba(210,240,255,.95)' },
     meteor_shower: { r: 1, fill: 'rgba(255,70,20,', edge: 'rgba(255,170,90,.95)' }, plague_cloud: { r: 1, fill: 'rgba(130,200,90,', edge: 'rgba(190,240,150,.95)' },
-    holy_dawn: { r: 1, fill: 'rgba(255,220,120,', edge: 'rgba(255,240,180,.95)' } },
+    holy_dawn: { r: 1, fill: 'rgba(255,220,120,', edge: 'rgba(255,240,180,.95)' },
+    // (0.31.73) le Glas
+    knell: { r: 1, fill: 'rgba(150,80,210,', edge: 'rgba(215,180,255,.95)' } },
   ROTS: [[1, -1], [1, 1], [1, 0], [0, 1]],
   zoneOf(id, c, r, rot) {
     const z = CombatView.ZONES[id]; if (!z) return null;
@@ -867,6 +872,17 @@ const CombatView = {
       g.addColorStop(0, 'rgba(' + rgb + ',' + a.toFixed(3) + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
       ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, TW * .32, TW * .19, 0, 0, 7); ctx.fill();
     }
+    ctx.restore();
+  },
+  drawKnell(c, r, n, now) {
+    const ctx = CombatView.ctx, P = CombatView.iso(c, r), TW = CombatView.TW, sz = TW * .42, y = P.y - TW * .95 + Math.sin(now / 400) * TW * .03;
+    ctx.save();
+    ctx.globalAlpha = .92; Sprites.draw(ctx, 'spell:knell', P.x - sz / 2, y - sz / 2, sz, sz); ctx.globalAlpha = 1;
+    ctx.strokeStyle = 'rgba(200,160,255,.9)'; ctx.lineWidth = 2; ctx.strokeRect(P.x - sz / 2, y - sz / 2, sz, sz);
+    const tx = n > 0 ? String(n) : '!';
+    ctx.font = 'bold ' + Math.round(TW * .2) + 'px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.beginPath(); ctx.arc(P.x + sz / 2, y + sz / 2, TW * .13, 0, 7); ctx.fillStyle = 'rgba(30,10,45,.95)'; ctx.fill(); ctx.strokeStyle = 'rgba(200,160,255,.95)'; ctx.stroke();
+    ctx.fillStyle = n > 0 ? '#e8d8ff' : '#ff9a8a'; ctx.fillText(tx, P.x + sz / 2, y + sz / 2 + 1);
     ctx.restore();
   },
   drawGroveFire(c, r, now) {
@@ -1123,7 +1139,7 @@ const CombatView = {
     ctx.fillStyle = hp > .6 ? '#6fcf7a' : hp > .3 ? '#e6b450' : '#e35d5d'; ctx.fillRect(bx, by, bw * hp, 3);
     ctx.fillStyle = col; ctx.fillRect(bx - 5, by - 1, 4, 5);
     // états qui privent l'unité de son tour : écrits sous la barre de vie
-    const st = [b.stasis ? 'stase' : null, b.asleep ? 'Zz' : null, b.web ? 'toile ' + b.web : null, b.confused ? '?' : null, b.feared ? 'terreur' : null, b.entangled && !b.web && !b.asleep ? 'enchevêtré' : null, b.curses.includes('slow') ? 'ralenti' : null, b.curses.includes('shackles') ? 'sans riposte' : null, b.curses.includes('twilight') ? 'sans tir' : null, b.clone ? 'double' : null, b.possessed && b.origSide != null && b.origSide !== b.side ? (b.bound ? 'asservi' : 'possédé') : null, b.curses.includes('shatter') ? 'bris' : null, b.curses.some(c => c.startsWith('warp_creature')) ? 'déformé' : null].filter(Boolean);
+    const st = [b.stasis ? 'stase' : null, b.asleep ? 'Zz' : null, b.web ? 'toile ' + b.web : null, b.confused ? (bt.madness && bt.madness.includes(b) ? 'démence' : '?') : null, bt.swornFoe && bt.swornFoe.has(b) && !bt.swornFoe.get(b).dead ? 'ennemi juré' : null, b.feared ? 'terreur' : null, b.entangled && !b.web && !b.asleep ? 'enchevêtré' : null, b.curses.includes('slow') ? 'ralenti' : null, b.curses.includes('shackles') ? 'sans riposte' : null, b.curses.includes('twilight') ? 'sans tir' : null, b.clone ? 'double' : null, b.possessed && b.origSide != null && b.origSide !== b.side ? (b.bound ? 'asservi' : 'possédé') : null, b.curses.includes('shatter') ? 'bris' : null, b.curses.some(c => c.startsWith('warp_creature')) ? 'déformé' : null].filter(Boolean);
     if (st.length) { ctx.font = 'bold 11px system-ui'; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(10,8,16,.85)'; ctx.strokeText(st.join(' · '), P.x, by - 4); ctx.fillStyle = '#b892ff'; ctx.fillText(st.join(' · '), P.x, by - 4); }
     else if (b.autoCtl && b.side === CombatView.humanSide) { ctx.font = 'bold 10.5px system-ui'; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(6,14,20,.9)'; ctx.strokeText('auto', P.x, by - 4); ctx.fillStyle = '#7fd4ff'; ctx.fillText('auto', P.x, by - 4); }
     else if (b.holdBreach || b.guarding) { const tx = b.holdBreach ? 'garde (brèche)' : 'en garde'; ctx.font = 'bold 10.5px system-ui'; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(20,14,4,.9)'; ctx.strokeText(tx, P.x, by - 4); ctx.fillStyle = '#ffd66e'; ctx.fillText(tx, P.x, by - 4); }
@@ -2086,11 +2102,12 @@ const CombatView = {
       for (const id of new Set([...b.tempEnch, ...b.u.ench])) if (DATA.spells[id]) add(b.side, id, b, 'unit', true);
       for (const c of new Set(b.curses)) add(1 - b.side, c.startsWith('warp_creature') ? 'warp_creature' : c, b, 'unit', false);
       if (b.asleep) add(1 - b.side, 'black_sleep', b, 'unit', false);
-      if (b.confused) add(1 - b.side, 'confusion', b, 'unit', false);
+      if (b.confused) { const mad = bt.madness ? bt.madness.indexOf(b) : -1; if (mad >= 0) add(mad, 'contagious_madness', b, 'unit', false); else add(1 - b.side, 'confusion', b, 'unit', false); }
       if (b.web > 0) add(1 - b.side, 'web', b, 'unit', false);
       if (b.possessed && b.origSide != null) add(b.side, b.bound ? 'creature_binding' : 'possession', b, 'unit', false);   // prise à l'ennemi : le lanceur la commande
     }
     for (const v of bt.vortices || []) add(v.side, 'magic_vortex');
+    for (const sd of [0, 1]) if (bt.knells && bt.knells[sd]) add(sd, 'knell');
     if (bt.wallOfFire) add(DEF_SIDE, 'wall_of_fire');
     if (bt.wallOfDarkness) add(DEF_SIDE, 'wall_of_darkness');
     for (const t of bt.towers || []) if (t.mute > 0 && bt.standing(t)) add(1 - t.side, t.kind === 'spire' ? 'flux_rupture' : 'haunted_ramparts');

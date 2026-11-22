@@ -14,7 +14,7 @@ const App = {
     window.addEventListener('resize', () => { MapView.resize(); App.redraw(); if (CombatView.active) { CombatView.layout(); } });
     App.bindInput(); App.bindLog();
     Game.hooks.notify = (game, pid, e) => App.onLog(e);
-    Game.hooks.update = (ev) => { if (ev && ev.type === 'move') MapView.bumpVis(); App.dirty = true; };
+    Game.hooks.update = (ev) => { if (ev && ev.type === 'move') MapView.bumpVis(); if (ev && ev.type === 'inversion') { MapView.invalidate(); MapView.invalidateVis(); MapView.bumpVis(); } App.dirty = true; };
     Game.hooks.battle = (game, battle, info) => CombatView.run(game, battle, info);
     Game.hooks.choose = (game, pid, q) => App.answer(q);
     Game.hooks.fx = ev => App.onFx(ev);
@@ -526,6 +526,9 @@ const App = {
         if (fc.reportAge != null) html += '<div class="dim">D\'après un rapport ' + UI.ago(fc.reportAge) + ' : la situation a pu changer.</div>';
       }
     }
+    // (0.31.73) un charnier qu'on voit ; la Grande Inversion annoncée
+    { const gr = typeof Novel !== 'undefined' && MapView.vis && MapView.vis[p][y * world.w + x] && Novel.grave(game, p, x, y); if (gr && gr.n >= Novel.GRAVE_MIN) html += '<div class="dim">Charnier : ' + U.n(gr.n, 'figurine tombée', 'figurines tombées') + ' ici' + (gr.hero ? ', dont un héros' : '') + '.</div>'; }
+    { const inv = game.inversion; if (inv && World.dist(world, inv.x, inv.y, x, y) <= Novel.INV_R) html += '<div class="warn">Grande Inversion : cette case changera de monde dans ' + U.n(Math.max(1, inv.at - game.turn), 'tour') + '.</div>'; }
     const cc = Game.cacheAt(game, p, x, y);
     if (cc) html += '<div><span class="gold">' + Game.CACHE[cc.kind].name + '</span> · trouvaille sans gardien : passez dessus pour la ramasser</div>';
     const si = World.get(world, p, 'site', x, y);
@@ -537,6 +540,7 @@ const App = {
       if (s.type === 'tower') html += '<div class="dim">' + (s.cleared ? 'Passage vers ' + (s.plane ? 'Arcane' : 'le Miroir') + ' : vos unités ici peuvent changer de plan (P).' : 'Prise, elle ouvre un passage vers ' + (s.plane ? 'Arcane' : 'le Miroir') + '.') + '</div>';
       if (kn && !kn.cleared && kn.guards.length) html += '<div class="danger">Gardé : ' + App.guardianHint(kn.guards, s) + ' <span class="dim">· vu au tour ' + kn.t + '</span></div>';
       if (s.type === 'node') html += App.nodeHtml(s);
+      if (s.type === 'node' && s.trap === App.pid && s.owner === App.pid) html += '<div class="ok">Piégé : le prochain esprit rival qui voudra s\'y lier sera détruit.</div>';
       html += App.specialSiteHtml(s);
       html += App.questHtml(s);
     }
@@ -1481,6 +1485,7 @@ const App = {
     badMoon: { name: 'Lune maléfique', color: '#d06a50' }, earthquake: { name: 'Tremblement de terre', color: '#c89a6a' },
     newMinerals: { name: 'Nouveau gisement', color: '#9fc8e8' }, depletion: { name: 'Gisement épuisé', color: '#a8a8a8' },
     rebellion: { name: 'Révolte', color: '#e05a50' },
+    great_inversion: { name: 'La Grande Inversion', color: '#d8d4ff', kicker: 'Sort du Livre de légende' },
   },
   // une illustration en bandeau en tête d'une fenêtre de choix (chaîne HTML vide si l'image manque)
   async artBanner(dir, id) { const img = window.AUTO_CHOICE ? null : await App.eventArt(id, dir); return img ? '<div class="dil-art"><img src="' + img.src + '" alt=""></div>' : ''; },
@@ -1494,11 +1499,12 @@ const App = {
       if (!d || e.ref.shown || e.turn < game.turn - 1 || (e.pid !== pl.id && e.pid !== -1)) continue;
       e.ref.shown = true;
       const c = e.ref.city != null ? game.cities[e.ref.city] : null;
+      if (!c && e.ref.x != null && e.ref.plane != null) { MapView.centerOn(e.ref.x, e.ref.y, e.ref.plane); App.dirty = true; }
       const img = await App.eventArt(ev); if (App.game !== game) return;
       const art = h('div', { class: 'lm-art' + (img ? '' : ' none') });
       if (img) { img.alt = ''; art.append(img); } else art.append(h('div', { class: 'lm-halo' }));
       const body = h('div', { class: 'lm', style: '--lc:' + d.color }, art,
-        h('div', { class: 'lm-kicker' }, 'Événement' + (c ? ' · ' + c.name : '')),
+        h('div', { class: 'lm-kicker' }, d.kicker ? d.kicker : 'Événement' + (c ? ' · ' + c.name : '')),
         h('div', { class: 'lm-name' }, d.name),
         h('div', { class: 'lm-text' }, e.text));
       if (c) { MapView.centerOn(c.x, c.y, c.plane); App.dirty = true; }
@@ -2296,7 +2302,7 @@ const App = {
     // la prévision appartient à la pile qui l'a demandée (passer à la suivante ne doit pas afficher celle de la précédente)
     const sel = units.map(u => u.id).join(',');
     // une attaque que le moteur refusera (Forteresse volante, garde magique) : la raison, pas des chances
-    const refused = city && Game.attackRefusal(game, units, city);
+    const refused = (city && Game.attackRefusal(game, units, city)) || (typeof Novel !== 'undefined' && Novel.truceWhy(game, plane));
     if (refused) { MapView.forecast = { x, y, plane, sel, refused }; return; }
     if (!visible && !guarded && !report) { MapView.forecast = { x, y, plane, sel, unknown: true }; return; }
     const dsig = visible ? AI.defendersAt(game, App.pid, plane, x, y).map(u => u.id + ':' + u.dmg + ':' + (u.ench || []).join('/')).join(',') : '';

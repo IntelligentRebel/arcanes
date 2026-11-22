@@ -34,6 +34,7 @@ const Turn = {
     Diplomacy.updateTurn(game);
     Rite.tick(game);
     Book.tick(game);
+    if (typeof Novel !== 'undefined') Novel.tick(game);
     Game.rescueStranded(game);
     // 4. nouveau tour
     game.turn++;
@@ -116,6 +117,7 @@ const Turn = {
     // mana
     pl.mana += Magic.manaPerTurn(game, pl);
     if (pl.mana < 0) Turn.manaShortage(game, pl);
+    if (pl.debt && typeof Novel !== 'undefined') Novel.payDebt(game, pl);   // (0.31.73) Dette de sang : l'échéance du tour
     // compétence
     pl.skillPoints += split.skill;
     // recherche
@@ -715,6 +717,8 @@ const Neutrals = {
           for (const u of units) { delete u.crisis; u.rampage = true; }
         }
       }
+      // (0.31.73) la Bête déchaînée : sur la proie la plus proche, à qui qu'elle soit
+      if (u0.beast) { await Novel.beastAct(game, units); if (game.over) return; continue; }
       // une némésis en chasse : droit sur son ennemi
       if (u0.hunt != null && !city) {
         const ht = Nemesis.huntTarget(game, units);

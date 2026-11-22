@@ -85,6 +85,21 @@ const MagicUI = {
       return;
     }
     if (tt === 'none') return MagicUI.doCast(id, null);
+    // (0.31.73) Ennemi juré : un de vos héros, puis le héros rival
+    if (tt === 'heroPair') {
+      const lvl = u => (HERO_LEVELS[Units.levelIndex(game, u)] || { name: '' }).name;
+      const hs = Novel.swornHeroes(game, pl).filter(u => Novel.swornFoes(game, pl, u).length);
+      if (!hs.length) { const v = Spells.validate(game, pl, id, null); UI.toast(U.esc(v.why || 'Aucun héros ne peut prêter serment.'), 'warn'); return; }
+      const pickFoe = u => {
+        const fs = Novel.swornFoes(game, pl, u);
+        UI.choice(DATA.spells[id].name, 'Le héros rival dont ' + u.hero.name + ' jure la perte :', fs.map(f => ({ label: f.hero.name + ' (' + Players.nameFor(game, pl.id, f.owner) + ', ' + lvl(f) + ')', value: String(f.id) })).concat([{ label: 'Annuler', value: null }]))
+          .then(v => { if (v != null) MagicUI.doCast(id, { unit: u.id, foe: game.units[v] ? game.units[v].id : +v }); });
+      };
+      if (hs.length === 1) return pickFoe(hs[0]);
+      UI.choice(DATA.spells[id].name, 'Lequel de vos héros prête serment ?', hs.map(u => ({ label: u.hero.name + ' (' + lvl(u) + ')', value: String(u.id) })).concat([{ label: 'Annuler', value: null }]))
+        .then(v => { if (v != null && game.units[v]) pickFoe(game.units[v]); });
+      return;
+    }
     // (0.31.71) Porte dimensionnelle, Portail urbain : la pile d'abord (sa case), puis son arrivée
     if (tt === 'stackJump' || tt === 'stackPortal') {
       const seen = new Set(), tiles = [];
@@ -153,7 +168,7 @@ const MagicUI = {
     UI.toast('Choisissez la cible de <b>' + DATA.spells[id].name + '</b> sur la carte' + (tiles ? (graded ? ' (or : gain, orange : perte, gris : sans effet)' : ' (cases cerclées d\'or)') : '') + ' (Échap pour annuler).');
     $('#map').style.cursor = 'crosshair';
   },
-  RING_ANYWHERE: ['earth_lore'],   // valent sur n'importe quelle case : rien à cercler
+  RING_ANYWHERE: ['earth_lore', 'unleashed_beast', 'great_inversion'],   // valent sur n'importe quelle case : rien à cercler
   LOSS_RGB: '255,140,70', GAIN_RGB: '255,214,110', NONE_RGB: '170,170,170',
   // les cases à cercler pour un sort visé sur la carte, ou null (pas de cercles)
   mapTargets(game, pl, id, tt) {
@@ -179,6 +194,7 @@ const MagicUI = {
     for (const u of Object.values(game.units)) tryAt(u.plane, u.x, u.y);
     for (const c of Object.values(game.cities)) tryAt(c.plane, c.x, c.y);
     for (const s of game.sites) tryAt(s.plane, s.x, s.y);
+    if (id === 'charnel_rising') for (const k in game.graves || {}) { const [p, x, y] = k.split(',').map(Number); tryAt(p, x, y); }
     if (id === 'purify_land') for (let p = 0; p < 2; p++) for (let y = 0; y < w.h; y++) for (let x = 0; x < w.w; x++) if (World.get(w, p, 'corrupt', x, y)) tryAt(p, x, y);
     // sorts de terrain : les terres de vos cités (Changement de terrain, Transmutation, Route enchantée), celles des cités
     // ennemies connues (Corruption, Volcan) ; l'Île flottante : l'océan au bord de vos cités et de vos troupes
@@ -367,6 +383,8 @@ const MagicUI = {
             ...[50, 100, 250].map(n => h('button', { class: 'abtn', disabled: pl.mana < n, onclick: () => { pl.mana -= n; pl.gold += pl.retorts.includes('alchemy') ? n : Math.floor(n / 2); render(); App.refresh(); } }, n + ' mana → or')))),
       );
       const globals = h('div', { class: 'list' });
+      // (0.31.73) la Dette de sang en cours ; la Trêve de Dieu : ses tours de trêve
+      if (pl.debt) globals.append(h('div', { class: 'row' }, spriteCanvas('spell:blood_debt', 32), h('div', { class: 'grow' }, h('div', { class: 't1' }, DATA.spells.blood_debt.name), h('div', { class: 't2' }, 'Encore ' + pl.debt.left + ' mana à rendre, ' + pl.debt.per + ' par tour.'))));
       for (const g of pl.globals) { const s = DATA.spells[g]; globals.append(h('div', { class: 'row' }, spriteCanvas('spell:' + g, 32), h('div', { class: 'grow' }, h('div', { class: 't1' }, s.name), h('div', { class: 't2' }, s.desc)), h('div', { class: 'mana', style: 'white-space:nowrap;margin-right:8px' }, Magic.spellUpkeep(game, pl, g) + ' mana / tour'), h('button', { class: 'abtn danger', onclick: async () => { if (await UI.confirm('Rompre ' + s.name, 'Mettre fin à cet enchantement global ?')) { pl.globals = pl.globals.filter(x => x !== g); Units.fixAll(game, pl.id); render(); App.refresh(); } } }, 'Rompre'))); }
       if (!pl.globals.length) globals.append(h('div', { class: 'dim' }, 'Aucun enchantement global.'));
       const others = h('div', { class: 'list' });

@@ -789,6 +789,8 @@ const MapView = {
         ctx.beginPath(); ctx.arc(P.x + ts / 2, P.y + ts / 2, ts * (.7 + .05 * pulse), 0, 7); ctx.stroke(); ctx.restore();
       }
     }
+    // (0.31.73) la Grande Inversion annoncée : la région qui changera de monde, sur les deux plans
+    if (game.inversion && typeof Novel !== 'undefined') MapView.drawInversion(ctx, game, pos, ts, now);
     // visée d'un sort qui touche plusieurs cases : sa zone en filigrane sous le curseur
     if (typeof MagicUI !== 'undefined' && MagicUI.targeting && MapView.hover) {
       const a = Spells.areaOf(game, pl, MagicUI.targeting.id, p, MapView.hover.x, MapView.hover.y);
@@ -998,6 +1000,27 @@ const MapView = {
   },
   ratioText(r) { return r >= 10 ? '×10 et plus' : '×' + String(Math.round(r * 10) / 10).replace('.', ','); },
   // zone d'un sort en cours de visée : toutes ses cases en bleu pâle, celles où il agira en or, et ce qu'il y fera
+  drawInversion(ctx, game, pos, ts, now) {
+    const inv = game.inversion, w = game.world, tiles = Novel.invTiles(game, inv.x, inv.y), inA = new Set(tiles.map(([x, y]) => y * w.w + x)), pulse = .5 + .5 * Math.sin(now / 420);
+    ctx.save();
+    for (const [x, y] of tiles) {
+      const P = pos(x + MapView.wrapNear(x), y);
+      ctx.fillStyle = 'rgba(200,190,255,' + (.08 + .07 * pulse).toFixed(3) + ')'; ctx.fillRect(P.x, P.y, ts, ts);
+      ctx.strokeStyle = 'rgba(225,220,255,.9)'; ctx.lineWidth = Math.max(2, ts / 22); ctx.setLineDash([ts / 6, ts / 10]);
+      for (const [dx, dy, x0, y0, x1, y1] of [[0, -1, 0, 0, 1, 0], [1, 0, 1, 0, 1, 1], [0, 1, 0, 1, 1, 1], [-1, 0, 0, 0, 0, 1]]) {
+        if (inA.has((y + dy) * w.w + World.wx(w, x + dx))) continue;
+        ctx.beginPath(); ctx.moveTo(P.x + x0 * ts, P.y + y0 * ts); ctx.lineTo(P.x + x1 * ts, P.y + y1 * ts); ctx.stroke();
+      }
+    }
+    ctx.setLineDash([]);
+    const T = pos(inv.x + MapView.wrapNear(inv.x), inv.y - Novel.INV_R), fs = Math.max(11, Math.min(15, ts * .2)), n = Math.max(1, inv.at - game.turn);
+    const label = 'Grande Inversion : dans ' + U.n(n, 'tour');
+    ctx.font = '700 ' + fs + 'px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const tw = ctx.measureText(label).width + 12, mx = T.x + ts / 2, my = T.y - fs;
+    ctx.fillStyle = 'rgba(10,12,18,.88)'; ctx.fillRect(mx - tw / 2, my - fs * .8, tw, fs * 1.6);
+    ctx.fillStyle = '#d8d4ff'; ctx.fillText(label, mx, my + 1); ctx.textBaseline = 'alphabetic';
+    ctx.restore();
+  },
   drawSpellArea(ctx, a, pos, ts, now) {
     const w = MapView.game.world, inA = new Set(a.tiles.map(([x, y]) => y * w.w + x)), hot = new Set(a.hot.map(([x, y]) => y * w.w + x)), pulse = .5 + .5 * Math.sin(now / 300);
     let top = null;

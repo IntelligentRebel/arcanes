@@ -75,6 +75,9 @@ function stage(B) {
   W.ec.buildings.shrine = true;
   // un nœud lié par le rival, connu
   W.node = g.sites.find(s => s.type === 'node');
+  // (0.31.73) un nœud à nous (Nœud-piège) ; un héros rival déjà combattu (Ennemi juré)
+  W.node2 = g.sites.find(s => s.type === 'node' && s !== W.node);
+  if (W.node2) { W.node2.owner = 0; W.node2.cleared = true; W.node2.guardians = []; W.node2.meldBy = 'MagicSpirit'; Move.reveal(g, me, W.node2.plane, W.node2.x, W.node2.y, 1); }
   if (W.node) { W.node.owner = 1; W.node.cleared = true; W.node.guardians = []; W.node.meldBy = 'MagicSpirit'; Move.reveal(g, me, W.node.plane, W.node.x, W.node.y, 2); }
   // des terres corrompues autour de notre deuxième pile
   for (const [x, y] of [[W.ms2.x, W.ms2.y]].concat(World.neighbors(g.world, W.ms2.x, W.ms2.y))) if (!World.isWaterAt(g.world, f.plane, x, y)) World.set(g.world, f.plane, 'corrupt', x, y, 1);
@@ -87,6 +90,10 @@ function stage(B) {
   // une faille ouverte près de chez nous (Sceller une faille)
   try { E.Veil.openRift(g); } catch (e) { }
   me.mana = 200000;
+  // (0.31.73) un héros rival déjà combattu (Ennemi juré), dans sa cité ; le hasard du monde de test n'en dépend pas
+  { const r0 = g.rng.s, taken = new Set(Object.values(g.units).map(u => u.type).concat((me.deadHeroes || []).map(d => d.type)));
+    const hx = Object.values(DATA.heroes).find(h => !h.champion && h.unit !== 'HeroTorin' && !taken.has(h.unit)); W.eh = Heroes.spawn(g, foe, hx, W.ec.plane, W.ec.x, W.ec.y, 0); me.metHeroes = { [W.eh.id]: g.turn };
+    if (r0 !== undefined) g.rng.s = r0; }
   Move.bumpVis && Move.bumpVis(g);
   return W;
 }
@@ -97,7 +104,9 @@ function snapMap(g) {
   for (const u of Object.values(g.units)) s['u' + u.id] = JSON.stringify([u.owner, u.type, u.plane, u.x, u.y, u.dmg, u.ench, u.stasis || 0, u.undead || 0, u.chaosChannel || 0, u.xp, u.items]);
   for (const c of Object.values(g.cities)) s['c' + c.id] = JSON.stringify([c.owner, c.pop, Object.keys(c.buildings).sort(), c.ench.map(e => e.spell + ':' + e.owner + ':' + (e.realm || '')), c.fortress, c.name]);
   for (const p of g.players) s['p' + p.id] = JSON.stringify([p.globals, p.alive, p.banished, p.relations, p.known.length, p.casting && p.casting.id, p.fortress, p.summonCity, (p.vault || []).length, p.diplo, (p.deadHeroes || []).length, p.id ? p.mana : 0, p.skill, p.skillPoints, p.researchProgress, p.forgotten || null, Object.keys(p.contact || {}).length]);
-  for (const st of g.sites) s['s' + st.id] = JSON.stringify([st.owner, st.warped, st.cleared, st.guardians, st.type]);
+  for (const st of g.sites) s['s' + st.id] = JSON.stringify([st.owner, st.warped, st.cleared, st.guardians, st.type, st.trap == null ? null : st.trap]);
+  // (0.31.73) dette, serments, charniers, Grande Inversion annoncée
+  s.novel = JSON.stringify([g.players.map(p => p.debt || null), Object.values(g.units).filter(u => u.sworn != null).map(u => u.id + '>' + u.sworn), Object.keys(g.graves || {}).length, g.inversion || null]);
   for (let p = 0; p < 2; p++) {
     const P = g.world.planes[p];
     s['w' + p] = [P.terr, P.mineral, P.road, P.corrupt].map(a => { let h = 0; for (let i = 0; i < a.length; i++) h = (h * 31 + (a[i] | 0)) | 0; return h; }).join(',');
@@ -128,12 +137,22 @@ function mapTargets(W, id) {
     X.push({ l: 'trop loin', t: Object.assign({}, W.ms2, { to: { x: World.wx(W.g.world, W.ms2.x + 9), y: W.ms2.y } }) });
   }
   else if (tt === 'stackPortal') { V.push({ l: 'retour de notre deuxième pile à la forteresse', t: Object.assign({}, W.ms2, { city: W.f.id }) }); X.push({ l: 'une cité ennemie', t: Object.assign({}, W.ms2, { city: W.ec.id }) }); }
-  else if (tt === 'node') { if (W.node) V.push({ l: 'nœud rival', t: { plane: W.node.plane, x: W.node.x, y: W.node.y } }); X.push({ l: 'notre forteresse', t: { plane: W.f.plane, x: W.f.x, y: W.f.y } }); }
+  else if (tt === 'node') {
+    // un nœud rival (Pervertir un nœud), ou le nôtre (Nœud-piège)
+    const cands = []; if (W.node) cands.push({ l: 'nœud rival', t: { plane: W.node.plane, x: W.node.x, y: W.node.y } }); if (W.node2) cands.push({ l: 'notre nœud', t: { plane: W.node2.plane, x: W.node2.x, y: W.node2.y } });
+    const ok = cands.find(c => Spells.validate(W.g, W.me, id, c.t).ok); if (ok) V.push(ok); else if (cands[0]) V.push(cands[0]);
+    X.push({ l: 'notre forteresse', t: { plane: W.f.plane, x: W.f.x, y: W.f.y } });
+  }
+  else if (tt === 'heroPair') {   // (0.31.73) Ennemi juré : notre héros et le héros rival
+    V.push({ l: 'notre héros et le héros rival', t: { unit: W.hero.id, foe: W.eh.id } });
+    X.push({ l: 'une unité qui n\'est pas un héros', t: { unit: W.sw.id, foe: W.eh.id } });
+  }
   else if (tt === 'tile') {
     // la case qui convient à ce sort : la pile ennemie, la nôtre, une terre corrompue, une faille, un minerai…
     const cands = [{ l: 'pile ennemie', t: W.fs }, { l: 'notre deuxième pile', t: W.ms2 }, { l: 'notre forteresse', t: { plane: W.f.plane, x: W.f.x, y: W.f.y } }, { l: 'cité ennemie', t: { plane: W.ec.plane, x: W.ec.x, y: W.ec.y } }];
     const rift = E.Veil.rifts ? E.Veil.rifts(W.g, 0).concat(E.Veil.rifts(W.g, 1))[0] : null; if (rift) cands.push({ l: 'faille', t: { plane: rift.plane, x: rift.x, y: rift.y } });
     if (W.node) cands.push({ l: 'nœud rival', t: { plane: W.node.plane, x: W.node.x, y: W.node.y } });
+    if (W.invT) cands.push({ l: 'région loin des forteresses', t: W.invT });
     // des cases de terre et de mer autour de nous, explorées
     for (let r = 1; r <= 4; r++) for (const [dx, dy] of [[r, 0], [-r, 0], [0, r], [0, -r], [r, r], [-r, -r]]) { const x = World.wx(W.g.world, W.f.x + dx), y = W.f.y + dy; if (World.inY(W.g.world, y)) cands.push({ l: 'case (' + x + ',' + y + ')', t: { plane: W.f.plane, x, y } }); }
     // de l'eau visible pour l'Île flottante : on poste une unité volante à nous à côté si besoin
@@ -169,7 +188,7 @@ function nearWater(W) {
   }
   return null;
 }
-const BOOK = ['palimpsest', 'erasure', 'oblivion', 'annals', 'deus_ex_machina', 'mise_en_abyme', 'legendary_artifact'];
+const BOOK = ['palimpsest', 'erasure', 'oblivion', 'annals', 'deus_ex_machina', 'mise_en_abyme', 'legendary_artifact', 'great_inversion'];
 // ---------- carte ----------
 function runMap(B, id) {
   const sp = DATA.spells[id];
@@ -191,6 +210,10 @@ function runMap(B, id) {
     palimpsest: W => { W.g.book.claimed = true; W.g.book.city = W.f.id; const c = W.foe.known.find(k => DATA.spells[k] && DATA.spells[k].research && DATA.spells[k].research > 0); if (c) W.me.known = W.me.known.filter(k => k !== c); },
     transmute: W => { World.set(W.g.world, W.ms2.plane, 'mineral', W.ms2.x, W.ms2.y, E.M.iron); },
     plane_shift: W => { const t = landBoth(W); if (t) { W.sp2.x = t[0]; W.sp2.y = t[1]; W.ms2 = { plane: W.f.plane, x: t[0], y: t[1] }; } },
+    // (0.31.73) un charnier sous notre deuxième pile ; une région sans forteresse pour la Grande Inversion
+    charnel_rising: W => { W.g.graves = { [W.ms2.plane + ',' + W.ms2.x + ',' + W.ms2.y]: { n: 30, t: 1 } }; },
+    great_inversion: W => { W.g.book.claimed = true; W.g.book.city = W.f.id; const forts = Object.values(W.g.cities).filter(c => c.fortress || W.g.players.some(o => o.fortress === c.id));
+      for (let y = 4; y < W.g.world.h - 4 && !W.invT; y++) for (let x = 0; x < W.g.world.w && !W.invT; x++) if (forts.every(c => World.dist(W.g.world, c.x, c.y, x, y) > 4)) { W.invT = { plane: W.f.plane, x, y }; W.me.explored[W.f.plane][y * W.g.world.w + x] = 1; } },
     floating_island: W => { const w = nearWater(W); if (w) { const u = Units.create(W.g, 'HighMenSpearmen', 0, w.plane, w.lx, w.ly); u.moves = 0; } },
   };
   // le Livre de légende pour ses sept sorts
@@ -216,7 +239,7 @@ function runMap(B, id) {
     if (!r || r.ok === false) { FAIL(id, 'carte', 'cible valable refusée au lancer (' + v.l + ') : ' + (r && r.why)); continue; }
     if (W.me.casting) { FAIL(id, 'carte', 'incantation non achevée malgré la compétence (' + W.me.casting.id + ')'); continue; }
     const spent = m0 - W.me.mana;
-    if (spent !== cost && id !== 'spell_blast') WARN(id, 'carte', 'mana débité ' + spent + ' au lieu de ' + cost);
+    if (spent !== cost && id !== 'spell_blast' && id !== 'blood_debt') WARN(id, 'carte', 'mana débité ' + spent + ' au lieu de ' + cost);
     const after = snapMap(W.g), d = diff(before, after);
     const logs = W.g.log;
     const lg = l => l.pid + ':' + l.text;
@@ -271,6 +294,7 @@ function snapBattle(bt) {
   for (const b of bt.units) { const st = b.dead ? null : bt.stats(b); s['b' + b.id] = JSON.stringify([b.dead, b.side, b.c, b.r, b.u.dmg, b.curses, b.tempEnch, b.u.ench, b.asleep, b.confused, b.web, b.possessed, b.stasis, b.ammo, b.casterMana, b.u.chaosChannel || 0, st && [st.melee, st.ranged, st.def, st.res, st.toHit, st.toDefend, st.move, st.hp, !!st.flying, b.invisible]]); }
   s.ench = JSON.stringify([bt.ench, bt.globalEnch, bt.counterMagic, bt.wallOfFire, bt.wallOfDarkness, Object.keys(bt.mud || {}).length, (bt.vortices || []).length, bt.units.length]);
   s.zones = JSON.stringify([bt.field, bt.flames, bt.mines, bt.mist].map(z => Object.keys(z || {}).sort().join(';')));
+  s.novel = JSON.stringify([(bt.knells || []).map(k => k && k.tiles.length), (bt.madness || []).map(m => m && m.id)]);
   s.walls = JSON.stringify(Object.values(bt.walls || {}).map(w => w.broken)); s.towers = JSON.stringify((bt.towers || []).map(t => [t.hp, t.mute || 0, t.def, t.dead]));
   return s;
 }

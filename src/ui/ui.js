@@ -193,6 +193,9 @@ const UI = {
     if (u.crisis) html += '<div class="danger">Créature de la Brèche</div>';
     else if (u.riftOf != null) html += '<div class="danger">Venue du Miroir par une faille</div>';
     if (u.nemesis) html += UI.nemesisLine(u, game);
+    // (0.31.73) la Bête déchaînée ; l'ennemi juré d'un héros
+    if (u.beast) html += '<div class="danger">Bête déchaînée : fond sur l\'armée ou la cité la plus proche, à qui qu\'elle soit ; elle s\'éteindra dans ' + U.n(Math.max(1, u.beast.until - game.turn), 'tour') + '</div>';
+    if (u.sworn != null && game.units[u.sworn] && game.units[u.sworn].hero) html += '<div class="gold">' + (Heroes.female(game, game.units[u.sworn]) ? 'Ennemie jurée' : 'Ennemi juré') + ' : ' + U.esc(game.units[u.sworn].hero.name) + '</div>';
     // le Démon légendaire : qui il traque (il ne combat personne d'autre)
     if (u.riteDemon && typeof Rite !== 'undefined') { const ra = Rite.active(game); if (ra && ra.target != null) html += '<div class="' + (ra.target === App.pid ? 'danger' : 'gold') + '">Ne combat que ' + (ra.target === App.pid ? 'vous' : U.esc(Players.nameFor(game, App.pid, ra.target))) + ', la cible du pacte.</div>'; }
     if (u.avatar) html += Heroes.female(game, u) ? '<div class="gold">Vous, en personne : compétence de lancement divisée par deux tant que vous êtes ici ; si vous tombez, vous êtes bannie</div>' : '<div class="gold">Vous, en personne : compétence de lancement divisée par deux tant que vous êtes ici ; si vous tombez, vous êtes banni</div>';

@@ -271,6 +271,7 @@ Object.assign(AI, {
       case 'time_stop': return atWar ? 45 : 0;
       // (essai « seal », banc 26 : lancé dans 2 parties sur 500, -8 ± 4 points ; retiré en 0.31.70) le Sceau reste au joueur
       case 'planar_seal': return 0;
+      case 'truce_of_god': return 0;   // (0.31.73) son propre plan : AI.novelPlan
       default: return 20;
     }
   },
