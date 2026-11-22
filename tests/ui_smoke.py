@@ -18,6 +18,10 @@ async def main():
         await pg.wait_for_timeout(400)
         await pg.screenshot(path=os.path.join(SHOTS, '02-newgame.png'))
         await pg.click('#ng-go')
+        # (0.31.73) les sorts de départ : on laisse le hasard choisir
+        await pg.wait_for_timeout(400)
+        await pg.screenshot(path=os.path.join(SHOTS, '02b-sorts-depart.png'))
+        await pg.evaluate("""() => { const m = [...document.querySelectorAll('.modal')].find(x => x.querySelector('.spick')); const b = m && [...m.querySelectorAll('button')].find(x => /Commencer la partie/.test(x.textContent)); if (b) b.click(); }""")
         await pg.wait_for_timeout(2500)
         await pg.screenshot(path=os.path.join(SHOTS, '03-intro.png'))
         try:

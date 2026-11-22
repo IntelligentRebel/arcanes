@@ -300,6 +300,11 @@ input[type=text], input[type=number], select { background: #0f141c; border: 1px 
 .retort { display: inline-flex; padding: 4px 8px; border: 1px solid var(--line); border-radius: 6px; margin: 0 4px 4px 0; cursor: pointer; font-size: 12px; background: rgba(255,255,255,.02); }
 .retort.on { border-color: var(--gold); background: rgba(230,180,80,.12); color: var(--gold); }
 .retort.dis { opacity: .35; cursor: default; }
+/* (0.31.73) sorts de départ */
+.spick { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+.spick .s { display: flex; gap: 8px; align-items: center; border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; cursor: pointer; font-size: 12.5px; background: rgba(255,255,255,.02); }
+.spick .s canvas { width: 32px; height: 32px; flex: none; }
+.spick .s.on { border-color: var(--gold); background: rgba(230,180,80,.12); color: var(--gold); }
 .title-screen { position: absolute; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at 50% 35%, #1d2638 0%, #0b0e13 70%); }
 .title-screen > div { position: relative; z-index: 1; padding: 34px 40px 26px; border-radius: 18px; background: radial-gradient(ellipse at center, rgba(6,8,13,.72) 0%, rgba(6,8,13,.45) 60%, rgba(6,8,13,0) 100%); }
 .title-screen .credits { color: #b9b4a6; text-shadow: 0 1px 2px #000; margin-left: auto; margin-right: auto; }
@@ -628,7 +633,7 @@ table.t th .sortmark { font-size: 10px; }
 html { forced-color-adjust: none; }
 .retort.on::before { content: '✓'; margin-right: 4px; }
 @media (forced-colors: active), (prefers-contrast: more) {
-  .retort.on, .rolerow .chip.on, .tab.on, .tbtn.on, .abtn.on, .row.sel, .ucard.sel, .tradeitem.on { outline: 2px solid #ffd76a; outline-offset: -1px; }
+  .retort.on, .spick .s.on, .rolerow .chip.on, .tab.on, .tbtn.on, .abtn.on, .row.sel, .ucard.sel, .tradeitem.on { outline: 2px solid #ffd76a; outline-offset: -1px; }
   .retort.dis, .row.dis, .spell.dis { opacity: .45; text-decoration: line-through; }
   button:focus-visible, .row:focus-visible { outline: 2px solid #fff; }
 }

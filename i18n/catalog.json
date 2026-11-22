@@ -28167,7 +28167,8 @@
  },
  "Commencer la partie": {
   "at": [
-   "src/ui/setup.js:141"
+   "src/ui/setup.js:141",
+   "src/ui/setup.js:303"
   ]
  },
  "<h4>{0} · {1} choix</h4>{2}{3}": {
@@ -28428,13 +28429,15 @@
  "livre": {
   "at": [
    "src/ui/setup.js:224",
-   "src/ui/setup.js:266"
+   "src/ui/setup.js:266",
+   "src/ui/setup.js:309"
   ]
  },
  "livres": {
   "at": [
    "src/ui/setup.js:224",
-   "src/ui/setup.js:266"
+   "src/ui/setup.js:266",
+   "src/ui/setup.js:309"
   ],
   "hint": "pluriel de « livre »"
  },
@@ -28560,14 +28563,95 @@
    "parts.join(', ')"
   ]
  },
+ "Communs": {
+  "at": [
+   "src/ui/setup.js:279"
+  ]
+ },
+ "Peu communs": {
+  "at": [
+   "src/ui/setup.js:279"
+  ]
+ },
+ "Rares": {
+  "at": [
+   "src/ui/setup.js:279"
+  ]
+ },
+ "Très rares": {
+  "at": [
+   "src/ui/setup.js:279"
+  ]
+ },
+ "Sorts de départ": {
+  "at": [
+   "src/ui/setup.js:301"
+  ]
+ },
+ "Compléter au hasard": {
+  "at": [
+   "src/ui/setup.js:302"
+  ]
+ },
+ "Retour": {
+  "at": [
+   "src/ui/setup.js:302",
+   "src/ui/main.js:1342"
+  ]
+ },
+ "Vos livres vous donnent ces sorts dès le départ. Les places laissées vides seront tirées au hasard. Les autres sorts de vos royaumes viendront par la recherche.": {
+  "at": [
+   "src/ui/setup.js:306"
+  ]
+ },
+ "carte et combat": {
+  "at": [
+   "src/ui/setup.js:316"
+  ]
+ },
+ "combat": {
+  "at": [
+   "src/ui/setup.js:316"
+  ]
+ },
+ "carte": {
+  "at": [
+   "src/ui/setup.js:316"
+  ]
+ },
+ "Sur la carte : {0} mana": {
+  "at": [
+   "src/ui/setup.js:319"
+  ],
+  "args": [
+   "sp.cost"
+  ]
+ },
+ "En combat : {0} mana": {
+  "at": [
+   "src/ui/setup.js:319"
+  ],
+  "args": [
+   "sp.combatCost"
+  ]
+ },
+ "Choisis : {0} / {1}": {
+  "at": [
+   "src/ui/setup.js:327"
+  ],
+  "args": [
+   "n",
+   "tot"
+  ]
+ },
  "Façonnage des deux plans…": {
   "at": [
-   "src/ui/setup.js:282"
+   "src/ui/setup.js:340"
   ]
  },
  "Erreur de création : {0}": {
   "at": [
-   "src/ui/setup.js:296"
+   "src/ui/setup.js:354"
   ],
   "args": [
    "U.esc(e.message)"
@@ -28575,12 +28659,12 @@
  },
  "Un sorcier rival convoite": {
   "at": [
-   "src/ui/setup.js:304"
+   "src/ui/setup.js:362"
   ]
  },
  "{0} sorciers rivaux convoitent": {
   "at": [
-   "src/ui/setup.js:304"
+   "src/ui/setup.js:362"
   ],
   "args": [
    "['', '', 'Deux', 'Trois', 'Quatre', 'Cinq'][n] || n"
@@ -28588,27 +28672,27 @@
  },
  "Deux": {
   "at": [
-   "src/ui/setup.js:304"
+   "src/ui/setup.js:362"
   ]
  },
  "Trois": {
   "at": [
-   "src/ui/setup.js:304"
+   "src/ui/setup.js:362"
   ]
  },
  "Quatre": {
   "at": [
-   "src/ui/setup.js:304"
+   "src/ui/setup.js:362"
   ]
  },
  "Cinq": {
   "at": [
-   "src/ui/setup.js:304"
+   "src/ui/setup.js:362"
   ]
  },
  "Bienvenue, {0}": {
   "at": [
-   "src/ui/setup.js:305"
+   "src/ui/setup.js:363"
   ],
   "args": [
    "pl.name"
@@ -28616,7 +28700,7 @@
  },
  "<p class=\"serif\" style=\"font-size:16px\">Votre forteresse de <b>{0}</b> se dresse sur le plan {1}. {2} la maîtrise des deux mondes.</p><p>Explorez, fondez des cités, liez les nœuds magiques et étudiez la magie. On l'emporte en éliminant tous ses rivaux ou en lançant le <b>Sort de Maîtrise</b>.</p><div class=\"box\"><b class=\"gold\">Commandes</b><div><b>Clic</b> : sélectionner une pile. <b>Double-clic</b> sur une case : l'y envoyer. <b>Clic droit</b> : désélectionner. <b>Entrée</b> : finir le tour.</div><div class=\"muted\">Un colon sélectionné affiche les meilleurs sites (★). Les autres raccourcis : Menu ▸ Aide.</div></div>": {
   "at": [
-   "src/ui/setup.js:305"
+   "src/ui/setup.js:363"
   ],
   "args": [
    "U.esc(fc.name)",
@@ -28626,17 +28710,17 @@
  },
  "du Miroir": {
   "at": [
-   "src/ui/setup.js:305"
+   "src/ui/setup.js:363"
   ]
  },
  "d'Arcane": {
   "at": [
-   "src/ui/setup.js:305"
+   "src/ui/setup.js:363"
   ]
  },
  "Commencer": {
   "at": [
-   "src/ui/setup.js:305"
+   "src/ui/setup.js:363"
   ]
  },
  "(index.html": {
@@ -30880,11 +30964,6 @@
  "Du plus faible au plus fort.": {
   "at": [
    "src/ui/main.js:1341"
-  ]
- },
- "Retour": {
-  "at": [
-   "src/ui/main.js:1342"
   ]
  },
  "<div class=\"questline\"><span class=\"qbadge\">!</span><div><b>Légende {0} : {1}</b>. Vaincre ses gardiens avec {2} dans l'armée qui attaque.{3}<div class=\"gold\">Récompense : {4}, {5} XP, {6} or, +{7} de renommée, {8} XP pour chaque unité de l'armée, et le trésor du repaire.</div></div></div>": {

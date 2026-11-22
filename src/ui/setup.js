@@ -274,8 +274,66 @@ const Setup = {
     if (q.distinctRealms && REALMS5.filter(rr => (st.books[rr] || 0) >= (q.booksEach || 1)).length < q.distinctRealms) return false;
     return true;
   },
+  // (0.31.73) les sorts de départ, comme dans Master of Magic : vos livres vous en donnent quelques-uns d'office (2 livres : 1 commun, 3 : 2, etc.) ;
+  // vous les choisissez, ou le hasard s'en charge
+  RAR_LABELS: { common: 'Communs', uncommon: 'Peu communs', rare: 'Rares', veryrare: 'Très rares' },
+  spellSlots(st) {
+    const out = [];
+    for (const realm of REALMS5) {
+      const n = st.books[realm] || 0; if (n < 2) continue;
+      const g = Magic.guaranteed(n);
+      for (const r of RARITIES) if (g[r] > 0) out.push({ realm, rarity: r, quota: g[r], spells: Magic.spellsOf(realm, r).map(sp => sp.id) });
+    }
+    return out;
+  },
+  // ce qui est choisi pour cette place (débarrassé de ce que les livres ne permettent plus)
+  slotPicks(st, sl) {
+    const sel = st.startSpells || (st.startSpells = {}), R = sel[sl.realm] || (sel[sl.realm] = {});
+    // (en place : la fenêtre garde une référence à ce tableau)
+    const arr = R[sl.rarity] || (R[sl.rarity] = []);
+    for (let i = arr.length - 1; i >= 0; i--) if (!sl.spells.includes(arr[i])) arr.splice(i, 1);
+    if (arr.length > sl.quota) arr.length = sl.quota;
+    return arr;
+  },
+  spellPicker(st, slots, done) {
+    const body = h('div'), hint = h('span', { class: 'muted', style: 'margin-right:auto' });
+    const fillRandom = () => { for (const sl of slots) { const cur = Setup.slotPicks(st, sl), rest = sl.spells.filter(id => !cur.includes(id)); while (cur.length < sl.quota && rest.length) cur.push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0]); } render(); };
+    const m = UI.modal({ title: 'Sorts de départ', width: 1000, body,
+      footer: [hint, h('button', { class: 'btn', onclick: fillRandom }, 'Compléter au hasard'), h('button', { class: 'btn', onclick: () => m.close() }, 'Retour'),
+        h('button', { class: 'btn primary', onclick: () => { m.close(); done(); } }, 'Commencer la partie')] });
+    const render = () => {
+      body.innerHTML = '';
+      body.append(h('div', { class: 'dim', style: 'margin-bottom:8px' }, 'Vos livres vous donnent ces sorts dès le départ. Les places laissées vides seront tirées au hasard. Les autres sorts de vos royaumes viendront par la recherche.'));
+      for (const realm of REALMS5) {
+        const mine = slots.filter(sl => sl.realm === realm); if (!mine.length) continue;
+        const sect = h('div', { class: 'sect' }, h('h4', { style: 'color:' + REALM_COLORS[realm] }, REALM_NAMES[realm] + ' · ' + U.n(st.books[realm], 'livre')));
+        for (const sl of mine) {
+          const cur = Setup.slotPicks(st, sl);
+          sect.append(h('div', { class: 'dim', style: 'margin:4px 0' }, Setup.RAR_LABELS[sl.rarity] + ' : ' + cur.length + ' / ' + sl.quota));
+          const grid = h('div', { class: 'spick' });
+          for (const id of sl.spells.slice().sort((a, b) => DATA.spells[a].name.localeCompare(DATA.spells[b].name))) {
+            const sp = DATA.spells[id], on = cur.includes(id);
+            const el = h('div', { class: 's' + (on ? ' on' : '') }, spriteCanvas('spell:' + id, 32), h('div', null, h('div', { class: 't1' }, sp.name), h('div', { class: 'dim', style: 'font-size:11px' }, sp.overland && sp.combat ? 'carte et combat' : sp.combat ? 'combat' : 'carte')));
+            // la place pleine : le premier choisi cède sa place
+            el.onclick = () => { if (on) cur.splice(cur.indexOf(id), 1); else { if (cur.length >= sl.quota) cur.shift(); cur.push(id); } render(); };
+            UI.tipOn(el, () => '<h4>' + U.esc(sp.name) + '</h4>' + U.esc(sp.desc) + '<div class="dim" style="margin-top:4px">' + [sp.overland ? 'Sur la carte : ' + sp.cost + ' mana' : '', sp.combat ? 'En combat : ' + sp.combatCost + ' mana' : ''].filter(Boolean).join(' · ') + '</div>');
+            grid.append(el);
+          }
+          sect.append(grid);
+        }
+        body.append(sect);
+      }
+      const n = U.sum(slots, sl => Setup.slotPicks(st, sl).length), tot = U.sum(slots, sl => sl.quota);
+      hint.textContent = 'Choisis : ' + n + ' / ' + tot;
+    };
+    render();
+  },
   launch(st, m) {
     if (Setup.picks(st) !== 11 || !String(st.name || '').trim()) return;
+    const slots = Setup.spellSlots(st);
+    if (slots.length && !st.spellsDone) { Setup.spellPicker(st, slots, () => { st.spellsDone = true; Setup.launch(st, m); }); return; }
+    st.spellsDone = false;
+    const startSpells = {}; for (const sl of slots) (startSpells[sl.realm] = startSpells[sl.realm] || {})[sl.rarity] = Setup.slotPicks(st, sl).slice();
     st.launching = true;
     m.close();
     const seed = st.seed ? (parseInt(st.seed, 10) || Array.from(st.seed).reduce((a, c) => a * 31 + c.charCodeAt(0) | 0, 7)) >>> 0 : undefined;
@@ -284,7 +342,7 @@ const Setup = {
       try {
         const ms = MAP_SIZES[st.mapSize] || MAP_SIZES.normal;
         const game = Game.newGame({ seed, mapW: ms.w, mapH: ms.h, landSize: st.landSize, opponents: st.opponents, difficulty: st.difficulty, mountainsBlock: st.mountainsBlock, crisis: st.crisis, finale: st.finale, pace: st.pace,
-          human: { name: st.name.trim(), portrait: st.portrait, books: st.books, retorts: st.retorts, race: st.race } });
+          human: { name: st.name.trim(), portrait: st.portrait, books: st.books, retorts: st.retorts, race: st.race, startSpells } });
         // couleur choisie
         const human = game.players[0];
         const c = PLAYER_COLORS[st.color];
