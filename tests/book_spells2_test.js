@@ -91,6 +91,8 @@ const { loadEngine } = require('./load');
   const fd = g6.cities[d1.fortress]; const hk = Object.keys(DATA.units).find(k => DATA.units[k].hero || /^Hero/.test(k));
   const hu = Units.create(g6, hk, 1, fd.plane, fd.x, fd.y); if (!hu.hero) hu.hero = { name: 'Test', slots: ['melee', 'armor', 'jewelry'] }; hu.items = hu.items || [null, null, null];
   for (const o of g6.players) if (o !== d1) o.known = [];
+  // (0.31.72) les sorts tirés ont changé avec les sorts de zone : on retire les invocations pour que la défense ne passe pas devant
+  d1.known = d1.known.filter(id => DATA.spells[id].kind !== 'summon');
   AI.manageMagic(g6, d1);
   ok(d1.casting && d1.casting.id === 'legendary_artifact', 'l\'IA qui a un héros fait paraître un artefact (' + (d1.casting ? d1.casting.id : 'rien') + ')');
 })().catch(e => { console.log('ERREUR', e.stack); process.exitCode = 1; });

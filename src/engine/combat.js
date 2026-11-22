@@ -55,6 +55,7 @@ class Battle {
     // (0.31.71) sorts de terrain venus de Heroes : champs de force { case: { n, side } }, rideaux de flammes { case: { n, side } },
     // mines de feu { case: camp du poseur } (invisibles pour l'autre camp), brume { case: true }
     this.field = {}; this.flames = {}; this.mines = {}; this.mist = {};
+    this.plague = {};   // (0.31.72) Nuée pestilentielle : { case: { n, side } }
     this.terrainKey = World.terrainKey(game.world, o.plane, o.x, o.y);
     this.counterMagic = [0, 0];
     this.rng = o.rng || game.rng;
@@ -181,6 +182,7 @@ class Battle {
   cutsField(c, r, dc, dr) { return !!(dc && dr) && this.fieldAt(c + dc, r) && this.fieldAt(c, r + dr); }
   flameAt(c, r) { const f = this.flames && this.flames[c + ',' + r]; return f && f.n > 0 ? f : null; }
   mistAt(c, r) { return !!this.mist && !!this.mist[c + ',' + r]; }
+  plagueAt(c, r) { const f = this.plague && this.plague[c + ',' + r]; return f && f.n > 0 ? f : null; }
   // la mine de cette case, si elle menace b (posée par l'autre camp)
   mineFor(b, c, r) { const m = this.mines ? this.mines[c + ',' + r] : undefined; return m != null && m !== b.side; }
   // un tir qui part de la brume ou qui y vise perd la moitié de sa force
@@ -194,6 +196,7 @@ class Battle {
     { const f = this.flameAt(c, r); if (f) out.push((f.side === viewer ? 'Rideau de flammes (le vôtre)' : 'Rideau de flammes') + ' : feu de force 5 sur ' + (f.side === viewer ? 'l\'ennemi' : 'vos unités') + ' qui y entre, 3 à chaque round où il y reste ; pas sur les volants (encore ' + U.n(f.n, 'round') + ')'); }
     if (viewer != null && this.mines && this.mines[k] === viewer) out.push('Votre mine de feu : explose sous le premier ennemi qui y entre');
     if (this.mistAt(c, r)) out.push('Brume : les tirs qui en partent ou qui y visent perdent la moitié de leur force');
+    { const f = this.plagueAt(c, r); if (f) out.push('Nuée pestilentielle : une attaque de mort de force 5 sur chaque figurine, à chaque round, amie ou ennemie (pas les morts-vivants) ; encore ' + U.n(f.n, 'round')); }
     if (this.tree(c, r)) out.push('Forêt : +2 défense contre les tirs ; y entrer coûte 1,5 mouvement ; le feu s\'y propage');
     if (this.hill(c, r)) out.push('Colline : +10 % pour toucher à distance, +1 défense en mêlée ; y monter coûte 1,5 mouvement');
     if (this.rock(c, r)) out.push('Rochers : infranchissables');
@@ -1456,6 +1459,15 @@ class Battle {
       }
       if (--f.n <= 0) delete this.flames[k];
     }
+    // (0.31.72) la Nuée pestilentielle ronge tout ce qui s'y tient, amis compris
+    const hit = [];
+    for (const k of Object.keys(this.plague)) {
+      const f = this.plague[k]; if (f.side !== side) continue;
+      const [c, r] = k.split(',').map(Number), b = this.unitAt(c, r);
+      if (b) { const d = CombatSpells.areaHit(this, b, ((DATA.spells.plague_cloud || {}).params || {}).strength || 5, 'magic', 'death'); if (d) hit.push(this.name(b) + ' ' + d); this.ev({ type: 'fx', fx: 'death', at: [c, r] }); this.checkDeath(b); }
+      if (--f.n <= 0) delete this.plague[k];
+    }
+    if (hit.length) this.say('Nuée pestilentielle : ' + hit.join(', ') + '.');
     this.checkEnd();
   }
   // vortex magique : 4 cases par tour, attiré par l'ennemi ; 5 dégâts sans défense à l'unité traversée,
@@ -1719,7 +1731,7 @@ const CombatSpells = {
     const sp = DATA.spells[id]; if (!sp) return 'none';
     if (sp.kind === 'summon') return 'none';
     if (['raise_dead', 'animate_dead', 'sacrifice'].includes(id)) return 'deadUnit';
-    if (['earth_to_mud', 'disrupt', 'magic_vortex', 'force_field', 'fire_curtain', 'fire_mines', 'mist'].includes(id)) return 'combatTile';
+    if (['earth_to_mud', 'disrupt', 'magic_vortex', 'force_field', 'fire_curtain', 'fire_mines', 'mist', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn'].includes(id)) return 'combatTile';
     if (sp.target === 'friendlyUnit' || sp.target === 'friendlyHero') return 'friendlyUnit';
     if (sp.target === 'enemyUnit') return 'enemyUnit';
     if (sp.target === 'anyUnit') return 'anyUnit';
@@ -2112,6 +2124,7 @@ const CombatSpells = {
     if (id === 'mass_healing' && !mine.some(b => realm(b) !== 'death' && b.u.dmg > (b.irrDmg || 0))) return CombatSpells.healWhy(bt, side);
     if (id === 'counter_magic' && !bt.player(1 - side) && !foes.some(f => bt.unitSpells(f, true).length)) return 'Aucun lanceur de sorts en face : sans effet ici.';
     if (id === 'mass_slow' && !foes.some(b => CombatSpells.canAffect(bt, b, 'slow'))) return 'Aucun ennemi ne peut être ralenti ici.';
+    if (id === 'holy_dawn' && !mine.some(b => realm(b) !== 'death' && b.u.dmg > (b.irrDmg || 0))) return CombatSpells.healWhy(bt, side);
     if (id === 'sacrifice') {
       if (!CombatSpells.sacrificeDead(bt, side).length) return 'Aucune de vos unités tombées ne peut être relevée (héros, doubles et morts irréversibles exceptés).';
       if (!CombatSpells.victims(bt, side).length) return 'Aucune de vos unités ne peut donner sa vie (pas un héros).';
@@ -2358,7 +2371,9 @@ Object.assign(CombatSpells, {
   MIRROR: 0.4,   // Miroir magique : chance de renvoi
   // sorts en deux temps : ce que vise le second choix
   SECOND: { teleport: 'tile', gust: 'tile', sacrifice: 'unit' },
-  ZONE_SPELLS: ['force_field', 'fire_curtain', 'fire_mines', 'mist'],
+  ZONE_SPELLS: ['force_field', 'fire_curtain', 'fire_mines', 'mist', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn'],
+  // (0.31.72) les sorts de zone qui frappent tout ce qui s'y trouve : [type de dégâts, royaume]
+  AREA: { fire_rain: ['fire', 'chaos'], frost_ring: ['cold', 'nature'], meteor_shower: ['fire', 'chaos'], plague_cloud: ['magic', 'death'] },
   // orientations d'une ligne de trois cases : en travers de l'écran, de haut en bas, le long de l'axe c, le long de l'axe r
   ROTS: [[1, -1], [1, 1], [1, 0], [0, 1]],
   mirrored(b) { return !!b && !!b.u && (b.u.ench.includes('magic_mirror') || b.tempEnch.includes('magic_mirror')); },
@@ -2369,7 +2384,8 @@ Object.assign(CombatSpells, {
     const out = [];
     if (id === 'force_field' || id === 'fire_curtain') { const [dc, dr] = CombatSpells.ROTS[(rot || 0) & 3]; for (const k of [-1, 0, 1]) out.push([c + k * dc, r + k * dr]); }
     else if (id === 'fire_mines') out.push([c, r], [c + 1, r], [c - 1, r], [c, r + 1], [c, r - 1]);
-    else if (id === 'mist') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) out.push([c + dc, r + dr]);
+    else if (id === 'mist' || id === 'fire_rain' || id === 'meteor_shower' || id === 'plague_cloud' || id === 'holy_dawn') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) out.push([c + dc, r + dr]);
+    else if (id === 'frost_ring') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) if (dc || dr) out.push([c + dc, r + dr]);
     return out.filter(([x, y]) => x >= 0 && y >= 0 && x < CW && y < CH);
   },
   // les cases où le sort se pose vraiment : un champ de force ni sur une unité ni sur une tour ; un rideau pas sur une tour ;
@@ -2447,6 +2463,28 @@ Object.assign(CombatSpells, {
       out.push(best); cur = best;
     }
     return out;
+  },
+  // une attaque de zone sur b (chaque figurine pare pour elle-même) : rien sur qui en est immunisé (magie, feu, froid, mort, Droiture)
+  areaHit(bt, b, str, kind, realm) {
+    const s = bt.stats(b), on = b.u.ench.concat(b.tempEnch);
+    if (s.ab.magicImmunity || (realm === 'death' && s.ab.deathImmunity) || ((realm === 'death' || realm === 'chaos') && on.includes('righteousness'))) return 0;
+    return bt.applyArea(b, str, kind, realm);
+  },
+  // les unités qu'un sort de zone prendrait sur ces cases (Aube sacrée : vos blessés, hors créatures de la mort)
+  zoneVictims(bt, side, id, tiles) {
+    const ks = new Set(tiles.map(([c, r]) => c + ',' + r));
+    return bt.alive().filter(b => ks.has(b.c + ',' + b.r) && (id !== 'holy_dawn' || (b.side === side && b.u.dmg > (b.irrDmg || 0) && Units.realmOf(b.u) !== 'death')));
+  },
+  // le gros des sorts de zone : chaque unité sur les cases, amie ou ennemie, encaisse l'attaque ; le journal dit qui (les vôtres signalés)
+  areaSpell(bt, side, id, t) {
+    const [kind, realm] = CombatSpells.AREA[id], str = ((DATA.spells[id] || {}).params || {}).strength || 10, tiles = CombatSpells.zonePlace(bt, side, id, t), parts = [];
+    for (const [c, r] of tiles) bt.ev({ type: 'fx', fx: kind === 'cold' ? 'cold' : realm === 'death' ? 'death' : 'fire', at: [c, r] });
+    for (const b of CombatSpells.zoneVictims(bt, side, id, tiles)) {
+      const d = CombatSpells.areaHit(bt, b, str, kind, realm);
+      parts.push(bt.name(b) + (b.side === side ? ' (des vôtres)' : '') + ' ' + d);
+      bt.checkDeath(b);
+    }
+    bt.say((DATA.spells[id] ? DATA.spells[id].name : id) + ' : ' + (parts.length ? parts.join(', ') : 'personne dans la zone') + '.');
   },
   chainStrength(i) { const s0 = ((DATA.spells.chain_lightning || {}).params || {}).strength || 20; return Math.max(1, Math.round(s0 * Math.pow(2 / 3, i))); },
 });
@@ -2529,6 +2567,30 @@ Object.assign(COMBAT_SPELL_HANDLERS, {
     CombatSpells.revive(bt, side, dead, false);
     if (!dead.dead) dead.u.dmg = Math.max(0, Units.stats(bt.game, dead.u).maxHp - give);
     bt.ev({ type: 'fx', fx: 'death', at });
+  },
+  // (0.31.72) sorts de zone
+  fire_rain(bt, side, t) { CombatSpells.areaSpell(bt, side, 'fire_rain', t); },
+  frost_ring(bt, side, t) { CombatSpells.areaSpell(bt, side, 'frost_ring', t); },
+  meteor_shower(bt, side, t) {
+    const tiles = CombatSpells.zonePlace(bt, side, 'meteor_shower', t);
+    let walls = 0;
+    for (const [c, r] of tiles) {
+      const w = bt.hasWalls && bt.walls[c + ',' + r]; if (w && !w.broken) { w.broken = true; walls++; bt.ev({ type: 'fx', fx: 'wall', at: [c, r] }); }
+      const tw = bt.towerAt(c, r); if (tw) { const n = bt.damageTower(tw, 15, true); bt.say(U.cap(bt.towerName(tw)) + ' encaisse ' + n + ' dégâts.'); bt.settleTower(tw); }
+    }
+    if (walls) bt.say(walls > 1 ? walls + ' pans de muraille s\'écroulent.' : 'Un pan de muraille s\'écroule.');
+    CombatSpells.areaSpell(bt, side, 'meteor_shower', t);
+  },
+  plague_cloud(bt, side, t) {
+    const n = ((DATA.spells.plague_cloud || {}).params || {}).rounds || 3, tiles = CombatSpells.zonePlace(bt, side, 'plague_cloud', t);
+    for (const [c, r] of tiles) bt.plague[c + ',' + r] = { n, side };
+    CombatSpells.areaSpell(bt, side, 'plague_cloud', t);
+  },
+  holy_dawn(bt, side, t) {
+    const hp = ((DATA.spells.holy_dawn || {}).params || {}).hp || 10, tiles = CombatSpells.zonePlace(bt, side, 'holy_dawn', t), parts = [];
+    for (const b of CombatSpells.zoneVictims(bt, side, 'holy_dawn', tiles)) { const h = bt.heal(b, hp); if (h) parts.push(bt.name(b) + ' +' + h); bt.ev({ type: 'fx', fx: 'heal', at: [b.c, b.r] }); }
+    for (const [c, r] of tiles) bt.ev({ type: 'fx', fx: 'holy', at: [c, r] });
+    bt.say('Aube sacrée : ' + (parts.length ? parts.join(', ') : 'aucun blessé à soigner') + '.');
   },
   clone(bt, side, t) {
     if (bt.alive(side).length >= 9) return;
@@ -3198,6 +3260,21 @@ const CombatAI = {
   shooters(bt, l) { return l.filter(b => { const s = bt.stats(b); return s.ranged > 0 && s.rangedType && (s.rangedType === 'magic' ? b.ammo > 0 || b.casterMana >= 3 : b.ammo > 0); }); },
   // la chance qu'un sort visant t prenne (résistance, flux du nœud, contre-magie, Miroir magique)
   takes(bt, side, id, t) { const od = CombatSpells.odds(bt, side, id, t, 0); return od ? od.chance : 1 - CombatSpells.nodeFizzle(bt, side, id, 0); },
+  // ce que vaut une attaque de zone sur ces cases : dégâts attendus sur chaque unité qu'on voit (comme applyArea), l'ennemi en positif,
+  // les nôtres en négatif et plus lourdement ; la Nuée pestilentielle compte plusieurs rounds
+  areaValue(bt, side, id, tiles) {
+    const [kind, realm] = CombatSpells.AREA[id], str = ((DATA.spells[id] || {}).params || {}).strength || 10, mult = id === 'plague_cloud' ? 2.2 : 1;
+    let v = 0;
+    for (const b of CombatSpells.zoneVictims(bt, side, id, tiles)) {
+      if (b.side !== side && bt.isInvisible(b)) continue;
+      const s = bt.stats(b), on = b.u.ench.concat(b.tempEnch);
+      if (s.ab.magicImmunity || (realm === 'death' && s.ab.deathImmunity) || ((realm === 'death' || realm === 'chaos') && on.includes('righteousness'))) continue;
+      const def = bt.defFor(b, kind, realm, {}, s); if (def >= 50) continue;
+      const hp = Math.max(1, bt.hp(b)), dmg = Math.min(hp, Math.min(s.hp, CombatAI.expPos(str, 30, def, bt.toDefend(b, {}, s))) * bt.figures(b) * mult), st = CombatAI.st(bt, b);
+      v += (b.side === side ? -1.3 : 1) * (st * Math.min(1, dmg / hp) + (dmg >= hp * 0.9 ? 0.3 * st : 0)) / 10;
+    }
+    return v;
+  },
   hommPlan(bt, side, id, caster) {
     const foes = bt.alive(1 - side), friends = bt.alive(side), st = b => CombatAI.st(bt, b);
     const seen = foes.filter(f => !bt.isInvisible(f));
@@ -3381,6 +3458,26 @@ const CombatAI = {
           if (val > bv) { bv = val; best = { target: dd, to: v, score: val }; }
         }
         return best && bv >= 3 ? best : null;
+      }
+      // (0.31.72) sorts de zone : la case où ils font le plus de mal à l'ennemi, nos pertes comptées plus lourdement
+      case 'fire_rain': case 'frost_ring': case 'meteor_shower': case 'plague_cloud': {
+        let best = null, bv = 0;
+        for (let r = 0; r < CH; r++) for (let c = 0; c < CW; c++) {
+          const tiles = CombatSpells.zonePlace(bt, side, id, [c, r]);
+          let v = CombatAI.areaValue(bt, side, id, tiles);
+          if (id === 'meteor_shower' && side === ATT_SIDE) v += tiles.filter(([x, y]) => bt.hasWalls && bt.walls[x + ',' + y] && !bt.walls[x + ',' + y].broken).length * 0.8 + tiles.filter(([x, y]) => bt.towerAt(x, y) && bt.towerAt(x, y).side !== side).length * 2.5;
+          if (v > bv) { bv = v; best = [c, r]; }
+        }
+        return best && bv >= 3 ? { target: best, score: bv } : null;
+      }
+      case 'holy_dawn': {
+        let best = null, bv = 0;
+        const hp = ((DATA.spells.holy_dawn || {}).params || {}).hp || 10;
+        for (let r = 0; r < CH; r++) for (let c = 0; c < CW; c++) {
+          const v = U.sum(CombatSpells.zoneVictims(bt, side, 'holy_dawn', CombatSpells.zonePlace(bt, side, id, [c, r])), b => st(b) * Math.min(hp, b.u.dmg - (b.irrDmg || 0)) / Math.max(1, bt.stats(b).maxHp)) / 4;
+          if (v > bv) { bv = v; best = [c, r]; }
+        }
+        return best && bv >= 3 ? { target: best, score: bv } : null;
       }
       case 'clone': {
         if (friends.length >= 8) return null;

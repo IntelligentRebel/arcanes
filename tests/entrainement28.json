@@ -1,9 +1,9 @@
 {
- "nom": "Entraînement 28 : moteur 0.31.71 ; les sorts venus de Heroes entre les mains de l'IA",
+ "nom": "Entraînement 28 : moteur 0.31.72 ; les sorts venus de Heroes et les sorts de zone entre les mains de l'IA",
  "experiences": [
   {
    "id": "sorts_heroes",
-   "note": "Difficile, 250 tours, moteur 0.31.71. Le sorcier observé lance (ou non) en combat les 18 sorts de combat venus de Heroes (Lenteur, Champ de force, Rideau de flammes, Mines de feu, Brume, Téléportation, Rafale, Chaîne d'éclairs, etc.), ses héros aussi. Les adversaires les lancent dans les deux cas. À lire : le score et la survie du sorcier observé, le jeu contre « sans » (no_homm).",
+   "note": "Difficile, 250 tours, moteur 0.31.72. Le sorcier observé lance (ou non) en combat les 18 sorts de combat venus de Heroes (Lenteur, Champ de force, Rideau de flammes, Mines de feu, Brume, Téléportation, Rafale, Chaîne d’éclairs, etc.) et les 5 sorts de zone (Pluie de feu, Anneau de givre, Chute de météores, Nuée pestilentielle, Aube sacrée), ses héros aussi. Les adversaires les lancent dans les deux cas. À lire : le score et la survie du sorcier observé, le jeu contre « sans » (no_homm).",
    "tours": 250,
    "adversaires": "hard",
    "graine": 730000,
@@ -11,13 +11,13 @@
    "points": [100, 150, 200],
    "boss": true,
    "variantes": [
-    { "nom": "jeu 0.31.71", "niveau": "hard", "autrePlan": 2 },
+    { "nom": "jeu 0.31.72", "niveau": "hard", "autrePlan": 2 },
     { "nom": "sans les sorts de Heroes en combat", "niveau": "hard", "autrePlan": 2, "exp": { "no_homm": true } }
    ]
   },
   {
    "id": "portes",
-   "note": "Difficile, 250 tours, moteur 0.31.71. Le sorcier observé se sert (ou non) de la Porte dimensionnelle et du Portail urbain : une armée au secours d'une cité menacée, ou (la Porte) au pied de la cité visée quand le chemin fait un grand détour. Sans eux, il ne les cherche pas. À lire : le score, les cités perdues et la survie, le jeu contre « sans » (no_jumps).",
+   "note": "Difficile, 250 tours, moteur 0.31.72. Le sorcier observé se sert (ou non) de la Porte dimensionnelle et du Portail urbain : une armée au secours d'une cité menacée, ou (la Porte) au pied de la cité visée quand le chemin fait un grand détour. Sans eux, il ne les cherche pas. À lire : le score, les cités perdues et la survie, le jeu contre « sans » (no_jumps).",
    "tours": 250,
    "adversaires": "hard",
    "graine": 740000,
@@ -25,7 +25,7 @@
    "points": [100, 150, 200],
    "boss": true,
    "variantes": [
-    { "nom": "jeu 0.31.71", "niveau": "hard", "autrePlan": 2 },
+    { "nom": "jeu 0.31.72", "niveau": "hard", "autrePlan": 2 },
     { "nom": "sans Porte ni Portail", "niveau": "hard", "autrePlan": 2, "exp": { "no_jumps": true } }
    ]
   }

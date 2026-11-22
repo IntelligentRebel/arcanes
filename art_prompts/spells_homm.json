@@ -39,5 +39,17 @@
   ],
   "size": "1024x1024",
   "prompt": "Fantasy strategy game spell icons in the same rich painterly pixel-art style as the reference image: high detail, crisp pixel clusters, dramatic lighting, saturated magic glow, one clear focal subject per icon, readable even when shrunk to 48 pixels. Each icon is a square scene filling its frame, with a thin bevelled frame in the color of its magic realm (chaos: fiery red-orange; nature: emerald green; sorcery: bright blue; death: violet-purple; life: warm gold; arcane: silver-grey). Lay the icons out exactly like the reference: a grid on a flat pure magenta (#FF00FF) background, every icon the same size, evenly spaced with a clear magenta gap between them, nothing touching the image edge. No text, no letters, no numbers, no labels, no watermark.\n\nLayout: 2 columns x 2 rows, 4 icons, read left to right then top to bottom.\n\n1. (death realm frame) spectral violet chains binding a warrior's sword arm to the ground, his weapon pinned and useless.\n2. (death realm frame) a dark violet dusk swallowing a line of archers, their arrows dissolving into shadows before leaving the bows.\n3. (death realm frame) a kneeling soldier dissolving into purple soul light that pours into a fallen comrade rising from the ground.\n4. (death realm frame) a pale warrior with glowing red eyes striking an enemy, crimson streams of life flowing from the wound back into him, bats around."
+ },
+ "D": {
+  "grid": "3 icons on the top row, 2 centered on the bottom row",
+  "ids": [
+   "fire_rain",
+   "frost_ring",
+   "meteor_shower",
+   "plague_cloud",
+   "holy_dawn"
+  ],
+  "size": "1536x1024",
+  "prompt": "(0.31.72) voir le texte envoyé à Codex : pluie de feu, anneau de givre, chute de météores, nuée pestilentielle, aube sacrée"
  }
 }

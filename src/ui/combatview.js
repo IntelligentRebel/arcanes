@@ -374,6 +374,7 @@ const CombatView = {
       if (bt.inCity(c, r)) { ctx.fillStyle = 'rgba(120,100,80,.28)'; ctx.fill(); }
       if (bt.mud[c + ',' + r]) { ctx.fillStyle = 'rgba(70,50,20,.6)'; ctx.fill(); }
       if (bt.mistAt && bt.mistAt(c, r)) { ctx.fillStyle = 'rgba(212,222,238,' + (.34 + .08 * Math.sin(now / 900 + c * .7 + r * .5)).toFixed(3) + ')'; ctx.fill(); }
+      if (bt.plagueAt && bt.plagueAt(c, r)) { ctx.fillStyle = 'rgba(55,25,65,' + (.5 + .08 * Math.sin(now / 700 + c * .9 + r * .4)).toFixed(3) + ')'; ctx.fill(); }
       if (bt.inRiver && bt.inRiver(c, r)) CombatView.drawWater(p, c, r, now);
       else if (bt.isBridge && bt.isBridge(c, r)) { CombatView.drawWater(p, c, r, now); CombatView.drawBridge(p); }
       ctx.beginPath(); ctx.moveTo(p.x, p.y - TH / 2); ctx.lineTo(p.x + TW / 2, p.y); ctx.lineTo(p.x, p.y + TH / 2); ctx.lineTo(p.x - TW / 2, p.y); ctx.closePath();
@@ -399,6 +400,7 @@ const CombatView = {
     for (const k in bt.flames || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.8, f: () => CombatView.drawCurtain(c, r, now) }); }
     for (const k in bt.field || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.45, f: () => CombatView.drawField(c, r, now) }); }
     for (const k in bt.mist || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.95, f: () => CombatView.drawMist(c, r, now) }); }
+    for (const k in bt.plague || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.95, f: () => CombatView.drawPlague(c, r, now) }); }
     if (bt.buildings) for (const b of bt.buildings) items.push({ d: b.c + b.r, f: () => CombatView.drawHouse(b) });
     if (bt.hasWalls || bt.wallOfFire || bt.wallOfDarkness) for (const k in bt.walls) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.3, f: () => CombatView.drawWall(c, r, bt.walls[k], 'back') }, { d: c + r + 0.6, f: () => CombatView.drawWall(c, r, bt.walls[k], 'front') }); }
     if (bt.hasWalls && Sprites.hasHD('cwall:tower')) {
@@ -476,6 +478,7 @@ const CombatView = {
       const P = CombatView.iso(top[0], top[1]), sp = DATA.spells[CombatView.mode.id];
       const mid = CombatView.mode.id, txt = mid === 'force_field' ? (sp ? sp.name : '') + ' : ' + U.n(zone.size, 'case') + (zone.size < 3 ? ' (les autres sont occupées)' : '') + ' · R : tourner'
         : mid === 'fire_mines' ? U.n(zone.size, 'mine', 'mines') + (zone.size < 5 ? ' (pas sous une unité)' : '')
+        : mid === 'holy_dawn' ? (sp ? sp.name : '') + ' : ' + (hit.length ? U.n(hit.length, 'unité soignée', 'unités soignées') : 'aucun blessé à soigner')
         : (sp ? sp.name : '') + ' : ' + (nf ? U.n(nf, 'ennemi', 'ennemis') : 'aucun ennemi') + (zm.reach ? ' à portée ce round' : '') + (na ? ', ' + U.n(na, 'des vôtres', 'des vôtres') : '') + (zm.line ? ' · R : tourner' : '');
       ctx.save(); ctx.font = 'bold ' + Math.max(13, Math.round(TW * .19)) + 'px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
       ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(20,14,4,.95)'; ctx.strokeText(txt, P.x, P.y - TH / 2 - TW * .3);
@@ -751,19 +754,25 @@ const CombatView = {
   ZONES: { earth_to_mud: { r: 2, fill: 'rgba(150,104,42,', edge: 'rgba(255,214,110,.95)' }, magic_vortex: { r: 4, reach: true, fill: 'rgba(170,90,255,', edge: 'rgba(220,180,255,.95)' },
     // (0.31.71) sorts venus de Heroes : lignes de trois cases (qu'on tourne avec R), croix de cinq cases, carré de 3 × 3
     force_field: { line: true, fill: 'rgba(110,230,170,', edge: 'rgba(190,255,215,.95)' }, fire_curtain: { line: true, fill: 'rgba(255,120,40,', edge: 'rgba(255,200,130,.95)' },
-    fire_mines: { cross: true, fill: 'rgba(255,100,50,', edge: 'rgba(255,180,120,.95)' }, mist: { r: 1, fill: 'rgba(215,225,240,', edge: 'rgba(240,245,255,.95)' } },
+    fire_mines: { cross: true, fill: 'rgba(255,100,50,', edge: 'rgba(255,180,120,.95)' }, mist: { r: 1, fill: 'rgba(215,225,240,', edge: 'rgba(240,245,255,.95)' },
+    // (0.31.72) sorts de zone : 3 × 3 cases (l'Anneau de givre : les huit autour du centre)
+    fire_rain: { r: 1, fill: 'rgba(255,90,30,', edge: 'rgba(255,190,110,.95)' }, frost_ring: { ring: true, fill: 'rgba(150,210,255,', edge: 'rgba(210,240,255,.95)' },
+    meteor_shower: { r: 1, fill: 'rgba(255,70,20,', edge: 'rgba(255,170,90,.95)' }, plague_cloud: { r: 1, fill: 'rgba(130,200,90,', edge: 'rgba(190,240,150,.95)' },
+    holy_dawn: { r: 1, fill: 'rgba(255,220,120,', edge: 'rgba(255,240,180,.95)' } },
   ROTS: [[1, -1], [1, 1], [1, 0], [0, 1]],
   zoneOf(id, c, r, rot) {
     const z = CombatView.ZONES[id]; if (!z) return null;
     const out = new Set(), add = (x, y) => { if (x >= 0 && y >= 0 && x < CW && y < CH) out.add(x + ',' + y); };
     if (z.line) { const [dc, dr] = CombatView.ROTS[(rot || 0) & 3]; for (const k of [-1, 0, 1]) add(c + k * dc, r + k * dr); }
     else if (z.cross) for (const [dc, dr] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]) add(c + dc, r + dr);
+    else if (z.ring) { for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) if (dc || dr) add(c + dc, r + dr); }
     else for (let dc = -z.r; dc <= z.r; dc++) for (let dr = -z.r; dr <= z.r; dr++) add(c + dc, r + dr);
     return out;
   },
   // les unités que la zone prendrait (la boue : ni les volants ni les immatériels ; le vortex : les ennemis seulement)
   zoneUnits(id, zone) {
     const bt = CombatView.bt, me = CombatView.humanSide;
+    if (id === 'holy_dawn') return CombatSpells.zoneVictims(bt, me, id, [...zone].map(k => k.split(',').map(Number)));
     return bt.units.filter(b => !b.dead && zone.has(b.c + ',' + b.r) && !(b.side !== me && bt.isInvisible(b)) && (id !== 'magic_vortex' || b.side !== me) && (id !== 'fire_curtain' || (b.side !== me && !bt.stats(b).flying))
       && !(id === 'earth_to_mud' && (bt.stats(b).flying || bt.stats(b).ab.nonCorporeal)));
   },
@@ -835,14 +844,28 @@ const CombatView = {
     ctx.restore();
   },
   // la brume : des volutes pâles qui dérivent au-dessus de la case
-  drawMist(c, r, now) {
+  drawMist(c, r, now, rgb, a) {
     const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW;
+    rgb = rgb || '225,232,245'; a = a || .22;
     ctx.save();
     for (let i = 0; i < 3; i++) {
       const ph = (now / 4000 + i / 3 + (c * 5 + r * 11) % 7 / 7) % 1, x = p.x + Math.sin(ph * 6.28 + i) * TW * .18, y = p.y - TW * (.12 + .1 * i);
       const g = ctx.createRadialGradient(x, y, 0, x, y, TW * .32);
-      g.addColorStop(0, 'rgba(225,232,245,' + (.22 + .08 * Math.sin(ph * 6.28)).toFixed(3) + ')'); g.addColorStop(1, 'rgba(225,232,245,0)');
+      g.addColorStop(0, 'rgba(' + rgb + ',' + (a + .08 * Math.sin(ph * 6.28)).toFixed(3) + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
       ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, TW * .34, TW * .2, 0, 0, 7); ctx.fill();
+    }
+    ctx.restore();
+  },
+  // la Nuée pestilentielle : des volutes vert malade et violettes qui roulent au ras du sol
+  drawPlague(c, r, now) {
+    const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW;
+    ctx.save();
+    for (let i = 0; i < 4; i++) {
+      const ph = (now / 3200 + i / 4 + (c * 5 + r * 11) % 7 / 7) % 1, x = p.x + Math.sin(ph * 6.28 + i * 1.7) * TW * .2, y = p.y - TW * (.06 + .09 * i) - ph * TW * .06;
+      const rgb = i % 2 ? '125,60,150' : '170,220,60', a = (i % 2 ? .45 : .5) * Math.sin(ph * 3.14);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, TW * .3);
+      g.addColorStop(0, 'rgba(' + rgb + ',' + a.toFixed(3) + ')'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, TW * .32, TW * .19, 0, 0, 7); ctx.fill();
     }
     ctx.restore();
   },

@@ -4422,7 +4422,7 @@
  "Faiblesse": {
   "at": [
    "data/spells.js:69",
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Si l'unité échoue à résister (−2), elle perd 2 en attaque de mêlée, de jet et de tir physique.": {
@@ -4814,7 +4814,7 @@
  "Trait de feu": {
   "at": [
    "data/spells.js:111",
-   "src/engine/combat.js:2259"
+   "src/engine/combat.js:2272"
   ]
  },
  "Trait de flammes de force 5 sur une unité ennemie, les dégâts passant d'une figurine à l'autre ; +1 de force par mana supplémentaire (max 25).": {
@@ -5037,7 +5037,7 @@
  "Frappe de flammes": {
   "at": [
    "data/spells.js:137",
-   "src/engine/combat.js:2148"
+   "src/engine/combat.js:2161"
   ]
  },
  "Des arcs de feu frappent chaque figurine ennemie d'une attaque de feu de force 15.": {
@@ -5639,7 +5639,7 @@
  "Vertige": {
   "at": [
    "data/spells.js:204",
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Si l'unité échoue à résister, elle subit −20 % pour toucher et −1 en défense jusqu'à la fin du combat.": {
@@ -5777,7 +5777,7 @@
  "Tempête mentale": {
   "at": [
    "data/spells.js:219",
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Sans jet de résistance, l'unité perd 5 en attaque (mêlée, jet, distance), en défense et en résistance. Sans effet sur les immunisés aux illusions.": {
@@ -5939,7 +5939,7 @@
  "Rideau de flammes": {
   "at": [
    "data/spells.js:237",
-   "src/engine/combat.js:194"
+   "src/engine/combat.js:196"
   ]
  },
  "Embrase trois cases alignées pendant 3 rounds : un ennemi qui y entre subit une attaque de feu de force 5, puis 3 à chaque round où il y reste (pas les volants).": {
@@ -6106,6 +6106,56 @@
  "Ramène instantanément une pile de vos unités dans la cité de votre choix sur le même plan ; elle s'arrête là pour le tour.": {
   "at": [
    "data/spells.js:253"
+  ]
+ },
+ "Pluie de feu": {
+  "at": [
+   "data/spells.js:255"
+  ]
+ },
+ "Une pluie de feu s'abat sur 3 × 3 cases : chaque figurine qui s'y trouve, amie ou ennemie, subit une attaque de feu de force 10.": {
+  "at": [
+   "data/spells.js:255"
+  ]
+ },
+ "Anneau de givre": {
+  "at": [
+   "data/spells.js:256"
+  ]
+ },
+ "Un anneau de glace jaillit sur les huit cases autour du point visé, qui est épargné : chaque figurine de l'anneau, amie ou ennemie, subit une attaque de froid de force 10.": {
+  "at": [
+   "data/spells.js:256"
+  ]
+ },
+ "Chute de météores": {
+  "at": [
+   "data/spells.js:257"
+  ]
+ },
+ "Des météores écrasent 3 × 3 cases : chaque figurine, amie ou ennemie, subit une attaque de feu de force 18 ; les pans de muraille de la zone s'écroulent et ses tours encaissent 15 dégâts.": {
+  "at": [
+   "data/spells.js:257"
+  ]
+ },
+ "Nuée pestilentielle": {
+  "at": [
+   "data/spells.js:258"
+  ]
+ },
+ "Une nuée mortelle couvre 3 × 3 cases pendant 3 rounds : toute unité qui s'y trouve, amie ou ennemie, subit aussitôt puis à chaque round une attaque de mort de force 5 sur chaque figurine. Les morts-vivants et les créatures insensibles à la mort n'en souffrent pas.": {
+  "at": [
+   "data/spells.js:258"
+  ]
+ },
+ "Aube sacrée": {
+  "at": [
+   "data/spells.js:259"
+  ]
+ },
+ "Une lumière d'aube baigne 3 × 3 cases : chacune de vos unités qui s'y trouve récupère 10 PV. Sans effet sur les créatures de la mort.": {
+  "at": [
+   "data/spells.js:259"
   ]
  },
  "Halle des Jarls": {
@@ -6990,7 +7040,7 @@
  "Sorts de combat": {
   "at": [
    "src/core/util.js:73",
-   "src/ui/combatview.js:1771"
+   "src/ui/combatview.js:1794"
   ]
  },
  "Livre de légende": {
@@ -7277,8 +7327,8 @@
  "Invocation de démons": {
   "at": [
    "src/core/util.js:119",
-   "src/engine/combat.js:1863",
-   "src/ui/combatview.js:1795"
+   "src/engine/combat.js:1875",
+   "src/ui/combatview.js:1818"
   ]
  },
  "Précision": {
@@ -7296,7 +7346,7 @@
  "Lancer": {
   "at": [
    "src/core/util.js:119",
-   "src/ui/combatview.js:1907",
+   "src/ui/combatview.js:1930",
    "src/ui/panels.js:310"
   ]
  },
@@ -8303,7 +8353,7 @@
  },
  "Le combat commence{0}.": {
   "at": [
-   "src/engine/combat.js:85"
+   "src/engine/combat.js:86"
   ],
   "args": [
    "this.city ? ' devant ' + this.city.name : ''"
@@ -8311,7 +8361,7 @@
  },
  " devant {0}": {
   "at": [
-   "src/engine/combat.js:85"
+   "src/engine/combat.js:86"
   ],
   "args": [
    "this.city.name"
@@ -8319,7 +8369,7 @@
  },
  "Flux d'un nœud de {0} : les créatures de {1} y gagnent +2 en attaque, défense et résistance, et tout sort d'un autre royaume risque de se dissiper (sauf pour un sorcier qui a la Maîtrise des nœuds).": {
   "at": [
-   "src/engine/combat.js:86"
+   "src/engine/combat.js:87"
   ],
   "args": [
    "rn",
@@ -8328,12 +8378,12 @@
  },
  "En flammes : 3 de dégâts de feu par round à qui s'y tient": {
   "at": [
-   "src/engine/combat.js:192"
+   "src/engine/combat.js:194"
   ]
  },
  "Champ de force : infranchissable, même pour les volants (encore {0})": {
   "at": [
-   "src/engine/combat.js:193"
+   "src/engine/combat.js:195"
   ],
   "args": [
    "U.n(this.field[k].n, 'round')"
@@ -8341,22 +8391,24 @@
  },
  "round": {
   "at": [
-   "src/engine/combat.js:193",
-   "src/engine/combat.js:194",
-   "src/ui/combatview.js:2006"
+   "src/engine/combat.js:195",
+   "src/engine/combat.js:196",
+   "src/engine/combat.js:199",
+   "src/ui/combatview.js:2029"
   ]
  },
  "rounds": {
   "at": [
-   "src/engine/combat.js:193",
-   "src/engine/combat.js:194",
-   "src/ui/combatview.js:2006"
+   "src/engine/combat.js:195",
+   "src/engine/combat.js:196",
+   "src/engine/combat.js:199",
+   "src/ui/combatview.js:2029"
   ],
   "hint": "pluriel de « round »"
  },
  "{0} : feu de force 5 sur {1} qui y entre, 3 à chaque round où il y reste ; pas sur les volants (encore {2})": {
   "at": [
-   "src/engine/combat.js:194"
+   "src/engine/combat.js:196"
   ],
   "args": [
    "f.side === viewer ? 'Rideau de flammes (le vôtre)' : 'Rideau de flammes'",
@@ -8366,88 +8418,96 @@
  },
  "Rideau de flammes (le vôtre)": {
   "at": [
-   "src/engine/combat.js:194"
+   "src/engine/combat.js:196"
   ]
  },
  "l'ennemi": {
   "at": [
-   "src/engine/combat.js:194"
+   "src/engine/combat.js:196"
   ]
  },
  "vos unités": {
   "at": [
-   "src/engine/combat.js:194"
+   "src/engine/combat.js:196"
   ]
  },
  "Votre mine de feu : explose sous le premier ennemi qui y entre": {
   "at": [
-   "src/engine/combat.js:195"
+   "src/engine/combat.js:197"
   ]
  },
  "Brume : les tirs qui en partent ou qui y visent perdent la moitié de leur force": {
   "at": [
-   "src/engine/combat.js:196"
+   "src/engine/combat.js:198"
+  ]
+ },
+ "Nuée pestilentielle : une attaque de mort de force 5 sur chaque figurine, à chaque round, amie ou ennemie (pas les morts-vivants) ; encore {0}": {
+  "at": [
+   "src/engine/combat.js:199"
+  ],
+  "args": [
+   "U.n(f.n, 'round')"
   ]
  },
  "Forêt : +2 défense contre les tirs ; y entrer coûte 1,5 mouvement ; le feu s'y propage": {
   "at": [
-   "src/engine/combat.js:197"
+   "src/engine/combat.js:200"
   ]
  },
  "Colline : +10 % pour toucher à distance, +1 défense en mêlée ; y monter coûte 1,5 mouvement": {
   "at": [
-   "src/engine/combat.js:198"
+   "src/engine/combat.js:201"
   ]
  },
  "Rochers : infranchissables": {
   "at": [
-   "src/engine/combat.js:199"
+   "src/engine/combat.js:202"
   ]
  },
  "Eau profonde : infranchissable, sauf pour les unités qui volent, nagent ou marchent sur l'eau": {
   "at": [
-   "src/engine/combat.js:200"
+   "src/engine/combat.js:203"
   ]
  },
  "Gué : y entrer coûte tout le mouvement (pas aux nageurs), -1 défense dans l'eau": {
   "at": [
-   "src/engine/combat.js:201"
+   "src/engine/combat.js:204"
   ]
  },
  "Pont": {
   "at": [
-   "src/engine/combat.js:202"
+   "src/engine/combat.js:205"
   ]
  },
  "Fondrière : y entrer coûte tout le mouvement": {
   "at": [
-   "src/engine/combat.js:203"
+   "src/engine/combat.js:206"
   ]
  },
  "Porte : fermée à l'assaillant": {
   "at": [
-   "src/engine/combat.js:204"
+   "src/engine/combat.js:207"
   ]
  },
  "Chemin de ronde : les tireurs y visent mieux et plus loin ; les créneaux protègent des tirs (+2 en défense)": {
   "at": [
-   "src/engine/combat.js:204"
+   "src/engine/combat.js:207"
   ]
  },
  "Mur de feu : un assaillant qui le franchit subit une attaque de feu de force 5 (pas les volants ; les défenseurs passent librement)": {
   "at": [
-   "src/engine/combat.js:205"
+   "src/engine/combat.js:208"
   ]
  },
  "Souches calcinées : plus de couvert": {
   "at": [
-   "src/engine/combat.js:206"
+   "src/engine/combat.js:209"
   ]
  },
  "{0} dans les flammes ({1}).": {
   "at": [
-   "src/engine/combat.js:223",
-   "src/engine/combat.js:2476"
+   "src/engine/combat.js:226",
+   "src/engine/combat.js:2514"
   ],
   "args": [
    "this.subj(b, 'est pris')",
@@ -8456,22 +8516,22 @@
  },
  "est pris": {
   "at": [
-   "src/engine/combat.js:223",
-   "src/engine/combat.js:2180",
-   "src/engine/combat.js:2476"
+   "src/engine/combat.js:226",
+   "src/engine/combat.js:2193",
+   "src/engine/combat.js:2514"
   ]
  },
  "sont pris": {
   "at": [
-   "src/engine/combat.js:223",
-   "src/engine/combat.js:2180",
-   "src/engine/combat.js:2476"
+   "src/engine/combat.js:226",
+   "src/engine/combat.js:2193",
+   "src/engine/combat.js:2514"
   ],
   "hint": "pluriel de « est pris » (le sujet est une troupe de plusieurs figurines)"
  },
  "Le feu gagne {0}.": {
   "at": [
-   "src/engine/combat.js:229"
+   "src/engine/combat.js:232"
   ],
   "args": [
    "n > 1 ? n + ' bosquets voisins' : 'un bosquet voisin'"
@@ -8479,7 +8539,7 @@
  },
  "{0} bosquets voisins": {
   "at": [
-   "src/engine/combat.js:229"
+   "src/engine/combat.js:232"
   ],
   "args": [
    "n"
@@ -8487,12 +8547,12 @@
  },
  "un bosquet voisin": {
   "at": [
-   "src/engine/combat.js:229"
+   "src/engine/combat.js:232"
   ]
  },
  "{0} (double)": {
   "at": [
-   "src/engine/combat.js:363"
+   "src/engine/combat.js:366"
   ],
   "args": [
    "Units.label(b.u)"
@@ -8500,7 +8560,7 @@
  },
  "Martyre : les blessures de {0} passent à {1}.": {
   "at": [
-   "src/engine/combat.js:511"
+   "src/engine/combat.js:514"
   ],
   "args": [
    "this.name(b)",
@@ -8509,13 +8569,13 @@
  },
  "Le bosquet s'embrase !": {
   "at": [
-   "src/engine/combat.js:547",
-   "src/engine/combat.js:567"
+   "src/engine/combat.js:550",
+   "src/engine/combat.js:570"
   ]
  },
  "{0} unités sont figées par la terreur.": {
   "at": [
-   "src/engine/combat.js:616"
+   "src/engine/combat.js:619"
   ],
   "args": [
    "frozen"
@@ -8523,7 +8583,7 @@
  },
  "{0} par la terreur.": {
   "at": [
-   "src/engine/combat.js:616"
+   "src/engine/combat.js:619"
   ],
   "args": [
    "names.join(', ') + (frozen > 1 || Units.plural(fz[0].u) ? ' sont figés' : ' est figé')"
@@ -8531,17 +8591,17 @@
  },
  " sont figés": {
   "at": [
-   "src/engine/combat.js:616"
+   "src/engine/combat.js:619"
   ]
  },
  " est figé": {
   "at": [
-   "src/engine/combat.js:616"
+   "src/engine/combat.js:619"
   ]
  },
  "{0}, confus.": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ],
   "args": [
    "this.subj(b, ['est cloué sur place', 'erre au hasard', 'frappe au hasard'][r])"
@@ -8549,40 +8609,40 @@
  },
  "est cloué sur place": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ]
  },
  "erre au hasard": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ]
  },
  "frappe au hasard": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ]
  },
  "sont cloués sur place": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ],
   "hint": "pluriel de « est cloué sur place » (le sujet est une troupe de plusieurs figurines)"
  },
  "errent au hasard": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ],
   "hint": "pluriel de « erre au hasard » (le sujet est une troupe de plusieurs figurines)"
  },
  "frappent au hasard": {
   "at": [
-   "src/engine/combat.js:626"
+   "src/engine/combat.js:629"
   ],
   "hint": "pluriel de « frappe au hasard » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} le mur de feu ({1} dégâts).": {
   "at": [
-   "src/engine/combat.js:821"
+   "src/engine/combat.js:824"
   ],
   "args": [
    "this.subj(b, 'traverse')",
@@ -8591,18 +8651,18 @@
  },
  "traverse": {
   "at": [
-   "src/engine/combat.js:821"
+   "src/engine/combat.js:824"
   ]
  },
  "traversent": {
   "at": [
-   "src/engine/combat.js:821"
+   "src/engine/combat.js:824"
   ],
   "hint": "pluriel de « traverse » (le sujet est une troupe de plusieurs figurines)"
  },
  "Rideau de flammes : {0} le traverse ({1} dégâts).": {
   "at": [
-   "src/engine/combat.js:835"
+   "src/engine/combat.js:838"
   ],
   "args": [
    "this.name(b)",
@@ -8611,7 +8671,7 @@
  },
  "Une mine explose sous {0} ({1} dégâts).": {
   "at": [
-   "src/engine/combat.js:843"
+   "src/engine/combat.js:846"
   ],
   "args": [
    "this.name(b)",
@@ -8620,22 +8680,22 @@
  },
  "dans le dos": {
   "at": [
-   "src/engine/combat.js:862"
+   "src/engine/combat.js:865"
   ]
  },
  "de flanc": {
   "at": [
-   "src/engine/combat.js:862"
+   "src/engine/combat.js:865"
   ]
  },
  "plus de mouvement pour tirer": {
   "at": [
-   "src/engine/combat.js:896"
+   "src/engine/combat.js:899"
   ]
  },
  "tir magique : 3 de mana requis ({0} restant{1})": {
   "at": [
-   "src/engine/combat.js:897"
+   "src/engine/combat.js:900"
   ],
   "args": [
    "m",
@@ -8644,32 +8704,32 @@
  },
  "plus de munitions": {
   "at": [
-   "src/engine/combat.js:898"
+   "src/engine/combat.js:901"
   ]
  },
  "un ennemi au contact empêche de tirer": {
   "at": [
-   "src/engine/combat.js:899"
+   "src/engine/combat.js:902"
   ]
  },
  "cible invisible": {
   "at": [
-   "src/engine/combat.js:900"
+   "src/engine/combat.js:903"
   ]
  },
  "le Mur de ténèbres cache la cible": {
   "at": [
-   "src/engine/combat.js:901"
+   "src/engine/combat.js:904"
   ]
  },
  "la muraille arrête le trait magique": {
   "at": [
-   "src/engine/combat.js:902"
+   "src/engine/combat.js:905"
   ]
  },
  "{0} (+{1} en attaque) !": {
   "at": [
-   "src/engine/combat.js:1053"
+   "src/engine/combat.js:1056"
   ],
   "args": [
    "this.subj(a, 'charge')",
@@ -8678,18 +8738,18 @@
  },
  "charge": {
   "at": [
-   "src/engine/combat.js:1053"
+   "src/engine/combat.js:1056"
   ]
  },
  "chargent": {
   "at": [
-   "src/engine/combat.js:1053"
+   "src/engine/combat.js:1056"
   ],
   "hint": "pluriel de « charge » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} au mur de feu ({1}).": {
   "at": [
-   "src/engine/combat.js:1124"
+   "src/engine/combat.js:1127"
   ],
   "args": [
    "this.subj(a, 'se brûle')",
@@ -8698,18 +8758,18 @@
  },
  "se brûle": {
   "at": [
-   "src/engine/combat.js:1124"
+   "src/engine/combat.js:1127"
   ]
  },
  "se brûlent": {
   "at": [
-   "src/engine/combat.js:1124"
+   "src/engine/combat.js:1127"
   ],
   "hint": "pluriel de « se brûle » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} {1}{2} : {3} dégâts infligés, {4} subis.{5}": {
   "at": [
-   "src/engine/combat.js:1133"
+   "src/engine/combat.js:1136"
   ],
   "args": [
    "this.subj(a, 'attaque')",
@@ -8722,18 +8782,18 @@
  },
  "attaque": {
   "at": [
-   "src/engine/combat.js:1133"
+   "src/engine/combat.js:1136"
   ]
  },
  "attaquent": {
   "at": [
-   "src/engine/combat.js:1133"
+   "src/engine/combat.js:1136"
   ],
   "hint": "pluriel de « attaque » (le sujet est une troupe de plusieurs figurines)"
  },
  " Effroi : {0}.": {
   "at": [
-   "src/engine/combat.js:1133"
+   "src/engine/combat.js:1136"
   ],
   "args": [
    "[fearA ? U.n(fearA, 'figurine') + ' de ' + this.name(a) + ' paralysée' + (fearA > 1 ? 's' "
@@ -8741,8 +8801,8 @@
  },
  "{0} de {1} paralysée{2}": {
   "at": [
-   "src/engine/combat.js:1133",
-   "src/engine/combat.js:1133"
+   "src/engine/combat.js:1136",
+   "src/engine/combat.js:1136"
   ],
   "args": [
    "U.n(fearA, 'figurine')",
@@ -8752,24 +8812,24 @@
  },
  "figurine": {
   "at": [
-   "src/engine/combat.js:1133",
-   "src/engine/combat.js:1133",
-   "src/engine/combat.js:2161",
-   "src/engine/combat.js:2167"
+   "src/engine/combat.js:1136",
+   "src/engine/combat.js:1136",
+   "src/engine/combat.js:2174",
+   "src/engine/combat.js:2180"
   ]
  },
  "figurines": {
   "at": [
-   "src/engine/combat.js:1133",
-   "src/engine/combat.js:1133",
-   "src/engine/combat.js:2161",
-   "src/engine/combat.js:2167"
+   "src/engine/combat.js:1136",
+   "src/engine/combat.js:1136",
+   "src/engine/combat.js:2174",
+   "src/engine/combat.js:2180"
   ],
   "hint": "pluriel de « figurine »"
  },
  "Bouclier de feu de {0} : {1} dégâts à {2}.": {
   "at": [
-   "src/engine/combat.js:1144"
+   "src/engine/combat.js:1147"
   ],
   "args": [
    "this.name(owner)",
@@ -8779,7 +8839,7 @@
  },
  "Vampirisme : +{0} PV pour {1}.": {
   "at": [
-   "src/engine/combat.js:1151"
+   "src/engine/combat.js:1154"
   ],
   "args": [
    "h",
@@ -8788,7 +8848,7 @@
  },
  "{0} la muraille.": {
   "at": [
-   "src/engine/combat.js:1165"
+   "src/engine/combat.js:1168"
   ],
   "args": [
    "this.subj(a, 'bat')"
@@ -8796,23 +8856,23 @@
  },
  "bat": {
   "at": [
-   "src/engine/combat.js:1165"
+   "src/engine/combat.js:1168"
   ]
  },
  "La muraille tient bon.": {
   "at": [
-   "src/engine/combat.js:1169"
+   "src/engine/combat.js:1172"
   ]
  },
  "Une section de muraille s'effondre !": {
   "at": [
-   "src/engine/combat.js:1174"
+   "src/engine/combat.js:1177"
   ]
  },
  "{0} sur {1} : {2} dégâts.": {
   "at": [
-   "src/engine/combat.js:1215",
-   "src/engine/combat.js:1300"
+   "src/engine/combat.js:1218",
+   "src/engine/combat.js:1303"
   ],
   "args": [
    "this.subj(a, 'tire')",
@@ -8822,55 +8882,55 @@
  },
  "tire": {
   "at": [
-   "src/engine/combat.js:1215",
-   "src/engine/combat.js:1300"
+   "src/engine/combat.js:1218",
+   "src/engine/combat.js:1303"
   ]
  },
  "tirent": {
   "at": [
-   "src/engine/combat.js:1215",
-   "src/engine/combat.js:1300"
+   "src/engine/combat.js:1218",
+   "src/engine/combat.js:1303"
   ],
   "hint": "pluriel de « tire » (le sujet est une troupe de plusieurs figurines)"
  },
  "la tour du sorcier": {
   "at": [
-   "src/engine/combat.js:1226"
+   "src/engine/combat.js:1229"
   ]
  },
  "la porte": {
   "at": [
-   "src/engine/combat.js:1226"
+   "src/engine/combat.js:1229"
   ]
  },
  "la tour de droite": {
   "at": [
-   "src/engine/combat.js:1226"
+   "src/engine/combat.js:1229"
   ]
  },
  "la tour de gauche": {
   "at": [
-   "src/engine/combat.js:1226"
+   "src/engine/combat.js:1229"
   ]
  },
  "La porte cède sous les coups.": {
   "at": [
-   "src/engine/combat.js:1265"
+   "src/engine/combat.js:1268"
   ]
  },
  " s'effondre dans un fracas de magie.": {
   "at": [
-   "src/engine/combat.js:1265"
+   "src/engine/combat.js:1268"
   ]
  },
  " s'effondre : la muraille est ouverte.": {
   "at": [
-   "src/engine/combat.js:1265"
+   "src/engine/combat.js:1268"
   ]
  },
  "{0} {1} : {2} dégâts.": {
   "at": [
-   "src/engine/combat.js:1279"
+   "src/engine/combat.js:1282"
   ],
   "args": [
    "this.subj(a, 'frappe')",
@@ -8880,18 +8940,18 @@
  },
  "frappe": {
   "at": [
-   "src/engine/combat.js:1279"
+   "src/engine/combat.js:1282"
   ]
  },
  "frappent": {
   "at": [
-   "src/engine/combat.js:1279"
+   "src/engine/combat.js:1282"
   ],
   "hint": "pluriel de « frappe » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} tire sur {1} : {2} dégâts.": {
   "at": [
-   "src/engine/combat.js:1387"
+   "src/engine/combat.js:1390"
   ],
   "args": [
    "U.cap(this.towerName(t))",
@@ -8901,7 +8961,7 @@
  },
  "Le double de {0} se dissipe.": {
   "at": [
-   "src/engine/combat.js:1397"
+   "src/engine/combat.js:1400"
   ],
   "args": [
    "Units.label(b.u)"
@@ -8909,27 +8969,35 @@
  },
  "est anéanti": {
   "at": [
-   "src/engine/combat.js:1399"
+   "src/engine/combat.js:1402"
   ]
  },
  "sont anéantis": {
   "at": [
-   "src/engine/combat.js:1399"
+   "src/engine/combat.js:1402"
   ],
   "hint": "pluriel de « est anéanti » (le sujet est une troupe de plusieurs figurines)"
  },
  "Rideau de flammes : {0} y brûle ({1}).": {
   "at": [
-   "src/engine/combat.js:1453"
+   "src/engine/combat.js:1456"
   ],
   "args": [
    "this.name(b)",
    "d"
   ]
  },
+ "Nuée pestilentielle : {0}.": {
+  "at": [
+   "src/engine/combat.js:1470"
+  ],
+  "args": [
+   "hit.join(', ')"
+  ]
+ },
  "Le vortex happe {0} ({1}).": {
   "at": [
-   "src/engine/combat.js:1477"
+   "src/engine/combat.js:1489"
   ],
   "args": [
    "this.name(t)",
@@ -8938,7 +9006,7 @@
  },
  "La foudre frappe {0} ({1}).": {
   "at": [
-   "src/engine/combat.js:1502"
+   "src/engine/combat.js:1514"
   ],
   "args": [
    "this.name(t)",
@@ -8947,7 +9015,7 @@
  },
  "Supplice : {0} PV.": {
   "at": [
-   "src/engine/combat.js:1513"
+   "src/engine/combat.js:1525"
   ],
   "args": [
    "hit.join(', ')"
@@ -8955,7 +9023,7 @@
  },
  "vous perdez {0} mana": {
   "at": [
-   "src/engine/combat.js:1524"
+   "src/engine/combat.js:1536"
   ],
   "args": [
    "fm"
@@ -8963,7 +9031,7 @@
  },
  "{0} perd {1} mana": {
   "at": [
-   "src/engine/combat.js:1524"
+   "src/engine/combat.js:1536"
   ],
   "args": [
    "U.cap(me && me.human ? Players.nameFor(this.game, me.id, foe.id) : foe.name)",
@@ -8972,7 +9040,7 @@
  },
  "{0} mana": {
   "at": [
-   "src/engine/combat.js:1525",
+   "src/engine/combat.js:1537",
    "src/ui/ui.js:207",
    "src/ui/city.js:672",
    "src/ui/magicui.js:350"
@@ -8983,22 +9051,22 @@
  },
  "vos lanceurs perdent ": {
   "at": [
-   "src/engine/combat.js:1525"
+   "src/engine/combat.js:1537"
   ]
  },
  "ses lanceurs perdent ": {
   "at": [
-   "src/engine/combat.js:1525"
+   "src/engine/combat.js:1537"
   ]
  },
  "les lanceurs adverses perdent ": {
   "at": [
-   "src/engine/combat.js:1525"
+   "src/engine/combat.js:1537"
   ]
  },
  "{0} en moins": {
   "at": [
-   "src/engine/combat.js:1526"
+   "src/engine/combat.js:1538"
   ],
   "args": [
    "U.n(shots, 'tir magique', 'tirs magiques')"
@@ -9006,19 +9074,19 @@
  },
  "tir magique": {
   "at": [
-   "src/engine/combat.js:1526"
+   "src/engine/combat.js:1538"
   ]
  },
  "tirs magiques": {
   "at": [
-   "src/engine/combat.js:1526",
-   "src/engine/combat.js:1526"
+   "src/engine/combat.js:1538",
+   "src/engine/combat.js:1538"
   ],
   "hint": "pluriel de « tir magique »"
  },
  "Fuite de mana : {0}.": {
   "at": [
-   "src/engine/combat.js:1527"
+   "src/engine/combat.js:1539"
   ],
   "args": [
    "parts.join(', ')"
@@ -9026,12 +9094,12 @@
  },
  "Le combat s'éternise : l'attaquant se retire.": {
   "at": [
-   "src/engine/combat.js:1535"
+   "src/engine/combat.js:1547"
   ]
  },
  "{0} bat en retraite.": {
   "at": [
-   "src/engine/combat.js:1578"
+   "src/engine/combat.js:1590"
   ],
   "args": [
    "side === ATT_SIDE ? 'L\\'attaquant' : 'Le défenseur'"
@@ -9039,38 +9107,38 @@
  },
  "L'attaquant": {
   "at": [
-   "src/engine/combat.js:1578"
+   "src/engine/combat.js:1590"
   ]
  },
  "Le défenseur": {
   "at": [
-   "src/engine/combat.js:1578"
+   "src/engine/combat.js:1590"
   ]
  },
  "est rattrapé": {
   "at": [
-   "src/engine/combat.js:1581"
+   "src/engine/combat.js:1593"
   ]
  },
  "sont rattrapés": {
   "at": [
-   "src/engine/combat.js:1581"
+   "src/engine/combat.js:1593"
   ],
   "hint": "pluriel de « est rattrapé » (le sujet est une troupe de plusieurs figurines)"
  },
  " dans leur fuite.": {
   "at": [
-   "src/engine/combat.js:1581"
+   "src/engine/combat.js:1593"
   ]
  },
  " dans sa fuite.": {
   "at": [
-   "src/engine/combat.js:1581"
+   "src/engine/combat.js:1593"
   ]
  },
  "{0} se dissipe.": {
   "at": [
-   "src/engine/combat.js:1703"
+   "src/engine/combat.js:1715"
   ],
   "args": [
    "DATA.spells[other] ? DATA.spells[other].name : other"
@@ -9078,246 +9146,246 @@
  },
  "Ce sort vise une unité ennemie.": {
   "at": [
-   "src/engine/combat.js:1811"
+   "src/engine/combat.js:1823"
   ]
  },
  "Ce sort vise une de vos unités.": {
   "at": [
-   "src/engine/combat.js:1812"
+   "src/engine/combat.js:1824"
   ]
  },
  "Ce sort ne vise qu'un héros.": {
   "at": [
-   "src/engine/combat.js:1813"
+   "src/engine/combat.js:1825"
   ]
  },
  "Rien à dissiper sur cette unité.": {
   "at": [
-   "src/engine/combat.js:1814"
+   "src/engine/combat.js:1826"
   ]
  },
  "Ce sort ne touche que les unités normales.": {
   "at": [
-   "src/engine/combat.js:1815"
+   "src/engine/combat.js:1827"
   ]
  },
  "Ce sort ne touche que les créatures fantastiques.": {
   "at": [
-   "src/engine/combat.js:1816",
-   "src/engine/combat.js:1818"
+   "src/engine/combat.js:1828",
+   "src/engine/combat.js:1830"
   ]
  },
  "Ce sort ne touche que les morts-vivants.": {
   "at": [
-   "src/engine/combat.js:1818"
+   "src/engine/combat.js:1830"
   ]
  },
  "Sans effet sur un héros.": {
   "at": [
-   "src/engine/combat.js:1819"
+   "src/engine/combat.js:1831"
   ]
  },
  "Cette unité en bénéficie déjà.": {
   "at": [
-   "src/engine/combat.js:1821"
+   "src/engine/combat.js:1833"
   ]
  },
  "Un enchantement incompatible est déjà en place.": {
   "at": [
-   "src/engine/combat.js:1822"
+   "src/engine/combat.js:1834"
   ]
  },
  "Cette unité n'en tirerait rien.": {
   "at": [
-   "src/engine/combat.js:1823"
+   "src/engine/combat.js:1835"
   ]
  },
  "Cette unité subit déjà ce sort.": {
   "at": [
-   "src/engine/combat.js:1825"
+   "src/engine/combat.js:1837"
   ]
  },
  "Cette unité est immunisée contre la magie.": {
   "at": [
-   "src/engine/combat.js:1826",
-   "src/engine/combat.js:1846"
+   "src/engine/combat.js:1838",
+   "src/engine/combat.js:1858"
   ]
  },
  "Une unité incorporelle passe à travers la toile.": {
   "at": [
-   "src/engine/combat.js:1827"
+   "src/engine/combat.js:1839"
   ]
  },
  "Cette unité est déjà prise dans une toile.": {
   "at": [
-   "src/engine/combat.js:1828"
+   "src/engine/combat.js:1840"
   ]
  },
  "Une unité qui vole ne craint pas les failles du sol.": {
   "at": [
-   "src/engine/combat.js:1829"
+   "src/engine/combat.js:1841"
   ]
  },
  "Une unité incorporelle ne craint pas les failles du sol.": {
   "at": [
-   "src/engine/combat.js:1830"
+   "src/engine/combat.js:1842"
   ]
  },
  "Le Démon légendaire ne cède pas à ce sort.": {
   "at": [
-   "src/engine/combat.js:1831"
+   "src/engine/combat.js:1843"
   ]
  },
  "Une créature du combat ou prise à l'ennemi ne peut pas être rappelée.": {
   "at": [
-   "src/engine/combat.js:1832"
+   "src/engine/combat.js:1844"
   ]
  },
  "Cette unité est protégée contre ce sort.": {
   "at": [
-   "src/engine/combat.js:1833"
+   "src/engine/combat.js:1845"
   ]
  },
  "Cette unité n'a pas de flèches à tordre.": {
   "at": [
-   "src/engine/combat.js:1833"
+   "src/engine/combat.js:1845"
   ]
  },
  "Cette unité ne combat pas au corps à corps.": {
   "at": [
-   "src/engine/combat.js:1834"
+   "src/engine/combat.js:1846"
   ]
  },
  "Aucun enchantement à protéger.": {
   "at": [
-   "src/engine/combat.js:1835"
+   "src/engine/combat.js:1847"
   ]
  },
  "Plus rien à altérer chez cette créature.": {
   "at": [
-   "src/engine/combat.js:1836"
+   "src/engine/combat.js:1848"
   ]
  },
  "Cette unité dort déjà.": {
   "at": [
-   "src/engine/combat.js:1837"
+   "src/engine/combat.js:1849"
   ]
  },
  "Cette unité est déjà confuse.": {
   "at": [
-   "src/engine/combat.js:1838"
+   "src/engine/combat.js:1850"
   ]
  },
  "Cette unité est déjà sous une emprise.": {
   "at": [
-   "src/engine/combat.js:1839"
+   "src/engine/combat.js:1851"
   ]
  },
  "Cette unité est immunisée contre la pétrification.": {
   "at": [
-   "src/engine/combat.js:1840"
+   "src/engine/combat.js:1852"
   ]
  },
  "Cette unité est immunisée contre les illusions.": {
   "at": [
-   "src/engine/combat.js:1841"
+   "src/engine/combat.js:1853"
   ]
  },
  "Une créature de la Mort ne se soigne pas.": {
   "at": [
-   "src/engine/combat.js:1842"
+   "src/engine/combat.js:1854"
   ]
  },
  "Ces blessures ne se soignent pas.": {
   "at": [
-   "src/engine/combat.js:1842"
+   "src/engine/combat.js:1854"
   ]
  },
  "Elle ne va déjà pas plus loin qu'une case par round.": {
   "at": [
-   "src/engine/combat.js:1843"
+   "src/engine/combat.js:1855"
   ]
  },
  "Cette unité ne riposte pas au corps à corps.": {
   "at": [
-   "src/engine/combat.js:1844"
+   "src/engine/combat.js:1856"
   ]
  },
  "Cette unité n'a pas d'attaque à distance.": {
   "at": [
-   "src/engine/combat.js:1845"
+   "src/engine/combat.js:1857"
   ]
  },
  "Aucune direction où le vent puisse la pousser.": {
   "at": [
-   "src/engine/combat.js:1847"
+   "src/engine/combat.js:1859"
   ]
  },
  "On ne copie pas une créature du combat.": {
   "at": [
-   "src/engine/combat.js:1848"
+   "src/engine/combat.js:1860"
   ]
  },
  "Vous avez déjà 9 unités sur le terrain.": {
   "at": [
-   "src/engine/combat.js:1848",
-   "src/ui/combatview.js:1812"
+   "src/engine/combat.js:1860",
+   "src/ui/combatview.js:1835"
   ]
  },
  "Cette unité ne peut pas être copiée.": {
   "at": [
-   "src/engine/combat.js:1848"
+   "src/engine/combat.js:1860"
   ]
  },
  "Cette unité n'a encore tué aucune de vos figurines.": {
   "at": [
-   "src/engine/combat.js:1849"
+   "src/engine/combat.js:1861"
   ]
  },
  "Prise dans une toile, elle ne peut pas être transportée.": {
   "at": [
-   "src/engine/combat.js:1850"
+   "src/engine/combat.js:1862"
   ]
  },
  "Figée, elle ne peut pas être transportée.": {
   "at": [
-   "src/engine/combat.js:1850"
+   "src/engine/combat.js:1862"
   ]
  },
  "Cette unité est immunisée contre la mort.": {
   "at": [
-   "src/engine/combat.js:1852"
+   "src/engine/combat.js:1864"
   ]
  },
  "La Droiture la protège de ce sort.": {
   "at": [
-   "src/engine/combat.js:1853"
+   "src/engine/combat.js:1865"
   ]
  },
  "Cette unité est immunisée contre le feu.": {
   "at": [
-   "src/engine/combat.js:1854"
+   "src/engine/combat.js:1866"
   ]
  },
  "Cette unité est immunisée contre le froid.": {
   "at": [
-   "src/engine/combat.js:1855"
+   "src/engine/combat.js:1867"
   ]
  },
  "Sa résistance la rend insensible à ce sort.": {
   "at": [
-   "src/engine/combat.js:1856"
+   "src/engine/combat.js:1868"
   ]
  },
  "Ce sort ne peut pas viser cette unité.": {
   "at": [
-   "src/engine/combat.js:1857",
-   "src/ui/combatview.js:1979"
+   "src/engine/combat.js:1869",
+   "src/ui/combatview.js:2002"
   ]
  },
  "{0} se dissout dans le flux du nœud.": {
   "at": [
-   "src/engine/combat.js:1897"
+   "src/engine/combat.js:1909"
   ],
   "args": [
    "sp.name || id"
@@ -9325,7 +9393,7 @@
  },
  "{0} est contré !": {
   "at": [
-   "src/engine/combat.js:1906"
+   "src/engine/combat.js:1918"
   ],
   "args": [
    "sp.name || 'Le sort'"
@@ -9333,13 +9401,13 @@
  },
  "Le sort": {
   "at": [
-   "src/engine/combat.js:1906",
-   "src/engine/combat.js:2082"
+   "src/engine/combat.js:1918",
+   "src/engine/combat.js:2094"
   ]
  },
  "{0} lance {1}.": {
   "at": [
-   "src/engine/combat.js:1908",
+   "src/engine/combat.js:1920",
    "src/engine/chronicle.js:125"
   ],
   "args": [
@@ -9349,12 +9417,12 @@
  },
  "Le sorcier": {
   "at": [
-   "src/engine/combat.js:1908"
+   "src/engine/combat.js:1920"
   ]
  },
  "Le Miroir magique de {0} renvoie le sort{1} !": {
   "at": [
-   "src/engine/combat.js:1914"
+   "src/engine/combat.js:1926"
   ],
   "args": [
    "bt.name(target)",
@@ -9363,7 +9431,7 @@
  },
  " sur {0}": {
   "at": [
-   "src/engine/combat.js:1914"
+   "src/engine/combat.js:1926"
   ],
   "args": [
    "bt.name(nt)"
@@ -9371,15 +9439,15 @@
  },
  ", qui se perd": {
   "at": [
-   "src/engine/combat.js:1914"
+   "src/engine/combat.js:1926"
   ]
  },
  "force {0}": {
   "at": [
-   "src/engine/combat.js:1967",
-   "src/engine/combat.js:1968",
-   "src/engine/combat.js:1969",
-   "src/engine/combat.js:1970"
+   "src/engine/combat.js:1979",
+   "src/engine/combat.js:1980",
+   "src/engine/combat.js:1981",
+   "src/engine/combat.js:1982"
   ],
   "args": [
    "Math.min(25, 5 + x)"
@@ -9387,8 +9455,8 @@
  },
  "résistance de la cible −{0}": {
   "at": [
-   "src/engine/combat.js:1972",
-   "src/engine/combat.js:1973"
+   "src/engine/combat.js:1984",
+   "src/engine/combat.js:1985"
   ],
   "args": [
    "Math.floor(x / 5)"
@@ -9396,10 +9464,10 @@
  },
  "force de dissipation {0}": {
   "at": [
-   "src/engine/combat.js:1974",
-   "src/engine/combat.js:1975",
-   "src/engine/combat.js:1976",
-   "src/engine/combat.js:1977"
+   "src/engine/combat.js:1986",
+   "src/engine/combat.js:1987",
+   "src/engine/combat.js:1988",
+   "src/engine/combat.js:1989"
   ],
   "args": [
    "c + x"
@@ -9407,7 +9475,7 @@
  },
  "{0} dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:2075"
+   "src/engine/combat.js:2087"
   ],
   "args": [
    "n",
@@ -9416,7 +9484,7 @@
  },
  "{0} tient bon.": {
   "at": [
-   "src/engine/combat.js:2075"
+   "src/engine/combat.js:2087"
   ],
   "args": [
    "bt.towerName(t)"
@@ -9424,7 +9492,7 @@
  },
  " inflige {0} de dégâts à {1}": {
   "at": [
-   "src/engine/combat.js:2082"
+   "src/engine/combat.js:2094"
   ],
   "args": [
    "U.n(d, 'point', 'points')",
@@ -9433,22 +9501,22 @@
  },
  "point": {
   "at": [
-   "src/engine/combat.js:2082",
-   "src/engine/combat.js:2521"
+   "src/engine/combat.js:2094",
+   "src/engine/combat.js:2559"
   ]
  },
  "points": {
   "at": [
-   "src/engine/combat.js:2082",
-   "src/engine/combat.js:2082",
-   "src/engine/combat.js:2521",
-   "src/engine/combat.js:2521"
+   "src/engine/combat.js:2094",
+   "src/engine/combat.js:2094",
+   "src/engine/combat.js:2559",
+   "src/engine/combat.js:2559"
   ],
   "hint": "pluriel de « point »"
  },
  " ne fait aucun dégât à {0}": {
   "at": [
-   "src/engine/combat.js:2082"
+   "src/engine/combat.js:2094"
   ],
   "args": [
    "bt.name(t)"
@@ -9456,124 +9524,124 @@
  },
  "attaque de mêlée divisée par 2": {
   "at": [
-   "src/engine/combat.js:2086"
+   "src/engine/combat.js:2098"
   ]
  },
  "défense divisée par 2": {
   "at": [
-   "src/engine/combat.js:2086"
+   "src/engine/combat.js:2098"
   ]
  },
  "résistance à 0": {
   "at": [
-   "src/engine/combat.js:2086"
+   "src/engine/combat.js:2098"
   ]
  },
  "Aucune de vos unités n'est blessée.": {
   "at": [
-   "src/engine/combat.js:2091",
+   "src/engine/combat.js:2103",
    "src/engine/spells.js:282"
   ]
  },
  "Les blessures de vos unités sont irréversibles (pétrification, désintégration…) : rien à soigner.": {
   "at": [
-   "src/engine/combat.js:2092"
+   "src/engine/combat.js:2104"
   ]
  },
  "Vos blessés sont des créatures de la mort : les soins ne les touchent pas.": {
   "at": [
-   "src/engine/combat.js:2092"
+   "src/engine/combat.js:2104"
   ]
  },
  "Aucune cible à soigner.": {
   "at": [
-   "src/engine/combat.js:2093"
+   "src/engine/combat.js:2105"
   ]
  },
  "Ne se lance qu'en défendant sa propre cité.": {
   "at": [
-   "src/engine/combat.js:2098"
+   "src/engine/combat.js:2110"
   ]
  },
  "Ce mur entoure déjà la cité.": {
   "at": [
-   "src/engine/combat.js:2098"
+   "src/engine/combat.js:2110"
   ]
  },
  "Vos ennemis sont tous insensibles au feu : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:2099"
+   "src/engine/combat.js:2111"
   ]
  },
  "Aucune tour ennemie sur laquelle agir ici.": {
   "at": [
-   "src/engine/combat.js:2100",
-   "src/ui/combatview.js:1810"
+   "src/engine/combat.js:2112",
+   "src/ui/combatview.js:1833"
   ]
  },
  "Aucun enchantement ennemi ni maléfice à dissiper ici.": {
   "at": [
-   "src/engine/combat.js:2101"
+   "src/engine/combat.js:2113"
   ]
  },
  "Aucune créature de la vie dans vos rangs ni de la mort en face : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:2104"
+   "src/engine/combat.js:2116"
   ]
  },
  "Aucune créature de la mort dans vos rangs ni de la vie en face : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:2105"
+   "src/engine/combat.js:2117"
   ]
  },
  "Aucune créature invoquée ni morte-vivante en face.": {
   "at": [
-   "src/engine/combat.js:2106"
+   "src/engine/combat.js:2118"
   ]
  },
  "Vos ennemis relèvent tous de la mort : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:2107"
+   "src/engine/combat.js:2119"
   ]
  },
  "Aucun ennemi ne peut y être sensible ici.": {
   "at": [
-   "src/engine/combat.js:2109"
+   "src/engine/combat.js:2121"
   ]
  },
  "Aucune unité normale dans vos rangs.": {
   "at": [
-   "src/engine/combat.js:2110"
+   "src/engine/combat.js:2122"
   ]
  },
  "Vos ennemis volent ou sont immatériels : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:2111"
+   "src/engine/combat.js:2123"
   ]
  },
  "Aucun lanceur de sorts en face : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:2113"
+   "src/engine/combat.js:2125"
   ]
  },
  "Aucun ennemi ne peut être ralenti ici.": {
   "at": [
-   "src/engine/combat.js:2114"
+   "src/engine/combat.js:2126"
   ]
  },
  "Aucune de vos unités tombées ne peut être relevée (héros, doubles et morts irréversibles exceptés).": {
   "at": [
-   "src/engine/combat.js:2116"
+   "src/engine/combat.js:2129"
   ]
  },
  "Aucune de vos unités ne peut donner sa vie (pas un héros).": {
   "at": [
-   "src/engine/combat.js:2117"
+   "src/engine/combat.js:2130"
   ]
  },
  "Une nuit opaque enveloppe {0}.": {
   "at": [
-   "src/engine/combat.js:2140"
+   "src/engine/combat.js:2153"
   ],
   "args": [
    "bt.city.name"
@@ -9581,7 +9649,7 @@
  },
  "Un mur de flammes encercle {0}.": {
   "at": [
-   "src/engine/combat.js:2141"
+   "src/engine/combat.js:2154"
   ],
   "args": [
    "bt.city.name"
@@ -9589,7 +9657,7 @@
  },
  "Boule de feu : {0} dégâts.": {
   "at": [
-   "src/engine/combat.js:2147"
+   "src/engine/combat.js:2160"
   ],
   "args": [
    "d"
@@ -9597,7 +9665,7 @@
  },
  "{0} : {1} dégâts à {2}.": {
   "at": [
-   "src/engine/combat.js:2148"
+   "src/engine/combat.js:2161"
   ],
   "args": [
    "sp ? sp.name : 'Frappe de flammes'",
@@ -9607,7 +9675,7 @@
  },
  "Trait funeste : {0} dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:2149"
+   "src/engine/combat.js:2162"
   ],
   "args": [
    "d",
@@ -9616,7 +9684,7 @@
  },
  "Foudre distordue : {0} dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:2150"
+   "src/engine/combat.js:2163"
   ],
   "args": [
    "tot",
@@ -9625,7 +9693,7 @@
  },
  "Drain de vie : {0} points volés.": {
   "at": [
-   "src/engine/combat.js:2154"
+   "src/engine/combat.js:2167"
   ],
   "args": [
    "d"
@@ -9633,7 +9701,7 @@
  },
  "Exorcisme : {0} de {1} détruite{2}.": {
   "at": [
-   "src/engine/combat.js:2161"
+   "src/engine/combat.js:2174"
   ],
   "args": [
    "U.n(f, 'figurine')",
@@ -9643,24 +9711,24 @@
  },
  "résiste": {
   "at": [
-   "src/engine/combat.js:2161",
-   "src/engine/combat.js:2163",
-   "src/engine/combat.js:2165",
-   "src/engine/combat.js:2166"
+   "src/engine/combat.js:2174",
+   "src/engine/combat.js:2176",
+   "src/engine/combat.js:2178",
+   "src/engine/combat.js:2179"
   ]
  },
  "résistent": {
   "at": [
-   "src/engine/combat.js:2161",
-   "src/engine/combat.js:2163",
-   "src/engine/combat.js:2165",
-   "src/engine/combat.js:2166"
+   "src/engine/combat.js:2174",
+   "src/engine/combat.js:2176",
+   "src/engine/combat.js:2178",
+   "src/engine/combat.js:2179"
   ],
   "hint": "pluriel de « résiste » (le sujet est une troupe de plusieurs figurines)"
  },
  "Parole sacrée : {0}": {
   "at": [
-   "src/engine/combat.js:2162"
+   "src/engine/combat.js:2175"
   ],
   "args": [
    "hit.length ? 'figurines bannies : ' + hit.join(', ') + '.' : 'toutes résistent.'"
@@ -9668,7 +9736,7 @@
  },
  "figurines bannies : {0}.": {
   "at": [
-   "src/engine/combat.js:2162"
+   "src/engine/combat.js:2175"
   ],
   "args": [
    "hit.join(', ')"
@@ -9676,24 +9744,24 @@
  },
  "toutes résistent.": {
   "at": [
-   "src/engine/combat.js:2162"
+   "src/engine/combat.js:2175"
   ]
  },
  "figurine périt": {
   "at": [
-   "src/engine/combat.js:2163"
+   "src/engine/combat.js:2176"
   ]
  },
  "figurines périssent": {
   "at": [
-   "src/engine/combat.js:2163",
-   "src/engine/combat.js:2163"
+   "src/engine/combat.js:2176",
+   "src/engine/combat.js:2176"
   ],
   "hint": "pluriel de « figurine périt »"
  },
  "Sort de mort : {0}": {
   "at": [
-   "src/engine/combat.js:2164"
+   "src/engine/combat.js:2177"
   ],
   "args": [
    "hit.length ? 'figurines perdues : ' + hit.join(', ') + '.' : 'tous résistent.'"
@@ -9701,7 +9769,7 @@
  },
  "figurines perdues : {0}.": {
   "at": [
-   "src/engine/combat.js:2164"
+   "src/engine/combat.js:2177"
   ],
   "args": [
    "hit.join(', ')"
@@ -9709,23 +9777,23 @@
  },
  "tous résistent.": {
   "at": [
-   "src/engine/combat.js:2164"
+   "src/engine/combat.js:2177"
   ]
  },
  "est désintégré": {
   "at": [
-   "src/engine/combat.js:2165"
+   "src/engine/combat.js:2178"
   ]
  },
  "sont désintégrés": {
   "at": [
-   "src/engine/combat.js:2165"
+   "src/engine/combat.js:2178"
   ],
   "hint": "pluriel de « est désintégré » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} à la désintégration.": {
   "at": [
-   "src/engine/combat.js:2165"
+   "src/engine/combat.js:2178"
   ],
   "args": [
    "bt.subj(t, 'résiste')"
@@ -9733,7 +9801,7 @@
  },
  "{0} : {1} en pierre.": {
   "at": [
-   "src/engine/combat.js:2166"
+   "src/engine/combat.js:2179"
   ],
   "args": [
    "bt.name(t)",
@@ -9742,19 +9810,19 @@
  },
  "figurine changée": {
   "at": [
-   "src/engine/combat.js:2166"
+   "src/engine/combat.js:2179"
   ]
  },
  "figurines changées": {
   "at": [
-   "src/engine/combat.js:2166",
-   "src/engine/combat.js:2166"
+   "src/engine/combat.js:2179",
+   "src/engine/combat.js:2179"
   ],
   "hint": "pluriel de « figurine changée »"
  },
  "{0} à la pétrification.": {
   "at": [
-   "src/engine/combat.js:2166"
+   "src/engine/combat.js:2179"
   ],
   "args": [
    "bt.subj(t, 'résiste')"
@@ -9762,7 +9830,7 @@
  },
  "Bannissement : {0} de {1} renvoyée{2} dans son royaume.": {
   "at": [
-   "src/engine/combat.js:2167"
+   "src/engine/combat.js:2180"
   ],
   "args": [
    "U.n(f, 'figurine')",
@@ -9772,12 +9840,12 @@
  },
  "La muraille se fend et s'écroule.": {
   "at": [
-   "src/engine/combat.js:2170"
+   "src/engine/combat.js:2183"
   ]
  },
  "La terre engloutit {0} !": {
   "at": [
-   "src/engine/combat.js:2171"
+   "src/engine/combat.js:2184"
   ],
   "args": [
    "bt.name(t)"
@@ -9785,12 +9853,12 @@
  },
  "La terre se fend sans effet.": {
   "at": [
-   "src/engine/combat.js:2171"
+   "src/engine/combat.js:2184"
   ]
  },
  "{0} dans un sommeil de plomb.": {
   "at": [
-   "src/engine/combat.js:2174"
+   "src/engine/combat.js:2187"
   ],
   "args": [
    "bt.subj(t, 'sombre')"
@@ -9798,29 +9866,29 @@
  },
  "sombre": {
   "at": [
-   "src/engine/combat.js:2174"
+   "src/engine/combat.js:2187"
   ]
  },
  "sombrent": {
   "at": [
-   "src/engine/combat.js:2174"
+   "src/engine/combat.js:2187"
   ],
   "hint": "pluriel de « sombre » (le sujet est une troupe de plusieurs figurines)"
  },
  "est désorienté": {
   "at": [
-   "src/engine/combat.js:2175"
+   "src/engine/combat.js:2188"
   ]
  },
  "sont désorientés": {
   "at": [
-   "src/engine/combat.js:2175"
+   "src/engine/combat.js:2188"
   ],
   "hint": "pluriel de « est désorienté » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} : armes brisées, {1}": {
   "at": [
-   "src/engine/combat.js:2178"
+   "src/engine/combat.js:2191"
   ],
   "args": [
    "bt.name(t)",
@@ -9829,22 +9897,22 @@
  },
  "son tir magique reste intact.": {
   "at": [
-   "src/engine/combat.js:2178"
+   "src/engine/combat.js:2191"
   ]
  },
  "mêlée à 1 (son tir magique reste intact).": {
   "at": [
-   "src/engine/combat.js:2178"
+   "src/engine/combat.js:2191"
   ]
  },
  "attaques à 1.": {
   "at": [
-   "src/engine/combat.js:2178"
+   "src/engine/combat.js:2191"
   ]
  },
  "{0} : {1} (Déformation).": {
   "at": [
-   "src/engine/combat.js:2179"
+   "src/engine/combat.js:2192"
   ],
   "args": [
    "bt.name(t)",
@@ -9853,7 +9921,7 @@
  },
  "{0} dans une toile.": {
   "at": [
-   "src/engine/combat.js:2180"
+   "src/engine/combat.js:2193"
   ],
   "args": [
    "bt.subj(t, 'est pris')"
@@ -9861,7 +9929,7 @@
  },
  "{0} de camp !": {
   "at": [
-   "src/engine/combat.js:2181"
+   "src/engine/combat.js:2194"
   ],
   "args": [
    "bt.subj(t, 'change')"
@@ -9869,29 +9937,29 @@
  },
  "change": {
   "at": [
-   "src/engine/combat.js:2181"
+   "src/engine/combat.js:2194"
   ]
  },
  "changent": {
   "at": [
-   "src/engine/combat.js:2181"
+   "src/engine/combat.js:2194"
   ],
   "hint": "pluriel de « change » (le sujet est une troupe de plusieurs figurines)"
  },
  "est asservi": {
   "at": [
-   "src/engine/combat.js:2182"
+   "src/engine/combat.js:2195"
   ]
  },
  "sont asservis": {
   "at": [
-   "src/engine/combat.js:2182"
+   "src/engine/combat.js:2195"
   ],
   "hint": "pluriel de « est asservi » (le sujet est une troupe de plusieurs figurines)"
  },
  "Les arcs de {0} se tordent.": {
   "at": [
-   "src/engine/combat.js:2183"
+   "src/engine/combat.js:2196"
   ],
   "args": [
    "bt.name(t)"
@@ -9899,27 +9967,27 @@
  },
  "La terreur gagne les rangs ennemis.": {
   "at": [
-   "src/engine/combat.js:2190"
+   "src/engine/combat.js:2203"
   ]
  },
  "PV rendu": {
   "at": [
-   "src/engine/combat.js:2201",
-   "src/engine/combat.js:2202"
+   "src/engine/combat.js:2214",
+   "src/engine/combat.js:2215"
   ]
  },
  "PV rendus": {
   "at": [
-   "src/engine/combat.js:2201",
-   "src/engine/combat.js:2201",
-   "src/engine/combat.js:2202",
-   "src/engine/combat.js:2202"
+   "src/engine/combat.js:2214",
+   "src/engine/combat.js:2214",
+   "src/engine/combat.js:2215",
+   "src/engine/combat.js:2215"
   ],
   "hint": "pluriel de « PV rendu »"
  },
  "Guérison de masse : {0}.": {
   "at": [
-   "src/engine/combat.js:2202"
+   "src/engine/combat.js:2215"
   ],
   "args": [
    "U.n(n, 'PV rendu', 'PV rendus')"
@@ -9927,12 +9995,12 @@
  },
  "Un vortex magique se forme.": {
   "at": [
-   "src/engine/combat.js:2216"
+   "src/engine/combat.js:2229"
   ]
  },
  "{0} tremble : {1} dégâts.": {
   "at": [
-   "src/engine/combat.js:2221"
+   "src/engine/combat.js:2234"
   ],
   "args": [
    "U.cap(bt.towerName(t))",
@@ -9941,7 +10009,8 @@
  },
  "{0} pans de muraille s'écroulent.": {
   "at": [
-   "src/engine/combat.js:2225"
+   "src/engine/combat.js:2238",
+   "src/engine/combat.js:2581"
   ],
   "args": [
    "n"
@@ -9949,12 +10018,13 @@
  },
  "Un pan de muraille s'écroule.": {
   "at": [
-   "src/engine/combat.js:2225"
+   "src/engine/combat.js:2238",
+   "src/engine/combat.js:2581"
   ]
  },
  "Les servants {0} s'enfuient, épouvantés : {1} pendant 4 rounds.": {
   "at": [
-   "src/engine/combat.js:2230"
+   "src/engine/combat.js:2243"
   ],
   "args": [
    "n > 1 ? 'des ' + n + ' tours' : 'de la tour'",
@@ -9963,7 +10033,7 @@
  },
  "des {0} tours": {
   "at": [
-   "src/engine/combat.js:2230"
+   "src/engine/combat.js:2243"
   ],
   "args": [
    "n"
@@ -9971,38 +10041,38 @@
  },
  "de la tour": {
   "at": [
-   "src/engine/combat.js:2230"
+   "src/engine/combat.js:2243"
   ]
  },
  "elles se taisent": {
   "at": [
-   "src/engine/combat.js:2230"
+   "src/engine/combat.js:2243"
   ]
  },
  "elle se tait": {
   "at": [
-   "src/engine/combat.js:2230"
+   "src/engine/combat.js:2243"
   ]
  },
  "Aucune tour à hanter ici.": {
   "at": [
-   "src/engine/combat.js:2230"
+   "src/engine/combat.js:2243"
   ]
  },
  "La tour du sorcier perd son flux.": {
   "at": [
-   "src/engine/combat.js:2233"
+   "src/engine/combat.js:2246"
   ]
  },
  "Une brèche s'ouvre dans la muraille.": {
   "at": [
-   "src/engine/combat.js:2235"
+   "src/engine/combat.js:2248"
   ]
  },
  "Rien ne tombe sur {0}.": {
   "at": [
-   "src/engine/combat.js:2240",
-   "src/engine/combat.js:2241"
+   "src/engine/combat.js:2253",
+   "src/engine/combat.js:2254"
   ],
   "args": [
    "bt.name(t)"
@@ -10010,12 +10080,12 @@
  },
  "rien": {
   "at": [
-   "src/engine/combat.js:2251"
+   "src/engine/combat.js:2264"
   ]
  },
  "soigné de {0} PV": {
   "at": [
-   "src/engine/combat.js:2252"
+   "src/engine/combat.js:2265"
   ],
   "args": [
    "h"
@@ -10023,12 +10093,12 @@
  },
  "soin sans effet": {
   "at": [
-   "src/engine/combat.js:2252"
+   "src/engine/combat.js:2265"
   ]
  },
  "Canaux du chaos, {0}": {
   "at": [
-   "src/engine/combat.js:2255"
+   "src/engine/combat.js:2268"
   ],
   "args": [
    "Spells.CHANNEL_NAMES[t.u.chaosChannel]"
@@ -10036,37 +10106,37 @@
  },
  "Canaux du chaos, sans effet": {
   "at": [
-   "src/engine/combat.js:2256"
+   "src/engine/combat.js:2269"
   ]
  },
  "Déformation, sans effet": {
   "at": [
-   "src/engine/combat.js:2258"
+   "src/engine/combat.js:2271"
   ]
  },
  "trait de feu, sans effet": {
   "at": [
-   "src/engine/combat.js:2259"
+   "src/engine/combat.js:2272"
   ]
  },
  "Foudre distordue, sans effet": {
   "at": [
-   "src/engine/combat.js:2260"
+   "src/engine/combat.js:2273"
   ]
  },
  "Trait funeste, sans effet": {
   "at": [
-   "src/engine/combat.js:2261"
+   "src/engine/combat.js:2274"
   ]
  },
  "Désintégration, sans effet": {
   "at": [
-   "src/engine/combat.js:2262"
+   "src/engine/combat.js:2275"
   ]
  },
  "{0} au cercle d'invocation.": {
   "at": [
-   "src/engine/combat.js:2265"
+   "src/engine/combat.js:2278"
   ],
   "args": [
    "bt.subj(t, 'est rappelé')"
@@ -10074,39 +10144,39 @@
  },
  "est rappelé": {
   "at": [
-   "src/engine/combat.js:2265"
+   "src/engine/combat.js:2278"
   ]
  },
  "sont rappelés": {
   "at": [
-   "src/engine/combat.js:2265"
+   "src/engine/combat.js:2278"
   ],
   "hint": "pluriel de « est rappelé » (le sujet est une troupe de plusieurs figurines)"
  },
  "se relève": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ]
  },
  "se relèvent": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ],
   "hint": "pluriel de « se relève » (le sujet est une troupe de plusieurs figurines)"
  },
  "morts-vivants.": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ]
  },
  "mort-vivant.": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ]
  },
  "{0} à la vie.": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ],
   "args": [
    "bt.subj(t, 'revient')"
@@ -10114,29 +10184,29 @@
  },
  "revient": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ]
  },
  "reviennent": {
   "at": [
-   "src/engine/combat.js:2283"
+   "src/engine/combat.js:2296"
   ],
   "hint": "pluriel de « revient » (le sujet est une troupe de plusieurs figurines)"
  },
  "se dissipe": {
   "at": [
-   "src/engine/combat.js:2313"
+   "src/engine/combat.js:2326"
   ]
  },
  "se dissipent": {
   "at": [
-   "src/engine/combat.js:2313"
+   "src/engine/combat.js:2326"
   ],
   "hint": "pluriel de « se dissipe » (le sujet est une troupe de plusieurs figurines)"
  },
  "Dissipé sur {0} : {1}.": {
   "at": [
-   "src/engine/combat.js:2315"
+   "src/engine/combat.js:2328"
   ],
   "args": [
    "bt.name(t)",
@@ -10145,7 +10215,7 @@
  },
  "{0} (renvoi)": {
   "at": [
-   "src/engine/combat.js:2329"
+   "src/engine/combat.js:2342"
   ],
   "args": [
    "Units.label(t.u)"
@@ -10153,7 +10223,7 @@
  },
  "Dissipé : {0}.": {
   "at": [
-   "src/engine/combat.js:2349"
+   "src/engine/combat.js:2362"
   ],
   "args": [
    "gone.map(e => DATA.spells[e] ? DATA.spells[e].name : e).join(', ')"
@@ -10161,57 +10231,68 @@
  },
  "Désenchantement : rien ne tombe.": {
   "at": [
-   "src/engine/combat.js:2350"
+   "src/engine/combat.js:2363"
   ]
  },
  "Hors du champ de bataille.": {
   "at": [
-   "src/engine/combat.js:2401"
+   "src/engine/combat.js:2417"
   ]
  },
  "L'unité s'y trouve déjà.": {
   "at": [
-   "src/engine/combat.js:2402"
+   "src/engine/combat.js:2418"
   ]
  },
  "La case est occupée.": {
   "at": [
-   "src/engine/combat.js:2403"
+   "src/engine/combat.js:2419"
   ]
  },
  "Une tour ou une porte occupe la case.": {
   "at": [
-   "src/engine/combat.js:2404"
+   "src/engine/combat.js:2420"
   ]
  },
  "Des rochers occupent la case.": {
   "at": [
-   "src/engine/combat.js:2405"
+   "src/engine/combat.js:2421"
   ]
  },
  "Un champ de force occupe la case.": {
   "at": [
-   "src/engine/combat.js:2406"
+   "src/engine/combat.js:2422"
   ]
  },
  "Eau profonde : l'unité ne saurait s'y tenir.": {
   "at": [
-   "src/engine/combat.js:2407"
+   "src/engine/combat.js:2423"
   ]
  },
  "Le Mur de feu empêche de se téléporter dans la cité.": {
   "at": [
-   "src/engine/combat.js:2409"
+   "src/engine/combat.js:2425"
   ]
  },
  "On ne se pose pas sur la muraille ennemie.": {
   "at": [
-   "src/engine/combat.js:2410"
+   "src/engine/combat.js:2426"
+  ]
+ },
+ " (des vôtres)": {
+  "at": [
+   "src/engine/combat.js:2484",
+   "src/engine/combat.js:2551"
+  ]
+ },
+ "personne dans la zone": {
+  "at": [
+   "src/engine/combat.js:2487"
   ]
  },
  "{0} (Lenteur).": {
   "at": [
-   "src/engine/combat.js:2454"
+   "src/engine/combat.js:2492"
   ],
   "args": [
    "bt.subj(t, 'est ralenti')"
@@ -10219,18 +10300,18 @@
  },
  "est ralenti": {
   "at": [
-   "src/engine/combat.js:2454"
+   "src/engine/combat.js:2492"
   ]
  },
  "sont ralentis": {
   "at": [
-   "src/engine/combat.js:2454"
+   "src/engine/combat.js:2492"
   ],
   "hint": "pluriel de « est ralenti » (le sujet est une troupe de plusieurs figurines)"
  },
  "Lenteur de masse : {0}{1}.": {
   "at": [
-   "src/engine/combat.js:2462"
+   "src/engine/combat.js:2500"
   ],
   "args": [
    "hit.length ? 'ralentis : ' + hit.join(', ') : 'aucun ennemi ralenti'",
@@ -10239,7 +10320,7 @@
  },
  "ralentis : {0}": {
   "at": [
-   "src/engine/combat.js:2462"
+   "src/engine/combat.js:2500"
   ],
   "args": [
    "hit.join(', ')"
@@ -10247,12 +10328,12 @@
  },
  "aucun ennemi ralenti": {
   "at": [
-   "src/engine/combat.js:2462"
+   "src/engine/combat.js:2500"
   ]
  },
  " ; résistent : {0}": {
   "at": [
-   "src/engine/combat.js:2462"
+   "src/engine/combat.js:2500"
   ],
   "args": [
    "held.join(', ')"
@@ -10260,7 +10341,7 @@
  },
  "{0} : plus de riposte.": {
   "at": [
-   "src/engine/combat.js:2464"
+   "src/engine/combat.js:2502"
   ],
   "args": [
    "bt.subj(t, 'est entravé')"
@@ -10268,18 +10349,18 @@
  },
  "est entravé": {
   "at": [
-   "src/engine/combat.js:2464"
+   "src/engine/combat.js:2502"
   ]
  },
  "sont entravés": {
   "at": [
-   "src/engine/combat.js:2464"
+   "src/engine/combat.js:2502"
   ],
   "hint": "pluriel de « est entravé » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} dans le crépuscule : plus d'attaque à distance.": {
   "at": [
-   "src/engine/combat.js:2465"
+   "src/engine/combat.js:2503"
   ],
   "args": [
    "bt.subj(t, 'est plongé')"
@@ -10287,18 +10368,18 @@
  },
  "est plongé": {
   "at": [
-   "src/engine/combat.js:2465"
+   "src/engine/combat.js:2503"
   ]
  },
  "sont plongés": {
   "at": [
-   "src/engine/combat.js:2465"
+   "src/engine/combat.js:2503"
   ],
   "hint": "pluriel de « est plongé » (le sujet est une troupe de plusieurs figurines)"
  },
  "Un champ de force se dresse sur {0}.": {
   "at": [
-   "src/engine/combat.js:2469"
+   "src/engine/combat.js:2507"
   ],
   "args": [
    "U.n(tiles.length, 'case')"
@@ -10306,24 +10387,24 @@
  },
  "case": {
   "at": [
-   "src/engine/combat.js:2469",
-   "src/engine/combat.js:2474",
-   "src/engine/combat.js:2487",
-   "src/engine/combat.js:2504"
+   "src/engine/combat.js:2507",
+   "src/engine/combat.js:2512",
+   "src/engine/combat.js:2525",
+   "src/engine/combat.js:2542"
   ]
  },
  "cases": {
   "at": [
-   "src/engine/combat.js:2469",
-   "src/engine/combat.js:2474",
-   "src/engine/combat.js:2487",
-   "src/engine/combat.js:2504"
+   "src/engine/combat.js:2507",
+   "src/engine/combat.js:2512",
+   "src/engine/combat.js:2525",
+   "src/engine/combat.js:2542"
   ],
   "hint": "pluriel de « case »"
  },
  "Un rideau de flammes s'élève sur {0}.": {
   "at": [
-   "src/engine/combat.js:2474"
+   "src/engine/combat.js:2512"
   ],
   "args": [
    "U.n(tiles.length, 'case')"
@@ -10331,19 +10412,19 @@
  },
  "mine de feu enfouie": {
   "at": [
-   "src/engine/combat.js:2481"
+   "src/engine/combat.js:2519"
   ]
  },
  "mines de feu enfouies": {
   "at": [
-   "src/engine/combat.js:2481",
-   "src/engine/combat.js:2481"
+   "src/engine/combat.js:2519",
+   "src/engine/combat.js:2519"
   ],
   "hint": "pluriel de « mine de feu enfouie »"
  },
  "Une brume épaisse couvre {0}.": {
   "at": [
-   "src/engine/combat.js:2487"
+   "src/engine/combat.js:2525"
   ],
   "args": [
    "U.n(tiles.length, 'case')"
@@ -10351,7 +10432,7 @@
  },
  "{0} ailleurs sur le champ de bataille.": {
   "at": [
-   "src/engine/combat.js:2493"
+   "src/engine/combat.js:2531"
   ],
   "args": [
    "bt.subj(t, 'est transporté')"
@@ -10359,18 +10440,18 @@
  },
  "est transporté": {
   "at": [
-   "src/engine/combat.js:2493"
+   "src/engine/combat.js:2531"
   ]
  },
  "sont transportés": {
   "at": [
-   "src/engine/combat.js:2493"
+   "src/engine/combat.js:2531"
   ],
   "hint": "pluriel de « est transporté » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} de {1}.": {
   "at": [
-   "src/engine/combat.js:2504"
+   "src/engine/combat.js:2542"
   ],
   "args": [
    "bt.subj(t, 'est repoussé')",
@@ -10379,23 +10460,18 @@
  },
  "est repoussé": {
   "at": [
-   "src/engine/combat.js:2504"
+   "src/engine/combat.js:2542"
   ]
  },
  "sont repoussés": {
   "at": [
-   "src/engine/combat.js:2504"
+   "src/engine/combat.js:2542"
   ],
   "hint": "pluriel de « est repoussé » (le sujet est une troupe de plusieurs figurines)"
  },
- " (des vôtres)": {
-  "at": [
-   "src/engine/combat.js:2513"
-  ]
- },
  "Chaîne d'éclairs : {0}.": {
   "at": [
-   "src/engine/combat.js:2517"
+   "src/engine/combat.js:2555"
   ],
   "args": [
    "parts.join(', ')"
@@ -10403,7 +10479,7 @@
  },
  "Vengeance divine : {0} de dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:2521"
+   "src/engine/combat.js:2559"
   ],
   "args": [
    "U.n(d, 'point', 'points')",
@@ -10412,15 +10488,38 @@
  },
  "Sacrifice de {0}.": {
   "at": [
-   "src/engine/combat.js:2527"
+   "src/engine/combat.js:2565"
   ],
   "args": [
    "bt.name(v)"
   ]
  },
+ "{0} encaisse {1} dégâts.": {
+  "at": [
+   "src/engine/combat.js:2579"
+  ],
+  "args": [
+   "U.cap(bt.towerName(tw))",
+   "n"
+  ]
+ },
+ "Aube sacrée : {0}.": {
+  "at": [
+   "src/engine/combat.js:2593"
+  ],
+  "args": [
+   "parts.length ? parts.join(', ') : 'aucun blessé à soigner'"
+  ]
+ },
+ "aucun blessé à soigner": {
+  "at": [
+   "src/engine/combat.js:2593",
+   "src/ui/combatview.js:481"
+  ]
+ },
  "Un double de {0} apparaît.": {
   "at": [
-   "src/engine/combat.js:2541"
+   "src/engine/combat.js:2603"
   ],
   "args": [
    "bt.name(t)"
@@ -10568,7 +10667,7 @@
    "src/engine/game.js:433",
    "src/engine/game.js:457",
    "src/engine/game.js:2139",
-   "src/ui/combatview.js:1870"
+   "src/ui/combatview.js:1893"
   ],
   "args": [
    "cc.amt"
@@ -10977,31 +11076,31 @@
  "de la vie": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1816"
+   "src/ui/combatview.js:1839"
   ]
  },
  "de la mort": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1816"
+   "src/ui/combatview.js:1839"
   ]
  },
  "du chaos": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1816"
+   "src/ui/combatview.js:1839"
   ]
  },
  "de la nature": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1816"
+   "src/ui/combatview.js:1839"
   ]
  },
  "de la sorcellerie": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1816"
+   "src/ui/combatview.js:1839"
   ]
  },
  "Plus de mouvement.": {
@@ -14751,7 +14850,8 @@
  "unité soignée": {
   "at": [
    "src/engine/spells.js:758",
-   "src/engine/spells.js:759"
+   "src/engine/spells.js:759",
+   "src/ui/combatview.js:481"
   ]
  },
  "unités soignées": {
@@ -20016,7 +20116,7 @@
   "at": [
    "src/ui/mapview.js:706",
    "src/ui/mapview.js:1314",
-   "src/ui/combatview.js:1371"
+   "src/ui/combatview.js:1394"
   ],
   "args": [
    "fs"
@@ -23245,8 +23345,8 @@
  "Pillards": {
   "at": [
    "src/ui/combatview.js:128",
-   "src/ui/combatview.js:2037",
-   "src/ui/combatview.js:2037"
+   "src/ui/combatview.js:2060",
+   "src/ui/combatview.js:2060"
   ]
  },
  "écrasante": {
@@ -23292,7 +23392,7 @@
  "Semi-automatique": {
   "at": [
    "src/ui/combatview.js:133",
-   "src/ui/combatview.js:2166"
+   "src/ui/combatview.js:2189"
   ]
  },
  "Commander la bataille": {
@@ -23311,17 +23411,17 @@
  },
  "sans effet": {
   "at": [
-   "src/ui/combatview.js:445"
+   "src/ui/combatview.js:447"
   ]
  },
  " PV": {
   "at": [
-   "src/ui/combatview.js:445"
+   "src/ui/combatview.js:447"
   ]
  },
  "≈ {0} dégât{1}": {
   "at": [
-   "src/ui/combatview.js:445"
+   "src/ui/combatview.js:447"
   ],
   "args": [
    "String(Math.round(dm * 10) / 10).replace('.', ',')",
@@ -23330,14 +23430,14 @@
  },
  " par figurine": {
   "at": [
-   "src/ui/combatview.js:445"
+   "src/ui/combatview.js:447"
   ]
  },
  "bold {0}px system-ui, sans-serif": {
   "at": [
-   "src/ui/combatview.js:446",
-   "src/ui/combatview.js:467",
-   "src/ui/combatview.js:480"
+   "src/ui/combatview.js:448",
+   "src/ui/combatview.js:469",
+   "src/ui/combatview.js:483"
   ],
   "args": [
    "Math.max(13, Math.round(TW * .2))"
@@ -23345,7 +23445,7 @@
  },
  "{0} : {1}{2} · R : tourner": {
   "at": [
-   "src/ui/combatview.js:477"
+   "src/ui/combatview.js:479"
   ],
   "args": [
    "sp ? sp.name : ''",
@@ -23355,64 +23455,64 @@
  },
  " (les autres sont occupées)": {
   "at": [
-   "src/ui/combatview.js:477"
+   "src/ui/combatview.js:479"
   ]
  },
  "mine": {
   "at": [
-   "src/ui/combatview.js:478"
+   "src/ui/combatview.js:480"
   ]
  },
  "mines": {
   "at": [
-   "src/ui/combatview.js:478",
-   "src/ui/combatview.js:478"
+   "src/ui/combatview.js:480",
+   "src/ui/combatview.js:480"
   ],
   "hint": "pluriel de « mine »"
  },
  " (pas sous une unité)": {
   "at": [
-   "src/ui/combatview.js:478"
+   "src/ui/combatview.js:480"
   ]
  },
  "ennemi": {
   "at": [
-   "src/ui/combatview.js:479"
+   "src/ui/combatview.js:482"
   ]
  },
  "ennemis": {
   "at": [
-   "src/ui/combatview.js:479",
-   "src/ui/combatview.js:479"
+   "src/ui/combatview.js:482",
+   "src/ui/combatview.js:482"
   ],
   "hint": "pluriel de « ennemi »"
  },
  "aucun ennemi": {
   "at": [
-   "src/ui/combatview.js:479"
+   "src/ui/combatview.js:482"
   ]
  },
  " à portée ce round": {
   "at": [
-   "src/ui/combatview.js:479"
+   "src/ui/combatview.js:482"
   ]
  },
  "des vôtres": {
   "at": [
-   "src/ui/combatview.js:479",
-   "src/ui/combatview.js:479",
-   "src/ui/combatview.js:479"
+   "src/ui/combatview.js:482",
+   "src/ui/combatview.js:482",
+   "src/ui/combatview.js:482"
   ],
   "hint": "pluriel de « des vôtres »"
  },
  " · R : tourner": {
   "at": [
-   "src/ui/combatview.js:479"
+   "src/ui/combatview.js:482"
   ]
  },
  "Mêlée : ≈ {0} infligé{1}{2}": {
   "at": [
-   "src/ui/combatview.js:572"
+   "src/ui/combatview.js:575"
   ],
   "args": [
    "fmt(f.dealt)",
@@ -23422,7 +23522,7 @@
  },
  " · {0} % de l'abattre": {
   "at": [
-   "src/ui/combatview.js:572"
+   "src/ui/combatview.js:575"
   ],
   "args": [
    "Math.round(f.kill * 100)"
@@ -23430,7 +23530,7 @@
  },
  "riposte ≈ {0}{1}{2}": {
   "at": [
-   "src/ui/combatview.js:573"
+   "src/ui/combatview.js:576"
   ],
   "args": [
    "fmt(f.received)",
@@ -23440,7 +23540,7 @@
  },
  " ({0} % de périr)": {
   "at": [
-   "src/ui/combatview.js:573"
+   "src/ui/combatview.js:576"
   ],
   "args": [
    "Math.round(f.die * 100)"
@@ -23448,22 +23548,22 @@
  },
  " · dans le dos : +1, déf. ÷2": {
   "at": [
-   "src/ui/combatview.js:573"
+   "src/ui/combatview.js:576"
   ]
  },
  " · de flanc : +1": {
   "at": [
-   "src/ui/combatview.js:573"
+   "src/ui/combatview.js:576"
   ]
  },
  "relâchez Ctrl pour tirer": {
   "at": [
-   "src/ui/combatview.js:575"
+   "src/ui/combatview.js:578"
   ]
  },
  "Tir : ≈ {0} dégât{1}": {
   "at": [
-   "src/ui/combatview.js:600"
+   "src/ui/combatview.js:603"
   ],
   "args": [
    "dmg",
@@ -23472,7 +23572,7 @@
  },
  "{0} % sans effet · {1} % par dé{2}": {
   "at": [
-   "src/ui/combatview.js:600"
+   "src/ui/combatview.js:603"
   ],
   "args": [
    "Math.round(f.zero * 100)",
@@ -23482,7 +23582,7 @@
  },
  ", −{0} déf.": {
   "at": [
-   "src/ui/combatview.js:600"
+   "src/ui/combatview.js:603"
   ],
   "args": [
    "f.pierce"
@@ -23490,17 +23590,17 @@
  },
  "brightness(.55) sepia(.6) saturate(1.6) hue-rotate(-20deg)": {
   "at": [
-   "src/ui/combatview.js:618"
+   "src/ui/combatview.js:621"
   ]
  },
  "brightness(.5) saturate(.35)": {
   "at": [
-   "src/ui/combatview.js:957"
+   "src/ui/combatview.js:980"
   ]
  },
  "muette {0}": {
   "at": [
-   "src/ui/combatview.js:978"
+   "src/ui/combatview.js:1001"
   ],
   "args": [
    "t.mute"
@@ -23508,17 +23608,17 @@
  },
  "stase": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "Zz": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "toile {0}": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ],
   "args": [
    "b.web"
@@ -23526,57 +23626,57 @@
  },
  "terreur": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "enchevêtré": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "sans riposte": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "sans tir": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "asservi": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "possédé": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "bris": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "déformé": {
   "at": [
-   "src/ui/combatview.js:1103"
+   "src/ui/combatview.js:1126"
   ]
  },
  "garde (brèche)": {
   "at": [
-   "src/ui/combatview.js:1106"
+   "src/ui/combatview.js:1129"
   ]
  },
  "en garde": {
   "at": [
-   "src/ui/combatview.js:1106"
+   "src/ui/combatview.js:1129"
   ]
  },
  "Charge +{0}": {
   "at": [
-   "src/ui/combatview.js:1128"
+   "src/ui/combatview.js:1151"
   ],
   "args": [
    "e.charge"
@@ -23584,18 +23684,18 @@
  },
  "Dans le dos !": {
   "at": [
-   "src/ui/combatview.js:1129"
+   "src/ui/combatview.js:1152"
   ]
  },
  "De flanc !": {
   "at": [
-   "src/ui/combatview.js:1129"
+   "src/ui/combatview.js:1152"
   ]
  },
  "Effroi −{0}": {
   "at": [
-   "src/ui/combatview.js:1131",
-   "src/ui/combatview.js:1132"
+   "src/ui/combatview.js:1154",
+   "src/ui/combatview.js:1155"
   ],
   "args": [
    "e.fearA"
@@ -23603,22 +23703,22 @@
  },
  "porte -": {
   "at": [
-   "src/ui/combatview.js:1143"
+   "src/ui/combatview.js:1166"
   ]
  },
  "Rejouer manuellement": {
   "at": [
-   "src/ui/combatview.js:1495"
+   "src/ui/combatview.js:1518"
   ]
  },
  "Accepter le résultat": {
   "at": [
-   "src/ui/combatview.js:1495"
+   "src/ui/combatview.js:1518"
   ]
  },
  "Continuer": {
   "at": [
-   "src/ui/combatview.js:1495",
+   "src/ui/combatview.js:1518",
    "src/ui/main.js:178",
    "src/ui/main.js:195",
    "src/ui/main.js:1471"
@@ -23626,23 +23726,23 @@
  },
  "Revoir le champ de bataille": {
   "at": [
-   "src/ui/combatview.js:1497"
+   "src/ui/combatview.js:1520"
   ]
  },
  "Victoire !": {
   "at": [
-   "src/ui/combatview.js:1498",
+   "src/ui/combatview.js:1521",
    "src/ui/main.js:1864"
   ]
  },
  "Défaite": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "<p class=\"serif\" style=\"font-size:17px\">{0}</p><p>Ennemis {1} : <b>{2}</b>{3}<br>Pertes : <b>{4}</b>{5}</p>{6}{7}": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ],
   "args": [
    "won ? (bt.fled === 1 - CombatView.humanSide ? 'L\\'ennemi bat en retraite.' : 'Le champ de ",
@@ -23657,77 +23757,77 @@
  },
  "L'ennemi bat en retraite.": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "Le champ de bataille vous appartient.": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "Vos troupes ont battu en retraite.": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "Vos forces ont été repoussées.": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "anéantis ou pris": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "anéantis": {
   "at": [
-   "src/ui/combatview.js:1498"
+   "src/ui/combatview.js:1521"
   ]
  },
  "<p class=\"dim\">Bataille résolue automatiquement : acceptez ce résultat, ou rejouez-la vous-même depuis le début, sur le même terrain, avec les mêmes troupes et le même mana. Le résultat rejoué sera définitif.</p>": {
   "at": [
-   "src/ui/combatview.js:1499"
+   "src/ui/combatview.js:1522"
   ]
  },
  "Le champ de bataille": {
   "at": [
-   "src/ui/combatview.js:1508"
+   "src/ui/combatview.js:1531"
   ]
  },
  "Revenir au résultat": {
   "at": [
-   "src/ui/combatview.js:1508"
+   "src/ui/combatview.js:1531"
   ]
  },
  "combat facile": {
   "at": [
-   "src/ui/combatview.js:1518"
+   "src/ui/combatview.js:1541"
   ]
  },
  "combat à votre avantage": {
   "at": [
-   "src/ui/combatview.js:1518"
+   "src/ui/combatview.js:1541"
   ]
  },
  "combat serré": {
   "at": [
-   "src/ui/combatview.js:1518"
+   "src/ui/combatview.js:1541"
   ]
  },
  "combat rude": {
   "at": [
-   "src/ui/combatview.js:1518"
+   "src/ui/combatview.js:1541"
   ]
  },
  "combat désespéré": {
   "at": [
-   "src/ui/combatview.js:1518"
+   "src/ui/combatview.js:1541"
   ]
  },
  "{0} unités": {
   "at": [
-   "src/ui/combatview.js:1528"
+   "src/ui/combatview.js:1551"
   ],
   "args": [
    "gs.length"
@@ -23735,19 +23835,19 @@
  },
  "ennemi abattu": {
   "at": [
-   "src/ui/combatview.js:1528"
+   "src/ui/combatview.js:1551"
   ]
  },
  "ennemis abattus": {
   "at": [
-   "src/ui/combatview.js:1528",
-   "src/ui/combatview.js:1528"
+   "src/ui/combatview.js:1551",
+   "src/ui/combatview.js:1551"
   ],
   "hint": "pluriel de « ennemi abattu »"
  },
  "<p>Expérience, {0} : {1}.</p>{2}": {
   "at": [
-   "src/ui/combatview.js:1531"
+   "src/ui/combatview.js:1554"
   ],
   "args": [
    "how",
@@ -23757,7 +23857,7 @@
  },
  "<p>Promotion{0} : {1}</p>": {
   "at": [
-   "src/ui/combatview.js:1531"
+   "src/ui/combatview.js:1554"
   ],
   "args": [
    "ups.length > 1 ? 's' : ''",
@@ -23766,7 +23866,7 @@
  },
  "{0}<p>Tombés au combat : {1}.</p><p>{2} : <b class=\"mana\">{3} mana</b> <span class=\"dim\">(compétence {4}, mana {5})</span></p>": {
   "at": [
-   "src/ui/combatview.js:1545"
+   "src/ui/combatview.js:1568"
   ],
   "args": [
    "lastStand ? '<p>Toutes vos unités sont tombées.</p>' : ''",
@@ -23779,12 +23879,12 @@
  },
  "<p>Toutes vos unités sont tombées.</p>": {
   "at": [
-   "src/ui/combatview.js:1545"
+   "src/ui/combatview.js:1568"
   ]
  },
  "Relever : {0}": {
   "at": [
-   "src/ui/combatview.js:1546"
+   "src/ui/combatview.js:1569"
   ],
   "args": [
    "bt.name(b)"
@@ -23792,42 +23892,42 @@
  },
  "Accepter la défaite": {
   "at": [
-   "src/ui/combatview.js:1546"
+   "src/ui/combatview.js:1569"
   ]
  },
  "Laisser": {
   "at": [
-   "src/ui/combatview.js:1546"
+   "src/ui/combatview.js:1569"
   ]
  },
  "— La bataille reprend depuis le début —": {
   "at": [
-   "src/ui/combatview.js:1586"
+   "src/ui/combatview.js:1609"
   ]
  },
  "La bataille reprend depuis le début : à vous de commander.": {
   "at": [
-   "src/ui/combatview.js:1594"
+   "src/ui/combatview.js:1617"
   ]
  },
  "tombé dans vos rangs": {
   "at": [
-   "src/ui/combatview.js:1626"
+   "src/ui/combatview.js:1649"
   ]
  },
  "ennemi tombé": {
   "at": [
-   "src/ui/combatview.js:1626"
+   "src/ui/combatview.js:1649"
   ]
  },
  "<div class=\"dim\" style=\"font-size:11.5px\">Plusieurs corps ici : vous choisirez lequel relever.</div>": {
   "at": [
-   "src/ui/combatview.js:1626"
+   "src/ui/combatview.js:1649"
   ]
  },
  "<h4>Terrain</h4>{0}": {
   "at": [
-   "src/ui/combatview.js:1628"
+   "src/ui/combatview.js:1651"
   ],
   "args": [
    "terr"
@@ -23835,12 +23935,12 @@
  },
  "Seuls des sorts, les briseurs de murs et les créatures colossales abattent une tour.": {
   "at": [
-   "src/ui/combatview.js:1650"
+   "src/ui/combatview.js:1673"
   ]
  },
  "{0} est hors de portée.": {
   "at": [
-   "src/ui/combatview.js:1654"
+   "src/ui/combatview.js:1677"
   ],
   "args": [
    "U.cap(bt.towerName(tw))"
@@ -23848,22 +23948,22 @@
  },
  "Un engin de siège ne s'en prend qu'aux tours.": {
   "at": [
-   "src/ui/combatview.js:1659"
+   "src/ui/combatview.js:1682"
   ]
  },
  "Hors d'atteinte : cette unité vole.": {
   "at": [
-   "src/ui/combatview.js:1663"
+   "src/ui/combatview.js:1686"
   ]
  },
  "Cible hors de portée.": {
   "at": [
-   "src/ui/combatview.js:1667"
+   "src/ui/combatview.js:1690"
   ]
  },
  "{0} garde sa position jusqu'à ce que la muraille soit percée.": {
   "at": [
-   "src/ui/combatview.js:1707"
+   "src/ui/combatview.js:1730"
   ],
   "args": [
    "U.cap(bt.name(b))"
@@ -23871,7 +23971,7 @@
  },
  "Brèche ouverte ! {0} le combat.": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1739"
   ],
   "args": [
    "woke.length > 1 ? woke.length + ' unités en garde reprennent' : U.cap(bt.name(woke[0])) + "
@@ -23879,7 +23979,7 @@
  },
  "{0} unités en garde reprennent": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1739"
   ],
   "args": [
    "woke.length"
@@ -23887,7 +23987,7 @@
  },
  "{0} reprend": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1739"
   ],
   "args": [
    "U.cap(bt.name(woke[0]))"
@@ -23895,7 +23995,7 @@
  },
  "Vous reprenez la main{0}.": {
   "at": [
-   "src/ui/combatview.js:1724"
+   "src/ui/combatview.js:1747"
   ],
   "args": [
    "CombatView.bt && CombatView.bt.side === CombatView.humanSide ? '' : ' : ce sera à vous au "
@@ -23903,22 +24003,22 @@
  },
  " : ce sera à vous au prochain tour": {
   "at": [
-   "src/ui/combatview.js:1724"
+   "src/ui/combatview.js:1747"
   ]
  },
  " joue seule désormais (sélectionnez-la puis U pour la reprendre).": {
   "at": [
-   "src/ui/combatview.js:1741"
+   "src/ui/combatview.js:1764"
   ]
  },
  " attend de nouveau vos ordres.": {
   "at": [
-   "src/ui/combatview.js:1741"
+   "src/ui/combatview.js:1764"
   ]
  },
  "Compétence restante : {0} · mana : {1} · distance à la forteresse ×{2}{3}": {
   "at": [
-   "src/ui/combatview.js:1773"
+   "src/ui/combatview.js:1796"
   ],
   "args": [
    "bt.skillLeft[side]",
@@ -23929,23 +24029,23 @@
  },
  " (Relais de magie)": {
   "at": [
-   "src/ui/combatview.js:1773"
+   "src/ui/combatview.js:1796"
   ]
  },
  "Vous avez déjà lancé un sort ce tour-ci.": {
   "at": [
-   "src/ui/combatview.js:1774",
-   "src/ui/combatview.js:1841"
+   "src/ui/combatview.js:1797",
+   "src/ui/combatview.js:1864"
   ]
  },
  "Combat sur un nœud : votre Maîtrise des nœuds protège vos sorts de son flux.": {
   "at": [
-   "src/ui/combatview.js:1775"
+   "src/ui/combatview.js:1798"
   ]
  },
  "Combat sur un nœud de {0} : les sorts des autres royaumes risquent de s'y dissiper (le risque est indiqué sous chacun).": {
   "at": [
-   "src/ui/combatview.js:1775"
+   "src/ui/combatview.js:1798"
   ],
   "args": [
    "REALM_NAMES[bt.nodeRealm].toLowerCase()"
@@ -23953,7 +24053,7 @@
  },
  "Flux du nœud : {0} % de risque de dissipation": {
   "at": [
-   "src/ui/combatview.js:1776"
+   "src/ui/combatview.js:1799"
   ],
   "args": [
    "Math.round(f * 100)"
@@ -23961,7 +24061,7 @@
  },
  "Capacités de {0}": {
   "at": [
-   "src/ui/combatview.js:1793"
+   "src/ui/combatview.js:1816"
   ],
   "args": [
    "Units.label(sel.u)"
@@ -23969,37 +24069,37 @@
  },
  "Fait surgir des démons qui combattent à vos côtés jusqu'à la fin de la bataille.": {
   "at": [
-   "src/ui/combatview.js:1795"
+   "src/ui/combatview.js:1818"
   ]
  },
  "Déjà utilisée": {
   "at": [
-   "src/ui/combatview.js:1797"
+   "src/ui/combatview.js:1820"
   ]
  },
  "Mana insuffisant": {
   "at": [
-   "src/ui/combatview.js:1797"
+   "src/ui/combatview.js:1820"
   ]
  },
  "Déjà actif": {
   "at": [
-   "src/ui/combatview.js:1797"
+   "src/ui/combatview.js:1820"
   ]
  },
  "Aucune cible": {
   "at": [
-   "src/ui/combatview.js:1797"
+   "src/ui/combatview.js:1820"
   ]
  },
  "Une fois": {
   "at": [
-   "src/ui/combatview.js:1798"
+   "src/ui/combatview.js:1821"
   ]
  },
  "reste {0}": {
   "at": [
-   "src/ui/combatview.js:1798"
+   "src/ui/combatview.js:1821"
   ],
   "args": [
    "sel.casterMana"
@@ -24007,52 +24107,52 @@
  },
  "Aucun sort de combat disponible.": {
   "at": [
-   "src/ui/combatview.js:1804"
+   "src/ui/combatview.js:1827"
   ]
  },
  "Déjà actif sur ce champ de bataille.": {
   "at": [
-   "src/ui/combatview.js:1809"
+   "src/ui/combatview.js:1832"
   ]
  },
  "Aucune muraille ni tour à abattre ici.": {
   "at": [
-   "src/ui/combatview.js:1814"
+   "src/ui/combatview.js:1837"
   ]
  },
  "parmi vos ennemis": {
   "at": [
-   "src/ui/combatview.js:1817"
+   "src/ui/combatview.js:1840"
   ]
  },
  "dans vos rangs": {
   "at": [
-   "src/ui/combatview.js:1817"
+   "src/ui/combatview.js:1840"
   ]
  },
  "sur le champ de bataille": {
   "at": [
-   "src/ui/combatview.js:1817"
+   "src/ui/combatview.js:1840"
   ]
  },
  "Aucun mort ne peut être relevé (héros, rappelés ou morts irréversibles).": {
   "at": [
-   "src/ui/combatview.js:1818"
+   "src/ui/combatview.js:1841"
   ]
  },
  "Vos morts ne peuvent pas être relevés : leurs dégâts sont irréversibles (pétrification, désintégration…).": {
   "at": [
-   "src/ui/combatview.js:1819"
+   "src/ui/combatview.js:1842"
   ]
  },
  "Aucune de vos unités normales n'est tombée dans cette bataille.": {
   "at": [
-   "src/ui/combatview.js:1819"
+   "src/ui/combatview.js:1842"
   ]
  },
  "Ne touche que les {0} {1} : il n'y en a {2}{3}.": {
   "at": [
-   "src/ui/combatview.js:1821"
+   "src/ui/combatview.js:1844"
   ],
   "args": [
    "p.targets && p.targets.length ? 'créatures ou morts-vivants' : p.fantasticOnly ? 'créature",
@@ -24063,43 +24163,43 @@
  },
  "créatures ou morts-vivants": {
   "at": [
-   "src/ui/combatview.js:1821"
+   "src/ui/combatview.js:1844"
   ]
  },
  "créatures": {
   "at": [
-   "src/ui/combatview.js:1821"
+   "src/ui/combatview.js:1844"
   ]
  },
  " ou ": {
   "at": [
-   "src/ui/combatview.js:1821"
+   "src/ui/combatview.js:1844"
   ],
   "hint": "séparateur d'une liste (« a, b ou c »)"
  },
  "aucun ": {
   "at": [
-   "src/ui/combatview.js:1821"
+   "src/ui/combatview.js:1844"
   ]
  },
  "aucune ": {
   "at": [
-   "src/ui/combatview.js:1821"
+   "src/ui/combatview.js:1844"
   ]
  },
  "Les unités ennemies visibles ont déjà subi les trois mutations, ou y sont insensibles.": {
   "at": [
-   "src/ui/combatview.js:1823"
+   "src/ui/combatview.js:1846"
   ]
  },
  "Toutes les unités ennemies visibles le subissent déjà, ou y sont insensibles.": {
   "at": [
-   "src/ui/combatview.js:1823"
+   "src/ui/combatview.js:1846"
   ]
  },
  "Ne touche que les unités normales : il n'y en a aucune {0}.": {
   "at": [
-   "src/ui/combatview.js:1824"
+   "src/ui/combatview.js:1847"
   ],
   "args": [
    "where"
@@ -24107,7 +24207,7 @@
  },
  "Ne touche que les créatures fantastiques : il n'y en a aucune {0}.": {
   "at": [
-   "src/ui/combatview.js:1825"
+   "src/ui/combatview.js:1848"
   ],
   "args": [
    "where"
@@ -24115,27 +24215,27 @@
  },
  "Toutes vos unités qui peuvent en bénéficier l'ont déjà.": {
   "at": [
-   "src/ui/combatview.js:1826"
+   "src/ui/combatview.js:1849"
   ]
  },
  "Aucun ennemi ne peut être visé : invisibles, ou insensibles à ce sort.": {
   "at": [
-   "src/ui/combatview.js:1827"
+   "src/ui/combatview.js:1850"
   ]
  },
  "Aucune cible possible pour l'instant.": {
   "at": [
-   "src/ui/combatview.js:1828"
+   "src/ui/combatview.js:1851"
   ]
  },
  "Déjà utilisée dans ce combat.": {
   "at": [
-   "src/ui/combatview.js:1831"
+   "src/ui/combatview.js:1854"
   ]
  },
  "Mana de l'unité insuffisant : {0} sur {1}.": {
   "at": [
-   "src/ui/combatview.js:1832"
+   "src/ui/combatview.js:1855"
   ],
   "args": [
    "b.casterMana",
@@ -24144,12 +24244,12 @@
  },
  "Ce n'est pas votre tour.": {
   "at": [
-   "src/ui/combatview.js:1840"
+   "src/ui/combatview.js:1863"
   ]
  },
  "Compétence insuffisante : il vous en reste {0}, il en faut {1}.": {
   "at": [
-   "src/ui/combatview.js:1843"
+   "src/ui/combatview.js:1866"
   ],
   "args": [
    "bt.skillLeft[side]",
@@ -24158,7 +24258,7 @@
  },
  "Mana insuffisant : {0} sur {1}.": {
   "at": [
-   "src/ui/combatview.js:1844"
+   "src/ui/combatview.js:1867"
   ],
   "args": [
    "pl.mana",
@@ -24167,7 +24267,7 @@
  },
  "Choisissez où dresser <b>{0}</b> : trois cases alignées autour du curseur ; <b>R</b> pour tourner la ligne.": {
   "at": [
-   "src/ui/combatview.js:1856"
+   "src/ui/combatview.js:1879"
   ],
   "args": [
    "nm"
@@ -24175,7 +24275,7 @@
  },
  "Choisissez le centre de la croix de <b>{0}</b> (cinq cases).": {
   "at": [
-   "src/ui/combatview.js:1856"
+   "src/ui/combatview.js:1879"
   ],
   "args": [
    "nm"
@@ -24183,22 +24283,22 @@
  },
  "Choisissez l'unité à transporter (en or).": {
   "at": [
-   "src/ui/combatview.js:1857"
+   "src/ui/combatview.js:1880"
   ]
  },
  "Choisissez l'unité que le vent poussera (en or).": {
   "at": [
-   "src/ui/combatview.js:1857"
+   "src/ui/combatview.js:1880"
   ]
  },
  "Choisissez l'unité tombée à relever (en or).": {
   "at": [
-   "src/ui/combatview.js:1857"
+   "src/ui/combatview.js:1880"
   ]
  },
  "Choisissez où apparaît le <b>{0}</b> : la zone montre jusqu'où il peut aller dès ce round.": {
   "at": [
-   "src/ui/combatview.js:1859"
+   "src/ui/combatview.js:1882"
   ],
   "args": [
    "DATA.spells[id] ? DATA.spells[id].name : id"
@@ -24206,7 +24306,7 @@
  },
  "Choisissez le centre de <b>{0}</b> : la zone de {1} × {2} cases suit le curseur.": {
   "at": [
-   "src/ui/combatview.js:1859"
+   "src/ui/combatview.js:1882"
   ],
   "args": [
    "DATA.spells[id] ? DATA.spells[id].name : id",
@@ -24216,7 +24316,7 @@
  },
  "Choisissez la cible de <b>{0}</b> (en or){1}.": {
   "at": [
-   "src/ui/combatview.js:1860"
+   "src/ui/combatview.js:1883"
   ],
   "args": [
    "DATA.spells[id] ? DATA.spells[id].name : id",
@@ -24225,12 +24325,12 @@
  },
  " ; réglez sa puissance au-dessus de la barre (touches + et −)": {
   "at": [
-   "src/ui/combatview.js:1860"
+   "src/ui/combatview.js:1883"
   ]
  },
  "{0} de la réserve de {1}": {
   "at": [
-   "src/ui/combatview.js:1866"
+   "src/ui/combatview.js:1889"
   ],
   "args": [
    "o ? o.cost + x : x",
@@ -24239,7 +24339,7 @@
  },
  "coût {0} mana": {
   "at": [
-   "src/ui/combatview.js:1868"
+   "src/ui/combatview.js:1891"
   ],
   "args": [
    "Math.max(1, Math.ceil(base * Magic.distanceMult(App.game, pl, bt.plane, bt.x, bt.y)))"
@@ -24247,12 +24347,12 @@
  },
  "puissance de base": {
   "at": [
-   "src/ui/combatview.js:1870"
+   "src/ui/combatview.js:1893"
   ]
  },
  "<div><b class=\"danger\">Sans effet</b> : {0}.</div>": {
   "at": [
-   "src/ui/combatview.js:1935"
+   "src/ui/combatview.js:1958"
   ],
   "args": [
    "o.threshold ? 'résistance ' + o.res + ', il faudrait moins de ' + o.threshold : 'immunisé "
@@ -24260,7 +24360,7 @@
  },
  "résistance {0}, il faudrait moins de {1}": {
   "at": [
-   "src/ui/combatview.js:1935"
+   "src/ui/combatview.js:1958"
   ],
   "args": [
    "o.res",
@@ -24269,7 +24369,7 @@
  },
  "immunisé (résistance {0})": {
   "at": [
-   "src/ui/combatview.js:1935"
+   "src/ui/combatview.js:1958"
   ],
   "args": [
    "o.res >= 50 ? '50 ou plus' : o.res"
@@ -24277,12 +24377,12 @@
  },
  "50 ou plus": {
   "at": [
-   "src/ui/combatview.js:1935"
+   "src/ui/combatview.js:1958"
   ]
  },
  "<div>Au moins un effet dissipé : <b class=\"{0}\" style=\"font-size:16px\">{1}</b></div><div class=\"dim\" style=\"font-size:11.5px\">{2}</div>": {
   "at": [
-   "src/ui/combatview.js:1936"
+   "src/ui/combatview.js:1959"
   ],
   "args": [
    "col(o.p)",
@@ -24292,7 +24392,7 @@
  },
  "<div>Vol de vie attendu : <b class=\"ok\">{0} PV</b> <span class=\"dim\">(résistance {1}{2})</span></div>": {
   "at": [
-   "src/ui/combatview.js:1937"
+   "src/ui/combatview.js:1960"
   ],
   "args": [
    "String(Math.round(o.drain * 10) / 10).replace('.', ',')",
@@ -24302,7 +24402,7 @@
  },
  "<div>Dégâts attendus : <b class=\"{0}\" style=\"font-size:16px\">≈ {1}</b> sur {2} PV</div><div class=\"dim\" style=\"font-size:11.5px\">{3} sans effet · unité détruite : {4}</div>": {
   "at": [
-   "src/ui/combatview.js:1938"
+   "src/ui/combatview.js:1961"
   ],
   "args": [
    "col(1 - o.zero)",
@@ -24314,7 +24414,7 @@
  },
  "<div>Chaque figurine : <b class=\"{0}\">{1}</b> de périr</div><div>Au moins une tuée : <b class=\"{2}\">{3}</b> · l'unité entière : <b class=\"{4}\">{5}</b></div>": {
   "at": [
-   "src/ui/combatview.js:1939"
+   "src/ui/combatview.js:1962"
   ],
   "args": [
    "col(o.p)",
@@ -24327,7 +24427,7 @@
  },
  "<div>Chance de réussite : <b class=\"{0}\" style=\"font-size:16px\">{1}</b></div>": {
   "at": [
-   "src/ui/combatview.js:1940"
+   "src/ui/combatview.js:1963"
   ],
   "args": [
    "col(o.p)",
@@ -24336,7 +24436,7 @@
  },
  "<div class=\"dim\" style=\"font-size:11.5px\">Résistance {0}{1} : il faut faire plus que {2} sur 10{3}.</div>": {
   "at": [
-   "src/ui/combatview.js:1941"
+   "src/ui/combatview.js:1964"
   ],
   "args": [
    "o.res",
@@ -24347,7 +24447,7 @@
  },
  ", réduite de {0} par le sort": {
   "at": [
-   "src/ui/combatview.js:1941"
+   "src/ui/combatview.js:1964"
   ],
   "args": [
    "o.mod"
@@ -24355,27 +24455,27 @@
  },
  " pour chaque figurine": {
   "at": [
-   "src/ui/combatview.js:1941"
+   "src/ui/combatview.js:1964"
   ]
  },
  "le flux du nœud": {
   "at": [
-   "src/ui/combatview.js:1942"
+   "src/ui/combatview.js:1965"
   ]
  },
  "la contre-magie": {
   "at": [
-   "src/ui/combatview.js:1942"
+   "src/ui/combatview.js:1965"
   ]
  },
  "son Miroir magique": {
   "at": [
-   "src/ui/combatview.js:1942"
+   "src/ui/combatview.js:1965"
   ]
  },
  "<div class=\"gold\" style=\"font-size:11.5px\">Le sort doit d'abord passer {0} ({1}) : chance réelle {2}.</div>": {
   "at": [
-   "src/ui/combatview.js:1942"
+   "src/ui/combatview.js:1965"
   ],
   "args": [
    "ob.join(' et ')",
@@ -24385,48 +24485,48 @@
  },
  "Choisissez une des cases cerclées d'or : le vent pousse en ligne droite.": {
   "at": [
-   "src/ui/combatview.js:1953"
+   "src/ui/combatview.js:1976"
   ]
  },
  "Choisissez l'unité qui donnera sa vie (cerclée d'or ; pas un héros).": {
   "at": [
-   "src/ui/combatview.js:1953"
+   "src/ui/combatview.js:1976"
   ]
  },
  "Case impossible.": {
   "at": [
-   "src/ui/combatview.js:1954"
+   "src/ui/combatview.js:1977"
   ]
  },
  "Quel corps relever ?": {
   "at": [
-   "src/ui/combatview.js:1967"
+   "src/ui/combatview.js:1990"
   ]
  },
  " (ennemi)": {
   "at": [
-   "src/ui/combatview.js:1967"
+   "src/ui/combatview.js:1990"
   ]
  },
  "Sort annulé.": {
   "at": [
-   "src/ui/combatview.js:1968",
-   "src/ui/combatview.js:1981"
+   "src/ui/combatview.js:1991",
+   "src/ui/combatview.js:2004"
   ]
  },
  "Pas de mine sous une unité ni sur un obstacle : visez des cases libres.": {
   "at": [
-   "src/ui/combatview.js:1977"
+   "src/ui/combatview.js:2000"
   ]
  },
  "Toutes ces cases sont occupées : visez ailleurs.": {
   "at": [
-   "src/ui/combatview.js:1977"
+   "src/ui/combatview.js:2000"
   ]
  },
  "Choisissez où transporter {0} (cases en or ; Échap pour annuler).": {
   "at": [
-   "src/ui/combatview.js:1986"
+   "src/ui/combatview.js:2009"
   ],
   "args": [
    "U.esc(bt.name(target))"
@@ -24434,7 +24534,7 @@
  },
  "Choisissez où le vent pousse {0} (cases en or).": {
   "at": [
-   "src/ui/combatview.js:1986"
+   "src/ui/combatview.js:2009"
   ],
   "args": [
    "U.esc(bt.name(target))"
@@ -24442,7 +24542,7 @@
  },
  "Choisissez l'unité qui donnera sa vie pour relever {0} (en or).": {
   "at": [
-   "src/ui/combatview.js:1986"
+   "src/ui/combatview.js:2009"
   ],
   "args": [
    "U.esc(bt.name(target))"
@@ -24450,12 +24550,12 @@
  },
  "<h4>Porte enfoncée</h4><div class=\"muted\">Le passage est ouvert.</div>": {
   "at": [
-   "src/ui/combatview.js:1999"
+   "src/ui/combatview.js:2022"
   ]
  },
  "<h4>Porte</h4><div>{0} / {1} PV · défense {2}</div><div class=\"dim\" style=\"margin-top:4px\">Fermée aux assaillants tant qu'elle tient.</div>": {
   "at": [
-   "src/ui/combatview.js:2000"
+   "src/ui/combatview.js:2023"
   ],
   "args": [
    "Math.max(0, tv.hp)",
@@ -24465,22 +24565,22 @@
  },
  "Ruines de la tour du sorcier": {
   "at": [
-   "src/ui/combatview.js:2002"
+   "src/ui/combatview.js:2025"
   ]
  },
  "Ruines d'une tour": {
   "at": [
-   "src/ui/combatview.js:2002"
+   "src/ui/combatview.js:2025"
   ]
  },
  "<div class=\"muted\">La muraille est ouverte à cet endroit.</div>": {
   "at": [
-   "src/ui/combatview.js:2002"
+   "src/ui/combatview.js:2025"
   ]
  },
  "{0} magique{1} de force {2}": {
   "at": [
-   "src/ui/combatview.js:2003"
+   "src/ui/combatview.js:2026"
   ],
   "args": [
    "U.n(t.shots, 'rayon')",
@@ -24490,18 +24590,18 @@
  },
  "rayon": {
   "at": [
-   "src/ui/combatview.js:2003"
+   "src/ui/combatview.js:2026"
   ]
  },
  "rayons": {
   "at": [
-   "src/ui/combatview.js:2003"
+   "src/ui/combatview.js:2026"
   ],
   "hint": "pluriel de « rayon »"
  },
  "{0} flèches de force {1}": {
   "at": [
-   "src/ui/combatview.js:2003"
+   "src/ui/combatview.js:2026"
   ],
   "args": [
    "t.shots",
@@ -24510,7 +24610,7 @@
  },
  "<h4>{0}</h4><div>{1} / {2} PV · défense {3}</div>{4}<div class=\"dim\" style=\"margin-top:4px\">{5}</div>": {
   "at": [
-   "src/ui/combatview.js:2004"
+   "src/ui/combatview.js:2027"
   ],
   "args": [
    "t.kind === 'spire' ? 'Tour du sorcier' : 'Tour de défense'",
@@ -24523,17 +24623,17 @@
  },
  "Tour du sorcier": {
   "at": [
-   "src/ui/combatview.js:2004"
+   "src/ui/combatview.js:2027"
   ]
  },
  "Tour de défense": {
   "at": [
-   "src/ui/combatview.js:2004"
+   "src/ui/combatview.js:2027"
   ]
  },
  "<div class=\"danger\" style=\"margin-top:4px\">Réduite au silence : ne tire plus pendant {0}.</div>": {
   "at": [
-   "src/ui/combatview.js:2006"
+   "src/ui/combatview.js:2029"
   ],
   "args": [
    "U.n(t.mute, 'round')"
@@ -24541,7 +24641,7 @@
  },
  "<div style=\"margin-top:4px\">Tire {0} ({1} % pour toucher) à chaque round.</div>": {
   "at": [
-   "src/ui/combatview.js:2006"
+   "src/ui/combatview.js:2029"
   ],
   "args": [
    "what",
@@ -24550,69 +24650,69 @@
  },
  "Tant qu'elle tient, la forteresse n'est pas prise. Toute unité peut l'assaillir au contact.": {
   "at": [
-   "src/ui/combatview.js:2007"
+   "src/ui/combatview.js:2030"
   ]
  },
  "Ne tire que tant qu'une garnison la sert. Seuls des sorts, les briseurs de murs et les créatures colossales en viennent à bout.": {
   "at": [
-   "src/ui/combatview.js:2007"
+   "src/ui/combatview.js:2030"
   ]
  },
  "Bris": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Déformation (attaque)": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Déformation (défense)": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Déformation (résistance)": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Lenteur : mouvement réduit de moitié": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Entraves : plus de riposte": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "Crépuscule : plus de tir": {
   "at": [
-   "src/ui/combatview.js:2015"
+   "src/ui/combatview.js:2038"
   ]
  },
  "<span class=\"abl\" style=\"border-color:#3a5a8a;color:#a8c8ff\">Double : se dissipe dès qu'il est blessé</span>": {
   "at": [
-   "src/ui/combatview.js:2016"
+   "src/ui/combatview.js:2039"
   ]
  },
  "figurine des vôtres tuée": {
   "at": [
-   "src/ui/combatview.js:2017"
+   "src/ui/combatview.js:2040"
   ]
  },
  "figurines des vôtres tuées": {
   "at": [
-   "src/ui/combatview.js:2017",
-   "src/ui/combatview.js:2017"
+   "src/ui/combatview.js:2040",
+   "src/ui/combatview.js:2040"
   ],
   "hint": "pluriel de « figurine des vôtres tuée »"
  },
  "<span class=\"abl\">Munitions {0}</span>": {
   "at": [
-   "src/ui/combatview.js:2018"
+   "src/ui/combatview.js:2041"
   ],
   "args": [
    "b.ammo"
@@ -24620,12 +24720,12 @@
  },
  "<span class=\"abl\" style=\"border-color:#7a2a2a;color:#ffb0b0\">Munitions 0</span>": {
   "at": [
-   "src/ui/combatview.js:2019"
+   "src/ui/combatview.js:2042"
   ]
  },
  "<span class=\"abl e\">Mana {0}</span>": {
   "at": [
-   "src/ui/combatview.js:2020"
+   "src/ui/combatview.js:2043"
   ],
   "args": [
    "b.casterMana"
@@ -24633,12 +24733,12 @@
  },
  "<span class=\"abl\" style=\"border-color:#8a6a26;color:#ffd66e\">En garde jusqu'à la brèche</span>": {
   "at": [
-   "src/ui/combatview.js:2021"
+   "src/ui/combatview.js:2044"
   ]
  },
  "<span class=\"abl\" style=\"border-color:#8a6a26;color:#ffd66e\">En garde : {0}ni flanc ni dos</span>": {
   "at": [
-   "src/ui/combatview.js:2022"
+   "src/ui/combatview.js:2045"
   ],
   "args": [
    "s0.berserk ? '' : '+1 défense, '"
@@ -24646,12 +24746,12 @@
  },
  "+1 défense, ": {
   "at": [
-   "src/ui/combatview.js:2022"
+   "src/ui/combatview.js:2045"
   ]
  },
  "<span class=\"abl\" style=\"border-color:#6a5a3a;color:#c9b07a\">Élan de charge brisé par {0}</span>": {
   "at": [
-   "src/ui/combatview.js:2027"
+   "src/ui/combatview.js:2050"
   ],
   "args": [
    "U.esc(bt.name(foe))"
@@ -24659,7 +24759,7 @@
  },
  "<span class=\"abl\" style=\"border-color:#8a6a26;color:#ffd66e\">Élan de charge : +{0} en attaque</span>": {
   "at": [
-   "src/ui/combatview.js:2027"
+   "src/ui/combatview.js:2050"
   ],
   "args": [
    "ch"
@@ -24667,7 +24767,7 @@
  },
  "{0} · tour {1}": {
   "at": [
-   "src/ui/combatview.js:2036",
+   "src/ui/combatview.js:2059",
    "src/ui/main.js:328"
   ],
   "args": [
@@ -24677,12 +24777,12 @@
  },
  "Bataille": {
   "at": [
-   "src/ui/combatview.js:2036"
+   "src/ui/combatview.js:2059"
   ]
  },
  "<span style=\"color:{0}\">{1}</span> contre <span style=\"color:{2}\">{3}</span> · {4}": {
   "at": [
-   "src/ui/combatview.js:2037"
+   "src/ui/combatview.js:2060"
   ],
   "args": [
    "att ? att.color : '#aaa'",
@@ -24694,22 +24794,22 @@
  },
  "Gardiens": {
   "at": [
-   "src/ui/combatview.js:2037"
+   "src/ui/combatview.js:2060"
   ]
  },
  "<b class=\"gold\">À vous de jouer</b>": {
   "at": [
-   "src/ui/combatview.js:2037"
+   "src/ui/combatview.js:2060"
   ]
  },
  "Tour adverse": {
   "at": [
-   "src/ui/combatview.js:2037"
+   "src/ui/combatview.js:2060"
   ]
  },
  "<div class=\"c-magic\">Compétence <b>{0}</b>/{1} · mana <b class=\"mana\">{2}</b>{3}</div>": {
   "at": [
-   "src/ui/combatview.js:2041"
+   "src/ui/combatview.js:2064"
   ],
   "args": [
    "bt.skillLeft[side]",
@@ -24720,12 +24820,12 @@
  },
  " <span class=\"dim\">· sort déjà lancé ce tour</span>": {
   "at": [
-   "src/ui/combatview.js:2042"
+   "src/ui/combatview.js:2065"
   ]
  },
  "{0}<div class=\"dim\" style=\"margin-top:6px\">Mouvement restant : {1}</div>": {
   "at": [
-   "src/ui/combatview.js:2044"
+   "src/ui/combatview.js:2067"
   ],
   "args": [
    "CombatView.unitPanel(CombatView.sel)",
@@ -24734,27 +24834,27 @@
  },
  "<span class=\"dim\">Sélectionnez une unité.</span>": {
   "at": [
-   "src/ui/combatview.js:2044"
+   "src/ui/combatview.js:2067"
   ]
  },
  "Sorts en cours": {
   "at": [
-   "src/ui/combatview.js:2122"
+   "src/ui/combatview.js:2145"
   ]
  },
  "Vos sorts": {
   "at": [
-   "src/ui/combatview.js:2123"
+   "src/ui/combatview.js:2146"
   ]
  },
  "Sorts ennemis": {
   "at": [
-   "src/ui/combatview.js:2123"
+   "src/ui/combatview.js:2146"
   ]
  },
  " · réserve {0}": {
   "at": [
-   "src/ui/combatview.js:2131"
+   "src/ui/combatview.js:2154"
   ],
   "args": [
    "CombatView.bt.counterMagic[e.side] || 0"
@@ -24762,7 +24862,7 @@
  },
  "Sorts": {
   "at": [
-   "src/ui/combatview.js:2155",
+   "src/ui/combatview.js:2178",
    "src/ui/panels.js:331",
    "src/ui/panels.js:421",
    "src/ui/panels.js:852"
@@ -24770,136 +24870,136 @@
  },
  "Attendre": {
   "at": [
-   "src/ui/combatview.js:2156",
+   "src/ui/combatview.js:2179",
    "src/ui/main.js:630"
   ]
  },
  "Garder": {
   "at": [
-   "src/ui/combatview.js:2158"
+   "src/ui/combatview.js:2181"
   ]
  },
  "Passer le reste du tour (pas de bonus : l'unité a déjà frappé ce tour-ci)": {
   "at": [
-   "src/ui/combatview.js:2158"
+   "src/ui/combatview.js:2181"
   ]
  },
  "Se mettre en garde : passer le tour, +1 en défense et ni flanc ni dos jusqu'à son prochain tour": {
   "at": [
-   "src/ui/combatview.js:2158"
+   "src/ui/combatview.js:2181"
   ]
  },
  "Passer le reste du tour (les troupes montées et les créatures ne se mettent pas en garde)": {
   "at": [
-   "src/ui/combatview.js:2158"
+   "src/ui/combatview.js:2181"
   ]
  },
  "Lever la garde": {
   "at": [
-   "src/ui/combatview.js:2160"
+   "src/ui/combatview.js:2183"
   ]
  },
  "Garder jusqu'à la brèche": {
   "at": [
-   "src/ui/combatview.js:2160"
+   "src/ui/combatview.js:2183"
   ]
  },
  "Automatique": {
   "at": [
-   "src/ui/combatview.js:2161",
+   "src/ui/combatview.js:2184",
    "src/ui/setup.js:128"
   ]
  },
  "Résolution automatique choisie au début : la bataille se joue seule jusqu'au bout": {
   "at": [
-   "src/ui/combatview.js:2161"
+   "src/ui/combatview.js:2184"
   ]
  },
  "Reprendre la main": {
   "at": [
-   "src/ui/combatview.js:2162"
+   "src/ui/combatview.js:2185"
   ]
  },
  "Vous reprenez le commandement, tout de suite si c'est votre tour, sinon au prochain": {
   "at": [
-   "src/ui/combatview.js:2162"
+   "src/ui/combatview.js:2185"
   ]
  },
  "Automatiser toute la bataille": {
   "at": [
-   "src/ui/combatview.js:2164"
+   "src/ui/combatview.js:2187"
   ]
  },
  "Vos troupes jouent seules ; « Reprendre la main » (A) à tout moment": {
   "at": [
-   "src/ui/combatview.js:2164"
+   "src/ui/combatview.js:2187"
   ]
  },
  "Reprendre cette unité": {
   "at": [
-   "src/ui/combatview.js:2165"
+   "src/ui/combatview.js:2188"
   ]
  },
  "Automatiser cette unité": {
   "at": [
-   "src/ui/combatview.js:2165"
+   "src/ui/combatview.js:2188"
   ]
  },
  "Elle attendra de nouveau vos ordres": {
   "at": [
-   "src/ui/combatview.js:2165"
+   "src/ui/combatview.js:2188"
   ]
  },
  "Elle joue seule à chaque tour, les autres restent à vous": {
   "at": [
-   "src/ui/combatview.js:2165"
+   "src/ui/combatview.js:2188"
   ]
  },
  "Semi-automatique : à la fin de chacun de vos tours, vos troupes jouent seules.": {
   "at": [
-   "src/ui/combatview.js:2166"
+   "src/ui/combatview.js:2189"
   ]
  },
  "Vos troupes attendent de nouveau vos ordres.": {
   "at": [
-   "src/ui/combatview.js:2166"
+   "src/ui/combatview.js:2189"
   ]
  },
  "Lancez vos sorts, commandez qui vous voulez, puis « Fin du tour » : vos troupes jouent le reste du tour": {
   "at": [
-   "src/ui/combatview.js:2166"
+   "src/ui/combatview.js:2189"
   ]
  },
  "Fuir": {
   "at": [
-   "src/ui/combatview.js:2168",
-   "src/ui/combatview.js:2168"
+   "src/ui/combatview.js:2191",
+   "src/ui/combatview.js:2191"
   ]
  },
  "Fuir le combat": {
   "at": [
-   "src/ui/combatview.js:2168"
+   "src/ui/combatview.js:2191"
   ]
  },
  "Fin du tour": {
   "at": [
-   "src/ui/combatview.js:2169",
+   "src/ui/combatview.js:2192",
    "src/ui/main.js:487"
   ]
  },
  "Vos troupes jouent le reste du tour, puis la main passe": {
   "at": [
-   "src/ui/combatview.js:2169"
+   "src/ui/combatview.js:2192"
   ]
  },
  "Couper le son": {
   "at": [
-   "src/ui/combatview.js:2171"
+   "src/ui/combatview.js:2194"
   ]
  },
  "Remettre le son": {
   "at": [
-   "src/ui/combatview.js:2171"
+   "src/ui/combatview.js:2194"
   ]
  },
  "Vos cités": {

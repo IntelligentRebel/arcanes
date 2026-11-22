@@ -20,7 +20,7 @@ async def idle(pg):
         if not await pg.evaluate("CombatView.busy"): return
         await pg.wait_for_timeout(200)
 
-HOMM = ['slow', 'mass_slow', 'force_field', 'fire_curtain', 'fire_mines', 'mist', 'teleport', 'gust', 'magic_mirror', 'clone', 'chain_lightning', 'fire_shield', 'martyr', 'divine_vengeance', 'sacrifice', 'vampirism', 'shackles', 'twilight', 'dimension_door', 'town_portal']
+HOMM = ['slow', 'mass_slow', 'force_field', 'fire_curtain', 'fire_mines', 'mist', 'teleport', 'gust', 'magic_mirror', 'clone', 'chain_lightning', 'fire_shield', 'martyr', 'divine_vengeance', 'sacrifice', 'vampirism', 'shackles', 'twilight', 'dimension_door', 'town_portal', 'fire_rain', 'frost_ring', 'meteor_shower', 'plague_cloud', 'holy_dawn']
 
 
 async def main():
@@ -37,7 +37,7 @@ async def main():
         await pg.wait_for_timeout(2000); await pg.evaluate("UI.closeAll()")
         # icônes : toutes dans l'atlas
         r = await pg.evaluate("(H) => H.filter(id => !Sprites.hasHD('spell:' + id))", HOMM)
-        ok(not r, 'icônes des 20 sorts dans l\'atlas' + (' (manquent : %r)' % r if r else ''))
+        ok(not r, 'icônes des 25 sorts dans l\'atlas' + (' (manquent : %r)' % r if r else ''))
         # un combat en rase campagne
         at = await pg.evaluate("""() => {
           const g = App.game, pl = App.me(), w = g.world, foe = g.players[1], fc = g.cities[pl.fortress];
@@ -96,6 +96,16 @@ async def main():
         ok(await pg.evaluate("CombatView.active && CombatView.mode && CombatView.mode.id === 'chain_lightning'"), 'Chaîne d\'éclairs : visée affichée')
         await pg.evaluate("CombatView.mode = null")
         await idle(pg)
+        # 4b. (0.31.72) sorts de zone : la Pluie de feu se vise, la Nuée pestilentielle se pose au clic
+        await pg.evaluate("""() => { const bt = CombatView.bt, me = CombatView.humanSide; bt.castThisRound[me] = false; bt.side = me; bt.skillLeft[me] = 999;
+          const e = bt.alive(1 - me)[0]; CombatView.prepareCast('fire_rain', null); CombatView.hover = { c: e.c, r: e.r }; }""")
+        await pg.wait_for_timeout(400); await pg.screenshot(path=os.path.join(SHOTS, '03172-pluie.png'))
+        r = await pg.evaluate("""() => { const bt = CombatView.bt, me = CombatView.humanSide; const e = bt.alive(1 - me)[0];
+          const z = [...CombatView.zoneOf('fire_rain', e.c, e.r, 0)].length; CombatView.mode = null; bt.castThisRound[me] = false; bt.side = me; bt.skillLeft[me] = 999;
+          CombatView.prepareCast('plague_cloud', null); CombatView.useTarget({ c: e.c, r: e.r }, e);
+          return { z, plague: Object.keys(bt.plague).length, mode: !!CombatView.mode, log: bt.log.slice(-2) }; }""")
+        ok(r['z'] == 9 and r['plague'] >= 4 and not r['mode'], 'zones : Pluie de feu visée sur 3 × 3, Nuée posée (%r)' % r)
+        await pg.wait_for_timeout(1500); await idle(pg); await pg.screenshot(path=os.path.join(SHOTS, '03172-nuee.png'))
         # 5. la liste des sorts : les nouveaux y sont, avec leur icône
         await pg.evaluate("(() => { const bt = CombatView.bt; bt.castThisRound[CombatView.humanSide] = false; bt.side = CombatView.humanSide; CombatView.spellMenu(); })()"); await pg.wait_for_timeout(500)
         txt = await pg.evaluate("document.querySelector('.modal') ? document.querySelector('.modal').innerText : ''")
