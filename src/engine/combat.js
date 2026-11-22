@@ -52,6 +52,9 @@ class Battle {
     this.over = false; this.winner = null; this.fled = null;
     this.walls = {}; this.hasWalls = false; this.wallOfFire = false; this.wallOfDarkness = false; this.towers = [];
     this.mud = {};
+    // (0.31.71) sorts de terrain venus de Heroes : champs de force { case: { n, side } }, rideaux de flammes { case: { n, side } },
+    // mines de feu { case: camp du poseur } (invisibles pour l'autre camp), brume { case: true }
+    this.field = {}; this.flames = {}; this.mines = {}; this.mist = {};
     this.terrainKey = World.terrainKey(game.world, o.plane, o.x, o.y);
     this.counterMagic = [0, 0];
     this.rng = o.rng || game.rng;
@@ -172,11 +175,25 @@ class Battle {
   cutsDeep(c, r, dc, dr) { return !!(dc && dr) && this.deep(c + dc, r) && this.deep(c, r + dr); }
   // l'eau profonde n'arrête ni les volants, ni les nageurs, ni ceux qui marchent sur l'eau
   wades(s) { return !!(s.flying || s.swimming || s.ab.waterWalking); }
-  blocked(c, r) { return this.rock(c, r) || this.deep(c, r) || !!this.towerAt(c, r); }
+  blocked(c, r) { return this.rock(c, r) || this.deep(c, r) || !!this.towerAt(c, r) || this.fieldAt(c, r); }
+  // (0.31.71) un champ de force : rien n'y passe, pas même un volant ; on ne se glisse pas non plus entre deux de ses cases en diagonale
+  fieldAt(c, r) { const f = this.field && this.field[c + ',' + r]; return !!f && f.n > 0; }
+  cutsField(c, r, dc, dr) { return !!(dc && dr) && this.fieldAt(c + dc, r) && this.fieldAt(c, r + dr); }
+  flameAt(c, r) { const f = this.flames && this.flames[c + ',' + r]; return f && f.n > 0 ? f : null; }
+  mistAt(c, r) { return !!this.mist && !!this.mist[c + ',' + r]; }
+  // la mine de cette case, si elle menace b (posée par l'autre camp)
+  mineFor(b, c, r) { const m = this.mines ? this.mines[c + ',' + r] : undefined; return m != null && m !== b.side; }
+  // un tir qui part de la brume ou qui y vise perd la moitié de sa force
+  misty(a, d) { return this.mistAt(a.c, a.r) || this.mistAt(d.c, d.r); }
+  rangedStr(a, d, s) { s = s || this.stats(a); return this.misty(a, d) ? Math.max(1, Math.floor(s.ranged / 2)) : s.ranged; }
   // effets de la case, pour l'interface
-  terrainNotes(c, r) {
+  terrainNotes(c, r, viewer) {
     const out = [], k = c + ',' + r;
     if (this.fire && this.fire[k]) out.push('En flammes : 3 de dégâts de feu par round à qui s\'y tient');
+    if (this.fieldAt(c, r)) out.push('Champ de force : infranchissable, même pour les volants (encore ' + U.n(this.field[k].n, 'round') + ')');
+    { const f = this.flameAt(c, r); if (f) out.push((f.side === viewer ? 'Rideau de flammes (le vôtre)' : 'Rideau de flammes') + ' : feu de force 5 sur ' + (f.side === viewer ? 'l\'ennemi' : 'vos unités') + ' qui y entre, 3 à chaque round où il y reste ; pas sur les volants (encore ' + U.n(f.n, 'round') + ')'); }
+    if (viewer != null && this.mines && this.mines[k] === viewer) out.push('Votre mine de feu : explose sous le premier ennemi qui y entre');
+    if (this.mistAt(c, r)) out.push('Brume : les tirs qui en partent ou qui y visent perdent la moitié de leur force');
     if (this.tree(c, r)) out.push('Forêt : +2 défense contre les tirs ; y entrer coûte 1,5 mouvement ; le feu s\'y propage');
     if (this.hill(c, r)) out.push('Colline : +10 % pour toucher à distance, +1 défense en mêlée ; y monter coûte 1,5 mouvement');
     if (this.rock(c, r)) out.push('Rochers : infranchissables');
@@ -343,7 +360,7 @@ class Battle {
   ev(e) { this.events.push(e); }
   owner(side) { return this.pids[side]; }
   player(side) { return this.game.players[this.pids[side]]; }
-  name(b) { return Units.label(b.u); }
+  name(b) { return b.clone ? Units.label(b.u) + ' (double)' : Units.label(b.u); }
   subj(b, phrase) { return Units.subj(b.u, phrase); }
   dist(a, b) { return Math.max(Math.abs(a.c - b.c), Math.abs(a.r - b.r)); }
 
@@ -409,6 +426,8 @@ class Battle {
       if (cu === 'warp_creature_melee') s.melee = Math.floor(s.melee / 2);
       if (cu === 'warp_creature_def') s.def = Math.floor(s.def / 2);
       if (cu === 'warp_creature_res') s.res = 0;
+      if (cu === 'slow') s.move = s.move > 0 ? s.move / 2 : 0;   // (0.31.71) Lenteur : la moitié du mouvement
+      if (cu === 'twilight') s.ranged = 0;                       // Crépuscule : plus de tir
     }
     if (b.tempEnch.includes('berserk') || b.u.ench.includes('berserk')) { s.melee *= 2; s.def = 0; s.berserk = true; }
     // l'invisibilité se recalcule : un enchantement dissipé la fait perdre
@@ -483,14 +502,37 @@ class Battle {
   hp(b) { const s = this.ust(b); return Math.max(0, s.maxHp - b.u.dmg); }
   leadHp(b) { const s = this.ust(b); const h = s.maxHp - b.u.dmg; if (h <= 0) return 0; const r = h % s.hp; return r === 0 ? s.hp : r; }
 
-  takeDamage(b, n, type, by) {
+  takeDamage(b, n, type, by, direct) {
     if (n <= 0 || b.dead) return 0;
+    // (0.31.71) Martyre : les blessures passent à l'unité amie la plus solide qui se tient à côté (pas les dégâts irréversibles)
+    if (!direct && type !== 'irreversible' && (b.tempEnch.includes('martyr') || b.u.ench.includes('martyr'))) {
+      const m = this.martyrFor(b);
+      if (m) {
+        if (b._mtRound !== this.round + ':' + m.id) { b._mtRound = this.round + ':' + m.id; this.say('Martyre : les blessures de ' + this.name(b) + ' passent à ' + this.name(m) + '.'); this.ev({ type: 'fx', fx: 'holy', at: [m.c, m.r] }); }
+        return this.takeDamage(m, n, type, by, true);
+      }
+    }
     const before = this.hp(b);
     n = Math.min(n, before);
+    // un double (Clone) se dissipe dès qu'il est blessé
+    if (b.clone) { b.u.dmg += before; b.irrDmg += before; if (by) b.lastHitBy = by; return n; }
+    const f0 = by && by.side != null && by.side !== b.side ? this.figures(b) : 0;
     b.u.dmg += n;
     if (type === 'undead') b.undeadDmg += n; else if (type === 'irreversible') b.irrDmg += n; else b.normDmg = (b.normDmg || 0) + n;
     if (by) b.lastHitBy = by;
+    // les figurines que by a tuées dans ce camp (Vengeance divine)
+    if (f0) { const lost = f0 - this.figures(b); if (lost > 0) { by.slainOf = by.slainOf || [0, 0]; by.slainOf[b.side] += lost; } }
     return n;
+  }
+  // l'unité amie qui encaisse à la place d'une unité sous Martyre : la plus solide de ses voisines (ni un double, ni une autre sous Martyre)
+  martyrFor(b) {
+    let best = null;
+    for (const o of this.units) {
+      if (o.dead || o === b || o.side !== b.side || o.clone || this.dist(o, b) !== 1 || this.hp(o) <= 0) continue;
+      if (o.tempEnch.includes('martyr') || o.u.ench.includes('martyr')) continue;
+      if (!best || this.hp(o) > this.hp(best)) best = o;
+    }
+    return best;
   }
   // soins : jamais au-delà des dégâts irréversibles (pétrification, désintégration…)
   heal(b, n) { if (!(n > 0) || !(b.u.dmg > 0)) return 0; const floor = Math.min(b.u.dmg, b.irrDmg || 0), before = b.u.dmg; b.u.dmg = Math.max(floor, b.u.dmg - n); return before - b.u.dmg; }
@@ -606,7 +648,7 @@ class Battle {
     const start = b.c + ',' + b.r;
     if (s.ab.teleporting || s.ab.merging) {
       for (let r = 0; r < CH; r++) for (let c = 0; c < CW; c++) {
-        if ((c === b.c && r === b.r) || this.unitAt(c, r) || this.towerAt(c, r) || this.rock(c, r) || (this.deep(c, r) && !this.wades(s))) continue;
+        if ((c === b.c && r === b.r) || this.unitAt(c, r) || this.towerAt(c, r) || this.rock(c, r) || this.fieldAt(c, r) || (this.deep(c, r) && !this.wades(s))) continue;
         out.set(c + ',' + r, { c, r, cost: Math.min(2, b.moves), from: start });
       }
       return out;
@@ -614,17 +656,18 @@ class Battle {
     if (!(Number.isInteger(b.c) && Number.isInteger(b.r) && b.c >= 0 && b.r >= 0 && b.c < CW && b.r < CH)) return this.reachableRef(b, s, start, out);
     // (performance) même parcours que reachableRef, case par case et dans le même ordre : file de priorité en tas (coût, puis
     // ordre d'arrivée, comme le tri stable d'origine), distances en tableau, terrain et occupation relevés une fois par case
-    const N = CW * CH, R = Battle._rbuf || (Battle._rbuf = { dist: new Float64Array(N), has: new Uint8Array(N), info: new Uint8Array(N), occ: new Uint8Array(N) });
+    const N = CW * CH, R = Battle._rbuf || (Battle._rbuf = { dist: new Float64Array(N), has: new Uint8Array(N), info: new Uint16Array(N), occ: new Uint8Array(N) });
     const dist = R.dist, has = R.has, info = R.info, occ = R.occ;
     has.fill(0); info.fill(0); occ.fill(0);
     for (const o of this.units) if (!o.dead && Number.isInteger(o.c) && Number.isInteger(o.r) && o.c >= 0 && o.r >= 0 && o.c < CW && o.r < CH) occ[o.r * CW + o.c] = 1;
-    // bits : 1 relevée, 2 occupée (unité ou tour), 4 rocher, 8 eau profonde, 16 arbre, 32 colline, 64 fondrière, 128 rivière
+    // bits : 1 relevée, 2 occupée (unité ou tour), 4 rocher (ou champ de force), 8 eau profonde, 16 arbre, 32 colline, 64 fondrière, 128 rivière, 256 champ de force
     const cell = (c, r) => {
       const i = r * CW + c; let v = info[i];
       if (!v) {
         v = 1;
         if (occ[i] || this.towerAt(c, r)) v |= 2;
         if (this.rock(c, r)) v |= 4;
+        if (this.fieldAt(c, r)) v |= 4 | 256;
         if (this.deep(c, r)) v |= 8;
         if (this.tree(c, r)) v |= 16;
         if (this.hill(c, r)) v |= 32;
@@ -659,6 +702,7 @@ class Battle {
         if (v & 6) continue;   // occupée, rocher
         if ((v & 8) && !wades) continue;
         if (!wades && dc && dr && (cell(c + dc, r) & 8) && (cell(c, r + dr) & 8)) continue;   // cutsDeep
+        if (dc && dr && (cell(c + dc, r) & 256) && (cell(c, r + dr) & 256)) continue;   // cutsField
         if (this.hasWalls && this.wallBlocks(b, c, r, nc, nr)) continue;
         let cost = 2;
         if (!s.flying) {
@@ -687,7 +731,7 @@ class Battle {
         const nc = c + dc, nr = r + dr;
         if (nc < 0 || nr < 0 || nc >= CW || nr >= CH) continue;
         if (this.unitAt(nc, nr) || this.towerAt(nc, nr)) continue;
-        if (this.rock(nc, nr)) continue;
+        if (this.rock(nc, nr) || this.fieldAt(nc, nr) || this.cutsField(c, r, dc, dr)) continue;
         if (this.deep(nc, nr) && !this.wades(s)) continue;
         if (!this.wades(s) && this.cutsDeep(c, r, dc, dr)) continue;
         if (this.wallBlocks(b, c, r, nc, nr)) continue;
@@ -729,7 +773,7 @@ class Battle {
   _terrBuf() { const t = Battle._tbuf || (Battle._tbuf = new Uint8Array(CW * CH)); t.fill(0); return t; }
   _terr(t, c, r) {
     const i = r * CW + c; let v = t[i];
-    if (!v) { v = 4; if (this.blocked(c, r)) v |= 1; if (this.deep(c, r)) v |= 2; t[i] = v; }
+    if (!v) { v = 4; if (this.blocked(c, r)) v |= 1; if (this.deep(c, r) || this.fieldAt(c, r)) v |= 2; t[i] = v; }
     return v;
   }
   walkDistRef(c0, r0) {
@@ -738,7 +782,7 @@ class Battle {
       const [c, r] = q.shift(), d = out.get(c + ',' + r);
       for (const [dc, dr] of U.DIRS8) {
         const nc = c + dc, nr = r + dr, k = nc + ',' + nr;
-        if (nc < 0 || nr < 0 || nc >= CW || nr >= CH || out.has(k) || this.blocked(nc, nr) || this.cutsDeep(c, r, dc, dr)) continue;
+        if (nc < 0 || nr < 0 || nc >= CW || nr >= CH || out.has(k) || this.blocked(nc, nr) || this.cutsDeep(c, r, dc, dr) || this.cutsField(c, r, dc, dr)) continue;
         out.set(k, d + 1); q.push([nc, nr]);
       }
     }
@@ -756,7 +800,12 @@ class Battle {
     const k = c + ',' + r;
     if (!reach.has(k)) return false;
     const path = this.pathTo(reach, b, c, r);
-    const cost = reach.get(k).cost;
+    // (0.31.71) une mine de feu ennemie sur le chemin : l'unité s'y arrête net (un volant ne la déclenche qu'en s'y posant)
+    const fly = !!this.stats(b).flying;
+    let mine = -1;
+    for (let i = 0; i < path.length; i++) if (this.mineFor(b, path[i][0], path[i][1]) && (!fly || i === path.length - 1)) { mine = i; break; }
+    if (mine >= 0 && mine < path.length - 1) { path.length = mine + 1; c = path[mine][0]; r = path[mine][1]; }
+    const cost = reach.get(c + ',' + r).cost;
     const from = [b.c, b.r];
     // mur de feu : traverser la bordure inflige des dégâts
     let fire = 0;
@@ -774,7 +823,28 @@ class Battle {
       this.checkDeath(b);
       this.checkEnd();
     }
+    if (!b.dead) this.hazards(b, path, mine >= 0);
     return true;
+  }
+  // (0.31.71) ce qui attend une unité qui vient de passer par ces cases (marche, poussée, téléportation) :
+  // un rideau de flammes ennemi la brûle une fois (pas un volant), une mine ennemie là où elle s'arrête explose
+  hazards(b, path, mined) {
+    const fly = !!this.stats(b).flying;
+    if (!fly && path.some(([c, r]) => { const f = this.flameAt(c, r); return f && f.side !== b.side; })) {
+      const d = this.applyArea(b, (DATA.spells.fire_curtain.params || {}).strength || 5, 'immolation', 'chaos');
+      this.say('Rideau de flammes : ' + this.name(b) + ' le traverse (' + d + ' dégâts).');
+      this.ev({ type: 'fx', fx: 'fire', at: [b.c, b.r] });
+      this.checkDeath(b);
+    }
+    if (!b.dead && (mined || this.mineFor(b, b.c, b.r))) {
+      delete this.mines[b.c + ',' + b.r];
+      b.moves = 0;
+      const d = this.applyArea(b, (DATA.spells.fire_mines.params || {}).strength || 5, 'immolation', 'chaos');
+      this.say('Une mine explose sous ' + this.name(b) + ' (' + d + ' dégâts).');
+      this.ev({ type: 'fx', fx: 'fire', at: [b.c, b.r] });
+      this.checkDeath(b);
+    }
+    this.checkEnd();
   }
   // sens à l'écran (-1 gauche, +1 droite) vers la case visée : l'abscisse isométrique suit c - r
   // orientation : le sens du dernier pas ou de la dernière cible ; au départ, chaque camp fait face à l'autre
@@ -1028,7 +1098,7 @@ class Battle {
       for (let k = 0; k < attacks; k++) { aRolls = aRolls.concat(this.meleeRolls(a, d, fearA, false)); aTouch = aTouch.concat(this.touch(a, d, fearA)); }
       let dRolls = [], dTouch = [];
       const sd = this.stats(d);
-      if (!d.asleep && !d.confused && !d.stasis) {
+      if (!d.asleep && !d.confused && !d.stasis && !d.curses.includes('shackles')) {   // (0.31.71) Entraves : plus de riposte
         const counters = sd.haste ? 2 : 1;
         for (let k = 0; k < counters; k++) { dRolls = dRolls.concat(this.meleeRolls(d, a, fearD, true)); dTouch = dTouch.concat(this.touch(d, a, fearD)); }
       }
@@ -1038,6 +1108,14 @@ class Battle {
       received += this.applyRolls(a, dRolls, 'melee', null, this.meleeMods(d, a, true), d);
       for (const f of aTouch) dealt += f() || 0;
       for (const f of dTouch) received += f() || 0;
+    }
+    // (0.31.71) Bouclier de feu (qui frappe se brûle) et Vampirisme (qui frappe se nourrit), sur les coups de cet échange
+    {
+      const enA = a.u.ench.concat(a.tempEnch), enD = d.u.ench.concat(d.tempEnch);
+      if (dealt > 0 && enD.includes('fire_shield')) this.fireShield(d, a, dealt);
+      if (received > 0 && enA.includes('fire_shield')) this.fireShield(a, d, received);
+      if (dealt > 0 && enA.includes('vampirism')) this.vampire(a, d, dealt);
+      if (received > 0 && enD.includes('vampirism')) this.vampire(d, a, received);
     }
     d.attacked++;
     // mur de feu : frapper à travers brûle l'assaillant qui n'est pas volant
@@ -1056,6 +1134,22 @@ class Battle {
     this.checkDeath(d); this.checkDeath(a);
     this.checkEnd();  // le dernier ennemi tombé : la bataille s'arrête aussitôt, sans attendre la fin du tour
     return true;
+  }
+  // le porteur du Bouclier de feu a pris n dégâts de striker : striker en subit la moitié, en feu (sauf immunité au feu ou à la magie, Droiture)
+  fireShield(owner, striker, n) {
+    if (striker.dead || this.hp(striker) <= 0) return 0;
+    const s = this.stats(striker);
+    if (s.ab.magicImmunity || s.ab.fireImmunity || striker.u.ench.concat(striker.tempEnch).includes('righteousness')) return 0;
+    const t = this.takeDamage(striker, Math.round(n / 2), 'normal', owner);
+    if (t) { this.say('Bouclier de feu de ' + this.name(owner) + ' : ' + t + ' dégâts à ' + this.name(striker) + '.'); this.ev({ type: 'fx', fx: 'fire', at: [striker.c, striker.r] }); }
+    return t;
+  }
+  // Vampirisme : la moitié des dégâts infligés au corps à corps revient en PV (rien sur une créature insensible à la mort)
+  vampire(b, victim, n) {
+    if (b.dead || this.hp(b) <= 0 || this.stats(victim).ab.deathImmunity) return 0;
+    const h = this.heal(b, Math.round(n / 2));
+    if (h) { this.say('Vampirisme : +' + h + ' PV pour ' + this.name(b) + '.'); this.ev({ type: 'fx', fx: 'death', at: [b.c, b.r] }); }
+    return h;
   }
   canBreach(a, c, r) {
     if (!this.hasWalls || a.dead || a.moves <= 0 || this.over || a.side !== this.side) return false;
@@ -1110,8 +1204,8 @@ class Battle {
     let dealt = 0;
     for (let k = 0; k < (s.haste ? 2 : 1); k++) {
       if (k > 0) { if (d.dead || this.hp(d) <= 0) break; if (s.rangedType === 'magic') { if (a.ammo > 0) a.ammo--; else if (a.casterMana >= 3) a.casterMana -= 3; else break; } else if (a.ammo > 0) a.ammo--; else break; }
-      const rolls = [];
-      for (let i = 0; i < this.figures(a); i++) rolls.push(this.rng.rolls(s.ranged, th));
+      const rolls = [], str = this.rangedStr(a, d, s);
+      for (let i = 0; i < this.figures(a); i++) rolls.push(this.rng.rolls(str, th));
       dealt += this.applyRolls(d, rolls, kind, s.rangedRealm || (kind === 'magic' ? 'chaos' : null), mods, a);
     }
     if (kind === 'boulder' && s.ab.wallCrusher && this.hasWalls) this.damageWall(d.c, d.r, 0.3);
@@ -1260,7 +1354,7 @@ class Battle {
       const [c, r] = q.shift(), d = out.get(c + ',' + r);
       for (const [dc, dr] of U.DIRS8) {
         const nc = c + dc, nr = r + dr, k = nc + ',' + nr;
-        if (!ok(nc, nr) || out.has(k) || this.wallBlocks(b, c, r, nc, nr) || this.cutsDeep(c, r, dc, dr)) continue;
+        if (!ok(nc, nr) || out.has(k) || this.wallBlocks(b, c, r, nc, nr) || this.cutsDeep(c, r, dc, dr) || this.cutsField(c, r, dc, dr)) continue;
         out.set(k, d + 1); q.push([nc, nr]);
       }
     }
@@ -1283,10 +1377,11 @@ class Battle {
       const foes = this.alive(1 - t.side).filter(f => !this.isInvisible(f));
       if (!foes.length) return;
       const kind = t.magic ? 'magic' : 'missile';
-      const exp = f => { const th = this.towerToHit(t, f), def = this.defFor(f, kind, t.realm, {}); return def >= 50 ? 0 : t.shots * CombatAI.expPos(t.ranged, th, def, this.toDefend(f, {})); };
+      const str = f => this.mistAt(f.c, f.r) ? Math.max(1, Math.floor(t.ranged / 2)) : t.ranged;   // (0.31.71) la brume gêne aussi les tours
+      const exp = f => { const th = this.towerToHit(t, f), def = this.defFor(f, kind, t.realm, {}); return def >= 50 ? 0 : t.shots * CombatAI.expPos(str(f), th, def, this.toDefend(f, {})); };
       const f = U.max(foes, f => { const e = exp(f), hp = Math.max(1, this.hp(f)); return Units.strength(this.game, f.u) * Math.min(1, e / hp) + (e >= hp * 0.9 ? 5 : 0) + (this.breaksTowers(f) ? 3 : 0) + e * 0.1; });
       const th = this.towerToHit(t, f), rolls = [];
-      for (let i = 0; i < t.shots; i++) rolls.push(this.rng.rolls(t.ranged, th));
+      for (let i = 0; i < t.shots; i++) rolls.push(this.rng.rolls(str(f), th));
       const dealt = this.applyRolls(f, rolls, kind, t.realm, {}, null);
       this.ev({ type: 'ranged', a: t.id, d: f.id, kind, realm: t.realm, dealt });
       this.say(U.cap(this.towerName(t)) + ' tire sur ' + this.name(f) + ' : ' + dealt + ' dégâts.');
@@ -1299,6 +1394,7 @@ class Battle {
     if (b.dead || this.hp(b) > 0) return;
     b.dead = true;
     this.dead.push(b);
+    if (b.clone) { this.ev({ type: 'vanish', id: b.id }); this.say('Le double de ' + Units.label(b.u) + ' se dissipe.'); return; }
     this.ev({ type: 'death', id: b.id });
     this.say(this.subj(b, 'est anéanti') + '.');
     // invocation de démons, etc. : rien
@@ -1341,7 +1437,25 @@ class Battle {
     this.side = 1 - this.side;
     if (this.side === DEF_SIDE) this.newRound();
     if (this.side === DEF_SIDE && !this.over) this.towersFire();
+    if (!this.over) this.tickZones(this.side);
     this.resetMoves(this.side);
+    this.checkEnd();
+  }
+  // (0.31.71) au début du tour de leur lanceur, champs de force et rideaux de flammes perdent un round ;
+  // un ennemi qui se tient encore dans les flammes y brûle (feu de force 3, pas un volant)
+  tickZones(side) {
+    for (const k of Object.keys(this.field)) { const f = this.field[k]; if (f.side === side && --f.n <= 0) delete this.field[k]; }
+    for (const k of Object.keys(this.flames)) {
+      const f = this.flames[k]; if (f.side !== side) continue;
+      const [c, r] = k.split(',').map(Number), b = this.unitAt(c, r);
+      if (b && b.side !== side && !this.stats(b).flying) {
+        const d = this.applyArea(b, 3, 'immolation', 'chaos');
+        if (d) this.say('Rideau de flammes : ' + this.name(b) + ' y brûle (' + d + ').');
+        this.ev({ type: 'fx', fx: 'fire', at: [c, r] });
+        this.checkDeath(b);
+      }
+      if (--f.n <= 0) delete this.flames[k];
+    }
     this.checkEnd();
   }
   // vortex magique : 4 cases par tour, attiré par l'ennemi ; 5 dégâts sans défense à l'unité traversée,
@@ -1604,8 +1718,8 @@ const CombatSpells = {
     if (id === 'summon_demons') return 'none';
     const sp = DATA.spells[id]; if (!sp) return 'none';
     if (sp.kind === 'summon') return 'none';
-    if (['raise_dead', 'animate_dead'].includes(id)) return 'deadUnit';
-    if (['earth_to_mud', 'disrupt', 'magic_vortex'].includes(id)) return 'combatTile';
+    if (['raise_dead', 'animate_dead', 'sacrifice'].includes(id)) return 'deadUnit';
+    if (['earth_to_mud', 'disrupt', 'magic_vortex', 'force_field', 'fire_curtain', 'fire_mines', 'mist'].includes(id)) return 'combatTile';
     if (sp.target === 'friendlyUnit' || sp.target === 'friendlyHero') return 'friendlyUnit';
     if (sp.target === 'enemyUnit') return 'enemyUnit';
     if (sp.target === 'anyUnit') return 'anyUnit';
@@ -1617,11 +1731,15 @@ const CombatSpells = {
     if (tt === 'friendlyUnit') return bt.alive(side).filter(b => (!sp || sp.target !== 'friendlyHero' || !!b.u.hero) && CombatSpells.canAffect(bt, b, id));
     if (tt === 'enemyUnit') return bt.alive(1 - side).filter(b => !bt.isInvisible(b) && CombatSpells.canAffect(bt, b, id)).concat(CombatSpells.TOWER_HIT[id] ? bt.enemyTowers(side) : []);
     if (tt === 'anyUnit') {
+      // Rafale : toute unité visible qu'un coup de vent peut déplacer
+      if (id === 'gust') return bt.alive().filter(b => !(b.side !== side && bt.isInvisible(b)) && CombatSpells.canAffect(bt, b, id) && CombatSpells.gustLandings(bt, b).length);
       if (id !== 'dispel_magic' && id !== 'dispel_magic_true') return bt.alive();
       // la dissipation : un ennemi enchanté ou créature du combat ; une des vôtres maudite, prise, endormie, confuse ou possédée
       return bt.alive().filter(b => b.side !== side ? (!bt.isInvisible(b) && (b.u.ench.length || b.tempEnch.length || (b.u.combatOnly && Units.isFantastic(b.u)) || (b.possessed && b.origSide === side)))
         : (b.curses.length || b.web > 0 || b.asleep || b.confused));
     }
+    // Sacrifice : une de vos unités tombées (pas un héros), s'il reste une unité pour donner sa vie
+    if (id === 'sacrifice') return CombatSpells.victims(bt, side).length ? CombatSpells.sacrificeDead(bt, side) : [];
     // Relever les morts : vos unités normales ; Animation des morts : toute unité tombée (sauf les héros)
     if (tt === 'deadUnit') return bt.alive(side).length >= 9 ? [] : bt.dead.filter(b => !b.temp && !b.recalled && !(b.irrDmg > 0) && !b.u.hero && (id === 'animate_dead' || (Units.isNormal(b.u) && b.side === side)));
     return [];
@@ -1676,6 +1794,14 @@ const CombatSpells = {
     if (id === 'cracks_call' && (s.flying || s.ab.nonCorporeal)) return false;
     if (id === 'healing' && b.u.dmg <= (b.irrDmg || 0)) return false;   // les blessures irréversibles ne se soignent pas
     if (id === 'healing' && Units.realmOf(b.u) === 'death') return false;
+    // (0.31.71) sorts venus de Heroes
+    if ((id === 'slow' || id === 'mass_slow') && !(s.move > 1)) return false;   // à une case par round, rien à ralentir
+    if (id === 'shackles' && !(s.melee > 0)) return false;
+    if (id === 'twilight' && !(s.ranged > 0 && s.rangedType)) return false;
+    if (id === 'gust' && s.ab.magicImmunity) return false;
+    if (id === 'clone' && (b.temp || b.clone || b.u.avatar || b.u.riteDemon || b.possessed || b.stasis || bt.alive(b.side).length >= 9)) return false;
+    if (id === 'divine_vengeance' && !(b.slainOf && b.slainOf[1 - b.side] > 0)) return false;
+    if (id === 'teleport' && (b.stasis || b.web > 0)) return false;
     return true;
   },
   // (0.31.47) pourquoi une unité n'est pas une cible de ce sort : la vraie raison, dite au joueur au lieu d'un « Sort annulé » muet
@@ -1714,6 +1840,14 @@ const CombatSpells = {
     if (id === 'petrify' && s.ab.stoningImmunity) return 'Cette unité est immunisée contre la pétrification.';
     if (id === 'mind_storm' && s.ab.illusionsImmunity) return 'Cette unité est immunisée contre les illusions.';
     if (id === 'healing') return Units.realmOf(b.u) === 'death' ? 'Une créature de la Mort ne se soigne pas.' : 'Ces blessures ne se soignent pas.';
+    if ((id === 'slow' || id === 'mass_slow') && !(s.move > 1)) return 'Elle ne va déjà pas plus loin qu\'une case par round.';
+    if (id === 'shackles' && !(s.melee > 0)) return 'Cette unité ne riposte pas au corps à corps.';
+    if (id === 'twilight') return 'Cette unité n\'a pas d\'attaque à distance.';
+    if (id === 'gust' && s.ab.magicImmunity) return 'Cette unité est immunisée contre la magie.';
+    if (id === 'gust') return 'Aucune direction où le vent puisse la pousser.';
+    if (id === 'clone') return b.temp || b.clone ? 'On ne copie pas une créature du combat.' : bt.alive(b.side).length >= 9 ? 'Vous avez déjà 9 unités sur le terrain.' : 'Cette unité ne peut pas être copiée.';
+    if (id === 'divine_vengeance') return 'Cette unité n\'a encore tué aucune de vos figurines.';
+    if (id === 'teleport') return b.web > 0 ? 'Prise dans une toile, elle ne peut pas être transportée.' : 'Figée, elle ne peut pas être transportée.';
     const hostile = ['curse', 'damage', 'resistOrDie', 'areaDamage'].includes(sp.kind);
     if (hostile && sp.realm === 'death' && s.ab.deathImmunity) return 'Cette unité est immunisée contre la mort.';
     if (hostile && (sp.realm === 'death' || sp.realm === 'chaos') && on.includes('righteousness')) return 'La Droiture la protège de ce sort.';
@@ -1723,8 +1857,9 @@ const CombatSpells = {
     return 'Ce sort ne peut pas viser cette unité.';
   },
 
-  // lance un sort ; caster = null pour le sorcier, sinon unité lanceuse
-  cast(bt, side, id, target, caster, extra) {
+  // lance un sort ; caster = null pour le sorcier, sinon unité lanceuse ; to : le second choix d'un sort en deux temps
+  // (Téléportation, Rafale : une case [c, r] ; Sacrifice : l'unité qui donne sa vie)
+  cast(bt, side, id, target, caster, extra, to) {
     const sp = DATA.spells[id] || { id, name: id === 'summon_demons' ? 'Invocation de démons' : id, kind: 'special', params: {} };
     const pl = bt.player(side);
     // une cible d'unité doit être valable (vivante, visible, sensible au sort ; un mort relevable)
@@ -1737,6 +1872,10 @@ const CombatSpells = {
     }
     if (!target && ['enemyUnit', 'friendlyUnit', 'deadUnit'].includes(tt0)) return false;
     if (target && !target.tower && !Array.isArray(target) && ['enemyUnit', 'friendlyUnit', 'deadUnit'].includes(tt0) && !CombatSpells.validTargets(bt, side, id).includes(target)) return false;
+    // (0.31.71) Rafale : une cible valable ; sorts en deux temps : un second choix valable ; sorts posés sur des cases : au moins une case où les poser
+    if (id === 'gust' && !CombatSpells.validTargets(bt, side, id).includes(target)) return false;
+    if (CombatSpells.SECOND[id] && !CombatSpells.secondOk(bt, side, id, target, to)) return false;
+    if (CombatSpells.ZONE_SPELLS.includes(id) && !CombatSpells.zonePlace(bt, side, id, target).length) return false;
     // paiement (le mana ajouté à un sort à puissance variable se paie comme le reste, compétence comprise)
     extra = Math.max(0, Math.min(extra || 0, CombatSpells.MAX_EXTRA[id] || 0));
     if (!caster) {
@@ -1767,10 +1906,19 @@ const CombatSpells = {
       if (bt.rng.chance(strength / (strength + cost))) { bt.say((sp.name || 'Le sort') + ' est contré !'); bt.ev({ type: 'fx', fx: 'fizzle', at: target && target.c != null ? [target.c, target.r] : null }); return true; }
     }
     bt.say((caster ? bt.name(caster) : (pl ? pl.name : 'Le sorcier')) + ' lance ' + (sp.name || id) + '.');
-    bt.ev({ type: 'spell', spell: id, side, caster: caster ? caster.id : null, target: target && target.c != null ? [target.c, target.r] : null });
+    bt.ev({ type: 'spell', spell: id, side, caster: caster ? caster.id : null, target: target && target.c != null ? [target.c, target.r] : Array.isArray(target) ? [target[0], target[1]] : null });
+    // (0.31.71) Miroir magique : quatre fois sur dix, un sort hostile visant l'unité se retourne contre le camp de son lanceur
+    if (target && target.u && !target.tower && target.side !== side && tt0 === 'enemyUnit' && id !== 'divine_vengeance' && CombatSpells.mirrored(target) && bt.rng.chance(CombatSpells.MIRROR)) {
+      const back = bt.alive(side).filter(b => CombatSpells.canAffect(bt, b, id));
+      const nt = back.length ? bt.rng.pick(back) : null;
+      bt.say('Le Miroir magique de ' + bt.name(target) + ' renvoie le sort' + (nt ? ' sur ' + bt.name(nt) : ', qui se perd') + ' !');
+      bt.ev({ type: 'fx', fx: 'sorcery', at: [target.c, target.r] });
+      if (!nt) return true;
+      target = nt;
+    }
     const h = COMBAT_SPELL_HANDLERS[id];
     if (target && target.tower) CombatSpells.strikeTower(bt, id, target, extra || 0);
-    else if (h) h(bt, side, target, sp, caster, extra || 0);
+    else if (h) h(bt, side, target, sp, caster, extra || 0, to);
     else if (sp.kind === 'unitEnchant' && target) { target.tempEnch.push(id); }
     bt.refreshInvisible();
     for (const b of bt.units) if (!b.dead) bt.checkDeath(b);
@@ -1780,7 +1928,7 @@ const CombatSpells = {
 
   // chances qu'un sort ciblé réussisse sur une unité, d'après les mêmes jets que ses effets (affichées au survol de la cible) :
   // royaume de la résistance, malus imposé, et s'il frappe chaque figurine (résister ou périr) ou l'unité d'un seul jet
-  RESIST_SPELLS: { dispel_evil: ['life', b => Units.isUndead(b.u) ? 9 : 4, true], word_of_death: ['death', 5, true], petrify: ['nature', 0, true], banish: ['sorcery', 3, true],
+  RESIST_SPELLS: { slow: ['nature', 2], shackles: ['death', 1], twilight: ['death', 1], dispel_evil: ['life', b => Units.isUndead(b.u) ? 9 : 4, true], word_of_death: ['death', 5, true], petrify: ['nature', 0, true], banish: ['sorcery', 3, true],
     weakness: ['death', 2], black_sleep: ['death', 2], confusion: ['sorcery', 4], vertigo: ['sorcery', 0], shatter: ['chaos', 0], warp_creature: ['chaos', 1], possession: ['death', 1], creature_binding: ['sorcery', 2] },
   odds(bt, side, id, t, extra) {
     if (!t || t.tower) return null;
@@ -1798,11 +1946,13 @@ const CombatSpells = {
       const none = items.reduce((a, o) => a * (1 - o.p), 1); out = { dispel: items, p: 1 - none };
     }
     else if (id === 'life_drain') { const res = bt.resFor(t, 'death'), mod = Math.floor(extra / 5); let s = 0; for (let k = 1; k <= 10; k++) s += Math.max(0, k - (res - mod)); out = { drain: Math.min(bt.hp(t), s / 10), res, mod, immune: res >= 50 }; }
+    else if (id === 'divine_vengeance') { const hp = bt.hp(t), d = Math.min(hp, CombatSpells.vengeanceOf(t, 1 - t.side)); out = { dmg: d, zero: d > 0 ? 0 : 1, kill: d >= hp ? 1 : 0, hp, immune: false }; }
     else if (CombatSpells.DAMAGE[id]) out = CombatSpells.damageForecast(bt, id, t, extra);
     else return null;
     // le sort doit d'abord passer le flux d'un nœud et la contre-magie adverse
     let pass = 1 - CombatSpells.nodeFizzle(bt, side, id, extra);
     if (bt.ench[1 - side].includes('counter_magic') && bt.counterMagic[1 - side] > 0) { const s = bt.counterMagic[1 - side], cost = Math.max(1, sp.combatCost || sp.cost || 10); pass *= 1 - s / (s + cost); }
+    if (t.side !== side && id !== 'divine_vengeance' && CombatSpells.mirrored(t)) { pass *= 1 - CombatSpells.MIRROR; out.mirror = true; }
     out.pass = pass;
     out.chance = (out.p != null ? (out.perFigure && out.n > 1 ? out.any : out.p) : out.drain > 0 || out.dmg > 0 ? 1 : 0) * pass;
     return out;
@@ -1848,6 +1998,7 @@ const CombatSpells = {
     warp_lightning: () => ({ rolls: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], kind: 'lightning', realm: 'chaos', mods: { armorPiercing: true } }),
     fireball: x => ({ area: Math.min(25, 5 + Math.floor(x / 3)), kind: 'fire', realm: 'chaos' }),
     doom_bolt: () => ({ fixed: 10 }),
+    chain_lightning: () => ({ rolls: [20], kind: 'lightning', realm: 'chaos', mods: { armorPiercing: true } }),
   },
   // dégâts attendus, part des lancers sans effet et chance de détruire l'unité, par tirages simulés
   // (Math.random : le générateur de la bataille n'est pas touché), comme applyRolls / applyArea
@@ -1960,6 +2111,11 @@ const CombatSpells = {
     if (id === 'entangle' && !foes.some(b => { const s = bt.stats(b); return !s.flying && !s.ab.nonCorporeal; })) return 'Vos ennemis volent ou sont immatériels : sans effet ici.';
     if (id === 'mass_healing' && !mine.some(b => realm(b) !== 'death' && b.u.dmg > (b.irrDmg || 0))) return CombatSpells.healWhy(bt, side);
     if (id === 'counter_magic' && !bt.player(1 - side) && !foes.some(f => bt.unitSpells(f, true).length)) return 'Aucun lanceur de sorts en face : sans effet ici.';
+    if (id === 'mass_slow' && !foes.some(b => CombatSpells.canAffect(bt, b, 'slow'))) return 'Aucun ennemi ne peut être ralenti ici.';
+    if (id === 'sacrifice') {
+      if (!CombatSpells.sacrificeDead(bt, side).length) return 'Aucune de vos unités tombées ne peut être relevée (héros, doubles et morts irréversibles exceptés).';
+      if (!CombatSpells.victims(bt, side).length) return 'Aucune de vos unités ne peut donner sa vie (pas un héros).';
+    }
     return null;
   },
   summonTemp(bt, side, type, n) {
@@ -2197,6 +2353,195 @@ Object.assign(CombatSpells, {
 });
 delete COMBAT_SPELL_HANDLERS.revive;
 
+// ---------- (0.31.71) sorts venus de Heroes of Might and Magic ----------
+Object.assign(CombatSpells, {
+  MIRROR: 0.4,   // Miroir magique : chance de renvoi
+  // sorts en deux temps : ce que vise le second choix
+  SECOND: { teleport: 'tile', gust: 'tile', sacrifice: 'unit' },
+  ZONE_SPELLS: ['force_field', 'fire_curtain', 'fire_mines', 'mist'],
+  // orientations d'une ligne de trois cases : en travers de l'écran, de haut en bas, le long de l'axe c, le long de l'axe r
+  ROTS: [[1, -1], [1, 1], [1, 0], [0, 1]],
+  mirrored(b) { return !!b && !!b.u && (b.u.ench.includes('magic_mirror') || b.tempEnch.includes('magic_mirror')); },
+  // dégâts de la Vengeance divine sur b : selon les figurines du camp side qu'il a tuées
+  vengeanceOf(b, side) { const p = (DATA.spells.divine_vengeance || {}).params || {}; return Math.min(p.max || 30, (p.perFigure || 2) * ((b.slainOf && b.slainOf[side]) || 0)); },
+  // la forme d'un sort de zone autour de (c, r) : ligne de trois cases (orientation rot), croix de cinq cases, carré de 3 × 3
+  zoneShape(id, c, r, rot) {
+    const out = [];
+    if (id === 'force_field' || id === 'fire_curtain') { const [dc, dr] = CombatSpells.ROTS[(rot || 0) & 3]; for (const k of [-1, 0, 1]) out.push([c + k * dc, r + k * dr]); }
+    else if (id === 'fire_mines') out.push([c, r], [c + 1, r], [c - 1, r], [c, r + 1], [c, r - 1]);
+    else if (id === 'mist') for (let dc = -1; dc <= 1; dc++) for (let dr = -1; dr <= 1; dr++) out.push([c + dc, r + dr]);
+    return out.filter(([x, y]) => x >= 0 && y >= 0 && x < CW && y < CH);
+  },
+  // les cases où le sort se pose vraiment : un champ de force ni sur une unité ni sur une tour ; un rideau pas sur une tour ;
+  // une mine sur une case libre qui n'en a pas déjà
+  zonePlace(bt, side, id, target) {
+    const [c, r, rot] = Array.isArray(target) ? target : target && target.c != null ? [target.c, target.r, 0] : [-1, -1, 0];
+    if (!(c >= 0 && r >= 0 && c < CW && r < CH)) return [];
+    return CombatSpells.zoneShape(id, c, r, rot).filter(([x, y]) => {
+      if (id === 'force_field') return !bt.unitAt(x, y) && !bt.towerAt(x, y) && !bt.gateAt(x, y) && !bt.fieldAt(x, y);
+      if (id === 'fire_curtain') return !bt.towerAt(x, y) && !bt.gateAt(x, y);
+      if (id === 'fire_mines') return !bt.unitAt(x, y) && !bt.blocked(x, y) && bt.mines[x + ',' + y] == null;
+      return true;
+    });
+  },
+  secondTargets(bt, side, id, t) {
+    if (!t) return [];
+    if (id === 'teleport') return t.dead ? [] : CombatSpells.teleportDests(bt, side, t);
+    if (id === 'gust') return t.dead ? [] : CombatSpells.gustLandings(bt, t).map(l => [l.c, l.r]);
+    if (id === 'sacrifice') return CombatSpells.victims(bt, side);
+    return [];
+  },
+  secondOk(bt, side, id, t, to) {
+    if (!t || !to) return false;
+    const L = CombatSpells.secondTargets(bt, side, id, t);
+    return CombatSpells.SECOND[id] === 'unit' ? L.includes(to) : Array.isArray(to) && L.some(([c, r]) => c === to[0] && r === to[1]);
+  },
+  // Téléportation : pourquoi b ne peut pas se poser en (c, r), sinon null
+  teleportWhy(bt, side, b, c, r) {
+    if (!Battle._inGrid(c, r)) return 'Hors du champ de bataille.';
+    if (c === b.c && r === b.r) return 'L\'unité s\'y trouve déjà.';
+    if (bt.unitAt(c, r)) return 'La case est occupée.';
+    if (bt.towerAt(c, r) || bt.gateAt(c, r)) return 'Une tour ou une porte occupe la case.';
+    if (bt.rock(c, r)) return 'Des rochers occupent la case.';
+    if (bt.fieldAt(c, r)) return 'Un champ de force occupe la case.';
+    if (bt.deep(c, r) && !bt.wades(bt.stats(b))) return 'Eau profonde : l\'unité ne saurait s\'y tenir.';
+    // le contre-sort : un Mur de feu ferme la cité à la téléportation de l'assaillant
+    if (side === ATT_SIDE && bt.wallOfFire && bt.inCity(c, r)) return 'Le Mur de feu empêche de se téléporter dans la cité.';
+    if (side === ATT_SIDE && bt.onRampart(c, r)) return 'On ne se pose pas sur la muraille ennemie.';
+    return null;
+  },
+  teleportDests(bt, side, b) { const out = []; for (let r = 0; r < CH; r++) for (let c = 0; c < CW; c++) if (!CombatSpells.teleportWhy(bt, side, b, c, r)) out.push([c, r]); return out; },
+  // Rafale : dans chacune des huit directions, la case où le vent pose l'unité (au plus 3 cases ; un obstacle, une unité,
+  // l'eau profonde ou une muraille debout l'arrêtent avant), avec le chemin parcouru
+  gustLandings(bt, b) {
+    const out = [], s = bt.stats(b), wades = bt.wades(s), n = ((DATA.spells.gust || {}).params || {}).push || 3;
+    for (const [dc, dr] of U.DIRS8) {
+      let c = b.c, r = b.r; const path = [];
+      for (let i = 0; i < n; i++) {
+        const nc = c + dc, nr = r + dr;
+        if (!Battle._inGrid(nc, nr) || bt.unitAt(nc, nr) || bt.towerAt(nc, nr) || bt.gateAt(nc, nr) || bt.rock(nc, nr) || bt.fieldAt(nc, nr) || bt.cutsField(c, r, dc, dr)) break;
+        if (!wades && (bt.deep(nc, nr) || bt.cutsDeep(c, r, dc, dr))) break;
+        if (bt.hasWalls && !s.flying && bt.crossesWall(c, r, nc, nr)) { const w = bt.walls[bt.inCity(c, r) ? c + ',' + r : nc + ',' + nr]; if (w && !w.broken) break; }
+        c = nc; r = nr; path.push([c, r]);
+      }
+      if (path.length) out.push({ c, r, path, dir: [dc, dr] });
+    }
+    return out;
+  },
+  // Sacrifice : les unités qui peuvent donner leur vie, et les morts qu'elles peuvent relever
+  victims(bt, side) { return bt.alive(side).filter(v => !v.u.hero && !v.temp && !v.clone && !v.possessed && !v.u.avatar && !v.u.riteDemon && !v.stasis); },
+  sacrificeDead(bt, side) { return bt.dead.filter(b => b.side === side && !b.temp && !b.clone && !b.recalled && !b.sacrificed && !(b.irrDmg > 0) && !b.u.hero && !b.u.avatar && !b.u.riteDemon && !b.possessed && b.raisedFrom == null); },
+  // Chaîne d'éclairs : la cible, puis jusqu'à quatre bonds vers l'unité la plus proche (3 cases au plus), ennemie ou amie, qui n'a pas
+  // encore été frappée ; les invisibles du camp adverse ne l'attirent pas. Toujours le même chemin pour la même position (aperçu = effet).
+  chainPath(bt, t, side) {
+    const p = (DATA.spells.chain_lightning || {}).params || {}, out = [t], jump = p.jump || 3;
+    let cur = t;
+    for (let i = 0; i < (p.bounces || 4); i++) {
+      let best = null, bd = 99;
+      for (const o of bt.units) {
+        if (o.dead || out.includes(o) || (o.side !== side && bt.isInvisible(o))) continue;
+        const d = bt.dist(cur, o);
+        if (d <= jump && d < bd) { bd = d; best = o; }
+      }
+      if (!best) break;
+      out.push(best); cur = best;
+    }
+    return out;
+  },
+  chainStrength(i) { const s0 = ((DATA.spells.chain_lightning || {}).params || {}).strength || 20; return Math.max(1, Math.round(s0 * Math.pow(2 / 3, i))); },
+});
+Object.assign(COMBAT_SPELL_HANDLERS, {
+  slow(bt, side, t) { if (bt.resistFails(t, 'nature', 2, false)) { t.curses.push('slow'); bt.say(bt.subj(t, 'est ralenti') + ' (Lenteur).'); } else bt.say(bt.subj(t, 'résiste') + '.'); bt.ev({ type: 'fx', fx: 'nature', at: [t.c, t.r] }); },
+  mass_slow(bt, side) {
+    const hit = [], held = [];
+    for (const t of bt.alive(1 - side)) {
+      if (!CombatSpells.canAffect(bt, t, 'slow') || t.curses.includes('slow')) continue;
+      if (bt.resistFails(t, 'nature', 0, false)) { t.curses.push('slow'); hit.push(bt.name(t)); } else held.push(bt.name(t));
+      bt.ev({ type: 'fx', fx: 'nature', at: [t.c, t.r] });
+    }
+    bt.say('Lenteur de masse : ' + (hit.length ? 'ralentis : ' + hit.join(', ') : 'aucun ennemi ralenti') + (held.length ? ' ; résistent : ' + held.join(', ') : '') + '.');
+  },
+  shackles(bt, side, t) { if (bt.resistFails(t, 'death', 1, false)) { t.curses.push('shackles'); bt.say(bt.subj(t, 'est entravé') + ' : plus de riposte.'); } else bt.say(bt.subj(t, 'résiste') + '.'); bt.ev({ type: 'fx', fx: 'death', at: [t.c, t.r] }); },
+  twilight(bt, side, t) { if (bt.resistFails(t, 'death', 1, false)) { t.curses.push('twilight'); bt.say(bt.subj(t, 'est plongé') + ' dans le crépuscule : plus d\'attaque à distance.'); } else bt.say(bt.subj(t, 'résiste') + '.'); bt.ev({ type: 'fx', fx: 'death', at: [t.c, t.r] }); },
+  force_field(bt, side, t) {
+    const n = ((DATA.spells.force_field || {}).params || {}).rounds || 2, tiles = CombatSpells.zonePlace(bt, side, 'force_field', t);
+    for (const [c, r] of tiles) { bt.field[c + ',' + r] = { n, side }; bt.ev({ type: 'fx', fx: 'sorcery', at: [c, r] }); }
+    bt.say('Un champ de force se dresse sur ' + U.n(tiles.length, 'case') + '.');
+  },
+  fire_curtain(bt, side, t) {
+    const p = (DATA.spells.fire_curtain || {}).params || {}, tiles = CombatSpells.zonePlace(bt, side, 'fire_curtain', t);
+    for (const [c, r] of tiles) { bt.flames[c + ',' + r] = { n: p.rounds || 3, side }; bt.ev({ type: 'fx', fx: 'fire', at: [c, r] }); }
+    bt.say('Un rideau de flammes s\'élève sur ' + U.n(tiles.length, 'case') + '.');
+    // les ennemis pris dessous brûlent aussitôt
+    for (const [c, r] of tiles) { const b = bt.unitAt(c, r); if (b && b.side !== side && !bt.stats(b).flying) { const d = bt.applyArea(b, p.strength || 5, 'immolation', 'chaos'); bt.say(bt.subj(b, 'est pris') + ' dans les flammes (' + d + ').'); bt.checkDeath(b); } }
+  },
+  fire_mines(bt, side, t) {
+    const tiles = CombatSpells.zonePlace(bt, side, 'fire_mines', t);
+    for (const [c, r] of tiles) bt.mines[c + ',' + r] = side;
+    bt.say(U.n(tiles.length, 'mine de feu enfouie', 'mines de feu enfouies') + '.');
+  },
+  mist(bt, side, t) {
+    const tiles = CombatSpells.zonePlace(bt, side, 'mist', t);
+    for (const [c, r] of tiles) bt.mist[c + ',' + r] = true;
+    bt.ev({ type: 'fx', fx: 'mist', at: Array.isArray(t) ? [t[0], t[1]] : [t.c, t.r] });
+    bt.say('Une brume épaisse couvre ' + U.n(tiles.length, 'case') + '.');
+  },
+  teleport(bt, side, t, sp, caster, extra, to) {
+    const from = [t.c, t.r]; t.c = to[0]; t.r = to[1]; t.guarding = false;
+    bt.turnTo(t, t.c + (side === DEF_SIDE ? 1 : -1), t.r + (side === DEF_SIDE ? 1 : -1));
+    bt.ev({ type: 'blink', id: t.id, from, to: [t.c, t.r] });
+    bt.say(bt.subj(t, 'est transporté') + ' ailleurs sur le champ de bataille.');
+    bt.hazards(t, [[t.c, t.r]], false);
+  },
+  gust(bt, side, t, sp, caster, extra, to) {
+    const l = CombatSpells.gustLandings(bt, t).find(x => x.c === to[0] && x.r === to[1]); if (!l) return;
+    // une mine ennemie sur le chemin arrête la poussée (pas pour un volant, qui passe au-dessus)
+    const fly = !!bt.stats(t).flying; let path = l.path, mined = false;
+    if (!fly) { const i = path.findIndex(([c, r]) => bt.mineFor(t, c, r)); if (i >= 0) { path = path.slice(0, i + 1); mined = true; } }
+    const from = [t.c, t.r], last = path[path.length - 1];
+    t.c = last[0]; t.r = last[1]; t.guarding = false;
+    bt.ev({ type: 'push', id: t.id, path: [from].concat(path) });
+    bt.say(bt.subj(t, 'est repoussé') + ' de ' + U.n(path.length, 'case') + '.');
+    bt.hazards(t, path, mined);
+  },
+  chain_lightning(bt, side, t) {
+    const chain = CombatSpells.chainPath(bt, t, side), parts = [];
+    chain.forEach((b, i) => {
+      if (b.dead) return;
+      const str = CombatSpells.chainStrength(i);
+      const d = CombatSpells.canAffect(bt, b, 'chain_lightning') ? bt.applyRolls(b, [bt.rng.rolls(str, 30)], 'lightning', 'chaos', { armorPiercing: true }) : 0;
+      parts.push(bt.name(b) + (b.side === side ? ' (des vôtres)' : '') + ' ' + d);
+      bt.ev({ type: 'fx', fx: 'lightning', at: [b.c, b.r] });
+      bt.checkDeath(b);
+    });
+    bt.say('Chaîne d\'éclairs : ' + parts.join(', ') + '.');
+  },
+  divine_vengeance(bt, side, t) {
+    const d = bt.takeDamage(t, CombatSpells.vengeanceOf(t, side), 'normal');
+    bt.say('Vengeance divine : ' + U.n(d, 'point', 'points') + ' de dégâts à ' + bt.name(t) + '.');
+    bt.ev({ type: 'fx', fx: 'holy', at: [t.c, t.r] });
+  },
+  sacrifice(bt, side, dead, sp, caster, extra, v) {
+    const give = Math.min(Units.stats(bt.game, dead.u).maxHp, Math.floor(bt.hp(v) * 1.5)), at = [v.c, v.r];
+    bt.takeDamage(v, bt.hp(v), 'irreversible'); v.sacrificed = true; bt.checkDeath(v);
+    bt.say('Sacrifice de ' + bt.name(v) + '.');
+    dead.c = at[0]; dead.r = at[1];
+    CombatSpells.revive(bt, side, dead, false);
+    if (!dead.dead) dead.u.dmg = Math.max(0, Units.stats(bt.game, dead.u).maxHp - give);
+    bt.ev({ type: 'fx', fx: 'death', at });
+  },
+  clone(bt, side, t) {
+    if (bt.alive(side).length >= 9) return;
+    const u = Units.create(bt.game, t.u.type, bt.owner(side), bt.plane, bt.x, bt.y);
+    u.combatOnly = true; u.xp = t.u.xp || 0; u.dmg = t.u.dmg || 0;
+    const pos = bt.freeTileNear([t.c, t.r]);
+    const b = bt.addUnit(u, side, 0, 1, { pos, temp: true });
+    b.clone = true; b.moves = 0; b.maxMoves = Units.stats(bt.game, u).move * 2; b.ammo = t.ammo; b.facing = t.facing; b.fdir = t.fdir;
+    bt.ev({ type: 'summon', id: b.id, at: pos });
+    bt.say('Un double de ' + bt.name(t) + ' apparaît.');
+  },
+});
+
 // ---------- IA tactique ----------
 const CombatAI = {
   tacFor(game, pid) { const pl = game.players[pid]; if (!pl) return 0; if (pl.human) return 3; return typeof AI !== 'undefined' ? AI.lvl(pl) : 1; },
@@ -2216,6 +2561,7 @@ const CombatAI = {
   // dégâts attendus d'une mêlée de a sur d (counter : riposte, moins précise quand d a déjà été assailli)
   expMelee(bt, a, d, counter) {
     const s = bt.stats(a); if (s.melee <= 0) return 0;
+    if (counter && a.curses.includes('shackles')) return 0;   // sous Entraves, pas de riposte
     const th = bt.meleeToHit(a, d, s, counter);
     const mods = bt.meleeMods(a, d, counter), def = bt.defFor(d, 'melee', null, mods), td = bt.toDefend(d, mods);
     const m = s.melee + (!counter && bt.flankOf(a, d) ? 1 : 0);
@@ -2227,7 +2573,7 @@ const CombatAI = {
     const kind = s.rangedType === 'magic' ? 'magic' : s.rangedType === 'boulder' ? 'boulder' : 'missile';
     const mods = bt.rangedMods(a, d, s, th);
     const def = bt.defFor(d, kind, s.rangedRealm || (kind === 'magic' ? 'chaos' : null), mods);
-    return def >= 50 ? 0 : bt.figures(a) * CombatAI.expPos(s.ranged, Math.max(0, th), def, bt.toDefend(d, mods)) * CombatAI.volleys(a, s);
+    return def >= 50 ? 0 : bt.figures(a) * CombatAI.expPos(bt.rangedStr(a, d, s), Math.max(0, th), def, bt.toDefend(d, mods)) * CombatAI.volleys(a, s);
   },
   // Hâte : deux volées si les munitions (ou le mana du lanceur) le permettent
   volleys(a, s) { if (!s.haste) return 1; return (s.rangedType === 'magic' ? a.ammo + Math.floor((a.casterMana || 0) / 3) : a.ammo) >= 2 ? 2 : 1; },
@@ -2243,13 +2589,13 @@ const CombatAI = {
     const invuln = d.u.ench.concat(d.tempEnch).includes('invulnerability'), blur = bt.ench[d.side].includes('blur');
     const reduce = dmg => { if (invuln) dmg = Math.max(0, dmg - 2); if (blur) { let o = 0; for (let i = 0; i < dmg; i++) if (Math.random() >= 0.1) o++; dmg = o; } return dmg; };
     const def = bt.defFor(d, kind, s.rangedRealm || (kind === 'magic' ? 'chaos' : null), mods), td = bt.toDefend(d, mods);
-    const figs = bt.figures(a), hp0 = bt.hp(d), lead0 = bt.leadHp(d), per = ds.hp;
+    const figs = bt.figures(a), hp0 = bt.hp(d), lead0 = bt.leadHp(d), per = ds.hp, str = bt.rangedStr(a, d, s);
     const roll = (k, p) => { let x = 0; for (let i = 0; i < k; i++) if (Math.random() * 100 < p) x++; return x; };
     let total = 0, zero = 0;
     for (let t = 0; t < n; t++) {
       let hp = hp0, lead = lead0, dealt = 0;
       if (def < 50) for (let v = 0; v < CombatAI.volleys(a, s); v++) for (let f = 0; f < figs && hp > 0; f++) {
-        let dmg = reduce(roll(s.ranged, th));
+        let dmg = reduce(roll(str, th));
         while (dmg > 0 && hp > 0) {
           dmg -= roll(def, td);
           if (dmg > 0) { const take = Math.min(lead, dmg); hp -= take; lead -= take; dealt += take; dmg -= take; if (lead <= 0) lead = per; }
@@ -2267,6 +2613,7 @@ const CombatAI = {
     const sim = Object.create(bt);
     Object.assign(sim, { rng: new RNG((a.id * 7919 + d.id * 131 + bt.round * 17 + (at ? at.c * 13 + at.r : 0)) >>> 0), events: [], log: [] });
     sim.say = () => {}; sim.ev = () => {}; sim.checkDeath = () => {}; sim.checkEnd = () => {}; sim.ignite = () => false; sim.damageWall = () => {};
+    sim.martyrFor = () => null;   // (0.31.71) la prévision ne blesse jamais une vraie unité voisine
     const copy = b => Object.assign({}, b, { u: JSON.parse(JSON.stringify(b.u)), tempEnch: b.tempEnch.slice(), curses: b.curses.slice(), usedAbility: Object.assign({}, b.usedAbility) });
     let steps = 0;
     if (at) { const reach = bt.reachable(a); if (reach.has(at.c + ',' + at.r)) steps = bt.pathTo(reach, a, at.c, at.r).length; }
@@ -2381,7 +2728,7 @@ const CombatAI = {
     if (CombatAI.civilian(b) && CombatAI.civilOn(bt, b.side) && bt.alive(b.side).some(o => o !== b && !CombatAI.civilian(o))) return CombatAI.keepClear(bt, b, foes);
     // capacités spéciales et sorts des lanceurs (la réserve de mana d'un héros ne sert qu'au combat : autant la dépenser)
     const sp = CombatAI.unitSpellChoice(bt, b, foes);
-    if (sp) { CombatSpells.cast(bt, b.side, sp.id, sp.target, b); return true; }
+    if (sp) { CombatSpells.cast(bt, b.side, sp.id, sp.target, b, 0, sp.to); return true; }
     // dès Normale : un héros gravement blessé quitte la mêlée (sauf s'il peut achever son adversaire) et n'y retourne pas
     if (CombatAI.tf(bt, b.side, 'herosafe') && b.u.hero && bt.alive(b.side).length > 1 && bt.hp(b) < s.maxHp * 0.35) {
       const adj = foes.filter(f => bt.canMelee(b, f));
@@ -2617,8 +2964,13 @@ const CombatAI = {
       if (sp.params && sp.params.siege && !CombatSpells.siegeUseful(bt, b.side, id)) continue;   // pas de murailles à abattre ici
       if (CombatAI.pointless(bt, b.side, id)) continue;
       const tt = CombatSpells.targetType(id);
-      let target = null, sc = 0;
-      if (id === 'healing' || id === 'mass_healing') {
+      let target = null, sc = 0, to;
+      if (sp.homm) {
+        if (!CombatAI.tf(bt, b.side, 'homm', 0)) continue;
+        const P = CombatAI.hommPlan(bt, b.side, id, b);
+        if (!P) continue;
+        target = P.target; to = P.to; sc = 2 + P.score;
+      } else if (id === 'healing' || id === 'mass_healing') {
         const hurt = friends.filter(x => x.u.dmg >= 4 && CombatSpells.canAffect(bt, x, id));
         if (!hurt.length) continue;
         if (id === 'healing') { target = U.max(hurt, x => x.u.dmg); sc = 3 + Math.min(5, target.u.dmg); } else sc = 3 + hurt.length * 2;
@@ -2653,7 +3005,7 @@ const CombatAI = {
         } else sc = sp.kind === 'summon' ? 7 : sp.kind === 'combatEnchant' ? 4 + (friends.length + foes.length) * .4 : 4;
       } else continue;
       if (opt.free) sc += 2;
-      if (sc > bs) { bs = sc; best = { id, target }; }
+      if (sc > bs) { bs = sc; best = { id, target, to }; }
     }
     return bs >= 4 ? best : null;
   },
@@ -2704,13 +3056,20 @@ const CombatAI = {
     // le va-tout : sa capitale assiégée, le sorcier jette tout dans la bataille (la perdre, c'est l'exil, et des tours de mana pour revenir)
     const allIn = side === DEF_SIDE && !!bt.city && bt.city.owner === pl.id && pl.fortress === bt.city.id && CombatAI.tf(bt, side, 'allin');
     let best = null, bestScore = 0;
-    const extraOf = {};
+    const extraOf = {}, toOf = {};
+    const homm = CombatAI.tf(bt, side, 'homm', 0);
     for (const o of opts) {
       const sp = DATA.spells[o.id]; const tt = CombatSpells.targetType(o.id);
       let score = 0, target = null;
       if (!allIn && o.cost > pl.mana * 0.6 && o.cost > 30) continue;
       if (CombatAI.pointless(bt, side, o.id)) continue;
-      if (sp.kind === 'damage' || sp.kind === 'resistOrDie' || sp.kind === 'curse' || sp.kind === 'areaDamage') {
+      // (0.31.71) sorts venus de Heroes : leur propre plan (désactivable au banc : no_homm)
+      if (sp.homm) {
+        if (!homm) continue;
+        const P = CombatAI.hommPlan(bt, side, o.id, null);
+        if (!P) continue;
+        target = P.target; score = P.score; if (P.to) toOf[o.id] = P.to;
+      } else if (sp.kind === 'damage' || sp.kind === 'resistOrDie' || sp.kind === 'curse' || sp.kind === 'areaDamage') {
         if (tt === 'enemyUnit' && CombatSpells.DAMAGE[o.id] && CombatAI.tf(bt, side, 'spellaim')) {
           // dès Normale : la cible où le sort fait le plus de mal (l'achever vaut davantage), et le mana ajouté qui le rentabilise
           const plan = CombatAI.damagePlan(bt, side, o.id, CombatSpells.validTargets(bt, side, o.id).filter(f => f.u), allIn);
@@ -2771,9 +3130,9 @@ const CombatAI = {
       score *= 0.8 + bt.rng.next() * 0.4;
       score *= 1 - CombatSpells.nodeFizzle(bt, side, o.id);
       score -= (o.cost + (extraOf[o.id] || 0)) / (allIn ? 120 : 40);
-      if (score > bestScore) { bestScore = score; best = { id: o.id, target, extra: extraOf[o.id] || 0 }; }
+      if (score > bestScore) { bestScore = score; best = { id: o.id, target, extra: extraOf[o.id] || 0, to: toOf[o.id] }; }
     }
-    if (best && bestScore > (allIn ? 0.5 : 2)) CombatSpells.cast(bt, side, best.id, best.target, null, best.extra);
+    if (best && bestScore > (allIn ? 0.5 : 2)) CombatSpells.cast(bt, side, best.id, best.target, null, best.extra, best.to);
   },
   // le meilleur emploi d'un sort de dégâts : cible et mana ajouté (dès Normale, quand le mana abonde : 'power')
   damagePlan(bt, side, id, targets, allIn) {
@@ -2800,6 +3159,236 @@ const CombatAI = {
       }
     }
     return best;
+  },
+  // ---------- (0.31.71) sorts venus de Heroes : où et quand les lancer ----------
+  // ce que l'IA sait : ce qu'elle voit du champ de bataille (pas les mines adverses, pas les invisibles), les résistances affichées.
+  // Renvoie { target, to?, score } ou null ; caster : l'unité lanceuse (héros), sinon le sorcier
+  st(bt, b) { return Units.strength(bt.game, b.u); },
+  // pas de marche depuis les unités sources (0 sur leur case), pour un piéton, sans compter les unités ; extra : cases bloquées en plus
+  walkFrom(bt, sources, extra) {
+    const N = CW * CH, d = new Int16Array(N).fill(-1), q = [];
+    const blk = (c, r) => bt.blocked(c, r) || (extra && extra.has(c + ',' + r));
+    const wall = (c, r) => bt.deep(c, r) || bt.fieldAt(c, r) || (extra && extra.has(c + ',' + r));
+    for (const o of sources) { const i = o.r * CW + o.c; if (Battle._inGrid(o.c, o.r) && d[i] < 0) { d[i] = 0; q.push(i); } }
+    for (let h = 0; h < q.length; h++) {
+      const i = q[h], c = i % CW, r = (i - c) / CW;
+      for (const [dc, dr] of U.DIRS8) {
+        const nc = c + dc, nr = r + dr; if (!Battle._inGrid(nc, nr)) continue;
+        const ni = nr * CW + nc;
+        if (d[ni] >= 0 || blk(nc, nr) || (dc && dr && wall(nc, r) && wall(c, nr))) continue;
+        d[ni] = d[i] + 1; q.push(ni);
+      }
+    }
+    return d;
+  },
+  // les premières cases que l'ennemi f foulera pour venir au contact (selon la carte des pas d)
+  nextSteps(bt, f, d, n) {
+    const out = []; let c = f.c, r = f.r;
+    for (let k = 0; k < n; k++) {
+      const cur = d[r * CW + c]; if (!(cur > 1)) break;
+      let nx = null;
+      for (const [dc, dr] of U.DIRS8) { const nc = c + dc, nr = r + dr; if (Battle._inGrid(nc, nr) && d[nr * CW + nc] === cur - 1 && !bt.unitAt(nc, nr)) { nx = [nc, nr]; break; } }
+      if (!nx) break;
+      out.push(nx); c = nx[0]; r = nx[1];
+    }
+    return out;
+  },
+  // les ennemis qui marchent vers nous (ni volants, ni téléporteurs), avec leur force
+  walkers(bt, side) { return bt.alive(1 - side).filter(f => { const s = bt.stats(f); return !s.flying && !s.ab.teleporting && !s.ab.merging && !s.ab.nonCorporeal && s.melee > 0 && f.web <= 0 && !f.asleep && !f.stasis && !bt.isInvisible(f); }); },
+  shooters(bt, l) { return l.filter(b => { const s = bt.stats(b); return s.ranged > 0 && s.rangedType && (s.rangedType === 'magic' ? b.ammo > 0 || b.casterMana >= 3 : b.ammo > 0); }); },
+  // la chance qu'un sort visant t prenne (résistance, flux du nœud, contre-magie, Miroir magique)
+  takes(bt, side, id, t) { const od = CombatSpells.odds(bt, side, id, t, 0); return od ? od.chance : 1 - CombatSpells.nodeFizzle(bt, side, id, 0); },
+  hommPlan(bt, side, id, caster) {
+    const foes = bt.alive(1 - side), friends = bt.alive(side), st = b => CombatAI.st(bt, b);
+    const seen = foes.filter(f => !bt.isInvisible(f));
+    if (!seen.length) return null;
+    const vt = () => CombatSpells.validTargets(bt, side, id).filter(t => t.u);
+    const near = (b, l, d) => l.some(o => bt.dist(o, b) <= d);
+    const myMelee = friends.filter(b => bt.stats(b).melee > 0);
+    switch (id) {
+      case 'slow': {
+        // un ennemi rapide qui doit encore venir à nous (un tireur posté ou un ennemi déjà au contact y perd peu)
+        const t = U.max(vt(), f => { const sf = bt.stats(f); const k = (CombatAI.shooters(bt, [f]).length ? 0.4 : 1) * (bt.enemyAdjacent(f) ? 0.5 : 1) * Math.min(1, (sf.move - 1) / 2); return (st(f) / 10 + 2) * k * CombatAI.takes(bt, side, id, f); });
+        if (!t) return null;
+        const sf = bt.stats(t), k = (CombatAI.shooters(bt, [t]).length ? 0.4 : 1) * (bt.enemyAdjacent(t) ? 0.5 : 1) * Math.min(1, (sf.move - 1) / 2);
+        return { target: t, score: (st(t) / 10 + 2) * k * CombatAI.takes(bt, side, id, t) * 0.8 };
+      }
+      case 'mass_slow': {
+        let v = 0;
+        for (const f of foes) { if (!CombatSpells.canAffect(bt, f, 'slow') || f.curses.includes('slow')) continue; const p = U.clamp(10 - bt.resFor(f, 'nature'), 0, 10) / 10, sf = bt.stats(f); v += (st(f) / 12 + 1) * p * (CombatAI.shooters(bt, [f]).length ? 0.4 : 1) * Math.min(1, (sf.move - 1) / 2); }
+        return v > 0 ? { target: null, score: v * 0.8 } : null;
+      }
+      case 'shackles': {
+        if (!myMelee.length) return null;
+        const t = U.max(vt().filter(f => near(f, myMelee, 4)), f => (st(f) / 10 + 2) * CombatAI.takes(bt, side, id, f) * (bt.stats(f).melee >= 4 ? 1 : 0.6));
+        return t ? { target: t, score: (st(t) / 10 + 2) * CombatAI.takes(bt, side, id, t) * (bt.stats(t).melee >= 4 ? 1 : 0.6) * 0.8 } : null;
+      }
+      case 'twilight': {
+        const t = U.max(CombatAI.shooters(bt, vt()), f => (st(f) / 10 + 3) * CombatAI.takes(bt, side, id, f));
+        return t ? { target: t, score: (st(t) / 10 + 3) * CombatAI.takes(bt, side, id, t) } : null;
+      }
+      case 'force_field': {
+        // le mur qui retarde le plus les marcheurs ennemis ; utile au défenseur (le temps joue pour lui) ou à qui a des tireurs
+        if (side !== DEF_SIDE && !CombatAI.shooters(bt, friends).length) return null;
+        const W = CombatAI.walkers(bt, side); if (!W.length) return null;
+        const d0 = CombatAI.walkFrom(bt, friends), cand = new Map();
+        for (const f of W) for (const [c, r] of CombatAI.nextSteps(bt, f, d0, 3)) cand.set(c + ',' + r, [c, r]);
+        let best = null, bv = 0;
+        for (const [c, r] of cand.values()) for (let rot = 0; rot < 4; rot++) {
+          const tiles = CombatSpells.zonePlace(bt, side, id, [c, r, rot]); if (tiles.length < 2) continue;
+          const d1 = CombatAI.walkFrom(bt, friends, new Set(tiles.map(([x, y]) => x + ',' + y)));
+          let v = 0;
+          for (const f of W) { const a = d0[f.r * CW + f.c], b = d1[f.r * CW + f.c]; if (a < 0) continue; v += Math.min(5, b < 0 ? 5 : b - a) * st(f) / 60; }
+          if (v > bv) { bv = v; best = [c, r, rot]; }
+        }
+        return best ? { target: best, score: bv } : null;
+      }
+      case 'fire_curtain': {
+        const W = CombatAI.walkers(bt, side); if (!W.length) return null;
+        const d0 = CombatAI.walkFrom(bt, friends), cand = new Map();
+        for (const f of W) { cand.set(f.c + ',' + f.r, [f.c, f.r]); for (const [c, r] of CombatAI.nextSteps(bt, f, d0, 2)) cand.set(c + ',' + r, [c, r]); }
+        let best = null, bv = 0;
+        for (const [c, r] of cand.values()) for (let rot = 0; rot < 4; rot++) {
+          const tiles = CombatSpells.zonePlace(bt, side, id, [c, r, rot]), ks = new Set(tiles.map(([x, y]) => x + ',' + y));
+          if (friends.some(b => ks.has(b.c + ',' + b.r))) continue;
+          let v = 0;
+          for (const f of W) { if (ks.has(f.c + ',' + f.r)) v += st(f) / 25; else if (CombatAI.nextSteps(bt, f, d0, 2).some(([x, y]) => ks.has(x + ',' + y))) v += st(f) / 40; }
+          if (v > bv) { bv = v; best = [c, r, rot]; }
+        }
+        return best ? { target: best, score: bv } : null;
+      }
+      case 'fire_mines': {
+        const W = CombatAI.walkers(bt, side); if (!W.length) return null;
+        const d0 = CombatAI.walkFrom(bt, friends), steps = W.map(f => ({ f, s: CombatAI.nextSteps(bt, f, d0, 3) }));
+        const cand = new Map(); for (const o of steps) for (const [c, r] of o.s) cand.set(c + ',' + r, [c, r]);
+        let best = null, bv = 0;
+        for (const [c, r] of cand.values()) {
+          const ks = new Set(CombatSpells.zonePlace(bt, side, id, [c, r]).map(([x, y]) => x + ',' + y)); if (!ks.size) continue;
+          let v = 0; for (const o of steps) if (o.s.some(([x, y]) => ks.has(x + ',' + y))) v += st(o.f) / 35;
+          if (v > bv) { bv = v; best = [c, r]; }
+        }
+        return best ? { target: best, score: bv } : null;
+      }
+      case 'mist': {
+        const theirSh = CombatAI.shooters(bt, seen), mySh = CombatAI.shooters(bt, friends);
+        if (!theirSh.length) return null;
+        let best = null, bv = 0;
+        for (let r = 1; r < CH - 1; r++) for (let c = 1; c < CW - 1; c++) {
+          const inZ = b => Math.abs(b.c - c) <= 1 && Math.abs(b.r - r) <= 1 && !bt.mistAt(b.c, b.r);
+          const v = U.sum(theirSh.filter(inZ), b => st(b)) / 15 - U.sum(mySh.filter(inZ), b => st(b)) / 15 + U.sum(friends.filter(b => inZ(b) && !mySh.includes(b)), b => st(b)) / 60 * Math.min(1, theirSh.length / 2);
+          if (v > bv) { bv = v; best = [c, r]; }
+        }
+        return best ? { target: best, score: bv } : null;
+      }
+      case 'teleport': {
+        let best = null, bv = 0;
+        for (const b of friends) {
+          if (b === caster || !CombatSpells.canAffect(bt, b, id) || b.moves < b.maxMoves) continue;
+          const dests = CombatSpells.teleportDests(bt, side, b), s = bt.stats(b);
+          // un tireur pris au contact : à l'écart, d'où il pourra tirer
+          if (CombatAI.shooters(bt, [b]).length && bt.enemyAdjacent(b)) {
+            const ok = dests.filter(([c, r]) => !foes.some(f => Math.max(Math.abs(f.c - c), Math.abs(f.r - r)) <= 2));
+            // à trois ou quatre cases de l'ennemi le plus proche : hors d'atteinte immédiate, sans perdre en précision
+            const dst = U.max(ok, ([c, r]) => -Math.abs(Math.min(...foes.map(f => Math.max(Math.abs(f.c - c), Math.abs(f.r - r)))) - 4) - (bt.mistAt(c, r) ? 3 : 0) + (bt.hill(c, r) ? 0.5 : 0));
+            if (dst) { const v = st(b) / 25 + 3; if (v > bv) { bv = v; best = { target: b, to: dst, score: v }; } }
+            continue;
+          }
+          // un combattant qui ne peut frapper personne ce tour-ci : au contact d'une cible de choix (tireur, lanceur, héros)
+          if (!(s.melee > 0) || bt.enemyAdjacent(b)) continue;
+          const rch = bt.reachable(b);
+          if (seen.some(f => [...rch.values()].some(n => bt.canMeleeAt(b, n.c, n.r, f)))) continue;
+          for (const f of seen) {
+            if (bt.outOfReach(b, f)) continue;
+            const g = CombatAI.meleeGain(bt, b, f) * (CombatAI.shooters(bt, [f]).length ? 1.4 : 1);
+            if (g <= 0) continue;
+            for (const [dc, dr] of U.DIRS8) {
+              const c = f.c + dc, r = f.r + dr;
+              if (!dests.some(([x, y]) => x === c && y === r) || !bt.canMeleeAt(b, c, r, f)) continue;
+              const adj = foes.filter(o => o !== f && Math.max(Math.abs(o.c - c), Math.abs(o.r - r)) === 1).length;
+              const v = g / 10 - adj * (1 + st(b) / 200);
+              if (v > bv) { bv = v; best = { target: b, to: [c, r], score: v }; }
+            }
+          }
+        }
+        return best && bv >= 3 ? best : null;
+      }
+      case 'gust': {
+        // dégager un de nos tireurs pris au contact, ou jeter un ennemi dans nos flammes ou sur nos mines
+        const mySh = CombatAI.shooters(bt, friends);
+        let best = null, bv = 0;
+        for (const f of CombatSpells.validTargets(bt, side, id).filter(f => f.side !== side)) {
+          const engaged = mySh.filter(sh => bt.dist(sh, f) === 1);
+          for (const l of CombatSpells.gustLandings(bt, f)) {
+            let v = 0;
+            if (engaged.length && !engaged.some(sh => Math.max(Math.abs(sh.c - l.c), Math.abs(sh.r - l.r)) <= 1)) v += U.sum(engaged, sh => st(sh)) / 25 + 2;
+            // un fantassin ennemi sur le point de joindre nos tireurs : renvoyé en arrière, il perd un tour de marche
+            else if (!engaged.length && mySh.length && bt.stats(f).melee > 0 && !bt.stats(f).flying) {
+              const d0 = Math.min(...mySh.map(sh => bt.dist(sh, f))), d1 = Math.min(...mySh.map(sh => Math.max(Math.abs(sh.c - l.c), Math.abs(sh.r - l.r))));
+              if (d0 <= 2 && d1 - d0 >= 2) v += st(f) / 40 + 1;
+            }
+            if (!bt.stats(f).flying && l.path.some(([c, r]) => { const fl = bt.flameAt(c, r); return fl && fl.side === side; })) v += st(f) / 30 + 1;
+            const mi = l.path.findIndex(([c, r]) => bt.mines[c + ',' + r] === side);
+            if (mi >= 0 && !bt.stats(f).flying) v += st(f) / 30 + 1;
+            if (v > bv) { bv = v; best = { target: f, to: [l.c, l.r], score: v }; }
+          }
+        }
+        return best;
+      }
+      case 'magic_mirror': {
+        const foeWiz = bt.player(1 - side), casters = foes.some(f => f.casterMana > 0 && bt.unitSpells(f, true).length);
+        if (!(foeWiz && !foeWiz.banished && foeWiz.mana > 30) && !casters) return null;
+        const t = U.max(friends.filter(b => CombatSpells.canAffect(bt, b, id)), b => st(b) + (b.u.hero ? 100 : 0));
+        return t ? { target: t, score: st(t) / 40 + 1 } : null;
+      }
+      case 'fire_shield': {
+        const melee = seen.filter(f => bt.stats(f).melee > 0); if (!melee.length) return null;
+        const t = U.max(friends.filter(b => CombatSpells.canAffect(bt, b, id) && near(b, melee, 3)), b => st(b) * (bt.enemyAdjacent(b) ? 1.3 : 1));
+        return t ? { target: t, score: st(t) / 25 + 1 } : null;
+      }
+      case 'vampirism': {
+        const prey = seen.filter(f => !bt.stats(f).ab.deathImmunity); if (!prey.length) return null;
+        const t = U.max(friends.filter(b => CombatSpells.canAffect(bt, b, id) && bt.stats(b).melee > 0 && near(b, prey, 3)), b => bt.stats(b).melee * bt.figures(b) + st(b) / 20);
+        return t ? { target: t, score: st(t) / 25 + 1.2 } : null;
+      }
+      case 'martyr': {
+        // un héros menacé, à côté d'une unité solide qui encaissera pour lui
+        const t = U.max(friends.filter(b => b.u.hero && CombatSpells.canAffect(bt, b, id) && near(b, seen, 3) && bt.martyrFor(b)), b => st(b));
+        return t ? { target: t, score: st(t) / 25 + 1 } : null;
+      }
+      case 'chain_lightning': {
+        let best = null, bv = 0;
+        const hit = (b, i) => { if (!CombatSpells.canAffect(bt, b, id)) return 0; const mods = { armorPiercing: true }, def = bt.defFor(b, 'lightning', 'chaos', mods), e = def >= 50 ? 0 : CombatAI.expPos(CombatSpells.chainStrength(i), 30, def, bt.toDefend(b, mods)), hp = Math.max(1, bt.hp(b)); return st(b) * Math.min(1, e / hp) / 10; };
+        for (const t of vt()) {
+          let v = 2;
+          CombatSpells.chainPath(bt, t, side).forEach((b, i) => { v += (b.side === side ? -1.3 : 1) * hit(b, i); });
+          if (v > bv) { bv = v; best = t; }
+        }
+        return best && bv > 2.5 ? { target: best, score: bv } : null;
+      }
+      case 'divine_vengeance': {
+        const t = U.max(vt(), f => { const d = CombatSpells.vengeanceOf(f, side), hp = Math.max(1, bt.hp(f)); return st(f) * Math.min(1, d / hp) + (d >= hp ? 0.3 * st(f) : 0); });
+        if (!t) return null;
+        const d = CombatSpells.vengeanceOf(t, side), hp = Math.max(1, bt.hp(t));
+        return { target: t, score: (st(t) * Math.min(1, d / hp) + (d >= hp ? 0.3 * st(t) : 0)) / 10 + 2 };
+      }
+      case 'sacrifice': {
+        let best = null, bv = 0;
+        const full = b => Units.strength(bt.game, Object.assign({}, b.u, { dmg: 0 }));
+        for (const dd of CombatSpells.validTargets(bt, side, id)) for (const v of CombatSpells.victims(bt, side)) {
+          if (v === caster) continue;
+          const mh = Units.stats(bt.game, dd.u).maxHp, give = Math.min(mh, Math.floor(bt.hp(v) * 1.5));
+          const val = (full(dd) * give / Math.max(1, mh) - st(v)) / 10;
+          if (val > bv) { bv = val; best = { target: dd, to: v, score: val }; }
+        }
+        return best && bv >= 3 ? best : null;
+      }
+      case 'clone': {
+        if (friends.length >= 8) return null;
+        const t = U.max(vt(), b => st(b) * (bt.hp(b) / Math.max(1, bt.stats(b).maxHp)));
+        return t && st(t) >= 60 ? { target: t, score: st(t) / 25 + 1 } : null;
+      }
+    }
+    return null;
   },
   // combat entièrement automatique
   autoResolve(bt) {

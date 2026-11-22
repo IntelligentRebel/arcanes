@@ -358,7 +358,9 @@ const CombatView = {
     const tgt = CombatView.mode ? CombatView.targetTiles() : null;
     const reach = tgt ? new Map() : CombatView.reach || new Map();
     // sort de zone : toutes les cases qu'il touchera autour de la case survolée
-    const zm = CombatView.mode && CombatView.hover && CombatView.ZONES[CombatView.mode.id], zone = zm ? CombatView.zoneOf(CombatView.mode.id, CombatView.hover.c, CombatView.hover.r) : null;
+    const zm = CombatView.mode && CombatView.hover && CombatView.ZONES[CombatView.mode.id];
+    // (les sorts posés sur des cases : seulement celles où ils se poseront vraiment)
+    const zone = !zm ? null : CombatSpells.ZONE_SPELLS.includes(CombatView.mode.id) ? new Set(CombatSpells.zonePlace(bt, CombatView.humanSide, CombatView.mode.id, [CombatView.hover.c, CombatView.hover.r, CombatView.mode.rot || 0]).map(([x, y]) => x + ',' + y)) : CombatView.zoneOf(CombatView.mode.id, CombatView.hover.c, CombatView.hover.r, CombatView.mode.rot || 0);
     const zfill = zm ? zm.fill + (.34 + .1 * Math.sin(now / 220)).toFixed(3) + ')' : null;
     for (let r = 0; r < CH; r++) for (let c = 0; c < CW; c++) {
       const p = CombatView.iso(c, r);
@@ -371,6 +373,7 @@ const CombatView = {
       if (bt.plane) { ctx.fillStyle = 'rgba(40,10,70,.18)'; ctx.fill(); }
       if (bt.inCity(c, r)) { ctx.fillStyle = 'rgba(120,100,80,.28)'; ctx.fill(); }
       if (bt.mud[c + ',' + r]) { ctx.fillStyle = 'rgba(70,50,20,.6)'; ctx.fill(); }
+      if (bt.mistAt && bt.mistAt(c, r)) { ctx.fillStyle = 'rgba(212,222,238,' + (.34 + .08 * Math.sin(now / 900 + c * .7 + r * .5)).toFixed(3) + ')'; ctx.fill(); }
       if (bt.inRiver && bt.inRiver(c, r)) CombatView.drawWater(p, c, r, now);
       else if (bt.isBridge && bt.isBridge(c, r)) { CombatView.drawWater(p, c, r, now); CombatView.drawBridge(p); }
       ctx.beginPath(); ctx.moveTo(p.x, p.y - TH / 2); ctx.lineTo(p.x + TW / 2, p.y); ctx.lineTo(p.x, p.y + TH / 2); ctx.lineTo(p.x - TW / 2, p.y); ctx.closePath();
@@ -379,6 +382,7 @@ const CombatView = {
       if (reach.has(k)) { ctx.fillStyle = 'rgba(110,220,120,.20)'; ctx.fill(); ctx.strokeStyle = 'rgba(140,240,150,.45)'; ctx.stroke(); }
       if (tgt && tgt.has(k)) { ctx.fillStyle = 'rgba(255,200,60,' + (.22 + .12 * Math.sin(now / 220)).toFixed(3) + ')'; ctx.fill(); ctx.strokeStyle = 'rgba(255,214,110,.85)'; ctx.lineWidth = 2; ctx.stroke(); }
       if (zone && zone.has(k)) { ctx.fillStyle = zfill; ctx.fill(); }
+      if (bt.mines && bt.mines[k] === CombatView.humanSide) CombatView.drawMine(p, now);
       if (CombatView.hover && CombatView.hover.c === c && CombatView.hover.r === r) { ctx.strokeStyle = 'rgba(255,255,255,.8)'; ctx.lineWidth = 2; ctx.stroke(); }
     }
     if (zone) CombatView.drawZoneEdge(zone, zm.edge, 0);
@@ -392,6 +396,9 @@ const CombatView = {
     const items = [];
     for (const k in bt.props) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r, f: () => CombatView.drawProp(bt.props[k], c, r, bt.fire && bt.fire[k]) }); }
     for (const k in bt.fire || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.8, f: () => CombatView.drawGroveFire(c, r, now) }); }
+    for (const k in bt.flames || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.8, f: () => CombatView.drawCurtain(c, r, now) }); }
+    for (const k in bt.field || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.45, f: () => CombatView.drawField(c, r, now) }); }
+    for (const k in bt.mist || {}) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.95, f: () => CombatView.drawMist(c, r, now) }); }
     if (bt.buildings) for (const b of bt.buildings) items.push({ d: b.c + b.r, f: () => CombatView.drawHouse(b) });
     if (bt.hasWalls || bt.wallOfFire || bt.wallOfDarkness) for (const k in bt.walls) { const [c, r] = k.split(',').map(Number); items.push({ d: c + r + 0.3, f: () => CombatView.drawWall(c, r, bt.walls[k], 'back') }, { d: c + r + 0.6, f: () => CombatView.drawWall(c, r, bt.walls[k], 'front') }); }
     if (bt.hasWalls && Sprites.hasHD('cwall:tower')) {
@@ -445,12 +452,31 @@ const CombatView = {
         ctx.restore();
       }
     }
+    // (0.31.71) sort en deux temps : la première cible, cerclée de bleu en pointillés
+    if (CombatView.mode && CombatView.mode.first) {
+      const f = CombatView.mode.first, fp = CombatView.pos[f.id] || f, P = CombatView.stand(fp.c, fp.r);
+      ctx.save(); ctx.strokeStyle = 'rgba(140,200,255,.95)'; ctx.lineWidth = 3; ctx.setLineDash([6, 4]); ctx.beginPath(); ctx.ellipse(P.x, P.y, TW * .46, TH * .46, 0, 0, 7); ctx.stroke(); ctx.restore();
+    }
+    // Chaîne d'éclairs : le chemin de l'éclair depuis la cible survolée, ses bonds et leur force (les vôtres en rouge)
+    if (CombatView.mode && CombatView.mode.id === 'chain_lightning' && CombatView.hover) {
+      const u0 = bt.unitAt(CombatView.hover.c, CombatView.hover.r);
+      if (u0 && CombatSpells.validTargets(bt, CombatView.humanSide, 'chain_lightning').includes(u0)) {
+        const chain = CombatSpells.chainPath(bt, u0, CombatView.humanSide), pts = chain.map(b => { const q = CombatView.pos[b.id] || b; return CombatView.stand(q.c, q.r); });
+        ctx.save(); ctx.strokeStyle = 'rgba(255,120,110,.85)'; ctx.lineWidth = 2; ctx.setLineDash([5, 4]);
+        ctx.beginPath(); pts.forEach((P, i) => i ? ctx.lineTo(P.x, P.y - TW * .3) : ctx.moveTo(P.x, P.y - TW * .3)); ctx.stroke(); ctx.setLineDash([]);
+        ctx.font = 'bold ' + Math.max(12, Math.round(TW * .17)) + 'px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        chain.forEach((b, i) => { if (!i) return; const P = pts[i], mine = b.side === CombatView.humanSide, tx = String(CombatSpells.chainStrength(i)); ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(20,10,10,.9)'; ctx.strokeText(tx, P.x, P.y - TW * .3); ctx.fillStyle = mine ? '#ff8f80' : '#ffd66e'; ctx.fillText(tx, P.x, P.y - TW * .3); if (mine) { ctx.strokeStyle = 'rgba(255,120,110,.9)'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.ellipse(P.x, P.y, TW * .4, TH * .4, 0, 0, 7); ctx.stroke(); } });
+        ctx.restore();
+      }
+    }
     if (zone) {
       const me = CombatView.humanSide, hit = CombatView.zoneUnits(CombatView.mode.id, zone), nf = hit.filter(b => b.side !== me).length, na = hit.length - nf;
       for (const b of hit) { const p = CombatView.pos[b.id]; if (!p) continue; const P = CombatView.stand(p.c, p.r); ctx.save(); ctx.strokeStyle = b.side === me ? 'rgba(255,150,120,.9)' : zm.edge; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.ellipse(P.x, P.y, TW * .38, TH * .38, 0, 0, 7); ctx.stroke(); ctx.restore(); }
       let top = null; for (const k of zone) { const [c, r] = k.split(',').map(Number); if (!top || c + r < top[0] + top[1]) top = [c, r]; }
       const P = CombatView.iso(top[0], top[1]), sp = DATA.spells[CombatView.mode.id];
-      const txt = (sp ? sp.name : '') + ' : ' + (nf ? U.n(nf, 'ennemi', 'ennemis') : 'aucun ennemi') + (zm.reach ? ' à portée ce round' : '') + (na ? ', ' + U.n(na, 'des vôtres', 'des vôtres') : '');
+      const mid = CombatView.mode.id, txt = mid === 'force_field' ? (sp ? sp.name : '') + ' : ' + U.n(zone.size, 'case') + (zone.size < 3 ? ' (les autres sont occupées)' : '') + ' · R : tourner'
+        : mid === 'fire_mines' ? U.n(zone.size, 'mine', 'mines') + (zone.size < 5 ? ' (pas sous une unité)' : '')
+        : (sp ? sp.name : '') + ' : ' + (nf ? U.n(nf, 'ennemi', 'ennemis') : 'aucun ennemi') + (zm.reach ? ' à portée ce round' : '') + (na ? ', ' + U.n(na, 'des vôtres', 'des vôtres') : '') + (zm.line ? ' · R : tourner' : '');
       ctx.save(); ctx.font = 'bold ' + Math.max(13, Math.round(TW * .19)) + 'px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
       ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(20,14,4,.95)'; ctx.strokeText(txt, P.x, P.y - TH / 2 - TW * .3);
       ctx.fillStyle = nf ? '#ffd66e' : '#d8d0c0'; ctx.fillText(txt, P.x, P.y - TH / 2 - TW * .3); ctx.restore();
@@ -722,17 +748,23 @@ const CombatView = {
   },
   // sorts de zone visés sur une case : rayon autour de la case (Bourbier 5 × 5, Vortex magique : ses éclairs sur les cases voisines)
   // reach : la zone n'est pas frappée d'un coup, c'est ce que le sort peut atteindre ce round (le vortex parcourt 4 cases dès son apparition)
-  ZONES: { earth_to_mud: { r: 2, fill: 'rgba(150,104,42,', edge: 'rgba(255,214,110,.95)' }, magic_vortex: { r: 4, reach: true, fill: 'rgba(170,90,255,', edge: 'rgba(220,180,255,.95)' } },
-  zoneOf(id, c, r) {
+  ZONES: { earth_to_mud: { r: 2, fill: 'rgba(150,104,42,', edge: 'rgba(255,214,110,.95)' }, magic_vortex: { r: 4, reach: true, fill: 'rgba(170,90,255,', edge: 'rgba(220,180,255,.95)' },
+    // (0.31.71) sorts venus de Heroes : lignes de trois cases (qu'on tourne avec R), croix de cinq cases, carré de 3 × 3
+    force_field: { line: true, fill: 'rgba(110,230,170,', edge: 'rgba(190,255,215,.95)' }, fire_curtain: { line: true, fill: 'rgba(255,120,40,', edge: 'rgba(255,200,130,.95)' },
+    fire_mines: { cross: true, fill: 'rgba(255,100,50,', edge: 'rgba(255,180,120,.95)' }, mist: { r: 1, fill: 'rgba(215,225,240,', edge: 'rgba(240,245,255,.95)' } },
+  ROTS: [[1, -1], [1, 1], [1, 0], [0, 1]],
+  zoneOf(id, c, r, rot) {
     const z = CombatView.ZONES[id]; if (!z) return null;
-    const out = new Set();
-    for (let dc = -z.r; dc <= z.r; dc++) for (let dr = -z.r; dr <= z.r; dr++) { const x = c + dc, y = r + dr; if (x >= 0 && y >= 0 && x < CW && y < CH) out.add(x + ',' + y); }
+    const out = new Set(), add = (x, y) => { if (x >= 0 && y >= 0 && x < CW && y < CH) out.add(x + ',' + y); };
+    if (z.line) { const [dc, dr] = CombatView.ROTS[(rot || 0) & 3]; for (const k of [-1, 0, 1]) add(c + k * dc, r + k * dr); }
+    else if (z.cross) for (const [dc, dr] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]) add(c + dc, r + dr);
+    else for (let dc = -z.r; dc <= z.r; dc++) for (let dr = -z.r; dr <= z.r; dr++) add(c + dc, r + dr);
     return out;
   },
   // les unités que la zone prendrait (la boue : ni les volants ni les immatériels ; le vortex : les ennemis seulement)
   zoneUnits(id, zone) {
     const bt = CombatView.bt, me = CombatView.humanSide;
-    return bt.units.filter(b => !b.dead && zone.has(b.c + ',' + b.r) && !(b.side !== me && bt.isInvisible(b)) && (id !== 'magic_vortex' || b.side !== me)
+    return bt.units.filter(b => !b.dead && zone.has(b.c + ',' + b.r) && !(b.side !== me && bt.isInvisible(b)) && (id !== 'magic_vortex' || b.side !== me) && (id !== 'fire_curtain' || (b.side !== me && !bt.stats(b).flying))
       && !(id === 'earth_to_mud' && (bt.stats(b).flying || bt.stats(b).ab.nonCorporeal)));
   },
   // le contour de la zone : les bords de case qui ne touchent pas une autre case de la zone (lift : sommets des collines)
@@ -755,6 +787,65 @@ const CombatView = {
   // flammes d'un bosquet en feu
   // (0.31.65) un bosquet en feu ; il portait le même nom que les flammes du Mur de feu, qui l'écrasaient : appelées avec deux
   // nombres au lieu de deux points, elles plantaient le dessin, en laissant le contexte en mode additif (l'écran tournait au blanc)
+  // (0.31.71) un champ de force : un prisme de lumière verte, des reflets qui montent
+  drawField(c, r, now) {
+    const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW, TH = CombatView.TH, h = TW * .72;
+    const P = [[p.x, p.y - TH / 2], [p.x + TW / 2, p.y], [p.x, p.y + TH / 2], [p.x - TW / 2, p.y]];
+    const a = .2 + .07 * Math.sin(now / 320 + c * 1.3 + r);
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const face = (i, j, col) => { ctx.beginPath(); ctx.moveTo(P[i][0], P[i][1]); ctx.lineTo(P[j][0], P[j][1]); ctx.lineTo(P[j][0], P[j][1] - h); ctx.lineTo(P[i][0], P[i][1] - h); ctx.closePath(); ctx.fillStyle = col; ctx.fill(); };
+    face(0, 3, 'rgba(80,190,140,' + (a * .6).toFixed(3) + ')'); face(0, 1, 'rgba(80,190,140,' + (a * .6).toFixed(3) + ')');
+    face(3, 2, 'rgba(120,235,175,' + a.toFixed(3) + ')'); face(2, 1, 'rgba(100,215,160,' + a.toFixed(3) + ')');
+    ctx.beginPath(); P.forEach(([x, y], i) => i ? ctx.lineTo(x, y - h) : ctx.moveTo(x, y - h)); ctx.closePath(); ctx.fillStyle = 'rgba(190,255,220,' + (a * .9).toFixed(3) + ')'; ctx.fill();
+    ctx.strokeStyle = 'rgba(200,255,225,.65)'; ctx.lineWidth = 1.5;
+    for (const i of [1, 2, 3]) { ctx.beginPath(); ctx.moveTo(P[i][0], P[i][1]); ctx.lineTo(P[i][0], P[i][1] - h); ctx.stroke(); }
+    for (let k = 0; k < 3; k++) {
+      const t = (now / 1400 + k / 3 + (c * 7 + r * 3) % 5 / 5) % 1, y = h * t;
+      ctx.strokeStyle = 'rgba(210,255,230,' + (.5 * (1 - t)).toFixed(3) + ')';
+      ctx.beginPath(); ctx.moveTo(P[3][0], P[3][1] - y); ctx.lineTo(P[2][0], P[2][1] - y); ctx.lineTo(P[1][0], P[1][1] - y); ctx.stroke();
+    }
+    ctx.restore();
+  },
+  // un rideau de flammes : une haie de hautes langues de feu sur toute la case
+  drawCurtain(c, r, now) {
+    const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW, TH = CombatView.TH;
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    const g = ctx.createRadialGradient(p.x, p.y - TW * .25, 0, p.x, p.y - TW * .25, TW * .6);
+    g.addColorStop(0, 'rgba(255,150,50,.5)'); g.addColorStop(1, 'rgba(255,60,10,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(p.x, p.y - TW * .25, TW * .55, TW * .5, 0, 0, 7); ctx.fill();
+    // le sol brûle (assombri), puis les flammes, opaques, du jaune au rouge sombre
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(60,20,5,.35)'; ctx.beginPath(); ctx.moveTo(p.x, p.y - TH / 2); ctx.lineTo(p.x + TW / 2, p.y); ctx.lineTo(p.x, p.y + TH / 2); ctx.lineTo(p.x - TW / 2, p.y); ctx.closePath(); ctx.fill();
+    for (let i = 0; i < 11; i++) {
+      const u = (i + .5) / 11 - .5, ph = (now / 430 + i * .29 + (c * 13 + r * 7) % 10 / 10) % 1;
+      const x = p.x + u * TW * .8 + Math.sin(now / 150 + i * 1.7) * TW * .02, y = p.y + Math.abs(u) * TH * .3 - TW * (.02 + ph * .55), h = TW * (.3 * (1 - ph) + .06);
+      ctx.fillStyle = 'rgba(' + Math.round(255 - ph * 60) + ',' + Math.round(170 - ph * 140) + ',' + Math.round(40 - ph * 30) + ',' + (.92 * (1 - ph * .8)).toFixed(3) + ')';
+      ctx.beginPath(); ctx.moveTo(x - h * .3, y); ctx.quadraticCurveTo(x, y - h * 1.5, x + h * .3, y); ctx.quadraticCurveTo(x, y + h * .3, x - h * .3, y); ctx.fill();
+    }
+    ctx.restore();
+  },
+  // une mine de feu (de votre camp seulement) : un cercle de runes qui couve
+  drawMine(p, now) {
+    const ctx = CombatView.ctx, TW = CombatView.TW, TH = CombatView.TH, k = .5 + .5 * Math.sin(now / 260 + p.x * .01);
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,' + Math.round(120 + 60 * k) + ',60,' + (.55 + .35 * k).toFixed(3) + ')'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(p.x, p.y, TW * .17, TH * .17, 0, 0, 7); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(p.x - TW * .1, p.y); ctx.lineTo(p.x + TW * .1, p.y); ctx.moveTo(p.x, p.y - TH * .1); ctx.lineTo(p.x, p.y + TH * .1); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,150,60,' + (.25 * k).toFixed(3) + ')'; ctx.beginPath(); ctx.ellipse(p.x, p.y, TW * .2, TH * .2, 0, 0, 7); ctx.fill();
+    ctx.restore();
+  },
+  // la brume : des volutes pâles qui dérivent au-dessus de la case
+  drawMist(c, r, now) {
+    const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW;
+    ctx.save();
+    for (let i = 0; i < 3; i++) {
+      const ph = (now / 4000 + i / 3 + (c * 5 + r * 11) % 7 / 7) % 1, x = p.x + Math.sin(ph * 6.28 + i) * TW * .18, y = p.y - TW * (.12 + .1 * i);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, TW * .32);
+      g.addColorStop(0, 'rgba(225,232,245,' + (.22 + .08 * Math.sin(ph * 6.28)).toFixed(3) + ')'); g.addColorStop(1, 'rgba(225,232,245,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.ellipse(x, y, TW * .34, TW * .2, 0, 0, 7); ctx.fill();
+    }
+    ctx.restore();
+  },
   drawGroveFire(c, r, now) {
     const ctx = CombatView.ctx, p = CombatView.iso(c, r), TW = CombatView.TW;
     ctx.save(); ctx.globalCompositeOperation = 'lighter';
@@ -1009,7 +1100,7 @@ const CombatView = {
     ctx.fillStyle = hp > .6 ? '#6fcf7a' : hp > .3 ? '#e6b450' : '#e35d5d'; ctx.fillRect(bx, by, bw * hp, 3);
     ctx.fillStyle = col; ctx.fillRect(bx - 5, by - 1, 4, 5);
     // états qui privent l'unité de son tour : écrits sous la barre de vie
-    const st = [b.stasis ? 'stase' : null, b.asleep ? 'Zz' : null, b.web ? 'toile ' + b.web : null, b.confused ? '?' : null, b.feared ? 'terreur' : null, b.entangled && !b.web && !b.asleep ? 'entravé' : null, b.possessed && b.origSide != null && b.origSide !== b.side ? (b.bound ? 'asservi' : 'possédé') : null, b.curses.includes('shatter') ? 'bris' : null, b.curses.some(c => c.startsWith('warp_creature')) ? 'déformé' : null].filter(Boolean);
+    const st = [b.stasis ? 'stase' : null, b.asleep ? 'Zz' : null, b.web ? 'toile ' + b.web : null, b.confused ? '?' : null, b.feared ? 'terreur' : null, b.entangled && !b.web && !b.asleep ? 'enchevêtré' : null, b.curses.includes('slow') ? 'ralenti' : null, b.curses.includes('shackles') ? 'sans riposte' : null, b.curses.includes('twilight') ? 'sans tir' : null, b.clone ? 'double' : null, b.possessed && b.origSide != null && b.origSide !== b.side ? (b.bound ? 'asservi' : 'possédé') : null, b.curses.includes('shatter') ? 'bris' : null, b.curses.some(c => c.startsWith('warp_creature')) ? 'déformé' : null].filter(Boolean);
     if (st.length) { ctx.font = 'bold 11px system-ui'; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(10,8,16,.85)'; ctx.strokeText(st.join(' · '), P.x, by - 4); ctx.fillStyle = '#b892ff'; ctx.fillText(st.join(' · '), P.x, by - 4); }
     else if (b.autoCtl && b.side === CombatView.humanSide) { ctx.font = 'bold 10.5px system-ui'; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(6,14,20,.9)'; ctx.strokeText('auto', P.x, by - 4); ctx.fillStyle = '#7fd4ff'; ctx.fillText('auto', P.x, by - 4); }
     else if (b.holdBreach || b.guarding) { const tx = b.holdBreach ? 'garde (brèche)' : 'en garde'; ctx.font = 'bold 10.5px system-ui'; ctx.textAlign = 'center'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(20,14,4,.9)'; ctx.strokeText(tx, P.x, by - 4); ctx.fillStyle = '#ffd66e'; ctx.fillText(tx, P.x, by - 4); }
@@ -1075,10 +1166,10 @@ const CombatView = {
       if (e.target) { CombatView.flash(e.target[0], e.target[1], sp ? REALM_COLORS[sp.realm] : '#fff', 500); CombatView.burst(e.target[0], e.target[1], [sp ? REALM_COLORS[sp.realm] : '#fff', '#ffffff'], 18, 'rise'); }
       await CombatView.sleep(320);
     } else if (e.type === 'fx') {
-      const col = { fire: '#ff6a2a', lightning: '#9fd8ff', cold: '#bfe8ff', magic: '#ff9aff', doom: '#d02a2a', death: '#9a5ac8', holy: '#fff6c0', heal: '#7fffa0', stone: '#b0a890', chaos: '#ff4a2a', sorcery: '#6aa7ff', wall: '#c0b090', fizzle: '#888' }[e.fx] || '#fff';
+      const col = { fire: '#ff6a2a', lightning: '#9fd8ff', cold: '#bfe8ff', magic: '#ff9aff', doom: '#d02a2a', death: '#9a5ac8', holy: '#fff6c0', heal: '#7fffa0', stone: '#b0a890', chaos: '#ff4a2a', sorcery: '#6aa7ff', wall: '#c0b090', fizzle: '#888', nature: '#7fd47f', mist: '#dfe6f2' }[e.fx] || '#fff';
       if (e.at) {
         CombatView.flash(e.at[0], e.at[1], col, 420);
-        const kind = { fire: 'fire', chaos: 'fire', lightning: 'bolt', heal: 'rise', holy: 'rise', cold: 'snow', death: 'smoke', doom: 'smoke', stone: 'dust', wall: 'dust' }[e.fx] || 'spark';
+        const kind = { fire: 'fire', chaos: 'fire', lightning: 'bolt', heal: 'rise', holy: 'rise', cold: 'snow', death: 'smoke', doom: 'smoke', stone: 'dust', wall: 'dust', nature: 'rise', mist: 'smoke' }[e.fx] || 'spark';
         CombatView.burst(e.at[0], e.at[1], [col, '#ffffff'], kind === 'bolt' ? 6 : 16, kind);
       }
       Sfx.play({ fire: 'fire', chaos: 'fire', lightning: 'lightning', heal: 'heal', holy: 'heal', fizzle: 'bad' }[e.fx] || 'zap', { realm: { death: 'death', doom: 'death', sorcery: 'sorcery', magic: 'chaos', cold: 'sorcery', stone: 'nature' }[e.fx] });
@@ -1098,6 +1189,19 @@ const CombatView = {
       if (p) { CombatView.flash(p.c, p.r, '#c0b090', 500); CombatView.burst(p.c, p.r, ['#8d8a84', '#c0b090', '#5a544c'], 28, 'dust'); }
       Sfx.play('boulder');
       await CombatView.sleep(420);
+    } else if (e.type === 'blink') {
+      // (0.31.71) Téléportation : la figurine s'efface, puis reparaît ailleurs
+      const p = CombatView.pos[e.id];
+      if (p) {
+        CombatView.burst(p.c, p.r, ['#7fb8ff', '#ffffff'], 16, 'rise'); Sfx.play('spell', { realm: 'sorcery' });
+        const t0 = performance.now(); await new Promise(res => { const f = () => { const t = (performance.now() - t0) / 260; p.alpha = Math.max(0, 1 - t); if (t < 1) requestAnimationFrame(f); else res(); }; f(); });
+        p.c = e.to[0]; p.r = e.to[1]; CombatView.flash(p.c, p.r, '#9fc8ff', 400); CombatView.burst(p.c, p.r, ['#7fb8ff', '#ffffff'], 18, 'rise');
+        const t1 = performance.now(); await new Promise(res => { const f = () => { const t = (performance.now() - t1) / 260; p.alpha = Math.min(1, t); if (t < 1) requestAnimationFrame(f); else res(); }; f(); });
+      }
+    } else if (e.type === 'push') {
+      // Rafale : l'unité glisse, poussée par le vent
+      const p = CombatView.pos[e.id];
+      if (p) { Sfx.play('spell', { realm: 'sorcery' }); for (let i = 1; i < e.path.length; i++) { const [c, r] = e.path[i]; CombatView.burst(p.c, p.r, ['#cfe3ff', '#ffffff'], 6, 'dust'); await CombatView.tween(p, c, r, 70); } }
     } else if (e.type === 'vortex') {
       const vp = CombatView.vpos[e.id] || (CombatView.vpos[e.id] = { c: e.c, r: e.r });
       Sfx.play('step');
@@ -1515,7 +1619,7 @@ const CombatView = {
       CombatView.cv.style.cursor = CombatView.cursorFor(t);
       return;
     }
-    const notes = t && bt.terrainNotes ? bt.terrainNotes(t.c, t.r) : [];
+    const notes = t && bt.terrainNotes ? bt.terrainNotes(t.c, t.r, CombatView.humanSide) : [];
     const terr = notes.length ? '<div style="margin-top:6px">' + notes.map(n => '<div class="gold" style="font-size:12px">' + U.esc(n) + '</div>').join('') + '</div>' : '';
     // relever un mort : les corps de la case, ceux que le sort peut relever en tête
     const m = CombatView.mode, deadHere = t && m && m.tt === 'deadUnit' ? CombatSpells.validTargets(bt, CombatView.humanSide, m.id).filter(b => b.c === t.c && b.r === t.r) : [];
@@ -1570,6 +1674,7 @@ const CombatView = {
     const k = e.key.toLowerCase();
     if (UI.modals.length) return;
     if (e.key === 'Escape') { CombatView.mode = null; return; }
+    if (k === 'r' && CombatView.mode && CombatView.ZONES[CombatView.mode.id] && CombatView.ZONES[CombatView.mode.id].line) { CombatView.mode.rot = ((CombatView.mode.rot || 0) + 1) % 4; return; }
     if (CombatView.mode && CombatView.mode.maxExtra && ['+', '=', '-', '_'].includes(e.key)) { const st = CombatSpells.EXTRA_STEP[CombatView.mode.id] || 1; CombatView.setPower((CombatView.mode.extra || 0) + (e.key === '+' || e.key === '=' ? st : -st)); return; }
     if (e.key === '0') { CombatView._panId = (CombatView._panId || 0) + 1; CombatView.zoom = 1; CombatView.focus = null; CombatView.layout(); return; }
     if (k === 'c') { if (CombatView.sel && !CombatView.sel.dead) CombatView.centerOn(CombatView.sel); return; }
@@ -1746,7 +1851,10 @@ const CombatView = {
       if (!maxExtra) return CombatView.act(() => CombatSpells.cast(bt, CombatView.humanSide, id, null, caster, 0));
       return CombatView.powerDialog(id, caster, maxExtra);
     }
-    CombatView.mode = { id, caster, tt, extra: 0, maxExtra };
+    CombatView.mode = { id, caster, tt, extra: 0, maxExtra, rot: 0 };
+    const nm = DATA.spells[id] ? DATA.spells[id].name : id, Z = CombatView.ZONES[id];
+    if (Z && (Z.line || Z.cross)) return UI.toast(Z.line ? 'Choisissez où dresser <b>' + nm + '</b> : trois cases alignées autour du curseur ; <b>R</b> pour tourner la ligne.' : 'Choisissez le centre de la croix de <b>' + nm + '</b> (cinq cases).', '', 'cast');
+    if (CombatSpells.SECOND[id]) return UI.toast({ teleport: 'Choisissez l\'unité à transporter (en or).', gust: 'Choisissez l\'unité que le vent poussera (en or).', sacrifice: 'Choisissez l\'unité tombée à relever (en or).' }[id], '', 'cast');
     const zr = CombatView.ZONES[id] && CombatView.ZONES[id].r * 2 + 1;
     if (zr) return UI.toast(CombatView.ZONES[id].reach ? 'Choisissez où apparaît le <b>' + (DATA.spells[id] ? DATA.spells[id].name : id) + '</b> : la zone montre jusqu\'où il peut aller dès ce round.' : 'Choisissez le centre de <b>' + (DATA.spells[id] ? DATA.spells[id].name : id) + '</b> : la zone de ' + zr + ' × ' + zr + ' cases suit le curseur.', '', 'cast');
     UI.toast('Choisissez la cible de <b>' + (DATA.spells[id] ? DATA.spells[id].name : id) + '</b> (en or)' + (maxExtra ? ' ; réglez sa puissance au-dessus de la barre (touches + et −)' : '') + '.', '', 'cast');
@@ -1798,14 +1906,16 @@ const CombatView = {
     const m = UI.modal({ title: sp.name, body, width: 520, footer: [h('button', { class: 'btn', onclick: () => m.close() }, 'Annuler'),
       h('button', { class: 'btn primary', onclick: () => { m.close(); CombatView.act(() => CombatSpells.cast(CombatView.bt, CombatView.humanSide, id, null, caster, x)); } }, 'Lancer')] });
   },
-  // cases des cibles valables du sort en cours de ciblage
+  // cases des cibles valables du sort en cours de ciblage (second temps d'un sort en deux temps : ses cases, ou les unités qui peuvent se sacrifier)
   targetTiles() {
     const bt = CombatView.bt, m = CombatView.mode; if (!m || m.tt === 'combatTile') return null;
+    if (m.first) { const L = CombatSpells.secondTargets(bt, CombatView.humanSide, m.id, m.first); return new Set(L.map(x => Array.isArray(x) ? x[0] + ',' + x[1] : x.c + ',' + x.r)); }
     return new Set(CombatSpells.validTargets(bt, CombatView.humanSide, m.id).map(b => b.c + ',' + b.r));
   },
   // ce que le sort en cours de ciblage peut toucher (unités, tours, portes ; pour Disruption, les murailles debout)
   targetObjects() {
     const bt = CombatView.bt, m = CombatView.mode; if (!m) return [];
+    if (m.first) return CombatSpells.SECOND[m.id] === 'unit' ? CombatSpells.secondTargets(bt, CombatView.humanSide, m.id, m.first) : [];
     if (m.tt === 'combatTile') {
       if (m.id !== 'disrupt') return [];
       const out = bt.enemyTowers(CombatView.humanSide).filter(t => t.kind === 'stone' || t.kind === 'gate');
@@ -1816,7 +1926,7 @@ const CombatView = {
   },
   // chances du sort en cours de ciblage sur cette unité
   oddsHtml(u) {
-    const m = CombatView.mode, bt = CombatView.bt; if (!m || !u) return '';
+    const m = CombatView.mode, bt = CombatView.bt; if (!m || !u || m.first) return '';
     if (!CombatSpells.validTargets(bt, CombatView.humanSide, m.id).includes(u)) return '';
     const o = CombatSpells.odds(bt, CombatView.humanSide, m.id, u, m.extra || 0); if (!o) return '';
     const pc = x => Math.round(x * 100) + ' %', name = DATA.spells[m.id] ? DATA.spells[m.id].name : m.id;
@@ -1829,12 +1939,24 @@ const CombatView = {
     else if (o.perFigure && o.n > 1) html += '<div>Chaque figurine : <b class="' + col(o.p) + '">' + pc(o.p) + '</b> de périr</div><div>Au moins une tuée : <b class="' + col(o.any) + '">' + pc(o.any) + '</b> · l\'unité entière : <b class="' + col(o.all) + '">' + pc(o.all) + '</b></div>';
     else html += '<div>Chance de réussite : <b class="' + col(o.p) + '" style="font-size:16px">' + pc(o.p) + '</b></div>';
     if (o.res != null && o.mod != null && !o.immune) html += '<div class="dim" style="font-size:11.5px">Résistance ' + o.res + (o.mod ? ', réduite de ' + o.mod + ' par le sort' : '') + ' : il faut faire plus que ' + Math.max(0, o.res - o.mod) + ' sur 10' + (o.perFigure && o.n > 1 ? ' pour chaque figurine' : '') + '.</div>';
-    if (o.pass < 1 && !o.immune) html += '<div class="gold" style="font-size:11.5px">Le sort doit d\'abord passer ' + (bt.nodeRealm && CombatSpells.nodeFizzle(bt, CombatView.humanSide, m.id, 0) > 0 ? 'le flux du nœud' : '') + (bt.nodeRealm && CombatSpells.nodeFizzle(bt, CombatView.humanSide, m.id, 0) > 0 && bt.ench[1 - CombatView.humanSide].includes('counter_magic') ? ' et ' : '') + (bt.ench[1 - CombatView.humanSide].includes('counter_magic') ? 'la contre-magie' : '') + ' (' + pc(o.pass) + ') : chance réelle ' + pc(o.chance) + '.</div>';
+    if (o.pass < 1 && !o.immune) { const ob = [bt.nodeRealm && CombatSpells.nodeFizzle(bt, CombatView.humanSide, m.id, 0) > 0 ? 'le flux du nœud' : null, bt.ench[1 - CombatView.humanSide].includes('counter_magic') ? 'la contre-magie' : null, o.mirror ? 'son Miroir magique' : null].filter(Boolean); html += '<div class="gold" style="font-size:11.5px">Le sort doit d\'abord passer ' + ob.join(' et ') + ' (' + pc(o.pass) + ') : chance réelle ' + pc(o.chance) + '.</div>'; }
     return html + '</div>';
   },
   useTarget(t, u) {
     const bt = CombatView.bt; const { id, caster, tt } = CombatView.mode;
     const side = CombatView.humanSide;
+    // (0.31.71) second temps : la case (Téléportation, Rafale) ou l'unité qui donne sa vie (Sacrifice)
+    if (CombatView.mode.first) {
+      const m = CombatView.mode, kind = CombatSpells.SECOND[id];
+      const to = kind === 'unit' ? (u && CombatSpells.secondTargets(bt, side, id, m.first).includes(u) ? u : null) : [t.c, t.r];
+      if (!to || !CombatSpells.secondOk(bt, side, id, m.first, to)) {
+        const why = id === 'teleport' ? CombatSpells.teleportWhy(bt, side, m.first, t.c, t.r) : id === 'gust' ? 'Choisissez une des cases cerclées d\'or : le vent pousse en ligne droite.' : 'Choisissez l\'unité qui donnera sa vie (cerclée d\'or ; pas un héros).';
+        UI.toast(U.esc(why || 'Case impossible.'), 'warn', 'cast'); return true;
+      }
+      CombatView.mode = null;
+      CombatView.act(() => CombatSpells.cast(bt, side, id, m.first, caster, m.extra || 0, to));
+      return true;
+    }
     let target = null;
     if (tt === 'combatTile') target = id !== 'disrupt' || CombatView.targetObjects().some(o => o.c === t.c && o.r === t.r) ? [t.c, t.r] : null;   // Disruption : un ouvrage seulement
     else if (tt === 'deadUnit') {
@@ -1852,13 +1974,21 @@ const CombatView = {
       const vt = CombatSpells.validTargets(bt, side, id);
       target = u && vt.includes(u) ? u : vt.find(x => x.tower && x.c === t.c && x.r === t.r) || null;
     }
+    if (target && CombatSpells.ZONE_SPELLS.includes(id) && !CombatSpells.zonePlace(bt, side, id, [t.c, t.r, CombatView.mode.rot || 0]).length) { UI.toast(id === 'fire_mines' ? 'Pas de mine sous une unité ni sur un obstacle : visez des cases libres.' : 'Toutes ces cases sont occupées : visez ailleurs.', 'warn', 'cast'); return true; }
     // (0.31.47) une unité qui n'est pas une cible : on dit pourquoi, et le sort reste prêt (le clic ne devient pas un ordre de mouvement)
     if (!target && u && tt !== 'combatTile' && tt !== 'deadUnit' && !(u.side !== side && bt.isInvisible(u))) { UI.toast(CombatSpells.whyNot(bt, side, id, u) || 'Ce sort ne peut pas viser cette unité.', 'warn', 'cast'); return true; }
     // pas une cible : le sort est annulé et le clic sert à commander normalement
     if (!target) { CombatView.mode = null; UI.toast('Sort annulé.', '', 'cast'); return false; }
     const extra = CombatView.mode.extra || 0;
+    // premier temps d'un sort en deux temps : on retient la cible et l'on demande la suite
+    if (CombatSpells.SECOND[id]) {
+      CombatView.mode.first = target;
+      UI.toast({ teleport: 'Choisissez où transporter ' + U.esc(bt.name(target)) + ' (cases en or ; Échap pour annuler).', gust: 'Choisissez où le vent pousse ' + U.esc(bt.name(target)) + ' (cases en or).', sacrifice: 'Choisissez l\'unité qui donnera sa vie pour relever ' + U.esc(bt.name(target)) + ' (en or).' }[id], '', 'cast');
+      return true;
+    }
+    const rot = CombatView.mode.rot || 0;
     CombatView.mode = null;
-    CombatView.act(() => CombatSpells.cast(bt, side, id, target, caster, extra));
+    CombatView.act(() => CombatSpells.cast(bt, side, id, Array.isArray(target) && CombatView.ZONES[id] && CombatView.ZONES[id].line ? [target[0], target[1], rot] : target, caster, extra));
     return true;
   },
 
@@ -1882,7 +2012,9 @@ const CombatView = {
     const eu = bt.effUnit(b);
     let html = UI.unitTip(eu, game, { real: b.u, temp: b.tempEnch }).replace(UI.statLine(Units.stats(game, eu), eu, game), UI.statLine(s, eu, game));
     const extra = [];
-    if (b.curses.length) extra.push(...b.curses.map(c => '<span class="abl" style="border-color:#7a2a2a;color:#ffb0b0">' + ({ weakness: 'Faiblesse', vertigo: 'Vertige', mind_storm: 'Tempête mentale', shatter: 'Bris', warp_creature_melee: 'Déformation (attaque)', warp_creature_def: 'Déformation (défense)', warp_creature_res: 'Déformation (résistance)' }[c] || c) + '</span>'));
+    if (b.curses.length) extra.push(...b.curses.map(c => '<span class="abl" style="border-color:#7a2a2a;color:#ffb0b0">' + ({ weakness: 'Faiblesse', vertigo: 'Vertige', mind_storm: 'Tempête mentale', shatter: 'Bris', warp_creature_melee: 'Déformation (attaque)', warp_creature_def: 'Déformation (défense)', warp_creature_res: 'Déformation (résistance)', slow: 'Lenteur : mouvement réduit de moitié', shackles: 'Entraves : plus de riposte', twilight: 'Crépuscule : plus de tir' }[c] || c) + '</span>'));
+    if (b.clone) extra.push('<span class="abl" style="border-color:#3a5a8a;color:#a8c8ff">Double : se dissipe dès qu\'il est blessé</span>');
+    if (b.slainOf && b.slainOf[1 - b.side] > 0 && b.side !== CombatView.humanSide) extra.push('<span class="abl" style="border-color:#8a6a26;color:#ffd66e">' + U.n(b.slainOf[1 - b.side], 'figurine des vôtres tuée', 'figurines des vôtres tuées') + '</span>');
     if (b.ammo) extra.push('<span class="abl">Munitions ' + b.ammo + '</span>');
     else if (s0.rangedType === 'missile' && s0.ranged) extra.push('<span class="abl" style="border-color:#7a2a2a;color:#ffb0b0">Munitions 0</span>');
     if (b.casterMana) extra.push('<span class="abl e">Mana ' + b.casterMana + '</span>');

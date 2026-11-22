@@ -40,6 +40,9 @@ const Spells = {
   overlandTarget(id) {
     const sp = DATA.spells[id];
     if (!sp) return 'none';
+    // (0.31.71) une pile, puis sa case d'arrivée (Porte dimensionnelle) ou sa cité (Portail urbain)
+    if (id === 'dimension_door') return 'stackJump';
+    if (id === 'town_portal') return 'stackPortal';
     if (sp.kind === 'summon') return id === 'floating_island' ? 'tile' : 'none';
     if (['summon_hero', 'summon_champion', 'incarnation', 'spell_of_mastery', 'enchant_item', 'create_artifact', 'disjunction', 'disjunction_true', 'death_wish', 'great_unsummoning', 'awareness', 'detect_magic', 'natures_awareness', 'legendary_artifact'].includes(id)) return 'none';
     if (sp.kind === 'global') return 'none';
@@ -186,6 +189,7 @@ const Spells = {
     }
     if (pl.banished && id !== 'spell_of_return') return { ok: false, why: Players.female(pl) ? 'Une sorcière bannie ne peut lancer que le Sort de Retour.' : 'Un sorcier banni ne peut lancer que le Sort de Retour.' };
     { const bv = typeof Book !== 'undefined' && Book.validate(game, pl, id, target); if (bv) return bv; }
+    if (tt === 'stackJump' || tt === 'stackPortal') { const why = Spells.jumpWhy(game, pl, id, target); if (why) return { ok: false, why }; }
     if (tt === 'friendlyUnit' || tt === 'enemyUnit' || tt === 'anyUnit') {
       const u = target && game.units[target.unit];
       if (!u) return { ok: false, why: 'Cible disparue.' };
@@ -284,6 +288,65 @@ const Spells = {
     const out = [];
     for (const o of game.players) if (o !== pl && o.alive && o.globals.length && !['peace', 'alliance'].includes(pl.diplo[o.id])) for (const g of o.globals) if (DATA.spells[g]) out.push({ o, g });
     return out;
+  },
+  // ---------- (0.31.71) Porte dimensionnelle, Portail urbain ----------
+  // les unités d'une pile qui partent : les vôtres, sauf une unité figée, un gouverneur, le Démon légendaire
+  jumpStack(game, pl, t) {
+    if (!t || t.plane == null || t.x == null) return [];
+    return Units.at(game, t.plane, World.wx(game.world, t.x), t.y).filter(u => u.owner === pl.id && !u.stasis && u.status !== 'governor' && !u.riteDemon && u.guardian == null);
+  },
+  jumpRange() { return ((DATA.spells.dimension_door || {}).params || {}).range || 5; },
+  // la pile peut-elle se poser en (x, y) ? null, ou la raison
+  landWhy(game, pl, units, plane, x, y) {
+    const c = Cities.at(game, plane, x, y);
+    const h = Move.hostileAt(game, pl.id, plane, x, y);
+    if (h && !(typeof Intel !== 'undefined' && Intel.hiddenFrom(game, pl.id, h))) return 'Des troupes étrangères occupent cette case.';
+    if (c && c.owner !== pl.id) return 'On ne se pose pas dans une cité étrangère.';
+    if (Move.stackCount(game, plane, x, y, pl.id) + units.length > MAX_STACK) return 'Trop d\'unités sur cette case.';
+    if (!Move.canPassTo(game, units, Move.groupInfo(game, units), plane, x, y, pl.id)) return 'Votre pile ne peut pas s\'y poser.';
+    return null;
+  },
+  sees(game, pl, plane, x, y) {
+    if (!pl.human) return typeof Intel === 'undefined' || Intel.sees(game, pl, plane, x, y);
+    const v = Spells._vis && Spells._vis.pid === pl.id ? Spells._vis.vis : Move.visibility(game, pl.id);
+    return !!v[plane][y * game.world.w + x];
+  },
+  jumpWhy(game, pl, id, t) {
+    const units = Spells.jumpStack(game, pl, t);
+    if (!units.length) return t && t.plane != null && Units.at(game, t.plane, World.wx(game.world, t.x), t.y).some(u => u.owner === pl.id) ? 'Ces unités ne peuvent pas partir (figées, gouverneur).' : 'Aucune de vos unités sur cette case.';
+    if (id === 'dimension_door') {
+      if (!t.to || t.to.x == null) return 'Choisissez la case d\'arrivée.';
+      const x = World.wx(game.world, t.to.x), y = t.to.y, d = World.dist(game.world, World.wx(game.world, t.x), t.y, x, y);
+      if (!World.inY(game.world, y) || !d) return 'Choisissez une autre case.';
+      if (d > Spells.jumpRange()) return 'Trop loin : ' + Spells.jumpRange() + ' cases au plus.';
+      if (!Spells.sees(game, pl, t.plane, x, y)) return 'Il faut voir la case d\'arrivée.';
+      return Spells.landWhy(game, pl, units, t.plane, x, y);
+    }
+    const c = t.city != null ? game.cities[t.city] : null;
+    if (!c) return 'Choisissez une de vos cités.';
+    if (c.owner !== pl.id) return 'Il faut une de vos cités.';
+    if (c.plane !== t.plane) return 'La cité doit être sur le même plan.';
+    if (c.x === World.wx(game.world, t.x) && c.y === t.y) return 'La pile est déjà dans cette cité.';
+    return Spells.landWhy(game, pl, units, c.plane, c.x, c.y);
+  },
+  // les cases où la pile de t peut sauter (Porte dimensionnelle)
+  jumpDests(game, pl, t) {
+    const out = [], R = Spells.jumpRange(), w = game.world, x0 = World.wx(w, t.x);
+    if (!Spells.jumpStack(game, pl, t).length) return out;
+    Spells._vis = pl.human ? { pid: pl.id, vis: Move.visibility(game, pl.id) } : null;   // relevée une fois pour toutes les cases
+    try {
+      for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
+        const x = World.wx(w, x0 + dx), y = t.y + dy; if (!World.inY(w, y) || (!dx && !dy)) continue;
+        if (!Spells.jumpWhy(game, pl, 'dimension_door', { plane: t.plane, x: x0, y: t.y, to: { x, y } })) out.push([x, y]);
+      }
+    } finally { Spells._vis = null; }
+    return out;
+  },
+  // les cités où la pile de t peut rentrer (Portail urbain)
+  portalCities(game, pl, t) { return Cities.ofPlayer(game, pl.id).filter(c => !Spells.jumpWhy(game, pl, 'town_portal', Object.assign({}, t, { city: c.id }))); },
+  relocate(game, pl, units, plane, x, y) {
+    for (const u of units) { u.plane = plane; u.x = x; u.y = y; u.moves = 0; u.path = null; u.dest = null; u.roadPlan = null; u.attackOrder = false; if (['goto', 'roadto', 'explore', 'autopurify'].includes(u.status)) u.status = ''; }
+    Move.reveal(game, pl, plane, x, y, 2);
   },
   UNIT_TILE: ['stasis', 'fire_storm', 'ice_storm', 'black_wind', 'disenchant_area', 'disenchant_true', 'floating_island'],
   CHANGE_TERRAIN: null,
@@ -653,6 +716,18 @@ const OVERLAND_HANDLERS = {
     const at = Spells.spotNear(game, pl, c, u.type); if (!at) return { ok: false, why: 'Aucune place près de ' + c.name + '.' };
     u.plane = at[0]; u.x = at[1]; u.y = at[2]; u.moves = 0; u.path = null; u.dest = null; if (u.status === 'goto') u.status = ''; return { msg: Units.label(u) + ' est rappelé à ' + c.name + '.' }; },
   recall_hero(game, pl, t) { return OVERLAND_HANDLERS.word_of_recall(game, pl, t); },
+  dimension_door(game, pl, t) {
+    const why = Spells.jumpWhy(game, pl, 'dimension_door', t); if (why) return { ok: false, why };
+    const units = Spells.jumpStack(game, pl, t);
+    Spells.relocate(game, pl, units, t.plane, World.wx(game.world, t.to.x), t.to.y);
+    return { msg: U.n(units.length, 'unité franchit', 'unités franchissent') + ' la porte dimensionnelle.' };
+  },
+  town_portal(game, pl, t) {
+    const why = Spells.jumpWhy(game, pl, 'town_portal', t); if (why) return { ok: false, why };
+    const units = Spells.jumpStack(game, pl, t), c = game.cities[t.city];
+    Spells.relocate(game, pl, units, c.plane, c.x, c.y);
+    return { msg: U.n(units.length, 'unité rentre', 'unités rentrent') + ' à ' + c.name + ' par le portail.' };
+  },
   purify_land(game, pl, t) {
     const tiles = Spells.corruptAround(game, t.plane, t.x, t.y); if (!tiles.length) return { ok: false, why: 'Aucune terre corrompue ici ni autour.' };
     for (const [x, y] of tiles) World.set(game.world, t.plane, 'corrupt', x, y, 0);

@@ -4149,7 +4149,7 @@
  "Résurrection": {
   "at": [
    "data/spells.js:40",
-   "src/ui/magicui.js:100"
+   "src/ui/magicui.js:115"
   ]
  },
  "Ramène le héros mort de votre choix, en pleine santé et à son ancien niveau, à votre cercle d'invocation, si vous avez moins de 6 héros.": {
@@ -4422,7 +4422,7 @@
  "Faiblesse": {
   "at": [
    "data/spells.js:69",
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
  },
  "Si l'unité échoue à résister (−2), elle perd 2 en attaque de mêlée, de jet et de tir physique.": {
@@ -4814,7 +4814,7 @@
  "Trait de feu": {
   "at": [
    "data/spells.js:111",
-   "src/engine/combat.js:2103"
+   "src/engine/combat.js:2259"
   ]
  },
  "Trait de flammes de force 5 sur une unité ennemie, les dégâts passant d'une figurine à l'autre ; +1 de force par mana supplémentaire (max 25).": {
@@ -5037,7 +5037,7 @@
  "Frappe de flammes": {
   "at": [
    "data/spells.js:137",
-   "src/engine/combat.js:1992"
+   "src/engine/combat.js:2148"
   ]
  },
  "Des arcs de feu frappent chaque figurine ennemie d'une attaque de feu de force 15.": {
@@ -5639,7 +5639,7 @@
  "Vertige": {
   "at": [
    "data/spells.js:204",
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
  },
  "Si l'unité échoue à résister, elle subit −20 % pour toucher et −1 en défense jusqu'à la fin du combat.": {
@@ -5777,7 +5777,7 @@
  "Tempête mentale": {
   "at": [
    "data/spells.js:219",
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
  },
  "Sans jet de résistance, l'unité perd 5 en attaque (mêlée, jet, distance), en défense et en résistance. Sans effet sur les immunisés aux illusions.": {
@@ -5904,6 +5904,208 @@
  "Le temps s'arrête pour tous les autres sorciers : vous seul agissez. Vos cités et vos revenus s'arrêtent aussi : vous ne payez que l'entretien de ce sort.": {
   "at": [
    "data/spells.js:232"
+  ]
+ },
+ "Lenteur": {
+  "at": [
+   "data/spells.js:234"
+  ]
+ },
+ "La créature visée doit résister (−2) ou voir son mouvement réduit de moitié jusqu'à la fin du combat.": {
+  "at": [
+   "data/spells.js:234"
+  ]
+ },
+ "Lenteur de masse": {
+  "at": [
+   "data/spells.js:235"
+  ]
+ },
+ "Chaque unité ennemie doit résister ou voir son mouvement réduit de moitié jusqu'à la fin du combat.": {
+  "at": [
+   "data/spells.js:235"
+  ]
+ },
+ "Champ de force": {
+  "at": [
+   "data/spells.js:236"
+  ]
+ },
+ "Dresse sur trois cases alignées un mur de force que rien ne franchit, pas même les volants, pendant 2 rounds.": {
+  "at": [
+   "data/spells.js:236"
+  ]
+ },
+ "Rideau de flammes": {
+  "at": [
+   "data/spells.js:237",
+   "src/engine/combat.js:194"
+  ]
+ },
+ "Embrase trois cases alignées pendant 3 rounds : un ennemi qui y entre subit une attaque de feu de force 5, puis 3 à chaque round où il y reste (pas les volants).": {
+  "at": [
+   "data/spells.js:237"
+  ]
+ },
+ "Mines de feu": {
+  "at": [
+   "data/spells.js:238"
+  ]
+ },
+ "Enfouit cinq mines en croix, que l'ennemi ne voit pas. La première unité ennemie qui marche sur l'une d'elles s'arrête net dans une explosion de feu de force 5 sur chaque figurine.": {
+  "at": [
+   "data/spells.js:238"
+  ]
+ },
+ "Brume": {
+  "at": [
+   "data/spells.js:239"
+  ]
+ },
+ "Une brume épaisse couvre 3 × 3 cases jusqu'à la fin du combat : les tirs qui en partent ou qui y visent perdent la moitié de leur force.": {
+  "at": [
+   "data/spells.js:239"
+  ]
+ },
+ "Téléportation": {
+  "at": [
+   "data/spells.js:240",
+   "src/core/util.js:119"
+  ]
+ },
+ "Transporte une de vos unités sur la case libre de votre choix, murailles comprises, sauf dans une cité qu'entoure un Mur de feu. Elle garde son mouvement.": {
+  "at": [
+   "data/spells.js:240"
+  ]
+ },
+ "Rafale": {
+  "at": [
+   "data/spells.js:241"
+  ]
+ },
+ "Un coup de vent pousse l'unité visée de 3 cases en ligne droite, dans la direction de votre choix ; un obstacle, une unité ou l'eau profonde l'arrête avant.": {
+  "at": [
+   "data/spells.js:241"
+  ]
+ },
+ "Miroir magique": {
+  "at": [
+   "data/spells.js:242"
+  ]
+ },
+ "Quatre fois sur dix, un sort hostile lancé sur l'unité se retourne contre une unité du camp de son lanceur.": {
+  "at": [
+   "data/spells.js:242"
+  ]
+ },
+ "Clone": {
+  "at": [
+   "data/spells.js:243"
+  ]
+ },
+ "Fait apparaître près d'une de vos unités (pas un héros) un double qui combat comme elle et se dissipe dès qu'il est blessé.": {
+  "at": [
+   "data/spells.js:243"
+  ]
+ },
+ "Porte dimensionnelle": {
+  "at": [
+   "data/spells.js:244"
+  ]
+ },
+ "Une pile de vos unités saute sur une case que vous voyez, jusqu'à 5 cases, par-dessus la mer et les montagnes ; elle s'arrête là pour le tour.": {
+  "at": [
+   "data/spells.js:244"
+  ]
+ },
+ "Chaîne d'éclairs": {
+  "at": [
+   "data/spells.js:245"
+  ]
+ },
+ "Un éclair perforant de force 20 frappe la cible puis saute jusqu'à quatre fois vers l'unité la plus proche, ennemie ou amie, en perdant un tiers de sa force à chaque bond.": {
+  "at": [
+   "data/spells.js:245"
+  ]
+ },
+ "Bouclier de feu": {
+  "at": [
+   "data/spells.js:246"
+  ]
+ },
+ "Qui frappe l'unité au corps à corps se brûle : il subit la moitié des dégâts qu'il lui inflige.": {
+  "at": [
+   "data/spells.js:246"
+  ]
+ },
+ "Martyre": {
+  "at": [
+   "data/spells.js:247"
+  ]
+ },
+ "Jusqu'à la fin du combat, les blessures de l'unité passent à l'unité amie la plus solide qui se tient à côté d'elle.": {
+  "at": [
+   "data/spells.js:247"
+  ]
+ },
+ "Vengeance divine": {
+  "at": [
+   "data/spells.js:248"
+  ]
+ },
+ "Frappe une unité ennemie de 2 points de dégâts, sans défense, pour chaque figurine de vos troupes qu'elle a tuée dans ce combat (30 au plus).": {
+  "at": [
+   "data/spells.js:248"
+  ]
+ },
+ "Sacrifice": {
+  "at": [
+   "data/spells.js:249"
+  ]
+ },
+ "Une de vos unités (pas un héros) donne sa vie pour relever à sa place une unité amie tombée, avec une fois et demie les PV qui lui restaient.": {
+  "at": [
+   "data/spells.js:249"
+  ]
+ },
+ "Vampirisme": {
+  "at": [
+   "data/spells.js:250"
+  ]
+ },
+ "L'unité récupère la moitié des dégâts qu'elle inflige au corps à corps, et ses figurines tombées se relèvent avec ces PV (pas contre les créatures insensibles à la mort).": {
+  "at": [
+   "data/spells.js:250"
+  ]
+ },
+ "Entraves": {
+  "at": [
+   "data/spells.js:251"
+  ]
+ },
+ "L'unité visée doit résister (−1) ou ne plus riposter au corps à corps jusqu'à la fin du combat.": {
+  "at": [
+   "data/spells.js:251"
+  ]
+ },
+ "Crépuscule": {
+  "at": [
+   "data/spells.js:252"
+  ]
+ },
+ "L'unité visée doit résister (−1) ou perdre ses attaques à distance jusqu'à la fin du combat.": {
+  "at": [
+   "data/spells.js:252"
+  ]
+ },
+ "Portail urbain": {
+  "at": [
+   "data/spells.js:253"
+  ]
+ },
+ "Ramène instantanément une pile de vos unités dans la cité de votre choix sur le même plan ; elle s'arrête là pour le tour.": {
+  "at": [
+   "data/spells.js:253"
   ]
  },
  "Halle des Jarls": {
@@ -6788,7 +6990,7 @@
  "Sorts de combat": {
   "at": [
    "src/core/util.js:73",
-   "src/ui/combatview.js:1666"
+   "src/ui/combatview.js:1771"
   ]
  },
  "Livre de légende": {
@@ -7075,8 +7277,8 @@
  "Invocation de démons": {
   "at": [
    "src/core/util.js:119",
-   "src/engine/combat.js:1728",
-   "src/ui/combatview.js:1690"
+   "src/engine/combat.js:1863",
+   "src/ui/combatview.js:1795"
   ]
  },
  "Précision": {
@@ -7091,15 +7293,10 @@
    "src/core/util.js:119"
   ]
  },
- "Téléportation": {
-  "at": [
-   "src/core/util.js:119"
-  ]
- },
  "Lancer": {
   "at": [
    "src/core/util.js:119",
-   "src/ui/combatview.js:1799",
+   "src/ui/combatview.js:1907",
    "src/ui/panels.js:310"
   ]
  },
@@ -7691,7 +7888,7 @@
   "at": [
    "src/engine/cities.js:264",
    "src/engine/cities.js:386",
-   "src/ui/magicui.js:319"
+   "src/ui/magicui.js:359"
   ]
  },
  "Unité de la ruche (même peuple que la capitale)": {
@@ -8106,7 +8303,7 @@
  },
  "Le combat commence{0}.": {
   "at": [
-   "src/engine/combat.js:82"
+   "src/engine/combat.js:85"
   ],
   "args": [
    "this.city ? ' devant ' + this.city.name : ''"
@@ -8114,7 +8311,7 @@
  },
  " devant {0}": {
   "at": [
-   "src/engine/combat.js:82"
+   "src/engine/combat.js:85"
   ],
   "args": [
    "this.city.name"
@@ -8122,7 +8319,7 @@
  },
  "Flux d'un nœud de {0} : les créatures de {1} y gagnent +2 en attaque, défense et résistance, et tout sort d'un autre royaume risque de se dissiper (sauf pour un sorcier qui a la Maîtrise des nœuds).": {
   "at": [
-   "src/engine/combat.js:83"
+   "src/engine/combat.js:86"
   ],
   "args": [
    "rn",
@@ -8131,67 +8328,126 @@
  },
  "En flammes : 3 de dégâts de feu par round à qui s'y tient": {
   "at": [
-   "src/engine/combat.js:179"
+   "src/engine/combat.js:192"
+  ]
+ },
+ "Champ de force : infranchissable, même pour les volants (encore {0})": {
+  "at": [
+   "src/engine/combat.js:193"
+  ],
+  "args": [
+   "U.n(this.field[k].n, 'round')"
+  ]
+ },
+ "round": {
+  "at": [
+   "src/engine/combat.js:193",
+   "src/engine/combat.js:194",
+   "src/ui/combatview.js:2006"
+  ]
+ },
+ "rounds": {
+  "at": [
+   "src/engine/combat.js:193",
+   "src/engine/combat.js:194",
+   "src/ui/combatview.js:2006"
+  ],
+  "hint": "pluriel de « round »"
+ },
+ "{0} : feu de force 5 sur {1} qui y entre, 3 à chaque round où il y reste ; pas sur les volants (encore {2})": {
+  "at": [
+   "src/engine/combat.js:194"
+  ],
+  "args": [
+   "f.side === viewer ? 'Rideau de flammes (le vôtre)' : 'Rideau de flammes'",
+   "f.side === viewer ? 'l\\'ennemi' : 'vos unités'",
+   "U.n(f.n, 'round')"
+  ]
+ },
+ "Rideau de flammes (le vôtre)": {
+  "at": [
+   "src/engine/combat.js:194"
+  ]
+ },
+ "l'ennemi": {
+  "at": [
+   "src/engine/combat.js:194"
+  ]
+ },
+ "vos unités": {
+  "at": [
+   "src/engine/combat.js:194"
+  ]
+ },
+ "Votre mine de feu : explose sous le premier ennemi qui y entre": {
+  "at": [
+   "src/engine/combat.js:195"
+  ]
+ },
+ "Brume : les tirs qui en partent ou qui y visent perdent la moitié de leur force": {
+  "at": [
+   "src/engine/combat.js:196"
   ]
  },
  "Forêt : +2 défense contre les tirs ; y entrer coûte 1,5 mouvement ; le feu s'y propage": {
   "at": [
-   "src/engine/combat.js:180"
+   "src/engine/combat.js:197"
   ]
  },
  "Colline : +10 % pour toucher à distance, +1 défense en mêlée ; y monter coûte 1,5 mouvement": {
   "at": [
-   "src/engine/combat.js:181"
+   "src/engine/combat.js:198"
   ]
  },
  "Rochers : infranchissables": {
   "at": [
-   "src/engine/combat.js:182"
+   "src/engine/combat.js:199"
   ]
  },
  "Eau profonde : infranchissable, sauf pour les unités qui volent, nagent ou marchent sur l'eau": {
   "at": [
-   "src/engine/combat.js:183"
+   "src/engine/combat.js:200"
   ]
  },
  "Gué : y entrer coûte tout le mouvement (pas aux nageurs), -1 défense dans l'eau": {
   "at": [
-   "src/engine/combat.js:184"
+   "src/engine/combat.js:201"
   ]
  },
  "Pont": {
   "at": [
-   "src/engine/combat.js:185"
+   "src/engine/combat.js:202"
   ]
  },
  "Fondrière : y entrer coûte tout le mouvement": {
   "at": [
-   "src/engine/combat.js:186"
+   "src/engine/combat.js:203"
   ]
  },
  "Porte : fermée à l'assaillant": {
   "at": [
-   "src/engine/combat.js:187"
+   "src/engine/combat.js:204"
   ]
  },
  "Chemin de ronde : les tireurs y visent mieux et plus loin ; les créneaux protègent des tirs (+2 en défense)": {
   "at": [
-   "src/engine/combat.js:187"
+   "src/engine/combat.js:204"
   ]
  },
  "Mur de feu : un assaillant qui le franchit subit une attaque de feu de force 5 (pas les volants ; les défenseurs passent librement)": {
   "at": [
-   "src/engine/combat.js:188"
+   "src/engine/combat.js:205"
   ]
  },
  "Souches calcinées : plus de couvert": {
   "at": [
-   "src/engine/combat.js:189"
+   "src/engine/combat.js:206"
   ]
  },
  "{0} dans les flammes ({1}).": {
   "at": [
-   "src/engine/combat.js:206"
+   "src/engine/combat.js:223",
+   "src/engine/combat.js:2476"
   ],
   "args": [
    "this.subj(b, 'est pris')",
@@ -8200,20 +8456,22 @@
  },
  "est pris": {
   "at": [
-   "src/engine/combat.js:206",
-   "src/engine/combat.js:2024"
+   "src/engine/combat.js:223",
+   "src/engine/combat.js:2180",
+   "src/engine/combat.js:2476"
   ]
  },
  "sont pris": {
   "at": [
-   "src/engine/combat.js:206",
-   "src/engine/combat.js:2024"
+   "src/engine/combat.js:223",
+   "src/engine/combat.js:2180",
+   "src/engine/combat.js:2476"
   ],
   "hint": "pluriel de « est pris » (le sujet est une troupe de plusieurs figurines)"
  },
  "Le feu gagne {0}.": {
   "at": [
-   "src/engine/combat.js:212"
+   "src/engine/combat.js:229"
   ],
   "args": [
    "n > 1 ? n + ' bosquets voisins' : 'un bosquet voisin'"
@@ -8221,7 +8479,7 @@
  },
  "{0} bosquets voisins": {
   "at": [
-   "src/engine/combat.js:212"
+   "src/engine/combat.js:229"
   ],
   "args": [
    "n"
@@ -8229,18 +8487,35 @@
  },
  "un bosquet voisin": {
   "at": [
-   "src/engine/combat.js:212"
+   "src/engine/combat.js:229"
+  ]
+ },
+ "{0} (double)": {
+  "at": [
+   "src/engine/combat.js:363"
+  ],
+  "args": [
+   "Units.label(b.u)"
+  ]
+ },
+ "Martyre : les blessures de {0} passent à {1}.": {
+  "at": [
+   "src/engine/combat.js:511"
+  ],
+  "args": [
+   "this.name(b)",
+   "this.name(m)"
   ]
  },
  "Le bosquet s'embrase !": {
   "at": [
-   "src/engine/combat.js:505",
-   "src/engine/combat.js:525"
+   "src/engine/combat.js:547",
+   "src/engine/combat.js:567"
   ]
  },
  "{0} unités sont figées par la terreur.": {
   "at": [
-   "src/engine/combat.js:574"
+   "src/engine/combat.js:616"
   ],
   "args": [
    "frozen"
@@ -8248,7 +8523,7 @@
  },
  "{0} par la terreur.": {
   "at": [
-   "src/engine/combat.js:574"
+   "src/engine/combat.js:616"
   ],
   "args": [
    "names.join(', ') + (frozen > 1 || Units.plural(fz[0].u) ? ' sont figés' : ' est figé')"
@@ -8256,17 +8531,17 @@
  },
  " sont figés": {
   "at": [
-   "src/engine/combat.js:574"
+   "src/engine/combat.js:616"
   ]
  },
  " est figé": {
   "at": [
-   "src/engine/combat.js:574"
+   "src/engine/combat.js:616"
   ]
  },
  "{0}, confus.": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ],
   "args": [
    "this.subj(b, ['est cloué sur place', 'erre au hasard', 'frappe au hasard'][r])"
@@ -8274,40 +8549,40 @@
  },
  "est cloué sur place": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ]
  },
  "erre au hasard": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ]
  },
  "frappe au hasard": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ]
  },
  "sont cloués sur place": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ],
   "hint": "pluriel de « est cloué sur place » (le sujet est une troupe de plusieurs figurines)"
  },
  "errent au hasard": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ],
   "hint": "pluriel de « erre au hasard » (le sujet est une troupe de plusieurs figurines)"
  },
  "frappent au hasard": {
   "at": [
-   "src/engine/combat.js:584"
+   "src/engine/combat.js:626"
   ],
   "hint": "pluriel de « frappe au hasard » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} le mur de feu ({1} dégâts).": {
   "at": [
-   "src/engine/combat.js:772"
+   "src/engine/combat.js:821"
   ],
   "args": [
    "this.subj(b, 'traverse')",
@@ -8316,33 +8591,51 @@
  },
  "traverse": {
   "at": [
-   "src/engine/combat.js:772"
+   "src/engine/combat.js:821"
   ]
  },
  "traversent": {
   "at": [
-   "src/engine/combat.js:772"
+   "src/engine/combat.js:821"
   ],
   "hint": "pluriel de « traverse » (le sujet est une troupe de plusieurs figurines)"
  },
+ "Rideau de flammes : {0} le traverse ({1} dégâts).": {
+  "at": [
+   "src/engine/combat.js:835"
+  ],
+  "args": [
+   "this.name(b)",
+   "d"
+  ]
+ },
+ "Une mine explose sous {0} ({1} dégâts).": {
+  "at": [
+   "src/engine/combat.js:843"
+  ],
+  "args": [
+   "this.name(b)",
+   "d"
+  ]
+ },
  "dans le dos": {
   "at": [
-   "src/engine/combat.js:792"
+   "src/engine/combat.js:862"
   ]
  },
  "de flanc": {
   "at": [
-   "src/engine/combat.js:792"
+   "src/engine/combat.js:862"
   ]
  },
  "plus de mouvement pour tirer": {
   "at": [
-   "src/engine/combat.js:826"
+   "src/engine/combat.js:896"
   ]
  },
  "tir magique : 3 de mana requis ({0} restant{1})": {
   "at": [
-   "src/engine/combat.js:827"
+   "src/engine/combat.js:897"
   ],
   "args": [
    "m",
@@ -8351,32 +8644,32 @@
  },
  "plus de munitions": {
   "at": [
-   "src/engine/combat.js:828"
+   "src/engine/combat.js:898"
   ]
  },
  "un ennemi au contact empêche de tirer": {
   "at": [
-   "src/engine/combat.js:829"
+   "src/engine/combat.js:899"
   ]
  },
  "cible invisible": {
   "at": [
-   "src/engine/combat.js:830"
+   "src/engine/combat.js:900"
   ]
  },
  "le Mur de ténèbres cache la cible": {
   "at": [
-   "src/engine/combat.js:831"
+   "src/engine/combat.js:901"
   ]
  },
  "la muraille arrête le trait magique": {
   "at": [
-   "src/engine/combat.js:832"
+   "src/engine/combat.js:902"
   ]
  },
  "{0} (+{1} en attaque) !": {
   "at": [
-   "src/engine/combat.js:983"
+   "src/engine/combat.js:1053"
   ],
   "args": [
    "this.subj(a, 'charge')",
@@ -8385,18 +8678,18 @@
  },
  "charge": {
   "at": [
-   "src/engine/combat.js:983"
+   "src/engine/combat.js:1053"
   ]
  },
  "chargent": {
   "at": [
-   "src/engine/combat.js:983"
+   "src/engine/combat.js:1053"
   ],
   "hint": "pluriel de « charge » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} au mur de feu ({1}).": {
   "at": [
-   "src/engine/combat.js:1046"
+   "src/engine/combat.js:1124"
   ],
   "args": [
    "this.subj(a, 'se brûle')",
@@ -8405,18 +8698,18 @@
  },
  "se brûle": {
   "at": [
-   "src/engine/combat.js:1046"
+   "src/engine/combat.js:1124"
   ]
  },
  "se brûlent": {
   "at": [
-   "src/engine/combat.js:1046"
+   "src/engine/combat.js:1124"
   ],
   "hint": "pluriel de « se brûle » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} {1}{2} : {3} dégâts infligés, {4} subis.{5}": {
   "at": [
-   "src/engine/combat.js:1055"
+   "src/engine/combat.js:1133"
   ],
   "args": [
    "this.subj(a, 'attaque')",
@@ -8429,18 +8722,18 @@
  },
  "attaque": {
   "at": [
-   "src/engine/combat.js:1055"
+   "src/engine/combat.js:1133"
   ]
  },
  "attaquent": {
   "at": [
-   "src/engine/combat.js:1055"
+   "src/engine/combat.js:1133"
   ],
   "hint": "pluriel de « attaque » (le sujet est une troupe de plusieurs figurines)"
  },
  " Effroi : {0}.": {
   "at": [
-   "src/engine/combat.js:1055"
+   "src/engine/combat.js:1133"
   ],
   "args": [
    "[fearA ? U.n(fearA, 'figurine') + ' de ' + this.name(a) + ' paralysée' + (fearA > 1 ? 's' "
@@ -8448,8 +8741,8 @@
  },
  "{0} de {1} paralysée{2}": {
   "at": [
-   "src/engine/combat.js:1055",
-   "src/engine/combat.js:1055"
+   "src/engine/combat.js:1133",
+   "src/engine/combat.js:1133"
   ],
   "args": [
    "U.n(fearA, 'figurine')",
@@ -8459,24 +8752,43 @@
  },
  "figurine": {
   "at": [
-   "src/engine/combat.js:1055",
-   "src/engine/combat.js:1055",
-   "src/engine/combat.js:2005",
-   "src/engine/combat.js:2011"
+   "src/engine/combat.js:1133",
+   "src/engine/combat.js:1133",
+   "src/engine/combat.js:2161",
+   "src/engine/combat.js:2167"
   ]
  },
  "figurines": {
   "at": [
-   "src/engine/combat.js:1055",
-   "src/engine/combat.js:1055",
-   "src/engine/combat.js:2005",
-   "src/engine/combat.js:2011"
+   "src/engine/combat.js:1133",
+   "src/engine/combat.js:1133",
+   "src/engine/combat.js:2161",
+   "src/engine/combat.js:2167"
   ],
   "hint": "pluriel de « figurine »"
  },
+ "Bouclier de feu de {0} : {1} dégâts à {2}.": {
+  "at": [
+   "src/engine/combat.js:1144"
+  ],
+  "args": [
+   "this.name(owner)",
+   "t",
+   "this.name(striker)"
+  ]
+ },
+ "Vampirisme : +{0} PV pour {1}.": {
+  "at": [
+   "src/engine/combat.js:1151"
+  ],
+  "args": [
+   "h",
+   "this.name(b)"
+  ]
+ },
  "{0} la muraille.": {
   "at": [
-   "src/engine/combat.js:1071"
+   "src/engine/combat.js:1165"
   ],
   "args": [
    "this.subj(a, 'bat')"
@@ -8484,23 +8796,23 @@
  },
  "bat": {
   "at": [
-   "src/engine/combat.js:1071"
+   "src/engine/combat.js:1165"
   ]
  },
  "La muraille tient bon.": {
   "at": [
-   "src/engine/combat.js:1075"
+   "src/engine/combat.js:1169"
   ]
  },
  "Une section de muraille s'effondre !": {
   "at": [
-   "src/engine/combat.js:1080"
+   "src/engine/combat.js:1174"
   ]
  },
  "{0} sur {1} : {2} dégâts.": {
   "at": [
-   "src/engine/combat.js:1121",
-   "src/engine/combat.js:1206"
+   "src/engine/combat.js:1215",
+   "src/engine/combat.js:1300"
   ],
   "args": [
    "this.subj(a, 'tire')",
@@ -8510,55 +8822,55 @@
  },
  "tire": {
   "at": [
-   "src/engine/combat.js:1121",
-   "src/engine/combat.js:1206"
+   "src/engine/combat.js:1215",
+   "src/engine/combat.js:1300"
   ]
  },
  "tirent": {
   "at": [
-   "src/engine/combat.js:1121",
-   "src/engine/combat.js:1206"
+   "src/engine/combat.js:1215",
+   "src/engine/combat.js:1300"
   ],
   "hint": "pluriel de « tire » (le sujet est une troupe de plusieurs figurines)"
  },
  "la tour du sorcier": {
   "at": [
-   "src/engine/combat.js:1132"
+   "src/engine/combat.js:1226"
   ]
  },
  "la porte": {
   "at": [
-   "src/engine/combat.js:1132"
+   "src/engine/combat.js:1226"
   ]
  },
  "la tour de droite": {
   "at": [
-   "src/engine/combat.js:1132"
+   "src/engine/combat.js:1226"
   ]
  },
  "la tour de gauche": {
   "at": [
-   "src/engine/combat.js:1132"
+   "src/engine/combat.js:1226"
   ]
  },
  "La porte cède sous les coups.": {
   "at": [
-   "src/engine/combat.js:1171"
+   "src/engine/combat.js:1265"
   ]
  },
  " s'effondre dans un fracas de magie.": {
   "at": [
-   "src/engine/combat.js:1171"
+   "src/engine/combat.js:1265"
   ]
  },
  " s'effondre : la muraille est ouverte.": {
   "at": [
-   "src/engine/combat.js:1171"
+   "src/engine/combat.js:1265"
   ]
  },
  "{0} {1} : {2} dégâts.": {
   "at": [
-   "src/engine/combat.js:1185"
+   "src/engine/combat.js:1279"
   ],
   "args": [
    "this.subj(a, 'frappe')",
@@ -8568,18 +8880,18 @@
  },
  "frappe": {
   "at": [
-   "src/engine/combat.js:1185"
+   "src/engine/combat.js:1279"
   ]
  },
  "frappent": {
   "at": [
-   "src/engine/combat.js:1185"
+   "src/engine/combat.js:1279"
   ],
   "hint": "pluriel de « frappe » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} tire sur {1} : {2} dégâts.": {
   "at": [
-   "src/engine/combat.js:1292"
+   "src/engine/combat.js:1387"
   ],
   "args": [
    "U.cap(this.towerName(t))",
@@ -8587,20 +8899,37 @@
    "dealt"
   ]
  },
+ "Le double de {0} se dissipe.": {
+  "at": [
+   "src/engine/combat.js:1397"
+  ],
+  "args": [
+   "Units.label(b.u)"
+  ]
+ },
  "est anéanti": {
   "at": [
-   "src/engine/combat.js:1303"
+   "src/engine/combat.js:1399"
   ]
  },
  "sont anéantis": {
   "at": [
-   "src/engine/combat.js:1303"
+   "src/engine/combat.js:1399"
   ],
   "hint": "pluriel de « est anéanti » (le sujet est une troupe de plusieurs figurines)"
  },
+ "Rideau de flammes : {0} y brûle ({1}).": {
+  "at": [
+   "src/engine/combat.js:1453"
+  ],
+  "args": [
+   "this.name(b)",
+   "d"
+  ]
+ },
  "Le vortex happe {0} ({1}).": {
   "at": [
-   "src/engine/combat.js:1363"
+   "src/engine/combat.js:1477"
   ],
   "args": [
    "this.name(t)",
@@ -8609,7 +8938,7 @@
  },
  "La foudre frappe {0} ({1}).": {
   "at": [
-   "src/engine/combat.js:1388"
+   "src/engine/combat.js:1502"
   ],
   "args": [
    "this.name(t)",
@@ -8618,7 +8947,7 @@
  },
  "Supplice : {0} PV.": {
   "at": [
-   "src/engine/combat.js:1399"
+   "src/engine/combat.js:1513"
   ],
   "args": [
    "hit.join(', ')"
@@ -8626,7 +8955,7 @@
  },
  "vous perdez {0} mana": {
   "at": [
-   "src/engine/combat.js:1410"
+   "src/engine/combat.js:1524"
   ],
   "args": [
    "fm"
@@ -8634,7 +8963,7 @@
  },
  "{0} perd {1} mana": {
   "at": [
-   "src/engine/combat.js:1410"
+   "src/engine/combat.js:1524"
   ],
   "args": [
    "U.cap(me && me.human ? Players.nameFor(this.game, me.id, foe.id) : foe.name)",
@@ -8643,10 +8972,10 @@
  },
  "{0} mana": {
   "at": [
-   "src/engine/combat.js:1411",
+   "src/engine/combat.js:1525",
    "src/ui/ui.js:207",
    "src/ui/city.js:672",
-   "src/ui/magicui.js:310"
+   "src/ui/magicui.js:350"
   ],
   "args": [
    "(foe && foe.human ? 'vos lanceurs perdent ' : foe ? 'ses lanceurs perdent ' : 'les lanceur"
@@ -8654,22 +8983,22 @@
  },
  "vos lanceurs perdent ": {
   "at": [
-   "src/engine/combat.js:1411"
+   "src/engine/combat.js:1525"
   ]
  },
  "ses lanceurs perdent ": {
   "at": [
-   "src/engine/combat.js:1411"
+   "src/engine/combat.js:1525"
   ]
  },
  "les lanceurs adverses perdent ": {
   "at": [
-   "src/engine/combat.js:1411"
+   "src/engine/combat.js:1525"
   ]
  },
  "{0} en moins": {
   "at": [
-   "src/engine/combat.js:1412"
+   "src/engine/combat.js:1526"
   ],
   "args": [
    "U.n(shots, 'tir magique', 'tirs magiques')"
@@ -8677,19 +9006,19 @@
  },
  "tir magique": {
   "at": [
-   "src/engine/combat.js:1412"
+   "src/engine/combat.js:1526"
   ]
  },
  "tirs magiques": {
   "at": [
-   "src/engine/combat.js:1412",
-   "src/engine/combat.js:1412"
+   "src/engine/combat.js:1526",
+   "src/engine/combat.js:1526"
   ],
   "hint": "pluriel de « tir magique »"
  },
  "Fuite de mana : {0}.": {
   "at": [
-   "src/engine/combat.js:1413"
+   "src/engine/combat.js:1527"
   ],
   "args": [
    "parts.join(', ')"
@@ -8697,12 +9026,12 @@
  },
  "Le combat s'éternise : l'attaquant se retire.": {
   "at": [
-   "src/engine/combat.js:1421"
+   "src/engine/combat.js:1535"
   ]
  },
  "{0} bat en retraite.": {
   "at": [
-   "src/engine/combat.js:1464"
+   "src/engine/combat.js:1578"
   ],
   "args": [
    "side === ATT_SIDE ? 'L\\'attaquant' : 'Le défenseur'"
@@ -8710,38 +9039,38 @@
  },
  "L'attaquant": {
   "at": [
-   "src/engine/combat.js:1464"
+   "src/engine/combat.js:1578"
   ]
  },
  "Le défenseur": {
   "at": [
-   "src/engine/combat.js:1464"
+   "src/engine/combat.js:1578"
   ]
  },
  "est rattrapé": {
   "at": [
-   "src/engine/combat.js:1467"
+   "src/engine/combat.js:1581"
   ]
  },
  "sont rattrapés": {
   "at": [
-   "src/engine/combat.js:1467"
+   "src/engine/combat.js:1581"
   ],
   "hint": "pluriel de « est rattrapé » (le sujet est une troupe de plusieurs figurines)"
  },
  " dans leur fuite.": {
   "at": [
-   "src/engine/combat.js:1467"
+   "src/engine/combat.js:1581"
   ]
  },
  " dans sa fuite.": {
   "at": [
-   "src/engine/combat.js:1467"
+   "src/engine/combat.js:1581"
   ]
  },
  "{0} se dissipe.": {
   "at": [
-   "src/engine/combat.js:1589"
+   "src/engine/combat.js:1703"
   ],
   "args": [
    "DATA.spells[other] ? DATA.spells[other].name : other"
@@ -8749,194 +9078,246 @@
  },
  "Ce sort vise une unité ennemie.": {
   "at": [
-   "src/engine/combat.js:1685"
+   "src/engine/combat.js:1811"
   ]
  },
  "Ce sort vise une de vos unités.": {
   "at": [
-   "src/engine/combat.js:1686"
+   "src/engine/combat.js:1812"
   ]
  },
  "Ce sort ne vise qu'un héros.": {
   "at": [
-   "src/engine/combat.js:1687"
+   "src/engine/combat.js:1813"
   ]
  },
  "Rien à dissiper sur cette unité.": {
   "at": [
-   "src/engine/combat.js:1688"
+   "src/engine/combat.js:1814"
   ]
  },
  "Ce sort ne touche que les unités normales.": {
   "at": [
-   "src/engine/combat.js:1689"
+   "src/engine/combat.js:1815"
   ]
  },
  "Ce sort ne touche que les créatures fantastiques.": {
   "at": [
-   "src/engine/combat.js:1690",
-   "src/engine/combat.js:1692"
+   "src/engine/combat.js:1816",
+   "src/engine/combat.js:1818"
   ]
  },
  "Ce sort ne touche que les morts-vivants.": {
   "at": [
-   "src/engine/combat.js:1692"
+   "src/engine/combat.js:1818"
   ]
  },
  "Sans effet sur un héros.": {
   "at": [
-   "src/engine/combat.js:1693"
+   "src/engine/combat.js:1819"
   ]
  },
  "Cette unité en bénéficie déjà.": {
   "at": [
-   "src/engine/combat.js:1695"
+   "src/engine/combat.js:1821"
   ]
  },
  "Un enchantement incompatible est déjà en place.": {
   "at": [
-   "src/engine/combat.js:1696"
+   "src/engine/combat.js:1822"
   ]
  },
  "Cette unité n'en tirerait rien.": {
   "at": [
-   "src/engine/combat.js:1697"
+   "src/engine/combat.js:1823"
   ]
  },
  "Cette unité subit déjà ce sort.": {
   "at": [
-   "src/engine/combat.js:1699"
+   "src/engine/combat.js:1825"
   ]
  },
  "Cette unité est immunisée contre la magie.": {
   "at": [
-   "src/engine/combat.js:1700"
+   "src/engine/combat.js:1826",
+   "src/engine/combat.js:1846"
   ]
  },
  "Une unité incorporelle passe à travers la toile.": {
   "at": [
-   "src/engine/combat.js:1701"
+   "src/engine/combat.js:1827"
   ]
  },
  "Cette unité est déjà prise dans une toile.": {
   "at": [
-   "src/engine/combat.js:1702"
+   "src/engine/combat.js:1828"
   ]
  },
  "Une unité qui vole ne craint pas les failles du sol.": {
   "at": [
-   "src/engine/combat.js:1703"
+   "src/engine/combat.js:1829"
   ]
  },
  "Une unité incorporelle ne craint pas les failles du sol.": {
   "at": [
-   "src/engine/combat.js:1704"
+   "src/engine/combat.js:1830"
   ]
  },
  "Le Démon légendaire ne cède pas à ce sort.": {
   "at": [
-   "src/engine/combat.js:1705"
+   "src/engine/combat.js:1831"
   ]
  },
  "Une créature du combat ou prise à l'ennemi ne peut pas être rappelée.": {
   "at": [
-   "src/engine/combat.js:1706"
+   "src/engine/combat.js:1832"
   ]
  },
  "Cette unité est protégée contre ce sort.": {
   "at": [
-   "src/engine/combat.js:1707"
+   "src/engine/combat.js:1833"
   ]
  },
  "Cette unité n'a pas de flèches à tordre.": {
   "at": [
-   "src/engine/combat.js:1707"
+   "src/engine/combat.js:1833"
   ]
  },
  "Cette unité ne combat pas au corps à corps.": {
   "at": [
-   "src/engine/combat.js:1708"
+   "src/engine/combat.js:1834"
   ]
  },
  "Aucun enchantement à protéger.": {
   "at": [
-   "src/engine/combat.js:1709"
+   "src/engine/combat.js:1835"
   ]
  },
  "Plus rien à altérer chez cette créature.": {
   "at": [
-   "src/engine/combat.js:1710"
+   "src/engine/combat.js:1836"
   ]
  },
  "Cette unité dort déjà.": {
   "at": [
-   "src/engine/combat.js:1711"
+   "src/engine/combat.js:1837"
   ]
  },
  "Cette unité est déjà confuse.": {
   "at": [
-   "src/engine/combat.js:1712"
+   "src/engine/combat.js:1838"
   ]
  },
  "Cette unité est déjà sous une emprise.": {
   "at": [
-   "src/engine/combat.js:1713"
+   "src/engine/combat.js:1839"
   ]
  },
  "Cette unité est immunisée contre la pétrification.": {
   "at": [
-   "src/engine/combat.js:1714"
+   "src/engine/combat.js:1840"
   ]
  },
  "Cette unité est immunisée contre les illusions.": {
   "at": [
-   "src/engine/combat.js:1715"
+   "src/engine/combat.js:1841"
   ]
  },
  "Une créature de la Mort ne se soigne pas.": {
   "at": [
-   "src/engine/combat.js:1716"
+   "src/engine/combat.js:1842"
   ]
  },
  "Ces blessures ne se soignent pas.": {
   "at": [
-   "src/engine/combat.js:1716"
+   "src/engine/combat.js:1842"
+  ]
+ },
+ "Elle ne va déjà pas plus loin qu'une case par round.": {
+  "at": [
+   "src/engine/combat.js:1843"
+  ]
+ },
+ "Cette unité ne riposte pas au corps à corps.": {
+  "at": [
+   "src/engine/combat.js:1844"
+  ]
+ },
+ "Cette unité n'a pas d'attaque à distance.": {
+  "at": [
+   "src/engine/combat.js:1845"
+  ]
+ },
+ "Aucune direction où le vent puisse la pousser.": {
+  "at": [
+   "src/engine/combat.js:1847"
+  ]
+ },
+ "On ne copie pas une créature du combat.": {
+  "at": [
+   "src/engine/combat.js:1848"
+  ]
+ },
+ "Vous avez déjà 9 unités sur le terrain.": {
+  "at": [
+   "src/engine/combat.js:1848",
+   "src/ui/combatview.js:1812"
+  ]
+ },
+ "Cette unité ne peut pas être copiée.": {
+  "at": [
+   "src/engine/combat.js:1848"
+  ]
+ },
+ "Cette unité n'a encore tué aucune de vos figurines.": {
+  "at": [
+   "src/engine/combat.js:1849"
+  ]
+ },
+ "Prise dans une toile, elle ne peut pas être transportée.": {
+  "at": [
+   "src/engine/combat.js:1850"
+  ]
+ },
+ "Figée, elle ne peut pas être transportée.": {
+  "at": [
+   "src/engine/combat.js:1850"
   ]
  },
  "Cette unité est immunisée contre la mort.": {
   "at": [
-   "src/engine/combat.js:1718"
+   "src/engine/combat.js:1852"
   ]
  },
  "La Droiture la protège de ce sort.": {
   "at": [
-   "src/engine/combat.js:1719"
+   "src/engine/combat.js:1853"
   ]
  },
  "Cette unité est immunisée contre le feu.": {
   "at": [
-   "src/engine/combat.js:1720"
+   "src/engine/combat.js:1854"
   ]
  },
  "Cette unité est immunisée contre le froid.": {
   "at": [
-   "src/engine/combat.js:1721"
+   "src/engine/combat.js:1855"
   ]
  },
  "Sa résistance la rend insensible à ce sort.": {
   "at": [
-   "src/engine/combat.js:1722"
+   "src/engine/combat.js:1856"
   ]
  },
  "Ce sort ne peut pas viser cette unité.": {
   "at": [
-   "src/engine/combat.js:1723",
-   "src/ui/combatview.js:1856"
+   "src/engine/combat.js:1857",
+   "src/ui/combatview.js:1979"
   ]
  },
  "{0} se dissout dans le flux du nœud.": {
   "at": [
-   "src/engine/combat.js:1758"
+   "src/engine/combat.js:1897"
   ],
   "args": [
    "sp.name || id"
@@ -8944,7 +9325,7 @@
  },
  "{0} est contré !": {
   "at": [
-   "src/engine/combat.js:1767"
+   "src/engine/combat.js:1906"
   ],
   "args": [
    "sp.name || 'Le sort'"
@@ -8952,13 +9333,13 @@
  },
  "Le sort": {
   "at": [
-   "src/engine/combat.js:1767",
-   "src/engine/combat.js:1931"
+   "src/engine/combat.js:1906",
+   "src/engine/combat.js:2082"
   ]
  },
  "{0} lance {1}.": {
   "at": [
-   "src/engine/combat.js:1769",
+   "src/engine/combat.js:1908",
    "src/engine/chronicle.js:125"
   ],
   "args": [
@@ -8968,15 +9349,37 @@
  },
  "Le sorcier": {
   "at": [
-   "src/engine/combat.js:1769"
+   "src/engine/combat.js:1908"
+  ]
+ },
+ "Le Miroir magique de {0} renvoie le sort{1} !": {
+  "at": [
+   "src/engine/combat.js:1914"
+  ],
+  "args": [
+   "bt.name(target)",
+   "nt ? ' sur ' + bt.name(nt) : ', qui se perd'"
+  ]
+ },
+ " sur {0}": {
+  "at": [
+   "src/engine/combat.js:1914"
+  ],
+  "args": [
+   "bt.name(nt)"
+  ]
+ },
+ ", qui se perd": {
+  "at": [
+   "src/engine/combat.js:1914"
   ]
  },
  "force {0}": {
   "at": [
-   "src/engine/combat.js:1817",
-   "src/engine/combat.js:1818",
-   "src/engine/combat.js:1819",
-   "src/engine/combat.js:1820"
+   "src/engine/combat.js:1967",
+   "src/engine/combat.js:1968",
+   "src/engine/combat.js:1969",
+   "src/engine/combat.js:1970"
   ],
   "args": [
    "Math.min(25, 5 + x)"
@@ -8984,8 +9387,8 @@
  },
  "résistance de la cible −{0}": {
   "at": [
-   "src/engine/combat.js:1822",
-   "src/engine/combat.js:1823"
+   "src/engine/combat.js:1972",
+   "src/engine/combat.js:1973"
   ],
   "args": [
    "Math.floor(x / 5)"
@@ -8993,10 +9396,10 @@
  },
  "force de dissipation {0}": {
   "at": [
-   "src/engine/combat.js:1824",
-   "src/engine/combat.js:1825",
-   "src/engine/combat.js:1826",
-   "src/engine/combat.js:1827"
+   "src/engine/combat.js:1974",
+   "src/engine/combat.js:1975",
+   "src/engine/combat.js:1976",
+   "src/engine/combat.js:1977"
   ],
   "args": [
    "c + x"
@@ -9004,7 +9407,7 @@
  },
  "{0} dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:1924"
+   "src/engine/combat.js:2075"
   ],
   "args": [
    "n",
@@ -9013,7 +9416,7 @@
  },
  "{0} tient bon.": {
   "at": [
-   "src/engine/combat.js:1924"
+   "src/engine/combat.js:2075"
   ],
   "args": [
    "bt.towerName(t)"
@@ -9021,7 +9424,7 @@
  },
  " inflige {0} de dégâts à {1}": {
   "at": [
-   "src/engine/combat.js:1931"
+   "src/engine/combat.js:2082"
   ],
   "args": [
    "U.n(d, 'point', 'points')",
@@ -9030,19 +9433,22 @@
  },
  "point": {
   "at": [
-   "src/engine/combat.js:1931"
+   "src/engine/combat.js:2082",
+   "src/engine/combat.js:2521"
   ]
  },
  "points": {
   "at": [
-   "src/engine/combat.js:1931",
-   "src/engine/combat.js:1931"
+   "src/engine/combat.js:2082",
+   "src/engine/combat.js:2082",
+   "src/engine/combat.js:2521",
+   "src/engine/combat.js:2521"
   ],
   "hint": "pluriel de « point »"
  },
  " ne fait aucun dégât à {0}": {
   "at": [
-   "src/engine/combat.js:1931"
+   "src/engine/combat.js:2082"
   ],
   "args": [
    "bt.name(t)"
@@ -9050,109 +9456,124 @@
  },
  "attaque de mêlée divisée par 2": {
   "at": [
-   "src/engine/combat.js:1935"
+   "src/engine/combat.js:2086"
   ]
  },
  "défense divisée par 2": {
   "at": [
-   "src/engine/combat.js:1935"
+   "src/engine/combat.js:2086"
   ]
  },
  "résistance à 0": {
   "at": [
-   "src/engine/combat.js:1935"
+   "src/engine/combat.js:2086"
   ]
  },
  "Aucune de vos unités n'est blessée.": {
   "at": [
-   "src/engine/combat.js:1940",
-   "src/engine/spells.js:278"
+   "src/engine/combat.js:2091",
+   "src/engine/spells.js:282"
   ]
  },
  "Les blessures de vos unités sont irréversibles (pétrification, désintégration…) : rien à soigner.": {
   "at": [
-   "src/engine/combat.js:1941"
+   "src/engine/combat.js:2092"
   ]
  },
  "Vos blessés sont des créatures de la mort : les soins ne les touchent pas.": {
   "at": [
-   "src/engine/combat.js:1941"
+   "src/engine/combat.js:2092"
   ]
  },
  "Aucune cible à soigner.": {
   "at": [
-   "src/engine/combat.js:1942"
+   "src/engine/combat.js:2093"
   ]
  },
  "Ne se lance qu'en défendant sa propre cité.": {
   "at": [
-   "src/engine/combat.js:1947"
+   "src/engine/combat.js:2098"
   ]
  },
  "Ce mur entoure déjà la cité.": {
   "at": [
-   "src/engine/combat.js:1947"
+   "src/engine/combat.js:2098"
   ]
  },
  "Vos ennemis sont tous insensibles au feu : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:1948"
+   "src/engine/combat.js:2099"
   ]
  },
  "Aucune tour ennemie sur laquelle agir ici.": {
   "at": [
-   "src/engine/combat.js:1949",
-   "src/ui/combatview.js:1705"
+   "src/engine/combat.js:2100",
+   "src/ui/combatview.js:1810"
   ]
  },
  "Aucun enchantement ennemi ni maléfice à dissiper ici.": {
   "at": [
-   "src/engine/combat.js:1950"
+   "src/engine/combat.js:2101"
   ]
  },
  "Aucune créature de la vie dans vos rangs ni de la mort en face : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:1953"
+   "src/engine/combat.js:2104"
   ]
  },
  "Aucune créature de la mort dans vos rangs ni de la vie en face : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:1954"
+   "src/engine/combat.js:2105"
   ]
  },
  "Aucune créature invoquée ni morte-vivante en face.": {
   "at": [
-   "src/engine/combat.js:1955"
+   "src/engine/combat.js:2106"
   ]
  },
  "Vos ennemis relèvent tous de la mort : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:1956"
+   "src/engine/combat.js:2107"
   ]
  },
  "Aucun ennemi ne peut y être sensible ici.": {
   "at": [
-   "src/engine/combat.js:1958"
+   "src/engine/combat.js:2109"
   ]
  },
  "Aucune unité normale dans vos rangs.": {
   "at": [
-   "src/engine/combat.js:1959"
+   "src/engine/combat.js:2110"
   ]
  },
  "Vos ennemis volent ou sont immatériels : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:1960"
+   "src/engine/combat.js:2111"
   ]
  },
  "Aucun lanceur de sorts en face : sans effet ici.": {
   "at": [
-   "src/engine/combat.js:1962"
+   "src/engine/combat.js:2113"
+  ]
+ },
+ "Aucun ennemi ne peut être ralenti ici.": {
+  "at": [
+   "src/engine/combat.js:2114"
+  ]
+ },
+ "Aucune de vos unités tombées ne peut être relevée (héros, doubles et morts irréversibles exceptés).": {
+  "at": [
+   "src/engine/combat.js:2116"
+  ]
+ },
+ "Aucune de vos unités ne peut donner sa vie (pas un héros).": {
+  "at": [
+   "src/engine/combat.js:2117"
   ]
  },
  "Une nuit opaque enveloppe {0}.": {
   "at": [
-   "src/engine/combat.js:1984"
+   "src/engine/combat.js:2140"
   ],
   "args": [
    "bt.city.name"
@@ -9160,7 +9581,7 @@
  },
  "Un mur de flammes encercle {0}.": {
   "at": [
-   "src/engine/combat.js:1985"
+   "src/engine/combat.js:2141"
   ],
   "args": [
    "bt.city.name"
@@ -9168,7 +9589,7 @@
  },
  "Boule de feu : {0} dégâts.": {
   "at": [
-   "src/engine/combat.js:1991"
+   "src/engine/combat.js:2147"
   ],
   "args": [
    "d"
@@ -9176,7 +9597,7 @@
  },
  "{0} : {1} dégâts à {2}.": {
   "at": [
-   "src/engine/combat.js:1992"
+   "src/engine/combat.js:2148"
   ],
   "args": [
    "sp ? sp.name : 'Frappe de flammes'",
@@ -9186,7 +9607,7 @@
  },
  "Trait funeste : {0} dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:1993"
+   "src/engine/combat.js:2149"
   ],
   "args": [
    "d",
@@ -9195,7 +9616,7 @@
  },
  "Foudre distordue : {0} dégâts à {1}.": {
   "at": [
-   "src/engine/combat.js:1994"
+   "src/engine/combat.js:2150"
   ],
   "args": [
    "tot",
@@ -9204,7 +9625,7 @@
  },
  "Drain de vie : {0} points volés.": {
   "at": [
-   "src/engine/combat.js:1998"
+   "src/engine/combat.js:2154"
   ],
   "args": [
    "d"
@@ -9212,7 +9633,7 @@
  },
  "Exorcisme : {0} de {1} détruite{2}.": {
   "at": [
-   "src/engine/combat.js:2005"
+   "src/engine/combat.js:2161"
   ],
   "args": [
    "U.n(f, 'figurine')",
@@ -9222,24 +9643,24 @@
  },
  "résiste": {
   "at": [
-   "src/engine/combat.js:2005",
-   "src/engine/combat.js:2007",
-   "src/engine/combat.js:2009",
-   "src/engine/combat.js:2010"
+   "src/engine/combat.js:2161",
+   "src/engine/combat.js:2163",
+   "src/engine/combat.js:2165",
+   "src/engine/combat.js:2166"
   ]
  },
  "résistent": {
   "at": [
-   "src/engine/combat.js:2005",
-   "src/engine/combat.js:2007",
-   "src/engine/combat.js:2009",
-   "src/engine/combat.js:2010"
+   "src/engine/combat.js:2161",
+   "src/engine/combat.js:2163",
+   "src/engine/combat.js:2165",
+   "src/engine/combat.js:2166"
   ],
   "hint": "pluriel de « résiste » (le sujet est une troupe de plusieurs figurines)"
  },
  "Parole sacrée : {0}": {
   "at": [
-   "src/engine/combat.js:2006"
+   "src/engine/combat.js:2162"
   ],
   "args": [
    "hit.length ? 'figurines bannies : ' + hit.join(', ') + '.' : 'toutes résistent.'"
@@ -9247,7 +9668,7 @@
  },
  "figurines bannies : {0}.": {
   "at": [
-   "src/engine/combat.js:2006"
+   "src/engine/combat.js:2162"
   ],
   "args": [
    "hit.join(', ')"
@@ -9255,24 +9676,24 @@
  },
  "toutes résistent.": {
   "at": [
-   "src/engine/combat.js:2006"
+   "src/engine/combat.js:2162"
   ]
  },
  "figurine périt": {
   "at": [
-   "src/engine/combat.js:2007"
+   "src/engine/combat.js:2163"
   ]
  },
  "figurines périssent": {
   "at": [
-   "src/engine/combat.js:2007",
-   "src/engine/combat.js:2007"
+   "src/engine/combat.js:2163",
+   "src/engine/combat.js:2163"
   ],
   "hint": "pluriel de « figurine périt »"
  },
  "Sort de mort : {0}": {
   "at": [
-   "src/engine/combat.js:2008"
+   "src/engine/combat.js:2164"
   ],
   "args": [
    "hit.length ? 'figurines perdues : ' + hit.join(', ') + '.' : 'tous résistent.'"
@@ -9280,7 +9701,7 @@
  },
  "figurines perdues : {0}.": {
   "at": [
-   "src/engine/combat.js:2008"
+   "src/engine/combat.js:2164"
   ],
   "args": [
    "hit.join(', ')"
@@ -9288,23 +9709,23 @@
  },
  "tous résistent.": {
   "at": [
-   "src/engine/combat.js:2008"
+   "src/engine/combat.js:2164"
   ]
  },
  "est désintégré": {
   "at": [
-   "src/engine/combat.js:2009"
+   "src/engine/combat.js:2165"
   ]
  },
  "sont désintégrés": {
   "at": [
-   "src/engine/combat.js:2009"
+   "src/engine/combat.js:2165"
   ],
   "hint": "pluriel de « est désintégré » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} à la désintégration.": {
   "at": [
-   "src/engine/combat.js:2009"
+   "src/engine/combat.js:2165"
   ],
   "args": [
    "bt.subj(t, 'résiste')"
@@ -9312,7 +9733,7 @@
  },
  "{0} : {1} en pierre.": {
   "at": [
-   "src/engine/combat.js:2010"
+   "src/engine/combat.js:2166"
   ],
   "args": [
    "bt.name(t)",
@@ -9321,19 +9742,19 @@
  },
  "figurine changée": {
   "at": [
-   "src/engine/combat.js:2010"
+   "src/engine/combat.js:2166"
   ]
  },
  "figurines changées": {
   "at": [
-   "src/engine/combat.js:2010",
-   "src/engine/combat.js:2010"
+   "src/engine/combat.js:2166",
+   "src/engine/combat.js:2166"
   ],
   "hint": "pluriel de « figurine changée »"
  },
  "{0} à la pétrification.": {
   "at": [
-   "src/engine/combat.js:2010"
+   "src/engine/combat.js:2166"
   ],
   "args": [
    "bt.subj(t, 'résiste')"
@@ -9341,7 +9762,7 @@
  },
  "Bannissement : {0} de {1} renvoyée{2} dans son royaume.": {
   "at": [
-   "src/engine/combat.js:2011"
+   "src/engine/combat.js:2167"
   ],
   "args": [
    "U.n(f, 'figurine')",
@@ -9351,12 +9772,12 @@
  },
  "La muraille se fend et s'écroule.": {
   "at": [
-   "src/engine/combat.js:2014"
+   "src/engine/combat.js:2170"
   ]
  },
  "La terre engloutit {0} !": {
   "at": [
-   "src/engine/combat.js:2015"
+   "src/engine/combat.js:2171"
   ],
   "args": [
    "bt.name(t)"
@@ -9364,12 +9785,12 @@
  },
  "La terre se fend sans effet.": {
   "at": [
-   "src/engine/combat.js:2015"
+   "src/engine/combat.js:2171"
   ]
  },
  "{0} dans un sommeil de plomb.": {
   "at": [
-   "src/engine/combat.js:2018"
+   "src/engine/combat.js:2174"
   ],
   "args": [
    "bt.subj(t, 'sombre')"
@@ -9377,29 +9798,29 @@
  },
  "sombre": {
   "at": [
-   "src/engine/combat.js:2018"
+   "src/engine/combat.js:2174"
   ]
  },
  "sombrent": {
   "at": [
-   "src/engine/combat.js:2018"
+   "src/engine/combat.js:2174"
   ],
   "hint": "pluriel de « sombre » (le sujet est une troupe de plusieurs figurines)"
  },
  "est désorienté": {
   "at": [
-   "src/engine/combat.js:2019"
+   "src/engine/combat.js:2175"
   ]
  },
  "sont désorientés": {
   "at": [
-   "src/engine/combat.js:2019"
+   "src/engine/combat.js:2175"
   ],
   "hint": "pluriel de « est désorienté » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} : armes brisées, {1}": {
   "at": [
-   "src/engine/combat.js:2022"
+   "src/engine/combat.js:2178"
   ],
   "args": [
    "bt.name(t)",
@@ -9408,22 +9829,22 @@
  },
  "son tir magique reste intact.": {
   "at": [
-   "src/engine/combat.js:2022"
+   "src/engine/combat.js:2178"
   ]
  },
  "mêlée à 1 (son tir magique reste intact).": {
   "at": [
-   "src/engine/combat.js:2022"
+   "src/engine/combat.js:2178"
   ]
  },
  "attaques à 1.": {
   "at": [
-   "src/engine/combat.js:2022"
+   "src/engine/combat.js:2178"
   ]
  },
  "{0} : {1} (Déformation).": {
   "at": [
-   "src/engine/combat.js:2023"
+   "src/engine/combat.js:2179"
   ],
   "args": [
    "bt.name(t)",
@@ -9432,7 +9853,7 @@
  },
  "{0} dans une toile.": {
   "at": [
-   "src/engine/combat.js:2024"
+   "src/engine/combat.js:2180"
   ],
   "args": [
    "bt.subj(t, 'est pris')"
@@ -9440,7 +9861,7 @@
  },
  "{0} de camp !": {
   "at": [
-   "src/engine/combat.js:2025"
+   "src/engine/combat.js:2181"
   ],
   "args": [
    "bt.subj(t, 'change')"
@@ -9448,29 +9869,29 @@
  },
  "change": {
   "at": [
-   "src/engine/combat.js:2025"
+   "src/engine/combat.js:2181"
   ]
  },
  "changent": {
   "at": [
-   "src/engine/combat.js:2025"
+   "src/engine/combat.js:2181"
   ],
   "hint": "pluriel de « change » (le sujet est une troupe de plusieurs figurines)"
  },
  "est asservi": {
   "at": [
-   "src/engine/combat.js:2026"
+   "src/engine/combat.js:2182"
   ]
  },
  "sont asservis": {
   "at": [
-   "src/engine/combat.js:2026"
+   "src/engine/combat.js:2182"
   ],
   "hint": "pluriel de « est asservi » (le sujet est une troupe de plusieurs figurines)"
  },
  "Les arcs de {0} se tordent.": {
   "at": [
-   "src/engine/combat.js:2027"
+   "src/engine/combat.js:2183"
   ],
   "args": [
    "bt.name(t)"
@@ -9478,27 +9899,27 @@
  },
  "La terreur gagne les rangs ennemis.": {
   "at": [
-   "src/engine/combat.js:2034"
+   "src/engine/combat.js:2190"
   ]
  },
  "PV rendu": {
   "at": [
-   "src/engine/combat.js:2045",
-   "src/engine/combat.js:2046"
+   "src/engine/combat.js:2201",
+   "src/engine/combat.js:2202"
   ]
  },
  "PV rendus": {
   "at": [
-   "src/engine/combat.js:2045",
-   "src/engine/combat.js:2045",
-   "src/engine/combat.js:2046",
-   "src/engine/combat.js:2046"
+   "src/engine/combat.js:2201",
+   "src/engine/combat.js:2201",
+   "src/engine/combat.js:2202",
+   "src/engine/combat.js:2202"
   ],
   "hint": "pluriel de « PV rendu »"
  },
  "Guérison de masse : {0}.": {
   "at": [
-   "src/engine/combat.js:2046"
+   "src/engine/combat.js:2202"
   ],
   "args": [
    "U.n(n, 'PV rendu', 'PV rendus')"
@@ -9506,12 +9927,12 @@
  },
  "Un vortex magique se forme.": {
   "at": [
-   "src/engine/combat.js:2060"
+   "src/engine/combat.js:2216"
   ]
  },
  "{0} tremble : {1} dégâts.": {
   "at": [
-   "src/engine/combat.js:2065"
+   "src/engine/combat.js:2221"
   ],
   "args": [
    "U.cap(bt.towerName(t))",
@@ -9520,7 +9941,7 @@
  },
  "{0} pans de muraille s'écroulent.": {
   "at": [
-   "src/engine/combat.js:2069"
+   "src/engine/combat.js:2225"
   ],
   "args": [
    "n"
@@ -9528,12 +9949,12 @@
  },
  "Un pan de muraille s'écroule.": {
   "at": [
-   "src/engine/combat.js:2069"
+   "src/engine/combat.js:2225"
   ]
  },
  "Les servants {0} s'enfuient, épouvantés : {1} pendant 4 rounds.": {
   "at": [
-   "src/engine/combat.js:2074"
+   "src/engine/combat.js:2230"
   ],
   "args": [
    "n > 1 ? 'des ' + n + ' tours' : 'de la tour'",
@@ -9542,7 +9963,7 @@
  },
  "des {0} tours": {
   "at": [
-   "src/engine/combat.js:2074"
+   "src/engine/combat.js:2230"
   ],
   "args": [
    "n"
@@ -9550,38 +9971,38 @@
  },
  "de la tour": {
   "at": [
-   "src/engine/combat.js:2074"
+   "src/engine/combat.js:2230"
   ]
  },
  "elles se taisent": {
   "at": [
-   "src/engine/combat.js:2074"
+   "src/engine/combat.js:2230"
   ]
  },
  "elle se tait": {
   "at": [
-   "src/engine/combat.js:2074"
+   "src/engine/combat.js:2230"
   ]
  },
  "Aucune tour à hanter ici.": {
   "at": [
-   "src/engine/combat.js:2074"
+   "src/engine/combat.js:2230"
   ]
  },
  "La tour du sorcier perd son flux.": {
   "at": [
-   "src/engine/combat.js:2077"
+   "src/engine/combat.js:2233"
   ]
  },
  "Une brèche s'ouvre dans la muraille.": {
   "at": [
-   "src/engine/combat.js:2079"
+   "src/engine/combat.js:2235"
   ]
  },
  "Rien ne tombe sur {0}.": {
   "at": [
-   "src/engine/combat.js:2084",
-   "src/engine/combat.js:2085"
+   "src/engine/combat.js:2240",
+   "src/engine/combat.js:2241"
   ],
   "args": [
    "bt.name(t)"
@@ -9589,12 +10010,12 @@
  },
  "rien": {
   "at": [
-   "src/engine/combat.js:2095"
+   "src/engine/combat.js:2251"
   ]
  },
  "soigné de {0} PV": {
   "at": [
-   "src/engine/combat.js:2096"
+   "src/engine/combat.js:2252"
   ],
   "args": [
    "h"
@@ -9602,12 +10023,12 @@
  },
  "soin sans effet": {
   "at": [
-   "src/engine/combat.js:2096"
+   "src/engine/combat.js:2252"
   ]
  },
  "Canaux du chaos, {0}": {
   "at": [
-   "src/engine/combat.js:2099"
+   "src/engine/combat.js:2255"
   ],
   "args": [
    "Spells.CHANNEL_NAMES[t.u.chaosChannel]"
@@ -9615,37 +10036,37 @@
  },
  "Canaux du chaos, sans effet": {
   "at": [
-   "src/engine/combat.js:2100"
+   "src/engine/combat.js:2256"
   ]
  },
  "Déformation, sans effet": {
   "at": [
-   "src/engine/combat.js:2102"
+   "src/engine/combat.js:2258"
   ]
  },
  "trait de feu, sans effet": {
   "at": [
-   "src/engine/combat.js:2103"
+   "src/engine/combat.js:2259"
   ]
  },
  "Foudre distordue, sans effet": {
   "at": [
-   "src/engine/combat.js:2104"
+   "src/engine/combat.js:2260"
   ]
  },
  "Trait funeste, sans effet": {
   "at": [
-   "src/engine/combat.js:2105"
+   "src/engine/combat.js:2261"
   ]
  },
  "Désintégration, sans effet": {
   "at": [
-   "src/engine/combat.js:2106"
+   "src/engine/combat.js:2262"
   ]
  },
  "{0} au cercle d'invocation.": {
   "at": [
-   "src/engine/combat.js:2109"
+   "src/engine/combat.js:2265"
   ],
   "args": [
    "bt.subj(t, 'est rappelé')"
@@ -9653,39 +10074,39 @@
  },
  "est rappelé": {
   "at": [
-   "src/engine/combat.js:2109"
+   "src/engine/combat.js:2265"
   ]
  },
  "sont rappelés": {
   "at": [
-   "src/engine/combat.js:2109"
+   "src/engine/combat.js:2265"
   ],
   "hint": "pluriel de « est rappelé » (le sujet est une troupe de plusieurs figurines)"
  },
  "se relève": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ]
  },
  "se relèvent": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ],
   "hint": "pluriel de « se relève » (le sujet est une troupe de plusieurs figurines)"
  },
  "morts-vivants.": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ]
  },
  "mort-vivant.": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ]
  },
  "{0} à la vie.": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ],
   "args": [
    "bt.subj(t, 'revient')"
@@ -9693,29 +10114,29 @@
  },
  "revient": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ]
  },
  "reviennent": {
   "at": [
-   "src/engine/combat.js:2127"
+   "src/engine/combat.js:2283"
   ],
   "hint": "pluriel de « revient » (le sujet est une troupe de plusieurs figurines)"
  },
  "se dissipe": {
   "at": [
-   "src/engine/combat.js:2157"
+   "src/engine/combat.js:2313"
   ]
  },
  "se dissipent": {
   "at": [
-   "src/engine/combat.js:2157"
+   "src/engine/combat.js:2313"
   ],
   "hint": "pluriel de « se dissipe » (le sujet est une troupe de plusieurs figurines)"
  },
  "Dissipé sur {0} : {1}.": {
   "at": [
-   "src/engine/combat.js:2159"
+   "src/engine/combat.js:2315"
   ],
   "args": [
    "bt.name(t)",
@@ -9724,7 +10145,7 @@
  },
  "{0} (renvoi)": {
   "at": [
-   "src/engine/combat.js:2173"
+   "src/engine/combat.js:2329"
   ],
   "args": [
    "Units.label(t.u)"
@@ -9732,7 +10153,7 @@
  },
  "Dissipé : {0}.": {
   "at": [
-   "src/engine/combat.js:2193"
+   "src/engine/combat.js:2349"
   ],
   "args": [
    "gone.map(e => DATA.spells[e] ? DATA.spells[e].name : e).join(', ')"
@@ -9740,7 +10161,269 @@
  },
  "Désenchantement : rien ne tombe.": {
   "at": [
-   "src/engine/combat.js:2194"
+   "src/engine/combat.js:2350"
+  ]
+ },
+ "Hors du champ de bataille.": {
+  "at": [
+   "src/engine/combat.js:2401"
+  ]
+ },
+ "L'unité s'y trouve déjà.": {
+  "at": [
+   "src/engine/combat.js:2402"
+  ]
+ },
+ "La case est occupée.": {
+  "at": [
+   "src/engine/combat.js:2403"
+  ]
+ },
+ "Une tour ou une porte occupe la case.": {
+  "at": [
+   "src/engine/combat.js:2404"
+  ]
+ },
+ "Des rochers occupent la case.": {
+  "at": [
+   "src/engine/combat.js:2405"
+  ]
+ },
+ "Un champ de force occupe la case.": {
+  "at": [
+   "src/engine/combat.js:2406"
+  ]
+ },
+ "Eau profonde : l'unité ne saurait s'y tenir.": {
+  "at": [
+   "src/engine/combat.js:2407"
+  ]
+ },
+ "Le Mur de feu empêche de se téléporter dans la cité.": {
+  "at": [
+   "src/engine/combat.js:2409"
+  ]
+ },
+ "On ne se pose pas sur la muraille ennemie.": {
+  "at": [
+   "src/engine/combat.js:2410"
+  ]
+ },
+ "{0} (Lenteur).": {
+  "at": [
+   "src/engine/combat.js:2454"
+  ],
+  "args": [
+   "bt.subj(t, 'est ralenti')"
+  ]
+ },
+ "est ralenti": {
+  "at": [
+   "src/engine/combat.js:2454"
+  ]
+ },
+ "sont ralentis": {
+  "at": [
+   "src/engine/combat.js:2454"
+  ],
+  "hint": "pluriel de « est ralenti » (le sujet est une troupe de plusieurs figurines)"
+ },
+ "Lenteur de masse : {0}{1}.": {
+  "at": [
+   "src/engine/combat.js:2462"
+  ],
+  "args": [
+   "hit.length ? 'ralentis : ' + hit.join(', ') : 'aucun ennemi ralenti'",
+   "held.length ? ' ; résistent : ' + held.join(', ') : ''"
+  ]
+ },
+ "ralentis : {0}": {
+  "at": [
+   "src/engine/combat.js:2462"
+  ],
+  "args": [
+   "hit.join(', ')"
+  ]
+ },
+ "aucun ennemi ralenti": {
+  "at": [
+   "src/engine/combat.js:2462"
+  ]
+ },
+ " ; résistent : {0}": {
+  "at": [
+   "src/engine/combat.js:2462"
+  ],
+  "args": [
+   "held.join(', ')"
+  ]
+ },
+ "{0} : plus de riposte.": {
+  "at": [
+   "src/engine/combat.js:2464"
+  ],
+  "args": [
+   "bt.subj(t, 'est entravé')"
+  ]
+ },
+ "est entravé": {
+  "at": [
+   "src/engine/combat.js:2464"
+  ]
+ },
+ "sont entravés": {
+  "at": [
+   "src/engine/combat.js:2464"
+  ],
+  "hint": "pluriel de « est entravé » (le sujet est une troupe de plusieurs figurines)"
+ },
+ "{0} dans le crépuscule : plus d'attaque à distance.": {
+  "at": [
+   "src/engine/combat.js:2465"
+  ],
+  "args": [
+   "bt.subj(t, 'est plongé')"
+  ]
+ },
+ "est plongé": {
+  "at": [
+   "src/engine/combat.js:2465"
+  ]
+ },
+ "sont plongés": {
+  "at": [
+   "src/engine/combat.js:2465"
+  ],
+  "hint": "pluriel de « est plongé » (le sujet est une troupe de plusieurs figurines)"
+ },
+ "Un champ de force se dresse sur {0}.": {
+  "at": [
+   "src/engine/combat.js:2469"
+  ],
+  "args": [
+   "U.n(tiles.length, 'case')"
+  ]
+ },
+ "case": {
+  "at": [
+   "src/engine/combat.js:2469",
+   "src/engine/combat.js:2474",
+   "src/engine/combat.js:2487",
+   "src/engine/combat.js:2504"
+  ]
+ },
+ "cases": {
+  "at": [
+   "src/engine/combat.js:2469",
+   "src/engine/combat.js:2474",
+   "src/engine/combat.js:2487",
+   "src/engine/combat.js:2504"
+  ],
+  "hint": "pluriel de « case »"
+ },
+ "Un rideau de flammes s'élève sur {0}.": {
+  "at": [
+   "src/engine/combat.js:2474"
+  ],
+  "args": [
+   "U.n(tiles.length, 'case')"
+  ]
+ },
+ "mine de feu enfouie": {
+  "at": [
+   "src/engine/combat.js:2481"
+  ]
+ },
+ "mines de feu enfouies": {
+  "at": [
+   "src/engine/combat.js:2481",
+   "src/engine/combat.js:2481"
+  ],
+  "hint": "pluriel de « mine de feu enfouie »"
+ },
+ "Une brume épaisse couvre {0}.": {
+  "at": [
+   "src/engine/combat.js:2487"
+  ],
+  "args": [
+   "U.n(tiles.length, 'case')"
+  ]
+ },
+ "{0} ailleurs sur le champ de bataille.": {
+  "at": [
+   "src/engine/combat.js:2493"
+  ],
+  "args": [
+   "bt.subj(t, 'est transporté')"
+  ]
+ },
+ "est transporté": {
+  "at": [
+   "src/engine/combat.js:2493"
+  ]
+ },
+ "sont transportés": {
+  "at": [
+   "src/engine/combat.js:2493"
+  ],
+  "hint": "pluriel de « est transporté » (le sujet est une troupe de plusieurs figurines)"
+ },
+ "{0} de {1}.": {
+  "at": [
+   "src/engine/combat.js:2504"
+  ],
+  "args": [
+   "bt.subj(t, 'est repoussé')",
+   "U.n(path.length, 'case')"
+  ]
+ },
+ "est repoussé": {
+  "at": [
+   "src/engine/combat.js:2504"
+  ]
+ },
+ "sont repoussés": {
+  "at": [
+   "src/engine/combat.js:2504"
+  ],
+  "hint": "pluriel de « est repoussé » (le sujet est une troupe de plusieurs figurines)"
+ },
+ " (des vôtres)": {
+  "at": [
+   "src/engine/combat.js:2513"
+  ]
+ },
+ "Chaîne d'éclairs : {0}.": {
+  "at": [
+   "src/engine/combat.js:2517"
+  ],
+  "args": [
+   "parts.join(', ')"
+  ]
+ },
+ "Vengeance divine : {0} de dégâts à {1}.": {
+  "at": [
+   "src/engine/combat.js:2521"
+  ],
+  "args": [
+   "U.n(d, 'point', 'points')",
+   "bt.name(t)"
+  ]
+ },
+ "Sacrifice de {0}.": {
+  "at": [
+   "src/engine/combat.js:2527"
+  ],
+  "args": [
+   "bt.name(v)"
+  ]
+ },
+ "Un double de {0} apparaît.": {
+  "at": [
+   "src/engine/combat.js:2541"
+  ],
+  "args": [
+   "bt.name(t)"
   ]
  },
  "Le monde s'éveille. Des sorciers rivaux se disputent les deux plans.": {
@@ -9885,7 +10568,7 @@
    "src/engine/game.js:433",
    "src/engine/game.js:457",
    "src/engine/game.js:2139",
-   "src/ui/combatview.js:1762"
+   "src/ui/combatview.js:1870"
   ],
   "args": [
    "cc.amt"
@@ -9983,7 +10666,7 @@
   "at": [
    "src/engine/game.js:482",
    "src/engine/game.js:1079",
-   "src/engine/spells.js:333",
+   "src/engine/spells.js:396",
    "src/engine/chronicle.js:122"
   ],
   "args": [
@@ -10294,31 +10977,31 @@
  "de la vie": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1711"
+   "src/ui/combatview.js:1816"
   ]
  },
  "de la mort": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1711"
+   "src/ui/combatview.js:1816"
   ]
  },
  "du chaos": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1711"
+   "src/ui/combatview.js:1816"
   ]
  },
  "de la nature": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1711"
+   "src/ui/combatview.js:1816"
   ]
  },
  "de la sorcellerie": {
   "at": [
    "src/engine/game.js:857",
-   "src/ui/combatview.js:1711"
+   "src/ui/combatview.js:1816"
   ]
  },
  "Plus de mouvement.": {
@@ -10725,8 +11408,8 @@
   "at": [
    "src/engine/game.js:1239",
    "src/engine/events.js:1157",
-   "src/ui/magicui.js:353",
-   "src/ui/magicui.js:379"
+   "src/ui/magicui.js:393",
+   "src/ui/magicui.js:419"
   ],
   "args": [
    "back.name"
@@ -10910,13 +11593,13 @@
  "Vous êtes déjà sur la carte.": {
   "at": [
    "src/engine/game.js:1439",
-   "src/engine/spells.js:276"
+   "src/engine/spells.js:280"
   ]
  },
  "Il faut votre forteresse.": {
   "at": [
    "src/engine/game.js:1440",
-   "src/engine/spells.js:277"
+   "src/engine/spells.js:281"
   ]
  },
  "Aucune place près de la forteresse.": {
@@ -11274,7 +11957,7 @@
  "Le Sceau planaire bloque tout passage.": {
   "at": [
    "src/engine/game.js:1687",
-   "src/engine/spells.js:349"
+   "src/engine/spells.js:412"
   ]
  },
  "Il faut encore du mouvement pour passer dans l'autre plan.": {
@@ -11290,7 +11973,7 @@
  "Le terrain de l'autre plan est impraticable.": {
   "at": [
    "src/engine/game.js:1692",
-   "src/engine/spells.js:350"
+   "src/engine/spells.js:413"
   ]
  },
  "Une force ennemie occupe la case de l'autre plan.": {
@@ -11306,7 +11989,7 @@
  "Des gardiens occupent la case de l'autre plan.": {
   "at": [
    "src/engine/game.js:1696",
-   "src/engine/spells.js:353"
+   "src/engine/spells.js:416"
   ]
  },
  "Or insuffisant.": {
@@ -12080,7 +12763,7 @@
    "src/engine/turn.js:90",
    "src/engine/turn.js:641",
    "src/engine/spells.js:31",
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1265"
   ]
  },
  "unités": {
@@ -12591,9 +13274,9 @@
  "Vous avez déjà six héros.": {
   "at": [
    "src/engine/turn.js:664",
-   "src/engine/spells.js:267",
-   "src/engine/spells.js:590",
-   "src/engine/spells.js:605"
+   "src/engine/spells.js:271",
+   "src/engine/spells.js:653",
+   "src/engine/spells.js:668"
   ]
  },
  "{0} sert déjà un autre sorcier.": {
@@ -12661,15 +13344,15 @@
  "terre corrompue": {
   "at": [
    "src/engine/spells.js:19",
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:809"
   ]
  },
  "terres corrompues": {
   "at": [
    "src/engine/spells.js:19",
    "src/engine/spells.js:19",
-   "src/engine/spells.js:734",
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:809",
+   "src/engine/spells.js:809"
   ],
   "hint": "pluriel de « terre corrompue »"
  },
@@ -12754,12 +13437,12 @@
  },
  "Sort inconnu.": {
   "at": [
-   "src/engine/spells.js:74"
+   "src/engine/spells.js:77"
   ]
  },
  "nouvelle cible, l'incantation reprend ({0}).": {
   "at": [
-   "src/engine/spells.js:79"
+   "src/engine/spells.js:82"
   ],
   "args": [
    "Spells.castingTurnsText(game, pl)"
@@ -12767,12 +13450,12 @@
  },
  "Un sort est déjà en cours d'incantation.": {
   "at": [
-   "src/engine/spells.js:81"
+   "src/engine/spells.js:84"
   ]
  },
  "Incantation en cours ({0} tour{1}).": {
   "at": [
-   "src/engine/spells.js:99"
+   "src/engine/spells.js:102"
   ],
   "args": [
    "turns",
@@ -12781,18 +13464,18 @@
  },
  "mana insuffisant": {
   "at": [
-   "src/engine/spells.js:120",
+   "src/engine/spells.js:123",
    "src/ui/magicui.js:42"
   ]
  },
  "prêt au prochain tour": {
   "at": [
-   "src/engine/spells.js:120"
+   "src/engine/spells.js:123"
   ]
  },
  "prêt dans {0} tours": {
   "at": [
-   "src/engine/spells.js:120"
+   "src/engine/spells.js:123"
   ],
   "args": [
    "t"
@@ -12800,12 +13483,12 @@
  },
  "Aucune cité pour vous accueillir.": {
   "at": [
-   "src/engine/spells.js:126"
+   "src/engine/spells.js:129"
   ]
  },
  "{0} : incantation suspendue, {1}. Elle reprendra dès que la cible sera valable ; vous pouvez aussi lui donner une nouvelle cible (grimoire) ou l'abandonner.": {
   "at": [
-   "src/engine/spells.js:140"
+   "src/engine/spells.js:143"
   ],
   "args": [
    "DATA.spells[c.id].name",
@@ -12814,8 +13497,8 @@
  },
  "{0} échoue : {1} La moitié du mana est récupérée.": {
   "at": [
-   "src/engine/spells.js:155",
-   "src/engine/spells.js:157"
+   "src/engine/spells.js:158",
+   "src/engine/spells.js:160"
   ],
   "args": [
    "DATA.spells[c.id].name",
@@ -12824,13 +13507,13 @@
  },
  "Choisissez une case.": {
   "at": [
-   "src/engine/spells.js:183",
-   "src/engine/spells.js:237"
+   "src/engine/spells.js:186",
+   "src/engine/spells.js:241"
   ]
  },
  "Aucune unité de la case à enchanter (elles {0}).": {
   "at": [
-   "src/engine/spells.js:184"
+   "src/engine/spells.js:187"
   ],
   "args": [
    "sp.params.enchant === 'flight' ? 'volent déjà' : 'vont déjà sur l\\'eau'"
@@ -12838,58 +13521,59 @@
  },
  "volent déjà": {
   "at": [
-   "src/engine/spells.js:184"
+   "src/engine/spells.js:187"
   ]
  },
  "vont déjà sur l'eau": {
   "at": [
-   "src/engine/spells.js:184"
+   "src/engine/spells.js:187"
   ]
  },
  "Aucune de vos unités sur cette case.": {
   "at": [
-   "src/engine/spells.js:184"
+   "src/engine/spells.js:187",
+   "src/engine/spells.js:316"
   ]
  },
  "Une sorcière bannie ne peut lancer que le Sort de Retour.": {
   "at": [
-   "src/engine/spells.js:187"
+   "src/engine/spells.js:190"
   ]
  },
  "Un sorcier banni ne peut lancer que le Sort de Retour.": {
   "at": [
-   "src/engine/spells.js:187"
+   "src/engine/spells.js:190"
   ]
  },
  "Cible disparue.": {
   "at": [
-   "src/engine/spells.js:191"
+   "src/engine/spells.js:195"
   ]
  },
  "Il faut une unité amie.": {
   "at": [
-   "src/engine/spells.js:192",
+   "src/engine/spells.js:196",
    "src/engine/events.js:1129"
   ]
  },
  "Il faut une unité ennemie.": {
   "at": [
-   "src/engine/spells.js:193"
+   "src/engine/spells.js:197"
   ]
  },
  "Réservé aux unités normales.": {
   "at": [
-   "src/engine/spells.js:195"
+   "src/engine/spells.js:199"
   ]
  },
  "Déjà enchantée.": {
   "at": [
-   "src/engine/spells.js:196"
+   "src/engine/spells.js:200"
   ]
  },
  "Incompatible avec {0}.": {
   "at": [
-   "src/engine/spells.js:197"
+   "src/engine/spells.js:201"
   ],
   "args": [
    "DATA.spells[p.exclusiveWith].name"
@@ -12897,69 +13581,69 @@
  },
  "Incompatible avec un enchantement déjà présent.": {
   "at": [
-   "src/engine/spells.js:198"
+   "src/engine/spells.js:202"
   ]
  },
  "Le chaos a déjà transformé cette unité.": {
   "at": [
-   "src/engine/spells.js:199"
+   "src/engine/spells.js:203"
   ]
  },
  "L'unité a déjà cette capacité.": {
   "at": [
-   "src/engine/spells.js:204"
+   "src/engine/spells.js:208"
   ]
  },
  "L'unité vole déjà.": {
   "at": [
-   "src/engine/spells.js:206",
-   "src/engine/spells.js:207"
+   "src/engine/spells.js:210",
+   "src/engine/spells.js:211"
   ]
  },
  "L'unité va déjà sur l'eau.": {
   "at": [
-   "src/engine/spells.js:207"
+   "src/engine/spells.js:211"
   ]
  },
  "Il faut viser un de vos héros.": {
   "at": [
-   "src/engine/spells.js:209"
+   "src/engine/spells.js:213"
   ]
  },
  "L'unité est déjà dans la cité de votre cercle d'invocation.": {
   "at": [
-   "src/engine/spells.js:211"
+   "src/engine/spells.js:215"
   ]
  },
  "Aucun enchantement à protéger sur cette unité.": {
   "at": [
-   "src/engine/spells.js:212"
+   "src/engine/spells.js:216"
   ]
  },
  "Sa pile resterait sur l'eau sans rien pour la porter.": {
   "at": [
-   "src/engine/spells.js:216"
+   "src/engine/spells.js:220"
   ]
  },
  "Cité disparue.": {
   "at": [
-   "src/engine/spells.js:221"
+   "src/engine/spells.js:225"
   ]
  },
  "Il faut une cité amie.": {
   "at": [
-   "src/engine/spells.js:222",
+   "src/engine/spells.js:226",
    "src/engine/events.js:1112"
   ]
  },
  "Il faut une cité ennemie.": {
   "at": [
-   "src/engine/spells.js:223"
+   "src/engine/spells.js:227"
   ]
  },
  "Un traité vous lie à {0} : ses cités sont épargnées.": {
   "at": [
-   "src/engine/spells.js:224"
+   "src/engine/spells.js:228"
   ],
   "args": [
    "Players.nameFor(game, pl.id, c.owner)"
@@ -12967,63 +13651,63 @@
  },
  "Cet enchantement est déjà actif.": {
   "at": [
-   "src/engine/spells.js:225"
+   "src/engine/spells.js:229"
   ]
  },
  "La cité est consacrée.": {
   "at": [
-   "src/engine/spells.js:226",
-   "src/engine/spells.js:247"
+   "src/engine/spells.js:230",
+   "src/engine/spells.js:251"
   ]
  },
  "Choisissez le royaume dont la cité sera gardée.": {
   "at": [
-   "src/engine/spells.js:227"
+   "src/engine/spells.js:231"
   ]
  },
  "La cité a déjà des murailles.": {
   "at": [
-   "src/engine/spells.js:228"
+   "src/engine/spells.js:232"
   ]
  },
  "De l'autre côté, c'est la mer : seuls les volants et les nageurs passeraient.": {
   "at": [
-   "src/engine/spells.js:229"
+   "src/engine/spells.js:233"
   ]
  },
  "Son maître pratique la magie de la mort : sans effet.": {
   "at": [
-   "src/engine/spells.js:231"
+   "src/engine/spells.js:235"
   ]
  },
  "Aucun lieu de culte dans la cité : il n'y aurait que les inconvénients.": {
   "at": [
-   "src/engine/spells.js:232"
+   "src/engine/spells.js:236"
   ]
  },
  "La forteresse est déjà là.": {
   "at": [
-   "src/engine/spells.js:233"
+   "src/engine/spells.js:237"
   ]
  },
  "Le cercle d'invocation est déjà là.": {
   "at": [
-   "src/engine/spells.js:234"
+   "src/engine/spells.js:238"
   ]
  },
  "Case inexplorée.": {
   "at": [
-   "src/engine/spells.js:239"
+   "src/engine/spells.js:243"
   ]
  },
  "Il faut voir la case pour y viser des troupes.": {
   "at": [
-   "src/engine/spells.js:240"
+   "src/engine/spells.js:244"
   ]
  },
  "L'Égide arcanique de {0} repousse les sorts de ce royaume.": {
   "at": [
-   "src/engine/spells.js:246"
+   "src/engine/spells.js:250"
   ],
   "args": [
    "tc.name"
@@ -13031,25 +13715,25 @@
  },
  "Aucun rival connu n'entretient d'enchantement global.": {
   "at": [
-   "src/engine/spells.js:249",
+   "src/engine/spells.js:253",
    "src/ui/magicui.js:47",
    "src/ui/magicui.js:82"
   ]
  },
  "Choisissez un sorcier rival.": {
   "at": [
-   "src/engine/spells.js:250",
+   "src/engine/spells.js:254",
    "src/engine/events.js:1096"
   ]
  },
  "N'entretient aucun enchantement global.": {
   "at": [
-   "src/engine/spells.js:250"
+   "src/engine/spells.js:254"
   ]
  },
  "{0} n'est plus entretenu.": {
   "at": [
-   "src/engine/spells.js:250"
+   "src/engine/spells.js:254"
   ],
   "args": [
    "DATA.spells[target.spell].name"
@@ -13057,7 +13741,7 @@
  },
  "{0} n'incante rien en ce moment.": {
   "at": [
-   "src/engine/spells.js:252"
+   "src/engine/spells.js:256"
   ],
   "args": [
    "U.cap(Players.nameFor(game, pl.id, o.id))"
@@ -13065,12 +13749,12 @@
  },
  "Déjà actif.": {
   "at": [
-   "src/engine/spells.js:254"
+   "src/engine/spells.js:258"
   ]
  },
  "{0} entretient déjà cet enchantement.": {
   "at": [
-   "src/engine/spells.js:256"
+   "src/engine/spells.js:260"
   ],
   "args": [
    "U.cap(Players.nameFor(game, pl.id, holder.id))"
@@ -13078,24 +13762,24 @@
  },
  "Aucun héros à ressusciter.": {
   "at": [
-   "src/engine/spells.js:258"
+   "src/engine/spells.js:262"
   ]
  },
  "Ce héros n'est plus parmi les morts.": {
   "at": [
-   "src/engine/spells.js:259"
+   "src/engine/spells.js:263"
   ]
  },
  "Aucun enchantement global adverse.": {
   "at": [
-   "src/engine/spells.js:260",
-   "src/engine/spells.js:758",
+   "src/engine/spells.js:264",
+   "src/engine/spells.js:833",
    "src/ui/magicui.js:73"
   ]
  },
  "{0} n'est plus à portée : dissipé, ou un traité vous lie désormais à son maître.": {
   "at": [
-   "src/engine/spells.js:261"
+   "src/engine/spells.js:265"
   ],
   "args": [
    "DATA.spells[target.spell] ? DATA.spells[target.spell].name : 'Cet enchantement'"
@@ -13103,24 +13787,24 @@
  },
  "Cet enchantement": {
   "at": [
-   "src/engine/spells.js:261"
+   "src/engine/spells.js:265"
   ]
  },
  "Aucun héros disponible.": {
   "at": [
-   "src/engine/spells.js:264",
-   "src/engine/spells.js:594"
+   "src/engine/spells.js:268",
+   "src/engine/spells.js:657"
   ]
  },
  "L'Élu est déjà incarné.": {
   "at": [
-   "src/engine/spells.js:266",
-   "src/engine/spells.js:604"
+   "src/engine/spells.js:270",
+   "src/engine/spells.js:667"
   ]
  },
  "Aucune place autour de {0} pour accueillir le héros.": {
   "at": [
-   "src/engine/spells.js:268"
+   "src/engine/spells.js:272"
   ],
   "args": [
    "sc.name"
@@ -13128,34 +13812,103 @@
  },
  "Aucune terre corrompue ici ni autour.": {
   "at": [
-   "src/engine/spells.js:269",
-   "src/engine/spells.js:657"
+   "src/engine/spells.js:273",
+   "src/engine/spells.js:732"
   ]
  },
  "Il faut viser une faille ouverte.": {
   "at": [
-   "src/engine/spells.js:270"
+   "src/engine/spells.js:274"
   ]
  },
  "Le Sceau planaire fige le voile.": {
   "at": [
-   "src/engine/spells.js:272"
+   "src/engine/spells.js:276"
   ]
  },
  "Il faut viser une case où se tiennent vos troupes.": {
   "at": [
-   "src/engine/spells.js:273"
+   "src/engine/spells.js:277"
   ]
  },
  "Aucune unité blessée à soigner ici.": {
   "at": [
-   "src/engine/spells.js:278"
+   "src/engine/spells.js:282"
+  ]
+ },
+ "Des troupes étrangères occupent cette case.": {
+  "at": [
+   "src/engine/spells.js:303"
+  ]
+ },
+ "On ne se pose pas dans une cité étrangère.": {
+  "at": [
+   "src/engine/spells.js:304"
+  ]
+ },
+ "Trop d'unités sur cette case.": {
+  "at": [
+   "src/engine/spells.js:305",
+   "src/engine/spells.js:694"
+  ]
+ },
+ "Votre pile ne peut pas s'y poser.": {
+  "at": [
+   "src/engine/spells.js:306"
+  ]
+ },
+ "Ces unités ne peuvent pas partir (figées, gouverneur).": {
+  "at": [
+   "src/engine/spells.js:316"
+  ]
+ },
+ "Choisissez la case d'arrivée.": {
+  "at": [
+   "src/engine/spells.js:318"
+  ]
+ },
+ "Choisissez une autre case.": {
+  "at": [
+   "src/engine/spells.js:320"
+  ]
+ },
+ "Trop loin : {0} cases au plus.": {
+  "at": [
+   "src/engine/spells.js:321"
+  ],
+  "args": [
+   "Spells.jumpRange()"
+  ]
+ },
+ "Il faut voir la case d'arrivée.": {
+  "at": [
+   "src/engine/spells.js:322"
+  ]
+ },
+ "Choisissez une de vos cités.": {
+  "at": [
+   "src/engine/spells.js:326"
+  ]
+ },
+ "Il faut une de vos cités.": {
+  "at": [
+   "src/engine/spells.js:327"
+  ]
+ },
+ "La cité doit être sur le même plan.": {
+  "at": [
+   "src/engine/spells.js:328"
+  ]
+ },
+ "La pile est déjà dans cette cité.": {
+  "at": [
+   "src/engine/spells.js:329"
   ]
  },
  "{0} or": {
   "at": [
-   "src/engine/spells.js:298",
-   "src/engine/spells.js:305",
+   "src/engine/spells.js:361",
+   "src/engine/spells.js:368",
    "src/engine/diplo.js:199",
    "src/engine/diplo.js:257"
   ],
@@ -13165,7 +13918,7 @@
  },
  "{0} puissance": {
   "at": [
-   "src/engine/spells.js:299",
+   "src/engine/spells.js:362",
    "src/ui/city.js:409"
   ],
   "args": [
@@ -13174,7 +13927,7 @@
  },
  "troupes {0}{1} % de coût": {
   "at": [
-   "src/engine/spells.js:300"
+   "src/engine/spells.js:363"
   ],
   "args": [
    "du > 0 ? '+' : '−'",
@@ -13183,7 +13936,7 @@
  },
  "plus d'armes en mithril à {0}": {
   "at": [
-   "src/engine/spells.js:302"
+   "src/engine/spells.js:365"
   ],
   "args": [
    "city.name"
@@ -13191,12 +13944,12 @@
  },
  "plus d'armes en mithril possibles": {
   "at": [
-   "src/engine/spells.js:302"
+   "src/engine/spells.js:365"
   ]
  },
  "armes en mithril à {0}": {
   "at": [
-   "src/engine/spells.js:303"
+   "src/engine/spells.js:366"
   ],
   "args": [
    "city.name"
@@ -13204,22 +13957,22 @@
  },
  "armes en mithril avec une Guilde des alchimistes": {
   "at": [
-   "src/engine/spells.js:303"
+   "src/engine/spells.js:366"
   ]
  },
  "mithril": {
   "at": [
-   "src/engine/spells.js:305"
+   "src/engine/spells.js:368"
   ]
  },
  "− mithril": {
   "at": [
-   "src/engine/spells.js:305"
+   "src/engine/spells.js:368"
   ]
  },
  "{0} puiss.": {
   "at": [
-   "src/engine/spells.js:305"
+   "src/engine/spells.js:368"
   ],
   "args": [
    "(dp > 0 ? '+' : '−') + Math.abs(dp)"
@@ -13227,13 +13980,13 @@
  },
  " (aucune de vos cités ne l'exploite)": {
   "at": [
-   "src/engine/spells.js:305",
-   "src/engine/spells.js:334"
+   "src/engine/spells.js:368",
+   "src/engine/spells.js:397"
   ]
  },
  "{0} nourriture{1}": {
   "at": [
-   "src/engine/spells.js:330"
+   "src/engine/spells.js:393"
   ],
   "args": [
    "sg(dFood) + f(Math.abs(dFood))",
@@ -13242,7 +13995,7 @@
  },
  " (taille maximale {0}{1})": {
   "at": [
-   "src/engine/spells.js:330"
+   "src/engine/spells.js:393"
   ],
   "args": [
    "sg(dPop)",
@@ -13251,17 +14004,17 @@
  },
  " (taille déjà au plafond)": {
   "at": [
-   "src/engine/spells.js:330"
+   "src/engine/spells.js:393"
   ]
  },
  " (taille maximale inchangée)": {
   "at": [
-   "src/engine/spells.js:330"
+   "src/engine/spells.js:393"
   ]
  },
  "{0} % de production": {
   "at": [
-   "src/engine/spells.js:331"
+   "src/engine/spells.js:394"
   ],
   "args": [
    "sg(dProd) + f(Math.abs(dProd))"
@@ -13269,17 +14022,17 @@
  },
  "passable sans route": {
   "at": [
-   "src/engine/spells.js:332"
+   "src/engine/spells.js:395"
   ]
  },
  "infranchissable sans route": {
   "at": [
-   "src/engine/spells.js:332"
+   "src/engine/spells.js:395"
   ]
  },
  " et ": {
   "at": [
-   "src/engine/spells.js:333",
+   "src/engine/spells.js:396",
    "src/engine/diplo.js:200",
    "src/engine/diplo.js:201",
    "src/engine/diplo.js:256"
@@ -13288,22 +14041,22 @@
  },
  "rien de plus ni de moins": {
   "at": [
-   "src/engine/spells.js:334"
+   "src/engine/spells.js:397"
   ]
  },
  "passable": {
   "at": [
-   "src/engine/spells.js:339"
+   "src/engine/spells.js:402"
   ]
  },
  "bloquant": {
   "at": [
-   "src/engine/spells.js:339"
+   "src/engine/spells.js:402"
   ]
  },
  "{0} nour.": {
   "at": [
-   "src/engine/spells.js:339"
+   "src/engine/spells.js:402"
   ],
   "args": [
    "sg(dFood) + f(Math.abs(dFood))"
@@ -13311,7 +14064,7 @@
  },
  "{0} % prod.": {
   "at": [
-   "src/engine/spells.js:339"
+   "src/engine/spells.js:402"
   ],
   "args": [
    "sg(dProd) + f(Math.abs(dProd))"
@@ -13319,27 +14072,27 @@
  },
  "Aucune unité amie ici.": {
   "at": [
-   "src/engine/spells.js:346"
+   "src/engine/spells.js:409"
   ]
  },
  "Case occupée de l'autre côté.": {
   "at": [
-   "src/engine/spells.js:348"
+   "src/engine/spells.js:411"
   ]
  },
  "Une cité étrangère occupe la case de l'autre plan.": {
   "at": [
-   "src/engine/spells.js:351"
+   "src/engine/spells.js:414"
   ]
  },
  "Trop d'unités vous attendent déjà de l'autre côté.": {
   "at": [
-   "src/engine/spells.js:352"
+   "src/engine/spells.js:415"
   ]
  },
  "Un traité vous lie à {0}, à qui sont ces troupes.": {
   "at": [
-   "src/engine/spells.js:361"
+   "src/engine/spells.js:424"
   ],
   "args": [
    "Players.nameFor(game, pl.id, o.owner)"
@@ -13347,96 +14100,96 @@
  },
  "Ce terrain ne peut pas être changé.": {
   "at": [
-   "src/engine/spells.js:362",
-   "src/engine/spells.js:529"
+   "src/engine/spells.js:425",
+   "src/engine/spells.js:592"
   ]
  },
  "Impossible ici (ni eau, ni colline, ni montagne, ni nœud).": {
   "at": [
-   "src/engine/spells.js:363",
-   "src/engine/spells.js:533"
+   "src/engine/spells.js:426",
+   "src/engine/spells.js:596"
   ]
  },
  "C'est déjà un volcan.": {
   "at": [
-   "src/engine/spells.js:363",
-   "src/engine/spells.js:534"
+   "src/engine/spells.js:426",
+   "src/engine/spells.js:597"
   ]
  },
  "Impossible sur l'eau.": {
   "at": [
-   "src/engine/spells.js:364",
-   "src/engine/spells.js:543",
+   "src/engine/spells.js:427",
+   "src/engine/spells.js:606",
    "src/engine/veil.js:147"
   ]
  },
  "Cette terre est déjà corrompue.": {
   "at": [
-   "src/engine/spells.js:364"
+   "src/engine/spells.js:427"
   ]
  },
  "Aucun minerai transmutable ici.": {
   "at": [
-   "src/engine/spells.js:365",
-   "src/engine/spells.js:552"
+   "src/engine/spells.js:428",
+   "src/engine/spells.js:615"
   ]
  },
  "Aucune unité ennemie ici.": {
   "at": [
-   "src/engine/spells.js:366",
-   "src/engine/spells.js:691",
-   "src/engine/spells.js:708"
+   "src/engine/spells.js:429",
+   "src/engine/spells.js:766",
+   "src/engine/spells.js:783"
   ]
  },
  "Aucune unité ennemie à figer ici.": {
   "at": [
-   "src/engine/spells.js:367",
-   "src/engine/spells.js:796"
+   "src/engine/spells.js:430",
+   "src/engine/spells.js:871"
   ]
  },
  "Rien à dissiper ici.": {
   "at": [
-   "src/engine/spells.js:371"
+   "src/engine/spells.js:434"
   ]
  },
  "Il faut une case d'océan.": {
   "at": [
-   "src/engine/spells.js:374",
-   "src/engine/spells.js:629"
+   "src/engine/spells.js:437",
+   "src/engine/spells.js:692"
   ]
  },
  "Des unités étrangères occupent cette case.": {
   "at": [
-   "src/engine/spells.js:374",
-   "src/engine/spells.js:630"
+   "src/engine/spells.js:437",
+   "src/engine/spells.js:693"
   ]
  },
  "Aucune route à enchanter ici.": {
   "at": [
-   "src/engine/spells.js:375"
+   "src/engine/spells.js:438"
   ]
  },
  "Il faut viser un nœud.": {
   "at": [
-   "src/engine/spells.js:378",
-   "src/engine/spells.js:785"
+   "src/engine/spells.js:441",
+   "src/engine/spells.js:860"
   ]
  },
  "Il faut un nœud lié à un sorcier rival.": {
   "at": [
-   "src/engine/spells.js:379",
-   "src/engine/spells.js:786"
+   "src/engine/spells.js:442",
+   "src/engine/spells.js:861"
   ]
  },
  "Ce nœud est déjà perverti.": {
   "at": [
-   "src/engine/spells.js:380",
-   "src/engine/spells.js:787"
+   "src/engine/spells.js:443",
+   "src/engine/spells.js:862"
   ]
  },
  "La colère de la nature fait trembler {0} ({1}{2}).": {
   "at": [
-   "src/engine/spells.js:427"
+   "src/engine/spells.js:490"
   ],
   "args": [
    "c.name",
@@ -13446,24 +14199,24 @@
  },
  "unité perdue": {
   "at": [
-   "src/engine/spells.js:427"
+   "src/engine/spells.js:490"
   ]
  },
  "unités perdues": {
   "at": [
-   "src/engine/spells.js:427",
-   "src/engine/spells.js:427"
+   "src/engine/spells.js:490",
+   "src/engine/spells.js:490"
   ],
   "hint": "pluriel de « unité perdue »"
  },
  ", aucun bâtiment perdu": {
   "at": [
-   "src/engine/spells.js:427"
+   "src/engine/spells.js:490"
   ]
  },
  "La colère de la nature frappe {0}, cité de {1}.": {
   "at": [
-   "src/engine/spells.js:428"
+   "src/engine/spells.js:491"
   ],
   "args": [
    "c.name",
@@ -13472,12 +14225,12 @@
  },
  "Le Livre de légende vous a échappé : l'incantation se dissipe.": {
   "at": [
-   "src/engine/spells.js:465"
+   "src/engine/spells.js:528"
   ]
  },
  "{0} est dissipé par {1} de {2}.": {
   "at": [
-   "src/engine/spells.js:469"
+   "src/engine/spells.js:532"
   ],
   "args": [
    "sp.name",
@@ -13487,7 +14240,7 @@
  },
  "{0} dissipe {1} de {2}.": {
   "at": [
-   "src/engine/spells.js:470"
+   "src/engine/spells.js:533"
   ],
   "args": [
    "by",
@@ -13497,7 +14250,7 @@
  },
  "{0} est dissipé.": {
   "at": [
-   "src/engine/spells.js:471"
+   "src/engine/spells.js:534"
   ],
   "args": [
    "sp.name"
@@ -13505,12 +14258,12 @@
  },
  "Aucune place pour accueillir la créature.": {
   "at": [
-   "src/engine/spells.js:477"
+   "src/engine/spells.js:540"
   ]
  },
  "Invocation réussie à {0} : {1}.": {
   "at": [
-   "src/engine/spells.js:479"
+   "src/engine/spells.js:542"
   ],
   "args": [
    "c.name",
@@ -13519,24 +14272,24 @@
  },
  "Plus aucune unité à enchanter.": {
   "at": [
-   "src/engine/spells.js:482"
+   "src/engine/spells.js:545"
   ]
  },
  "unité enchantée": {
   "at": [
-   "src/engine/spells.js:484"
+   "src/engine/spells.js:547"
   ]
  },
  "unités enchantées": {
   "at": [
-   "src/engine/spells.js:484",
-   "src/engine/spells.js:484"
+   "src/engine/spells.js:547",
+   "src/engine/spells.js:547"
   ],
   "hint": "pluriel de « unité enchantée »"
  },
  "{0} par le chaos : {1}.": {
   "at": [
-   "src/engine/spells.js:487"
+   "src/engine/spells.js:550"
   ],
   "args": [
    "Units.subj(u, 'est transformé')",
@@ -13545,18 +14298,18 @@
  },
  "est transformé": {
   "at": [
-   "src/engine/spells.js:487"
+   "src/engine/spells.js:550"
   ]
  },
  "sont transformés": {
   "at": [
-   "src/engine/spells.js:487"
+   "src/engine/spells.js:550"
   ],
   "hint": "pluriel de « est transformé » (le sujet est une troupe de plusieurs figurines)"
  },
  "{0} sur {1}.": {
   "at": [
-   "src/engine/spells.js:488"
+   "src/engine/spells.js:551"
   ],
   "args": [
    "sp.name",
@@ -13565,7 +14318,7 @@
  },
  "{0} est consacrée : ses malédictions se lèvent.": {
   "at": [
-   "src/engine/spells.js:493"
+   "src/engine/spells.js:556"
   ],
   "args": [
    "c.name"
@@ -13573,7 +14326,7 @@
  },
  "{0} est protégée par {1}{2}.": {
   "at": [
-   "src/engine/spells.js:494"
+   "src/engine/spells.js:557"
   ],
   "args": [
    "c.name",
@@ -13583,7 +14336,7 @@
  },
  "L'Égide arcanique de {0} repousse {1}.": {
   "at": [
-   "src/engine/spells.js:498"
+   "src/engine/spells.js:561"
   ],
   "args": [
    "c.name",
@@ -13592,7 +14345,7 @@
  },
  "{0} s'abat sur {1}.": {
   "at": [
-   "src/engine/spells.js:500"
+   "src/engine/spells.js:563"
   ],
   "args": [
    "sp.name",
@@ -13601,7 +14354,7 @@
  },
  "{0} a lancé {1} sur {2} !": {
   "at": [
-   "src/engine/spells.js:501"
+   "src/engine/spells.js:564"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -13611,7 +14364,7 @@
  },
  "Enchantement global actif : {0}.": {
   "at": [
-   "src/engine/spells.js:505"
+   "src/engine/spells.js:568"
   ],
   "args": [
    "sp.name"
@@ -13619,7 +14372,7 @@
  },
  "{0} a lancé {1}.": {
   "at": [
-   "src/engine/spells.js:506"
+   "src/engine/spells.js:569"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -13628,9 +14381,9 @@
  },
  "{0} est lancé.": {
   "at": [
-   "src/engine/spells.js:511",
-   "src/engine/spells.js:513",
-   "src/engine/spells.js:560"
+   "src/engine/spells.js:574",
+   "src/engine/spells.js:576",
+   "src/engine/spells.js:623"
   ],
   "args": [
    "sp.name"
@@ -13638,12 +14391,12 @@
  },
  "Le terrain se transforme.": {
   "at": [
-   "src/engine/spells.js:530"
+   "src/engine/spells.js:593"
   ]
  },
  "Un volcan jaillit sous {0}, lancé par {1}{2}.": {
   "at": [
-   "src/engine/spells.js:538"
+   "src/engine/spells.js:601"
   ],
   "args": [
    "c.name",
@@ -13653,7 +14406,7 @@
  },
  "Un volcan jaillit du sol{0}.": {
   "at": [
-   "src/engine/spells.js:540"
+   "src/engine/spells.js:603"
   ],
   "args": [
    "c ? ' sous ' + c.name + (lost.length ? ' (' + Cities.lostText(lost) + ')' : '') : ''"
@@ -13661,7 +14414,7 @@
  },
  " sous {0}{1}": {
   "at": [
-   "src/engine/spells.js:540"
+   "src/engine/spells.js:603"
   ],
   "args": [
    "c.name",
@@ -13670,7 +14423,7 @@
  },
  "{0} a corrompu une terre de {1}.": {
   "at": [
-   "src/engine/spells.js:546"
+   "src/engine/spells.js:609"
   ],
   "args": [
    "U.cap(Players.nameFor(game, oc.owner, pl.id))",
@@ -13679,27 +14432,27 @@
  },
  "La terre est corrompue.": {
   "at": [
-   "src/engine/spells.js:547"
+   "src/engine/spells.js:610"
   ]
  },
  "Le minerai est transmuté.": {
   "at": [
-   "src/engine/spells.js:553"
+   "src/engine/spells.js:616"
   ]
  },
  "Les routes s'enchantent.": {
   "at": [
-   "src/engine/spells.js:557"
+   "src/engine/spells.js:620"
   ]
  },
  "Sort de combat.": {
   "at": [
-   "src/engine/spells.js:559"
+   "src/engine/spells.js:622"
   ]
  },
  "{0} a lancé le Sort de Maîtrise et règne désormais sur toute magie !": {
   "at": [
-   "src/engine/spells.js:568"
+   "src/engine/spells.js:631"
   ],
   "args": [
    "pl.name"
@@ -13707,12 +14460,12 @@
  },
  "Le Sort de Maîtrise est accompli.": {
   "at": [
-   "src/engine/spells.js:569"
+   "src/engine/spells.js:632"
   ]
  },
  "Vous revenez dans le monde à {0}.": {
   "at": [
-   "src/engine/spells.js:575"
+   "src/engine/spells.js:638"
   ],
   "args": [
    "c.name"
@@ -13720,7 +14473,7 @@
  },
  "Le cercle d'invocation est déplacé à {0}.": {
   "at": [
-   "src/engine/spells.js:577"
+   "src/engine/spells.js:640"
   ],
   "args": [
    "game.cities[t.city].name"
@@ -13728,7 +14481,7 @@
  },
  "La forteresse s'élève désormais à {0}{1}.": {
   "at": [
-   "src/engine/spells.js:585"
+   "src/engine/spells.js:648"
   ],
   "args": [
    "c.name",
@@ -13737,18 +14490,18 @@
  },
  ", avec son Relais de magie": {
   "at": [
-   "src/engine/spells.js:585"
+   "src/engine/spells.js:648"
   ]
  },
  "Aucune place pour accueillir le héros.": {
   "at": [
-   "src/engine/spells.js:596",
-   "src/engine/spells.js:620"
+   "src/engine/spells.js:659",
+   "src/engine/spells.js:683"
   ]
  },
  "{0} ({1}) répond à votre appel.": {
   "at": [
-   "src/engine/spells.js:601"
+   "src/engine/spells.js:664"
   ],
   "args": [
    "h.name",
@@ -13757,12 +14510,12 @@
  },
  "Aucune place pour accueillir l'Élu.": {
   "at": [
-   "src/engine/spells.js:607"
+   "src/engine/spells.js:670"
   ]
  },
  "L'Élu s'incarne à {0}.": {
   "at": [
-   "src/engine/spells.js:611"
+   "src/engine/spells.js:674"
   ],
   "args": [
    "c.name"
@@ -13770,17 +14523,17 @@
  },
  "Aucun héros.": {
   "at": [
-   "src/engine/spells.js:614"
+   "src/engine/spells.js:677"
   ]
  },
  "Ce héros est déjà revenu au monde.": {
   "at": [
-   "src/engine/spells.js:618"
+   "src/engine/spells.js:681"
   ]
  },
  "{0} revient d'entre les morts.": {
   "at": [
-   "src/engine/spells.js:624"
+   "src/engine/spells.js:687"
   ],
   "args": [
    "d.hero.name"
@@ -13788,7 +14541,7 @@
  },
  "Objet créé : {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:626"
+   "src/engine/spells.js:689"
   ],
   "args": [
    "it.name",
@@ -13797,7 +14550,7 @@
  },
  "Artefact créé : {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:627"
+   "src/engine/spells.js:690"
   ],
   "args": [
    "it.name",
@@ -13806,22 +14559,17 @@
  },
  "L'île ne parvient pas à émerger ici.": {
   "at": [
-   "src/engine/spells.js:630"
-  ]
- },
- "Trop d'unités sur cette case.": {
-  "at": [
-   "src/engine/spells.js:631"
+   "src/engine/spells.js:693"
   ]
  },
  "Une île flottante émerge des flots.": {
   "at": [
-   "src/engine/spells.js:632"
+   "src/engine/spells.js:695"
   ]
  },
  "La région se révèle à vous{0}.": {
   "at": [
-   "src/engine/spells.js:641"
+   "src/engine/spells.js:704"
   ],
   "args": [
    "n ? ' : ' + U.n(n, 'armée repérée', 'armées repérées') + ' (le détail au survol de leur ca"
@@ -13829,7 +14577,7 @@
  },
  " : {0} (le détail au survol de leur case)": {
   "at": [
-   "src/engine/spells.js:641"
+   "src/engine/spells.js:704"
   ],
   "args": [
    "U.n(n, 'armée repérée', 'armées repérées')"
@@ -13837,39 +14585,39 @@
  },
  "armée repérée": {
   "at": [
-   "src/engine/spells.js:641"
+   "src/engine/spells.js:704"
   ]
  },
  "armées repérées": {
   "at": [
-   "src/engine/spells.js:641",
-   "src/engine/spells.js:641"
+   "src/engine/spells.js:704",
+   "src/engine/spells.js:704"
   ],
   "hint": "pluriel de « armée repérée »"
  },
  ", sans armée en vue": {
   "at": [
-   "src/engine/spells.js:641"
+   "src/engine/spells.js:704"
   ]
  },
  "Vos troupes basculent dans l'autre plan.": {
   "at": [
-   "src/engine/spells.js:648"
+   "src/engine/spells.js:711"
   ]
  },
  "Pas de forteresse.": {
   "at": [
-   "src/engine/spells.js:651"
+   "src/engine/spells.js:714"
   ]
  },
  "Un navire ne peut pas être rappelé.": {
   "at": [
-   "src/engine/spells.js:652"
+   "src/engine/spells.js:715"
   ]
  },
  "Aucune place près de {0}.": {
   "at": [
-   "src/engine/spells.js:653"
+   "src/engine/spells.js:716"
   ],
   "args": [
    "c.name"
@@ -13877,16 +14625,57 @@
  },
  "{0} est rappelé à {1}.": {
   "at": [
-   "src/engine/spells.js:654"
+   "src/engine/spells.js:717"
   ],
   "args": [
    "Units.label(u)",
    "c.name"
   ]
  },
+ "{0} la porte dimensionnelle.": {
+  "at": [
+   "src/engine/spells.js:723"
+  ],
+  "args": [
+   "U.n(units.length, 'unité franchit', 'unités franchissent')"
+  ]
+ },
+ "unité franchit": {
+  "at": [
+   "src/engine/spells.js:723"
+  ]
+ },
+ "unités franchissent": {
+  "at": [
+   "src/engine/spells.js:723",
+   "src/engine/spells.js:723"
+  ],
+  "hint": "pluriel de « unité franchit »"
+ },
+ "{0} à {1} par le portail.": {
+  "at": [
+   "src/engine/spells.js:729"
+  ],
+  "args": [
+   "U.n(units.length, 'unité rentre', 'unités rentrent')",
+   "c.name"
+  ]
+ },
+ "unité rentre": {
+  "at": [
+   "src/engine/spells.js:729"
+  ]
+ },
+ "unités rentrent": {
+  "at": [
+   "src/engine/spells.js:729",
+   "src/engine/spells.js:729"
+  ],
+  "hint": "pluriel de « unité rentre »"
+ },
  "{0} terres corrompues sont purifiées.": {
   "at": [
-   "src/engine/spells.js:659"
+   "src/engine/spells.js:734"
   ],
   "args": [
    "tiles.length"
@@ -13894,12 +14683,12 @@
  },
  "La terre est purifiée.": {
   "at": [
-   "src/engine/spells.js:659"
+   "src/engine/spells.js:734"
   ]
  },
  "Une faille s'est ouverte entre les plans ({0}, {1}).": {
   "at": [
-   "src/engine/spells.js:664"
+   "src/engine/spells.js:739"
   ],
   "args": [
    "x",
@@ -13908,7 +14697,7 @@
  },
  "La faille s'ouvre sous vos troupes ; le voile s'use ({0} %).": {
   "at": [
-   "src/engine/spells.js:665"
+   "src/engine/spells.js:740"
   ],
   "args": [
    "Math.round(game.veil)"
@@ -13916,12 +14705,12 @@
  },
  "Il faut viser une faille.": {
   "at": [
-   "src/engine/spells.js:668"
+   "src/engine/spells.js:743"
   ]
  },
  "Une faille entre les plans s'est refermée ({0}, {1}).": {
   "at": [
-   "src/engine/spells.js:670"
+   "src/engine/spells.js:745"
   ],
   "args": [
    "s.x",
@@ -13930,7 +14719,7 @@
  },
  "La faille se referme ; le voile se recoud un peu ({0} %).": {
   "at": [
-   "src/engine/spells.js:671"
+   "src/engine/spells.js:746"
   ],
   "args": [
    "Math.round(game.veil)"
@@ -13938,7 +14727,7 @@
  },
  "Vous voici sur la carte, à {0}.": {
   "at": [
-   "src/engine/spells.js:673"
+   "src/engine/spells.js:748"
   ],
   "args": [
    "game.cities[pl.fortress].name"
@@ -13946,13 +14735,13 @@
  },
  "Aucune unité blessée à soigner.": {
   "at": [
-   "src/engine/spells.js:679",
-   "src/engine/spells.js:686"
+   "src/engine/spells.js:754",
+   "src/engine/spells.js:761"
   ]
  },
  "{0} ({1} PV rendus).": {
   "at": [
-   "src/engine/spells.js:683"
+   "src/engine/spells.js:758"
   ],
   "args": [
    "U.n(units.length, 'unité soignée', 'unités soignées')",
@@ -13961,22 +14750,22 @@
  },
  "unité soignée": {
   "at": [
-   "src/engine/spells.js:683",
-   "src/engine/spells.js:684"
+   "src/engine/spells.js:758",
+   "src/engine/spells.js:759"
   ]
  },
  "unités soignées": {
   "at": [
-   "src/engine/spells.js:683",
-   "src/engine/spells.js:683",
-   "src/engine/spells.js:684",
-   "src/engine/spells.js:684"
+   "src/engine/spells.js:758",
+   "src/engine/spells.js:758",
+   "src/engine/spells.js:759",
+   "src/engine/spells.js:759"
   ],
   "hint": "pluriel de « unité soignée »"
  },
  "{0}, {1} PV rendus.": {
   "at": [
-   "src/engine/spells.js:684"
+   "src/engine/spells.js:759"
   ],
   "args": [
    "U.n(units.length, 'unité soignée', 'unités soignées')",
@@ -13985,44 +14774,44 @@
  },
  "Les troupes sont entièrement soignées.": {
   "at": [
-   "src/engine/spells.js:686"
+   "src/engine/spells.js:761"
   ]
  },
  "La tempête": {
   "at": [
-   "src/engine/spells.js:693"
+   "src/engine/spells.js:768"
   ]
  },
  "détruites": {
   "at": [
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:777"
   ]
  },
  "détruite": {
   "at": [
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:777"
   ]
  },
  "aucune unité détruite": {
   "at": [
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:777"
   ]
  },
  "autre blessée": {
   "at": [
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:777"
   ]
  },
  "autres blessées": {
   "at": [
-   "src/engine/spells.js:702",
-   "src/engine/spells.js:702"
+   "src/engine/spells.js:777",
+   "src/engine/spells.js:777"
   ],
   "hint": "pluriel de « autre blessée »"
  },
  "{0} lance {1} sur vos troupes : {2}.": {
   "at": [
-   "src/engine/spells.js:704"
+   "src/engine/spells.js:779"
   ],
   "args": [
    "U.cap(Players.nameFor(game, vic, pl.id))",
@@ -14032,7 +14821,7 @@
  },
  "{0} s'abat : {1}.": {
   "at": [
-   "src/engine/spells.js:705"
+   "src/engine/spells.js:780"
   ],
   "args": [
    "sname",
@@ -14041,7 +14830,7 @@
  },
  "{0} emportée{1}{2}": {
   "at": [
-   "src/engine/spells.js:712"
+   "src/engine/spells.js:787"
   ],
   "args": [
    "U.n(figs, 'figurine')",
@@ -14051,7 +14840,7 @@
  },
  ", dont {0} ({1})": {
   "at": [
-   "src/engine/spells.js:712"
+   "src/engine/spells.js:787"
   ],
   "args": [
    "U.n(killed, 'unité entière', 'unités entières')",
@@ -14060,19 +14849,19 @@
  },
  "unité entière": {
   "at": [
-   "src/engine/spells.js:712"
+   "src/engine/spells.js:787"
   ]
  },
  "unités entières": {
   "at": [
-   "src/engine/spells.js:712",
-   "src/engine/spells.js:712"
+   "src/engine/spells.js:787",
+   "src/engine/spells.js:787"
   ],
   "hint": "pluriel de « unité entière »"
  },
  "Le vent noir {0} souffle sur vos troupes : {1}.": {
   "at": [
-   "src/engine/spells.js:714"
+   "src/engine/spells.js:789"
   ],
   "args": [
    "U.de(Players.nameFor(game, vic, pl.id))",
@@ -14081,7 +14870,7 @@
  },
  "Le vent noir : {0}.": {
   "at": [
-   "src/engine/spells.js:715"
+   "src/engine/spells.js:790"
   ],
   "args": [
    "what"
@@ -14089,24 +14878,24 @@
  },
  "aucun bâtiment perdu": {
   "at": [
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:797"
   ]
  },
  "unité engloutie": {
   "at": [
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:797"
   ]
  },
  "unités englouties": {
   "at": [
-   "src/engine/spells.js:722",
-   "src/engine/spells.js:722"
+   "src/engine/spells.js:797",
+   "src/engine/spells.js:797"
   ],
   "hint": "pluriel de « unité engloutie »"
  },
  "{0} fait trembler la terre sous {1} ({2}).": {
   "at": [
-   "src/engine/spells.js:723"
+   "src/engine/spells.js:798"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -14116,7 +14905,7 @@
  },
  "La terre tremble sous {0} ({1}).": {
   "at": [
-   "src/engine/spells.js:724"
+   "src/engine/spells.js:799"
   ],
   "args": [
    "c.name",
@@ -14125,7 +14914,7 @@
  },
  "la moitié de la population disparaît{0}{1}{2}": {
   "at": [
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:809"
   ],
   "args": [
    "lost.length ? ' ; ' + Cities.lostText(lost) : ''",
@@ -14135,19 +14924,19 @@
  },
  "unité anéantie": {
   "at": [
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:809"
   ]
  },
  "unités anéanties": {
   "at": [
-   "src/engine/spells.js:734",
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:809",
+   "src/engine/spells.js:809"
   ],
   "hint": "pluriel de « unité anéantie »"
  },
  " ; {0} alentour": {
   "at": [
-   "src/engine/spells.js:734"
+   "src/engine/spells.js:809"
   ],
   "args": [
    "U.n(nc, 'terre corrompue', 'terres corrompues')"
@@ -14155,7 +14944,7 @@
  },
  "{0} appelle le Néant sur {1} : {2}.": {
   "at": [
-   "src/engine/spells.js:735"
+   "src/engine/spells.js:810"
   ],
   "args": [
    "U.cap(Players.nameFor(game, c.owner, pl.id))",
@@ -14165,7 +14954,7 @@
  },
  "Le Néant frappe {0} : {1}.": {
   "at": [
-   "src/engine/spells.js:736"
+   "src/engine/spells.js:811"
   ],
   "args": [
    "c.name",
@@ -14174,7 +14963,7 @@
  },
  "{0} lance le Vœu de mort : {1}.": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:816"
   ],
   "args": [
    "U.cap(Players.nameFor(game, +o, pl.id))",
@@ -14183,19 +14972,19 @@
  },
  "de vos unités périt": {
   "at": [
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:816"
   ]
  },
  "de vos unités périssent": {
   "at": [
-   "src/engine/spells.js:741",
-   "src/engine/spells.js:741"
+   "src/engine/spells.js:816",
+   "src/engine/spells.js:816"
   ],
   "hint": "pluriel de « de vos unités périt »"
  },
  "Le Vœu de mort fauche {0}.": {
   "at": [
-   "src/engine/spells.js:742"
+   "src/engine/spells.js:817"
   ],
   "args": [
    "U.n(n, 'unité ennemie', 'unités ennemies')"
@@ -14203,19 +14992,19 @@
  },
  "unité ennemie": {
   "at": [
-   "src/engine/spells.js:742"
+   "src/engine/spells.js:817"
   ]
  },
  "unités ennemies": {
   "at": [
-   "src/engine/spells.js:742",
-   "src/engine/spells.js:742"
+   "src/engine/spells.js:817",
+   "src/engine/spells.js:817"
   ],
   "hint": "pluriel de « unité ennemie »"
  },
  "{0} lance le Grand Renvoi : vous perdez {1}.": {
   "at": [
-   "src/engine/spells.js:747"
+   "src/engine/spells.js:822"
   ],
   "args": [
    "U.cap(Players.nameFor(game, +o, pl.id))",
@@ -14224,7 +15013,7 @@
  },
  "{0} dans {1}{2}.": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:823"
   ],
   "args": [
    "U.n(n, 'créature renvoyée', 'créatures renvoyées')",
@@ -14234,29 +15023,29 @@
  },
  "créature renvoyée": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:823"
   ]
  },
  "créatures renvoyées": {
   "at": [
-   "src/engine/spells.js:748",
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:823",
+   "src/engine/spells.js:823"
   ],
   "hint": "pluriel de « créature renvoyée »"
  },
  "leur royaume": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:823"
   ]
  },
  "son royaume": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:823"
   ]
  },
  ", dont les vôtres : {0}": {
   "at": [
-   "src/engine/spells.js:748"
+   "src/engine/spells.js:823"
   ],
   "args": [
    "U.tally(per[pl.id])"
@@ -14264,7 +15053,7 @@
  },
  "{0} draine {1} points de votre mana !": {
   "at": [
-   "src/engine/spells.js:750"
+   "src/engine/spells.js:825"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -14273,7 +15062,7 @@
  },
  "{0} points de mana drainés à {1}.": {
   "at": [
-   "src/engine/spells.js:750"
+   "src/engine/spells.js:825"
   ],
   "args": [
    "n",
@@ -14282,7 +15071,7 @@
  },
  "{0} répand des rumeurs contre vous : les autres sorciers se méfient de vous (Subversion).": {
   "at": [
-   "src/engine/spells.js:751"
+   "src/engine/spells.js:826"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -14290,7 +15079,7 @@
  },
  "Les sorciers se méfient désormais de {0}.": {
   "at": [
-   "src/engine/spells.js:751"
+   "src/engine/spells.js:826"
   ],
   "args": [
    "o.name"
@@ -14298,7 +15087,7 @@
  },
  "{0} a lacéré votre esprit : compétence réduite.": {
   "at": [
-   "src/engine/spells.js:752"
+   "src/engine/spells.js:827"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))"
@@ -14306,7 +15095,7 @@
  },
  "La compétence de {0} est entamée.": {
   "at": [
-   "src/engine/spells.js:752"
+   "src/engine/spells.js:827"
   ],
   "args": [
    "o.name"
@@ -14314,7 +15103,7 @@
  },
  "{0} ne lance aucun sort.": {
   "at": [
-   "src/engine/spells.js:753"
+   "src/engine/spells.js:828"
   ],
   "args": [
    "o.name"
@@ -14322,13 +15111,13 @@
  },
  "Mana insuffisant.": {
   "at": [
-   "src/engine/spells.js:753",
+   "src/engine/spells.js:828",
    "src/engine/events.js:699"
   ]
  },
  "{0} a pulvérisé votre incantation de {1}.": {
   "at": [
-   "src/engine/spells.js:753"
+   "src/engine/spells.js:828"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -14337,12 +15126,12 @@
  },
  "Incantation adverse anéantie.": {
   "at": [
-   "src/engine/spells.js:753"
+   "src/engine/spells.js:828"
   ]
  },
  "{0} n'a aucun enchantement global.": {
   "at": [
-   "src/engine/spells.js:754"
+   "src/engine/spells.js:829"
   ],
   "args": [
    "o.name"
@@ -14350,7 +15139,7 @@
  },
  "{0} vous a volé {1}.": {
   "at": [
-   "src/engine/spells.js:754"
+   "src/engine/spells.js:829"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -14359,7 +15148,7 @@
  },
  "Vous captez {0}.": {
   "at": [
-   "src/engine/spells.js:754"
+   "src/engine/spells.js:829"
   ],
   "args": [
    "DATA.spells[g].name"
@@ -14367,7 +15156,7 @@
  },
  "{0} a brisé votre {1}.": {
   "at": [
-   "src/engine/spells.js:760"
+   "src/engine/spells.js:835"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -14376,7 +15165,7 @@
  },
  "Vous brisez {0} {1}.": {
   "at": [
-   "src/engine/spells.js:760"
+   "src/engine/spells.js:835"
   ],
   "args": [
    "DATA.spells[g].name",
@@ -14385,7 +15174,7 @@
  },
  "{0} a tenté de briser votre {1} : il a résisté.": {
   "at": [
-   "src/engine/spells.js:760"
+   "src/engine/spells.js:835"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o.id, pl.id))",
@@ -14394,7 +15183,7 @@
  },
  "{0} {1} résiste à la Disjonction.": {
   "at": [
-   "src/engine/spells.js:760"
+   "src/engine/spells.js:835"
   ],
   "args": [
    "DATA.spells[g].name",
@@ -14403,33 +15192,33 @@
  },
  "Ces enchantements sont les vôtres.": {
   "at": [
-   "src/engine/spells.js:761",
-   "src/engine/spells.js:762"
+   "src/engine/spells.js:836",
+   "src/engine/spells.js:837"
   ]
  },
  "enchantement dissipé": {
   "at": [
-   "src/engine/spells.js:761",
-   "src/engine/spells.js:762"
+   "src/engine/spells.js:836",
+   "src/engine/spells.js:837"
   ]
  },
  "enchantements dissipés": {
   "at": [
-   "src/engine/spells.js:761",
-   "src/engine/spells.js:761",
-   "src/engine/spells.js:762",
-   "src/engine/spells.js:762"
+   "src/engine/spells.js:836",
+   "src/engine/spells.js:836",
+   "src/engine/spells.js:837",
+   "src/engine/spells.js:837"
   ],
   "hint": "pluriel de « enchantement dissipé »"
  },
  "la garde de l'esprit gardien du nœud": {
   "at": [
-   "src/engine/spells.js:775"
+   "src/engine/spells.js:850"
   ]
  },
  "{0} a dissipé {1}.": {
   "at": [
-   "src/engine/spells.js:780"
+   "src/engine/spells.js:855"
   ],
   "args": [
    "U.cap(Players.nameFor(game, o, pl.id))",
@@ -14438,7 +15227,7 @@
  },
  "Dissipés : {0}{1}.": {
   "at": [
-   "src/engine/spells.js:781"
+   "src/engine/spells.js:856"
   ],
   "args": [
    "names.join(', ')",
@@ -14447,17 +15236,17 @@
  },
  " et le sort qui pervertissait le nœud": {
   "at": [
-   "src/engine/spells.js:781"
+   "src/engine/spells.js:856"
   ]
  },
  "Rien n'a cédé.": {
   "at": [
-   "src/engine/spells.js:781"
+   "src/engine/spells.js:856"
   ]
  },
  "{0} a perverti votre {1} : il vous coûte 5 mana par tour.": {
   "at": [
-   "src/engine/spells.js:789"
+   "src/engine/spells.js:864"
   ],
   "args": [
    "U.cap(Players.nameFor(game, s.owner, pl.id))",
@@ -14466,7 +15255,7 @@
  },
  "Le {0} est perverti.": {
   "at": [
-   "src/engine/spells.js:791"
+   "src/engine/spells.js:866"
   ],
   "args": [
    "Game.siteName(s)"
@@ -14474,12 +15263,12 @@
  },
  "Vos soldats deviennent des loups-garous.": {
   "at": [
-   "src/engine/spells.js:793"
+   "src/engine/spells.js:868"
   ]
  },
  "{0} a figé vos troupes dans la stase.": {
   "at": [
-   "src/engine/spells.js:798"
+   "src/engine/spells.js:873"
   ],
   "args": [
    "U.cap(Players.nameFor(game, us[0].owner, pl.id))"
@@ -14487,7 +15276,7 @@
  },
  "Les ennemis sont figés.": {
   "at": [
-   "src/engine/spells.js:799"
+   "src/engine/spells.js:874"
   ]
  },
  "un citoyen": {
@@ -15151,29 +15940,29 @@
  },
  "Aucun traité": {
   "at": [
-   "src/engine/ai.js:1174"
+   "src/engine/ai.js:1181"
   ]
  },
  "Pacte de paix": {
   "at": [
-   "src/engine/ai.js:1174"
+   "src/engine/ai.js:1181"
   ]
  },
  "Alliance": {
   "at": [
-   "src/engine/ai.js:1174",
+   "src/engine/ai.js:1181",
    "src/ui/panels.js:415"
   ]
  },
  "Guerre": {
   "at": [
-   "src/engine/ai.js:1174",
+   "src/engine/ai.js:1181",
    "src/ui/panels.js:429"
   ]
  },
  "{0} a rompu son traité et vous attaque !": {
   "at": [
-   "src/engine/ai.js:1192"
+   "src/engine/ai.js:1199"
   ],
   "args": [
    "pa.name"
@@ -15181,7 +15970,7 @@
  },
  "Vous êtes en guerre contre {0}.": {
   "at": [
-   "src/engine/ai.js:1196"
+   "src/engine/ai.js:1203"
   ],
   "args": [
    "pb.name"
@@ -15189,7 +15978,7 @@
  },
  "{0} vous déclare la guerre.": {
   "at": [
-   "src/engine/ai.js:1196"
+   "src/engine/ai.js:1203"
   ],
   "args": [
    "pa.name"
@@ -15197,12 +15986,12 @@
  },
  "Seulement avec un sorcier en paix ou allié.": {
   "at": [
-   "src/engine/ai.js:1211"
+   "src/engine/ai.js:1218"
   ]
  },
  "{0} rouvre son territoire à vos troupes.": {
   "at": [
-   "src/engine/ai.js:1213"
+   "src/engine/ai.js:1220"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))"
@@ -15210,7 +15999,7 @@
  },
  "{0} vous interdit son territoire{1}": {
   "at": [
-   "src/engine/ai.js:1217"
+   "src/engine/ai.js:1224"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, a))",
@@ -15219,7 +16008,7 @@
  },
  " : {0} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1217",
+   "src/engine/ai.js:1224",
    "src/ui/panels.js:417"
   ],
   "args": [
@@ -15228,23 +16017,23 @@
  },
  "unité est reconduite": {
   "at": [
-   "src/engine/ai.js:1217",
-   "src/engine/ai.js:1256",
-   "src/engine/ai.js:1257"
+   "src/engine/ai.js:1224",
+   "src/engine/ai.js:1263",
+   "src/engine/ai.js:1264"
   ]
  },
  "unités sont reconduites": {
   "at": [
-   "src/engine/ai.js:1217",
-   "src/engine/ai.js:1217",
-   "src/engine/ai.js:1256",
-   "src/engine/ai.js:1256"
+   "src/engine/ai.js:1224",
+   "src/engine/ai.js:1224",
+   "src/engine/ai.js:1263",
+   "src/engine/ai.js:1263"
   ],
   "hint": "pluriel de « unité est reconduite »"
  },
  "{0} étend son territoire, qu'elle vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1256"
+   "src/engine/ai.js:1263"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -15253,7 +16042,7 @@
  },
  "{0} étend son territoire, qu'il vous interdit : {1} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1257"
+   "src/engine/ai.js:1264"
   ],
   "args": [
    "U.cap(Players.nameFor(game, b, pa.id))",
@@ -15262,7 +16051,7 @@
  },
  "{0} {1}{2} sur votre territoire, qui lui est interdit : {3} à la frontière.": {
   "at": [
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1265"
   ],
   "args": [
    "U.n(n, 'unité', 'unités')",
@@ -15273,27 +16062,27 @@
  },
  " se trouvaient": {
   "at": [
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1265"
   ]
  },
  " se trouvait": {
   "at": [
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1265"
   ]
  },
  "elles sont reconduites": {
   "at": [
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1265"
   ]
  },
  "elle est reconduite": {
   "at": [
-   "src/engine/ai.js:1258"
+   "src/engine/ai.js:1265"
   ]
  },
  "{0} accepte : faisons front ensemble contre {1}.": {
   "at": [
-   "src/engine/ai.js:1284"
+   "src/engine/ai.js:1291"
   ],
   "args": [
    "pb.name",
@@ -15302,7 +16091,7 @@
  },
  "{0} accepte votre présent.": {
   "at": [
-   "src/engine/ai.js:1286"
+   "src/engine/ai.js:1293"
   ],
   "args": [
    "pb.name"
@@ -15310,7 +16099,7 @@
  },
  "La guerre est déclarée.{0}": {
   "at": [
-   "src/engine/ai.js:1287"
+   "src/engine/ai.js:1294"
   ],
   "args": [
    "broke ? ' Rompre un traité vous coûte l\\'estime de tous les sorciers.' : ''"
@@ -15318,12 +16107,12 @@
  },
  " Rompre un traité vous coûte l'estime de tous les sorciers.": {
   "at": [
-   "src/engine/ai.js:1287"
+   "src/engine/ai.js:1294"
   ]
  },
  "{0} vous a déjà répondu ce tour-ci.": {
   "at": [
-   "src/engine/ai.js:1291"
+   "src/engine/ai.js:1298"
   ],
   "args": [
    "pb.name"
@@ -15331,7 +16120,7 @@
  },
  "{0} accepte : {1}.": {
   "at": [
-   "src/engine/ai.js:1294"
+   "src/engine/ai.js:1301"
   ],
   "args": [
    "pb.name",
@@ -15340,7 +16129,7 @@
  },
  "{0} refuse.": {
   "at": [
-   "src/engine/ai.js:1296"
+   "src/engine/ai.js:1303"
   ],
   "args": [
    "pb.name"
@@ -15348,9 +16137,9 @@
  },
  "{0} vous déclare la guerre !": {
   "at": [
-   "src/engine/ai.js:1374",
-   "src/engine/ai.js:1403",
-   "src/engine/ai.js:1410"
+   "src/engine/ai.js:1381",
+   "src/engine/ai.js:1410",
+   "src/engine/ai.js:1417"
   ],
   "args": [
    "a.name"
@@ -15358,9 +16147,9 @@
  },
  "Guerre déclarée à {0}.": {
   "at": [
-   "src/engine/ai.js:1375",
-   "src/engine/ai.js:1404",
+   "src/engine/ai.js:1382",
    "src/engine/ai.js:1411",
+   "src/engine/ai.js:1418",
    "src/engine/diplo.js:126"
   ],
   "args": [
@@ -15369,7 +16158,7 @@
  },
  "{0} vous propose la paix{1}.": {
   "at": [
-   "src/engine/ai.js:1384"
+   "src/engine/ai.js:1391"
   ],
   "args": [
    "a.name",
@@ -15378,12 +16167,12 @@
  },
  ", avec des concessions": {
   "at": [
-   "src/engine/ai.js:1384"
+   "src/engine/ai.js:1391"
   ]
  },
  "{0} et {1} signent la paix.": {
   "at": [
-   "src/engine/ai.js:1386"
+   "src/engine/ai.js:1393"
   ],
   "args": [
    "U.cap(Players.nameFor(game, v, a.id))",
@@ -15392,7 +16181,7 @@
  },
  "{0} vous propose un pacte de paix.": {
   "at": [
-   "src/engine/ai.js:1423"
+   "src/engine/ai.js:1430"
   ],
   "args": [
    "a.name"
@@ -16842,7 +17631,7 @@
   "at": [
    "src/engine/events.js:655",
    "src/engine/events.js:692",
-   "src/ui/magicui.js:435"
+   "src/ui/magicui.js:475"
   ]
  },
  "Le Démon légendaire se dresse aux côtés {0} et marche contre vous.": {
@@ -17380,7 +18169,7 @@
  "Le Livre de légende": {
   "at": [
    "src/engine/events.js:1027",
-   "src/ui/magicui.js:447",
+   "src/ui/magicui.js:487",
    "src/ui/main.js:2064"
   ]
  },
@@ -17752,7 +18541,7 @@
  "Sorts connus": {
   "at": [
    "src/engine/chronicle.js:9",
-   "src/ui/magicui.js:346"
+   "src/ui/magicui.js:386"
   ]
  },
  "Renommée": {
@@ -19227,7 +20016,7 @@
   "at": [
    "src/ui/mapview.js:706",
    "src/ui/mapview.js:1314",
-   "src/ui/combatview.js:1267"
+   "src/ui/combatview.js:1371"
   ],
   "args": [
    "fs"
@@ -19552,7 +20341,7 @@
  "Recherche": {
   "at": [
    "src/ui/city.js:85",
-   "src/ui/magicui.js:573",
+   "src/ui/magicui.js:613",
    "src/ui/main.js:278"
   ]
  },
@@ -19619,13 +20408,13 @@
    "src/ui/city.js:107",
    "src/ui/city.js:456",
    "src/ui/city.js:653",
-   "src/ui/magicui.js:281"
+   "src/ui/magicui.js:321"
   ]
  },
  "{0} tour{1}": {
   "at": [
    "src/ui/city.js:107",
-   "src/ui/magicui.js:281"
+   "src/ui/magicui.js:321"
   ],
   "args": [
    "turns",
@@ -19760,8 +20549,8 @@
  "Rompre {0}": {
   "at": [
    "src/ui/city.js:161",
-   "src/ui/magicui.js:330",
-   "src/ui/magicui.js:394"
+   "src/ui/magicui.js:370",
+   "src/ui/magicui.js:434"
   ],
   "args": [
    "sp.name"
@@ -19779,9 +20568,9 @@
  "Rompre": {
   "at": [
    "src/ui/city.js:161",
-   "src/ui/magicui.js:330",
-   "src/ui/magicui.js:394",
-   "src/ui/magicui.js:395"
+   "src/ui/magicui.js:370",
+   "src/ui/magicui.js:434",
+   "src/ui/magicui.js:435"
   ]
  },
  "Enchantements": {
@@ -19840,7 +20629,7 @@
  "Choisir sur la carte": {
   "at": [
    "src/ui/city.js:195",
-   "src/ui/magicui.js:121"
+   "src/ui/magicui.js:136"
   ]
  },
  "<h4>Point de ralliement</h4>Les troupes recrutées ici partent d'elles-mêmes vers cette case et y attendent en sentinelle.": {
@@ -21239,7 +22028,7 @@
  "Abandonner {0}": {
   "at": [
    "src/ui/magicui.js:26",
-   "src/ui/magicui.js:388"
+   "src/ui/magicui.js:428"
   ],
   "args": [
    "DATA.spells[c.id].name"
@@ -21258,8 +22047,8 @@
   "at": [
    "src/ui/magicui.js:26",
    "src/ui/magicui.js:26",
-   "src/ui/magicui.js:388",
-   "src/ui/magicui.js:388"
+   "src/ui/magicui.js:428",
+   "src/ui/magicui.js:428"
   ]
  },
  "Aucune incantation en cours": {
@@ -21339,7 +22128,7 @@
   "at": [
    "src/ui/magicui.js:75",
    "src/ui/magicui.js:83",
-   "src/ui/magicui.js:93"
+   "src/ui/magicui.js:108"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -21355,39 +22144,52 @@
    "src/ui/magicui.js:83"
   ]
  },
+ "{0} : aucune pile qui puisse partir.": {
+  "at": [
+   "src/ui/magicui.js:96"
+  ],
+  "args": [
+   "DATA.spells[id].name"
+  ]
+ },
+ "Choisissez la pile qui part (cases cerclées d'or ; Échap pour annuler).": {
+  "at": [
+   "src/ui/magicui.js:99"
+  ]
+ },
  "Aucun sorcier rival connu.": {
   "at": [
-   "src/ui/magicui.js:90"
+   "src/ui/magicui.js:105"
   ]
  },
  "Choisissez le sorcier visé.": {
   "at": [
-   "src/ui/magicui.js:93"
+   "src/ui/magicui.js:108"
   ]
  },
  "Quel héros ramener d'entre les morts ?": {
   "at": [
-   "src/ui/magicui.js:100"
+   "src/ui/magicui.js:115"
   ]
  },
  "vos cités": {
   "at": [
-   "src/ui/magicui.js:112"
+   "src/ui/magicui.js:127"
   ]
  },
  "les cités connues": {
   "at": [
-   "src/ui/magicui.js:112"
+   "src/ui/magicui.js:127"
   ]
  },
  "aucune cité où il servirait.": {
   "at": [
-   "src/ui/magicui.js:113"
+   "src/ui/magicui.js:128"
   ]
  },
  "toutes {0} ont déjà {1}": {
   "at": [
-   "src/ui/magicui.js:113"
+   "src/ui/magicui.js:128"
   ],
   "args": [
    "whose",
@@ -21396,7 +22198,7 @@
  },
  "déjà actif dans toutes {0}.": {
   "at": [
-   "src/ui/magicui.js:114"
+   "src/ui/magicui.js:129"
   ],
   "args": [
    "whose"
@@ -21404,24 +22206,24 @@
  },
  "Aucune cité ciblable.": {
   "at": [
-   "src/ui/magicui.js:115"
+   "src/ui/magicui.js:130"
   ]
  },
  "cité écartée": {
   "at": [
-   "src/ui/magicui.js:119"
+   "src/ui/magicui.js:134"
   ]
  },
  "cités écartées": {
   "at": [
-   "src/ui/magicui.js:119",
-   "src/ui/magicui.js:119"
+   "src/ui/magicui.js:134",
+   "src/ui/magicui.js:134"
   ],
   "hint": "pluriel de « cité écartée »"
  },
  "{0} : choisir une cité": {
   "at": [
-   "src/ui/magicui.js:120"
+   "src/ui/magicui.js:135"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -21429,7 +22231,7 @@
  },
  "{0} · {1} hab. · ": {
   "at": [
-   "src/ui/magicui.js:124"
+   "src/ui/magicui.js:139"
   ],
   "args": [
    "Cities.sizeName(c)",
@@ -21438,17 +22240,17 @@
  },
  "hors de vue · ": {
   "at": [
-   "src/ui/magicui.js:124"
+   "src/ui/magicui.js:139"
   ]
  },
  "indépendante": {
   "at": [
-   "src/ui/magicui.js:124"
+   "src/ui/magicui.js:139"
   ]
  },
  "{0} : aucune cible connue où il servirait.": {
   "at": [
-   "src/ui/magicui.js:133"
+   "src/ui/magicui.js:148"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -21456,7 +22258,7 @@
  },
  "Choisissez la cible de <b>{0}</b> sur la carte{1} (Échap pour annuler).": {
   "at": [
-   "src/ui/magicui.js:138"
+   "src/ui/magicui.js:153"
   ],
   "args": [
    "DATA.spells[id].name",
@@ -21465,35 +22267,76 @@
  },
  " (or : gain, orange : perte, gris : sans effet)": {
   "at": [
-   "src/ui/magicui.js:138"
+   "src/ui/magicui.js:153"
   ]
  },
  " (cases cerclées d'or)": {
   "at": [
-   "src/ui/magicui.js:138"
+   "src/ui/magicui.js:153"
   ]
  },
  "Cliquez sur une cité cerclée d'or pour <b>{0}</b> (Échap pour annuler).": {
   "at": [
-   "src/ui/magicui.js:188"
+   "src/ui/magicui.js:203"
   ],
   "args": [
    "DATA.spells[id].name"
   ]
  },
+ "La porte ne mène pas sur l'autre plan.": {
+  "at": [
+   "src/ui/magicui.js:216"
+  ]
+ },
+ "Choisissez une case où se tiennent vos unités.": {
+  "at": [
+   "src/ui/magicui.js:221"
+  ]
+ },
+ "Cette pile n'a nulle part où sauter (à {0} cases au plus, sur une case que vous voyez).": {
+  "at": [
+   "src/ui/magicui.js:224"
+  ],
+  "args": [
+   "Spells.jumpRange()"
+  ]
+ },
+ "Choisissez la case d'arrivée (cerclée d'or, à {0} cases au plus).": {
+  "at": [
+   "src/ui/magicui.js:226"
+  ],
+  "args": [
+   "Spells.jumpRange()"
+  ]
+ },
+ "Aucune de vos cités de ce plan ne peut accueillir cette pile.": {
+  "at": [
+   "src/ui/magicui.js:230"
+  ]
+ },
+ "Dans quelle cité ramener cette pile ?": {
+  "at": [
+   "src/ui/magicui.js:232"
+  ]
+ },
+ " (forteresse)": {
+  "at": [
+   "src/ui/magicui.js:232"
+  ]
+ },
  "Cliquez sur une cité cerclée d'or.": {
   "at": [
-   "src/ui/magicui.js:203"
+   "src/ui/magicui.js:243"
   ]
  },
  "Aucune unité valide ici.": {
   "at": [
-   "src/ui/magicui.js:208"
+   "src/ui/magicui.js:248"
   ]
  },
  "{0} : quelle unité ?": {
   "at": [
-   "src/ui/magicui.js:213"
+   "src/ui/magicui.js:253"
   ],
   "args": [
    "DATA.spells[id].name"
@@ -21501,12 +22344,12 @@
  },
  "Aucun enchantement": {
   "at": [
-   "src/ui/magicui.js:216"
+   "src/ui/magicui.js:256"
   ]
  },
  "<p>Contre quel royaume {0} sera-t-elle gardée ? Ses sorts de ville y échoueront, ses sorts de combat y seront interdits à l'assaillant et ses créatures ne pourront pas l'attaquer.</p>": {
   "at": [
-   "src/ui/magicui.js:225"
+   "src/ui/magicui.js:265"
   ],
   "args": [
    "U.esc(game.cities[target.city].name)"
@@ -21514,28 +22357,28 @@
  },
  "Impossible de lancer ce sort.": {
   "at": [
-   "src/ui/magicui.js:231"
+   "src/ui/magicui.js:271"
   ]
  },
  "Eurêka !": {
   "at": [
-   "src/ui/magicui.js:247"
+   "src/ui/magicui.js:287"
   ]
  },
  " achève les plans d'un grand ouvrage.": {
   "at": [
-   "src/ui/magicui.js:248"
+   "src/ui/magicui.js:288"
   ]
  },
  " perce le secret d'un nouveau sort.": {
   "at": [
-   "src/ui/magicui.js:248"
+   "src/ui/magicui.js:288"
   ]
  },
  "Ouvrage des {0}": {
   "at": [
-   "src/ui/magicui.js:250",
-   "src/ui/magicui.js:280",
+   "src/ui/magicui.js:290",
+   "src/ui/magicui.js:320",
    "src/ui/main.js:1463"
   ],
   "args": [
@@ -21544,17 +22387,17 @@
  },
  "Recherche magique": {
   "at": [
-   "src/ui/magicui.js:259"
+   "src/ui/magicui.js:299"
   ]
  },
  "Vous avez percé tous les secrets à votre portée.": {
   "at": [
-   "src/ui/magicui.js:263"
+   "src/ui/magicui.js:303"
   ]
  },
  "Points de recherche : {0} par tour (bibliothèques, sages et puissance allouée). Choisissez le prochain sort à étudier.": {
   "at": [
-   "src/ui/magicui.js:265"
+   "src/ui/magicui.js:305"
   ],
   "args": [
    "Math.floor(rpt)"
@@ -21562,7 +22405,7 @@
  },
  "Ouvrages de vos peuples · {0} au plus dans la partie{1}": {
   "at": [
-   "src/ui/magicui.js:275"
+   "src/ui/magicui.js:315"
   ],
   "args": [
    "Wonders.CAP",
@@ -21571,7 +22414,7 @@
  },
  " ({0} bâti{1})": {
   "at": [
-   "src/ui/magicui.js:275"
+   "src/ui/magicui.js:315"
   ],
   "args": [
    "nb",
@@ -21580,12 +22423,12 @@
  },
  "Magie et trésor": {
   "at": [
-   "src/ui/magicui.js:304"
+   "src/ui/magicui.js:344"
   ]
  },
  "{0} recherche": {
   "at": [
-   "src/ui/magicui.js:310"
+   "src/ui/magicui.js:350"
   ],
   "args": [
    "Math.floor(sp.research)"
@@ -21593,7 +22436,7 @@
  },
  "{0} compétence": {
   "at": [
-   "src/ui/magicui.js:310"
+   "src/ui/magicui.js:350"
   ],
   "args": [
    "sp.skill"
@@ -21601,7 +22444,7 @@
  },
  "Puissance magique : {0}": {
   "at": [
-   "src/ui/magicui.js:317"
+   "src/ui/magicui.js:357"
   ],
   "args": [
    "sp.power"
@@ -21609,7 +22452,7 @@
  },
  "Faites glisser le niveau de chaque sceptre ; un clic sur la tête d'un sceptre le verrouille, les deux autres se partagent alors le reste. Compétence actuelle {0}{1} ; elle progresse avec les points investis.{2}": {
   "at": [
-   "src/ui/magicui.js:318"
+   "src/ui/magicui.js:358"
   ],
   "args": [
    "Magic.castingSkill(pl)",
@@ -21619,7 +22462,7 @@
  },
  " (+{0} héros à la forteresse)": {
   "at": [
-   "src/ui/magicui.js:318"
+   "src/ui/magicui.js:358"
   ],
   "args": [
    "Magic.heroSkillBonus(game, pl)"
@@ -21627,7 +22470,7 @@
  },
  " Incarné sur la carte, vous n'en disposez que de la moitié : {0} par tour.": {
   "at": [
-   "src/ui/magicui.js:318"
+   "src/ui/magicui.js:358"
   ],
   "args": [
    "Magic.totalSkill(game, pl)"
@@ -21635,7 +22478,7 @@
  },
  "<h4>Impôts à {0} or</h4>{1} rebelle{2} sur {3} citoyens · or {4}{5} par tour": {
   "at": [
-   "src/ui/magicui.js:320"
+   "src/ui/magicui.js:360"
   ],
   "args": [
    "t",
@@ -21648,7 +22491,7 @@
  },
  "Rebelles dans l'empire : <b class=\"{0}\">{1}</b> sur {2} citoyens · or {3}{4} par tour": {
   "at": [
-   "src/ui/magicui.js:322"
+   "src/ui/magicui.js:362"
   ],
   "args": [
    "r.rebels ? 'danger' : 'ok'",
@@ -21660,7 +22503,7 @@
  },
  "Agitation de base : {0} % des citoyens. Survolez un taux pour voir ses rebelles et son or.": {
   "at": [
-   "src/ui/magicui.js:323"
+   "src/ui/magicui.js:363"
   ],
   "args": [
    "Math.round(TAX_UNREST[pl.taxIdx] * 100)"
@@ -21668,17 +22511,17 @@
  },
  "Alchimie (taux 1:1)": {
   "at": [
-   "src/ui/magicui.js:324"
+   "src/ui/magicui.js:364"
   ]
  },
  "Conversion (taux 2:1)": {
   "at": [
-   "src/ui/magicui.js:324"
+   "src/ui/magicui.js:364"
   ]
  },
  "{0} or → mana": {
   "at": [
-   "src/ui/magicui.js:326"
+   "src/ui/magicui.js:366"
   ],
   "args": [
    "n"
@@ -21686,7 +22529,7 @@
  },
  "{0} mana → or": {
   "at": [
-   "src/ui/magicui.js:327"
+   "src/ui/magicui.js:367"
   ],
   "args": [
    "n"
@@ -21694,10 +22537,10 @@
  },
  "{0} mana / tour": {
   "at": [
-   "src/ui/magicui.js:330",
-   "src/ui/magicui.js:360",
-   "src/ui/magicui.js:366",
-   "src/ui/magicui.js:384"
+   "src/ui/magicui.js:370",
+   "src/ui/magicui.js:400",
+   "src/ui/magicui.js:406",
+   "src/ui/magicui.js:424"
   ],
   "args": [
    "Magic.spellUpkeep(game, pl, g)"
@@ -21705,17 +22548,17 @@
  },
  "Mettre fin à cet enchantement global ?": {
   "at": [
-   "src/ui/magicui.js:330"
+   "src/ui/magicui.js:370"
   ]
  },
  "Aucun enchantement global.": {
   "at": [
-   "src/ui/magicui.js:331"
+   "src/ui/magicui.js:371"
   ]
  },
  " incante {0} ({1} %)": {
   "at": [
-   "src/ui/magicui.js:338"
+   "src/ui/magicui.js:378"
   ],
   "args": [
    "DATA.spells[o.casting.id].name",
@@ -21724,22 +22567,22 @@
  },
  "Mana produit": {
   "at": [
-   "src/ui/magicui.js:341"
+   "src/ui/magicui.js:381"
   ]
  },
  "Entretien magique": {
   "at": [
-   "src/ui/magicui.js:342"
+   "src/ui/magicui.js:382"
   ]
  },
  "Nœuds liés": {
   "at": [
-   "src/ui/magicui.js:345"
+   "src/ui/magicui.js:385"
   ]
  },
  "près de {0}": {
   "at": [
-   "src/ui/magicui.js:353",
+   "src/ui/magicui.js:393",
    "src/ui/main.js:1322"
   ],
   "args": [
@@ -21748,7 +22591,7 @@
  },
  "Vos créatures invoquées ({0})": {
   "at": [
-   "src/ui/magicui.js:360"
+   "src/ui/magicui.js:400"
   ],
   "args": [
    "crea.length"
@@ -21756,12 +22599,12 @@
  },
  "Renvoyer cette créature dans le néant : elle disparaît, son entretien cesse.": {
   "at": [
-   "src/ui/magicui.js:367"
+   "src/ui/magicui.js:407"
   ]
  },
  "Renvoyer {0}": {
   "at": [
-   "src/ui/magicui.js:368"
+   "src/ui/magicui.js:408"
   ],
   "args": [
    "Units.label(u)"
@@ -21769,7 +22612,7 @@
  },
  "{0} {1} retourne dans le néant, définitivement. Vous économisez {2} mana par tour.": {
   "at": [
-   "src/ui/magicui.js:368"
+   "src/ui/magicui.js:408"
   ],
   "args": [
    "U.cap(Units.label(u))",
@@ -21779,13 +22622,13 @@
  },
  "Renvoyer": {
   "at": [
-   "src/ui/magicui.js:368",
-   "src/ui/magicui.js:369"
+   "src/ui/magicui.js:408",
+   "src/ui/magicui.js:409"
   ]
  },
  "sur {0} ({1})": {
   "at": [
-   "src/ui/magicui.js:376"
+   "src/ui/magicui.js:416"
   ],
   "args": [
    "Units.label(u)",
@@ -21794,22 +22637,22 @@
  },
  " La pile est au-dessus de l'eau : sans navire pour la porter, elle se noiera.": {
   "at": [
-   "src/ui/magicui.js:377"
+   "src/ui/magicui.js:417"
   ]
  },
  " L'unité est au-dessus de l'eau : sans navire pour la porter, elle se noiera.": {
   "at": [
-   "src/ui/magicui.js:377"
+   "src/ui/magicui.js:417"
   ]
  },
  "Vos sorts en cours": {
   "at": [
-   "src/ui/magicui.js:384"
+   "src/ui/magicui.js:424"
   ]
  },
  "incantation {0} / {1} · {2}": {
   "at": [
-   "src/ui/magicui.js:387"
+   "src/ui/magicui.js:427"
   ],
   "args": [
    "pl.casting.progress",
@@ -21819,7 +22662,7 @@
  },
  "Suspendue : {0}": {
   "at": [
-   "src/ui/magicui.js:387"
+   "src/ui/magicui.js:427"
   ],
   "args": [
    "Spells.castingWarning(game, pl)"
@@ -21827,12 +22670,12 @@
  },
  "Abandonner l'incantation en cours.": {
   "at": [
-   "src/ui/magicui.js:388"
+   "src/ui/magicui.js:428"
   ]
  },
  "Abandonner l'incantation en cours ? Vous ne récupérerez que {0} mana sur les {1} investis.": {
   "at": [
-   "src/ui/magicui.js:388"
+   "src/ui/magicui.js:428"
   ],
   "args": [
    "Math.floor(pl.casting.progress / 2)",
@@ -21841,12 +22684,12 @@
  },
  "Mettre fin à ce sort : son effet et son entretien cessent.": {
   "at": [
-   "src/ui/magicui.js:393"
+   "src/ui/magicui.js:433"
   ]
  },
  "Mettre fin à {0} {1} ? Vous économisez {2} mana par tour.{3}": {
   "at": [
-   "src/ui/magicui.js:394"
+   "src/ui/magicui.js:434"
   ],
   "args": [
    "sp.name",
@@ -21857,22 +22700,22 @@
  },
  "Bilan": {
   "at": [
-   "src/ui/magicui.js:399"
+   "src/ui/magicui.js:439"
   ]
  },
  "Vos enchantements globaux": {
   "at": [
-   "src/ui/magicui.js:399"
+   "src/ui/magicui.js:439"
   ]
  },
  "Enchantements rivaux": {
   "at": [
-   "src/ui/magicui.js:399"
+   "src/ui/magicui.js:439"
   ]
  },
  "Pacte contre {0}": {
   "at": [
-   "src/ui/magicui.js:410"
+   "src/ui/magicui.js:450"
   ],
   "args": [
    "tname"
@@ -21880,7 +22723,7 @@
  },
  "{0} la sorcière qui domine la partie.": {
   "at": [
-   "src/ui/magicui.js:413"
+   "src/ui/magicui.js:453"
   ],
   "args": [
    "U.cap(Rite.names(game, pl.id, co)) + (co.filter(id => id !== pl.id).length > 1 ? ' voient "
@@ -21888,19 +22731,19 @@
  },
  " voient en ": {
   "at": [
-   "src/ui/magicui.js:413",
-   "src/ui/magicui.js:414"
+   "src/ui/magicui.js:453",
+   "src/ui/magicui.js:454"
   ]
  },
  " voit en ": {
   "at": [
-   "src/ui/magicui.js:413",
-   "src/ui/magicui.js:414"
+   "src/ui/magicui.js:453",
+   "src/ui/magicui.js:454"
   ]
  },
  "{0} le sorcier qui domine la partie.": {
   "at": [
-   "src/ui/magicui.js:414"
+   "src/ui/magicui.js:454"
   ],
   "args": [
    "U.cap(Rite.names(game, pl.id, co)) + (co.filter(id => id !== pl.id).length > 1 ? ' voient "
@@ -21908,12 +22751,12 @@
  },
  "Vous dominez la partie.": {
   "at": [
-   "src/ui/magicui.js:414"
+   "src/ui/magicui.js:454"
   ]
  },
  "{0} domine la partie.": {
   "at": [
-   "src/ui/magicui.js:414"
+   "src/ui/magicui.js:454"
   ],
   "args": [
    "U.cap(tname)"
@@ -21921,7 +22764,7 @@
  },
  "Invocation du Démon légendaire : {0} / {1} mana{2}.": {
   "at": [
-   "src/ui/magicui.js:418"
+   "src/ui/magicui.js:458"
   ],
   "args": [
    "r.progress",
@@ -21931,7 +22774,7 @@
  },
  ", environ {0}": {
   "at": [
-   "src/ui/magicui.js:418"
+   "src/ui/magicui.js:458"
   ],
   "args": [
    "U.n(left, 'tour')"
@@ -21939,7 +22782,7 @@
  },
  "Y contribuent : {0}.": {
   "at": [
-   "src/ui/magicui.js:420"
+   "src/ui/magicui.js:460"
   ],
   "args": [
    "Rite.names(game, pl.id, ids)"
@@ -21947,47 +22790,47 @@
  },
  "Personne n'y contribue ce tour.": {
   "at": [
-   "src/ui/magicui.js:420"
+   "src/ui/magicui.js:460"
   ]
  },
  "à vous": {
   "at": [
-   "src/ui/magicui.js:424"
+   "src/ui/magicui.js:464"
   ]
  },
  "Vous y participez": {
   "at": [
-   "src/ui/magicui.js:425"
+   "src/ui/magicui.js:465"
   ]
  },
  "Vous n'y participez pas": {
   "at": [
-   "src/ui/magicui.js:425"
+   "src/ui/magicui.js:465"
   ]
  },
  "le démon irait ": {
   "at": [
-   "src/ui/magicui.js:425"
+   "src/ui/magicui.js:465"
   ]
  },
  "en y participant, le démon irait ": {
   "at": [
-   "src/ui/magicui.js:425"
+   "src/ui/magicui.js:465"
   ]
  },
  "Se retirer du rituel": {
   "at": [
-   "src/ui/magicui.js:426"
+   "src/ui/magicui.js:466"
   ]
  },
  "Participer au rituel": {
   "at": [
-   "src/ui/magicui.js:426"
+   "src/ui/magicui.js:466"
   ]
  },
  "<h4>Le rituel</h4>Il avance chaque tour de la somme des compétences de lancement des participants. Le mana se partage selon la puissance magique de chacun.{0}": {
   "at": [
-   "src/ui/magicui.js:427"
+   "src/ui/magicui.js:467"
   ],
   "args": [
    "r.paid[pl.id] ? '<br>Votre part versée : ' + r.paid[pl.id] + ' mana.' : ''"
@@ -21995,7 +22838,7 @@
  },
  "<br>Votre part versée : {0} mana.": {
   "at": [
-   "src/ui/magicui.js:427"
+   "src/ui/magicui.js:467"
   ],
   "args": [
    "r.paid[pl.id]"
@@ -22003,17 +22846,17 @@
  },
  "Explosion de sort sur un participant détruit sa part déjà versée.": {
   "at": [
-   "src/ui/magicui.js:430"
+   "src/ui/magicui.js:470"
   ]
  },
  "À vos ordres": {
   "at": [
-   "src/ui/magicui.js:435"
+   "src/ui/magicui.js:475"
   ]
  },
  "Aux côtés de {0}": {
   "at": [
-   "src/ui/magicui.js:435"
+   "src/ui/magicui.js:475"
   ],
   "args": [
    "Players.nameFor(game, pl.id, r.owner)"
@@ -22021,7 +22864,7 @@
  },
  " · {0} / {1} PV": {
   "at": [
-   "src/ui/magicui.js:435"
+   "src/ui/magicui.js:475"
   ],
   "args": [
    "hp - d.dmg",
@@ -22030,7 +22873,7 @@
  },
  "Il retourne aux abîmes quand {0}.": {
   "at": [
-   "src/ui/magicui.js:437"
+   "src/ui/magicui.js:477"
   ],
   "args": [
    "isTarget ? 'vous ne dominez plus la partie' : tname + ' ne domine plus la partie'"
@@ -22038,12 +22881,12 @@
  },
  "vous ne dominez plus la partie": {
   "at": [
-   "src/ui/magicui.js:437"
+   "src/ui/magicui.js:477"
   ]
  },
  "{0} ne domine plus la partie": {
   "at": [
-   "src/ui/magicui.js:437"
+   "src/ui/magicui.js:477"
   ],
   "args": [
    "tname"
@@ -22051,7 +22894,7 @@
  },
  "Il est à vous, gardé {0}{1}. Qui prend la cité prend le Livre.": {
   "at": [
-   "src/ui/magicui.js:451"
+   "src/ui/magicui.js:491"
   ],
   "args": [
    "c && c.buildings.library ? 'dans la bibliothèque de ' : 'à '",
@@ -22060,12 +22903,12 @@
  },
  "dans la bibliothèque de ": {
   "at": [
-   "src/ui/magicui.js:451"
+   "src/ui/magicui.js:491"
   ]
  },
  "{0} le détient{1}.": {
   "at": [
-   "src/ui/magicui.js:452"
+   "src/ui/magicui.js:492"
   ],
   "args": [
    "U.cap(Players.nameFor(game, pl.id, hd))",
@@ -22074,17 +22917,17 @@
  },
  "Des fragments d'un livre ancien circulent entre les sorciers. Vous n'en avez lu aucun.": {
   "at": [
-   "src/ui/magicui.js:454"
+   "src/ui/magicui.js:494"
   ]
  },
  "<h4>La carte du Livre</h4>Chaque fragment lu en dévoile une part.": {
   "at": [
-   "src/ui/magicui.js:459"
+   "src/ui/magicui.js:499"
   ]
  },
  "Fragments détenus : {0} sur {1}{2}.": {
   "at": [
-   "src/ui/magicui.js:465"
+   "src/ui/magicui.js:505"
   ],
   "args": [
    "held",
@@ -22094,7 +22937,7 @@
  },
  " (vous en avez lu {0})": {
   "at": [
-   "src/ui/magicui.js:465"
+   "src/ui/magicui.js:505"
   ],
   "args": [
    "read.length"
@@ -22102,12 +22945,12 @@
  },
  "Le sceau ne cède qu'à qui détient trois fragments.": {
   "at": [
-   "src/ui/magicui.js:466"
+   "src/ui/magicui.js:506"
   ]
  },
  "Chez vous : {0}.": {
   "at": [
-   "src/ui/magicui.js:480"
+   "src/ui/magicui.js:520"
   ],
   "args": [
    "fmt(here)"
@@ -22115,7 +22958,7 @@
  },
  "Ailleurs : {0}.": {
   "at": [
-   "src/ui/magicui.js:481"
+   "src/ui/magicui.js:521"
   ],
   "args": [
    "Object.keys(there).map(id => { const c = game.cities[id]; return c.name + (there[id] > 1 ?"
@@ -22123,7 +22966,7 @@
  },
  ", chez {0}": {
   "at": [
-   "src/ui/magicui.js:481"
+   "src/ui/magicui.js:521"
   ],
   "args": [
    "Players.nameFor(game, pl.id, c.owner)"
@@ -22131,12 +22974,12 @@
  },
  "La carte du Livre de légende": {
   "at": [
-   "src/ui/magicui.js:550"
+   "src/ui/magicui.js:590"
   ]
  },
  "<h4>Mana produit : +{0}</h4><div>{1} % de votre puissance magique ({2}){3}.</div><div style=\"margin-top:6px\" class=\"gold\">D'où vient la puissance</div>{4}": {
   "at": [
-   "src/ui/magicui.js:555"
+   "src/ui/magicui.js:595"
   ],
   "args": [
    "sp.mana",
@@ -22148,7 +22991,7 @@
  },
  ", +25 % par la {0}": {
   "at": [
-   "src/ui/magicui.js:555"
+   "src/ui/magicui.js:595"
   ],
   "args": [
    "DATA.retorts.manaFocusing.name"
@@ -22156,7 +22999,7 @@
  },
  "<h4>Entretien magique : {0}</h4><div>L'Arrêt du temps suspend tout le reste : vous ne payez que lui.</div>": {
   "at": [
-   "src/ui/magicui.js:560"
+   "src/ui/magicui.js:600"
   ],
   "args": [
    "U2.total"
@@ -22164,7 +23007,7 @@
  },
  "<h4>Entretien magique : {0} mana / tour</h4>": {
   "at": [
-   "src/ui/magicui.js:561"
+   "src/ui/magicui.js:601"
   ],
   "args": [
    "U2.total"
@@ -22172,7 +23015,7 @@
  },
  "Créatures invoquées ({0})": {
   "at": [
-   "src/ui/magicui.js:562"
+   "src/ui/magicui.js:602"
   ],
   "args": [
    "U2.creatures.length"
@@ -22180,7 +23023,7 @@
  },
  "Nœuds pervertis ({0})": {
   "at": [
-   "src/ui/magicui.js:565"
+   "src/ui/magicui.js:605"
   ],
   "args": [
    "U2.warped.length"
@@ -22188,12 +23031,12 @@
  },
  "<div class=\"dim\">Rien à entretenir.</div>": {
   "at": [
-   "src/ui/magicui.js:566"
+   "src/ui/magicui.js:606"
   ]
  },
  "<div class=\"dim\">{0} : l'entretien des sorts est divisé par deux.</div>": {
   "at": [
-   "src/ui/magicui.js:567"
+   "src/ui/magicui.js:607"
   ],
   "args": [
    "DATA.retorts.channeler.name"
@@ -22201,22 +23044,22 @@
  },
  "Mana": {
   "at": [
-   "src/ui/magicui.js:572"
+   "src/ui/magicui.js:612"
   ]
  },
  "Compétence": {
   "at": [
-   "src/ui/magicui.js:574"
+   "src/ui/magicui.js:614"
   ]
  },
  "compétence": {
   "at": [
-   "src/ui/magicui.js:574"
+   "src/ui/magicui.js:614"
   ]
  },
  "{0} {1} / tour": {
   "at": [
-   "src/ui/magicui.js:586"
+   "src/ui/magicui.js:626"
   ],
   "args": [
    "c.st.key === 'research' ? Math.floor(sp.research) : sp[c.st.key]",
@@ -22225,12 +23068,12 @@
  },
  "grayscale(.75) brightness(.7)": {
   "at": [
-   "src/ui/magicui.js:656"
+   "src/ui/magicui.js:696"
   ]
  },
  "<h4>Mana</h4>La part de votre puissance magique versée chaque tour dans votre réserve de mana{0}. Le mana paie tout : le lancement des sorts, sur la carte comme en bataille, et l'entretien de vos créatures invoquées et de vos enchantements.<div style=\"margin-top:4px\">Actuellement <b class=\"mana\">+{1} mana / tour</b> ; réserve {2}.</div>": {
   "at": [
-   "src/ui/magicui.js:682"
+   "src/ui/magicui.js:722"
   ],
   "args": [
    "has('manaFocusing') ? ' (+25 % grâce à la ' + DATA.retorts.manaFocusing.name + ')' : ''",
@@ -22240,7 +23083,7 @@
  },
  " (+25 % grâce à la {0})": {
   "at": [
-   "src/ui/magicui.js:682"
+   "src/ui/magicui.js:722"
   ],
   "args": [
    "DATA.retorts.manaFocusing.name"
@@ -22248,7 +23091,7 @@
  },
  "<h4>Recherche</h4>La part de votre puissance consacrée à l'étude de nouveaux sorts. Elle s'ajoute à ce que produisent vos bibliothèques, vos sages et vos héros érudits.<div style=\"margin-top:4px\">Ce sceptre apporte <b class=\"research\">{0}</b> points ; au total {1} par tour. Le sort étudié se choisit avec <span class=\"kbd\">R</span>.</div>": {
   "at": [
-   "src/ui/magicui.js:684"
+   "src/ui/magicui.js:724"
   ],
   "args": [
    "Math.floor(sp.research)",
@@ -22257,7 +23100,7 @@
  },
  "<h4>Compétence de lancement</h4>La part de votre puissance qui fait grandir votre compétence de lancement : le mana que vous pouvez investir chaque tour dans vos sorts sur la carte, et celui que vous pouvez dépenser à chaque bataille. Plus elle est haute, plus vos grands sorts partent vite.{0}<div style=\"margin-top:4px\">Compétence actuelle <b class=\"research\">{1}</b> ; encore {2} points pour gagner 1 ({3}).</div>": {
   "at": [
-   "src/ui/magicui.js:689"
+   "src/ui/magicui.js:729"
   ],
   "args": [
    "has('archmage') ? ' Archimage : +50 % sur ces points.' : ''",
@@ -22268,12 +23111,12 @@
  },
  " Archimage : +50 % sur ces points.": {
   "at": [
-   "src/ui/magicui.js:690"
+   "src/ui/magicui.js:730"
   ]
  },
  "≈ {0} à ce rythme": {
   "at": [
-   "src/ui/magicui.js:691"
+   "src/ui/magicui.js:731"
   ],
   "args": [
    "U.n(t, 'tour')"
@@ -22281,12 +23124,12 @@
  },
  "aucun point investi": {
   "at": [
-   "src/ui/magicui.js:691"
+   "src/ui/magicui.js:731"
   ]
  },
  "{0}<div class=\"dim\" style=\"margin-top:5px\">Faites glisser le niveau du sceptre. Un clic sur sa tête le {1}.</div>": {
   "at": [
-   "src/ui/magicui.js:693"
+   "src/ui/magicui.js:733"
   ],
   "args": [
    "html",
@@ -22295,12 +23138,12 @@
  },
  "libère (il est verrouillé)": {
   "at": [
-   "src/ui/magicui.js:693"
+   "src/ui/magicui.js:733"
   ]
  },
  "verrouille": {
   "at": [
-   "src/ui/magicui.js:693"
+   "src/ui/magicui.js:733"
   ]
  },
  "url(\"data:image/svg+xml,{0}\") 3 3, pointer": {
@@ -22402,8 +23245,8 @@
  "Pillards": {
   "at": [
    "src/ui/combatview.js:128",
-   "src/ui/combatview.js:1905",
-   "src/ui/combatview.js:1905"
+   "src/ui/combatview.js:2037",
+   "src/ui/combatview.js:2037"
   ]
  },
  "écrasante": {
@@ -22449,7 +23292,7 @@
  "Semi-automatique": {
   "at": [
    "src/ui/combatview.js:133",
-   "src/ui/combatview.js:2034"
+   "src/ui/combatview.js:2166"
   ]
  },
  "Commander la bataille": {
@@ -22468,17 +23311,17 @@
  },
  "sans effet": {
   "at": [
-   "src/ui/combatview.js:438"
+   "src/ui/combatview.js:445"
   ]
  },
  " PV": {
   "at": [
-   "src/ui/combatview.js:438"
+   "src/ui/combatview.js:445"
   ]
  },
  "≈ {0} dégât{1}": {
   "at": [
-   "src/ui/combatview.js:438"
+   "src/ui/combatview.js:445"
   ],
   "args": [
    "String(Math.round(dm * 10) / 10).replace('.', ',')",
@@ -22487,51 +23330,89 @@
  },
  " par figurine": {
   "at": [
-   "src/ui/combatview.js:438"
+   "src/ui/combatview.js:445"
   ]
  },
  "bold {0}px system-ui, sans-serif": {
   "at": [
-   "src/ui/combatview.js:439",
-   "src/ui/combatview.js:454"
+   "src/ui/combatview.js:446",
+   "src/ui/combatview.js:467",
+   "src/ui/combatview.js:480"
   ],
   "args": [
    "Math.max(13, Math.round(TW * .2))"
   ]
  },
+ "{0} : {1}{2} · R : tourner": {
+  "at": [
+   "src/ui/combatview.js:477"
+  ],
+  "args": [
+   "sp ? sp.name : ''",
+   "U.n(zone.size, 'case')",
+   "zone.size < 3 ? ' (les autres sont occupées)' : ''"
+  ]
+ },
+ " (les autres sont occupées)": {
+  "at": [
+   "src/ui/combatview.js:477"
+  ]
+ },
+ "mine": {
+  "at": [
+   "src/ui/combatview.js:478"
+  ]
+ },
+ "mines": {
+  "at": [
+   "src/ui/combatview.js:478",
+   "src/ui/combatview.js:478"
+  ],
+  "hint": "pluriel de « mine »"
+ },
+ " (pas sous une unité)": {
+  "at": [
+   "src/ui/combatview.js:478"
+  ]
+ },
  "ennemi": {
   "at": [
-   "src/ui/combatview.js:453"
+   "src/ui/combatview.js:479"
   ]
  },
  "ennemis": {
   "at": [
-   "src/ui/combatview.js:453",
-   "src/ui/combatview.js:453"
+   "src/ui/combatview.js:479",
+   "src/ui/combatview.js:479"
   ],
   "hint": "pluriel de « ennemi »"
  },
  "aucun ennemi": {
   "at": [
-   "src/ui/combatview.js:453"
+   "src/ui/combatview.js:479"
   ]
  },
  " à portée ce round": {
   "at": [
-   "src/ui/combatview.js:453"
+   "src/ui/combatview.js:479"
   ]
  },
  "des vôtres": {
   "at": [
-   "src/ui/combatview.js:453",
-   "src/ui/combatview.js:453",
-   "src/ui/combatview.js:453"
+   "src/ui/combatview.js:479",
+   "src/ui/combatview.js:479",
+   "src/ui/combatview.js:479"
   ],
   "hint": "pluriel de « des vôtres »"
  },
+ " · R : tourner": {
+  "at": [
+   "src/ui/combatview.js:479"
+  ]
+ },
  "Mêlée : ≈ {0} infligé{1}{2}": {
   "at": [
-   "src/ui/combatview.js:546"
+   "src/ui/combatview.js:572"
   ],
   "args": [
    "fmt(f.dealt)",
@@ -22541,7 +23422,7 @@
  },
  " · {0} % de l'abattre": {
   "at": [
-   "src/ui/combatview.js:546"
+   "src/ui/combatview.js:572"
   ],
   "args": [
    "Math.round(f.kill * 100)"
@@ -22549,7 +23430,7 @@
  },
  "riposte ≈ {0}{1}{2}": {
   "at": [
-   "src/ui/combatview.js:547"
+   "src/ui/combatview.js:573"
   ],
   "args": [
    "fmt(f.received)",
@@ -22559,7 +23440,7 @@
  },
  " ({0} % de périr)": {
   "at": [
-   "src/ui/combatview.js:547"
+   "src/ui/combatview.js:573"
   ],
   "args": [
    "Math.round(f.die * 100)"
@@ -22567,22 +23448,22 @@
  },
  " · dans le dos : +1, déf. ÷2": {
   "at": [
-   "src/ui/combatview.js:547"
+   "src/ui/combatview.js:573"
   ]
  },
  " · de flanc : +1": {
   "at": [
-   "src/ui/combatview.js:547"
+   "src/ui/combatview.js:573"
   ]
  },
  "relâchez Ctrl pour tirer": {
   "at": [
-   "src/ui/combatview.js:549"
+   "src/ui/combatview.js:575"
   ]
  },
  "Tir : ≈ {0} dégât{1}": {
   "at": [
-   "src/ui/combatview.js:574"
+   "src/ui/combatview.js:600"
   ],
   "args": [
    "dmg",
@@ -22591,7 +23472,7 @@
  },
  "{0} % sans effet · {1} % par dé{2}": {
   "at": [
-   "src/ui/combatview.js:574"
+   "src/ui/combatview.js:600"
   ],
   "args": [
    "Math.round(f.zero * 100)",
@@ -22601,7 +23482,7 @@
  },
  ", −{0} déf.": {
   "at": [
-   "src/ui/combatview.js:574"
+   "src/ui/combatview.js:600"
   ],
   "args": [
    "f.pierce"
@@ -22609,17 +23490,17 @@
  },
  "brightness(.55) sepia(.6) saturate(1.6) hue-rotate(-20deg)": {
   "at": [
-   "src/ui/combatview.js:592"
+   "src/ui/combatview.js:618"
   ]
  },
  "brightness(.5) saturate(.35)": {
   "at": [
-   "src/ui/combatview.js:866"
+   "src/ui/combatview.js:957"
   ]
  },
  "muette {0}": {
   "at": [
-   "src/ui/combatview.js:887"
+   "src/ui/combatview.js:978"
   ],
   "args": [
    "t.mute"
@@ -22627,17 +23508,17 @@
  },
  "stase": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
  "Zz": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
  "toile {0}": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ],
   "args": [
    "b.web"
@@ -22645,47 +23526,57 @@
  },
  "terreur": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
- "entravé": {
+ "enchevêtré": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
+  ]
+ },
+ "sans riposte": {
+  "at": [
+   "src/ui/combatview.js:1103"
+  ]
+ },
+ "sans tir": {
+  "at": [
+   "src/ui/combatview.js:1103"
   ]
  },
  "asservi": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
  "possédé": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
  "bris": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
  "déformé": {
   "at": [
-   "src/ui/combatview.js:1012"
+   "src/ui/combatview.js:1103"
   ]
  },
  "garde (brèche)": {
   "at": [
-   "src/ui/combatview.js:1015"
+   "src/ui/combatview.js:1106"
   ]
  },
  "en garde": {
   "at": [
-   "src/ui/combatview.js:1015"
+   "src/ui/combatview.js:1106"
   ]
  },
  "Charge +{0}": {
   "at": [
-   "src/ui/combatview.js:1037"
+   "src/ui/combatview.js:1128"
   ],
   "args": [
    "e.charge"
@@ -22693,18 +23584,18 @@
  },
  "Dans le dos !": {
   "at": [
-   "src/ui/combatview.js:1038"
+   "src/ui/combatview.js:1129"
   ]
  },
  "De flanc !": {
   "at": [
-   "src/ui/combatview.js:1038"
+   "src/ui/combatview.js:1129"
   ]
  },
  "Effroi −{0}": {
   "at": [
-   "src/ui/combatview.js:1040",
-   "src/ui/combatview.js:1041"
+   "src/ui/combatview.js:1131",
+   "src/ui/combatview.js:1132"
   ],
   "args": [
    "e.fearA"
@@ -22712,22 +23603,22 @@
  },
  "porte -": {
   "at": [
-   "src/ui/combatview.js:1052"
+   "src/ui/combatview.js:1143"
   ]
  },
  "Rejouer manuellement": {
   "at": [
-   "src/ui/combatview.js:1391"
+   "src/ui/combatview.js:1495"
   ]
  },
  "Accepter le résultat": {
   "at": [
-   "src/ui/combatview.js:1391"
+   "src/ui/combatview.js:1495"
   ]
  },
  "Continuer": {
   "at": [
-   "src/ui/combatview.js:1391",
+   "src/ui/combatview.js:1495",
    "src/ui/main.js:178",
    "src/ui/main.js:195",
    "src/ui/main.js:1471"
@@ -22735,23 +23626,23 @@
  },
  "Revoir le champ de bataille": {
   "at": [
-   "src/ui/combatview.js:1393"
+   "src/ui/combatview.js:1497"
   ]
  },
  "Victoire !": {
   "at": [
-   "src/ui/combatview.js:1394",
+   "src/ui/combatview.js:1498",
    "src/ui/main.js:1864"
   ]
  },
  "Défaite": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "<p class=\"serif\" style=\"font-size:17px\">{0}</p><p>Ennemis {1} : <b>{2}</b>{3}<br>Pertes : <b>{4}</b>{5}</p>{6}{7}": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ],
   "args": [
    "won ? (bt.fled === 1 - CombatView.humanSide ? 'L\\'ennemi bat en retraite.' : 'Le champ de ",
@@ -22766,77 +23657,77 @@
  },
  "L'ennemi bat en retraite.": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "Le champ de bataille vous appartient.": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "Vos troupes ont battu en retraite.": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "Vos forces ont été repoussées.": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "anéantis ou pris": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "anéantis": {
   "at": [
-   "src/ui/combatview.js:1394"
+   "src/ui/combatview.js:1498"
   ]
  },
  "<p class=\"dim\">Bataille résolue automatiquement : acceptez ce résultat, ou rejouez-la vous-même depuis le début, sur le même terrain, avec les mêmes troupes et le même mana. Le résultat rejoué sera définitif.</p>": {
   "at": [
-   "src/ui/combatview.js:1395"
+   "src/ui/combatview.js:1499"
   ]
  },
  "Le champ de bataille": {
   "at": [
-   "src/ui/combatview.js:1404"
+   "src/ui/combatview.js:1508"
   ]
  },
  "Revenir au résultat": {
   "at": [
-   "src/ui/combatview.js:1404"
+   "src/ui/combatview.js:1508"
   ]
  },
  "combat facile": {
   "at": [
-   "src/ui/combatview.js:1414"
+   "src/ui/combatview.js:1518"
   ]
  },
  "combat à votre avantage": {
   "at": [
-   "src/ui/combatview.js:1414"
+   "src/ui/combatview.js:1518"
   ]
  },
  "combat serré": {
   "at": [
-   "src/ui/combatview.js:1414"
+   "src/ui/combatview.js:1518"
   ]
  },
  "combat rude": {
   "at": [
-   "src/ui/combatview.js:1414"
+   "src/ui/combatview.js:1518"
   ]
  },
  "combat désespéré": {
   "at": [
-   "src/ui/combatview.js:1414"
+   "src/ui/combatview.js:1518"
   ]
  },
  "{0} unités": {
   "at": [
-   "src/ui/combatview.js:1424"
+   "src/ui/combatview.js:1528"
   ],
   "args": [
    "gs.length"
@@ -22844,19 +23735,19 @@
  },
  "ennemi abattu": {
   "at": [
-   "src/ui/combatview.js:1424"
+   "src/ui/combatview.js:1528"
   ]
  },
  "ennemis abattus": {
   "at": [
-   "src/ui/combatview.js:1424",
-   "src/ui/combatview.js:1424"
+   "src/ui/combatview.js:1528",
+   "src/ui/combatview.js:1528"
   ],
   "hint": "pluriel de « ennemi abattu »"
  },
  "<p>Expérience, {0} : {1}.</p>{2}": {
   "at": [
-   "src/ui/combatview.js:1427"
+   "src/ui/combatview.js:1531"
   ],
   "args": [
    "how",
@@ -22866,7 +23757,7 @@
  },
  "<p>Promotion{0} : {1}</p>": {
   "at": [
-   "src/ui/combatview.js:1427"
+   "src/ui/combatview.js:1531"
   ],
   "args": [
    "ups.length > 1 ? 's' : ''",
@@ -22875,7 +23766,7 @@
  },
  "{0}<p>Tombés au combat : {1}.</p><p>{2} : <b class=\"mana\">{3} mana</b> <span class=\"dim\">(compétence {4}, mana {5})</span></p>": {
   "at": [
-   "src/ui/combatview.js:1441"
+   "src/ui/combatview.js:1545"
   ],
   "args": [
    "lastStand ? '<p>Toutes vos unités sont tombées.</p>' : ''",
@@ -22888,12 +23779,12 @@
  },
  "<p>Toutes vos unités sont tombées.</p>": {
   "at": [
-   "src/ui/combatview.js:1441"
+   "src/ui/combatview.js:1545"
   ]
  },
  "Relever : {0}": {
   "at": [
-   "src/ui/combatview.js:1442"
+   "src/ui/combatview.js:1546"
   ],
   "args": [
    "bt.name(b)"
@@ -22901,42 +23792,42 @@
  },
  "Accepter la défaite": {
   "at": [
-   "src/ui/combatview.js:1442"
+   "src/ui/combatview.js:1546"
   ]
  },
  "Laisser": {
   "at": [
-   "src/ui/combatview.js:1442"
+   "src/ui/combatview.js:1546"
   ]
  },
  "— La bataille reprend depuis le début —": {
   "at": [
-   "src/ui/combatview.js:1482"
+   "src/ui/combatview.js:1586"
   ]
  },
  "La bataille reprend depuis le début : à vous de commander.": {
   "at": [
-   "src/ui/combatview.js:1490"
+   "src/ui/combatview.js:1594"
   ]
  },
  "tombé dans vos rangs": {
   "at": [
-   "src/ui/combatview.js:1522"
+   "src/ui/combatview.js:1626"
   ]
  },
  "ennemi tombé": {
   "at": [
-   "src/ui/combatview.js:1522"
+   "src/ui/combatview.js:1626"
   ]
  },
  "<div class=\"dim\" style=\"font-size:11.5px\">Plusieurs corps ici : vous choisirez lequel relever.</div>": {
   "at": [
-   "src/ui/combatview.js:1522"
+   "src/ui/combatview.js:1626"
   ]
  },
  "<h4>Terrain</h4>{0}": {
   "at": [
-   "src/ui/combatview.js:1524"
+   "src/ui/combatview.js:1628"
   ],
   "args": [
    "terr"
@@ -22944,12 +23835,12 @@
  },
  "Seuls des sorts, les briseurs de murs et les créatures colossales abattent une tour.": {
   "at": [
-   "src/ui/combatview.js:1546"
+   "src/ui/combatview.js:1650"
   ]
  },
  "{0} est hors de portée.": {
   "at": [
-   "src/ui/combatview.js:1550"
+   "src/ui/combatview.js:1654"
   ],
   "args": [
    "U.cap(bt.towerName(tw))"
@@ -22957,22 +23848,22 @@
  },
  "Un engin de siège ne s'en prend qu'aux tours.": {
   "at": [
-   "src/ui/combatview.js:1555"
+   "src/ui/combatview.js:1659"
   ]
  },
  "Hors d'atteinte : cette unité vole.": {
   "at": [
-   "src/ui/combatview.js:1559"
+   "src/ui/combatview.js:1663"
   ]
  },
  "Cible hors de portée.": {
   "at": [
-   "src/ui/combatview.js:1563"
+   "src/ui/combatview.js:1667"
   ]
  },
  "{0} garde sa position jusqu'à ce que la muraille soit percée.": {
   "at": [
-   "src/ui/combatview.js:1602"
+   "src/ui/combatview.js:1707"
   ],
   "args": [
    "U.cap(bt.name(b))"
@@ -22980,7 +23871,7 @@
  },
  "Brèche ouverte ! {0} le combat.": {
   "at": [
-   "src/ui/combatview.js:1611"
+   "src/ui/combatview.js:1716"
   ],
   "args": [
    "woke.length > 1 ? woke.length + ' unités en garde reprennent' : U.cap(bt.name(woke[0])) + "
@@ -22988,7 +23879,7 @@
  },
  "{0} unités en garde reprennent": {
   "at": [
-   "src/ui/combatview.js:1611"
+   "src/ui/combatview.js:1716"
   ],
   "args": [
    "woke.length"
@@ -22996,7 +23887,7 @@
  },
  "{0} reprend": {
   "at": [
-   "src/ui/combatview.js:1611"
+   "src/ui/combatview.js:1716"
   ],
   "args": [
    "U.cap(bt.name(woke[0]))"
@@ -23004,7 +23895,7 @@
  },
  "Vous reprenez la main{0}.": {
   "at": [
-   "src/ui/combatview.js:1619"
+   "src/ui/combatview.js:1724"
   ],
   "args": [
    "CombatView.bt && CombatView.bt.side === CombatView.humanSide ? '' : ' : ce sera à vous au "
@@ -23012,22 +23903,22 @@
  },
  " : ce sera à vous au prochain tour": {
   "at": [
-   "src/ui/combatview.js:1619"
+   "src/ui/combatview.js:1724"
   ]
  },
  " joue seule désormais (sélectionnez-la puis U pour la reprendre).": {
   "at": [
-   "src/ui/combatview.js:1636"
+   "src/ui/combatview.js:1741"
   ]
  },
  " attend de nouveau vos ordres.": {
   "at": [
-   "src/ui/combatview.js:1636"
+   "src/ui/combatview.js:1741"
   ]
  },
  "Compétence restante : {0} · mana : {1} · distance à la forteresse ×{2}{3}": {
   "at": [
-   "src/ui/combatview.js:1668"
+   "src/ui/combatview.js:1773"
   ],
   "args": [
    "bt.skillLeft[side]",
@@ -23038,23 +23929,23 @@
  },
  " (Relais de magie)": {
   "at": [
-   "src/ui/combatview.js:1668"
+   "src/ui/combatview.js:1773"
   ]
  },
  "Vous avez déjà lancé un sort ce tour-ci.": {
   "at": [
-   "src/ui/combatview.js:1669",
-   "src/ui/combatview.js:1736"
+   "src/ui/combatview.js:1774",
+   "src/ui/combatview.js:1841"
   ]
  },
  "Combat sur un nœud : votre Maîtrise des nœuds protège vos sorts de son flux.": {
   "at": [
-   "src/ui/combatview.js:1670"
+   "src/ui/combatview.js:1775"
   ]
  },
  "Combat sur un nœud de {0} : les sorts des autres royaumes risquent de s'y dissiper (le risque est indiqué sous chacun).": {
   "at": [
-   "src/ui/combatview.js:1670"
+   "src/ui/combatview.js:1775"
   ],
   "args": [
    "REALM_NAMES[bt.nodeRealm].toLowerCase()"
@@ -23062,7 +23953,7 @@
  },
  "Flux du nœud : {0} % de risque de dissipation": {
   "at": [
-   "src/ui/combatview.js:1671"
+   "src/ui/combatview.js:1776"
   ],
   "args": [
    "Math.round(f * 100)"
@@ -23070,7 +23961,7 @@
  },
  "Capacités de {0}": {
   "at": [
-   "src/ui/combatview.js:1688"
+   "src/ui/combatview.js:1793"
   ],
   "args": [
    "Units.label(sel.u)"
@@ -23078,37 +23969,37 @@
  },
  "Fait surgir des démons qui combattent à vos côtés jusqu'à la fin de la bataille.": {
   "at": [
-   "src/ui/combatview.js:1690"
+   "src/ui/combatview.js:1795"
   ]
  },
  "Déjà utilisée": {
   "at": [
-   "src/ui/combatview.js:1692"
+   "src/ui/combatview.js:1797"
   ]
  },
  "Mana insuffisant": {
   "at": [
-   "src/ui/combatview.js:1692"
+   "src/ui/combatview.js:1797"
   ]
  },
  "Déjà actif": {
   "at": [
-   "src/ui/combatview.js:1692"
+   "src/ui/combatview.js:1797"
   ]
  },
  "Aucune cible": {
   "at": [
-   "src/ui/combatview.js:1692"
+   "src/ui/combatview.js:1797"
   ]
  },
  "Une fois": {
   "at": [
-   "src/ui/combatview.js:1693"
+   "src/ui/combatview.js:1798"
   ]
  },
  "reste {0}": {
   "at": [
-   "src/ui/combatview.js:1693"
+   "src/ui/combatview.js:1798"
   ],
   "args": [
    "sel.casterMana"
@@ -23116,57 +24007,52 @@
  },
  "Aucun sort de combat disponible.": {
   "at": [
-   "src/ui/combatview.js:1699"
+   "src/ui/combatview.js:1804"
   ]
  },
  "Déjà actif sur ce champ de bataille.": {
   "at": [
-   "src/ui/combatview.js:1704"
-  ]
- },
- "Vous avez déjà 9 unités sur le terrain.": {
-  "at": [
-   "src/ui/combatview.js:1707"
+   "src/ui/combatview.js:1809"
   ]
  },
  "Aucune muraille ni tour à abattre ici.": {
   "at": [
-   "src/ui/combatview.js:1709"
+   "src/ui/combatview.js:1814"
   ]
  },
  "parmi vos ennemis": {
   "at": [
-   "src/ui/combatview.js:1712"
+   "src/ui/combatview.js:1817"
   ]
  },
  "dans vos rangs": {
   "at": [
-   "src/ui/combatview.js:1712"
+   "src/ui/combatview.js:1817"
   ]
  },
  "sur le champ de bataille": {
   "at": [
-   "src/ui/combatview.js:1712"
+   "src/ui/combatview.js:1817"
   ]
  },
  "Aucun mort ne peut être relevé (héros, rappelés ou morts irréversibles).": {
   "at": [
-   "src/ui/combatview.js:1713"
+   "src/ui/combatview.js:1818"
   ]
  },
  "Vos morts ne peuvent pas être relevés : leurs dégâts sont irréversibles (pétrification, désintégration…).": {
   "at": [
-   "src/ui/combatview.js:1714"
+   "src/ui/combatview.js:1819"
   ]
  },
  "Aucune de vos unités normales n'est tombée dans cette bataille.": {
   "at": [
-   "src/ui/combatview.js:1714"
+   "src/ui/combatview.js:1819"
   ]
  },
  "Ne touche que les {0} {1} : il n'y en a {2}{3}.": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1821"
   ],
   "args": [
    "p.targets && p.targets.length ? 'créatures ou morts-vivants' : p.fantasticOnly ? 'créature",
@@ -23177,43 +24063,43 @@
  },
  "créatures ou morts-vivants": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1821"
   ]
  },
  "créatures": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1821"
   ]
  },
  " ou ": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1821"
   ],
   "hint": "séparateur d'une liste (« a, b ou c »)"
  },
  "aucun ": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1821"
   ]
  },
  "aucune ": {
   "at": [
-   "src/ui/combatview.js:1716"
+   "src/ui/combatview.js:1821"
   ]
  },
  "Les unités ennemies visibles ont déjà subi les trois mutations, ou y sont insensibles.": {
   "at": [
-   "src/ui/combatview.js:1718"
+   "src/ui/combatview.js:1823"
   ]
  },
  "Toutes les unités ennemies visibles le subissent déjà, ou y sont insensibles.": {
   "at": [
-   "src/ui/combatview.js:1718"
+   "src/ui/combatview.js:1823"
   ]
  },
  "Ne touche que les unités normales : il n'y en a aucune {0}.": {
   "at": [
-   "src/ui/combatview.js:1719"
+   "src/ui/combatview.js:1824"
   ],
   "args": [
    "where"
@@ -23221,7 +24107,7 @@
  },
  "Ne touche que les créatures fantastiques : il n'y en a aucune {0}.": {
   "at": [
-   "src/ui/combatview.js:1720"
+   "src/ui/combatview.js:1825"
   ],
   "args": [
    "where"
@@ -23229,27 +24115,27 @@
  },
  "Toutes vos unités qui peuvent en bénéficier l'ont déjà.": {
   "at": [
-   "src/ui/combatview.js:1721"
+   "src/ui/combatview.js:1826"
   ]
  },
  "Aucun ennemi ne peut être visé : invisibles, ou insensibles à ce sort.": {
   "at": [
-   "src/ui/combatview.js:1722"
+   "src/ui/combatview.js:1827"
   ]
  },
  "Aucune cible possible pour l'instant.": {
   "at": [
-   "src/ui/combatview.js:1723"
+   "src/ui/combatview.js:1828"
   ]
  },
  "Déjà utilisée dans ce combat.": {
   "at": [
-   "src/ui/combatview.js:1726"
+   "src/ui/combatview.js:1831"
   ]
  },
  "Mana de l'unité insuffisant : {0} sur {1}.": {
   "at": [
-   "src/ui/combatview.js:1727"
+   "src/ui/combatview.js:1832"
   ],
   "args": [
    "b.casterMana",
@@ -23258,12 +24144,12 @@
  },
  "Ce n'est pas votre tour.": {
   "at": [
-   "src/ui/combatview.js:1735"
+   "src/ui/combatview.js:1840"
   ]
  },
  "Compétence insuffisante : il vous en reste {0}, il en faut {1}.": {
   "at": [
-   "src/ui/combatview.js:1738"
+   "src/ui/combatview.js:1843"
   ],
   "args": [
    "bt.skillLeft[side]",
@@ -23272,16 +24158,47 @@
  },
  "Mana insuffisant : {0} sur {1}.": {
   "at": [
-   "src/ui/combatview.js:1739"
+   "src/ui/combatview.js:1844"
   ],
   "args": [
    "pl.mana",
    "cost"
   ]
  },
+ "Choisissez où dresser <b>{0}</b> : trois cases alignées autour du curseur ; <b>R</b> pour tourner la ligne.": {
+  "at": [
+   "src/ui/combatview.js:1856"
+  ],
+  "args": [
+   "nm"
+  ]
+ },
+ "Choisissez le centre de la croix de <b>{0}</b> (cinq cases).": {
+  "at": [
+   "src/ui/combatview.js:1856"
+  ],
+  "args": [
+   "nm"
+  ]
+ },
+ "Choisissez l'unité à transporter (en or).": {
+  "at": [
+   "src/ui/combatview.js:1857"
+  ]
+ },
+ "Choisissez l'unité que le vent poussera (en or).": {
+  "at": [
+   "src/ui/combatview.js:1857"
+  ]
+ },
+ "Choisissez l'unité tombée à relever (en or).": {
+  "at": [
+   "src/ui/combatview.js:1857"
+  ]
+ },
  "Choisissez où apparaît le <b>{0}</b> : la zone montre jusqu'où il peut aller dès ce round.": {
   "at": [
-   "src/ui/combatview.js:1751"
+   "src/ui/combatview.js:1859"
   ],
   "args": [
    "DATA.spells[id] ? DATA.spells[id].name : id"
@@ -23289,7 +24206,7 @@
  },
  "Choisissez le centre de <b>{0}</b> : la zone de {1} × {2} cases suit le curseur.": {
   "at": [
-   "src/ui/combatview.js:1751"
+   "src/ui/combatview.js:1859"
   ],
   "args": [
    "DATA.spells[id] ? DATA.spells[id].name : id",
@@ -23299,7 +24216,7 @@
  },
  "Choisissez la cible de <b>{0}</b> (en or){1}.": {
   "at": [
-   "src/ui/combatview.js:1752"
+   "src/ui/combatview.js:1860"
   ],
   "args": [
    "DATA.spells[id] ? DATA.spells[id].name : id",
@@ -23308,12 +24225,12 @@
  },
  " ; réglez sa puissance au-dessus de la barre (touches + et −)": {
   "at": [
-   "src/ui/combatview.js:1752"
+   "src/ui/combatview.js:1860"
   ]
  },
  "{0} de la réserve de {1}": {
   "at": [
-   "src/ui/combatview.js:1758"
+   "src/ui/combatview.js:1866"
   ],
   "args": [
    "o ? o.cost + x : x",
@@ -23322,7 +24239,7 @@
  },
  "coût {0} mana": {
   "at": [
-   "src/ui/combatview.js:1760"
+   "src/ui/combatview.js:1868"
   ],
   "args": [
    "Math.max(1, Math.ceil(base * Magic.distanceMult(App.game, pl, bt.plane, bt.x, bt.y)))"
@@ -23330,12 +24247,12 @@
  },
  "puissance de base": {
   "at": [
-   "src/ui/combatview.js:1762"
+   "src/ui/combatview.js:1870"
   ]
  },
  "<div><b class=\"danger\">Sans effet</b> : {0}.</div>": {
   "at": [
-   "src/ui/combatview.js:1825"
+   "src/ui/combatview.js:1935"
   ],
   "args": [
    "o.threshold ? 'résistance ' + o.res + ', il faudrait moins de ' + o.threshold : 'immunisé "
@@ -23343,7 +24260,7 @@
  },
  "résistance {0}, il faudrait moins de {1}": {
   "at": [
-   "src/ui/combatview.js:1825"
+   "src/ui/combatview.js:1935"
   ],
   "args": [
    "o.res",
@@ -23352,7 +24269,7 @@
  },
  "immunisé (résistance {0})": {
   "at": [
-   "src/ui/combatview.js:1825"
+   "src/ui/combatview.js:1935"
   ],
   "args": [
    "o.res >= 50 ? '50 ou plus' : o.res"
@@ -23360,12 +24277,12 @@
  },
  "50 ou plus": {
   "at": [
-   "src/ui/combatview.js:1825"
+   "src/ui/combatview.js:1935"
   ]
  },
  "<div>Au moins un effet dissipé : <b class=\"{0}\" style=\"font-size:16px\">{1}</b></div><div class=\"dim\" style=\"font-size:11.5px\">{2}</div>": {
   "at": [
-   "src/ui/combatview.js:1826"
+   "src/ui/combatview.js:1936"
   ],
   "args": [
    "col(o.p)",
@@ -23375,7 +24292,7 @@
  },
  "<div>Vol de vie attendu : <b class=\"ok\">{0} PV</b> <span class=\"dim\">(résistance {1}{2})</span></div>": {
   "at": [
-   "src/ui/combatview.js:1827"
+   "src/ui/combatview.js:1937"
   ],
   "args": [
    "String(Math.round(o.drain * 10) / 10).replace('.', ',')",
@@ -23385,7 +24302,7 @@
  },
  "<div>Dégâts attendus : <b class=\"{0}\" style=\"font-size:16px\">≈ {1}</b> sur {2} PV</div><div class=\"dim\" style=\"font-size:11.5px\">{3} sans effet · unité détruite : {4}</div>": {
   "at": [
-   "src/ui/combatview.js:1828"
+   "src/ui/combatview.js:1938"
   ],
   "args": [
    "col(1 - o.zero)",
@@ -23397,7 +24314,7 @@
  },
  "<div>Chaque figurine : <b class=\"{0}\">{1}</b> de périr</div><div>Au moins une tuée : <b class=\"{2}\">{3}</b> · l'unité entière : <b class=\"{4}\">{5}</b></div>": {
   "at": [
-   "src/ui/combatview.js:1829"
+   "src/ui/combatview.js:1939"
   ],
   "args": [
    "col(o.p)",
@@ -23410,7 +24327,7 @@
  },
  "<div>Chance de réussite : <b class=\"{0}\" style=\"font-size:16px\">{1}</b></div>": {
   "at": [
-   "src/ui/combatview.js:1830"
+   "src/ui/combatview.js:1940"
   ],
   "args": [
    "col(o.p)",
@@ -23419,7 +24336,7 @@
  },
  "<div class=\"dim\" style=\"font-size:11.5px\">Résistance {0}{1} : il faut faire plus que {2} sur 10{3}.</div>": {
   "at": [
-   "src/ui/combatview.js:1831"
+   "src/ui/combatview.js:1941"
   ],
   "args": [
    "o.res",
@@ -23430,7 +24347,7 @@
  },
  ", réduite de {0} par le sort": {
   "at": [
-   "src/ui/combatview.js:1831"
+   "src/ui/combatview.js:1941"
   ],
   "args": [
    "o.mod"
@@ -23438,55 +24355,107 @@
  },
  " pour chaque figurine": {
   "at": [
-   "src/ui/combatview.js:1831"
-  ]
- },
- "<div class=\"gold\" style=\"font-size:11.5px\">Le sort doit d'abord passer {0}{1}{2} ({3}) : chance réelle {4}.</div>": {
-  "at": [
-   "src/ui/combatview.js:1832"
-  ],
-  "args": [
-   "bt.nodeRealm && CombatSpells.nodeFizzle(bt, CombatView.humanSide, m.id, 0) > 0 ? 'le flux ",
-   "bt.nodeRealm && CombatSpells.nodeFizzle(bt, CombatView.humanSide, m.id, 0) > 0 && bt.ench[",
-   "bt.ench[1 - CombatView.humanSide].includes('counter_magic') ? 'la contre-magie' : ''",
-   "pc(o.pass)",
-   "pc(o.chance)"
+   "src/ui/combatview.js:1941"
   ]
  },
  "le flux du nœud": {
   "at": [
-   "src/ui/combatview.js:1832"
+   "src/ui/combatview.js:1942"
   ]
  },
  "la contre-magie": {
   "at": [
-   "src/ui/combatview.js:1832"
+   "src/ui/combatview.js:1942"
+  ]
+ },
+ "son Miroir magique": {
+  "at": [
+   "src/ui/combatview.js:1942"
+  ]
+ },
+ "<div class=\"gold\" style=\"font-size:11.5px\">Le sort doit d'abord passer {0} ({1}) : chance réelle {2}.</div>": {
+  "at": [
+   "src/ui/combatview.js:1942"
+  ],
+  "args": [
+   "ob.join(' et ')",
+   "pc(o.pass)",
+   "pc(o.chance)"
+  ]
+ },
+ "Choisissez une des cases cerclées d'or : le vent pousse en ligne droite.": {
+  "at": [
+   "src/ui/combatview.js:1953"
+  ]
+ },
+ "Choisissez l'unité qui donnera sa vie (cerclée d'or ; pas un héros).": {
+  "at": [
+   "src/ui/combatview.js:1953"
+  ]
+ },
+ "Case impossible.": {
+  "at": [
+   "src/ui/combatview.js:1954"
   ]
  },
  "Quel corps relever ?": {
   "at": [
-   "src/ui/combatview.js:1845"
+   "src/ui/combatview.js:1967"
   ]
  },
  " (ennemi)": {
   "at": [
-   "src/ui/combatview.js:1845"
+   "src/ui/combatview.js:1967"
   ]
  },
  "Sort annulé.": {
   "at": [
-   "src/ui/combatview.js:1846",
-   "src/ui/combatview.js:1858"
+   "src/ui/combatview.js:1968",
+   "src/ui/combatview.js:1981"
+  ]
+ },
+ "Pas de mine sous une unité ni sur un obstacle : visez des cases libres.": {
+  "at": [
+   "src/ui/combatview.js:1977"
+  ]
+ },
+ "Toutes ces cases sont occupées : visez ailleurs.": {
+  "at": [
+   "src/ui/combatview.js:1977"
+  ]
+ },
+ "Choisissez où transporter {0} (cases en or ; Échap pour annuler).": {
+  "at": [
+   "src/ui/combatview.js:1986"
+  ],
+  "args": [
+   "U.esc(bt.name(target))"
+  ]
+ },
+ "Choisissez où le vent pousse {0} (cases en or).": {
+  "at": [
+   "src/ui/combatview.js:1986"
+  ],
+  "args": [
+   "U.esc(bt.name(target))"
+  ]
+ },
+ "Choisissez l'unité qui donnera sa vie pour relever {0} (en or).": {
+  "at": [
+   "src/ui/combatview.js:1986"
+  ],
+  "args": [
+   "U.esc(bt.name(target))"
   ]
  },
  "<h4>Porte enfoncée</h4><div class=\"muted\">Le passage est ouvert.</div>": {
   "at": [
-   "src/ui/combatview.js:1869"
+   "src/ui/combatview.js:1999"
   ]
  },
  "<h4>Porte</h4><div>{0} / {1} PV · défense {2}</div><div class=\"dim\" style=\"margin-top:4px\">Fermée aux assaillants tant qu'elle tient.</div>": {
   "at": [
-   "src/ui/combatview.js:1870"
+   "src/ui/combatview.js:2000"
   ],
   "args": [
    "Math.max(0, tv.hp)",
@@ -23496,22 +24465,22 @@
  },
  "Ruines de la tour du sorcier": {
   "at": [
-   "src/ui/combatview.js:1872"
+   "src/ui/combatview.js:2002"
   ]
  },
  "Ruines d'une tour": {
   "at": [
-   "src/ui/combatview.js:1872"
+   "src/ui/combatview.js:2002"
   ]
  },
  "<div class=\"muted\">La muraille est ouverte à cet endroit.</div>": {
   "at": [
-   "src/ui/combatview.js:1872"
+   "src/ui/combatview.js:2002"
   ]
  },
  "{0} magique{1} de force {2}": {
   "at": [
-   "src/ui/combatview.js:1873"
+   "src/ui/combatview.js:2003"
   ],
   "args": [
    "U.n(t.shots, 'rayon')",
@@ -23521,18 +24490,18 @@
  },
  "rayon": {
   "at": [
-   "src/ui/combatview.js:1873"
+   "src/ui/combatview.js:2003"
   ]
  },
  "rayons": {
   "at": [
-   "src/ui/combatview.js:1873"
+   "src/ui/combatview.js:2003"
   ],
   "hint": "pluriel de « rayon »"
  },
  "{0} flèches de force {1}": {
   "at": [
-   "src/ui/combatview.js:1873"
+   "src/ui/combatview.js:2003"
   ],
   "args": [
    "t.shots",
@@ -23541,7 +24510,7 @@
  },
  "<h4>{0}</h4><div>{1} / {2} PV · défense {3}</div>{4}<div class=\"dim\" style=\"margin-top:4px\">{5}</div>": {
   "at": [
-   "src/ui/combatview.js:1874"
+   "src/ui/combatview.js:2004"
   ],
   "args": [
    "t.kind === 'spire' ? 'Tour du sorcier' : 'Tour de défense'",
@@ -23554,36 +24523,25 @@
  },
  "Tour du sorcier": {
   "at": [
-   "src/ui/combatview.js:1874"
+   "src/ui/combatview.js:2004"
   ]
  },
  "Tour de défense": {
   "at": [
-   "src/ui/combatview.js:1874"
+   "src/ui/combatview.js:2004"
   ]
  },
  "<div class=\"danger\" style=\"margin-top:4px\">Réduite au silence : ne tire plus pendant {0}.</div>": {
   "at": [
-   "src/ui/combatview.js:1876"
+   "src/ui/combatview.js:2006"
   ],
   "args": [
    "U.n(t.mute, 'round')"
   ]
  },
- "round": {
-  "at": [
-   "src/ui/combatview.js:1876"
-  ]
- },
- "rounds": {
-  "at": [
-   "src/ui/combatview.js:1876"
-  ],
-  "hint": "pluriel de « round »"
- },
  "<div style=\"margin-top:4px\">Tire {0} ({1} % pour toucher) à chaque round.</div>": {
   "at": [
-   "src/ui/combatview.js:1876"
+   "src/ui/combatview.js:2006"
   ],
   "args": [
    "what",
@@ -23592,37 +24550,69 @@
  },
  "Tant qu'elle tient, la forteresse n'est pas prise. Toute unité peut l'assaillir au contact.": {
   "at": [
-   "src/ui/combatview.js:1877"
+   "src/ui/combatview.js:2007"
   ]
  },
  "Ne tire que tant qu'une garnison la sert. Seuls des sorts, les briseurs de murs et les créatures colossales en viennent à bout.": {
   "at": [
-   "src/ui/combatview.js:1877"
+   "src/ui/combatview.js:2007"
   ]
  },
  "Bris": {
   "at": [
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
  },
  "Déformation (attaque)": {
   "at": [
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
  },
  "Déformation (défense)": {
   "at": [
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
  },
  "Déformation (résistance)": {
   "at": [
-   "src/ui/combatview.js:1885"
+   "src/ui/combatview.js:2015"
   ]
+ },
+ "Lenteur : mouvement réduit de moitié": {
+  "at": [
+   "src/ui/combatview.js:2015"
+  ]
+ },
+ "Entraves : plus de riposte": {
+  "at": [
+   "src/ui/combatview.js:2015"
+  ]
+ },
+ "Crépuscule : plus de tir": {
+  "at": [
+   "src/ui/combatview.js:2015"
+  ]
+ },
+ "<span class=\"abl\" style=\"border-color:#3a5a8a;color:#a8c8ff\">Double : se dissipe dès qu'il est blessé</span>": {
+  "at": [
+   "src/ui/combatview.js:2016"
+  ]
+ },
+ "figurine des vôtres tuée": {
+  "at": [
+   "src/ui/combatview.js:2017"
+  ]
+ },
+ "figurines des vôtres tuées": {
+  "at": [
+   "src/ui/combatview.js:2017",
+   "src/ui/combatview.js:2017"
+  ],
+  "hint": "pluriel de « figurine des vôtres tuée »"
  },
  "<span class=\"abl\">Munitions {0}</span>": {
   "at": [
-   "src/ui/combatview.js:1886"
+   "src/ui/combatview.js:2018"
   ],
   "args": [
    "b.ammo"
@@ -23630,12 +24620,12 @@
  },
  "<span class=\"abl\" style=\"border-color:#7a2a2a;color:#ffb0b0\">Munitions 0</span>": {
   "at": [
-   "src/ui/combatview.js:1887"
+   "src/ui/combatview.js:2019"
   ]
  },
  "<span class=\"abl e\">Mana {0}</span>": {
   "at": [
-   "src/ui/combatview.js:1888"
+   "src/ui/combatview.js:2020"
   ],
   "args": [
    "b.casterMana"
@@ -23643,12 +24633,12 @@
  },
  "<span class=\"abl\" style=\"border-color:#8a6a26;color:#ffd66e\">En garde jusqu'à la brèche</span>": {
   "at": [
-   "src/ui/combatview.js:1889"
+   "src/ui/combatview.js:2021"
   ]
  },
  "<span class=\"abl\" style=\"border-color:#8a6a26;color:#ffd66e\">En garde : {0}ni flanc ni dos</span>": {
   "at": [
-   "src/ui/combatview.js:1890"
+   "src/ui/combatview.js:2022"
   ],
   "args": [
    "s0.berserk ? '' : '+1 défense, '"
@@ -23656,12 +24646,12 @@
  },
  "+1 défense, ": {
   "at": [
-   "src/ui/combatview.js:1890"
+   "src/ui/combatview.js:2022"
   ]
  },
  "<span class=\"abl\" style=\"border-color:#6a5a3a;color:#c9b07a\">Élan de charge brisé par {0}</span>": {
   "at": [
-   "src/ui/combatview.js:1895"
+   "src/ui/combatview.js:2027"
   ],
   "args": [
    "U.esc(bt.name(foe))"
@@ -23669,7 +24659,7 @@
  },
  "<span class=\"abl\" style=\"border-color:#8a6a26;color:#ffd66e\">Élan de charge : +{0} en attaque</span>": {
   "at": [
-   "src/ui/combatview.js:1895"
+   "src/ui/combatview.js:2027"
   ],
   "args": [
    "ch"
@@ -23677,7 +24667,7 @@
  },
  "{0} · tour {1}": {
   "at": [
-   "src/ui/combatview.js:1904",
+   "src/ui/combatview.js:2036",
    "src/ui/main.js:328"
   ],
   "args": [
@@ -23687,12 +24677,12 @@
  },
  "Bataille": {
   "at": [
-   "src/ui/combatview.js:1904"
+   "src/ui/combatview.js:2036"
   ]
  },
  "<span style=\"color:{0}\">{1}</span> contre <span style=\"color:{2}\">{3}</span> · {4}": {
   "at": [
-   "src/ui/combatview.js:1905"
+   "src/ui/combatview.js:2037"
   ],
   "args": [
    "att ? att.color : '#aaa'",
@@ -23704,22 +24694,22 @@
  },
  "Gardiens": {
   "at": [
-   "src/ui/combatview.js:1905"
+   "src/ui/combatview.js:2037"
   ]
  },
  "<b class=\"gold\">À vous de jouer</b>": {
   "at": [
-   "src/ui/combatview.js:1905"
+   "src/ui/combatview.js:2037"
   ]
  },
  "Tour adverse": {
   "at": [
-   "src/ui/combatview.js:1905"
+   "src/ui/combatview.js:2037"
   ]
  },
  "<div class=\"c-magic\">Compétence <b>{0}</b>/{1} · mana <b class=\"mana\">{2}</b>{3}</div>": {
   "at": [
-   "src/ui/combatview.js:1909"
+   "src/ui/combatview.js:2041"
   ],
   "args": [
    "bt.skillLeft[side]",
@@ -23730,12 +24720,12 @@
  },
  " <span class=\"dim\">· sort déjà lancé ce tour</span>": {
   "at": [
-   "src/ui/combatview.js:1910"
+   "src/ui/combatview.js:2042"
   ]
  },
  "{0}<div class=\"dim\" style=\"margin-top:6px\">Mouvement restant : {1}</div>": {
   "at": [
-   "src/ui/combatview.js:1912"
+   "src/ui/combatview.js:2044"
   ],
   "args": [
    "CombatView.unitPanel(CombatView.sel)",
@@ -23744,27 +24734,27 @@
  },
  "<span class=\"dim\">Sélectionnez une unité.</span>": {
   "at": [
-   "src/ui/combatview.js:1912"
+   "src/ui/combatview.js:2044"
   ]
  },
  "Sorts en cours": {
   "at": [
-   "src/ui/combatview.js:1990"
+   "src/ui/combatview.js:2122"
   ]
  },
  "Vos sorts": {
   "at": [
-   "src/ui/combatview.js:1991"
+   "src/ui/combatview.js:2123"
   ]
  },
  "Sorts ennemis": {
   "at": [
-   "src/ui/combatview.js:1991"
+   "src/ui/combatview.js:2123"
   ]
  },
  " · réserve {0}": {
   "at": [
-   "src/ui/combatview.js:1999"
+   "src/ui/combatview.js:2131"
   ],
   "args": [
    "CombatView.bt.counterMagic[e.side] || 0"
@@ -23772,7 +24762,7 @@
  },
  "Sorts": {
   "at": [
-   "src/ui/combatview.js:2023",
+   "src/ui/combatview.js:2155",
    "src/ui/panels.js:331",
    "src/ui/panels.js:421",
    "src/ui/panels.js:852"
@@ -23780,136 +24770,136 @@
  },
  "Attendre": {
   "at": [
-   "src/ui/combatview.js:2024",
+   "src/ui/combatview.js:2156",
    "src/ui/main.js:630"
   ]
  },
  "Garder": {
   "at": [
-   "src/ui/combatview.js:2026"
+   "src/ui/combatview.js:2158"
   ]
  },
  "Passer le reste du tour (pas de bonus : l'unité a déjà frappé ce tour-ci)": {
   "at": [
-   "src/ui/combatview.js:2026"
+   "src/ui/combatview.js:2158"
   ]
  },
  "Se mettre en garde : passer le tour, +1 en défense et ni flanc ni dos jusqu'à son prochain tour": {
   "at": [
-   "src/ui/combatview.js:2026"
+   "src/ui/combatview.js:2158"
   ]
  },
  "Passer le reste du tour (les troupes montées et les créatures ne se mettent pas en garde)": {
   "at": [
-   "src/ui/combatview.js:2026"
+   "src/ui/combatview.js:2158"
   ]
  },
  "Lever la garde": {
   "at": [
-   "src/ui/combatview.js:2028"
+   "src/ui/combatview.js:2160"
   ]
  },
  "Garder jusqu'à la brèche": {
   "at": [
-   "src/ui/combatview.js:2028"
+   "src/ui/combatview.js:2160"
   ]
  },
  "Automatique": {
   "at": [
-   "src/ui/combatview.js:2029",
+   "src/ui/combatview.js:2161",
    "src/ui/setup.js:128"
   ]
  },
  "Résolution automatique choisie au début : la bataille se joue seule jusqu'au bout": {
   "at": [
-   "src/ui/combatview.js:2029"
+   "src/ui/combatview.js:2161"
   ]
  },
  "Reprendre la main": {
   "at": [
-   "src/ui/combatview.js:2030"
+   "src/ui/combatview.js:2162"
   ]
  },
  "Vous reprenez le commandement, tout de suite si c'est votre tour, sinon au prochain": {
   "at": [
-   "src/ui/combatview.js:2030"
+   "src/ui/combatview.js:2162"
   ]
  },
  "Automatiser toute la bataille": {
   "at": [
-   "src/ui/combatview.js:2032"
+   "src/ui/combatview.js:2164"
   ]
  },
  "Vos troupes jouent seules ; « Reprendre la main » (A) à tout moment": {
   "at": [
-   "src/ui/combatview.js:2032"
+   "src/ui/combatview.js:2164"
   ]
  },
  "Reprendre cette unité": {
   "at": [
-   "src/ui/combatview.js:2033"
+   "src/ui/combatview.js:2165"
   ]
  },
  "Automatiser cette unité": {
   "at": [
-   "src/ui/combatview.js:2033"
+   "src/ui/combatview.js:2165"
   ]
  },
  "Elle attendra de nouveau vos ordres": {
   "at": [
-   "src/ui/combatview.js:2033"
+   "src/ui/combatview.js:2165"
   ]
  },
  "Elle joue seule à chaque tour, les autres restent à vous": {
   "at": [
-   "src/ui/combatview.js:2033"
+   "src/ui/combatview.js:2165"
   ]
  },
  "Semi-automatique : à la fin de chacun de vos tours, vos troupes jouent seules.": {
   "at": [
-   "src/ui/combatview.js:2034"
+   "src/ui/combatview.js:2166"
   ]
  },
  "Vos troupes attendent de nouveau vos ordres.": {
   "at": [
-   "src/ui/combatview.js:2034"
+   "src/ui/combatview.js:2166"
   ]
  },
  "Lancez vos sorts, commandez qui vous voulez, puis « Fin du tour » : vos troupes jouent le reste du tour": {
   "at": [
-   "src/ui/combatview.js:2034"
+   "src/ui/combatview.js:2166"
   ]
  },
  "Fuir": {
   "at": [
-   "src/ui/combatview.js:2036",
-   "src/ui/combatview.js:2036"
+   "src/ui/combatview.js:2168",
+   "src/ui/combatview.js:2168"
   ]
  },
  "Fuir le combat": {
   "at": [
-   "src/ui/combatview.js:2036"
+   "src/ui/combatview.js:2168"
   ]
  },
  "Fin du tour": {
   "at": [
-   "src/ui/combatview.js:2037",
+   "src/ui/combatview.js:2169",
    "src/ui/main.js:487"
   ]
  },
  "Vos troupes jouent le reste du tour, puis la main passe": {
   "at": [
-   "src/ui/combatview.js:2037"
+   "src/ui/combatview.js:2169"
   ]
  },
  "Couper le son": {
   "at": [
-   "src/ui/combatview.js:2039"
+   "src/ui/combatview.js:2171"
   ]
  },
  "Remettre le son": {
   "at": [
-   "src/ui/combatview.js:2039"
+   "src/ui/combatview.js:2171"
   ]
  },
  "Vos cités": {
@@ -30338,19 +31328,6 @@
    "z.names.map(U.esc).join(', ')",
    "gain.length || z.pop > 0 ? ' La raser rendrait à vos cités ' + gain.join(', ') + (gain.len"
   ]
- },
- "case": {
-  "at": [
-   "src/ui/main.js:1924",
-   "src/ui/main.js:2213"
-  ]
- },
- "cases": {
-  "at": [
-   "src/ui/main.js:1924",
-   "src/ui/main.js:2213"
-  ],
-  "hint": "pluriel de « case »"
  },
  " La raser rendrait à vos cités {0}{1}{2}.": {
   "at": [

@@ -13,7 +13,7 @@ const bt = new Battle(g, { attackers: [a], defenders: [d, lord], attackerPid: 0,
 const bd = bt.alive(1).find(b => b.u.riteDemon), bl = bt.alive(1).find(b => !b.u.riteDemon);
 for (const id of ['banish', 'confusion']) ok(!CombatSpells.canAffect(bt, bd, id) && CombatSpells.canAffect(bt, bl, id), id + ' : le Démon légendaire n\'est pas une cible, le Seigneur démon l\'est');
 const pl = g.players[0];
-for (let i = 0; i < 20; i++) { const u = Units.create(g, 'RiteDemon', 1, f.plane, x, y); u.riteDemon = true; Units.create(g, 'DemonLord', 1, f.plane, x, y); }
+for (let i = 0; i < 60; i++) { const u = Units.create(g, "RiteDemon", 1, f.plane, x, y); u.riteDemon = true; Units.create(g, "DemonLord", 1, f.plane, x, y); }
 const count = () => [Object.values(g.units).filter(u => u.riteDemon).length, Object.values(g.units).filter(u => u.type === 'DemonLord').length];
 const [d0, l0] = count();
 pl.known.push('great_unsummoning'); pl.mana = 99999; pl.skillLeft = 99999;

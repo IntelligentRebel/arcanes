@@ -99,6 +99,7 @@ const AI = {
       if (id === 'purify_land') sc += AI.feat(pl, 'purify', 1) && U.sum(Cities.ofPlayer(game, pl.id), c => World.catchment(game.world, c.x, c.y).filter(([x, y]) => World.get(game.world, c.plane, 'corrupt', x, y)).length) >= 3 ? 25 : -60;
       if (id === 'spell_of_mastery') sc = pl.known.length > 35 ? 500 : -100;
       if (id === 'open_rift') sc += AI.crusadeTarget(game, pl) && !AI.crossingNear(game, pl) ? 70 : -30;
+      if ((id === 'dimension_door' || id === 'town_portal') && !AI.feat(pl, 'jumps', 0)) sc -= 60;   // sorts dont elle ne se servirait pas
       sc += AI.counterResearch(game, pl, id);
       sc += game.rng.next() * 15;
       if (sc > bs) { bs = sc; best = id; }
@@ -374,6 +375,12 @@ const AI = {
         const r = U.min(Veil.rifts(game, 0).concat(Veil.rifts(game, 1)).filter(s => s.by !== pl.id).filter(s => { const c = near(s); return c && Intel.knows(game, pl, s.plane, s.x, s.y) && World.dist(game.world, c.x, c.y, s.x, s.y) <= 8; }), s => { const c = near(s); return World.dist(game.world, c.x, c.y, s.x, s.y); });
         if (!r) continue;
         target = { plane: r.plane, x: r.x, y: r.y }; sc = 24;
+      }
+      else if (id === 'dimension_door' || id === 'town_portal') {
+        // (0.31.71) une pile qui saute ou rentre par un portail : au secours d'une cité menacée, ou (la Porte) au pied de la cité visée
+        if (!AI.feat(pl, 'jumps', 0)) continue;
+        const r = AI.jumpPlan(game, pl, id, cost); if (!r) continue;
+        target = r.target; sc = r.sc;
       }
       else if (AI.feat(pl, 'spells2') && AI.SPELLS2[id]) {
         // en essai : sorts hostiles, de rappel et de héros que l'IA ne lançait jamais
@@ -1494,6 +1501,50 @@ Object.assign(AI, {
       const theirs = U.sum(Object.values(game.units).filter(u => foes.has(u.owner) && nor(u)), u => Units.strength(game, u)), ours = U.sum(o.army.filter(nor), u => Units.strength(game, u));
       return theirs > ours * 1.3 + 500 ? { sc: 25 + (theirs - ours) / 150 } : null;
     },
+  },
+  // (0.31.71) Porte dimensionnelle et Portail urbain : seulement lancés tout de suite (la pile ne doit pas bouger d'ici là)
+  jumpPlan(game, pl, id, cost) {
+    if (!AI.now(game, pl, cost)) return null;
+    const w = game.world, st = us => U.sum(us, u => Units.strength(game, u));
+    const stacks = U.groupBy(Object.values(game.units).filter(u => u.owner === pl.id && !u.stasis && u.status !== 'governor' && !u.riteDemon && u.guardian == null && !Units.isSettler(u) && !Units.isEngineer(u)), u => u.plane + ',' + u.x + ',' + u.y);
+    const threatened = new Set(Cities.ofPlayer(game, pl.id).filter(c => AI.threatNear(game, pl, c) > 0).map(c => c.id));
+    let best = null, bs = 0;
+    // au secours : une cité menacée dont la garnison ne suffit pas, une pile solide qui n'en garde pas une autre menacée
+    for (const c of Cities.ofPlayer(game, pl.id)) {
+      if (!threatened.has(c.id)) continue;
+      const need = AI.threatNear(game, pl, c) * 1.2 - st(Units.at(game, c.plane, c.x, c.y).filter(u => u.owner === pl.id));
+      if (need <= 0) continue;
+      for (const k in stacks) {
+        const us = stacks[k], u0 = us[0], here = Cities.at(game, u0.plane, u0.x, u0.y);
+        if (u0.plane !== c.plane || (here && (here.id === c.id || threatened.has(here.id)))) continue;
+        const d = World.dist(w, u0.x, u0.y, c.x, c.y), S = st(us);
+        if (d <= 2 || S < Math.max(60, need * 0.4)) continue;
+        const t = id === 'town_portal' ? { plane: u0.plane, x: u0.x, y: u0.y, city: c.id } : { plane: u0.plane, x: u0.x, y: u0.y, to: { x: c.x, y: c.y } };
+        if (Spells.jumpWhy(game, pl, id, t)) continue;
+        const v = (c.fortress ? 45 : 22 + c.pop / 2000) * Math.min(1, S / need);
+        if (v > bs) { bs = v; best = { target: t, sc: v }; }
+      }
+    }
+    // à l'assaut (la Porte) : une armée dont le chemin vers la cité visée fait un grand détour (la mer, des montagnes)
+    const tg = pl.aiTargetCity;
+    if (id === 'dimension_door' && tg && game.turn - tg.turn <= 3) {
+      for (const k in stacks) {
+        const us = stacks[k], u0 = us[0];
+        if (u0.plane !== tg.plane || st(us) < 200 || !u0.dest || World.dist(w, u0.dest[0], u0.dest[1], tg.x, tg.y) > 1) continue;
+        const d = World.dist(w, u0.x, u0.y, tg.x, tg.y);
+        if (d < 3 || d > Spells.jumpRange() + 1 || !u0.path || u0.path.length < d + 4) continue;
+        // une case libre au contact de la cité visée, à portée de saut
+        let at = null;
+        for (const [x, y] of World.neighbors(w, tg.x, tg.y)) {
+          const t = { plane: u0.plane, x: u0.x, y: u0.y, to: { x, y } };
+          if (!Spells.jumpWhy(game, pl, id, t)) { at = t; break; }
+        }
+        if (!at) continue;
+        const v = 20 + Math.min(15, (u0.path.length - d) * 2);
+        if (v > bs) { bs = v; best = { target: at, sc: v }; }
+      }
+    }
+    return best;
   },
   // une tempête sur la pile ennemie vue la plus menaçante (près de nos cités d'abord)
   stackSpell(game, pl, id, o, base) {

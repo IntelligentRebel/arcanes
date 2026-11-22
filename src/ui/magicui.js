@@ -85,6 +85,21 @@ const MagicUI = {
       return;
     }
     if (tt === 'none') return MagicUI.doCast(id, null);
+    // (0.31.71) Porte dimensionnelle, Portail urbain : la pile d'abord (sa case), puis son arrivée
+    if (tt === 'stackJump' || tt === 'stackPortal') {
+      const seen = new Set(), tiles = [];
+      for (const u of Object.values(game.units)) {
+        const k = u.plane + ',' + u.x + ',' + u.y; if (u.owner !== pl.id || seen.has(k)) continue; seen.add(k);
+        const t = { plane: u.plane, x: u.x, y: u.y };
+        if (tt === 'stackJump' ? Spells.jumpDests(game, pl, t).length : Spells.portalCities(game, pl, t).length) tiles.push([u.plane, u.x, u.y]);
+      }
+      if (!tiles.length) { UI.toast(DATA.spells[id].name + ' : aucune pile qui puisse partir.', 'warn'); return; }
+      MagicUI.targeting = { id, tt, tiles };
+      if (!tiles.some(t => t[0] === MapView.plane)) MapView.centerOn(tiles[0][1], tiles[0][2], tiles[0][0]);
+      UI.toast('Choisissez la pile qui part (cases cerclées d\'or ; Échap pour annuler).');
+      $('#map').style.cursor = 'crosshair'; App.refresh();
+      return;
+    }
     if (tt === 'enemyWizard') {
       const foes = game.players.filter(o => o.alive && o !== pl && pl.contact[o.id]);
       if (!foes.length) { UI.toast('Aucun sorcier rival connu.', 'warn'); return; }
@@ -193,6 +208,31 @@ const MagicUI = {
     const game = App.game, pl = App.me();
     if (!MagicUI.targeting) return;
     const { id, tt } = MagicUI.targeting;
+    if (tt === 'stackJump' || tt === 'stackPortal') {
+      const from = MagicUI.targeting.from;
+      // second temps de la Porte : la case d'arrivée
+      if (from) {
+        const t = { plane: from.plane, x: from.x, y: from.y, to: { x, y } };
+        if (plane !== from.plane) { UI.toast('La porte ne mène pas sur l\'autre plan.', 'warn'); return; }
+        const v = Spells.validate(game, pl, id, t); if (!v.ok) { UI.toast(U.esc(v.why), 'warn'); return; }
+        MagicUI.cancelTarget(); return MagicUI.doCast(id, t);
+      }
+      const t = { plane, x, y };
+      if (!Spells.jumpStack(game, pl, t).length) { UI.toast('Choisissez une case où se tiennent vos unités.', 'warn'); return; }
+      if (tt === 'stackJump') {
+        const dests = Spells.jumpDests(game, pl, t);
+        if (!dests.length) { UI.toast('Cette pile n\'a nulle part où sauter (à ' + Spells.jumpRange() + ' cases au plus, sur une case que vous voyez).', 'warn'); return; }
+        MagicUI.targeting = { id, tt, from: t, tiles: dests.map(([dx, dy]) => [plane, dx, dy]) };
+        UI.toast('Choisissez la case d\'arrivée (cerclée d\'or, à ' + Spells.jumpRange() + ' cases au plus).');
+        App.refresh(); return;
+      }
+      const cities = Spells.portalCities(game, pl, t);
+      if (!cities.length) { UI.toast('Aucune de vos cités de ce plan ne peut accueillir cette pile.', 'warn'); return; }
+      MagicUI.cancelTarget();
+      UI.choice(DATA.spells[id].name, 'Dans quelle cité ramener cette pile ?', cities.sort((a, b) => World.dist(game.world, a.x, a.y, x, y) - World.dist(game.world, b.x, b.y, x, y)).map(c => ({ label: c.name + (c.id === pl.fortress ? ' (forteresse)' : ''), value: String(c.id) })).concat([{ label: 'Annuler', value: null }]))
+        .then(v => { if (v != null) MagicUI.doCast(id, Object.assign({}, t, { city: +v })); });
+      return;
+    }
     if (tt === 'tile' || tt === 'node' || tt === 'friendlyStack') {
       // une case où le sort échouerait : la raison, et la visée reste ouverte
       const v = Spells.validate(game, pl, id, { plane, x, y }); if (!v.ok) { UI.toast(U.esc(v.why), 'warn'); return; }

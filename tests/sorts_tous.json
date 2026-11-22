@@ -1,6 +1,9 @@
 {
- "pass": 601,
+ "pass": 690,
  "fail": [],
  "warn": [],
- "skip": []
+ "skip": [
+  "open_rift [carte] aucune case valable dans le monde de test",
+  "recall_hero [carte] refusé dans le monde de test (Épéistes) : Il faut viser un de vos héros."
+ ]
 }

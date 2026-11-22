@@ -1,0 +1,43 @@
+{
+ "A": {
+  "grid": "4 columns x 2 rows, 8 icons, read left to right then top to bottom",
+  "ids": [
+   "fire_curtain",
+   "fire_mines",
+   "chain_lightning",
+   "fire_shield",
+   "slow",
+   "mass_slow",
+   "force_field",
+   "town_portal"
+  ],
+  "size": "1536x1024",
+  "prompt": "Fantasy strategy game spell icons in the same rich painterly pixel-art style as the reference image: high detail, crisp pixel clusters, dramatic lighting, saturated magic glow, one clear focal subject per icon, readable even when shrunk to 48 pixels. Each icon is a square scene filling its frame, with a thin bevelled frame in the color of its magic realm (chaos: fiery red-orange; nature: emerald green; sorcery: bright blue; death: violet-purple; life: warm gold; arcane: silver-grey). Lay the icons out exactly like the reference: a grid on a flat pure magenta (#FF00FF) background, every icon the same size, evenly spaced with a clear magenta gap between them, nothing touching the image edge. No text, no letters, no numbers, no labels, no watermark.\n\nLayout: 4 columns x 2 rows, 8 icons, read left to right then top to bottom.\n\n1. (chaos realm frame) a straight line of three roaring pillars of fire erupting from a grassy battlefield like a burning curtain, a foot soldier recoiling from the heat.\n2. (chaos realm frame) glowing red runic fire mines half buried in the dirt of a battlefield, one of them exploding in a fireball under an armored boot.\n3. (chaos realm frame) a jagged red-and-white lightning bolt leaping in a chain from one armored soldier to a second and a third, each struck figure lit up.\n4. (chaos realm frame) a knight wrapped in a swirling shield of flames, the sword of an attacker turning red-hot and scorching the attacker.\n5. (nature realm frame) a warrior caught in heavy slow motion, emerald vines and glowing amber hourglass sand dragging at his legs.\n6. (nature realm frame) a whole marching column of soldiers bogged down by glowing green vines and streams of amber hourglass sand.\n7. (nature realm frame) a shimmering translucent wall of green-gold force standing across a stone bridge, an enemy soldier bouncing off it.\n8. (arcane realm frame) a tall silver-blue arched magic portal standing on a road, showing through it a friendly walled city, soldiers stepping through."
+ },
+ "B": {
+  "grid": "4 columns x 2 rows, 8 icons, read left to right then top to bottom",
+  "ids": [
+   "mist",
+   "teleport",
+   "gust",
+   "magic_mirror",
+   "clone",
+   "dimension_door",
+   "martyr",
+   "divine_vengeance"
+  ],
+  "size": "1536x1024",
+  "prompt": "Fantasy strategy game spell icons in the same rich painterly pixel-art style as the reference image: high detail, crisp pixel clusters, dramatic lighting, saturated magic glow, one clear focal subject per icon, readable even when shrunk to 48 pixels. Each icon is a square scene filling its frame, with a thin bevelled frame in the color of its magic realm (chaos: fiery red-orange; nature: emerald green; sorcery: bright blue; death: violet-purple; life: warm gold; arcane: silver-grey). Lay the icons out exactly like the reference: a grid on a flat pure magenta (#FF00FF) background, every icon the same size, evenly spaced with a clear magenta gap between them, nothing touching the image edge. No text, no letters, no numbers, no labels, no watermark.\n\nLayout: 4 columns x 2 rows, 8 icons, read left to right then top to bottom.\n\n1. (sorcery realm frame) a thick blue-white fog bank rolling over a battlefield, arrows losing strength and falling into the mist.\n2. (sorcery realm frame) a knight vanishing in a column of blue sparkles on the left and reappearing in a burst of light on the far side of a castle wall.\n3. (sorcery realm frame) a violent blue blast of wind hurling an armored soldier backwards off his feet, leaves and dust swirling.\n4. (sorcery realm frame) a floating ornate oval mirror deflecting a crimson spell bolt straight back toward the hooded caster who threw it.\n5. (sorcery realm frame) a warrior and his translucent shimmering blue double standing side by side, the double fraying at the edges into light.\n6. (sorcery realm frame) a swirling blue-violet portal ring hanging in the air above a sea strait and mountains, an army stepping out of a second portal on the far shore.\n7. (life realm frame) a radiant armored guardian shielding a wounded hero with his own body, golden light flowing from the hero's wounds into the guardian.\n8. (life realm frame) a huge golden sword of light plunging from parted clouds onto a dark warrior standing over fallen banners."
+ },
+ "C": {
+  "grid": "2 columns x 2 rows, 4 icons, read left to right then top to bottom",
+  "ids": [
+   "shackles",
+   "twilight",
+   "sacrifice",
+   "vampirism"
+  ],
+  "size": "1024x1024",
+  "prompt": "Fantasy strategy game spell icons in the same rich painterly pixel-art style as the reference image: high detail, crisp pixel clusters, dramatic lighting, saturated magic glow, one clear focal subject per icon, readable even when shrunk to 48 pixels. Each icon is a square scene filling its frame, with a thin bevelled frame in the color of its magic realm (chaos: fiery red-orange; nature: emerald green; sorcery: bright blue; death: violet-purple; life: warm gold; arcane: silver-grey). Lay the icons out exactly like the reference: a grid on a flat pure magenta (#FF00FF) background, every icon the same size, evenly spaced with a clear magenta gap between them, nothing touching the image edge. No text, no letters, no numbers, no labels, no watermark.\n\nLayout: 2 columns x 2 rows, 4 icons, read left to right then top to bottom.\n\n1. (death realm frame) spectral violet chains binding a warrior's sword arm to the ground, his weapon pinned and useless.\n2. (death realm frame) a dark violet dusk swallowing a line of archers, their arrows dissolving into shadows before leaving the bows.\n3. (death realm frame) a kneeling soldier dissolving into purple soul light that pours into a fallen comrade rising from the ground.\n4. (death realm frame) a pale warrior with glowing red eyes striking an enemy, crimson streams of life flowing from the wound back into him, bats around."
+ }
+}

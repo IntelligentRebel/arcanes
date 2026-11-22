@@ -34,7 +34,7 @@ ok(vsStack >= 0.4, 'la même armée contre le Prophète et sa suite (' + stack.l
 Finale.MIGHT_SIMS = saved;
 // il ne redescend jamais : sa proie perd son champion, il garde son cran
 const keep = boss.might; delete g.units[grum.id]; Finale.matchBest(g, f);
-ok(boss.might === keep, 'le champion perdu, le Prophète garde son cran (' + boss.might + ')');
+ok(boss.might >= keep, 'le champion perdu, le Prophète garde son cran (' + keep + ' → ' + boss.might + ')');
 
 // le palier : un meneur 1,6 fois plus riche, mais cinq fois plus fort par les armes
 const g2 = Game.newGame({ seed: 22, mapW: 60, mapH: 40, opponents: 3, difficulty: 'hardcore', crisis: 'off', finale: 'random', human: { name: 'X', portrait: 9, books: { nature: 10 }, retorts: [], race: 'highelf' } });

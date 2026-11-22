@@ -122,6 +122,12 @@ function mapTargets(W, id) {
   else if (tt === 'enemyCity') { V.push({ l: 'cité ennemie', t: { city: W.ec.id } }); X.push({ l: 'notre forteresse', t: { city: W.f.id } }); }
   else if (tt === 'enemyWizard') { V.push({ l: 'le rival en guerre', t: { player: 1 } }); X.push({ l: 'soi-même', t: { player: 0 } }); }
   else if (tt === 'deadHero') { const d = (W.me.deadHeroes || [])[0]; V.push({ l: 'héros tombé', t: d ? { hero: d.type } : null }); X.push({ l: 'un héros inconnu', t: { hero: 'HeroTorin' } }); }
+  else if (tt === 'stackJump') {   // (0.31.71) Porte dimensionnelle : notre deuxième pile, vers une case vue à portée
+    const d = Spells.jumpDests(W.g, W.me, W.ms2)[0];
+    V.push(d ? { l: 'saut de notre deuxième pile', t: Object.assign({}, W.ms2, { to: { x: d[0], y: d[1] } }) } : { l: 'aucune case d\'arrivée', t: null, none: true });
+    X.push({ l: 'trop loin', t: Object.assign({}, W.ms2, { to: { x: World.wx(W.g.world, W.ms2.x + 9), y: W.ms2.y } }) });
+  }
+  else if (tt === 'stackPortal') { V.push({ l: 'retour de notre deuxième pile à la forteresse', t: Object.assign({}, W.ms2, { city: W.f.id }) }); X.push({ l: 'une cité ennemie', t: Object.assign({}, W.ms2, { city: W.ec.id }) }); }
   else if (tt === 'node') { if (W.node) V.push({ l: 'nœud rival', t: { plane: W.node.plane, x: W.node.x, y: W.node.y } }); X.push({ l: 'notre forteresse', t: { plane: W.f.plane, x: W.f.x, y: W.f.y } }); }
   else if (tt === 'tile') {
     // la case qui convient à ce sort : la pile ennemie, la nôtre, une terre corrompue, une faille, un minerai…
@@ -251,8 +257,8 @@ function battleFor(B, kind) {
   opts.rng = new RNG(77);
   const bt = new Battle(g, opts);
   // un mort de chaque camp (Relever les morts, Animation des morts), des blessés
-  const kill = b => { bt.takeDamage(b, 999); bt.checkDeath(b); };
-  kill(bt.alive(mySide).find(b => b.u.type === 'HighMenSpearmen'));
+  const kill = (b, by) => { bt.takeDamage(b, 999, 'normal', by); bt.checkDeath(b); };
+  kill(bt.alive(mySide).find(b => b.u.type === 'HighMenSpearmen'), bt.alive(1 - mySide)[0]);   // (Vengeance divine : un ennemi a tué des nôtres)
   kill(bt.alive(1 - mySide).find(b => b.u.type === 'HighMenSpearmen'));
   for (const b of bt.alive(mySide)) if (!b.u.hero) bt.takeDamage(b, 2);
   // une invocation de combat ennemie (Dissipation), des enchantements de champ ennemis (Désenchantement)
@@ -264,6 +270,7 @@ function snapBattle(bt) {
   const s = {};
   for (const b of bt.units) { const st = b.dead ? null : bt.stats(b); s['b' + b.id] = JSON.stringify([b.dead, b.side, b.c, b.r, b.u.dmg, b.curses, b.tempEnch, b.u.ench, b.asleep, b.confused, b.web, b.possessed, b.stasis, b.ammo, b.casterMana, b.u.chaosChannel || 0, st && [st.melee, st.ranged, st.def, st.res, st.toHit, st.toDefend, st.move, st.hp, !!st.flying, b.invisible]]); }
   s.ench = JSON.stringify([bt.ench, bt.globalEnch, bt.counterMagic, bt.wallOfFire, bt.wallOfDarkness, Object.keys(bt.mud || {}).length, (bt.vortices || []).length, bt.units.length]);
+  s.zones = JSON.stringify([bt.field, bt.flames, bt.mines, bt.mist].map(z => Object.keys(z || {}).sort().join(';')));
   s.walls = JSON.stringify(Object.values(bt.walls || {}).map(w => w.broken)); s.towers = JSON.stringify((bt.towers || []).map(t => [t.hp, t.mute || 0, t.def, t.dead]));
   return s;
 }
@@ -282,7 +289,7 @@ function runCombat(B, id) {
     if (tt === 'none') targets = [null];
     else if (tt === 'combatTile') {
       if (id === 'disrupt') { const all = CombatSpells.disruptTargets(bt, mySide); targets = all.slice(0, 1).concat(all.filter(([c, r]) => bt.towerAt(c, r)).slice(0, 1)); }
-      else { const e = bt.alive(1 - mySide)[0]; targets = e ? [[e.c, e.r]] : []; }
+      else { const e = bt.alive(1 - mySide)[0]; targets = e ? [[e.c, e.r, 1]] : []; }   // (lignes de trois cases : en travers des rangs de déploiement)
     } else targets = CombatSpells.validTargets(bt, mySide, id).slice(0, 2);
     if (!targets.length) { reasons.push(kind + ' : aucune cible'); continue; }
     // une cible invalide : refusée, sans dépense
@@ -306,8 +313,11 @@ function runCombat(B, id) {
       if (!CombatSpells.wizardOptions(bt, mySide).find(x => x.id === id)) break;   // déjà actif après le premier lancer, par exemple
       const base = Magic.spellCost(W.g, W.me, id, true), cost = Math.max(1, Math.ceil(base * Magic.distanceMult(W.g, W.me, bt.plane, bt.x, bt.y)));
       const m0 = W.me.mana, s0 = bt.skillLeft[mySide], before = snapBattle(bt), log0 = bt.log.length, ev0 = (bt.events || []).length;
-      const zone = CV.ZONES[id] && Array.isArray(t) ? CV.zoneOf(id, t[0], t[1]) : null;
-      let r; try { r = CombatSpells.cast(bt, mySide, id, t, null, 0); } catch (e) { FAIL(id, kind, 'erreur : ' + e.stack.split('\n').slice(0, 3).join(' | ')); continue; }
+      const zone = CV.ZONES[id] && Array.isArray(t) ? CV.zoneOf(id, t[0], t[1], 0) : null;
+      // sorts en deux temps (Téléportation, Rafale, Sacrifice) : le premier second choix possible ; sans lui, refusé sans dépense
+      const to = CombatSpells.SECOND[id] && t ? CombatSpells.secondTargets(bt, mySide, id, t)[0] : undefined;
+      if (CombatSpells.SECOND[id]) { const m1 = W.me.mana; let r0; try { r0 = CombatSpells.cast(bt, mySide, id, t, null, 0); } catch (e) { FAIL(id, kind, 'erreur sans second choix : ' + e.message); } if (r0 !== false || W.me.mana !== m1) FAIL(id, kind, 'lancé sans second choix'); bt.castThisRound[mySide] = false; }
+      let r; try { r = CombatSpells.cast(bt, mySide, id, t, null, 0, to); } catch (e) { FAIL(id, kind, 'erreur : ' + e.stack.split('\n').slice(0, 3).join(' | ')); continue; }
       if (r === false) { FAIL(id, kind, 'refusé sur une cible valable'); continue; }
       castable++;
       if (W.me.mana !== m0 - cost) WARN(id, kind, 'mana ' + (m0 - W.me.mana) + ' au lieu de ' + cost);
