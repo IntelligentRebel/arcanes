@@ -167,6 +167,23 @@ const Spells = {
     }
   },
 
+  // (0.31.75) file d'incantations : chaque entrée { id, target } commence à son tour, sur la compétence qui reste ce tour-ci ;
+  // une entrée devenue impossible (sort oublié, cible disparue) est retirée, et le journal le dit
+  QUEUE_MAX: 6,
+  castNext(game, pl) {
+    for (let guard = 0; guard < 12 && !pl.casting && pl.castQueue && pl.castQueue.length; guard++) {
+      const q = pl.castQueue.shift(), sp = DATA.spells[q.id];
+      if (!sp) continue;
+      const drop = why => Game.log(game, pl.id, sp.name + ' : retiré de la file d\'incantations, ' + String(why || '').replace(/\.$/, '').replace(/^./, ch => ch.toLowerCase()) + '.', { spell: q.id });
+      if (!Spells.castable(game, pl).includes(q.id)) { drop('ce sort ne peut plus être lancé'); continue; }
+      const v = Spells.validate(game, pl, q.id, q.target);
+      if (!v.ok) { drop(v.why); continue; }
+      const r = Spells.cast(game, pl, q.id, q.target);
+      if (!r || r.ok === false) { drop(r && r.why); continue; }
+      Game.log(game, pl.id, r.pending ? 'File d\'incantations : ' + sp.name + ' commence (' + Spells.castingTurnsText(game, pl) + ').' : 'File d\'incantations : lancement de ' + sp.name + '.', { spell: q.id, minor: !!r.pending });
+    }
+  },
+
   returnCity(game, pl) {
     const mine = Cities.ofPlayer(game, pl.id); if (!mine.length) return null;
     const lf = pl.lastFortress;

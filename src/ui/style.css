@@ -647,3 +647,24 @@ html { forced-color-adjust: none; }
 #oops .oops-b { display: flex; gap: 8px; margin-top: 8px; justify-content: flex-end; }
 #c-sub .c-magic { margin-top: 3px; font-size: 12px; color: #c9d0dc; }
 #peekbar.combat-look { top: 112px; }
+/* 0.31.75 : réglage des touches */
+.keyset .kv { align-items: center; padding: 2px 0; }
+.keyset .kbtn { min-width: 74px; justify-content: center; font-family: inherit; }
+.keyset .kbtn.changed { border-color: var(--gold); color: var(--gold); }
+.keyset .kbtn.wait { border-color: #7fd0ff; color: #7fd0ff; animation: kwait 1s ease-in-out infinite; }
+@keyframes kwait { 50% { opacity: .45; } }
+#tileinfo .pinnote { color: #ffd34d; font-size: 12px; margin-bottom: 3px; }
+/* 0.31.75 : sorts rapides du combat (1 à 9), en tête de la barre d'actions */
+.cquick { display: flex; gap: 3px; align-items: center; padding-right: 6px; margin-right: 2px; border-right: 1px solid var(--line2); }
+.cquick .qspell { position: relative; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line2); border-radius: 6px; background: rgba(10,12,18,.7); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.cquick .qspell canvas { width: 30px; height: 30px; }
+.cquick .qspell:hover { border-color: var(--gold); }
+.cquick .qspell.on { border-color: #7fd0ff; box-shadow: 0 0 6px rgba(127,208,255,.6); }
+.cquick .qspell.dis { opacity: .4; }
+.cquick .qk { position: absolute; right: 0; bottom: 0; font-size: 10px; line-height: 12px; padding: 0 3px; border-radius: 4px 0 5px 0; font-weight: 700; color: #f3e6c0; background: rgba(6,8,12,.82); }
+/* 0.31.75 : filtres du journal */
+#log-filters { display: flex; gap: 2px; justify-content: center; flex-wrap: wrap; font-size: 10px; line-height: 13px; padding: 0 4px 2px; flex: none; opacity: .35; }
+#logwrap:hover #log-filters, #logwrap.filtered #log-filters { opacity: 1; }
+#log-filters .lf { cursor: pointer; padding: 0 4px; border-radius: 3px; border: 1px solid transparent; color: var(--dim); text-decoration: line-through; user-select: none; white-space: nowrap; }
+#log-filters .lf.on { color: var(--muted); text-decoration: none; border-color: var(--line2); }
+#log-filters .lf:hover { color: var(--gold); }

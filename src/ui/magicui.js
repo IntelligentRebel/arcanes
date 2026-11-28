@@ -24,6 +24,7 @@ const MagicUI = {
       head.append(h('div', { class: 'muted' }, 'Compétence restante ce tour : ', h('b', { class: 'research' }, pl.skillLeft), ' / ' + Magic.totalSkill(game, pl) + ' · Mana : ', h('b', { class: 'mana' }, U.fmt(pl.mana))),
         pl.casting ? h('div', null, 'En cours : ', h('b', null, DATA.spells[pl.casting.id].name), ' ' + pl.casting.progress + '/' + pl.casting.cost + ' ', h('span', { class: Spells.castingTurns(game, pl) === Infinity ? 'danger' : 'gold' }, '· ' + Spells.castingTurnsText(game, pl)),
           Spells.castingWarning(game, pl) ? h('span', { class: 'danger', title: 'L\'incantation n\'avance plus (pas de mana dépensé) tant que la cible ne vaut rien ; elle reprend dès qu\'elle redevient valable.' }, ' · suspendue : ' + Spells.castingWarning(game, pl).replace(/\.$/, '').replace(/^./, ch => ch.toLowerCase())) : null, ' ', MagicUI.canRetarget(game, pl, pl.casting.id) ? h('button', { class: 'abtn', title: 'Viser ailleurs, sans rien perdre du mana investi.', onclick: () => { const id = pl.casting.id; m.close(); MagicUI.beginCast(id); } }, 'Nouvelle cible') : null, ' ', h('button', { class: 'abtn danger', onclick: async () => { const c = pl.casting; if (!c || !await UI.confirm('Abandonner ' + DATA.spells[c.id].name, 'Abandonner l\'incantation ? Vous ne récupérerez que ' + Math.floor(c.progress / 2) + ' mana sur les ' + c.progress + ' investis.', 'Abandonner')) return; Spells.cancelCasting(game, pl); render(); App.refresh(); } }, 'Abandonner')) : h('div', { class: 'dim' }, 'Aucune incantation en cours'));
+      if ((pl.castQueue || []).length) head.append(h('div', { class: 'muted', style: 'flex-basis:100%;font-size:12px' }, 'Ensuite : ' + pl.castQueue.map(q => DATA.spells[q.id] ? DATA.spells[q.id].name : q.id).join(', ')));
       pages.innerHTML = '';
       const list = known.filter(id => DATA.spells[id] && DATA.spells[id].section === tab && DATA.spells[id].inGame !== false)
         .sort((a, b) => REALMS_ORDER(DATA.spells[a].realm) - REALMS_ORDER(DATA.spells[b].realm) || (DATA.spells[a].cost || 0) - (DATA.spells[b].cost || 0));
@@ -47,12 +48,14 @@ const MagicUI = {
             : castable && id === 'spell_binding' && !game.players.some(o => o !== pl && o.alive && pl.contact[o.id] && o.globals.length) ? { ok: false, why: 'Aucun rival connu n\'entretient d\'enchantement global.' } : { ok: true });
           // une incantation suspendue de ce sort peut recevoir une nouvelle cible
           const retarget = MagicUI.canRetarget(game, pl, id);
-          const open = castable && (!pl.casting || retarget) && pre.ok;
+          // (0.31.75) pendant une incantation, un autre sort se met en file : il commencera dès qu'elle aboutira
+          const queue = !!(pl.casting && !retarget && s.overland && castable && pre.ok && (pl.castQueue || []).length < Spells.QUEUE_MAX);
+          const open = castable && (!pl.casting || retarget || queue) && pre.ok;
           const row = h('div', { class: 'spell' + (open ? '' : ' dis') }, spriteCanvas('spell:' + id, 40),
             h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'nm' }, h('span', { class: 'realmdot', style: 'color:' + REALM_COLORS[s.realm] }), s.name), h('div', { class: 'ds' }, s.desc)),
-            h('div', { class: 'cs', style: 'text-align:right' }, cost != null ? cost + ' mana' + (s.kind === 'stackEnchant' ? ' / unité' : '') : (s.combat ? 'Combat ' + Magic.spellCost(game, pl, id, true) : ''), h('div', { style: 'opacity:.75' }, !pre.ok ? 'impossible' : retarget ? 'nouvelle cible' : castable ? turns : s.combat && !s.overland ? 'en combat' : 'non lançable'), upk ? h('div', { style: 'opacity:.75' }, upk + '/tour') : null));
+            h('div', { class: 'cs', style: 'text-align:right' }, cost != null ? cost + ' mana' + (s.kind === 'stackEnchant' ? ' / unité' : '') : (s.combat ? 'Combat ' + Magic.spellCost(game, pl, id, true) : ''), h('div', { style: 'opacity:.75' }, !pre.ok ? 'impossible' : retarget ? 'nouvelle cible' : queue ? 'mettre en file' : castable ? turns : s.combat && !s.overland ? 'en combat' : 'non lançable'), upk ? h('div', { style: 'opacity:.75' }, upk + '/tour') : null));
           UI.tipOn(row, () => UI.spellTip(id, pl, game) + (pre.ok ? '' : '<div class="danger" style="margin-top:4px">' + U.esc(pre.why) + '</div>'));
-          if (open) row.onclick = () => { m.close(); MagicUI.beginCast(id); };
+          if (open) row.onclick = () => { m.close(); MagicUI.queueing = queue ? id : null; MagicUI.beginCast(id); };
           p.append(row);
         }
         if (!arr.length) p.append(h('div', { class: 'dim', style: 'padding:10px' }, 'Aucun sort connu dans cette section.'));
@@ -283,6 +286,15 @@ const MagicUI = {
       if (!realm) return;
       target = Object.assign({}, target, { realm });
     }
+    // (0.31.75) en file d'incantations : la cible est retenue, l'incantation commencera quand la place sera libre
+    if (MagicUI.queueing === id && pl.casting) {
+      MagicUI.queueing = null;
+      const v = Spells.validate(game, pl, id, target); if (!v.ok) { UI.toast(U.esc(v.why), 'warn'); return; }
+      (pl.castQueue = pl.castQueue || []).push({ id, target: target || null });
+      UI.toast(DATA.spells[id].name + ' : en file d\'incantations, position ' + pl.castQueue.length + ', après ' + DATA.spells[pl.casting.id].name + '.', '', 'queue');
+      App.refresh(); return;
+    }
+    MagicUI.queueing = null;
     const r = Spells.cast(game, pl, id, target);
     if (!r.ok) UI.toast(r.why || 'Impossible de lancer ce sort.', 'warn');
     else if (r.pending) UI.toast(DATA.spells[id].name + ' : ' + r.why);
@@ -444,6 +456,13 @@ const MagicUI = {
         if (pl.casting && DATA.spells[pl.casting.id]) list.append(h('div', { class: 'row' }, spriteCanvas('spell:' + pl.casting.id, 32),
           h('div', { class: 'grow' }, h('div', { class: 't1' }, DATA.spells[pl.casting.id].name), h('div', { class: 't2' }, 'incantation ' + pl.casting.progress + ' / ' + pl.casting.cost + ' · ' + Spells.castingTurnsText(game, pl)), Spells.castingWarning(game, pl) ? h('div', { class: 't2 danger' }, 'Suspendue : ' + Spells.castingWarning(game, pl)) : null),
           h('button', { class: 'abtn danger', title: 'Abandonner l\'incantation en cours.', onclick: async () => { if (!await UI.confirm('Abandonner ' + DATA.spells[pl.casting.id].name, 'Abandonner l\'incantation en cours ? Vous ne récupérerez que ' + Math.floor(pl.casting.progress / 2) + ' mana sur les ' + pl.casting.progress + ' investis.', 'Abandonner')) return; Spells.cancelCasting(game, pl); render(); App.refresh(); } }, 'Abandonner')));
+        // (0.31.75) la file d'incantations : chacun commencera à son tour, après l'incantation en cours
+        (pl.castQueue || []).forEach((q, i) => { const sp = DATA.spells[q.id]; if (!sp) return;
+          const tgt = q.target && q.target.city != null && game.cities[q.target.city] ? ' · ' + game.cities[q.target.city].name : q.target && q.target.unit != null && game.units[q.target.unit] ? ' · ' + Units.label(game.units[q.target.unit]) : '';
+          list.append(h('div', { class: 'row' }, spriteCanvas('spell:' + q.id, 32),
+            h('div', { class: 'grow' }, h('div', { class: 't1' }, sp.name), h('div', { class: 't2' }, 'en file (' + (i + 1) + ') · ' + Magic.spellCost(game, pl, q.id, false) + ' mana' + tgt)),
+            i > 0 ? h('button', { class: 'abtn', title: 'Avancer dans la file', onclick: () => { const L = pl.castQueue; [L[i - 1], L[i]] = [L[i], L[i - 1]]; render(); App.refresh(); } }, '↑') : null,
+            h('button', { class: 'abtn danger', title: 'Retirer de la file', onclick: () => { pl.castQueue.splice(i, 1); render(); App.refresh(); } }, 'Retirer'))); });
         for (const k of kept) {
           const sp = DATA.spells[k.id];
           list.append(h('div', { class: 'row', style: 'cursor:pointer', onclick: k.go }, spriteCanvas('spell:' + k.id, 32),

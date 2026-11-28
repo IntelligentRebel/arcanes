@@ -18,6 +18,7 @@ const App = {
     Game.hooks.battle = (game, battle, info) => CombatView.run(game, battle, info);
     Game.hooks.choose = (game, pid, q) => App.answer(q);
     Game.hooks.fx = ev => App.onFx(ev);
+    Game.hooks.step = (game, pid, units, plane, fx, fy, nx, ny) => App.recordStep(game, pid, units, plane, fx, fy, nx, ny);
     Game.hooks.demonSlain = () => setTimeout(() => App.demonPrompt(), 450);
     Game.hooks.finale = () => setTimeout(() => App.finalePrompts(), 450);
     UI.abilityHover();
@@ -78,7 +79,8 @@ const App = {
     const fc = game.cities[human.fortress] || Cities.ofPlayer(game, human.id)[0];
     if (fc) MapView.centerOn(fc.x, fc.y, fc.plane);
     $('#logbox').innerHTML = '';
-    for (const e of game.log.filter(e => e.pid === App.pid || e.pid === -1).slice(-40)) App.onLog(e, true);
+    for (const e of game.log.filter(e => (e.pid === App.pid || e.pid === -1) && !App.logHidden(App.logCat(e))).slice(-40)) App.onLog(e, true);
+    App.logFilters();
     App.buildTopbar();
     if (!(human.seenHistory && human.seenHistory.length)) Intel.recordHistory(game, human);   // le graphique des forces commence ici
     App.refresh();
@@ -139,13 +141,42 @@ const App = {
     window.addEventListener('resize', () => App.logPlace());
     App.logPlace();
   },
+  // (0.31.75) les filtres du journal : chaque ligne a sa catégorie (d'après ses renvois et son texte français)
+  LOG_CATS: [['battle', 'Batailles'], ['city', 'Cités'], ['magic', 'Magie'], ['diplo', 'Diplomatie'], ['other', 'Autres']],
+  logCat(e) {
+    const r = e.ref || {}, t = e.fr || e.text || '';
+    if (r.diplo || r.contact || r.offer || /traité|(en|la) guerre|guerre déclarée|\bpaix\b|dénonce|alliance|ambassad|tribut|exige|vous propose|propose un|rompt|rompu|déclare|non-agression|échange|Premier contact|diplomat|vous offre|offre de/i.test(t)) return 'diplo';
+    if (r.battle || /bataille|victoire|défaite|vaincu|vainqueur|abat|attaqu|assaut|repouss|pertes|tomb(e|é|ée|és) au combat|tué|massacr|combat|péri|pillard|pill(e|é|ent)|prise de|\bprend\b|s'empare|assièg|en fuite|fuient|marchent sur|rasée|capturée|repaire|\bantre\b|gardiens|meurtrier|Vengeance|duel|patrouille/i.test(t)) return 'battle';
+    if (r.spell || r.global || r.rite || r.book || /\bsorts?\b|incantation|\bmana\b|recherche|nœud|enchant|rituel|grimoire|Eurêka|magique|invoqu|dissip|maîtrise|compétence/i.test(t)) return 'magic';
+    if (r.city != null || r.building || /\bcités?\b|bâtiment|construi|production|famine|révolte|population|habitants|croissance|achève|achevé|colon|fond(e|ée|ent|ation)|gouverneur|impôts|nourriture/i.test(t)) return 'city';
+    return 'other';
+  },
+  logHidden(cat) { return (App.prefs.logHide || []).includes(cat); },
+  // le journal reconstruit (filtres changés) : les dernières lignes visibles
+  rebuildLog() {
+    const game = App.game, box = $('#logbox'); if (!game || !box) return;
+    box.innerHTML = '';
+    const L = game.log.filter(e => (e.pid === App.pid || e.pid === -1) && !App.logHidden(App.logCat(e))).slice(-120);
+    for (const e of L) App.onLog(e, true);
+  },
+  logFilters() {
+    const bar = $('#logbar'); if (!bar) return;
+    // une rangée sous la poignée (la poignée garde toute la largeur pour déplacer le journal)
+    let f = $('#log-filters'); if (!f) { f = h('div', { id: 'log-filters' }); bar.after(f); }
+    f.innerHTML = ''; $('#logwrap').classList.toggle('filtered', (App.prefs.logHide || []).length > 0);
+    for (const [c, label] of App.LOG_CATS) f.append(h('span', { class: 'lf' + (App.logHidden(c) ? '' : ' on'), title: App.logHidden(c) ? 'Afficher ces lignes' : 'Masquer ces lignes', onclick: () => {
+      const hide = new Set(App.prefs.logHide || []); if (hide.has(c)) hide.delete(c); else hide.add(c);
+      App.setPref('logHide', [...hide]); App.logFilters(); App.rebuildLog(); } }, label));
+  },
   onLog(e, silent) {
     if (!App.game) return;
     if (e.pid !== App.pid && e.pid !== -1) return;
     const box = $('#logbox');
-    const div = h('div', { class: 'e' + (e.ref && e.ref.alert ? ' alert' : '') }, h('span', { class: 't' }, 'T' + e.turn), App.linkify(e));
+    const hidden = App.logHidden(App.logCat(e));
+    const div = hidden ? null : h('div', { class: 'e' + (e.ref && e.ref.alert ? ' alert' : '') }, h('span', { class: 't' }, 'T' + e.turn), App.linkify(e));
     // l'ordre au choix (menu) : le plus récent en bas (par défaut) ou en haut
-    if (App.prefs.logReverse) { box.prepend(div); while (box.children.length > 120) box.lastChild.remove(); box.scrollTop = 0; }
+    if (!div) { /* catégorie masquée : la ligne reste dans la partie, pas à l'écran */ }
+    else if (App.prefs.logReverse) { box.prepend(div); while (box.children.length > 120) box.lastChild.remove(); box.scrollTop = 0; }
     else { box.append(div); while (box.children.length > 120) box.firstChild.remove(); box.scrollTop = box.scrollHeight; }
     if (!silent) Sfx.forLog(e, UI.busyLog);
     if (!silent && e.ref && e.ref.cache) {
@@ -273,14 +304,14 @@ const App = {
     tb.append(resWrap, h('div', { class: 'sp' }), btnWrap);
     const btn = (label, ic, key, fn, tip) => { const b = h('button', { class: 'tbtn', onclick: fn }, h('span', { html: ICONS[ic] }), label ? h('span', { class: 'lbl' }, label) : null, key ? h('span', { class: 'k' }, key) : null); if (tip) UI.tipOn(b, () => '<b>' + (label || '') + '</b> ' + tip + (key ? ' <span class="kbd">' + key + '</span>' : '')); return b; };
     btnWrap.append(
-      btn('Grimoire', 'book', 'G', () => MagicUI.spellbook(), 'Lancer un sort'),
-      btn('Magie', 'wand', 'M', () => MagicUI.magic(), 'Répartition de la puissance, enchantements globaux'),
-      btn('Recherche', 'research', 'R', () => MagicUI.research(), 'Choisir le prochain sort à étudier'),
-      btn('Cités', 'city', '⇧C', () => Panels.cities(), 'Vue d\'ensemble des cités'),
-      btn('Armées', 'army', 'A', () => Panels.armies(), 'Toutes vos unités'),
-      btn('Sorciers', 'wizards', 'D', () => Panels.wizards(), 'Diplomatie'),
-      btn('', 'chron', 'J', () => Panels.chronicle(App.game), 'Chronique de la partie : courbes de chaque sorcier, moments clés, grandes batailles'),
-      btn('', 'plane', 'P', () => App.togglePlane(), 'Basculer la vue entre Arcane et Miroir (P)'),
+      btn('Grimoire', 'book', Keys.badge('spellbook'), () => MagicUI.spellbook(), 'Lancer un sort'),
+      btn('Magie', 'wand', Keys.badge('magic'), () => MagicUI.magic(), 'Répartition de la puissance, enchantements globaux'),
+      btn('Recherche', 'research', Keys.badge('research'), () => MagicUI.research(), 'Choisir le prochain sort à étudier'),
+      btn('Cités', 'city', Keys.badge('cities'), () => Panels.cities(), 'Vue d\'ensemble des cités'),
+      btn('Armées', 'army', Keys.badge('armies'), () => Panels.armies(), 'Toutes vos unités'),
+      btn('Sorciers', 'wizards', Keys.badge('wizards'), () => Panels.wizards(), 'Diplomatie'),
+      btn('', 'chron', Keys.badge('chronicle'), () => Panels.chronicle(App.game), 'Chronique de la partie : courbes de chaque sorcier, moments clés, grandes batailles'),
+      btn('', 'plane', Keys.badge('plane'), () => App.togglePlane(), 'Basculer la vue entre Arcane et Miroir (P)'),
       (() => { const b = btn('', Sfx.on ? 'sound' : 'mute', null, () => { Sfx.setOn(!Sfx.on); b.querySelector('span').innerHTML = ICONS[Sfx.on ? 'sound' : 'mute']; }, 'Activer ou couper le son et la musique (volume : menu)'); b.id = 'tb-sound'; return b; })(),
       btn('', 'menu', null, () => Panels.menu(), 'Menu : sauvegarder, charger, options'),
     );
@@ -303,7 +334,7 @@ const App = {
     else set('tb-research', 'Aucune recherche', '');
     set('tb-skill', pl.skillLeft + '/' + Magic.totalSkill(game, pl), '');
     // l'incantation en cours : son nom s'efface quand la barre manque de place, le pourcentage reste
-    { const sp = $('#tb-skill .p'); if (sp) { sp.innerHTML = ''; if (pl.casting) sp.append(h('span', { class: 'nm' }, DATA.spells[pl.casting.id].name + ' '), Math.floor(pl.casting.progress / pl.casting.cost * 100) + ' %'); } }
+    { const sp = $('#tb-skill .p'); if (sp) { sp.innerHTML = ''; if (pl.casting) sp.append(h('span', { class: 'nm' }, DATA.spells[pl.casting.id].name + ' '), Math.floor(pl.casting.progress / pl.casting.cost * 100) + ' %' + ((pl.castQueue || []).length ? ' +' + pl.castQueue.length : '')); } }
     set('tb-fame', U.cap(App.fameTier(Players.fame(game, pl)).name), '');
     {
       const k = game.crisis, due = Pacts.due(game, pl).length;
@@ -408,7 +439,7 @@ const App = {
     }
     return html;
   },
-  skillTip() { const game = App.game, pl = App.me(); return '<h4>Compétence de lancement</h4>Mana utilisable par tour pour les sorts : <b>' + Magic.totalSkill(game, pl) + '</b> (reste ' + pl.skillLeft + ' ce tour).' + (Magic.incarnate(game, pl) ? '<div style="margin-top:4px">Incarné sur la carte : la moitié de votre compétence (' + (Magic.castingSkill(pl) + Magic.heroSkillBonus(game, pl)) + ').</div>' : '') + (pl.casting ? '<div style="margin-top:4px">En cours : ' + DATA.spells[pl.casting.id].name + ' (' + pl.casting.progress + '/' + pl.casting.cost + ', ' + Spells.castingTurnsText(game, pl) + ')</div>' : ''); },
+  skillTip() { const game = App.game, pl = App.me(); return '<h4>Compétence de lancement</h4>Mana utilisable par tour pour les sorts : <b>' + Magic.totalSkill(game, pl) + '</b> (reste ' + pl.skillLeft + ' ce tour).' + (Magic.incarnate(game, pl) ? '<div style="margin-top:4px">Incarné sur la carte : la moitié de votre compétence (' + (Magic.castingSkill(pl) + Magic.heroSkillBonus(game, pl)) + ').</div>' : '') + (pl.casting ? '<div style="margin-top:4px">En cours : ' + DATA.spells[pl.casting.id].name + ' (' + pl.casting.progress + '/' + pl.casting.cost + ', ' + Spells.castingTurnsText(game, pl) + ')</div>' : '') + ((pl.castQueue || []).length ? '<div>Ensuite : ' + pl.castQueue.map(q => DATA.spells[q.id] ? U.esc(DATA.spells[q.id].name) : '').join(', ') + '</div>' : ''); },
 
   // ---------- panneau latéral ----------
   renderSide() {
@@ -481,6 +512,7 @@ const App = {
     const hv = MapView.hover;
     if (hv && pl.explored[MapView.plane][hv.y * game.world.w + hv.x]) ti.innerHTML = App.tileInfoHtml(MapView.plane, hv.x, hv.y);
     else ti.innerHTML = '<span class="dim">' + PLANE_NAMES[MapView.plane] + ' · survolez une case</span>';
+    { const pin = hv && App.pinAt(MapView.plane, hv.x, hv.y); if (pin) ti.insertAdjacentHTML('afterbegin', '<div class="pinnote">Repère' + (pin.note ? ' : ' + U.esc(pin.note) : '') + ' <span class="dim">(' + Keys.labelOf('pin') + ')</span></div>'); }
     // bouton suivant
     const left = App.unitsWaiting();
     $('#btn-next').textContent = left.length ? 'Suivante (' + left.length + ')' : 'Suivante';
@@ -600,11 +632,11 @@ const App = {
     const box = h('div', { class: 'actions' });
     const b = (label, key, fn, enabled = true, cls = '', tip) => { const e = h('button', { class: 'abtn ' + cls, onclick: fn, disabled: !enabled }, label, key ? h('span', { class: 'k' }, key) : null); if (tip) UI.tipOn(e, tip); box.append(e); };
     const settler = sel.find(u => Units.isSettler(u));
-    if (settler) { const chk = settler.moves > 0 ? Cities.canFoundAt(game, App.pid, settler.plane, settler.x, settler.y) : { ok: false, why: 'Il faut du mouvement restant pour fonder.' }; b('Fonder', 'B', () => App.found(settler), chk.ok, 'primary', chk.ok ? 'Fonder une nouvelle cité ici' : chk.why); }
+    if (settler) { const chk = settler.moves > 0 ? Cities.canFoundAt(game, App.pid, settler.plane, settler.x, settler.y) : { ok: false, why: 'Il faut du mouvement restant pour fonder.' }; b('Fonder', Keys.badge('found'), () => App.found(settler), chk.ok, 'primary', chk.ok ? 'Fonder une nouvelle cité ici' : chk.why); }
     if (sel.some(u => Units.isEngineer(u))) {
       { const has = World.hasRoad(game.world, sel[0].plane, sel[0].x, sel[0].y), tt = DATA.terrain && DATA.terrain[T_KEYS[World.terr(game.world, sel[0].plane, sel[0].x, sel[0].y)]], noRoad = tt && !tt.roadTurns;
-        b('Route', 'R', () => { const r = Game.buildRoad(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); App.afterAction(); }, !has && !noRoad, '', has ? 'Il y a déjà une route ici.' : noRoad ? 'On ne bâtit pas de route sur ce terrain.' : 'Construire une route sur cette case' + (tt ? ' (' + U.n(tt.roadTurns, 'tour') + ')' : '')); }
-      b('Route vers…', '⇧R', () => App.startRoadTo(sel), true, App.roadMode ? 'primary' : '', 'Tracer une route jusqu\'à une destination : les ingénieurs l\'empierrent case après case, tour après tour');
+        b('Route', Keys.badge('road'), () => { const r = Game.buildRoad(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); App.afterAction(); }, !has && !noRoad, '', has ? 'Il y a déjà une route ici.' : noRoad ? 'On ne bâtit pas de route sur ce terrain.' : 'Construire une route sur cette case' + (tt ? ' (' + U.n(tt.roadTurns, 'tour') + ')' : '')); }
+      b('Route vers…', Keys.badge('roadTo'), () => App.startRoadTo(sel), true, App.roadMode ? 'primary' : '', 'Tracer une route jusqu\'à une destination : les ingénieurs l\'empierrent case après case, tour après tour');
     }
     if (sel.some(u => Units.has(game, u, 'purify'))) {
       { const cor = !!World.get(game.world, sel[0].plane, 'corrupt', sel[0].x, sel[0].y), k0 = sel[0].plane + ',' + sel[0].x + ',' + sel[0].y, w0 = Math.max(0, ...sel.map(u => u.purifyAt === k0 ? u.purifyWork || 0 : 0));   // le travail compte pour cette case-ci seulement
@@ -617,8 +649,10 @@ const App = {
     if (melder && !mc.off) b('Fusionner', null, () => { const r = Game.meld(game, melder.id); if (!r.ok || r.failed) UI.toast(r.why, 'warn'); MapView.invalidate(); App.afterAction(); }, mc.ok, mc.ok ? 'primary' : '', mc.ok ? mc.what : mc.why);
     { const hu = sel.find(u => u.halted && u.path && u.path.length && u.dest); if (hu) b('Reprendre la route', null, () => App.moveSelected(hu.dest[0], hu.dest[1]), sel.some(u => u.moves > 0), 'primary', 'Repartir vers la destination d\'avant la rencontre (l\'itinéraire est recalculé)'); }
     if (sel.some(u => (u.path && u.path.length) || u.status === 'roadto')) b('Annuler l\'ordre', null, () => App.cancelOrders(sel), true, '', sel.some(u => u.status === 'roadto') ? 'Abandonner la route en cours' : 'Oublier l\'itinéraire en cours');
-    b('Explorer', 'X', () => App.explore(sel), true, '', 'Exploration automatique : la pile part d\'elle-même vers les terres inconnues, tour après tour');
-    b('Sentinelle', 'S', () => { for (const u of sel) { u.status = 'sentry'; u.path = null; } App.selectNext(); });
+    b('Explorer', Keys.badge('explore'), () => App.explore(sel), true, '', 'Exploration automatique : la pile part d\'elle-même vers les terres inconnues, tour après tour');
+    b('Sentinelle', Keys.badge('sentry'), () => { for (const u of sel) { u.status = 'sentry'; u.path = null; } App.selectNext(); });
+    { const on = sel.every(u => u.status === 'patrol' && u.patrol);
+      b(on ? 'Lever la patrouille' : 'Patrouiller', Keys.badge('patrol'), () => App.patrolDialog(sel), true, on ? 'primary' : '', on ? 'La pile garde une zone de ' + sel[0].patrol.r + ' cases autour de son poste : elle ne l\'attaquera plus d\'elle-même' : 'Garder une zone : au début de vos tours, la pile attaque d\'elle-même les ennemis qui y entrent, si elle les atteint et que ses chances sont bonnes'); }
     const promo = sel.length === 1 ? Game.promoteOptions(game, sel[0]) : [];
     if (promo.length) b('Promouvoir', null, () => App.promoteDialog(sel[0]), true, '', 'Ce vétéran peut être rééquipé en unité supérieure, en gardant son grade');
     const hero = sel.find(u => u.hero && !u.avatar);
@@ -626,15 +660,15 @@ const App = {
       if (hero.status === 'governor' && hero.govCity === city.id) b('Relever', null, () => { hero.status = ''; hero.govCity = null; UI.toast(U.esc(hero.hero.name) + ' n\'est plus gouverneur de ' + U.esc(city.name) + '.'); App.refresh(); }, true, '', 'Retirer à ce héros le gouvernement de la cité');
       else b('Gouverner', null, () => App.governDialog(hero, city), true, '', 'Confier la cité à ce héros : bonus selon son niveau et ses talents, et il choisit la production quand la file est vide');
     }
-    if (city && city.owner === App.pid && sel.some(u => Units.canHealInCity(game, u))) b('Soigner', 'H', () => App.healInCity(sel), true, '',
+    if (city && city.owner === App.pid && sel.some(u => Units.canHealInCity(game, u))) b('Soigner', Keys.badge('heal'), () => App.healInCity(sel), true, '',
       (Cities.hasEnch(city, 'stream_of_life') || (App.me().globals || []).includes('herb_mastery') ? 'Rester dans la cité : entièrement soignée au prochain tour (' + (Cities.hasEnch(city, 'stream_of_life') ? 'Source de vie' : 'Maîtrise des simples') + ')' : 'Rester dans la cité jusqu\'à guérison complète (' + (city.buildings.animistsGuild ? 15 : 10) + ' % des points de vie par tour)') + ' ; l\'unité se réveille d\'elle-même une fois soignée');
     const shrine = Pacts.shrineAt(game, sel[0].plane, sel[0].x, sel[0].y);
     if (shrine && !Pacts.pactWith(App.me(), shrine.entity)) b('Pacte', null, async () => { await Pacts.propose(game, App.me(), shrine); MapView.bumpVis(); App.refresh(); }, true, 'primary', 'Écouter l\'offre de ' + Pacts.ENT[shrine.entity].name);
-    if (App.canUndo()) b('Annuler', 'U', () => App.undoMove(), true, '', () => { const u = App.undo && App.game.units[App.undo.ids[0]]; return 'Annuler le dernier déplacement' + (u ? ' (' + U.esc(Units.label(u)) + ')' : '') + ' : il n\'a rien révélé'; });
-    b('Attendre', 'W', () => App.selectNext(false, sel.map(u => u.id)), true, '', 'Plus tard dans ce tour : « Suivante » y reviendra');
-    b('Passer', 'F', () => App.passTurn(sel), true, '', 'Rien pour cette unité ce tour-ci : « Suivante » ne la proposera plus et la fin du tour ne l\'attendra pas');
+    if (App.canUndo()) b('Annuler', Keys.badge('undo'), () => App.undoMove(), true, '', () => { const u = App.undo && App.game.units[App.undo.ids[0]]; return 'Annuler le dernier déplacement' + (u ? ' (' + U.esc(Units.label(u)) + ')' : '') + ' : il n\'a rien révélé'; });
+    b('Attendre', Keys.badge('wait'), () => App.selectNext(false, sel.map(u => u.id)), true, '', 'Plus tard dans ce tour : « Suivante » y reviendra');
+    b('Passer', Keys.badge('pass'), () => App.passTurn(sel), true, '', 'Rien pour cette unité ce tour-ci : « Suivante » ne la proposera plus et la fin du tour ne l\'attendra pas');
     const psWhy = Game.planeShiftBlock(game, sel, sel[0].plane, sel[0].x, sel[0].y);
-    b('Plan', 'P', async () => { const r = Game.planeShift(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); else { MapView.plane = sel[0].plane; MapView.centerOn(sel[0].x, sel[0].y); MapView.bumpVis(); App.selectTile(sel[0].plane, sel[0].x, sel[0].y, sel.map(u => u.id)); } App.afterAction(); }, !psWhy, '', psWhy || 'Changer de plan (tour de sorcellerie dégagée, faille, porte astrale ou capacité)');
+    b('Plan', Keys.badge('plane'), async () => { const r = Game.planeShift(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); else { MapView.plane = sel[0].plane; MapView.centerOn(sel[0].x, sel[0].y); MapView.bumpVis(); App.selectTile(sel[0].plane, sel[0].x, sel[0].y, sel.map(u => u.id)); } App.afterAction(); }, !psWhy, '', psWhy || 'Changer de plan (tour de sorcellerie dégagée, faille, porte astrale ou capacité)');
     if (city && city.owner === App.pid) b('Cité', null, () => CityUI.open(city.id));
     if (city && city.owner === App.pid && Cities.hasEnch(city, 'earth_gate') && Game.earthGateCities(game, city).length) b('Porte tellurique', null, async () => {
       const to = await UI.choice('Porte tellurique', '<p>Vers quelle cité ? (1 point de mouvement)</p>', Game.earthGateCities(game, city).map(c => ({ label: c.name, value: c.id })).concat([{ label: 'Annuler', value: null }]));
@@ -681,7 +715,7 @@ const App = {
     if (!units.length) { App.sel = null; MapView.sel = null; MapView.path = null; App.refresh(); return false; }
     // un clic sur une pile la sélectionne tout entière ; dans une cité, la garnison en sentinelle reste à son poste
     const city = Cities.at(game, plane, x, y);
-    const army = city ? units.filter(u => u.status !== 'sentry' && u.status !== 'fortify' && u.status !== 'governor') : units;
+    const army = city ? units.filter(u => u.status !== 'sentry' && u.status !== 'fortify' && u.status !== 'governor' && u.status !== 'patrol') : units;
     const ids = keepIds || (army.length ? army : units).map(u => u.id);
     App.sel = { plane, x, y, all: units.map(u => u.id), ids: ids.length ? ids : units.map(u => u.id) };
     MapView.sel = { tileKey: plane + ':' + x + ',' + y, ids: App.sel.ids };
@@ -705,6 +739,172 @@ const App = {
     return Object.values(game.units).filter(u => u.owner === App.pid && u.moves > 0 && !u.status && (!u.path || u.halted) && u.guardian == null && u.passed !== game.turn && !tied(u));
   },
   // passer son tour : l'unité reste où elle est, sans ordre durable (contrairement à Sentinelle) ; elle reviendra au tour suivant
+  // ---------- patrouille (0.31.75) ----------
+  // La pile garde une zone carrée de r cases autour de son poste. Au début de vos tours, une pile ennemie en vue dans la zone
+  // (monstres, ou sorcier en guerre avec vous), hors cité et hors repaire, est attaquée si elle est atteignable dans le tour
+  // et que les chances sont au moins bonnes ; sinon la pile tient et le journal le dit. Sans cible, elle regagne son poste.
+  PATROL_WIN: 0.65,
+  async patrolDialog(sel) {
+    const game = App.game; sel = (sel || []).filter(u => game.units[u.id]); if (!sel.length) return;
+    const on = sel.every(u => u.status === 'patrol' && u.patrol), r0 = on ? sel[0].patrol.r : App.prefs.patrolR || 3;
+    const opts = [2, 3, 4, 5].map(r => ({ label: r + ' cases', value: r, primary: r === r0 }));
+    if (on) opts.push({ label: 'Lever la patrouille', value: 'off', danger: true });
+    opts.push({ label: 'Annuler', value: null });
+    const v = await UI.choice('Patrouille', '<p>' + (on ? 'Nouveau rayon de la zone gardée, ou fin de la patrouille.' : 'Rayon de la zone gardée autour de cette case. Au début de vos tours, la pile attaque d\'elle-même les ennemis qui y entrent, si elle les atteint dans le tour et que ses chances sont au moins bonnes.') + '</p>', opts);
+    if (v == null) return;
+    if (v === 'off') { for (const u of sel) { u.status = ''; delete u.patrol; } UI.toast('Patrouille levée.', '', 'patrol'); App.refresh(); return; }
+    App.setPref('patrolR', v);
+    const u0 = sel[0], post = on ? u0.patrol : { plane: u0.plane, x: u0.x, y: u0.y };
+    for (const u of sel) { u.status = 'patrol'; u.patrol = { plane: post.plane, x: post.x, y: post.y, r: v }; u.path = null; u.dest = null; u.attackOrder = false; delete u.halted; }
+    MapView.bumpVis(); App.refresh();
+    if (!on) App.selectNext(false, sel.map(u => u.id));
+  },
+  // les piles en patrouille : unités d'une même case gardant le même poste
+  patrolGroups() {
+    const game = App.game, out = {};
+    for (const u of Object.values(game.units)) if (u.owner === App.pid && u.status === 'patrol' && u.patrol) {
+      const P = u.patrol, k = u.plane + ',' + u.x + ',' + u.y + ':' + P.plane + ',' + P.x + ',' + P.y + ',' + P.r;
+      (out[k] = out[k] || []).push(u);
+    }
+    return Object.values(out);
+  },
+  // les piles ennemies en vue dans la zone, les plus proches de la patrouille d'abord
+  patrolFoes(group) {
+    const game = App.game, w = game.world, u0 = group[0], P = u0.patrol, me = App.me();
+    const vis = Move.visibility(game, App.pid)[P.plane], tiles = new Map();
+    for (const o of Object.values(game.units)) {
+      if (o.owner === App.pid || o.plane !== P.plane || World.dist(w, P.x, P.y, o.x, o.y) > P.r) continue;
+      if (!vis[o.y * w.w + World.wx(w, o.x)] || Intel.hiddenFrom(game, App.pid, o)) continue;
+      if (o.owner >= 0 && me.diplo[o.owner] !== 'war') continue;
+      if (Cities.at(game, o.plane, o.x, o.y) || World.get(w, o.plane, 'site', o.x, o.y) >= 0) continue;
+      const k = o.x + ',' + o.y; if (!tiles.has(k)) tiles.set(k, { x: o.x, y: o.y, units: [] }); tiles.get(k).units.push(o);
+    }
+    return [...tiles.values()].sort((a, b) => World.dist(w, u0.x, u0.y, a.x, a.y) - World.dist(w, u0.x, u0.y, b.x, b.y));
+  },
+  // atteignable dans ce tour : chaque pas du chemin se fait avec le mouvement qui reste
+  patrolReach(group, x, y) {
+    const game = App.game, u0 = group[0];
+    if (group.some(u => u.moves <= 0)) return false;
+    const path = Move.findPath(game, group, u0.plane, x, y, { maxNodes: 4000 });
+    if (!path || !path.length) return false;
+    const pace = Move.pacers(game, group), per = Math.max(1, Math.min(...pace.map(u => Units.maxMoves(game, u)))), left = Math.min(...pace.map(u => u.moves));
+    return Move.stepTurns(left, per, path).every(t => t === 0);
+  },
+  async patrolStep() {
+    const game = App.game; if (!game || game.over) return;
+    if (Turn.frozen(game, App.me())) return;
+    App._patrolSeen = App._patrolSeen || {};
+    for (const group0 of App.patrolGroups()) {
+      const group = group0.filter(u => game.units[u.id] && u.status === 'patrol'); if (!group.length) continue;
+      const u0 = group[0], P = u0.patrol, name = Units.label(u0);
+      let attacked = false;
+      for (const t of App.patrolFoes(group)) {
+        const foe = t.units[0], what = foe.owner < 0 ? 'des monstres' : 'des troupes de ' + Players.nameFor(game, App.pid, foe.owner);
+        const seenKey = game.turn + ':' + group.map(u => u.id).join(',') + ':' + t.x + ',' + t.y;
+        const say = txt => { if (App._patrolSeen[seenKey]) return; App._patrolSeen[seenKey] = true; Game.log(game, App.pid, txt, { unit: u0.id, x: t.x, y: t.y, plane: P.plane }); };
+        if (!App.patrolReach(group, t.x, t.y)) { say('Votre patrouille (' + name + ') repère ' + what + ' (' + Units.label(foe) + '), hors d\'atteinte ce tour-ci : elle tient sa position.'); continue; }
+        const f = Game.forecast(game, group.map(u => u.id), P.plane, t.x, t.y, 12);
+        if (!f || f.win < App.PATROL_WIN) { say('Votre patrouille (' + name + ') repère ' + what + ' (' + Units.label(foe) + ') : chances ' + Game.chanceWord(f ? f.win : 0) + ', elle tient sa position.'); continue; }
+        UI.toast('Votre patrouille (' + U.esc(name) + ') attaque ' + U.esc(what) + ' (' + U.esc(Units.label(foe)) + ').', '', 'patrol');
+        MapView.centerOn(t.x, t.y, P.plane); App.selectTile(u0.plane, u0.x, u0.y, group.map(u => u.id));
+        App._patrolMove = true;
+        try { await App.moveSelected(t.x, t.y); } finally { App._patrolMove = false; }
+        for (const u of group) if (game.units[u.id] && !u.status) { u.status = 'patrol'; u.patrol = P; u.path = null; u.dest = null; delete u.halted; }
+        attacked = true; break;
+      }
+      // sans cible : retour au poste
+      const alive = group.filter(u => game.units[u.id]);
+      if (!attacked && alive.length && (alive[0].plane !== P.plane || alive[0].x !== P.x || alive[0].y !== P.y) && alive.every(u => u.moves > 0)) {
+        await Game.moveGroup(game, alive.map(u => u.id), P.x, P.y, { noAttack: true });
+        // (le reste du chemin ne se poursuit pas tout seul : la patrouille le reprend à chaque début de tour, cible d'abord)
+        for (const u of alive) if (game.units[u.id]) { u.status = 'patrol'; u.patrol = P; u.path = null; u.dest = null; delete u.halted; }
+      }
+    }
+    MapView.bumpVis(); App.refresh();
+  },
+  // ---------- ce que l'on a vu bouger pendant l'intertour (0.31.75) ----------
+  // chaque pas d'une pile qui n'est pas à vous, partie d'une case en vue ou arrivée dans une case en vue (la vue du début de
+  // l'intertour : vos troupes et vos cités ne bougent pas pendant qu'ils jouent) ; dessiné au début du tour, puis effacé
+  recordStep(game, pid, units, plane, fx, fy, nx, ny) {
+    const T0 = App._trail; if (!T0 || game !== App.game || pid === App.pid) return;
+    const w = game.world, vis = T0.vis[plane];
+    if (!vis[fy * w.w + World.wx(w, fx)] && !vis[ny * w.w + World.wx(w, nx)]) return;
+    if (units.every(u => Intel.hiddenFrom(game, App.pid, u))) return;
+    T0.segs.push({ k: units[0].id, o: pid, plane, a: [fx, fy], b: [nx, ny] });
+  },
+  replayFoeMoves() {
+    const t = App.foeTrail;
+    if (!t || t.turn !== App.game.turn || !t.segs.length) { UI.toast('Aucun mouvement adverse vu pendant le dernier intertour.', '', 'trail'); return; }
+    t.t0 = performance.now();
+    const p = t.segs.some(s => s.plane === MapView.plane) ? MapView.plane : t.segs[0].plane;
+    if (p !== MapView.plane) App.togglePlane();
+  },
+  // ---------- repères (0.31.75) : une épingle et une note, sur la case survolée ----------
+  pinAt(p, x, y) { const pl = App.me(); return (pl.pins || []).find(q => q.plane === p && q.x === x && q.y === y) || null; },
+  pinDialog(at) {
+    const game = App.game, pl = App.me(), hv = at || MapView.hover;
+    const tile = hv ? { plane: hv.plane != null ? hv.plane : MapView.plane, x: World.wx(game.world, hv.x), y: hv.y } : App.sel ? { plane: App.sel.plane, x: App.sel.x, y: App.sel.y } : null;
+    if (!tile || !World.inY(game.world, tile.y)) { UI.toast('Survolez la case où poser le repère.', 'warn', 'pin'); return; }
+    const old = App.pinAt(tile.plane, tile.x, tile.y);
+    const inp = h('input', { type: 'text', maxlength: 120, value: old ? old.note : '', placeholder: 'Note (facultative)', style: 'width:100%' });
+    const save = () => {
+      pl.pins = (pl.pins || []).filter(q => q !== old);
+      pl.pins.push({ plane: tile.plane, x: tile.x, y: tile.y, note: inp.value.trim().slice(0, 120), t: game.turn });
+      m.close(); App.refresh();
+    };
+    inp.onkeydown = ev => { if (ev.key === 'Enter') { ev.preventDefault(); save(); } };
+    const foot = [h('button', { class: 'btn ghost', onclick: () => m.close() }, 'Annuler')];
+    if (old) foot.unshift(h('button', { class: 'btn danger', onclick: () => { pl.pins = (pl.pins || []).filter(q => q !== old); m.close(); App.refresh(); } }, 'Retirer le repère'));
+    foot.push(h('button', { class: 'btn primary', onclick: save }, old ? 'Enregistrer' : 'Poser le repère'));
+    const m = UI.modal({ title: (old ? 'Repère' : 'Nouveau repère') + ' · ' + PLANE_NAMES[tile.plane] + ' (' + tile.x + ',' + tile.y + ')', width: 440, body: h('div', null, inp), footer: foot });
+    setTimeout(() => inp.focus(), 30);
+  },
+  // ---------- recherche sur la carte (0.31.75) : cités, héros, lieux connus, repères ----------
+  searchItems() {
+    const game = App.game, pl = App.me(), w = game.world, out = [];
+    const ex = (p, x, y) => pl.explored[p][y * w.w + World.wx(w, x)];
+    for (const c of Object.values(game.cities)) if (c.owner === App.pid || ex(c.plane, c.x, c.y))
+      out.push({ name: c.name, what: c.owner === App.pid ? (c.fortress ? 'votre capitale' : 'votre cité') : c.owner < 0 ? 'cité neutre' : 'cité de ' + Players.nameFor(game, App.pid, c.owner), plane: c.plane, x: c.x, y: c.y, city: c.owner === App.pid ? c.id : null, rank: c.owner === App.pid ? 0 : 1 });
+    for (const u of Object.values(game.units)) if (u.owner === App.pid && u.hero && !u.avatar)
+      out.push({ name: u.hero.name, what: 'votre héros · ' + Units.label(u), plane: u.plane, x: u.x, y: u.y, unit: u.id, rank: 0 });
+    for (const q of pl.pins || []) out.push({ name: q.note || 'Repère', what: 'repère · ' + PLANE_NAMES[q.plane] + ' (' + q.x + ',' + q.y + ')', plane: q.plane, x: q.x, y: q.y, pin: true, rank: 0 });
+    for (const st of game.sites) {
+      if (st.closed || !ex(st.plane, st.x, st.y) || Cities.at(game, st.plane, st.x, st.y)) continue;
+      const done = Game.knownCleared(pl, st);
+      out.push({ name: U.cap(Game.siteName(st)), what: (done ? 'lieu visité · ' : '') + PLANE_NAMES[st.plane] + ' (' + st.x + ',' + st.y + ')', plane: st.plane, x: st.x, y: st.y, rank: done ? 3 : 2 });
+    }
+    return out;
+  },
+  searchDialog() {
+    const game = App.game;
+    const norm = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const items = App.searchItems();
+    const inp = h('input', { type: 'text', placeholder: 'Nom d\'une cité, d\'un héros, d\'un lieu ou d\'un repère', style: 'width:100%' });
+    const list = h('div', { class: 'list scroll', style: 'max-height:52vh;margin-top:8px' });
+    let shown = [];
+    const go = it => {
+      m.close();
+      if (it.plane !== MapView.plane) App.togglePlane();
+      MapView.centerOn(it.x, it.y, it.plane); MapView.ping(it.x, it.y, it.plane);
+      if (it.unit != null && game.units[it.unit]) App.selectTile(it.plane, it.x, it.y, [it.unit]);
+      else if (it.city != null) App.selectTile(it.plane, it.x, it.y);
+      MapView.bumpVis(); App.refresh();
+    };
+    const render = () => {
+      const q = norm(inp.value.trim());
+      shown = q ? items.filter(it => norm(it.name).includes(q) || norm(it.what).includes(q)).sort((a, b) => (norm(a.name).startsWith(q) ? 0 : 1) - (norm(b.name).startsWith(q) ? 0 : 1) || a.rank - b.rank || a.name.localeCompare(b.name))
+        : items.filter(it => it.pin || it.unit != null);
+      shown = shown.slice(0, 40);
+      list.innerHTML = '';
+      for (const it of shown) list.append(h('div', { class: 'row', onclick: () => go(it) }, h('div', { class: 'grow' }, h('div', { class: 't1' }, it.name), h('div', { class: 't2' }, it.what))));
+      if (!shown.length) list.append(h('div', { class: 'dim', style: 'padding:6px' }, q ? 'Rien de connu sous ce nom.' : 'Tapez un nom. Vos héros et vos repères :'));
+      else if (!q) list.prepend(h('div', { class: 'dim', style: 'padding:2px 6px' }, 'Vos héros et vos repères :'));
+    };
+    inp.oninput = render;
+    inp.onkeydown = ev => { if (ev.key === 'Enter' && shown.length) { ev.preventDefault(); go(shown[0]); } };
+    const m = UI.modal({ title: 'Rechercher', width: 520, body: h('div', null, inp, list) });
+    render(); setTimeout(() => inp.focus(), 30);
+  },
   passTurn(sel) {
     const game = App.game; if (!sel || !sel.length) return;
     for (const u of sel) u.passed = game.turn;
@@ -996,6 +1196,7 @@ const App = {
     const game = App.game;
     const all = App.sel.ids.filter(id => game.units[id]);
     if (!all.length) return;
+    if (!App._patrolMove) for (const id of all) { const u = game.units[id]; if (u.status === 'patrol') { u.status = ''; delete u.patrol; } }
     const ids = all.filter(id => game.units[id].moves > 0);
     const u0 = game.units[all[0]];
     // attaque d'un sorcier en paix : confirmation
@@ -1130,7 +1331,10 @@ const App = {
     const lastE = game.log[game.log.length - 1];
     UI.busyLog = true;
     await new Promise(r => setTimeout(r, 30));
+    App._trail = { vis: Move.visibility(game, App.pid), segs: [] };
     try { await Turn.endTurn(game); } catch (e) { console.error(e); UI.toast('Erreur pendant le tour : ' + U.esc(e.message), 'warn'); }
+    // (les flèches attendent la fin des écrans du début de tour : hold)
+    App.foeTrail = App._trail.segs.length ? { segs: App._trail.segs, t0: null, turn: game.turn, hold: true } : null; App._trail = null;
     UI.busyLog = false;
     MapView.invalidate(); MapView.invalidateVis();
     // ordres de déplacement en cours (une erreur ici ne doit pas laisser l'écran d'attente en place : le jeu ne répondrait plus)
@@ -1152,6 +1356,7 @@ const App = {
     } catch (e) { App.oops(e); }
     UI.setBusy(null);
     if ((App.pendingScouts || []).length) await App.flushScouts();
+    try { await App.patrolStep(); } catch (e) { App.oops(e); }
     Sfx.afterTurn();
     App.save('auto');
     if (App.prefs.autoExport > 0 && game.turn % App.prefs.autoExport === 0 && !game.over) await App.autoExport();
@@ -1174,6 +1379,7 @@ const App = {
     await App.turnPrompts();
     await App.talentPrompts();
     App.summary(lastE, upto);
+    if (App.foeTrail) App.foeTrail.hold = false;
     App.selectNext(true);
     // un rival a arrêté le temps : vos ordres attendent, le tour passe de lui-même
     if (Turn.frozen(game, App.me()) && !game.over) { UI.toast('Le temps est figé par un sorcier rival : vos troupes et vos cités attendent qu\'il reprenne son cours.', 'warn', 'timestop'); setTimeout(() => App.endTurn(true), 900); }
@@ -1971,7 +2177,9 @@ const App = {
           try { keep(); } catch (e1) { try { localStorage.removeItem('arcanes:prev'); localStorage.removeItem('arcanes:prev:meta'); keep(); } catch (e2) { UI.toast('Stockage plein : la sauvegarde automatique de la partie précédente n\'a pas pu être gardée.', 'warn'); } }
         }
       }
-      localStorage.setItem('arcanes:' + slot, App.serialize()); localStorage.setItem('arcanes:' + slot + ':meta', JSON.stringify({ t: Date.now(), turn: g.turn, name: App.me().name, uid: g.uid }));
+      const text = App.serialize();
+      localStorage.setItem('arcanes:' + slot, text); localStorage.setItem('arcanes:' + slot + ':meta', JSON.stringify({ t: Date.now(), turn: g.turn, name: App.me().name, uid: g.uid }));
+      App._savedSig = App.sig(text);
       if (slot === 'auto') App._autoOwned = g.uid;
       return true;
     } catch (e) {
@@ -1988,6 +2196,7 @@ const App = {
     const name = (App.me().name || 'sorcier').normalize('NFKD').replace(/[^\w-]+/g, '').toLowerCase() || 'sorcier';
     const d = new Date(), z = n => String(n).padStart(2, '0'), stamp = manual ? '-' + z(d.getHours()) + z(d.getMinutes()) + z(d.getSeconds()) : '';
     const file = 'arcanes-' + name + '-' + __k('@save_turn', 'tour') + App.game.turn + stamp + '.json', text = App.serialize();
+    App._savedSig = App.sig(text);
     if (App.prefs.saveDir && SaveDir.supported()) {
       const r = await SaveDir.write(file, text, ask);
       if (r.ok) return { ok: true, file, dir: r.dir };
@@ -2019,7 +2228,39 @@ const App = {
   },
   load(slot) {
     const s = localStorage.getItem('arcanes:' + slot); if (!s) return false;
-    const g = App.deserialize(s); App.start(g); return true;
+    const g = App.deserialize(s); App.start(g); App.markSaved(); return true;
+  },
+  // (0.31.75) l'empreinte de l'état de la partie : rien à perdre en quittant tant qu'elle est celle de la dernière sauvegarde
+  // (le compteur des simulations de bataille, qui bouge au simple survol d'une case, n'en fait pas partie)
+  sig(text) {
+    const t = String(text).replace(/"simId":\d+,?/, '');
+    let hs = 2166136261; for (let i = 0; i < t.length; i++) { hs ^= t.charCodeAt(i); hs = Math.imul(hs, 16777619) >>> 0; }
+    return t.length + ':' + hs;
+  },
+  markSaved() { try { App._savedSig = App.sig(App.serialize()); } catch (e) { App._savedSig = null; } },
+  unsaved() { const g = App.game; if (!g || g.over) return false; try { return App.sig(App.serialize()) !== App._savedSig; } catch (e) { return true; } },
+  // sauvegarde rapide (F5, Ctrl+S) : un emplacement à part, écrasé sans rien demander
+  quickSave() {
+    const g = App.game; if (!g || g.over) return;
+    if (CombatView.active) { UI.toast('Pas de sauvegarde rapide pendant une bataille.', 'warn', 'quick'); return; }
+    if (UI.busy || App.moving) { UI.toast('Sauvegarde rapide impossible pour l\'instant.', 'warn', 'quick'); return; }
+    if (App.save('quick')) { UI.toast('Sauvegarde rapide : tour ' + g.turn + '.', '', 'quick'); if (typeof Sfx !== 'undefined') Sfx.play('click'); }
+  },
+  // chargement rapide (F9) : la partie revient à la sauvegarde rapide, après confirmation si quelque chose a été joué depuis
+  async quickLoad() {
+    if (CombatView.active) { UI.toast('Pas de chargement rapide pendant une bataille.', 'warn', 'quick'); return; }
+    if (UI.busy || App.moving || App._quickAsk) return;
+    const s = localStorage.getItem('arcanes:quick'), meta = App.saveMeta('quick');
+    if (!s || !meta) { UI.toast('Aucune sauvegarde rapide.', 'warn', 'quick'); return; }
+    const g = App.game, other = g && meta.uid && g.uid !== meta.uid;
+    if (g && !g.over && App.sig(App.serialize()) !== App.sig(s)) {
+      App._quickAsk = true;
+      const ok = await UI.confirm('Chargement rapide', (other ? 'Charger la sauvegarde rapide d\'une autre partie (' + U.esc(meta.name || '?') + ', tour ' + meta.turn + ') ?' : 'Revenir à la sauvegarde rapide du tour ' + meta.turn + ' ?') + ' Ce qui a été joué depuis sera perdu.', 'Charger');
+      App._quickAsk = false;
+      if (!ok) return;
+    }
+    UI.closeAll(); App.load('quick');
+    UI.toast('Sauvegarde rapide chargée : tour ' + meta.turn + '.', '', 'quick');
   },
 
   // effets visibles sur la carte : la faille qu'on referme se résorbe sous les yeux du joueur
@@ -2166,6 +2407,8 @@ const App = {
       window.addEventListener('mousemove', mv); window.addEventListener('mouseup', up);
     });
     window.addEventListener('keydown', e => App.onKey(e));
+    // (0.31.75) fermer ou recharger la page avec des coups non sauvegardés : le navigateur demande confirmation
+    window.addEventListener('beforeunload', e => { if (App.leaveOk || !App.unsaved()) return; e.preventDefault(); e.returnValue = ''; });
     setInterval(() => { if (!App.game) return; const k = App.keys; const sp = 0.35; let mv = false; if (k.ArrowLeft) { MapView.camX -= sp; mv = true; } if (k.ArrowRight) { MapView.camX += sp; mv = true; } if (k.ArrowUp) { MapView.camY -= sp; mv = true; } if (k.ArrowDown) { MapView.camY += sp; mv = true; } if (mv) { MapView.clampCam(); App.renderMinimap(); } }, 30);
     window.addEventListener('keyup', e => { App.keys[e.key] = false; });
   },
@@ -2333,44 +2576,61 @@ const App = {
   onKey(e) {
     if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return;
     if (!App.game) return;
-    if (e.ctrlKey || e.metaKey || e.altKey) return;   // raccourcis du navigateur (Ctrl+R, Ctrl+S…) : pas d'ordre au passage
+    const acts = Keys.match(e, 'map');
+    // sauvegarde et chargement rapides : même derrière une fenêtre ouverte (Ctrl+S n'ouvre jamais « Enregistrer la page »)
+    const quick = acts.find(id => id === 'quickSave' || id === 'quickLoad');
+    if (quick) { e.preventDefault(); if (quick === 'quickSave') App.quickSave(); else App.quickLoad(); return; }
+    // les autres combinaisons avec Ctrl ou Alt restent au navigateur (Ctrl+R…), sauf celles qu'un ordre a prises (Ctrl+F)
+    if ((e.ctrlKey || e.metaKey || e.altKey) && !acts.length) return;
     App.keys[e.key] = true;
     if (App.moving) return;   // une pile en marche : on attend qu'elle arrive
     if (e.key === 'Escape' && App.tilePick) { const tp = App.tilePick; App.tilePick = null; tp.resolve(null); return; }
     if (e.key === 'Escape') { if (App.roadMode) { App.roadMode = null; MapView.roadPreview = null; UI.toast('Tracé de route annulé.', '', 'roadmode'); App.refresh(); return; } if (MagicUI.targeting) { MagicUI.cancelTarget(); return; } if (UI.closeTop()) return; App.sel = null; MapView.sel = null; MapView.path = null; App.refresh(); return; }
-    if (UI.modals.length || UI.busy || CombatView.active) return;
-    const k = e.key.toLowerCase();
+    if (UI.modals.length || UI.busy || CombatView.active) { if (acts.includes('search')) e.preventDefault(); return; }
+    for (const id of acts) if (App.keyAction(id, e) !== false) { e.preventDefault(); break; }
+  },
+  // un ordre du clavier (Keys) ; false : il ne s'applique pas ici, la touche passe à l'ordre suivant qui la partage
+  keyAction(id, e) {
     const game = App.game;
     const sel = App.sel ? App.sel.ids.map(id => game.units[id]).filter(Boolean) : [];
-    if (e.key === 'Enter') { App.endTurn(); e.preventDefault(); }
-    else if (k === ' ' || k === 'n') { App.selectNext(false, null, true); e.preventDefault(); }
-    else if (k === 'w' && sel.length) App.selectNext(false, sel.map(u => u.id));
-    else if (k === 'f' && sel.length) App.passTurn(sel);
-    else if (k === 'x' && sel.length) App.explore(sel);
-    else if (k === 'u' && App.undo) App.undoMove();
-    else if (k === 'v') App.toggleLairs();
-    else if (k === 'o') App.toggleNodes();
-    else if (k === 't') { App.showThreats = App.showThreats === false; UI.toast(App.showThreats ? 'Menaces affichées sur la carte.' : 'Menaces masquées (T pour les réafficher).', '', 'threats'); }
-    else if (k === 's' && sel.length) { for (const u of sel) { u.status = 'sentry'; u.path = null; } App.selectNext(); }
-    else if (k === 'h' && sel.length) { const c = Cities.at(game, sel[0].plane, sel[0].x, sel[0].y); if (c && c.owner === App.pid) App.healInCity(sel); }
-    else if (k === 'b') { const st = sel.find(u => Units.isSettler(u)); if (st) App.found(st); }
-    else if (k === 'r' && e.shiftKey && sel.some(u => Units.isEngineer(u))) App.startRoadTo(sel);
-    else if (k === 'r' && sel.some(u => Units.isEngineer(u))) { const r = Game.buildRoad(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); else App.afterAction(); }
-    else if (k === 'r') MagicUI.research();
-    else if (k === 'g') MagicUI.spellbook();
-    else if (k === 'm') MagicUI.magic();
-    else if (k === 'c' && e.shiftKey) Panels.cities();
-    else if (k === 'c') App.centerSelection();
-    else if (k === 'a') Panels.armies();
-    else if (k === 'd') Panels.wizards();
-    else if (k === 'j') Panels.chronicle(game);
-    else if (k === 'l') $('#logbox').classList.toggle('hidden');
-    else if (k === 'p') { if (sel.length) { const r = Game.planeShift(game, sel.map(u => u.id)); const u0 = sel[0], si = World.get(game.world, u0.plane, 'site', u0.x, u0.y), cty = Cities.at(game, u0.plane, u0.x, u0.y);
-        // sur une tour, une faille ou une Porte tellurique, un passage refusé se dit (au lieu de simplement tourner la vue)
-        if (!r.ok && r.why && ((si >= 0 && ['tower', 'rift'].includes(game.sites[si].type)) || (cty && Cities.hasEnch(cty, 'astral_gate')))) { UI.toast(U.esc(r.why), 'warn'); return; } if (r.ok) { MapView.plane = sel[0].plane; MapView.centerOn(sel[0].x, sel[0].y); MapView.bumpVis(); App.selectTile(sel[0].plane, sel[0].x, sel[0].y, sel.map(u => u.id)); App.refresh(); return; } } App.togglePlane(); }
-    else if (k === '+' || k === '=') { MapView.ts = Math.min(128, Math.round(MapView.ts * 1.15)); }
-    else if (k === '-') { MapView.ts = Math.max(24, Math.round(MapView.ts / 1.15)); }
-    else if (k === 'f5') { /* laisser le navigateur */ }
+    switch (id) {
+      case 'endTurn': App.endTurn(); return;
+      case 'next': App.selectNext(false, null, true); return;
+      case 'wait': if (!sel.length) return false; App.selectNext(false, sel.map(u => u.id)); return;
+      case 'pass': if (!sel.length) return false; App.passTurn(sel); return;
+      case 'explore': if (!sel.length) return false; App.explore(sel); return;
+      case 'patrol': if (!sel.length) return false; App.patrolDialog(sel); return;
+      case 'undo': if (!App.undo) return false; App.undoMove(); return;
+      case 'lairs': App.toggleLairs(); return;
+      case 'nodes': App.toggleNodes(); return;
+      case 'threats': App.showThreats = App.showThreats === false; UI.toast(App.showThreats ? 'Menaces affichées sur la carte.' : 'Menaces masquées (' + Keys.labelOf('threats') + ' pour les réafficher).', '', 'threats'); return;
+      case 'sentry': if (!sel.length) return false; for (const u of sel) { u.status = 'sentry'; u.path = null; } App.selectNext(); return;
+      case 'heal': { if (!sel.length) return false; const c = Cities.at(game, sel[0].plane, sel[0].x, sel[0].y); if (c && c.owner === App.pid) App.healInCity(sel); return; }
+      case 'found': { const st = sel.find(u => Units.isSettler(u)); if (!st) return false; App.found(st); return; }
+      case 'roadTo': if (!sel.some(u => Units.isEngineer(u))) return false; App.startRoadTo(sel); return;
+      case 'road': { if (!sel.some(u => Units.isEngineer(u))) return false; const r = Game.buildRoad(game, sel.map(u => u.id)); if (!r.ok) UI.toast(r.why, 'warn'); else App.afterAction(); return; }
+      case 'research': MagicUI.research(); return;
+      case 'spellbook': MagicUI.spellbook(); return;
+      case 'magic': MagicUI.magic(); return;
+      case 'cities': Panels.cities(); return;
+      case 'center': App.centerSelection(); return;
+      case 'armies': Panels.armies(); return;
+      case 'wizards': Panels.wizards(); return;
+      case 'chronicle': Panels.chronicle(game); return;
+      case 'log': $('#logbox').classList.toggle('hidden'); return;
+      case 'foeMoves': App.replayFoeMoves(); return;
+      case 'pin': App.pinDialog(); return;
+      case 'search': App.searchDialog(); return;
+      case 'plane': {
+        if (sel.length) { const r = Game.planeShift(game, sel.map(u => u.id)); const u0 = sel[0], si = World.get(game.world, u0.plane, 'site', u0.x, u0.y), cty = Cities.at(game, u0.plane, u0.x, u0.y);
+          // sur une tour, une faille ou une Porte tellurique, un passage refusé se dit (au lieu de simplement tourner la vue)
+          if (!r.ok && r.why && ((si >= 0 && ['tower', 'rift'].includes(game.sites[si].type)) || (cty && Cities.hasEnch(cty, 'astral_gate')))) { UI.toast(U.esc(r.why), 'warn'); return; } if (r.ok) { MapView.plane = sel[0].plane; MapView.centerOn(sel[0].x, sel[0].y); MapView.bumpVis(); App.selectTile(sel[0].plane, sel[0].x, sel[0].y, sel.map(u => u.id)); App.refresh(); return; } }
+        App.togglePlane(); return;
+      }
+      case 'zoomIn': MapView.ts = Math.min(128, Math.round(MapView.ts * 1.15)); return;
+      case 'zoomOut': MapView.ts = Math.max(24, Math.round(MapView.ts / 1.15)); return;
+    }
+    return false;
   },
 };
 

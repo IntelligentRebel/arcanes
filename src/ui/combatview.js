@@ -1713,17 +1713,27 @@ const CombatView = {
     const k = e.key.toLowerCase();
     if (UI.modals.length) return;
     if (e.key === 'Escape') { CombatView.mode = null; return; }
-    if (k === 'r' && CombatView.mode && CombatView.ZONES[CombatView.mode.id] && CombatView.ZONES[CombatView.mode.id].line) { CombatView.mode.rot = ((CombatView.mode.rot || 0) + 1) % 4; return; }
+    // en visée : la puissance d'un sort à puissance variable (+ et −)
     if (CombatView.mode && CombatView.mode.maxExtra && ['+', '=', '-', '_'].includes(e.key)) { const st = CombatSpells.EXTRA_STEP[CombatView.mode.id] || 1; CombatView.setPower((CombatView.mode.extra || 0) + (e.key === '+' || e.key === '=' ? st : -st)); return; }
-    if (e.key === '0') { CombatView._panId = (CombatView._panId || 0) + 1; CombatView.zoom = 1; CombatView.focus = null; CombatView.layout(); return; }
-    if (k === 'c') { if (CombatView.sel && !CombatView.sel.dead) CombatView.centerOn(CombatView.sel); return; }
-    if (e.key === 'Enter') CombatView.endTurn();
-    else if (k === 'w' && CombatView.sel) { CombatView.sel.waited = true; CombatView.selectNext(); }
-    else if (k === 'd' && CombatView.sel) CombatView.guard();
-    else if (k === 'g' && CombatView.sel && CombatView.bt.hasWalls && !CombatView.bt.breached()) CombatView.holdBreach();
-    else if (k === 's') CombatView.spellMenu();
-    else if (k === 'a') CombatView.toggleAuto();
-    else if (k === 'u') CombatView.toggleUnitAuto();
+    // 1 à 9 : les derniers sorts lancés (barre des sorts rapides)
+    if (/^[1-9]$/.test(e.key) && !e.ctrlKey && !e.altKey && !e.metaKey) { CombatView.quickCast(+e.key - 1); return; }
+    for (const id of Keys.match(e, 'combat')) if (CombatView.keyAction(id) !== false) { e.preventDefault(); return; }
+  },
+  keyAction(id) {
+    const sel = CombatView.sel;
+    switch (id) {
+      case 'c_rotate': { const m = CombatView.mode; if (!(m && CombatView.ZONES[m.id] && CombatView.ZONES[m.id].line)) return false; m.rot = ((m.rot || 0) + 1) % 4; return; }
+      case 'c_zoom': CombatView._panId = (CombatView._panId || 0) + 1; CombatView.zoom = 1; CombatView.focus = null; CombatView.layout(); return;
+      case 'c_center': if (sel && !sel.dead) CombatView.centerOn(sel); return;
+      case 'c_end': CombatView.endTurn(); return;
+      case 'c_wait': if (!sel) return false; sel.waited = true; CombatView.selectNext(); return;
+      case 'c_guard': if (!sel) return false; CombatView.guard(); return;
+      case 'c_breach': if (!(sel && CombatView.bt.hasWalls && !CombatView.bt.breached())) return false; CombatView.holdBreach(); return;
+      case 'c_spells': CombatView.spellMenu(); return;
+      case 'c_auto': CombatView.toggleAuto(); return;
+      case 'c_unitAuto': CombatView.toggleUnitAuto(); return;
+    }
+    return false;
   },
   // se mettre en garde (D) : l'unité passe son tour ; un fantassin qui n'a pas frappé gagne +1 en défense
   guard() {
@@ -1842,6 +1852,36 @@ const CombatView = {
     }
     if (!known.length && !(sel && bt.unitSpells(sel, true).length)) list.append(h('div', { class: 'dim' }, 'Aucun sort de combat disponible.'));
   },
+  // ---------- sorts rapides (0.31.75) : vos derniers sorts de combat, touches 1 à 9 ----------
+  // retenus avec la partie (le sorcier du joueur) ; un sort lancé passe en tête
+  QUICK_MAX: 9,
+  noteCast(r, id, caster) {
+    if (r !== false && !caster && DATA.spells[id]) { const pl = App.me(); if (pl) pl.quickSpells = [id].concat((pl.quickSpells || []).filter(x => x !== id)).slice(0, CombatView.QUICK_MAX); }
+    return r;
+  },
+  quickList() {
+    const bt = CombatView.bt, pl = bt && bt.player(CombatView.humanSide); if (!pl) return [];
+    return (pl.quickSpells || []).filter(id => pl.known.includes(id) && DATA.spells[id] && DATA.spells[id].combat && CombatSpells.implemented(id)).slice(0, CombatView.QUICK_MAX);
+  },
+  quickCast(i) {
+    const bt = CombatView.bt, side = CombatView.humanSide, id = CombatView.quickList()[i];
+    if (!id || CombatView.busy || bt.side !== side) return;
+    const why = CombatView.whyNot(bt, side, id) || (CombatSpells.wizardOptions(bt, side).some(o => o.id === id) ? null : 'Ce sort ne peut pas être lancé maintenant.');
+    if (why) { UI.toast(U.esc(DATA.spells[id].name) + ' : ' + U.esc(why), 'warn', 'cast'); return; }
+    CombatView.prepareCast(id, null); CombatView.renderBar();
+  },
+  // en tête de la barre d'actions : une icône par sort, son chiffre en coin
+  renderQuick(bar) {
+    const bt = CombatView.bt, side = CombatView.humanSide, L = CombatView.quickList(); if (!L.length) return;
+    const box = h('div', { class: 'cquick' }); bar.append(box);
+    const mine = bt.side === side && !CombatView.busy && !CombatView.auto, opts = mine ? CombatSpells.wizardOptions(bt, side) : [];
+    L.forEach((id, i) => {
+      const ok = mine && !CombatView.whyNot(bt, side, id) && opts.some(o => o.id === id);
+      const b = h('button', { class: 'qspell' + (ok ? '' : ' dis') + (CombatView.mode && CombatView.mode.id === id ? ' on' : ''), onclick: () => CombatView.quickCast(i) }, spriteCanvas('spell:' + id, 32), h('span', { class: 'qk' }, String(i + 1)));
+      UI.tipOn(b, () => { const w = CombatView.whyNot(bt, side, id); return (w ? '<div class="danger" style="margin-bottom:6px;font-weight:600">' + U.esc(w) + '</div>' : '') + UI.spellTip(id, bt.player(side), App.game); });
+      box.append(b);
+    });
+  },
   // le sort ne servirait à rien ici : déjà actif, ou aucune cible possible
   targetWhy(bt, side, id) {
     const sp = DATA.spells[id] || { params: {} }, p = sp.params || {};
@@ -1887,7 +1927,7 @@ const CombatView = {
     const bt = CombatView.bt;
     const tt = CombatSpells.targetType(id), maxExtra = CombatSpells.maxExtra(bt, CombatView.humanSide, id, caster);
     if (tt === 'none') {
-      if (!maxExtra) return CombatView.act(() => CombatSpells.cast(bt, CombatView.humanSide, id, null, caster, 0));
+      if (!maxExtra) return CombatView.act(() => CombatView.noteCast(CombatSpells.cast(bt, CombatView.humanSide, id, null, caster, 0), id, caster));
       return CombatView.powerDialog(id, caster, maxExtra);
     }
     CombatView.mode = { id, caster, tt, extra: 0, maxExtra, rot: 0 };
@@ -1943,7 +1983,7 @@ const CombatView = {
     range.oninput = () => { x = +range.value; txt.textContent = CombatView.powerLine(id, caster, x); };
     const body = h('div', null, h('div', null, sp.desc), h('div', { style: 'margin-top:10px' }, range), txt);
     const m = UI.modal({ title: sp.name, body, width: 520, footer: [h('button', { class: 'btn', onclick: () => m.close() }, 'Annuler'),
-      h('button', { class: 'btn primary', onclick: () => { m.close(); CombatView.act(() => CombatSpells.cast(CombatView.bt, CombatView.humanSide, id, null, caster, x)); } }, 'Lancer')] });
+      h('button', { class: 'btn primary', onclick: () => { m.close(); CombatView.act(() => CombatView.noteCast(CombatSpells.cast(CombatView.bt, CombatView.humanSide, id, null, caster, x), id, caster)); } }, 'Lancer')] });
   },
   // cases des cibles valables du sort en cours de ciblage (second temps d'un sort en deux temps : ses cases, ou les unités qui peuvent se sacrifier)
   targetTiles() {
@@ -1993,7 +2033,7 @@ const CombatView = {
         UI.toast(U.esc(why || 'Case impossible.'), 'warn', 'cast'); return true;
       }
       CombatView.mode = null;
-      CombatView.act(() => CombatSpells.cast(bt, side, id, m.first, caster, m.extra || 0, to));
+      CombatView.act(() => CombatView.noteCast(CombatSpells.cast(bt, side, id, m.first, caster, m.extra || 0, to), id, caster));
       return true;
     }
     let target = null;
@@ -2004,7 +2044,7 @@ const CombatView = {
       if (here.length > 1) {
         const extra0 = CombatView.mode.extra || 0; CombatView.mode = null;
         UI.choice(DATA.spells[id].name, 'Quel corps relever ?', here.map((b, i) => ({ label: bt.name(b) + (b.side === side ? '' : ' (ennemi)'), value: String(i) })).concat([{ label: 'Annuler', value: null }]))
-          .then(v => { if (v != null) CombatView.act(() => CombatSpells.cast(bt, side, id, here[+v], caster, extra0)); else UI.toast('Sort annulé.', '', 'cast'); });
+          .then(v => { if (v != null) CombatView.act(() => CombatView.noteCast(CombatSpells.cast(bt, side, id, here[+v], caster, extra0), id, caster)); else UI.toast('Sort annulé.', '', 'cast'); });
         return true;
       }
       target = here[0] || null;
@@ -2027,7 +2067,7 @@ const CombatView = {
     }
     const rot = CombatView.mode.rot || 0;
     CombatView.mode = null;
-    CombatView.act(() => CombatSpells.cast(bt, side, id, Array.isArray(target) && CombatView.ZONES[id] && CombatView.ZONES[id].line ? [target[0], target[1], rot] : target, caster, extra));
+    CombatView.act(() => CombatView.noteCast(CombatSpells.cast(bt, side, id, Array.isArray(target) && CombatView.ZONES[id] && CombatView.ZONES[id].line ? [target[0], target[1], rot] : target, caster, extra), id, caster));
     return true;
   },
 
@@ -2190,23 +2230,24 @@ const CombatView = {
   renderBar() {
     const bar = $('#c-bar'); if (!bar) return;
     bar.innerHTML = '';
+    CombatView.renderQuick(bar);
     const mine = CombatView.bt && CombatView.bt.side === CombatView.humanSide && !CombatView.busy;
     const b = (label, fn, key, cls, dis, title) => bar.append(h('button', { class: 'abtn ' + (cls || ''), onclick: fn, disabled: !!dis, title: title || '' }, label, key ? h('span', { class: 'k' }, key) : null));
-    b('Sorts', () => CombatView.spellMenu(), 'S', '', !mine);
-    b('Attendre', () => { if (CombatView.sel) { CombatView.sel.waited = true; CombatView.selectNext(); } }, 'W', '', !mine);
+    b('Sorts', () => CombatView.spellMenu(), Keys.badge('c_spells'), '', !mine);
+    b('Attendre', () => { if (CombatView.sel) { CombatView.sel.waited = true; CombatView.selectNext(); } }, Keys.badge('c_wait'), '', !mine);
     const bt = CombatView.bt, sel = CombatView.sel;
-    b('Garder', () => CombatView.guard(), 'D', '', !mine, sel && Units.isInfantry(sel.u) ? (sel.struck ? 'Passer le reste du tour (pas de bonus : l\'unité a déjà frappé ce tour-ci)' : 'Se mettre en garde : passer le tour, +1 en défense et ni flanc ni dos jusqu\'à son prochain tour') : 'Passer le reste du tour (les troupes montées et les créatures ne se mettent pas en garde)');
+    b('Garder', () => CombatView.guard(), Keys.badge('c_guard'), '', !mine, sel && Units.isInfantry(sel.u) ? (sel.struck ? 'Passer le reste du tour (pas de bonus : l\'unité a déjà frappé ce tour-ci)' : 'Se mettre en garde : passer le tour, +1 en défense et ni flanc ni dos jusqu\'à son prochain tour') : 'Passer le reste du tour (les troupes montées et les créatures ne se mettent pas en garde)');
     // devant une muraille intacte : garder jusqu'à la brèche (l'unité passe ses tours sans qu'on ait à la commander)
-    if (bt && bt.hasWalls && !bt.breached()) b(sel && sel.holdBreach ? 'Lever la garde' : 'Garder jusqu\'à la brèche', () => CombatView.holdBreach(), 'G', '', !mine || !sel);
+    if (bt && bt.hasWalls && !bt.breached()) b(sel && sel.holdBreach ? 'Lever la garde' : 'Garder jusqu\'à la brèche', () => CombatView.holdBreach(), Keys.badge('c_breach'), '', !mine || !sel);
     if (CombatView.auto && CombatView.autoStart) b('Automatique', () => {}, null, 'primary', true, 'Résolution automatique choisie au début : la bataille se joue seule jusqu\'au bout');
-    else if (CombatView.auto) b('Reprendre la main', () => CombatView.toggleAuto(), 'A', 'primary', false, 'Vous reprenez le commandement, tout de suite si c\'est votre tour, sinon au prochain');
+    else if (CombatView.auto) b('Reprendre la main', () => CombatView.toggleAuto(), Keys.badge('c_auto'), 'primary', false, 'Vous reprenez le commandement, tout de suite si c\'est votre tour, sinon au prochain');
     else {
-      b('Automatiser toute la bataille', () => CombatView.toggleAuto(), 'A', '', !mine, 'Vos troupes jouent seules ; « Reprendre la main » (A) à tout moment');
-      b(sel && sel.autoCtl ? 'Reprendre cette unité' : 'Automatiser cette unité', () => CombatView.toggleUnitAuto(), 'U', sel && sel.autoCtl ? 'primary' : '', !mine || !sel, sel && sel.autoCtl ? 'Elle attendra de nouveau vos ordres' : 'Elle joue seule à chaque tour, les autres restent à vous');
+      b('Automatiser toute la bataille', () => CombatView.toggleAuto(), Keys.badge('c_auto'), '', !mine, 'Vos troupes jouent seules ; « Reprendre la main » (A) à tout moment');
+      b(sel && sel.autoCtl ? 'Reprendre cette unité' : 'Automatiser cette unité', () => CombatView.toggleUnitAuto(), Keys.badge('c_unitAuto'), sel && sel.autoCtl ? 'primary' : '', !mine || !sel, sel && sel.autoCtl ? 'Elle attendra de nouveau vos ordres' : 'Elle joue seule à chaque tour, les autres restent à vous');
       b('Semi-automatique', () => { CombatView.semi = !CombatView.semi; UI.toast(CombatView.semi ? 'Semi-automatique : à la fin de chacun de vos tours, vos troupes jouent seules.' : 'Vos troupes attendent de nouveau vos ordres.', '', 'semi'); CombatView.renderBar(); }, null, CombatView.semi ? 'on' : '', false, 'Lancez vos sorts, commandez qui vous voulez, puis « Fin du tour » : vos troupes jouent le reste du tour');
     }
     b('Fuir', async () => { if (await UI.confirm('Fuir le combat', CombatView.fleeText(), 'Fuir')) { CombatView.bt.flee(CombatView.humanSide); await CombatView.playEvents(); CombatView.finish(); } }, null, 'danger', !mine);
-    b('Fin du tour', () => CombatView.endTurn(), '↵', 'primary', !mine, CombatView.semi && !CombatView.auto ? 'Vos troupes jouent le reste du tour, puis la main passe' : '');
+    b('Fin du tour', () => CombatView.endTurn(), Keys.badge('c_end'), 'primary', !mine, CombatView.semi && !CombatView.auto ? 'Vos troupes jouent le reste du tour, puis la main passe' : '');
     // le son, coupé ou rendu sans quitter la bataille (toujours actif, même pendant le tour adverse)
     const snd = h('button', { class: 'abtn', title: Sfx.on ? 'Couper le son' : 'Remettre le son', onclick: () => { Sfx.setOn(!Sfx.on); CombatView.renderBar(); } });
     snd.innerHTML = '<span style="display:inline-flex;width:16px;height:16px;vertical-align:middle">' + (ICONS[Sfx.on ? 'sound' : 'mute'] || '') + '</span>'; bar.append(snd);

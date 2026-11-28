@@ -853,6 +853,30 @@ const MapView = {
         ctx.restore();
       }
     }
+    // (0.31.75) la zone que garde la pile sélectionnée en patrouille : un carré en pointillés autour de son poste
+    if (MapView.sel) {
+      const pu = MapView.sel.ids.map(id => game.units[id]).find(u => u && u.status === 'patrol' && u.patrol), P = pu && pu.patrol;
+      if (P && P.plane === p) {
+        const A = pos(P.x - P.r + MapView.wrapNear(P.x), P.y - P.r), side = (2 * P.r + 1) * ts, col = '#ffb070';   // (l'ambre de la marque ◎, pas la couleur des frontières)
+        ctx.save(); ctx.globalAlpha = .07; ctx.fillStyle = col; ctx.fillRect(A.x, A.y, side, side);
+        ctx.globalAlpha = .9; ctx.setLineDash([ts * .08, ts * .1]); ctx.lineWidth = Math.max(1.5, ts / 22); ctx.strokeStyle = col; ctx.strokeRect(A.x + 1, A.y + 1, side - 2, side - 2);
+        ctx.setLineDash([]); const C = pos(P.x + MapView.wrapNear(P.x), P.y); ctx.lineWidth = Math.max(1.2, ts / 30); ctx.beginPath(); ctx.arc(C.x + ts / 2, C.y + ts / 2, ts * .42, 0, 7); ctx.stroke();
+        ctx.restore();
+      }
+    }
+    // (0.31.75) repères : une épingle dorée en haut à droite de la case
+    for (const q of (game.players[App.pid].pins || [])) {
+      if (q.plane !== p) continue;
+      const P = pos(q.x + MapView.wrapNear(q.x), q.y), cx = P.x + ts * .8, cy = P.y + ts * .2, r = Math.max(3, ts * .1);
+      if (cx < -ts || cy < -ts || cx > innerWidth + ts || cy > innerHeight + ts) continue;
+      ctx.save(); ctx.strokeStyle = 'rgba(20,14,4,.9)'; ctx.lineWidth = Math.max(1.2, ts / 40);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx - r * .5, cy + r * 2.6); ctx.stroke();
+      ctx.fillStyle = '#ffd34d'; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.beginPath(); ctx.arc(cx - r * .35, cy - r * .35, r * .3, 0, 7); ctx.fill();
+      ctx.restore();
+    }
+    // (0.31.75) ce que vous avez vu bouger pendant l'intertour : des flèches aux couleurs des sorciers, qui s'effacent
+    MapView.drawFoeTrail(ctx, p, pos, ts, now);
     // menaces : les piles ennemies en vue qui marchent sur vos cités, avec leur délai et leur force
     if (App.showThreats !== false) MapView.drawThreats(ctx, p, pos, ts, now);
     // chemin prévu
@@ -1261,7 +1285,7 @@ const MapView = {
         ctx.fillStyle = '#fff'; ctx.font = 'bold ' + Math.round(r * 1.25) + 'px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         ctx.fillText(n, bx, by + .5); ctx.textBaseline = 'alphabetic';
       }
-      const tag = u.stasis || frozen ? ['❄', '#a8e8ff'] : u.status === 'sentry' || u.status === 'fortify' ? ['S', '#9fd0ff'] : u.status === 'heal' ? ['+', '#7fe08a'] : u.status === 'governor' ? ['G', '#ffd27a'] : u.status === 'explore' ? ['E', '#a8e6a0'] : u.status === 'road' ? ['R', '#f0c060'] : u.status === 'roadto' ? ['R→', '#f0c060'] : u.status === 'purify' ? ['P', '#f0c060'] : u.status === 'autopurify' ? ['P+', '#f0c060'] : null;
+      const tag = u.stasis || frozen ? ['❄', '#a8e8ff'] : u.status === 'patrol' ? ['◎', '#ffb070'] : u.status === 'sentry' || u.status === 'fortify' ? ['S', '#9fd0ff'] : u.status === 'heal' ? ['+', '#7fe08a'] : u.status === 'governor' ? ['G', '#ffd27a'] : u.status === 'explore' ? ['E', '#a8e6a0'] : u.status === 'road' ? ['R', '#f0c060'] : u.status === 'roadto' ? ['R→', '#f0c060'] : u.status === 'purify' ? ['P', '#f0c060'] : u.status === 'autopurify' ? ['P+', '#f0c060'] : null;
       if (tag) { ctx.font = 'bold ' + fs + 'px system-ui'; const tw = Math.max(fs * .65, ctx.measureText(tag[0]).width); ctx.fillStyle = 'rgba(8,10,14,.8)'; ctx.fillRect(cx - rx - fs * .2, base - fs * 1.1, tw + fs * .4, fs * 1.15); ctx.fillStyle = tag[1]; ctx.textAlign = 'left'; ctx.fillText(tag[0], cx - rx, base - fs * .2); }
       return;
     }
@@ -1280,6 +1304,7 @@ const MapView = {
     }
     if (u.stasis || frozen) { ctx.fillStyle = '#a8e8ff'; ctx.font = 'bold ' + Math.max(9, ts * .2) + 'px system-ui'; ctx.textAlign = 'left'; ctx.fillText('❄', x + pad + ox + 3, y + pad + oy + ts * .22); }
     else if (u.status === 'sentry' || u.status === 'fortify') { ctx.fillStyle = '#9fd0ff'; ctx.font = 'bold ' + Math.max(9, ts * .2) + 'px system-ui'; ctx.textAlign = 'left'; ctx.fillText('S', x + pad + ox + 3, y + pad + oy + ts * .22); }
+    if (u.status === 'patrol') { ctx.fillStyle = '#ffb070'; ctx.font = 'bold ' + Math.max(9, ts * .2) + 'px system-ui'; ctx.textAlign = 'left'; ctx.fillText('◎', x + pad + ox + 3, y + pad + oy + ts * .22); }
     if (u.status === 'explore') { ctx.fillStyle = '#a8e6a0'; ctx.font = 'bold ' + Math.max(9, ts * .2) + 'px system-ui'; ctx.textAlign = 'left'; ctx.fillText('E', x + pad + ox + 3, y + pad + oy + ts * .22); }
     if (u.status === 'road' || u.status === 'roadto' || u.status === 'purify' || u.status === 'autopurify') { ctx.fillStyle = '#f0c060'; ctx.font = 'bold ' + Math.max(9, ts * .2) + 'px system-ui'; ctx.textAlign = 'left'; ctx.fillText(u.status === 'road' ? 'R' : u.status === 'roadto' ? 'R→' : u.status === 'autopurify' ? 'P+' : 'P', x + pad + ox + 3, y + pad + oy + ts * .22); }
     if (selected) {
@@ -1834,6 +1859,42 @@ const MapView = {
   flash(plane, x, y, color, dur) { MapView.flashes.push({ plane, x, y, color: color || '#ffd27a', t0: performance.now(), dur: dur || 700 }); },
 
   // ---------- mini-carte ----------
+  drawFoeTrail(ctx, p, pos, ts, now) {
+    const T0 = typeof App !== 'undefined' && App.foeTrail, game = MapView.game; if (!T0 || T0.turn !== game.turn) return;
+    const busy = (UI.modals || []).length || UI.busy || (typeof CombatView !== 'undefined' && CombatView.active);
+    if (T0.t0 == null) { if (busy || T0.hold) return; T0.t0 = now; }
+    const age = (now - T0.t0) / 1000, HOLD = 4, FADE = 2.5;
+    if (age > HOLD + FADE) return;
+    const alpha = age < HOLD ? 1 : 1 - (age - HOLD) / FADE, w = game.world;
+    const byK = new Map(); for (const sg of T0.segs) if (sg.plane === p) { if (!byK.has(sg.k)) byK.set(sg.k, []); byK.get(sg.k).push(sg); }
+    ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (const segs of byK.values()) {
+      const o = segs[0].o, col = o < 0 ? '#e0604c' : Players.knows(game, App.pid, o) ? game.players[o].color : '#9a958a';
+      // un trajet suivi case après case ; un saut (autre mouvement de la même pile) recommence un tracé
+      const pts = [], runs = [pts];
+      let cx = null, cy = null;
+      for (const sg of segs) {
+        if (cx == null || World.wx(w, cx) !== World.wx(w, sg.a[0]) || cy !== sg.a[1]) { const P0 = pos(sg.a[0] + MapView.wrapNear(sg.a[0]), sg.a[1]); if (runs[runs.length - 1].length) runs.push([]); runs[runs.length - 1].push([P0.x + ts / 2, P0.y + ts / 2]); }
+        const last = runs[runs.length - 1][runs[runs.length - 1].length - 1], dx = World.dxw(w, sg.a[0], sg.b[0]);
+        runs[runs.length - 1].push([last[0] + dx * ts, last[1] + (sg.b[1] - sg.a[1]) * ts]);
+        cx = sg.b[0]; cy = sg.b[1];
+      }
+      for (const run of runs) {
+        if (run.length < 2) continue;
+        // la pointe s'arrête au bord de la figurine (sinon cachée dessous)
+        { const n = run.length, [xa, ya] = run[n - 2], [xb, yb] = run[n - 1], d = Math.hypot(xb - xa, yb - ya) || 1, cut = Math.min(ts * .34, d * .6); run[n - 1] = [xb - (xb - xa) / d * cut, yb - (yb - ya) / d * cut]; }
+        ctx.globalAlpha = alpha * .55; ctx.strokeStyle = 'rgba(8,8,12,.9)'; ctx.lineWidth = Math.max(4, ts / 9); ctx.setLineDash([]);
+        ctx.beginPath(); run.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+        ctx.globalAlpha = alpha * .9; ctx.strokeStyle = col; ctx.lineWidth = Math.max(2, ts / 18); ctx.setLineDash([ts * .16, ts * .1]); ctx.lineDashOffset = -(now / 40) % (ts * .26);
+        ctx.beginPath(); run.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+        // la pointe, sur la dernière case
+        const [x1, y1] = run[run.length - 1], [x0, y0] = run[run.length - 2], an = Math.atan2(y1 - y0, x1 - x0), L = ts * .26;
+        ctx.setLineDash([]); ctx.fillStyle = col; ctx.strokeStyle = 'rgba(8,8,12,.9)'; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1 - L * Math.cos(an - .45), y1 - L * Math.sin(an - .45)); ctx.lineTo(x1 - L * Math.cos(an + .45), y1 - L * Math.sin(an + .45)); ctx.closePath(); ctx.fill(); ctx.stroke();
+      }
+    }
+    ctx.restore();
+  },
   drawMinimap(cv) {
     const game = MapView.game, world = game.world, p = MapView.plane;
     const ctx = cv.getContext('2d');
@@ -1883,6 +1944,13 @@ const MapView = {
       if (q.stage === 2) { if (!(MapView.sel && MapView.sel.ids.includes(u.id))) { ctx.restore(); continue; } ctx.setLineDash([2, 2]); ctx.strokeStyle = '#ffcf3a'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(q.cx * s + s / 2, q.cy * s + s / 2, (q.r + .5) * s, 0, 7); ctx.stroke(); }
       else { ctx.fillStyle = '#ffcf3a'; ctx.strokeStyle = '#3a1e00'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(st.x * s + s / 2, st.y * s + s / 2, Math.max(2.4, s * 1.1), 0, 7); ctx.fill(); ctx.stroke(); }
       ctx.restore();
+    }
+    // (0.31.75) vos repères : un losange doré
+    for (const q of pl.pins || []) {
+      if (q.plane !== p) continue;
+      const cx = q.x * s + s / 2, cy = q.y * s + s / 2, r = Math.max(2.4, s * 1.1);
+      ctx.fillStyle = '#ffd34d'; ctx.strokeStyle = '#3a2a00'; ctx.lineWidth = .9;
+      ctx.beginPath(); ctx.moveTo(cx, cy - r); ctx.lineTo(cx + r, cy); ctx.lineTo(cx, cy + r); ctx.lineTo(cx - r, cy); ctx.closePath(); ctx.fill(); ctx.stroke();
     }
     // cadre de vue
     const ts = MapView.ts, vw = innerWidth / ts, vh = innerHeight / ts;

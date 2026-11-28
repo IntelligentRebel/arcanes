@@ -19,8 +19,8 @@ const KEY_PROPS = new Set(['en', 'id', 'key', 'icon', 'sprite', 'img', 'type', '
 // Machinerie grammaticale : du français qui n'est pas du texte affiché, mais une étape intermédiaire. Units.conj fabrique
 // le pluriel FRANÇAIS d'une phrase (« est pris » -> « sont pris ») que Units.subj traduit ensuite d'un bloc. Traduire les
 // morceaux à l'intérieur casse cette seconde étape et produit des phrases mi-françaises (« are pris »).
-const RAW_NAMES = new Set(['conj']);
-const FORCE_NAMES = new Set(['AUTO_SPEED_WORDS', 'PLAN_NAMES', 'GOV_WORDS', 'RARITY_WORDS', 'raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
+const RAW_NAMES = new Set(['conj', 'combo', 'alias']);
+const FORCE_NAMES = new Set(['AUTO_SPEED_WORDS', 'KEY_WORDS', 'PLAN_NAMES', 'GOV_WORDS', 'RARITY_WORDS', 'raceAdj', 'FAME_TIERS', 'levelWord', 'fameWord', 'chanceWord', 'moodWord', 'relWord', 'sizeWord', 'ODDS_WORDS', 'MONTHS', 'REALM_NAMES', 'SECTION_NAMES', 'ABILITY_NAMES', 'CHANNEL_NAMES', 'NUM', 'WEAPON_WORDS']);
 const DISPLAY_PROPS = new Set(['name', 'label', 'title', 'text', 'desc', 'tip', 'msg', 'why', 'hint', 'note', 'sub', 'body', 'kicker', 'lore', 'story', 'epithet', 'quote', 'help', 'caption', 'short', 'long', 'verb', 'one', 'many', 'plural', 'singular', 'placeholder']);
 
 // identifiants du jeu (types d'unités, sorts, bâtiments…) et noms anglais d'origine : des clés, même s'ils ressemblent à des mots

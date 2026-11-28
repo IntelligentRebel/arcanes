@@ -291,7 +291,7 @@ const Panels = {
       if (u.owner === pl.id) for (const it of pl.vault) {
         const ok = Items.canEquip(u, it);
         const t = h('div', { class: 'hs-vit' + (ok ? '' : ' no') }, spriteCanvas(it.icon || 'item:' + it.kind, 44));
-        UI.tipOn(t, () => itemTip(it) + (ok ? '<div class="ok" style="margin-top:4px">Clic : équiper ' + U.esc(u.hero.name) + '</div>' : '<div class="danger" style="margin-top:4px">' + U.esc(u.hero.name) + ' ne peut pas porter cet objet.</div>'));
+        UI.tipOn(t, () => itemTip(it) + (ok ? Panels.itemCompareHtml(game, u, it) + '<div class="ok" style="margin-top:4px">Clic : équiper ' + U.esc(u.hero.name) + '</div>' : '<div class="danger" style="margin-top:4px">' + U.esc(u.hero.name) + ' ne peut pas porter cet objet.</div>'));
         if (ok) t.onclick = () => {
           let i = Items.freeSlot(u, it); if (i < 0) i = (u.hero.slots || []).findIndex(sl => Items.slotAccepts(sl, it, u)); if (i < 0) return;
           if (u.items[i]) pl.vault.push(u.items[i]);
@@ -336,6 +336,24 @@ const Panels = {
     };
     render();
   },
+  // (0.31.75) ce que changerait cet objet sur ce héros, à la place qu'il prendrait (celle d'un objet porté, s'il le faut)
+  itemCompare(game, u, it) {
+    let i = Items.freeSlot(u, it); if (i < 0) i = (u.hero.slots || []).findIndex(sl => Items.slotAccepts(sl, it, u)); if (i < 0) return null;
+    const old = (u.items && u.items[i]) || null;
+    const copy = JSON.parse(JSON.stringify(u)); copy.items = (copy.items || []).slice(); copy.items[i] = JSON.parse(JSON.stringify(it));
+    const a = Units.stats(game, u), b = Units.stats(game, copy), out = [];
+    const L = [['melee', 'Attaque'], ['ranged', 'Tir'], ['thrown', 'Lancer'], ['def', 'Défense'], ['res', 'Résistance'], ['maxHp', 'Points de vie'], ['move', 'Mouvement'], ['toHit', 'Précision', ' %'], ['caster', 'Mana de combat']];
+    for (const [f, n, suf] of L) { const d = (b[f] || 0) - (a[f] || 0); if (d) out.push({ up: d > 0, text: n + ' ' + (d > 0 ? '+' : '−') + Math.abs(d) + (suf || '') }); }
+    const ka = Object.keys(a.ab).filter(k => ABILITY_NAMES[k]), kb = Object.keys(b.ab).filter(k => ABILITY_NAMES[k]);
+    for (const k of kb) if (!ka.includes(k)) out.push({ up: true, text: '+ ' + ABILITY_NAMES[k] });
+    for (const k of ka) if (!kb.includes(k)) out.push({ up: false, text: '− ' + ABILITY_NAMES[k] });
+    return { old, diffs: out };
+  },
+  itemCompareHtml(game, u, it, named) {
+    const c = Panels.itemCompare(game, u, it); if (!c) return '';
+    const what = named ? '<b>' + U.esc(u.hero.name) + '</b>' + (c.old ? ' (à la place de ' + U.esc(c.old.name) + ')' : '') : c.old ? 'À la place de <b>' + U.esc(c.old.name) + '</b>' : 'Sur une place libre';
+    return '<div style="margin-top:6px">' + what + ' : ' + (c.diffs.length ? c.diffs.map(d => '<span class="' + (d.up ? 'ok' : 'danger') + '">' + U.esc(d.text) + '</span>').join(' · ') : '<span class="dim">aucun changement</span>') + '</div>';
+  },
   items(hero) {
     const game = App.game, pl = App.me();
     const body = h('div');
@@ -346,6 +364,7 @@ const Panels = {
       const vault = h('div', { class: 'list' });
       for (const it of pl.vault) {
         const row = h('div', { class: 'row' }, spriteCanvas(it.icon || 'item:' + it.kind, 32), h('div', { class: 'grow' }, h('div', { class: 't1' }, it.name), h('div', { class: 't2' }, Items.describe(it))));
+        { const who = heroes.filter(u => Items.canEquip(u, it)); if (who.length) UI.tipOn(row.querySelector('.grow'), () => '<h4>' + U.esc(it.name) + '</h4>' + who.map(u => Panels.itemCompareHtml(game, u, it, true)).join('')); }
         const sel = h('select', null, h('option', { value: '' }, 'Équiper…'), ...heroes.filter(u => Items.canEquip(u, it)).map(u => h('option', { value: u.id }, u.hero.name)));
         sel.onchange = () => { const u = game.units[+sel.value]; if (!u) return; let i = Items.freeSlot(u, it); if (i < 0) i = (u.hero.slots || []).findIndex(s => Items.slotAccepts(s, it, u)); if (i < 0) return; if (u.items[i]) pl.vault.push(u.items[i]); u.items[i] = it; pl.vault = pl.vault.filter(x => x !== it); Units.fixHp(game, u); render(); App.refresh(); };
         row.append(sel);
@@ -783,6 +802,7 @@ const Panels = {
       const v = await UI.choice('Langue', '', I18N.available().map(l => ({ label: l.name, value: l.id, primary: l.id === I18N.lang })));
       if (v) I18N.switchTo(v); });
     row('Aide et raccourcis', 'Contrôles du jeu', () => { m.close(); Panels.help(); });
+    row('Touches', 'Changer les raccourcis clavier de la carte et du combat', () => { m.close(); Keys.panel(); });
     row('Son : ' + (Sfx.on ? 'activé' : 'coupé'), 'Effets de combat, de magie et d\'interface, synthétisés dans le navigateur (coupe aussi la musique)', () => { Sfx.setOn(!Sfx.on); const t = $('#tb-sound span'); if (t) t.innerHTML = ICONS[Sfx.on ? 'sound' : 'mute']; again(); });
     row('Musique : ' + (Sfx.music ? 'activée' : 'coupée'), Music.hasTracks() ? 'Bande originale orchestrale : titre, Arcane, Miroir, combats, victoire et défaite' + (Music.nowPlaying() ? ' (en cours : ' + Music.nowPlaying() + ')' : '') : 'Nappes génératives discrètes (jamais la même boucle)', () => { Sfx.setMusic(!Sfx.music); again(); });
     const vol = h('input', { type: 'range', min: 0, max: 100, step: 5, value: Math.round(Sfx.mvol * 100), style: 'width:100%', onclick: e => e.stopPropagation(), oninput: e => { Sfx.setMusicVolume(e.target.value / 100); vlab.textContent = e.target.value + ' %'; } });
@@ -839,7 +859,17 @@ const Panels = {
       <p class="muted"><b>Course à la Maîtrise</b> : qui étudie ou lance le Sort de Maîtrise, et dans combien de tours, est connu de tous (indicateur en haut). Celui qui le lance s'attire la guerre de tous les sorciers ; prendre sa forteresse l'arrête. <b>Empire étendu</b> : une cité à plus de 20 cases de la forteresse, ou sur l'autre plan, compte un rebelle de plus ; à partir de 20 cités, toutes (sauf la forteresse) en comptent un de plus.</p>
       <p class="muted"><b>Flanc et dos</b> : le chevron au sol montre où regarde l'unité (son dernier pas, sa dernière cible ; frappée, elle se retourne). Frapper de flanc donne +1 en attaque ; dans le dos, +1 et la défense de la cible divisée par deux. Une unité en garde n'a ni flanc ni dos. En cliquant sur un ennemi hors de portée, votre unité choisit d'elle-même la meilleure case.</p>
       <p class="muted"><b>Les nœuds</b> (comme dans l'original) : chaque nœud rayonne sur une aura d'autant de cases que sa puissance. Un Esprit magique ou gardien qui fusionne avec lui le lie à votre magie : son aura scintille alors à vos couleurs et vous rapporte sa puissance chaque tour (doublée par la Maîtrise des nœuds, et encore par la maîtrise de son royaume). Un combat livré sur le nœud donne +2 en attaque, défense et résistance aux créatures de son royaume, et dissipe souvent les sorts des autres royaumes (force 50 : un sort de 10 mana n'a que 17 % de chances de passer) ; la Maîtrise des nœuds en protège.</p>`;
-    UI.modal({ title: 'Aide', width: 820, body: h('div', { html }) });
+    const body = h('div', { html });
+    // (0.31.75) les touches changées (Menu > Touches) : dans l'aide aussi ; les vingt-quatre marques, dans l'ordre du texte
+    const KBD = [null, 'next', 'center', 'wait', 'sentry', 'explore', 'found', 'road', 'plane', 'endTurn', 'spellbook', 'magic', 'research', 'cities', 'armies', 'wizards', 'log', 'threats', 'lairs', 'nodes', 'undo', 'c_spells', 'c_auto', 'c_end'];
+    body.querySelectorAll('.kbd').forEach((el, i) => { const id = KBD[i]; if (id && Keys.changed(id)) el.textContent = Keys.labelOf(id); });
+    // les ordres ajoutés depuis : leur touche, et le lien vers le réglage
+    const more = h('div', { class: 'grid2', style: 'margin-top:10px' });
+    const col = ids => h('div', null, ...ids.map(id => h('div', { class: 'kv' }, h('span', null, Keys.byId(id).label), h('span', { class: 'kbd' }, Keys.labelOf(id)))));
+    more.append(col(['patrol', 'pass', 'heal', 'roadTo', 'foeMoves', 'pin']), col(['search', 'quickSave', 'quickLoad', 'chronicle', 'zoomIn', 'zoomOut']));
+    body.firstChild.after(h('h4', { class: 'gold', style: 'margin:10px 0 6px' }, 'Autres raccourcis'), more,
+      h('div', { class: 'muted', style: 'margin-top:4px' }, 'En combat, les touches 1 à 9 relancent vos derniers sorts. ', h('a', { href: '#', onclick: ev => { ev.preventDefault(); Keys.panel(); } }, 'Changer les touches')));
+    UI.modal({ title: 'Aide', width: 820, body });
   },
 
   encyclopedia() {

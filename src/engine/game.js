@@ -1,7 +1,7 @@
 'use strict';
 // État de la partie, actions du joueur, combats, lieux de pouvoir, héros et trésors.
 
-const GAME_VERSION = '0.31.74';
+const GAME_VERSION = '0.31.75';
 const FORTRESS_DISMANTLE = 10; // tours pour démanteler une forteresse conquise
 
 const Game = {
@@ -12,6 +12,7 @@ const Game = {
     choose: null,          // async (game, pid, question) -> réponse
     update: () => {},
     fx: null,              // (évènement visible : une faille se referme…) -> void
+    step: null,            // (0.31.75) (game, pid, units, plane, fx, fy, nx, ny) -> void : un pas sur la carte, relevé par l'interface
   },
 
   // ---------- rythme de la partie (0.31.39) ----------
@@ -637,7 +638,10 @@ const Game = {
     pl.skillLeft = Magic.totalSkill(game, pl);
     // l'incantation en cours prend d'abord ce qu'il lui faut de la compétence du tour ; le reste sert à d'autres sorts dans la foulée
     // (rien ne s'accumule d'un tour à l'autre). Figé par l'Arrêt du temps d'un autre, le sorcier n'avance pas.
-    if (pl.casting && !game.players.some(o => o && o.alive && o !== pl && o.globals.includes('time_stop'))) Spells.progressCasting(game, pl);
+    const frozen = game.players.some(o => o && o.alive && o !== pl && o.globals.includes('time_stop'));
+    if (pl.casting && !frozen) Spells.progressCasting(game, pl);
+    // (0.31.75) la file d'incantations (le joueur seul en a une) : le sort suivant commence dès que la place se libère
+    if (!pl.casting && pl.castQueue && pl.castQueue.length && !frozen) Spells.castNext(game, pl);
     for (const c of Object.values(game.cities)) if (c.owner === pl.id) Move.reveal(game, pl, c.plane, c.x, c.y, Move.citySight(c));   // Œil de la nature, Oracle : ce que voit la cité s'inscrit sur la carte
     Cities.rebalanceFood(game, pl.id);
     for (const u of Object.values(game.units)) if (u.owner === pl.id) {
@@ -788,6 +792,7 @@ const Game = {
       if (pl && await Book.onEnter(game, pl, units.concat(riders), plane, nx, ny, fx, fy) === 'stop') { stop(); if (Game.hooks.update) Game.hooks.update({ type: 'move', ids: units.map(u => u.id) }); return { ok: true, moved, blocked: true }; }
       // l'interface anime chaque pas (marche d'une case à l'autre)
       if (opts.onStep) await opts.onStep(units.map(u => u.id), [fx, fy], [nx, ny]);
+      if (Game.hooks.step) Game.hooks.step(game, pid, units, plane, fx, fy, nx, ny);
       if (watch && units[0].path && units[0].path.length) {
         const seen = foesSeen(); let found = null;
         // (la cible d'une attaque ordonnée ne surprend personne : la marche continue jusqu'à elle)

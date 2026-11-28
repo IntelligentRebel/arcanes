@@ -119,13 +119,13 @@ const Setup = {
   },
   importFile(scr) {
     const inp = h('input', { type: 'file', accept: '.json,application/json' });
-    inp.onchange = () => { const f = inp.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { const g = App.deserialize(r.result); if (scr) scr.remove(); App.start(g); } catch (e) { UI.toast('Fichier invalide.', 'warn'); } }; r.readAsText(f); };
+    inp.onchange = () => { const f = inp.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { const g = App.deserialize(r.result); if (scr) scr.remove(); App.start(g); App.markSaved(); } catch (e) { UI.toast('Fichier invalide.', 'warn'); } }; r.readAsText(f); };
     inp.click();
   },
   loadMenu() {
-    const opts = ['auto', 'manual', 'prev'].filter(s => localStorage.getItem('arcanes:' + s));
+    const opts = ['quick', 'auto', 'manual', 'prev'].filter(s => localStorage.getItem('arcanes:' + s));
     const meta = s => { const m = App.saveMeta(s); return m ? ' (' + m.name + ', tour ' + m.turn + ')' : ''; };
-    const name = { auto: 'Automatique', manual: 'Manuelle', prev: 'Partie précédente' };
+    const name = { quick: 'Sauvegarde rapide', auto: 'Automatique', manual: 'Manuelle', prev: 'Partie précédente' };
     UI.choice('Charger', opts.length ? 'Quelle sauvegarde reprendre ?' : 'Aucune sauvegarde dans ce navigateur.', opts.map(s => ({ label: name[s] + meta(s), value: s })).concat([{ label: 'Importer un fichier…', value: 'file' }]))
       .then(v => { if (v === 'file') Setup.importFile(null); else if (v) App.load(v); });
   },
